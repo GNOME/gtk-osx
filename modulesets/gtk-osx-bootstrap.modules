@@ -140,7 +140,7 @@
   </tarball>
 
   <autotools id="intltool">
-    <branch repo="ftp.gnome.org" mdoule="intltool/0.40/intltool-0.40.1.tar.bz2"
+    <branch repo="ftp.gnome.org" module="intltool/0.40/intltool-0.40.1.tar.bz2"
 	    version="0.40.1" md5sum="18a75ec5ff9d049c3ef148f1d7b03929"/>
     <dependencies>
       <dep package="gnome-common"/>
