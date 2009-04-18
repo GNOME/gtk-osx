@@ -48,7 +48,7 @@
   </metamodule>
 
   <autotools id="glib">
-    <branch/>
+    <branch revision="glib-2-18"/>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
       <dep package="gtk-doc"/> <!-- FIXME: http://bugs.gnome.org/546640 -->
@@ -57,7 +57,7 @@
 
   <autotools id="pango" autogenargs="--without-x --with-included-modules=basic-atsui"
              makeargs="-k -C modules; make">
-    <branch/>
+    <branch revision="pango-1-20"/>
     <dependencies>
       <dep package="glib"/>
       <dep package="cairo"/>
@@ -80,7 +80,7 @@
   </autotools>
 
   <autotools id="gtk+" autogenargs="--with-gdktarget=quartz --without-libjasper">
-    <branch/>
+    <branch revision="gtk-2-14"/>
     <dependencies>
       <dep package="pango"/>
       <dep package="atk"/>
@@ -112,8 +112,7 @@
   <autotools id="ige-mac-integration" autogenargs="--disable-python">
     <branch repo="github"
 	    module="rhult/ige-mac-integration/tarball/IMI_1"
-            version="0.8.3~unreleased"
-            checkoutdir="rhult-ige-mac-integration-6e75f48538dbfb6d03abe9cecc5dbd2b35c9be41"/>
+            version="0.8.3~unreleased" />
     <dependencies>
       <dep package="gtk+"/>
     </dependencies>
