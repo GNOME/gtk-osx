@@ -2,13 +2,19 @@
 <!DOCTYPE moduleset SYSTEM "moduleset.dtd">
 <?xml-stylesheet type="text/xsl" href="moduleset.xsl"?>
 <moduleset>
-  <repository type="svn" name="svn.gnome.org" default="yes" href="http://svn.gnome.org/svn/"/>
-  <repository type="svn" name="inkscape.svn.sourceforge.net" href="https://inkscape.svn.sourceforge.net/svnroot/inkscape/"/>
-  <repository type="svn" name="ardour" href="http://subversion.ardour.org/svn/"/>
+  <repository type="svn" name="svn.gnome.org" default="yes"
+              href="http://svn.gnome.org/svn/"/>
+  <repository type="tarball" name="ftp.gnome.org" 
+	      href="ftp://ftp.gnome.org/pub/gnome/sources/"/>
+  <repository type="svn" name="inkscape.svn.sourceforge.net" 
+              href="https://inkscape.svn.sourceforge.net/svnroot/inkscape/"/>
+  <repository type="svn" name="ardour" 
+              href="http://subversion.ardour.org/svn/"/>
   <repository type="git" name="github.com" href="git://github.com/"/>
 
   <autotools id="loudmouth" autogenargs="--with-ssl=openssl">
-    <branch repo="github.com" module="hallski/loudmouth.git" checkoutdir="loudmouth" revision="loudmouth-1-4"/>
+    <branch repo="ftp.gnome.org" 
+            module="loudmouth/1.4/loudmouth-1.4.3.tar.bz2" />
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
       <dep package="glib"/>
@@ -16,7 +22,7 @@
   </autotools>
 
   <autotools id="libglade">
-    <branch/>
+    <branch revision="552"/>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
       <dep package="meta-gtk-osx-core"/>
@@ -24,7 +30,7 @@
   </autotools>
 
   <autotools id="gossip">
-    <branch/>
+    <branch revision="2850"/>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
       <dep package="meta-gtk-osx-themes"/>
@@ -40,7 +46,7 @@
        installing a tarball version.
   -->
   <autotools id="vala">
-    <branch/>
+    <branch revision="vala-0-4"/>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
       <dep package="meta-gtk-osx-core"/>
@@ -48,7 +54,7 @@
   </autotools>
 
   <autotools id="devhelp">
-    <branch/>
+    <branchb revision="gnome-2-22"/>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
       <dep package="meta-gtk-osx-themes"/>
@@ -61,7 +67,7 @@
   </autotools>
 
   <autotools id="glade3">
-    <branch/>
+    <branch revision="gnome-2-22"/>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
       <dep package="meta-gtk-osx-themes"/>
@@ -70,7 +76,7 @@
   </autotools>
 
   <autotools id="gtksourceview">
-    <branch/>
+    <branch revision="gnome-2-24"/>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
       <dep package="meta-gtk-osx-core"/>
@@ -78,14 +84,15 @@
   </autotools>
 
   <autotools id="libIDL">
-    <branch/>
+    <branch revision="603"/>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
       <dep package="meta-gtk-osx-core"/>
     </after>
   </autotools>
+
   <autotools id="ORBit2">
-    <branch/>
+    <branch revision="2109"/>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
     </after>
@@ -93,8 +100,9 @@
       <dep package="libIDL"/>
     </dependencies>
   </autotools>
+
   <autotools id="gconf">
-    <branch/>
+    <branch revision="2835"/>
     <dependencies>
       <dep package="ORBit2"/>
       <dep package="libxml2"/>
@@ -118,7 +126,7 @@
   </tarball>
 
   <autotools id="gimp" autogenargs="--disable-python --disable-print --without-x --without-dbus --without-gnomevfs">
-    <branch/>
+    <branch revision="gimp-2-6"/>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
       <dep package="meta-gtk-osx-core"/>
@@ -131,10 +139,11 @@
   </autotools>
 
   <autotools id="babl">
-    <branch/>
+    <branch revision="288"/>
   </autotools>
+
   <autotools id="gegl">
-    <branch/>
+    <branch revision="2136"/>
     <dependencies>
       <dep package="babl"/>
     </dependencies>
