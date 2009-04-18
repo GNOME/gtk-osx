@@ -4,6 +4,8 @@
 <moduleset>
 
   <repository type="tarball" name="ftp.gnu.org" href="ftp://ftp.gnu.org/gnu/"/>
+  <repository type="tarball" name="ftp.gnome.org" 
+	      href="ftp://ftp.gnome.org/pub/gnome/sources/"/>
   <repository type="svn" name="svn.gnome.org" default="yes" href="http://svn.gnome.org/svn/"/>
   <repository type="tarball" name="cpan" href="http://search.cpan.org/CPAN/" />
   <repository type="tarball" name="sourceforge" href="http://heanet.dl.sourceforge.net/sourceforge"/>
@@ -109,22 +111,22 @@
   </perl>
 
   <autotools id="gnome-common">
-    <branch/>
+    <branch revision="gnome-2-26"/>
   </autotools>
 
   <autotools id="libxml2">
-    <branch/>
+    <branch revision="3815"/>
   </autotools>
 
   <autotools id="libxslt">
-    <branch/>
+    <branch revision="1474"/>
     <dependencies>
       <dep package="libxml2"/>
     </dependencies>
   </autotools>
 
   <autotools id="gtk-doc" autogenargs="--disable-scrollkeepeer --with-xml-catalog=$JHBUILD_PREFIX/etc/xml/catalog" makeargs="-k -i" makeinstallargs="-k -i install">
-    <branch/>
+    <branch release="619"/>
     <dependencies>
       <dep package="libxslt"/>
       <dep package="docbook-setup"/>
@@ -138,7 +140,8 @@
   </tarball>
 
   <autotools id="intltool">
-    <branch/>
+    <branch repo="ftp.gnome.org" module="intltool/0.40/intltool-0.40.1.tar.bz2"
+	    version="0.40.1" md5sum="18a75ec5ff9d049c3ef148f1d7b03929"/>
     <dependencies>
       <dep package="gnome-common"/>
       <dep package="perl-xml-parser"/>
