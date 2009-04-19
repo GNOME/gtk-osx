@@ -2,13 +2,19 @@
 <!DOCTYPE moduleset SYSTEM "moduleset.dtd">
 <?xml-stylesheet type="text/xsl" href="moduleset.xsl"?>
 <moduleset>
-  <repository type="svn" name="svn.gnome.org" default="yes" href="http://svn.gnome.org/svn/"/>
-  <repository type='tarball' name='michael.68k.org' href="http://www.68k.org/~michael/"/>
+  <repository type="svn" name="svn.gnome.org" default="yes" 
+              href="http://svn.gnome.org/svn/"/>
+  <repository type='tarball' name='michael.68k.org' 
+              href="http://www.68k.org/~michael/"/>
   <repository type='tarball' name='ftp.gnu.org' href="ftp://ftp.gnu.org/gnu/"/>
-  <repository type='tarball' name='www.gnu.org' href="http://www.gnu.org/software/gnutls/releases/"/>
+  <repository type='tarball' name='www.gnu.org' 
+              href="http://www.gnu.org/software/gnutls/releases/"/>
   <repository type='tarball' name='ftp.gnupg.org' href="ftp://ftp.gnupg.org/" />
   <repository type="svn" name="svn.debian.org" href="svn://svn.debian.org/"/>
-  <repository type="tarball" name="abisource/enchant" href="http://www.abisource.com/downloads/enchant/" />
+  <repository type="tarball" name="abisource/enchant" 
+              href="http://www.abisource.com/downloads/enchant/" />
+  <repository type="tarball" name="iso-codes"
+              href="http://pkg-isocodes.alioth.debian.org/pub/"/>
 
   <autotools id="gnome-mime-data">
    <branch/>
@@ -19,7 +25,7 @@
   </autotools>
 
   <autotools id="iso-codes" >
-    <branch repo="svn.debian.org" module="pkg-isocodes/trunk/iso-codes" />
+    <branch repo="iso-codes" module="pkg-isocodes/iso-codes-3.8.tar.gz"/>
 
   </autotools>
 
