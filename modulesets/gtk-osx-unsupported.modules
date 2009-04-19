@@ -14,7 +14,7 @@
   <repository type="tarball" name="abisource/enchant" 
               href="http://www.abisource.com/downloads/enchant/" />
   <repository type="tarball" name="iso-codes"
-              href="http://pkg-isocodes.alioth.debian.org/pub/"/>
+              href="ftp://pkg-isocodes.alioth.debian.org/pub/"/>
 
   <autotools id="gnome-mime-data">
    <branch/>
@@ -25,7 +25,8 @@
   </autotools>
 
   <autotools id="iso-codes" >
-    <branch repo="iso-codes" module="pkg-isocodes/iso-codes-3.8.tar.gz"/>
+    <branch repo="iso-codes" version="3.8"
+            module="pkg-isocodes/iso-codes-3.8.tar.gz"/>
 
   </autotools>
 
