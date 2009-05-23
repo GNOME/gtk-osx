@@ -6,6 +6,8 @@
               href="http://svn.gnome.org/svn/"/>
   <repository type="tarball" name="ftp.gnome.org" 
 	      href="ftp://ftp.gnome.org/pub/gnome/sources/"/>
+  <repository type="tarball" name="ftp.gtk.org" 
+	      href="ftp://ftp.gtk.org/pub/"/>
   <repository type="svn" name="inkscape.svn.sourceforge.net" 
               href="https://inkscape.svn.sourceforge.net/svnroot/inkscape/"/>
   <repository type="svn" name="ardour" 
@@ -125,7 +127,10 @@
     </dependencies>
   </tarball>
 
-  <autotools id="gimp" autogenargs="--disable-python --disable-print --without-x --without-dbus --without-gnomevfs">
+  <autotools id="gimp" 
+             autogenargs="--disable-python --disable-print --without-x
+                          --without-dbus --without-gnomevfs"
+             makeargs='LDFLAGS="-framework Carbon"'>
     <branch revision="gimp-2-6"/>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
@@ -139,11 +144,13 @@
   </autotools>
 
   <autotools id="babl">
-    <branch revision="288"/>
+    <branch repo="ftp.gtk.org" version="0.0.22" 
+            module="babl/0.0/babl-0.0.22.tar.bz2"/>
   </autotools>
 
   <autotools id="gegl">
-    <branch revision="2136"/>
+    <branch repo="ftp.gtk.org" version="0.0.22" 
+            module="gegl/0.0/gegl-0.0.22.tar.bz2"/>
     <dependencies>
       <dep package="babl"/>
     </dependencies>
