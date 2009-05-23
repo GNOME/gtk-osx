@@ -55,17 +55,18 @@
     </after>
   </autotools>
 
-  <autotools id="pango" autogenargs="--without-x --with-included-modules=basic-atsui"
+  <autotools id="pango" 
+             autogenargs="--without-x --with-included-modules=basic-atsui"
              makeargs="-k -C modules; make">
     <branch revision="2830"/>
     <dependencies>
       <dep package="glib"/>
       <dep package="cairo"/>
+      <dep package="fontconfig"/>
+      <dep package="freetype"/>
     </dependencies>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
-      <dep package="fontconfig"/>
-      <dep package="freetype"/>
     </after>
   </autotools>
 
