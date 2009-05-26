@@ -66,6 +66,7 @@ echo "Installing jhbuild..."
 echo "Installing jhbuild configuration..."
 curl -s $BASEURL/jhbuildrc-gtk-osx -o $HOME/.jhbuildrc
 curl -s $BASEURL/jhbuildrc-gtk-osx-fw-10.4 -o $HOME/.jhbuildrc-fw-10.4
+curl -s $BASEURL/jhbuildrc-gtk-osx-cfw-10.4 -o $HOME/.jhbuildrc-cfw-10.4
 curl -s $BASEURL/jhbuildrc-gtk-osx-fw-10.4-test -o $HOME/.jhbuildrc-fw-10.4-test
 if [ ! -f $HOME/.jhbuildrc-custom ]; then
     curl -s $BASEURL/jhbuildrc-gtk-osx-custom-example -o $HOME/.jhbuildrc-custom
