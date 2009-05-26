@@ -79,4 +79,11 @@
 	    module="libtasn1/libtasn1-1.4.tar.gz"/>
   </autotools>
 
+  <autotools id="gnet" autogenargs="--enable-glib2">
+    <branch/>
+    <dependencies>
+      <dep package="glib"/>
+    </dependencies>
+  </autotools>
+  
 </moduleset>
