@@ -73,7 +73,7 @@ def set_branch(module, branch):
     # Keep any overriden repo name here to keep custom usernames set
     # up in a custom setup.
     #
-    repo = repos.get("svn.gnome.org", "http://svn.gnome.org/svn")
+    repo = repos.get("git.gnome.org", "git://git.gnome.org/")
     if repo.endswith("/"):
         repo = repo[:-1]
 

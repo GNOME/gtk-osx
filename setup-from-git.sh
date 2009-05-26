@@ -16,39 +16,32 @@ do_exit()
     exit 1
 }
 
-if test x`which svn` == x; then
-    do_exit "Svn (subversion) isn't available, please install it and try again."
+if test x`which git` == x; then
+    do_exit "Git isn't available, please install it and try again."
 fi
 
 if test ! -d $SOURCE; then
     do_exit "The directory $SOURCE does not exist, please create it and try again."
 fi
 
-if test ! -d $SOURCE/gtk-osx-build; then
-    do_exit "The directory $SOURCE/gtk-osx-build does not exist, please check it out from git and try again."
-fi
-
-cd $SOURCE
-
-JHBUILD_REVISION=`cat $SOURCE/gtk-osx-build/jhbuild-revision 2>/dev/null`
-if test x"$JHBUILD_REVISION" = x; then
-    do_exit "Could not find jhbuild revision to use."
-fi
-
-JHBUILD_REVISION_OPTION="-r$JHBUILD_REVISION"
-
-echo "Checking out jhbuild ($JHBUILD_REVISION) from subversion..."
+#JHBUILD_REVISION=`cat $SOURCE/gtk-osx-build/jhbuild-revision 2>/dev/null`
+#if test x"$JHBUILD_REVISION" = x; then
+#    do_exit "Could not find jhbuild revision to use."
+#fi
+#
+#JHBUILD_REVISION_OPTION="-r$JHBUILD_REVISION"
+#
+echo "Checking out jhbuild ($JHBUILD_REVISION) from git..."
 if ! test -d $SOURCE/jhbuild; then
-    svn co $JHBUILD_REVISION_OPTION http://svn.gnome.org/svn/jhbuild/trunk jhbuild >/dev/null
+    (cd $SOURCE ; git clone git://git.gnome.org/jhbuild )
 else
-    (cd jhbuild && svn up $JHBUILD_REVISION_OPTION >/dev/null)
+    (cd $SOURCE/jhbuild && git pull >/dev/null)
 fi
 
 echo "Installing jhbuild..."
-(cd jhbuild && make -f Makefile.plain DISABLE_GETTEXT=1 install >/dev/null)
+(cd $SOURCE/jhbuild && make -f Makefile.plain DISABLE_GETTEXT=1 install >/dev/null)
 
 echo "Installing jhbuild configuration..."
-cd gtk-osx-build
 ln -sfh `pwd`/jhbuildrc-gtk-osx $HOME/.jhbuildrc
 ln -sfh `pwd`/jhbuildrc-gtk-osx-fw-10.4 $HOME/.jhbuildrc-fw-10.4
 ln -sfh `pwd`/jhbuildrc-gtk-osx-fw-10.4-test $HOME/.jhbuildrc-fw-10.4-test

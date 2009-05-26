@@ -2,7 +2,8 @@
 <!DOCTYPE moduleset SYSTEM "moduleset.dtd">
 <?xml-stylesheet type="text/xsl" href="moduleset.xsl"?>
 <moduleset>
-  <repository type="svn" name="svn.gnome.org" default="yes" href="http://svn.gnome.org/svn/"/>
+  <repository type="git" name="git.gnome.org" default="yes"
+      href="git://git.gnome.org/"/>
   <repository type="tarball" name="github" href="http://github.com/"/>
 
   <!-- This module set works a bit differently than for example the
