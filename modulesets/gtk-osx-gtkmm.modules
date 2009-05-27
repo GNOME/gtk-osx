@@ -2,8 +2,7 @@
 <!DOCTYPE moduleset SYSTEM "moduleset.dtd">
 <?xml-stylesheet type="text/xsl" href="moduleset.xsl"?>
 <moduleset>
-  <repository type="git" name="git.gnome.org" default="yes"
-      href="git://git.gnome.org/"/>
+  <repository type="git" name="git.gnome.org" default="yes" href="git://git.gnome.org/"/>
   <repository type="tarball" name="doxygen" href="http://ftp.stack.nl/pub/users/dimitri/"/>
 
   <metamodule id="meta-gtk-osx-gtkmm">
