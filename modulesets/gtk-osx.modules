@@ -4,6 +4,8 @@
 <moduleset>
   <repository type="svn" name="svn.gnome.org" default="yes" href="http://svn.gnome.org/svn/"/>
   <repository type="tarball" name="github" href="http://github.com/"/>
+  <repository type="tarball" name="github-sane" 
+              href="http://cloud.github.com/downloads/"/>
 
   <!-- This module set works a bit differently than for example the
        GNOME ones do. It's split up in seperate pieces:
@@ -100,8 +102,8 @@
 
   <tarball id="cairo" version="1.8.6" autogenargs="--enable-pdf --enable-quartz --disable-xlib">
     <source href="http://cairographics.org/releases/cairo-1.8.4.tar.gz"/>
-    <dependencies>
-      <dep package="pixman"/>
+    <dep>
+      <dependencies package="pixman"/>
     </dependencies>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
@@ -111,10 +113,9 @@
   </tarball>
 
   <autotools id="ige-mac-integration" autogenargs="--disable-python">
-    <branch repo="github"
-	    module="rhult/ige-mac-integration/tarball/IMI_1"
-            version="0.8.3~unreleased" 
-checkoutdir="rhult-ige-mac-integration-6e75f48538dbfb6d03abe9cecc5dbd2b35c9be41"/>
+    <branch repo="github-sane"
+	    module="jralls/ige-mac-integration/ige-mac-integration-0.8.0.tar.gz"
+            version="0.8.0" />
     <dependencies>
       <dep package="gtk+"/>
     </dependencies>
