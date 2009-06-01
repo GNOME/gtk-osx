@@ -114,8 +114,8 @@
 
   <autotools id="ige-mac-integration" autogenargs="--disable-python">
     <branch repo="github-sane"
-	    module="jralls/ige-mac-integration/ige-mac-integration-0.8.0.tar.gz"
-            version="0.8.0" />
+	    module="jralls/ige-mac-integration/ige-mac-integration-0.8.4.tar.gz"
+            version="0.8.4" />
     <dependencies>
       <dep package="gtk+"/>
     </dependencies>
