@@ -102,8 +102,8 @@
 
   <tarball id="cairo" version="1.8.6" autogenargs="--enable-pdf --enable-quartz --disable-xlib">
     <source href="http://cairographics.org/releases/cairo-1.8.4.tar.gz"/>
-    <dep>
-      <dependencies package="pixman"/>
+    <dependencies>
+      <dep package="pixman"/>
     </dependencies>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
