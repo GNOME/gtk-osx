@@ -6,6 +6,8 @@
   <repository type="cvs" name="tango.freedesktop.org"
       cvsroot=":pserver:anoncvs@anoncvs.freedesktop.org:/cvs/tango"
       password=""/>
+  <repository type='tarball' name="cloud.github.com" 
+              href="http://cloud.github.com/downloads/" />
 
   <metamodule id="meta-gtk-osx-themes">
     <dependencies>
@@ -56,4 +58,11 @@
     </after>
   </autotools>
 
+  <autotools id="gtk-quartz-engine">
+    <branch module="jralls/gtk-osx-build/gtk-quartz-engine-0.1.tar.gz"
+            repo="cloud.github.com" version="0.1" />
+    <after>
+      <dep package="meta-gtk-osx-core"/>
+    </after>
+  </autotools>
 </moduleset>
