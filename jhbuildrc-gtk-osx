@@ -69,15 +69,11 @@ def parse_custom_argument(key):
             return sys.argv[i+1]
     return None
 
-def set_branch(module, branch):
+def set_git_branch(module, branch):
     # Keep any overriden repo name here to keep custom usernames set
     # up in a custom setup.
     #
-    repo = repos.get("svn.gnome.org", "http://svn.gnome.org/svn")
-    if repo.endswith("/"):
-        repo = repo[:-1]
-
-    branches[module] = repo + "/" + module + "/" + branch
+    branches[module] = ('', branch)
 
 def append_autogenargs(module, args):
     old_value = module_autogenargs.get(module, autogenargs)

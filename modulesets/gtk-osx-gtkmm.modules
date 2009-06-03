@@ -2,7 +2,7 @@
 <!DOCTYPE moduleset SYSTEM "moduleset.dtd">
 <?xml-stylesheet type="text/xsl" href="moduleset.xsl"?>
 <moduleset>
-  <repository type="svn" name="svn.gnome.org" default="yes" href="http://svn.gnome.org/svn/"/>
+  <repository type="git" name="git.gnome.org" default="yes" href="git://git.gnome.org/"/>
   <repository type="tarball" name="doxygen" href="http://ftp.stack.nl/pub/users/dimitri/"/>
 
   <metamodule id="meta-gtk-osx-gtkmm">
@@ -11,16 +11,16 @@
     </dependencies>
   </metamodule>
 
-  <tarball id="cairomm" version="1.6.0">
-    <source href="http://www.cairographics.org/releases/cairomm-1.6.0.tar.gz"
-	    md5sum="549b0c9eaa25d61c4dd92d2de1cb4a462" size="797627"/>
+ <tarball id="cairomm" version="1.8.0">
+    <source href="http://www.cairographics.org/releases/cairomm-1.8.0.tar.gz"/>
+	    <!-- md5sum="549b0c9eaa25d61c4dd92d2de1cb4a462" size="797627"/-->
     <dependencies>
       <dep package="cairo"/>
     </dependencies>
   </tarball>
 
   <autotools id="glibmm">
-    <branch/>
+    <branch tag="glibmm-2.20.0"/>
     <dependencies>
       <dep package="glib"/>
       <dep package="libsigc++2"/>

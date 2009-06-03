@@ -53,11 +53,11 @@ fi
 
 JHBUILD_REVISION_OPTION="-r$JHBUILD_REVISION"
 
-echo "Checking out jhbuild ($JHBUILD_REVISION) from subversion..."
+echo "Checking out jhbuild ($JHBUILD_REVISION) from git..."
 if ! test -d $SOURCE/jhbuild; then
-    svn co $JHBUILD_REVISION_OPTION http://svn.gnome.org/svn/jhbuild/trunk $SOURCE/jhbuild >/dev/null
+    (cd $SOURCE ; git clone git://git.gnome.org/jhbuild )
 else
-    (cd $SOURCE/jhbuild && svn up $JHBUILD_REVISION_OPTION >/dev/null)
+    (cd $SOURCE/jhbuild && git pull >/dev/null)
 fi
 
 echo "Installing jhbuild..."
@@ -66,6 +66,7 @@ echo "Installing jhbuild..."
 echo "Installing jhbuild configuration..."
 curl -s $BASEURL/jhbuildrc-gtk-osx -o $HOME/.jhbuildrc
 curl -s $BASEURL/jhbuildrc-gtk-osx-fw-10.4 -o $HOME/.jhbuildrc-fw-10.4
+curl -s $BASEURL/jhbuildrc-gtk-osx-cfw-10.4 -o $HOME/.jhbuildrc-cfw-10.4
 curl -s $BASEURL/jhbuildrc-gtk-osx-fw-10.4-test -o $HOME/.jhbuildrc-fw-10.4-test
 if [ ! -f $HOME/.jhbuildrc-custom ]; then
     curl -s $BASEURL/jhbuildrc-gtk-osx-custom-example -o $HOME/.jhbuildrc-custom
