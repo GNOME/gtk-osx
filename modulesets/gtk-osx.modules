@@ -83,16 +83,6 @@
     </after>
   </autotools>
 
-  <autotools id="gtk-quartz-engine">
-    <branch/>
-    <dependencies>
-      <dep package="gtk+"/>
-    </dependencies>
-    <after>
-      <dep package="meta-gtk-osx-bootstrap"/>
-    </after>
-  </autotools>
-  
   <autotools id="gtk+" autogenargs="--with-gdktarget=quartz --without-libjasper">
     <branch revision="gtk-2-16"/>
     <dependencies>
