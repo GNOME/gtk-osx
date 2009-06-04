@@ -13,7 +13,7 @@
 
  <tarball id="cairomm" version="1.8.0">
     <source href="http://www.cairographics.org/releases/cairomm-1.8.0.tar.gz"/>
-	    <!-- md5sum="549b0c9eaa25d61c4dd92d2de1cb4a462" size="797627"/-->
+	          md5sum="4e64139ef6f668df24450f3b81dd0771" size="6616544"/>
     <dependencies>
       <dep package="cairo"/>
     </dependencies>
