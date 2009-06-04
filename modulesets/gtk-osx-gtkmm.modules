@@ -20,7 +20,7 @@
   </tarball>
 
   <autotools id="glibmm">
-    <branch tag="glibmm-2.20.0"/>
+    <branch revision="glibmm-2-20"/>
     <dependencies>
       <dep package="glib"/>
       <dep package="libsigc++2"/>
