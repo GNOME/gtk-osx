@@ -42,6 +42,10 @@ if test x`which svn` == x; then
     do_exit "Svn (subversion) is not available, please install it and try again."
 fi
 
+if test x`which git` == x; then
+    do_exit "Git is not available, please install it and try again."
+fi
+
 mkdir -p $SOURCE 2>/dev/null || do_exit "The directory $SOURCE could not be created. Check permissions and try again."
 
 rm -f tmp-jhbuild-revision
