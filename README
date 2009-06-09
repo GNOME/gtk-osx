@@ -1,9 +1,8 @@
 This repository is used to maintain the configurations and modulesets
 for building GTK+ OS X with jhbuild.
 
-NOTE: If you want to build GTK+, you most likely don't need this
-module, follow the instructions at:
+NOTE: If you only want to build GTK+, just download gtk-osx-build-setup.sh and follow the instructions at:
 
-http://live.gnome.org/GTK%2B/OSX/BuildInstructions
+https://apps.sourceforge.net/trac/gtk-osx/wiki/Build
 
-instead.
+
