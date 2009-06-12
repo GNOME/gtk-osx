@@ -130,7 +130,7 @@ _osx_version = os.popen("uname -r").read().strip()
 
 # Moduleset to use.
 #
-moduleset = 'http://github.com/jralls/gtk-osx-build/raw/master/modulesets/gtk-osx.modules'
+moduleset = 'http://github.com/jralls/gtk-osx-build/raw/master/modulesets-stable/gtk-osx.modules'
 use_local_modulesets = True
 
 # A list of the modules to build.
