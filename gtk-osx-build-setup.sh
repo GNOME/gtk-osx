@@ -35,7 +35,7 @@ do_exit()
 
 get_moduleset_from_git()
 {
-    curl -s "$BASEURL/modulesets/$1" -o $SOURCE/jhbuild/modulesets/$1
+    curl -s "$BASEURL/modulesets-stable/$1" -o $SOURCE/jhbuild/modulesets/$1
 }
 
 if test x`which svn` == x; then
@@ -55,13 +55,16 @@ if test x"$JHBUILD_REVISION" = x; then
     do_exit "Could not find jhbuild revision to use."
 fi
 
-JHBUILD_REVISION_OPTION="-r$JHBUILD_REVISION"
+JHBUILD_REVISION_OPTION="origin refs/tags/$JHBUILD_REVISION"
 
 echo "Checking out jhbuild ($JHBUILD_REVISION) from git..."
 if ! test -d $SOURCE/jhbuild; then
-    (cd $SOURCE ; git clone git://git.gnome.org/jhbuild )
+    cd $SOURCE 
+    git clone git://git.gnome.org/jhbuild 
+    cd jhbuild
+    git checkout -b stable $JHBUILD_REVISION;
 else
-    (cd $SOURCE/jhbuild && git pull >/dev/null)
+    cd $SOURCE/jhbuild && git pull $JHBUILD_REVISION_OPTION >/dev/null;
 fi
 
 echo "Installing jhbuild..."
