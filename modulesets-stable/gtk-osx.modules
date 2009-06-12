@@ -1,0 +1,127 @@
+<?xml version="1.0"?><!--*- mode: nxml; indent-tabs-mode: nil -*-->
+<!DOCTYPE moduleset SYSTEM "moduleset.dtd">
+<?xml-stylesheet type="text/xsl" href="moduleset.xsl"?>
+<moduleset>
+  <repository type="svn" name="svn.gnome.org" default="yes" href="http://svn.gnome.org/svn/"/>
+  <repository type="tarball" name="github" href="http://github.com/"/>
+  <repository type="tarball" name="github-sane" 
+              href="http://cloud.github.com/downloads/"/>
+
+  <!-- This module set works a bit differently than for example the
+       GNOME ones do. It's split up in seperate pieces:
+
+       - gtk-osx-bootstrap: contains bootstrap-like modules that you
+         don't want to rebuild all the time.
+
+       - gtk-osx.modules: contains the core GTK+ stack. This does not
+         have a hard dependency on the bootstrap modules, in order to
+         make it easy to rebuild the whole core stack without redoing
+         the bootstrap parts. They have a soft, "after", depencency.
+
+       The remaining modules are mostly for testing and might not work
+       all the time:
+
+       - gtk-osx-python.modules: self explaining.
+       - gtk-osx-gtkmm.modules: self explaining.
+       - gtk-osx-gstreamer.modules: self explaining.
+       - gtk-osx-themes.modules: self explaining.
+
+       - gtk-osx-random.modules: "random stuff", has apps for testing GTK+.
+       - gtk-osx-unsupported.modules: more testing stuff, competely unsupported.
+  -->
+
+  <include href="gtk-osx-bootstrap.modules"/>
+  <include href="gtk-osx-python.modules"/>
+  <include href="gtk-osx-gstreamer.modules"/>
+  <include href="gtk-osx-webkit-deps.modules"/>
+  <include href="gtk-osx-gtkmm.modules"/>
+  <include href="gtk-osx-themes.modules"/>
+  <include href="gtk-osx-random.modules"/>
+  <include href="gtk-osx-unsupported.modules"/>
+
+  <metamodule id="meta-gtk-osx-core">
+    <dependencies>
+      <dep package="gtk+"/>
+      <dep package="ige-mac-integration"/>
+    </dependencies>
+    <after>
+      <dep package="meta-gtk-osx-bootstrap"/>
+    </after>
+  </metamodule>
+
+  <autotools id="glib">
+    <branch revision="glib-2-18"/>
+    <after>
+      <dep package="meta-gtk-osx-bootstrap"/>
+      <dep package="gtk-doc"/> <!-- FIXME: http://bugs.gnome.org/546640 -->
+    </after>
+  </autotools>
+
+  <autotools id="pango" 
+             autogenargs="--without-x --with-included-modules=basic-atsui"
+             makeargs="-k -C modules; make">
+    <branch revision="2830"/>
+    <dependencies>
+      <dep package="glib"/>
+      <dep package="cairo"/>
+      <dep package="fontconfig"/>
+      <dep package="freetype"/>
+    </dependencies>
+    <after>
+      <dep package="meta-gtk-osx-bootstrap"/>
+    </after>
+  </autotools>
+
+ <autotools id="atk">
+    <branch/>
+    <dependencies>
+      <dep package="glib"/>
+    </dependencies>
+    <after>
+      <dep package="meta-gtk-osx-bootstrap"/>
+    </after>
+  </autotools>
+
+  <autotools id="gtk+" autogenargs="--with-gdktarget=quartz --without-libjasper">
+    <branch revision="gtk-2-14"/>
+    <dependencies>
+      <dep package="pango"/>
+      <dep package="atk"/>
+    </dependencies>
+    <after>
+      <dep package="meta-gtk-osx-bootstrap"/>
+    </after>
+  </autotools>
+
+  <tarball id="pixman" version="0.12.0" autogenargs="--disable-gtk">
+    <source href="http://cairographics.org/releases/pixman-0.13.2.tar.gz"/>
+    <after>
+      <dep package="meta-gtk-osx-bootstrap"/>
+    </after>
+  </tarball>
+
+  <tarball id="cairo" version="1.8.6" autogenargs="--enable-pdf --enable-quartz --disable-xlib">
+    <source href="http://cairographics.org/releases/cairo-1.8.4.tar.gz"/>
+    <dependencies>
+      <dep package="pixman"/>
+    </dependencies>
+    <after>
+      <dep package="meta-gtk-osx-bootstrap"/>
+      <dep package="fontconfig"/>
+      <dep package="freetype"/>
+    </after>
+  </tarball>
+
+  <autotools id="ige-mac-integration" autogenargs="--disable-python">
+    <branch repo="github-sane"
+	    module="jralls/ige-mac-integration/ige-mac-integration-0.8.4.tar.gz"
+            version="0.8.4" />
+    <dependencies>
+      <dep package="gtk+"/>
+    </dependencies>
+    <after>
+      <dep package="meta-gtk-osx-bootstrap"/>
+    </after>
+  </autotools>
+
+</moduleset>

@@ -1,0 +1,82 @@
+<?xml version="1.0"?><!--*- mode: xml; indent-tabs-mode: nil -*-->
+<!DOCTYPE moduleset SYSTEM "moduleset.dtd">
+<?xml-stylesheet type="text/xsl" href="moduleset.xsl"?>
+<moduleset>
+  <repository type="svn" name="svn.gnome.org" default="yes" 
+              href="http://svn.gnome.org/svn/"/>
+  <repository type='tarball' name='michael.68k.org' 
+              href="http://www.68k.org/~michael/"/>
+  <repository type='tarball' name='ftp.gnu.org' href="ftp://ftp.gnu.org/gnu/"/>
+  <repository type='tarball' name='www.gnu.org' 
+              href="http://www.gnu.org/software/gnutls/releases/"/>
+  <repository type='tarball' name='ftp.gnupg.org' href="ftp://ftp.gnupg.org/" />
+  <repository type="svn" name="svn.debian.org" href="svn://svn.debian.org/"/>
+  <repository type="tarball" name="abisource/enchant" 
+              href="http://www.abisource.com/downloads/enchant/" />
+  <repository type="tarball" name="iso-codes"
+              href="ftp://pkg-isocodes.alioth.debian.org/pub/"/>
+
+  <autotools id="gnome-mime-data">
+   <branch/>
+    <dependencies>
+      <dep package="gnome-common"/>
+      <dep package="glib"/>
+    </dependencies>
+  </autotools>
+
+  <autotools id="iso-codes" >
+    <branch repo="iso-codes" version="3.8"
+            module="pkg-isocodes/iso-codes-3.8.tar.gz"/>
+
+  </autotools>
+
+  <autotools id="gnutls">
+    <branch repo='www.gnu.org' version='2.3.11' 
+            module="gnutls-2.3.11.tar.bz2"/>
+    <dependencies>
+      <dep package="libgcrypt" />
+      <dep package="libtasn1" />
+      <dep package="opencdk" />
+    </dependencies>
+  </autotools>
+
+  <autotools id="opencdk" supports-non-srcdir-builds="no">
+    <branch repo="www.gnu.org" version='0.6.6'
+	    module="opencdk/opencdk-0.6.6.tar.bz2"
+            size="481904" md5sum="813d62d7afe7b2c2d8f3df0a6c9d9331" />
+    <dependencies>
+      <dep package="libgcrypt" />
+    </dependencies>
+  </autotools>
+
+  <autotools id="libsoup">
+    <branch/>
+    <dependencies>
+      <dep package="glib"/>
+      <dep package="gnutls"/>
+      <dep package="libxml2"/>
+    </dependencies>
+  </autotools>
+
+   <autotools id="libgpg-error" autogen-sh="configure">
+    <branch repo='ftp.gnupg.org' version='1.4'
+	    module="gcrypt/libgpg-error/libgpg-error-1.4.tar.bz2"
+            size="467196" md5sum="2ea1e25b7a6f9365c969403af4a6dbc5" />
+  </autotools>
+
+  <autotools id="libgcrypt" autogen-sh="configure">
+    <branch repo='ftp.gnupg.org' version='1.2.2'
+	    module='gcrypt/libgcrypt/libgcrypt-1.2.2.tar.bz2'
+            size="780315" md5sum="4a8a9a7572892ae3803a5aa558e52e02" />
+    <dependencies>
+      <dep package="libgpg-error" />
+    </dependencies>
+  </autotools>
+
+  <autotools id="libtasn1" supports-non-srcdir-builds="no"
+	     autogen-sh="configure">
+    <branch repo="www.gnu.org" version='1.4'
+	    module="libtasn1/libtasn1-1.4.tar.gz"/>
+  </autotools>
+
+</moduleset>

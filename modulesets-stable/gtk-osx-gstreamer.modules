@@ -1,0 +1,94 @@
+<?xml version="1.0"?><!--*- mode: xml; indent-tabs-mode: nil -*-->
+<!DOCTYPE moduleset SYSTEM "moduleset.dtd">
+<?xml-stylesheet type="text/xsl" href="moduleset.xsl"?>
+<moduleset>
+  <repository type="cvs" name="gstreamer.freedesktop.org"
+      cvsroot=":pserver:anoncvs@anoncvs.freedesktop.org:/cvs/gstreamer"
+      password=""/>
+
+  <tarball id="liboil" version="0.3.14">
+    <source href="http://liboil.freedesktop.org/download/liboil-0.3.14.tar.gz"
+            md5sum="7a9f719e50656b795c06c0167012a84f" size="819559"/>
+  </tarball>
+
+  <repository type="tarball" name="sourceforge" href="http://superb-east.dl.sourceforge.net/sourceforge/" />
+  <autotools id="faad" autogen-sh="autoreconf"
+             autogenargs="-without-bmp --without-xmms --without-drm --without-mpeg4ip">
+    <branch repo="sourceforge" module="faac/faad2-2.6.1.tar.gz"
+            version="2.6.1" checkoutdir="faad2"
+            md5sum="74e92df40c270f216a8305fc87603c8a" size="839410"/>
+  </autotools>
+
+  <autotools id="gstreamer" autogenargs="-- --disable-tests" supports-non-srcdir-builds="no"
+    makeargs="ERROR_CFLAGS=">
+    <branch repo="gstreamer.freedesktop.org" module="gstreamer"/>
+    <after>
+      <dep package="glib"/>
+      <dep package="libxml2"/>
+    </after>
+  </autotools>
+
+  <autotools id="gst-plugins-base" autogenargs="-- --disable-tests --disable-x --disable-xvideo" supports-non-srcdir-builds="no"
+    makeargs="ERROR_CFLAGS=">
+    <branch repo="gstreamer.freedesktop.org" module="gst-plugins-base"/>
+    <dependencies>
+      <dep package="gstreamer"/>
+      <!--dep package="gtk+"/-->
+      <dep package="liboil"/>
+    </dependencies>
+    <after>
+      <dep package="gnome-vfs"/>
+    </after>
+  </autotools>
+
+  <autotools id="gst-plugins-good" autogenargs="-- --disable-tests --disable-x --disable-xvideo --disable-osx-video" supports-non-srcdir-builds="no"
+    makeargs="ERROR_CFLAGS=">
+    <branch repo="gstreamer.freedesktop.org" module="gst-plugins-good"/>
+    <dependencies>
+      <dep package="gstreamer"/>
+      <dep package="gst-plugins-base"/>
+    </dependencies>
+  </autotools>
+
+  <autotools id="gst-plugins-ugly" autogenargs="-- --disable-tests" supports-non-srcdir-builds="no"
+    makeargs="ERROR_CFLAGS=">
+    <branch repo="gstreamer.freedesktop.org" module="gst-plugins-ugly"/>
+    <dependencies>
+      <dep package="gstreamer"/>
+      <dep package="gst-plugins-base"/>
+    </dependencies>
+  </autotools>
+
+  <autotools id="gst-plugins-bad" autogenargs="-- --disable-tests --disable-x --disable-xvid" supports-non-srcdir-builds="no"
+    makeargs="ERROR_CFLAGS=">
+    <branch repo="gstreamer.freedesktop.org" module="gst-plugins-bad"/>
+    <dependencies>
+      <dep package="gstreamer"/>
+      <dep package="gst-plugins-base"/>
+      <dep package="faad"/>
+    </dependencies>
+  </autotools>
+
+  <!-- This must be built with -O2, due to a GCC bug. Also MMX doesn't work yet on OSX. -->
+  <autotools id="gst-ffmpeg" autogenargs="-- --disable-tests --disable-mmx" supports-non-srcdir-builds="no"
+    makeargs='ERROR_CFLAGS= CFLAGS="$CFLAGS -O2"'>
+    <branch repo="gstreamer.freedesktop.org" module="gst-ffmpeg"/>
+    <dependencies>
+      <dep package="gstreamer"/>
+      <dep package="gst-plugins-base"/>
+    </dependencies>
+  </autotools>
+
+  <metamodule id="meta-gstreamer">
+    <dependencies>
+      <dep package="liboil"/>
+      <dep package="gstreamer"/>
+      <dep package="gst-plugins-base"/>
+      <dep package="gst-plugins-good"/>
+      <!--dep package="gst-plugins-ugly"/-->
+      <dep package="gst-plugins-bad"/>
+      <dep package="gst-ffmpeg"/>
+    </dependencies>
+  </metamodule>
+
+</moduleset>
