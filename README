@@ -3,6 +3,6 @@ for building GTK+ OS X with jhbuild.
 
 NOTE: If you only want to build GTK+, just download gtk-osx-build-setup.sh and follow the instructions at:
 
-https://apps.sourceforge.net/trac/gtk-osx/wiki/Build
+http://apps.sourceforge.net/trac/gtk-osx/wiki/Build
 
 
