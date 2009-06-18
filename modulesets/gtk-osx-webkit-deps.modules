@@ -2,7 +2,8 @@
 <!DOCTYPE moduleset SYSTEM "moduleset.dtd">
 <?xml-stylesheet type="text/xsl" href="moduleset.xsl"?>
 <moduleset>
-  <repository type="git" name="git.gnome.org" default="yes" href="git://git.gnome.org/"/>
+  <repository type="git" name="git.gnome.org" default="yes" 
+              href="git://git.gnome.org/"/>
   <repository type="git" name="git.debian.org" href="git://git.debian.org/"/>
 
   <metamodule id="meta-webkit-deps">
@@ -26,7 +27,7 @@
 
   <!-- Not sure which HTTP backend is best for the mac build yet, leave this here. -->
   <autotools id="libsoup">
-    <branch/>
+    <branch revision="gnome-2-26"/>
     <after>
       <dep package="meta-gtk-osx-core"/>
     </after>

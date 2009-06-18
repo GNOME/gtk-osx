@@ -2,10 +2,13 @@
 <!DOCTYPE moduleset SYSTEM "moduleset.dtd">
 <?xml-stylesheet type="text/xsl" href="moduleset.xsl"?>
 <moduleset>
-  <repository type="git" name="git.gnome.org" default="yes" href="git://git.gnome.org/"/>
+  <repository type="git" name="git.gnome.org" default="yes" 
+              href="git://git.gnome.org/"/>
   <repository type="cvs" name="tango.freedesktop.org"
-      cvsroot=":pserver:anoncvs@anoncvs.freedesktop.org:/cvs/tango"
-      password=""/>
+              cvsroot=":pserver:anoncvs@anoncvs.freedesktop.org:/cvs/tango"
+              password=""/>
+  <repository type="tarball" name="freedesktop.org"
+              href="http://tango.freedesktop.org/"/>
   <repository type='tarball' name="cloud.github.com" 
               href="http://cloud.github.com/downloads/" />
 
@@ -19,14 +22,14 @@
     </dependencies>
   </metamodule>
 
-  <tarball id="icon-naming-utils" version="0.8.7">
-    <source href="http://tango.freedesktop.org/releases/icon-naming-utils-0.8.7.tar.gz"
+  <autotools id="icon-naming-utils" >
+    <branch repo="freedesktop.org" version="0.8.7"
+            module="releases/icon-naming-utils-0.8.7.tar.gz"
             md5sum="4abe604721ce2ccb67f451aa7ceb44d6" size="69675"/>
-    <branch repo="icon-theme.freedesktop.org"/>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
     </after>
-  </tarball>
+  </autotools>
 
   <autotools id="tango-icon-theme" autogenargs="--disable-icon-framing">
     <branch repo="tango.freedesktop.org"/>
@@ -44,7 +47,7 @@
   </autotools>
 
   <autotools id="gnome-icon-theme">
-    <branch/>
+    <branch revision="gnome-2-24"/>
     <dependencies>
       <dep package="hicolor-icon-theme"/>
       <dep package="icon-naming-utils"/>
@@ -52,7 +55,7 @@
   </autotools>
 
   <autotools id="gtk-engines">
-    <branch/>
+    <branch revision="gtk-engines-2-16"/>
     <after>
       <dep package="meta-gtk-osx-core"/>
     </after>

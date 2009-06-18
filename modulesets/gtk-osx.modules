@@ -4,7 +4,7 @@
 <moduleset>
   <repository type="git" name="git.gnome.org" default="yes"
       href="git://git.gnome.org/"/>
-  <repository type="tarball" name="github" href="http://github.com/"/>
+  <repository type="git" name="github" href="git://github.com/"/>
   <repository type="tarball" name="github-sane" 
               href="http://cloud.github.com/downloads/"/>
 
@@ -62,7 +62,7 @@
   <autotools id="pango" 
              autogenargs="--without-x --with-included-modules=basic-atsui"
              makeargs="-k -C modules; make">
-    <branch/>
+    <branch revision="1.24.2"/>
     <dependencies>
       <dep package="glib"/>
       <dep package="cairo"/>
@@ -75,7 +75,7 @@
   </autotools>
 
  <autotools id="atk">
-    <branch/>
+    <branch revision="gnome-2-26"/>
     <dependencies>
       <dep package="glib"/>
     </dependencies>
@@ -115,9 +115,9 @@
   </tarball>
 
   <autotools id="ige-mac-integration" autogenargs="--disable-python">
-    <branch repo="github-sane"
-	    module="jralls/ige-mac-integration/ige-mac-integration-0.8.4.tar.gz"
-            version="0.8.4" />
+    <branch repo="github"
+	    module="jralls/ige-mac-integration.git"
+            revision="ige-mac-integration-0.8.4" />
     <dependencies>
       <dep package="gtk+"/>
     </dependencies>

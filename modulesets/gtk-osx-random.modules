@@ -24,7 +24,7 @@
   </autotools>
 
   <autotools id="libglade">
-    <branch revision="552"/>
+    <branch revision="LIBGLADE_2_6_4"/>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
       <dep package="meta-gtk-osx-core"/>
@@ -32,7 +32,7 @@
   </autotools>
 
   <autotools id="gossip">
-    <branch revision="2850"/>
+    <branch revision="GOSSIP_0_31"/>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
       <dep package="meta-gtk-osx-themes"/>
@@ -44,15 +44,22 @@
     </dependencies>
   </autotools>
 
-  <!-- You need to bootstrap vala yourself before installing this (by
-       installing a tarball version.
-  -->
-  <autotools id="vala">
-    <branch revision="vala-0-4"/>
+   <autotools id="vala">
+    <branch repo="ftp.gnome.org" module="vala/0.7/vala-0.7.3.tar.bz2"
+            version="0.7.3" md5sum="8e8bb3d30a4f7ca3fab75db82beaa60e"/>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
       <dep package="meta-gtk-osx-core"/>
     </after>
+  </autotools>
+<!-- Vala requires an installed vala compiler to build from git. Note
+     that the tarball above is the latest release, so a git d/l would
+     be superfluous.-->
+  <autotools id="vala-git">
+    <branch/>
+    <dependencies>
+      <dep package="vala"/>
+    </dependencies>
   </autotools>
 
   <autotools id="devhelp">
@@ -86,7 +93,7 @@
   </autotools>
 
   <autotools id="libIDL">
-    <branch revision="603"/>
+    <branch revision="LIBIDL_0_8_13"/>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
       <dep package="meta-gtk-osx-core"/>
@@ -104,7 +111,7 @@
   </autotools>
 
   <autotools id="gconf">
-    <branch revision="2835"/>
+    <branch revision="gnome-2-24"/>
     <dependencies>
       <dep package="ORBit2"/>
       <dep package="libxml2"/>

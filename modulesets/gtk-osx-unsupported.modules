@@ -17,7 +17,7 @@
               href="ftp://pkg-isocodes.alioth.debian.org/pub/"/>
 
   <autotools id="gnome-mime-data">
-   <branch/>
+   <branch revision="GNOME_MIME_DATA_2_18_0"/>
     <dependencies>
       <dep package="gnome-common"/>
       <dep package="glib"/>
@@ -50,7 +50,7 @@
   </autotools>
 
   <autotools id="libsoup">
-    <branch/>
+    <branch revision="gnome-2-26"/>
     <dependencies>
       <dep package="glib"/>
       <dep package="gnutls"/>
@@ -79,8 +79,9 @@
 	    module="libtasn1/libtasn1-1.4.tar.gz"/>
   </autotools>
 
+<!-- GNET is deprecated in favor of Glib/Gio. Don't build this unless you have to -->
   <autotools id="gnet" autogenargs="--enable-glib2">
-    <branch/>
+    <branch revision="GNET_2_0_8"/>
     <dependencies>
       <dep package="glib"/>
     </dependencies>

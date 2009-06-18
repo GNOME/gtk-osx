@@ -23,14 +23,14 @@
   </tarball>
 
   <autotools id="pygobject">
-    <branch/>
+    <branch revision="pygobject-2-18"/>
     <dependencies>
       <dep package="meta-gtk-osx-core"/>
     </dependencies>
   </autotools>
 
   <autotools id="pygtk">
-    <branch/>
+    <branch revision="pygtk-2-14"/>
     <dependencies>
       <dep package="pygobject"/>
       <dep package="meta-gtk-osx-core"/>

@@ -31,7 +31,7 @@
  </autotools>
  
  <autotools id="glib-ppc" makeinstallargs="DESTDIR=$JHBUILD_SOURCE/glib-u/build/ppc install">
-    <branch checkoutdir="glib-u/ppc" module="glib">
+    <branch checkoutdir="glib-u/ppc" module="glib" revision="glib-2-20">
     </branch>
     <after>
     </after>
@@ -56,14 +56,14 @@
   </metamodule>
   
   <autotools id="gtk-i386" makeinstallargs="DESTDIR=$JHBUILD_SOURCE/gtk-u/build/i386 install">
-    <branch checkoutdir="gtk-u/i386" module="gtk+">
+    <branch checkoutdir="gtk-u/i386" module="gtk+" revision="gtk-2-16">
     </branch>
     <after>
     </after>
  </autotools>
  
  <autotools id="gtk-ppc" makeinstallargs="DESTDIR=$JHBUILD_SOURCE/gtk-u/build/ppc install">
-    <branch checkoutdir="gtk-u/ppc" module="gtk+">
+    <branch checkoutdir="gtk-u/ppc" module="gtk+" revision="gtk-2-16">
     </branch>
     <after>
     </after>
