@@ -1,0 +1,71 @@
+<?xml version="1.0"?><!--*- mode: nxml; indent-tabs-mode: nil -*-->
+<!DOCTYPE moduleset SYSTEM "moduleset.dtd">
+<?xml-stylesheet type="text/xsl" href="moduleset.xsl"?>
+<moduleset>
+  <repository type="git" name="git.gnome.org" default="yes" 
+              href="git://git.gnome.org/"/>
+  <repository type="cvs" name="tango.freedesktop.org"
+              cvsroot=":pserver:anoncvs@anoncvs.freedesktop.org:/cvs/tango"
+              password=""/>
+  <repository type="tarball" name="freedesktop.org"
+              href="http://tango.freedesktop.org/"/>
+  <repository type='tarball' name="cloud.github.com" 
+              href="http://cloud.github.com/downloads/" />
+
+  <metamodule id="meta-gtk-osx-themes">
+    <dependencies>
+      <dep package="tango-icon-theme"/>
+      <dep package="tango-icon-theme-extras"/>
+      <dep package="gnome-icon-theme"/>
+      <dep package="icon-naming-utils"/>
+      <dep package="gtk-engines"/>
+    </dependencies>
+  </metamodule>
+
+  <autotools id="icon-naming-utils" >
+    <branch repo="freedesktop.org" version="0.8.7"
+            module="releases/icon-naming-utils-0.8.7.tar.gz"
+            md5sum="4abe604721ce2ccb67f451aa7ceb44d6" size="69675"/>
+    <after>
+      <dep package="meta-gtk-osx-bootstrap"/>
+    </after>
+  </autotools>
+
+  <autotools id="tango-icon-theme" autogenargs="--disable-icon-framing">
+    <branch repo="tango.freedesktop.org"/>
+    <dependencies>
+      <dep package="icon-naming-utils"/>
+      <dep package="hicolor-icon-theme"/>
+    </dependencies>
+  </autotools>
+
+  <autotools id="tango-icon-theme-extras" autogenargs="--disable-icon-framing">
+    <branch repo="tango.freedesktop.org"/>
+    <dependencies>
+      <dep package="tango-icon-theme"/>
+    </dependencies>
+  </autotools>
+
+  <autotools id="gnome-icon-theme">
+    <branch />
+    <dependencies>
+      <dep package="hicolor-icon-theme"/>
+      <dep package="icon-naming-utils"/>
+    </dependencies>
+  </autotools>
+
+  <autotools id="gtk-engines">
+    <branch />
+    <after>
+      <dep package="meta-gtk-osx-core"/>
+    </after>
+  </autotools>
+
+  <autotools id="gtk-quartz-engine">
+    <branch module="jralls/gtk-osx-build/gtk-quartz-engine-0.1.tar.gz"
+            repo="cloud.github.com" version="0.1" />
+    <after>
+      <dep package="meta-gtk-osx-core"/>
+    </after>
+  </autotools>
+</moduleset>

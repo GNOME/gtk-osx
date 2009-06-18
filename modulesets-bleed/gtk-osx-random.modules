@@ -1,0 +1,176 @@
+<?xml version="1.0"?><!--*- mode: xml; indent-tabs-mode: nil -*-->
+<!DOCTYPE moduleset SYSTEM "moduleset.dtd">
+<?xml-stylesheet type="text/xsl" href="moduleset.xsl"?>
+<moduleset>
+  <repository type="git" name="git.gnome.org" default="yes"
+              href="git://git.gnome.org/"/>
+  <repository type="tarball" name="ftp.gnome.org" 
+	      href="ftp://ftp.gnome.org/pub/gnome/sources/"/>
+  <repository type="tarball" name="ftp.gtk.org" 
+	      href="ftp://ftp.gtk.org/pub/"/>
+  <repository type="svn" name="inkscape.svn.sourceforge.net" 
+              href="https://inkscape.svn.sourceforge.net/svnroot/inkscape/"/>
+  <repository type="svn" name="ardour" 
+              href="http://subversion.ardour.org/svn/"/>
+  <repository type="git" name="github.com" href="git://github.com/"/>
+
+  <autotools id="loudmouth" autogenargs="--with-ssl=openssl">
+    <branch repo="ftp.gnome.org" version="1.4.3"
+            module="loudmouth/1.4/loudmouth-1.4.3.tar.bz2" />
+    <after>
+      <dep package="meta-gtk-osx-bootstrap"/>
+      <dep package="glib"/>
+    </after>
+  </autotools>
+
+  <autotools id="libglade">
+    <branch />
+    <after>
+      <dep package="meta-gtk-osx-bootstrap"/>
+      <dep package="meta-gtk-osx-core"/>
+    </after>
+  </autotools>
+
+  <autotools id="gossip">
+    <branch />
+    <after>
+      <dep package="meta-gtk-osx-bootstrap"/>
+      <dep package="meta-gtk-osx-themes"/>
+      <dep package="meta-gtk-osx-core"/>
+    </after>
+    <dependencies>
+      <dep package="loudmouth"/>
+      <dep package="libglade"/>
+    </dependencies>
+  </autotools>
+
+   <autotools id="vala">
+    <branch repo="ftp.gnome.org" module="vala/0.7/vala-0.7.3.tar.bz2"
+            version="0.7.3" md5sum="8e8bb3d30a4f7ca3fab75db82beaa60e"/>
+    <after>
+      <dep package="meta-gtk-osx-bootstrap"/>
+      <dep package="meta-gtk-osx-core"/>
+    </after>
+  </autotools>
+<!-- Vala requires an installed vala compiler to build from git. Note
+     that the tarball above is the latest release, so a git d/l would
+     be superfluous.-->
+  <autotools id="vala-git">
+    <branch/>
+    <dependencies>
+      <dep package="vala"/>
+    </dependencies>
+  </autotools>
+
+  <autotools id="devhelp">
+    <branch />
+    <after>
+      <dep package="meta-gtk-osx-bootstrap"/>
+      <dep package="meta-gtk-osx-themes"/>
+      <dep package="meta-gtk-osx-core"/>
+    </after>
+    <dependencies>
+      <dep package="WebKit"/>
+      <dep package="libglade"/>
+    </dependencies>
+  </autotools>
+
+  <autotools id="glade3">
+    <branch />
+    <after>
+      <dep package="meta-gtk-osx-bootstrap"/>
+      <dep package="meta-gtk-osx-themes"/>
+      <dep package="meta-gtk-osx-core"/>
+    </after>
+  </autotools>
+
+  <autotools id="gtksourceview">
+    <branch />
+    <after>
+      <dep package="meta-gtk-osx-bootstrap"/>
+      <dep package="meta-gtk-osx-core"/>
+    </after>
+  </autotools>
+
+  <autotools id="libIDL">
+    <branch />
+    <after>
+      <dep package="meta-gtk-osx-bootstrap"/>
+      <dep package="meta-gtk-osx-core"/>
+    </after>
+  </autotools>
+
+  <autotools id="ORBit2">
+    <branch />
+    <after>
+      <dep package="meta-gtk-osx-bootstrap"/>
+    </after>
+    <dependencies>
+      <dep package="libIDL"/>
+    </dependencies>
+  </autotools>
+
+  <autotools id="gconf">
+    <branch />
+    <dependencies>
+      <dep package="ORBit2"/>
+      <dep package="libxml2"/>
+      <dep package="dbus-glib"/>
+    </dependencies>
+  </autotools>
+
+  <tarball id="lcms" version="1.17">
+    <source href="http://www.littlecms.com/lcms-1.17.tar.gz"
+            md5sum="07bdbb4cfb05d21caa58fe3d1c84ddc1" size="898816"/>
+  </tarball>
+
+  <tarball id="shared-mime-info" supports-non-srcdir-builds="no" version="0.19">
+    <source href="http://freedesktop.org/~hadess/shared-mime-info-0.19.tar.gz"
+            md5sum="056a86a8245aecfd9c80740380c5265a" size="595168"/>
+    <dependencies>
+      <dep package="intltool"/>
+      <dep package="libxml2"/>
+      <dep package="glib"/>
+    </dependencies>
+  </tarball>
+
+  <autotools id="gimp" 
+             autogenargs="--disable-python --disable-print --without-x
+                          --without-dbus --without-gnomevfs"
+             makeargs='LDFLAGS="-framework Carbon"'>
+    <branch />
+    <after>
+      <dep package="meta-gtk-osx-bootstrap"/>
+      <dep package="meta-gtk-osx-core"/>
+    </after>
+    <dependencies>
+      <dep package="lcms"/>
+      <dep package="fontconfig"/>
+      <dep package="gegl"/>
+    </dependencies>
+  </autotools>
+
+  <autotools id="babl">
+    <branch repo="ftp.gtk.org" version="0.0.22" 
+            module="babl/0.0/babl-0.0.22.tar.bz2"/>
+  </autotools>
+
+  <autotools id="gegl">
+    <branch repo="ftp.gtk.org" version="0.0.22" 
+            module="gegl/0.0/gegl-0.0.22.tar.bz2"/>
+    <dependencies>
+      <dep package="babl"/>
+    </dependencies>
+  </autotools>
+
+  <tarball id="poppler" version="0.5.9"
+           autogenargs="--disable-qt --disable-qt4 --without-x --disable-gtk-test --enable-xpdf-headers">
+    <source href="http://poppler.freedesktop.org/poppler-0.5.9.tar.gz"
+            md5sum="8d1ac008614c0e413bcac95b8102fa07" size="1169002"/>
+    <after>
+      <dep package="meta-gtk-osx-bootstrap"/>
+      <dep package="meta-gtk-osx-core"/>
+    </after>
+  </tarball>
+
+</moduleset>

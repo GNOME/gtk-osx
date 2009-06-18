@@ -20,7 +20,7 @@
   </tarball>
 
   <autotools id="glibmm">
-    <branch revision="glibmm-2-20"/>
+    <branch />
     <dependencies>
       <dep package="glib"/>
       <dep package="libsigc++2"/>
@@ -28,7 +28,7 @@
   </autotools>
 
   <autotools id="pangomm">
-    <branch revision="pangomm-2-14"/>
+    <branch />
     <dependencies>
       <dep package="glibmm"/>
       <dep package="cairomm"/>
@@ -44,14 +44,14 @@
   </autotools>
 
   <autotools id="libsigc++2">
-    <branch revision="libsigc-2-0"/>
+    <branch />
     <dependencies>
       <dep package="doxygen"/>
     </dependencies>
   </autotools>
 
   <autotools id="gtkmm">
-    <branch revision=gtkmm-2-14"/>
+    <branch />
     <dependencies>
       <dep package="glibmm"/>
       <dep package="cairomm"/>
