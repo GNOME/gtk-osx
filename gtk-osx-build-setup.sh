@@ -86,8 +86,8 @@ for m in $MODULES; do
     get_moduleset_from_git $m
 done
 
-if test "x`echo $PATH | grep $HOME/bin`" == x; then
-    echo "PATH does not contain $HOME/bin, it is recommended that you add that."
+if test "x`echo $PATH | grep $HOME/.local/bin`" == x; then
+    echo "PATH does not contain $HOME/.local/bin, it is recommended that you add that."
     echo 
 fi
 
