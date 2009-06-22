@@ -2,10 +2,12 @@
 <!DOCTYPE moduleset SYSTEM "moduleset.dtd">
 <?xml-stylesheet type="text/xsl" href="moduleset.xsl"?>
 <moduleset>
-  <repository type="svn" name="svn.gnome.org" default="yes" href="http://svn.gnome.org/svn/"/>
-  <repository type="tarball" name="github" href="http://github.com/"/>
-  <repository type="tarball" name="github-sane" 
-              href="http://cloud.github.com/downloads/"/>
+  <repository type="tarball" name="ftp.gnome.org" default="yes" 
+              href="http://ftp.gnome.org/pub/GNOME/sources/"/>
+  <repository type="tarball" name="sourceforge" 
+              href="http://downloads.sourceforge.net/sourceforge/"/>
+  <repository type="tarball" name="cairographics"
+              href="http://cairographics.org/releases/"/>
 
   <!-- This module set works a bit differently than for example the
        GNOME ones do. It's split up in seperate pieces:
@@ -49,18 +51,20 @@
     </after>
   </metamodule>
 
-  <autotools id="glib">
-    <branch revision="glib-2-18"/>
+  <autotools id="glib" autogen-sh="configure">
+    <branch module="glib/2.20/glib-2.20.3.tar.bz2"  version="2.20.3"
+            md5sum="1173688c58b4b62809c83bb07a2cf71a"/>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
       <dep package="gtk-doc"/> <!-- FIXME: http://bugs.gnome.org/546640 -->
     </after>
   </autotools>
 
-  <autotools id="pango" 
+  <autotools id="pango"  autogen-sh="configure"
              autogenargs="--without-x --with-included-modules=basic-atsui"
              makeargs="-k -C modules; make">
-    <branch revision="2830"/>
+    <branch version="1.24.3" module="pango/1.24/pango-1.24.3.tar.bz2"
+            md5sum="63979efe16fe5abaa93c8ea48959e8f3"/>
     <dependencies>
       <dep package="glib"/>
       <dep package="cairo"/>
@@ -72,8 +76,9 @@
     </after>
   </autotools>
 
- <autotools id="atk">
-    <branch/>
+ <autotools id="atk" autogen-sh="configure">
+    <branch module="atk/1.26/atk-1.26.0.tar.bz2" version="1.26.0"
+            md5sum="719229408019c548855673840679f156"/>
     <dependencies>
       <dep package="glib"/>
     </dependencies>
@@ -82,8 +87,10 @@
     </after>
   </autotools>
 
-  <autotools id="gtk+" autogenargs="--with-gdktarget=quartz --without-libjasper">
-    <branch revision="gtk-2-14"/>
+  <autotools id="gtk+"  autogen-sh="configure"
+             autogenargs="--with-gdktarget=quartz --without-libjasper">
+    <branch module="gtk+/2.16/gtk+-2.16.2.tar.bz2" version="2.16.2"
+            md5sm="396e98df15f6e4005e360b5710660ce3"/>
     <dependencies>
       <dep package="pango"/>
       <dep package="atk"/>
@@ -93,15 +100,17 @@
     </after>
   </autotools>
 
-  <tarball id="pixman" version="0.12.0" autogenargs="--disable-gtk">
-    <source href="http://cairographics.org/releases/pixman-0.13.2.tar.gz"/>
+  <autotools id="pixman" autogenargs="--disable-gtk" autogen-sh="configure">
+    <branch version="0.15.12" module="pixman-0.15.12.tar.gz" 
+            repo="cairographics"/>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
     </after>
-  </tarball>
+  </autotools>
 
-  <tarball id="cairo" version="1.8.6" autogenargs="--enable-pdf --enable-quartz --disable-xlib">
-    <source href="http://cairographics.org/releases/cairo-1.8.4.tar.gz"/>
+  <autotools id="cairo"  autogen-sh="configure"
+             autogenargs="--enable-pdf --enable-quartz --disable-xlib">
+    <branch module="cairo-1.8.8.tar.gz"  version="1.8.8" repo="cairographics"/>
     <dependencies>
       <dep package="pixman"/>
     </dependencies>
@@ -110,11 +119,11 @@
       <dep package="fontconfig"/>
       <dep package="freetype"/>
     </after>
-  </tarball>
+  </autotools>
 
   <autotools id="ige-mac-integration" autogenargs="--disable-python">
-    <branch repo="github-sane"
-	    module="jralls/ige-mac-integration/ige-mac-integration-0.8.4.tar.gz"
+    <branch repo="sourceforge"
+	    module="gtk-osx/ige-mac-integration-0.8.4.tar.gz"
             version="0.8.4" />
     <dependencies>
       <dep package="gtk+"/>

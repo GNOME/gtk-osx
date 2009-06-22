@@ -3,9 +3,12 @@
 <?xml-stylesheet type="text/xsl" href="moduleset.xsl"?>
 <moduleset>
 
-  <repository type="svn" name="svn.gnome.org" default="yes" href="http://svn.gnome.org/svn/"/>
-  <repository type="cvs" name="cvs-cairo.freedesktop.org" cvsroot=":pserver:anoncvs@anoncvs.freedesktop.org:/cvs/cairo" password=""/>
-  <repository type="tarball" name="cairographics.org" href="http://cairographics.org/"/>
+  <repository type="tarball" name="ftp.gnome.org" default="yes" 
+              href="http://ftp.gnome.org/pub/GNOME/sources/"/>
+  <repository type="tarball" name="icon-theme"
+              href="http://icon-theme.freedesktop.org/releases/"/>
+  <repository type="tarball" name="cairographics.org" 
+              href="http://cairographics.org/releases/"/>
 
   <metamodule id="meta-gtk-osx-python">
     <dependencies>
@@ -15,22 +18,26 @@
     </dependencies>
   </metamodule>
 
-  <tarball id="pycairo" version="1.8.2">
-    <source href="http://cairographics.org/releases/pycairo-1.8.2.tar.gz"/>
+<!-- Pycairo 1.8.4 requires Python 2.6. You can go install this if you like, but jhbuild installs only 2.5, which is also what Leopard comes with. -->
+  <autotools id="pycairo" autogen-sh="configure">
+    <branch module="pycairo-1.8.2.tar.gz" repo="cairographics.org"
+            version="1.8.2" md5sum="bbfc0c2fef08dfb0c5b8baa5f0b67a87"/>
     <after>
       <dep package="meta-gtk-osx-core"/>
     </after>
-  </tarball>
+  </autotools>
 
-  <autotools id="pygobject">
-    <branch/>
+  <autotools id="pygobject" autogen-sh="configure">
+    <branch version="2.18.0" module="pygobject/2.18/pygobject-2.18.0.tar.bz2"
+            md5sum="522b813219a6ad14b85b25d953b08727"/>
     <dependencies>
       <dep package="meta-gtk-osx-core"/>
     </dependencies>
   </autotools>
 
-  <autotools id="pygtk">
-    <branch/>
+  <autotools id="pygtk" autogen-sh="configure">
+    <branch version="2.15.1" module="pygtk/2.15/pygtk-2.15.1.tar.bz2"
+            md5sum="f8ef885df57bd022b2bfc138f6590c21"/>
     <dependencies>
       <dep package="pygobject"/>
       <dep package="meta-gtk-osx-core"/>

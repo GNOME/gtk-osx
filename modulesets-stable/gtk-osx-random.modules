@@ -2,37 +2,64 @@
 <!DOCTYPE moduleset SYSTEM "moduleset.dtd">
 <?xml-stylesheet type="text/xsl" href="moduleset.xsl"?>
 <moduleset>
-  <repository type="svn" name="svn.gnome.org" default="yes"
-              href="http://svn.gnome.org/svn/"/>
+  <repository type="tarball" name="ftp.gnome.org" default="yes"
+              href="http://ftp.gnome.org/pub/GNOME/sources/"/>
   <repository type="tarball" name="ftp.gnome.org" 
 	      href="ftp://ftp.gnome.org/pub/gnome/sources/"/>
   <repository type="tarball" name="ftp.gtk.org" 
 	      href="ftp://ftp.gtk.org/pub/"/>
-  <repository type="svn" name="inkscape.svn.sourceforge.net" 
+  <repository type="tarball" name="littlecms"
+              href="http://www.littlecms.com/"/>
+  <repository type="tarball" name="hadess"
+              href="http://freedesktop.org/~hadess/"/>
+  <repository type="tarball" name="gimp"
+              href="ftp://ftp.gimp.org/pub/"/>
+  <repository type="tarball" name="poppler.freedesktop.org"
+              href="http://poppler.freedesktop.org/"/>
+  <repository type="tarball" name="sourceforge" 
+              href="http://downloads.sourceforge.net/sourceforge/"/>
+  <repository type="tarball" name="inkscape.svn.sourceforge.net" 
               href="https://inkscape.svn.sourceforge.net/svnroot/inkscape/"/>
   <repository type="svn" name="ardour" 
               href="http://subversion.ardour.org/svn/"/>
   <repository type="git" name="github.com" href="git://github.com/"/>
+  <repository type="tarball" name="dbus.freedesktop.org"
+	      href="http://dbus.freedesktop.org/releases/"/>
+  <repository type="tarball" name="sqlite" href="http://www.sqlite.org/"/>
+
+  <metamodule id="meta-gtk-osx-random">
+    <dependencies>
+      <dep package="poppler"/>
+      <dep package="gimp"/>
+      <dep package="devhelp"/>
+      <dep package="shared-mime-info"/>
+      <dep package="gossip"/>
+      <dep package="vala"/>
+      <dep package="glade3"/>
+    </dependencies>
+  </metamodule>
 
   <autotools id="loudmouth" autogenargs="--with-ssl=openssl">
-    <branch repo="ftp.gnome.org" version="1.4.3"
-            module="loudmouth/1.4/loudmouth-1.4.3.tar.bz2" />
+    <branch version="1.4.3" module="loudmouth/1.4/loudmouth-1.4.3.tar.bz2" 
+            md5sum="55339ca42494690c3942ee1465a96937"/>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
       <dep package="glib"/>
     </after>
   </autotools>
 
-  <autotools id="libglade">
-    <branch revision="552"/>
+  <autotools id="libglade" autogen-sh="configure">
+    <branch module="libglade/2.6/libglade-2.6.4.tar.bz2" version="2.6.4"
+            md5sum="d1776b40f4e166b5e9c107f1c8fe4139"/>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
       <dep package="meta-gtk-osx-core"/>
     </after>
   </autotools>
 
-  <autotools id="gossip">
-    <branch revision="2850"/>
+  <autotools id="gossip" autogen-sh="configure">
+    <branch module="gossip/0.31/gossip-0.31.tar.bz2" version="0.31"
+            md5sum="feacf7a78ced249268898d2a3f7063cd"/>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
       <dep package="meta-gtk-osx-themes"/>
@@ -44,19 +71,18 @@
     </dependencies>
   </autotools>
 
-  <!-- You need to bootstrap vala yourself before installing this (by
-       installing a tarball version.
-  -->
-  <autotools id="vala">
-    <branch revision="vala-0-4"/>
+    <autotools id="vala" autogen-sh="configure">
+    <branch repo="ftp.gnome.org" module="vala/0.7/vala-0.7.3.tar.bz2"
+            version="0.7.3" md5sum="8e8bb3d30a4f7ca3fab75db82beaa60e"/>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
       <dep package="meta-gtk-osx-core"/>
     </after>
   </autotools>
 
-  <autotools id="devhelp">
-    <branch revision="gnome-2-22"/>
+  <autotools id="devhelp" autogen-sh="configure">
+    <branch module="devhelp/0.23/devhelp-0.23.tar.bz2" version="0.23"
+            md5sum="704c0c90616aeb1c52ca3af1df93fde6"/>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
       <dep package="meta-gtk-osx-themes"/>
@@ -68,8 +94,9 @@
     </dependencies>
   </autotools>
 
-  <autotools id="glade3">
-    <branch revision="gnome-2-22"/>
+  <autotools id="glade3" autogen-sh="configure">
+    <branch module="glade3/3.6/glade3-3.6.5.tar.bz2" version="3.6.5"
+            md5sum="4d5d5ad0b9dc37d6e63e263e393c5105"/>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
       <dep package="meta-gtk-osx-themes"/>
@@ -77,24 +104,27 @@
     </after>
   </autotools>
 
-  <autotools id="gtksourceview">
-    <branch revision="gnome-2-24"/>
+  <autotools id="gtksourceview" autogen-sh="configure">
+    <branch module="gtksourceview/2.7/gtksourceview-2.7.1.tar.bz2"
+            version="2.7.1" md5sum="5aec59fbea62fc9d8112e8017e433ff4"/>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
       <dep package="meta-gtk-osx-core"/>
     </after>
   </autotools>
 
-  <autotools id="libIDL">
-    <branch revision="603"/>
+  <autotools id="libIDL" autogen-sh="configure">
+    <branch module="libIDL/0.8/libIDL-0.8.13.tar.bz2" version="0.8.13"
+            md5sum="b43b289a859eb38a710f70622c46e571"/>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
       <dep package="meta-gtk-osx-core"/>
     </after>
   </autotools>
 
-  <autotools id="ORBit2">
-    <branch revision="2109"/>
+  <autotools id="ORBit2" autogen-sh="configure">
+    <branch module="ORBit2/2.14/ORBit2-2.14.17.tar.bz2" version="2.14.17"
+            md5sum="10bfb957fa4a8935a0b4afaee7d71df7"/>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
     </after>
@@ -103,8 +133,34 @@
     </dependencies>
   </autotools>
 
-  <autotools id="gconf">
-    <branch revision="2835"/>
+  <autotools id="dbus" autogen-sh='configure'
+	   autogenargs="--disable-selinux --without-x 
+	   --with-session-socket-dir=$PREFIX/tmp">
+    <branch module="dbus/dbus-1.2.12.tar.gz"  version="1.2.12" 
+	    repo="dbus.freedesktop.org">
+      <patch file="http://github.com/jralls/gnucash-on-osx/raw/master/patches/dbus-install.patch"/>
+    </branch>
+    <after>
+      <dep package="gtk+"/>
+    </after>
+  </autotools>
+
+  <autotools id="dbus-glib" autogenargs="--disable-selinux">
+    <branch module="dbus-glib/dbus-glib-0.80.tar.gz"   version="0.80" 
+	    repo="dbus.freedesktop.org"/>
+    <dependencies>
+      <dep package="libxml2"/>
+      <dep package="dbus"/>
+    </dependencies>
+    <after>
+      <dep package="meta-gtk-osx-bootstrap"/>
+      <dep package="meta-gtk-osx-core"/>
+    </after>
+  </autotools>
+<!-- Later versions of GConf require something called "PolicyKit" which is available only through svn or from Linux distros -->
+  <autotools id="gconf" autogen-sh="configure">
+    <branch module="GConf/2.26/GConf-2.26.0.tar.bz2" version="2.26.0"
+            md5sum="b010f0de356ea093c6a73778b13de956"/>
     <dependencies>
       <dep package="ORBit2"/>
       <dep package="libxml2"/>
@@ -112,26 +168,28 @@
     </dependencies>
   </autotools>
 
-  <tarball id="lcms" version="1.17">
-    <source href="http://www.littlecms.com/lcms-1.17.tar.gz"
-            md5sum="07bdbb4cfb05d21caa58fe3d1c84ddc1" size="898816"/>
-  </tarball>
+  <autotools id="lcms" autogen-sh="configure">
+    <branch module="lcms-1.18a.tar.gz" version="1.18" repo="littlecms"
+            checkoutdir="lcms-1.18"/>
+  </autotools>
 
-  <tarball id="shared-mime-info" supports-non-srcdir-builds="no" version="0.19">
-    <source href="http://freedesktop.org/~hadess/shared-mime-info-0.19.tar.gz"
-            md5sum="056a86a8245aecfd9c80740380c5265a" size="595168"/>
+  <autotools id="shared-mime-info"  autogen-sh="configure"
+             supports-non-srcdir-builds="no" version="0.19">
+    <branch module="shared-mime-info-0.60.tar.bz2" version="0.60"
+            repo="hadess"/>
     <dependencies>
       <dep package="intltool"/>
       <dep package="libxml2"/>
       <dep package="glib"/>
     </dependencies>
-  </tarball>
+  </autotools>
 
-  <autotools id="gimp" 
+  <autotools id="gimp"  autogen-sh="configure"
              autogenargs="--disable-python --disable-print --without-x
                           --without-dbus --without-gnomevfs"
              makeargs='LDFLAGS="-framework Carbon"'>
-    <branch revision="gimp-2-6"/>
+    <branch module="gimp/v2.6/gimp-2.6.6.tar.bz2" version="2.6.6" 
+            md5sum="23d880dd09cd62c936ed04666a53f8e4" repo="gimp"/>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
       <dep package="meta-gtk-osx-core"/>
@@ -143,12 +201,12 @@
     </dependencies>
   </autotools>
 
-  <autotools id="babl">
+  <autotools id="babl" >
     <branch repo="ftp.gtk.org" version="0.0.22" 
             module="babl/0.0/babl-0.0.22.tar.bz2"/>
   </autotools>
 
-  <autotools id="gegl">
+  <autotools id="gegl" >
     <branch repo="ftp.gtk.org" version="0.0.22" 
             module="gegl/0.0/gegl-0.0.22.tar.bz2"/>
     <dependencies>
@@ -156,14 +214,18 @@
     </dependencies>
   </autotools>
 
-  <tarball id="poppler" version="0.5.9"
+  <autotools id="poppler"  autogen-sh="configure"
            autogenargs="--disable-qt --disable-qt4 --without-x --disable-gtk-test --enable-xpdf-headers">
-    <source href="http://poppler.freedesktop.org/poppler-0.5.9.tar.gz"
-            md5sum="8d1ac008614c0e413bcac95b8102fa07" size="1169002"/>
+    <branch module="poppler-0.10.7.tar.gz" version="0.10.7" 
+            repo="poppler.freedesktop.org"/>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
       <dep package="meta-gtk-osx-core"/>
     </after>
-  </tarball>
+  </autotools>
+
+  <autotools id="sqlite" autogenargs="--disable-tcl --enable-threadsafe" >
+    <branch module="sqlite-3.6.15.tar.gz" version='3.6.15' repo="sqlite"/>
+  </autotools>
 
 </moduleset>

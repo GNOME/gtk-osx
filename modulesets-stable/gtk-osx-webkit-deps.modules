@@ -2,8 +2,15 @@
 <!DOCTYPE moduleset SYSTEM "moduleset.dtd">
 <?xml-stylesheet type="text/xsl" href="moduleset.xsl"?>
 <moduleset>
-  <repository type="svn" name="svn.gnome.org" default="yes" href="http://svn.gnome.org/svn/"/>
+  <repository type="tarball" name="ftp.gnome.org" default="yes" 
+              href="http://ftp.gnome.org/pub/GNOME/sources/"/>
+  <repository type="svn" name="svn.webkit.org"
+              href="http://svn.webkit.org/repository/webkit/releases/WebKitGTK/"/>
   <repository type="git" name="git.debian.org" href="git://git.debian.org/"/>
+  <repository type="tarball" name="ftp.gnu.org"
+              href="http://ftp.gnu.org/gnu/"/>
+  <repository type="tarball" name="curl.haxx.se"
+              href="http://curl.haxx.se/download/"/>
 
   <metamodule id="meta-webkit-deps">
     <dependencies>
@@ -13,33 +20,37 @@
   </metamodule>
 
   <!-- 10.5 has 7.16.3, which is too old for some things. Otherwise can be skipped. -->
-  <tarball id="libcurl" version="7.18.1">
-    <source href="http://curl.haxx.se/download/curl-7.18.1.tar.bz2"
-            md5sum="805834fc1136ff7600d2179bc0386c5a" size="1700966"/>
-  </tarball>
+  <autotools id="libcurl" autogen-sh="configure">
+    <branch repo="curl.haxx.se" module="curl-7.19.5.tar.bz2" version="7.19.5" />
+  </autotools>
 
   <!-- 10.4 has 1.28 which is too old, 10.5 has 2.3 which is OK. -->
-  <tarball id="bison" version="2.3">
-    <source href="http://ftp.gnu.org/gnu/bison/bison-2.3.tar.bz2"
-            md5sum="c18640c6ec31a169d351e3117ecce3ec" size="1080319"/>
-  </tarball>
+  <autotools id="bison" autogen-sh="configure">
+    <branch repo="ftp.gnu.org" module="bison/bison-2.4.1.tar.bz2" 
+            version="2.4.1"/> 
+  </autotools>
 
-  <!-- Not sure which HTTP backend is best for the mac build yet, leave this here. -->
-  <autotools id="libsoup">
-    <branch/>
+  <!-- Not sure which HTTP backend is best for the mac build yet, leave this here. 
+  <autotools id="libsoup" autogen-sh="configure">
+    <branch module="libsoup/2.27/libsoup-2.27.2.tar.bz2"
+            version="2.27.2" md5sum="6ea5e7780488efe4565790cf4937cce3"/>
     <after>
       <dep package="meta-gtk-osx-core"/>
     </after>
   </autotools>
-
+-->
+<!--This is probably not the best way to get WebKit, but there doesn't seem to be much in the way of stable releases anywhere. -->
     <autotools id="WebKit" autogenargs="--disable-video --with-http-backend=curl --disable-dom-storage --disable-database --disable-icon-database --disable-svg --with-target=quartz --with-font-backend=pango --disable-offline-web-applications"
       makefile="GNUmakefile">
-    <branch repo="git.debian.org" module="git/pkg-webkit/upstream.git"
+    <branch repo="git.debian.org" module="pkg-webkit/upstream.git"
       checkoutdir="WebKit" revision="filtered"/>
+    <dependencies>
+      <dep package="libsoup"/>
+      <dep package="enchant"/>
+    </dependencies>
     <after>
       <dep package="meta-gtk-osx-core"/>
       <dep package="libcurl"/>
-      <dep package="libsoup"/>
       <dep package="bison"/>
       <!--dep package="gst-plugins-base"/-->
     </after>

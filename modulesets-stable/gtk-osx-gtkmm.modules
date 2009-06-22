@@ -2,8 +2,12 @@
 <!DOCTYPE moduleset SYSTEM "moduleset.dtd">
 <?xml-stylesheet type="text/xsl" href="moduleset.xsl"?>
 <moduleset>
-  <repository type="svn" name="svn.gnome.org" default="yes" href="http://svn.gnome.org/svn/"/>
-  <repository type="tarball" name="doxygen" href="http://ftp.stack.nl/pub/users/dimitri/"/>
+  <repository type="tarball" name="ftp.gnome.org" default="yes" 
+              href="http://ftp.gnome.org/pub/GNOME/sources/"/>
+  <repository type="tarball" name="doxygen" 
+              href="http://ftp.stack.nl/pub/users/dimitri/"/>
+  <repository type="tarball" name="cairographics"
+              href="http://cairographics.org/releases/"/>
 
   <metamodule id="meta-gtk-osx-gtkmm">
     <dependencies>
@@ -11,24 +15,26 @@
     </dependencies>
   </metamodule>
 
-  <tarball id="cairomm" version="1.6.0">
-    <source href="http://www.cairographics.org/releases/cairomm-1.6.0.tar.gz"
-	    md5sum="549b0c9eaa25d61c4dd92d2de1cb4a462" size="797627"/>
+  <autotools id="cairomm" autogen-sh="configure">
+    <branch module="cairomm-1.8.0.tar.gz" version="1.8.0" 
+            repo="cairographics" />
     <dependencies>
       <dep package="cairo"/>
     </dependencies>
-  </tarball>
+  </autotools>
 
-  <autotools id="glibmm">
-    <branch/>
+  <autotools id="glibmm" autogen-sh="configure">
+    <branch module="glibmm/2.20/glibmm-2.20.0.tar.bz2" version="2.20.0"
+            md5sum="38fa409b531144c238b6e2532e351799"/>
     <dependencies>
       <dep package="glib"/>
       <dep package="libsigc++2"/>
     </dependencies>
   </autotools>
 
-  <autotools id="pangomm">
-    <branch />
+  <autotools id="pangomm" autogen-sh="configure">
+    <branch module="pangomm/2.24/pangomm-2.24.0.tar.bz2" version="2.24.0"
+            md5sum="fa0f44c37499433455857becad4bbcda"/>
     <dependencies>
       <dep package="glibmm"/>
       <dep package="cairomm"/>
@@ -36,22 +42,23 @@
     </dependencies>
   </autotools>
 
-  <autotools id="doxygen" autogen-template="%(srcdir)s/configure --prefix %(prefix)s">
-    <branch module="doxygen-1.5.6.src.tar.gz" version="1.5.6"
-            repo="doxygen"
-            md5sum="779974eedf011ed52e1fe21fc2d5079c" size="4011956">
-    </branch>
+  <autotools id="doxygen" 
+             autogen-template="%(srcdir)s/configure --prefix %(prefix)s">
+    <branch module="doxygen-1.5.9.src.tar.gz" version="1.5.9"
+            repo="doxygen" />
   </autotools>
 
-  <autotools id="libsigc++2">
-    <branch revision="libsigc-2-0"/>
+  <autotools id="libsigc++2" autogen-sh="configure">
+    <branch module="libsigc++/2.2/libsigc++-2.2.3.tar.bz2" version="2.2.3"
+            md5sum="f4574b343eebc4bff66a9e1e5ce6e490"/>
     <dependencies>
       <dep package="doxygen"/>
     </dependencies>
   </autotools>
 
-  <autotools id="gtkmm">
-    <branch/>
+  <autotools id="gtkmm" autogen-sh="configure">
+    <branch module="gtkmm/2.16/gtkmm-2.16.0.tar.bz2" version="2.16.0"
+            md5sum="a82e3b5b93008421ff67df16d1e51ec2"/>
     <dependencies>
       <dep package="glibmm"/>
       <dep package="cairomm"/>
