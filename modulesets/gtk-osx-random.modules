@@ -1,4 +1,4 @@
-<?xml version="1.0"?><!--*- mode: xml; indent-tabs-mode: nil -*-->
+<?xml version="1.0"?><!--*- mode: nxml; indent-tabs-mode: nil -*-->
 <!DOCTYPE moduleset SYSTEM "moduleset.dtd">
 <?xml-stylesheet type="text/xsl" href="moduleset.xsl"?>
 <moduleset>
@@ -86,7 +86,7 @@
   </autotools>
 
   <autotools id="libIDL">
-    <branch revision="603"/>
+    <branch revision="LIBIDL_0_8_9"/>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
       <dep package="meta-gtk-osx-core"/>
@@ -94,7 +94,7 @@
   </autotools>
 
   <autotools id="ORBit2">
-    <branch revision="2109"/>
+    <branch revision="ORBIT2_2_14_9"/>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
     </after>
