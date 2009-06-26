@@ -47,7 +47,7 @@
   </autotools>
 
   <autotools id="gnome-icon-theme">
-    <branch revision="gnome-2-24"/>
+    <branch />
     <dependencies>
       <dep package="hicolor-icon-theme"/>
       <dep package="icon-naming-utils"/>
@@ -55,7 +55,7 @@
   </autotools>
 
   <autotools id="gtk-engines">
-    <branch revision="gtk-engines-2-16"/>
+    <branch />
     <after>
       <dep package="meta-gtk-osx-core"/>
     </after>

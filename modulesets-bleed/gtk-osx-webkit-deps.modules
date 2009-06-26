@@ -27,7 +27,7 @@
 
   <!-- Not sure which HTTP backend is best for the mac build yet, leave this here. -->
   <autotools id="libsoup">
-    <branch revision="gnome-2-26"/>
+    <branch />
     <after>
       <dep package="meta-gtk-osx-core"/>
     </after>

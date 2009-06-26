@@ -3,6 +3,13 @@ for building GTK+ OS X with jhbuild.
 
 NOTE: If you only want to build GTK+, just download gtk-osx-build-setup.sh and follow the instructions at:
 
-https://apps.sourceforge.net/trac/gtk-osx/wiki/Build
+http://apps.sourceforge.net/trac/gtk-osx/wiki/Build
+
+There are 3 modulesets. You can select the one which most suits you by adding the line 
+      moduleset="http://github.com/jralls/gtk-osx-build/raw/master/modulesets/gtk-osx.modules
+
+ * modulesets-stable: The default, all tarball-based released sources.
+ * modulesets: Sources from VCS repositories when that's available, with stable release revisions set for each module.
+ * modulesets-bleed: The bleeding edge modulesets, pulled from VCS repositories and no release revisions.
 
 

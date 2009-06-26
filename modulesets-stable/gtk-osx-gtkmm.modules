@@ -1,0 +1,70 @@
+<?xml version="1.0"?><!--*- mode: xml; indent-tabs-mode: nil -*-->
+<!DOCTYPE moduleset SYSTEM "moduleset.dtd">
+<?xml-stylesheet type="text/xsl" href="moduleset.xsl"?>
+<moduleset>
+  <repository type="tarball" name="ftp.gnome.org" default="yes" 
+              href="http://ftp.gnome.org/pub/GNOME/sources/"/>
+  <repository type="tarball" name="doxygen" 
+              href="http://ftp.stack.nl/pub/users/dimitri/"/>
+  <repository type="tarball" name="cairographics"
+              href="http://cairographics.org/releases/"/>
+
+  <metamodule id="meta-gtk-osx-gtkmm">
+    <dependencies>
+      <dep package="gtkmm"/>
+    </dependencies>
+  </metamodule>
+
+  <autotools id="cairomm" autogen-sh="configure">
+    <branch module="cairomm-1.8.0.tar.gz" version="1.8.0" 
+            repo="cairographics" />
+    <dependencies>
+      <dep package="cairo"/>
+    </dependencies>
+  </autotools>
+
+  <autotools id="glibmm" autogen-sh="configure">
+    <branch module="glibmm/2.20/glibmm-2.20.0.tar.bz2" version="2.20.0"
+            md5sum="38fa409b531144c238b6e2532e351799"/>
+    <dependencies>
+      <dep package="glib"/>
+      <dep package="libsigc++2"/>
+    </dependencies>
+  </autotools>
+
+  <autotools id="pangomm" autogen-sh="configure">
+    <branch module="pangomm/2.24/pangomm-2.24.0.tar.bz2" version="2.24.0"
+            md5sum="fa0f44c37499433455857becad4bbcda"/>
+    <dependencies>
+      <dep package="glibmm"/>
+      <dep package="cairomm"/>
+      <dep package="pango"/>
+    </dependencies>
+  </autotools>
+
+  <autotools id="doxygen" 
+             autogen-template="%(srcdir)s/configure --prefix %(prefix)s">
+    <branch module="doxygen-1.5.9.src.tar.gz" version="1.5.9"
+            repo="doxygen" />
+  </autotools>
+
+  <autotools id="libsigc++2" autogen-sh="configure">
+    <branch module="libsigc++/2.2/libsigc++-2.2.3.tar.bz2" version="2.2.3"
+            md5sum="f4574b343eebc4bff66a9e1e5ce6e490"/>
+    <dependencies>
+      <dep package="doxygen"/>
+    </dependencies>
+  </autotools>
+
+  <autotools id="gtkmm" autogen-sh="configure">
+    <branch module="gtkmm/2.16/gtkmm-2.16.0.tar.bz2" version="2.16.0"
+            md5sum="a82e3b5b93008421ff67df16d1e51ec2"/>
+    <dependencies>
+      <dep package="glibmm"/>
+      <dep package="cairomm"/>
+      <dep package="pangomm"/>
+      <dep package="gtk+"/>
+    </dependencies>
+  </autotools>
+
+</moduleset>

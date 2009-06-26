@@ -1,0 +1,109 @@
+<?xml version="1.0"?><!--*- mode: xml; indent-tabs-mode: nil -*-->
+<!DOCTYPE moduleset SYSTEM "moduleset.dtd">
+<?xml-stylesheet type="text/xsl" href="moduleset.xsl"?>
+<moduleset>
+  <repository type="tarball" name="ftp.gnome.org" default="yes" 
+              href="http://ftp.gnome.org/pub/GNOME/sources/"/>
+  <repository type='tarball' name='michael.68k.org' 
+              href="http://www.68k.org/~michael/"/>
+  <repository type='tarball' name='ftp.gnu.org' href="ftp://ftp.gnu.org/gnu/"/>
+ <repository type='tarball' name='ftp.gnupg.org' href="ftp://ftp.gnupg.org/" />
+  <repository type="svn" name="svn.debian.org" href="svn://svn.debian.org/"/>
+  <repository type="tarball" name="abisource/enchant" 
+              href="http://www.abisource.com/downloads/enchant/" />
+  <repository type="tarball" name="iso-codes"
+              href="ftp://pkg-isocodes.alioth.debian.org/pub/"/>
+  <repository type='tarball' name='libproxy.google.com'
+              href='http://libproxy.googlecode.com/files/'/>
+
+  <metamodule id="meta-gtk-osx-unsupported">
+    <dependencies>
+      <dep package="gnome-mime-data"/>
+      <dep package="iso-codes"/>
+    </dependencies>
+  </metamodule>
+
+  <autotools id="gnome-mime-data" autogen-sh="configure">
+   <branch module="gnome-mime-data/2.18/gnome-mime-data-2.18.0.tar.bz2"
+           version="2.18.0" md5sum="541858188f80090d12a33b5a7c34d42c"/>
+    <dependencies>
+      <dep package="gnome-common"/>
+      <dep package="glib"/>
+    </dependencies>
+  </autotools>
+
+  <autotools id="iso-codes" autogen-sh="configure" >
+    <branch repo="iso-codes" version="3.9"
+            module="pkg-isocodes/iso-codes-3.9.tar.gz"/>
+
+  </autotools>
+
+  <autotools id="gnutls" autogen-sh="configure">
+    <branch repo='ftp.gnu.org' version='2.8.1' 
+            module="gnutls/gnutls-2.8.1.tar.bz2"/>
+    <dependencies>
+      <dep package="libgcrypt" />
+      <dep package="libtasn1" />
+      <!--dep package="opencdk" / -->
+    </dependencies>
+  </autotools>
+
+  <autotools id='libproxy' autogen-sh='configure' autogenargs='CFLAGS=" "' >
+    <branch version='0.2.3' module='libproxy-0.2.3.tar.gz'
+            repo='libproxy.google.com'/>
+  </autotools>
+
+<!-- Deprecated, obsolete
+  <autotools id="opencdk" supports-non-srcdir-builds="no" 
+             autogen-sh="configure">
+    <branch repo="ftp.gnu.org" version='0.6.6'
+	    module="gnutls/opencdk-0.6.6.tar.bz2"
+            size="481904" md5sum="813d62d7afe7b2c2d8f3df0a6c9d9331" />
+    <dependencies>
+      <dep package="libgcrypt" />
+    </dependencies>
+  </autotools>
+-->
+
+  <autotools id="libsoup" autogen-sh="configure" >
+    <branch module="libsoup/2.27/libsoup-2.27.2.tar.bz2"
+            version="2.27.2" md5sum="6ea5e7780488efe4565790cf4937cce3"/>
+    <dependencies>
+      <dep package="glib"/>
+      <dep package="gnutls"/>
+      <dep package='libproxy'/>
+      <dep package='gconf'/>
+      <dep package='sqlite'/>
+      <dep package="libxml2"/>
+    </dependencies>
+  </autotools>
+
+  <autotools id="enchant" autogen-sh="configure" >
+    <branch module="1.4.2/enchant-1.4.2.tar.gz" version="1.4.2"
+	    repo="abisource/enchant" size='595192'
+	    md5sum="fe4558269ff59f569ab9581c907d58cb" />
+    <dependencies>
+      <dep package="glib"/>
+    </dependencies>
+  </autotools>
+
+   <autotools id="libgpg-error" autogen-sh="configure">
+    <branch repo='ftp.gnupg.org' version='1.7'
+	    module="gcrypt/libgpg-error/libgpg-error-1.7.tar.bz2"/>
+  </autotools>
+
+  <autotools id="libgcrypt" autogen-sh="configure">
+    <branch repo='ftp.gnupg.org' version='1.4.4'
+	    module='gcrypt/libgcrypt/libgcrypt-1.4.4.tar.bz2'/>
+    <dependencies>
+      <dep package="libgpg-error" />
+    </dependencies>
+  </autotools>
+
+  <autotools id="libtasn1" supports-non-srcdir-builds="no"
+	     autogen-sh="configure">
+    <branch repo="ftp.gnu.org" version='2.2'
+	    module="gnutls/libtasn1-2.2.tar.gz"/>
+  </autotools>
+
+</moduleset>

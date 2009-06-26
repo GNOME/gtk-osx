@@ -1,0 +1,99 @@
+<?xml version="1.0"?><!--*- mode: xml; indent-tabs-mode: nil -*-->
+<!DOCTYPE moduleset SYSTEM "moduleset.dtd">
+<?xml-stylesheet type="text/xsl" href="moduleset.xsl"?>
+<moduleset>
+  <repository type="tarball" name="gstreamer" default="yes"
+              href="http://gstreamer.freedesktop.org/src/"/>
+  <repository type="tarball" name="liboil"
+              href="http://liboil.freedesktop.org/download/"/>
+  <repository type="tarball" name="sourceforge" 
+              href="http://downloads.sourceforge.net/sourceforge/"/>
+
+  <autotools id="liboil" autogen-sh="configure">
+    <branch repo="liboil" module="liboil-0.3.16.tar.gz" version="0.3.16" />
+  </autotools>
+
+  <autotools id="faad2" autogen-sh="autoreconf"
+             autogenargs="-without-bmp --without-xmms --without-drm --without-mpeg4ip">
+    <branch repo="sourceforge" module="faac/faad2-2.7.tar.gz"
+            version="2.7" />
+  </autotools>
+
+  <autotools id="gstreamer" autogenargs="-- --disable-tests" supports-non-srcdir-builds="no"
+    makeargs="ERROR_CFLAGS=" autogen-sh="configure">
+    <branch module="gstreamer/gstreamer-0.10.23.tar.gz" version="0.10.23"
+            md5sum="a7bba377ff10ec35d812ef59ba6469f8"/>
+    <after>
+      <dep package="glib"/>
+      <dep package="libxml2"/>
+    </after>
+  </autotools>
+
+  <autotools id="gst-plugins-base" autogenargs="-- --disable-tests --disable-x --disable-xvideo" supports-non-srcdir-builds="no"
+    makeargs="ERROR_CFLAGS=" autogen-sh="configure">
+    <branch module="gst-plugins-base/gst-plugins-base-0.10.23.tar.gz"
+            version="0.10.23" md5sum="e3662b1099e91f0b6ed0c103d5001222"/>
+    <dependencies>
+      <dep package="gstreamer"/>
+      <!--dep package="gtk+"/-->
+      <dep package="liboil"/>
+    </dependencies>
+    <after>
+      <dep package="gnome-vfs"/>
+    </after>
+  </autotools>
+
+  <autotools id="gst-plugins-good" autogenargs="-- --disable-tests --disable-x --disable-xvideo --disable-osx-video" supports-non-srcdir-builds="no"
+    makeargs="ERROR_CFLAGS=" autogen-sh="configure">
+    <branch module="gst-plugins-good/gst-plugins-good-0.10.15.tar.gz"
+            version="0.10.15" md5sum="b2f917c1d031fd9b877737fb870870fe"/>
+    <dependencies>
+      <dep package="gstreamer"/>
+      <dep package="gst-plugins-base"/>
+    </dependencies>
+  </autotools>
+
+  <autotools id="gst-plugins-ugly" autogenargs="-- --disable-tests" supports-non-srcdir-builds="no"
+    makeargs="ERROR_CFLAGS=" autogen-sh="configure">
+    <branch module="gst-plugins-ugly/gst-plugins-ugly-0.10.12.tar.gz"
+            version="0.10.12" md5sum="44d048a18db20318803c8ae66dbfff56"/>
+    <dependencies>
+      <dep package="gstreamer"/>
+      <dep package="gst-plugins-base"/>
+    </dependencies>
+  </autotools>
+
+  <autotools id="gst-plugins-bad" autogenargs="-- --disable-tests --disable-x --disable-xvid" supports-non-srcdir-builds="no"
+    makeargs="ERROR_CFLAGS=" autogen-sh="configure">
+    <branch module="gst-plugins-bad/gst-plugins-bad-0.10.13.tar.gz"
+            version="0.10.13" md5sum="60cd24efc92cfd2847e7c4074f9fc868"/>
+    <dependencies>
+      <dep package="gstreamer"/>
+      <dep package="gst-plugins-base"/>
+      <dep package="faad2"/>
+    </dependencies>
+  </autotools>
+
+  <autotools id="gst-ffmpeg" autogenargs="-- --disable-tests --disable-mmx" 
+             supports-non-srcdir-builds="no" autogen-sh="configure" >
+    <branch module="gst-ffmpeg/gst-ffmpeg-0.10.7.tar.gz"
+            version="0.10.7" md5sum="ee113dae3055abfe2cb92ae106765f49"/>
+    <dependencies>
+      <dep package="gstreamer"/>
+      <dep package="gst-plugins-base"/>
+    </dependencies>
+  </autotools>
+
+  <metamodule id="meta-gstreamer">
+    <dependencies>
+      <dep package="liboil"/>
+      <dep package="gstreamer"/>
+      <dep package="gst-plugins-base"/>
+      <dep package="gst-plugins-good"/>
+      <!--dep package="gst-plugins-ugly"/-->
+      <dep package="gst-plugins-bad"/>
+      <dep package="gst-ffmpeg"/>
+    </dependencies>
+  </metamodule>
+
+</moduleset>

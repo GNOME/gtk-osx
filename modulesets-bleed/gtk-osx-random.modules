@@ -1,4 +1,4 @@
-<?xml version="1.0"?><!--*- mode: nxml; indent-tabs-mode: nil -*-->
+<?xml version="1.0"?><!--*- mode: xml; indent-tabs-mode: nil -*-->
 <!DOCTYPE moduleset SYSTEM "moduleset.dtd">
 <?xml-stylesheet type="text/xsl" href="moduleset.xsl"?>
 <moduleset>
@@ -24,7 +24,7 @@
   </autotools>
 
   <autotools id="libglade">
-    <branch revision="LIBGLADE_2_6_4"/>
+    <branch />
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
       <dep package="meta-gtk-osx-core"/>
@@ -32,7 +32,7 @@
   </autotools>
 
   <autotools id="gossip">
-    <branch revision="GOSSIP_0_31"/>
+    <branch />
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
       <dep package="meta-gtk-osx-themes"/>
@@ -63,7 +63,7 @@
   </autotools>
 
   <autotools id="devhelp">
-    <branch revision="gnome-2-22"/>
+    <branch />
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
       <dep package="meta-gtk-osx-themes"/>
@@ -76,7 +76,7 @@
   </autotools>
 
   <autotools id="glade3">
-    <branch revision="gnome-2-22"/>
+    <branch />
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
       <dep package="meta-gtk-osx-themes"/>
@@ -85,7 +85,7 @@
   </autotools>
 
   <autotools id="gtksourceview">
-    <branch revision="gnome-2-24"/>
+    <branch />
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
       <dep package="meta-gtk-osx-core"/>
@@ -93,7 +93,7 @@
   </autotools>
 
   <autotools id="libIDL">
-    <branch revision="LIBIDL_0_8_13"/>
+    <branch />
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
       <dep package="meta-gtk-osx-core"/>
@@ -101,7 +101,7 @@
   </autotools>
 
   <autotools id="ORBit2">
-    <branch revision="ORBIT2_2_14_9"/>
+    <branch />
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
     </after>
@@ -111,7 +111,7 @@
   </autotools>
 
   <autotools id="gconf">
-    <branch revision="gnome-2-24"/>
+    <branch />
     <dependencies>
       <dep package="ORBit2"/>
       <dep package="libxml2"/>
@@ -138,7 +138,7 @@
              autogenargs="--disable-python --disable-print --without-x
                           --without-dbus --without-gnomevfs"
              makeargs='LDFLAGS="-framework Carbon"'>
-    <branch revision="gimp-2-6"/>
+    <branch />
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
       <dep package="meta-gtk-osx-core"/>

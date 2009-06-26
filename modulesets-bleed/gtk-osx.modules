@@ -52,7 +52,7 @@
   </metamodule>
 
   <autotools id="glib">
-    <branch revision="glib-2-20"/>
+    <branch />
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
       <dep package="gtk-doc"/> <!-- FIXME: http://bugs.gnome.org/546640 -->
@@ -62,7 +62,7 @@
   <autotools id="pango" 
              autogenargs="--without-x --with-included-modules=basic-atsui"
              makeargs="-k -C modules; make">
-    <branch revision="1.24.2"/>
+    <branch />
     <dependencies>
       <dep package="glib"/>
       <dep package="cairo"/>
@@ -75,7 +75,7 @@
   </autotools>
 
  <autotools id="atk">
-    <branch revision="gnome-2-26"/>
+    <branch />
     <dependencies>
       <dep package="glib"/>
     </dependencies>
@@ -85,7 +85,7 @@
   </autotools>
 
   <autotools id="gtk+" autogenargs="--with-gdktarget=quartz --without-libjasper">
-    <branch revision="gtk-2-16"/>
+    <branch />
     <dependencies>
       <dep package="pango"/>
       <dep package="atk"/>
@@ -116,8 +116,7 @@
 
   <autotools id="ige-mac-integration" autogenargs="--disable-python">
     <branch repo="github"
-	    module="jralls/ige-mac-integration.git"
-            revision="ige-mac-integration-0.8.4" />
+	    module="jralls/ige-mac-integration.git" />
     <dependencies>
       <dep package="gtk+"/>
     </dependencies>

@@ -26,7 +26,7 @@
   <autotools id="gstreamer" autogenargs="-- --disable-tests" 
              supports-non-srcdir-builds="no"
     makeargs="ERROR_CFLAGS=">
-    <branch module="gstreamer" revision="RELEASE-0_10_22"/>
+    <branch module="gstreamer" />
     <after>
       <dep package="glib"/>
       <dep package="libxml2"/>
@@ -36,7 +36,7 @@
   <autotools id="gst-plugins-base" supports-non-srcdir-builds="no"
              autogenargs="-- --disable-tests --disable-x --disable-xvideo" 
              makeargs="ERROR_CFLAGS=">
-    <branch module="gst-plugins-base" revision="RELEASE-0_10_22"/>
+    <branch module="gst-plugins-base" />
     <dependencies>
       <dep package="gstreamer"/>
       <!--dep package="gtk+"/-->
@@ -50,7 +50,7 @@
   <autotools id="gst-plugins-good" supports-non-srcdir-builds="no"
              autogenargs="-- --disable-tests --disable-x --disable-xvideo --disable-osx-video" 
              makeargs="ERROR_CFLAGS=">
-    <branch module="gst-plugins-good" revision="RELEASE-0_10_11"/>
+    <branch module="gst-plugins-good" />
     <dependencies>
       <dep package="gstreamer"/>
       <dep package="gst-plugins-base"/>
@@ -59,7 +59,7 @@
 
   <autotools id="gst-plugins-ugly" autogenargs="-- --disable-tests" 
              supports-non-srcdir-builds="no" makeargs="ERROR_CFLAGS=">
-    <branch revision="RELEASE-0_10_11" module="gst-plugins-ugly"/>
+    <branch  module="gst-plugins-ugly"/>
     <dependencies>
       <dep package="gstreamer"/>
       <dep package="gst-plugins-base"/>
@@ -69,7 +69,7 @@
   <autotools id="gst-plugins-bad" supports-non-srcdir-builds="no"
              autogenargs="-- --disable-tests --disable-x --disable-xvid" 
              makeargs="ERROR_CFLAGS=">
-    <branch revision="RELEASE-0_10_11" module="gst-plugins-bad"/>
+    <branch  module="gst-plugins-bad"/>
     <dependencies>
       <dep package="gstreamer"/>
       <dep package="gst-plugins-base"/>
@@ -81,7 +81,7 @@
   <autotools id="gst-ffmpeg" supports-non-srcdir-builds="no"
              autogenargs="-- --disable-tests --disable-mmx" 
              makeargs='ERROR_CFLAGS= CFLAGS="$CFLAGS -O2"'>
-    <branch revision="RELEASE-0_10_7" module="gst-ffmpeg"/>
+    <branch  module="gst-ffmpeg"/>
     <dependencies>
       <dep package="gstreamer"/>
       <dep package="gst-plugins-base"/>

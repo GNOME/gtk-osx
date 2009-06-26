@@ -1,0 +1,76 @@
+<?xml version="1.0"?><!--*- mode: nxml; indent-tabs-mode: nil -*-->
+<!DOCTYPE moduleset SYSTEM "moduleset.dtd">
+<?xml-stylesheet type="text/xsl" href="moduleset.xsl"?>
+<moduleset>
+  <repository type="tarball" name="ftp.gnome.org" default="yes" 
+              href="http://ftp.gnome.org/pub/GNOME/sources/"/>
+  <repository type="tarball" name="sourceforge" 
+	      href="http://downloads.sourceforge.net/sourceforge/"/>
+  <repository type="tarball" name="tango.freedesktop.org"
+              href="http://tango.freedesktop.org/releases/"/>
+  <repository type="tarball" name="icon-theme.freedesktop.org"
+	      href="http://icon-theme.freedesktop.org/releases"/>
+
+  <metamodule id="meta-gtk-osx-themes">
+    <dependencies>
+      <dep package="tango-icon-theme"/>
+      <dep package="tango-icon-theme-extras"/>
+      <dep package="gnome-icon-theme"/>
+      <dep package="icon-naming-utils"/>
+      <dep package="gtk-engines"/>
+    </dependencies>
+  </metamodule>
+
+  <autotools id="icon-naming-utils" autogen-sh="configure">
+    <branch repo="tango.freedesktop.org"  version="0.8.7"
+            module="icon-naming-utils-0.8.7.tar.gz"
+            md5sum="4abe604721ce2ccb67f451aa7ceb44d6" size="69675"/>
+    <after>
+      <dep package="meta-gtk-osx-bootstrap"/>
+    </after>
+  </autotools>
+
+  <autotools id="tango-icon-theme" autogenargs="--disable-icon-framing"
+             autogen-sh="configure">
+    <branch repo="tango.freedesktop.org" version="0.8.1"
+            module="tango-icon-theme-0.8.0.tar.bz2"/>
+    <dependencies>
+      <dep package="icon-naming-utils"/>
+      <dep package="hicolor-icon-theme"/>
+    </dependencies>
+  </autotools>
+
+  <autotools id="tango-icon-theme-extras" autogenargs="--disable-icon-framing"
+             autogen-sh="configure">
+    <branch repo="tango.freedesktop.org" version="0.1.0"
+            module="tango-icon-theme-extras-0.1.0.tar.gz"/>
+    <dependencies>
+      <dep package="tango-icon-theme"/>
+    </dependencies>
+  </autotools>
+
+  <autotools id="gnome-icon-theme" autogen-sh="configure">
+    <branch module="gnome-icon-theme/2.26/gnome-icon-theme-2.26.0.tar.bz2"
+            version="2.26.0" md5sum="36a4e5e1b2c7c053779a9a399f6146a2"/>
+    <dependencies>
+      <dep package="hicolor-icon-theme"/>
+      <dep package="icon-naming-utils"/>
+    </dependencies>
+  </autotools>
+
+  <autotools id="gtk-engines" autogen-sh="configure">
+    <branch module="gtk-engines/2.18/gtk-engines-2.18.2.tar.bz2"
+            version="2.18.2" md5sum="68c7d012923bf40fab47765e82de0676"/>
+    <after>
+      <dep package="meta-gtk-osx-core"/>
+    </after>
+  </autotools>
+
+  <autotools id="gtk-quartz-engine" autogen-sh="configure">
+    <branch module="gtk-osx/gtk-quartz-engine-0.1.tar.gz"
+            repo="sourceforge" version="0.1" />
+    <after>
+      <dep package="meta-gtk-osx-core"/>
+    </after>
+  </autotools>
+</moduleset>
