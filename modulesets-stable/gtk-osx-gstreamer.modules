@@ -9,6 +9,8 @@
   <repository type="tarball" name="sourceforge" 
               href="http://downloads.sourceforge.net/sourceforge/"/>
 
+<!-- Note: liboil/motovec/motovec.c on PPC: comment out the defines in
+     lines 43 & 44, they cause linkage failures -->
   <autotools id="liboil" autogen-sh="configure">
     <branch repo="liboil" module="liboil-0.3.16.tar.gz" version="0.3.16" />
   </autotools>
@@ -23,6 +25,9 @@
     makeargs="ERROR_CFLAGS=" autogen-sh="configure">
     <branch module="gstreamer/gstreamer-0.10.23.tar.gz" version="0.10.23"
             md5sum="a7bba377ff10ec35d812ef59ba6469f8"/>
+    <dependencies>
+      <dep package="bison"/>
+    </dependencies>
     <after>
       <dep package="glib"/>
       <dep package="libxml2"/>
