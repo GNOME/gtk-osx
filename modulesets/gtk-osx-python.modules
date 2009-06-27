@@ -3,9 +3,12 @@
 <?xml-stylesheet type="text/xsl" href="moduleset.xsl"?>
 <moduleset>
 
-  <repository type="git" name="git.gnome.org" default="yes" href="git://git.gnome.org/"/>
-  <repository type="cvs" name="cvs-cairo.freedesktop.org" cvsroot=":pserver:anoncvs@anoncvs.freedesktop.org:/cvs/cairo" password=""/>
-  <repository type="tarball" name="cairographics.org" href="http://cairographics.org/"/>
+  <repository type="git" name="git.gnome.org" default="yes" 
+              href="git://git.gnome.org/"/>
+  <repository type="cvs" name="cairographics" 
+              cvsroot=":pserver:anoncvs@anoncvs.freedesktop.org:/cvs/cairo"
+              password=""/>
+
 
   <metamodule id="meta-gtk-osx-python">
     <dependencies>
@@ -15,12 +18,17 @@
     </dependencies>
   </metamodule>
 
-  <tarball id="pycairo" version="1.8.2">
-    <source href="http://cairographics.org/releases/pycairo-1.8.2.tar.gz"/>
+ <!-- Pycairo 1.8.4 requires Python 2.6. You can go install this if
+      you like, but jhbuild installs only 2.5, which is also what
+      Leopard comes with. -->
+ <autotools id="pycairo" >
+    <!-- This is CVS, so it's revision, not tag --> 
+    <!-- CVS was having problems when testing run; this may have issues. -->
+    <branch module="pycairo" repo="cairographics" revision="RELEASE_1_8_2"/>
     <after>
       <dep package="meta-gtk-osx-core"/>
     </after>
-  </tarball>
+  </autotools>
 
   <autotools id="pygobject">
     <branch revision="pygobject-2-18"/>
@@ -30,7 +38,7 @@
   </autotools>
 
   <autotools id="pygtk">
-    <branch revision="pygtk-2-14"/>
+    <branch tag="PYGTK_2_15_1"/>
     <dependencies>
       <dep package="pygobject"/>
       <dep package="meta-gtk-osx-core"/>

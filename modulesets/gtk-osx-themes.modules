@@ -7,10 +7,14 @@
   <repository type="cvs" name="tango.freedesktop.org"
               cvsroot=":pserver:anoncvs@anoncvs.freedesktop.org:/cvs/tango"
               password=""/>
-  <repository type="tarball" name="freedesktop.org"
-              href="http://tango.freedesktop.org/"/>
-  <repository type='tarball' name="cloud.github.com" 
-              href="http://cloud.github.com/downloads/" />
+  <repository type="cvs" name="icon.freedesktop.org"
+              cvsroot=":pserver:anoncvs@anoncvs.freedesktop.org:/cvs/icon-theme"
+              password=""/>
+  <repository type="git" name="freedesktop.org"
+              href="git://anongit.freedesktop.org/"/>
+  <repository type="git" name="github.com" href="git://github.com/"/>
+  <repository type="tarball" name="tango-rel.freedesktop.org"
+              href="http://tango.freedesktop.org/releases/"/>
 
   <metamodule id="meta-gtk-osx-themes">
     <dependencies>
@@ -23,16 +27,19 @@
   </metamodule>
 
   <autotools id="icon-naming-utils" >
-    <branch repo="freedesktop.org" version="0.8.7"
-            module="releases/icon-naming-utils-0.8.7.tar.gz"
-            md5sum="4abe604721ce2ccb67f451aa7ceb44d6" size="69675"/>
+    <branch repo="icon.freedesktop.org" tag="ICON_NAMING_UTILS_0_8_7"/>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
     </after>
   </autotools>
 
-  <autotools id="tango-icon-theme" autogenargs="--disable-icon-framing">
-    <branch repo="tango.freedesktop.org"/>
+  <!-- Requires Inkscape to build icons from SVG and for wome reason
+       the perl is wedged, looking in the wrong place for
+       ParserOptions.ini. Use the tarball -->
+  <autotools id="tango-icon-theme" autogenargs="--disable-icon-framing" 
+             autogen-sh="configure">
+    <branch repo="tango-rel.freedesktop.org" version="0.8.1"
+            module="tango-icon-theme-0.8.0.tar.bz2"/>
     <dependencies>
       <dep package="icon-naming-utils"/>
       <dep package="hicolor-icon-theme"/>
@@ -47,7 +54,7 @@
   </autotools>
 
   <autotools id="gnome-icon-theme">
-    <branch revision="gnome-2-24"/>
+    <branch tag="GNOME_ICON_THEME_2_26_0"/>
     <dependencies>
       <dep package="hicolor-icon-theme"/>
       <dep package="icon-naming-utils"/>
@@ -55,15 +62,15 @@
   </autotools>
 
   <autotools id="gtk-engines">
-    <branch revision="gtk-engines-2-16"/>
+    <branch tag="GTK_ENGINES_2_18_2"/>
     <after>
       <dep package="meta-gtk-osx-core"/>
     </after>
   </autotools>
 
   <autotools id="gtk-quartz-engine">
-    <branch module="jralls/gtk-osx-build/gtk-quartz-engine-0.1.tar.gz"
-            repo="cloud.github.com" version="0.1" />
+    <branch module="jralls/gtk-quartz-engine"
+            repo="github.com" tag="v0.1" />
     <after>
       <dep package="meta-gtk-osx-core"/>
     </after>

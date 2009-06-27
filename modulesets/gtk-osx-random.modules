@@ -4,19 +4,47 @@
 <moduleset>
   <repository type="git" name="git.gnome.org" default="yes"
               href="git://git.gnome.org/"/>
+  <repository type="git" name="github" href="git://github.com/"/>
   <repository type="tarball" name="ftp.gnome.org" 
 	      href="ftp://ftp.gnome.org/pub/gnome/sources/"/>
-  <repository type="tarball" name="ftp.gtk.org" 
-	      href="ftp://ftp.gtk.org/pub/"/>
   <repository type="svn" name="inkscape.svn.sourceforge.net" 
               href="https://inkscape.svn.sourceforge.net/svnroot/inkscape/"/>
   <repository type="svn" name="ardour" 
               href="http://subversion.ardour.org/svn/"/>
   <repository type="git" name="github.com" href="git://github.com/"/>
+  <repository type="git" name="git.freedesktop.org"
+              href="git://anongit.freedesktop.org/"/>
+  <repository type="tarball" name="dbus.freedesktop.org"
+	      href="http://dbus.freedesktop.org/releases/"/>
+  <repository type="cvs" name="mime.freedesktop.org"
+              cvsroot=":pserver:anoncvs@anoncvs.freedesktop.org:/cvs/mime"
+              password=""/>
+  <repository type="tarball" name="sourceforge"
+              href="http://downloads.sourceforge.net/sourceforge/"/>
+  <repository type="tarball" name="sqlite" href="http://www.sqlite.org/"/>
 
+
+    <metamodule id="meta-gtk-osx-random">
+    <dependencies>
+      <dep package="poppler"/>
+      <dep package="gimp"/>
+      <dep package="devhelp"/>
+      <dep package="shared-mime-info"/>
+      <dep package="gossip"/>
+      <dep package="vala"/>
+      <dep package="glade3"/>
+    </dependencies>
+  </metamodule>
+
+  <!-- Loudmouth seems to be a bit of a football. This is pointed at
+       the dev on github who's done the most recent work, though the
+       release in question is from the original author. The project
+       website is at http://www.loudmouth-project.org/, but it's a bit
+       out of date. -->
   <autotools id="loudmouth" autogenargs="--with-ssl=openssl">
-    <branch repo="ftp.gnome.org" version="1.4.3"
-            module="loudmouth/1.4/loudmouth-1.4.3.tar.bz2" />
+<!-- Release 1.4.3, immediately after which loudmouth requires openssl-0.9.8f; Leopard provides only 0.9.7. -->
+    <branch tag="b0c0551776079953cbd7132b69a0dd3c8e05886c" repo="github" 
+            module="engineyard/loudmouth" />
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
       <dep package="glib"/>
@@ -24,7 +52,7 @@
   </autotools>
 
   <autotools id="libglade">
-    <branch revision="LIBGLADE_2_6_4"/>
+    <branch tag="LIBGLADE_2_6_4"/>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
       <dep package="meta-gtk-osx-core"/>
@@ -32,7 +60,7 @@
   </autotools>
 
   <autotools id="gossip">
-    <branch revision="GOSSIP_0_31"/>
+    <branch tag="GOSSIP_0_31"/>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
       <dep package="meta-gtk-osx-themes"/>
@@ -62,8 +90,12 @@
     </dependencies>
   </autotools>
 
+  <!-- Devhelp is another Richard Hult/Imendio project. It seems to be
+       actively maintained by others, but no one may get around to
+       doing a formal release, so if you're using this it probably
+       will pay to override the revision. -->
   <autotools id="devhelp">
-    <branch revision="gnome-2-22"/>
+    <branch tag="DEVHELP_0_23"/>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
       <dep package="meta-gtk-osx-themes"/>
@@ -76,7 +108,7 @@
   </autotools>
 
   <autotools id="glade3">
-    <branch revision="gnome-2-22"/>
+    <branch tag="GLADE_3_6_6"/>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
       <dep package="meta-gtk-osx-themes"/>
@@ -85,7 +117,7 @@
   </autotools>
 
   <autotools id="gtksourceview">
-    <branch revision="gnome-2-24"/>
+    <branch tag="GTKSOURCEVIEW_2_7_1"/>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
       <dep package="meta-gtk-osx-core"/>
@@ -93,7 +125,7 @@
   </autotools>
 
   <autotools id="libIDL">
-    <branch revision="LIBIDL_0_8_13"/>
+    <branch tag="LIBIDL_0_8_13"/>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
       <dep package="meta-gtk-osx-core"/>
@@ -101,7 +133,8 @@
   </autotools>
 
   <autotools id="ORBit2">
-    <branch revision="2109"/>
+    <!-- Release 2.14.17 -->
+    <branch tag="777769cc9254a959fde10d67010619db26a3c53c"/>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
     </after>
@@ -110,8 +143,36 @@
     </dependencies>
   </autotools>
 
+  <!-- This stays as a tarball so that the patches can be applied -->
+  <autotools id="dbus" autogen-sh='configure'
+	   autogenargs="--disable-selinux --without-x 
+	   --with-session-socket-dir=$PREFIX/tmp">
+    <branch module="dbus/dbus-1.2.12.tar.gz"  version="1.2.12" 
+	    repo="dbus.freedesktop.org">
+      <patch file="http://github.com/jralls/gnucash-on-osx/raw/master/patches/dbus-install.patch"/>
+    </branch>
+    <after>
+      <dep package="gtk+"/>
+    </after>
+  </autotools>
+
+  <autotools id="dbus-glib" autogenargs="--disable-selinux">
+    <branch repo="git.freedesktop.org" module="dbus/dbus-glib" 
+            tag="dbus-glib_0.80"/>
+    <dependencies>
+      <dep package="libxml2"/>
+      <dep package="dbus"/>
+    </dependencies>
+    <after>
+      <dep package="meta-gtk-osx-bootstrap"/>
+      <dep package="meta-gtk-osx-core"/>
+    </after>
+  </autotools>
+
+  <!-- Later versions of GConf require something called "PolicyKit"
+       which is available only through svn or from Linux distros -->
   <autotools id="gconf">
-    <branch revision="gnome-2-24"/>
+    <branch tag="GCONF_2_26_0"/>
     <dependencies>
       <dep package="ORBit2"/>
       <dep package="libxml2"/>
@@ -119,20 +180,21 @@
     </dependencies>
   </autotools>
 
-  <tarball id="lcms" version="1.17">
-    <source href="http://www.littlecms.com/lcms-1.17.tar.gz"
-            md5sum="07bdbb4cfb05d21caa58fe3d1c84ddc1" size="898816"/>
-  </tarball>
+  <!-- These folks don't make their repository available.-->
+  <autotools id="lcms" autogen-sh="configure">
+    <branch module="lcms/lcms-1.18a.tar.gz" version="1.18" repo="sourceforge"
+            checkoutdir="lcms-1.18"/>
+  </autotools>
 
-  <tarball id="shared-mime-info" supports-non-srcdir-builds="no" version="0.19">
-    <source href="http://freedesktop.org/~hadess/shared-mime-info-0.19.tar.gz"
-            md5sum="056a86a8245aecfd9c80740380c5265a" size="595168"/>
+  <autotools id="shared-mime-info" supports-non-srcdir-builds="no" >
+    <branch module="shared-mime-info" tag="RELEASE-0-60"
+            repo="mime.freedesktop.org"/>
     <dependencies>
       <dep package="intltool"/>
       <dep package="libxml2"/>
       <dep package="glib"/>
     </dependencies>
-  </tarball>
+  </autotools>
 
   <autotools id="gimp" 
              autogenargs="--disable-python --disable-print --without-x
@@ -150,27 +212,34 @@
     </dependencies>
   </autotools>
 
+  <!-- GEGL-0.22 won't build with BABL-0.1.0. HEAD from both should work OK. -->
   <autotools id="babl">
-    <branch repo="ftp.gtk.org" version="0.0.22" 
-            module="babl/0.0/babl-0.0.22.tar.bz2"/>
+    <!-- Release 0.0.22 These guys don't really understand tagging. -->
+    <branch tag="7d95a0933d6f19696c4b7051242f9861df02be35"/>
   </autotools>
 
   <autotools id="gegl">
-    <branch repo="ftp.gtk.org" version="0.0.22" 
-            module="gegl/0.0/gegl-0.0.22.tar.bz2"/>
+    <!-- Release 0.22 -->
+    <branch tag="22c119e72ae4df6f2bd72c7879eb41800e6fd3ff"/>
     <dependencies>
       <dep package="babl"/>
     </dependencies>
   </autotools>
 
-  <tarball id="poppler" version="0.5.9"
+ <autotools id="poppler"  
            autogenargs="--disable-qt --disable-qt4 --without-x --disable-gtk-test --enable-xpdf-headers">
-    <source href="http://poppler.freedesktop.org/poppler-0.5.9.tar.gz"
-            md5sum="8d1ac008614c0e413bcac95b8102fa07" size="1169002"/>
+    <branch repo="git.freedesktop.org" module="poppler/poppler" 
+            tag="poppler-0.10.7"/>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
       <dep package="meta-gtk-osx-core"/>
     </after>
-  </tarball>
+  </autotools>
+
+  <autotools id="sqlite" autogenargs="--disable-tcl --enable-threadsafe" >
+    <!-- Another package with a non-standard repository structure. Tarballs
+    are easier.-->
+    <branch module="sqlite-3.6.15.tar.gz" version='3.6.15' repo="sqlite"/>
+  </autotools>
 
 </moduleset>
