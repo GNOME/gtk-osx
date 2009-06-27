@@ -48,6 +48,11 @@
     </dependencies>
   </autotools>
 
+  <autotools id='libproxy' autogen-sh='configure' autogenargs='CFLAGS=" "' >
+    <branch version='0.2.3' module='libproxy-0.2.3.tar.gz'
+            repo='libproxy.google.com'/>
+  </autotools>
+
 <!-- Deprecated, obsolete
   <autotools id="opencdk" supports-non-srcdir-builds="no" 
              autogen-sh="configure">
