@@ -30,7 +30,8 @@
             version="2.4.1"/> 
   </autotools>
 
-  <!-- Not sure which HTTP backend is best for the mac build yet, leave this here. 
+  <!-- Not sure which HTTP backend is best for the mac build yet,
+       leave this here. 
   <autotools id="libsoup" autogen-sh="configure">
     <branch module="libsoup/2.27/libsoup-2.27.2.tar.bz2"
             version="2.27.2" md5sum="6ea5e7780488efe4565790cf4937cce3"/>
