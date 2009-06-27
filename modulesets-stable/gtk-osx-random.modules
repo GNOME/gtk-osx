@@ -38,7 +38,11 @@
       <dep package="glade3"/>
     </dependencies>
   </metamodule>
-
+  <!-- Loudmouth seems to be a bit of a football. See
+       modulesets/gtk-osx-random.modules for more info on where the
+       development is happening. Note that when the current devs are
+       ready for a new stable release, they probably won't be able to
+       put it on gnome.org. -->
   <autotools id="loudmouth" autogenargs="--with-ssl=openssl">
     <branch version="1.4.3" module="loudmouth/1.4/loudmouth-1.4.3.tar.bz2" 
             md5sum="55339ca42494690c3942ee1465a96937"/>
@@ -105,6 +109,7 @@
   </autotools>
 
   <autotools id="gtksourceview" autogen-sh="configure">
+    <!-- This is an unstable release. Stable is 2.6.2 -->
     <branch module="gtksourceview/2.7/gtksourceview-2.7.1.tar.bz2"
             version="2.7.1" md5sum="5aec59fbea62fc9d8112e8017e433ff4"/>
     <after>
@@ -157,7 +162,8 @@
       <dep package="meta-gtk-osx-core"/>
     </after>
   </autotools>
-<!-- Later versions of GConf require something called "PolicyKit" which is available only through svn or from Linux distros -->
+<!-- Later versions of GConf require something called "PolicyKit"
+     which is available only through svn or from Linux distros -->
   <autotools id="gconf" autogen-sh="configure">
     <branch module="GConf/2.26/GConf-2.26.0.tar.bz2" version="2.26.0"
             md5sum="b010f0de356ea093c6a73778b13de956"/>
@@ -201,6 +207,7 @@
     </dependencies>
   </autotools>
 
+  <!-- GEGL-0.22 won't build with BABL-0.1.0. -->
   <autotools id="babl" >
     <branch repo="ftp.gtk.org" version="0.0.22" 
             module="babl/0.0/babl-0.0.22.tar.bz2"/>

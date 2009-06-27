@@ -48,11 +48,6 @@
     </dependencies>
   </autotools>
 
-  <autotools id='libproxy' autogen-sh='configure' autogenargs='CFLAGS=" "' >
-    <branch version='0.2.3' module='libproxy-0.2.3.tar.gz'
-            repo='libproxy.google.com'/>
-  </autotools>
-
 <!-- Deprecated, obsolete
   <autotools id="opencdk" supports-non-srcdir-builds="no" 
              autogen-sh="configure">
@@ -66,6 +61,7 @@
 -->
 
   <autotools id="libsoup" autogen-sh="configure" >
+    <!-- Development version, should revert to 2.26.2-->
     <branch module="libsoup/2.27/libsoup-2.27.2.tar.bz2"
             version="2.27.2" md5sum="6ea5e7780488efe4565790cf4937cce3"/>
     <dependencies>

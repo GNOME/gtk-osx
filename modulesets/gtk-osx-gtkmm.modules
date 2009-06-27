@@ -2,8 +2,12 @@
 <!DOCTYPE moduleset SYSTEM "moduleset.dtd">
 <?xml-stylesheet type="text/xsl" href="moduleset.xsl"?>
 <moduleset>
-  <repository type="git" name="git.gnome.org" default="yes" href="git://git.gnome.org/"/>
-  <repository type="tarball" name="doxygen" href="http://ftp.stack.nl/pub/users/dimitri/"/>
+  <repository type="git" name="git.gnome.org" default="yes" 
+              href="git://git.gnome.org/"/>
+  <repository type="svn" name="doxygen" 
+              href="http://doxygen.svn.sourceforge.net/svnroot/"/>
+  <repository type="git" name="cairographics" 
+              href="git://anongit.freedesktop.org/git/"/>
 
   <metamodule id="meta-gtk-osx-gtkmm">
     <dependencies>
@@ -11,15 +15,15 @@
     </dependencies>
   </metamodule>
 
- <tarball id="cairomm" version="1.8.0">
-    <source href="http://www.cairographics.org/releases/cairomm-1.8.0.tar.gz"/>
-	          md5sum="4e64139ef6f668df24450f3b81dd0771" size="6616544"/>
+  <autotools id="cairomm" >
+    <branch module="cairomm" tag="v1.8.0" 
+            repo="cairographics" />
     <dependencies>
       <dep package="cairo"/>
     </dependencies>
-  </tarball>
+  </autotools>
 
-  <autotools id="glibmm">
+  <autotools id="glibmm" >
     <branch revision="glibmm-2-20"/>
     <dependencies>
       <dep package="glib"/>
@@ -27,8 +31,9 @@
     </dependencies>
   </autotools>
 
-  <autotools id="pangomm">
-    <branch revision="pangomm-2-14"/>
+  <autotools id="pangomm" >
+    <!-- Release 2.24.0 -->
+    <branch tag="d4dfd3c1d5331511b31a14eb6ddf2effc6db6731"/>
     <dependencies>
       <dep package="glibmm"/>
       <dep package="cairomm"/>
@@ -36,22 +41,25 @@
     </dependencies>
   </autotools>
 
-  <autotools id="doxygen" autogen-template="%(srcdir)s/configure --prefix %(prefix)s">
-    <branch module="doxygen-1.5.6.src.tar.gz" version="1.5.6"
-            repo="doxygen"
-            md5sum="779974eedf011ed52e1fe21fc2d5079c" size="4011956">
-    </branch>
+  <autotools id="doxygen" 
+             autogen-template="%(srcdir)s/configure --prefix %(prefix)s">
+    <branch tag="Release_1_5_9"
+            repo="doxygen" />
   </autotools>
 
-  <autotools id="libsigc++2">
-    <branch revision="libsigc-2-0"/>
+  <autotools id="libsigc++2" >
+    <!-- Release 2.2.3 -->
+    <branch tag="40a593f55083c86154fae33728b9ca93eb287929"/>
     <dependencies>
       <dep package="doxygen"/>
     </dependencies>
   </autotools>
 
-  <autotools id="gtkmm">
-    <branch revision=gtkmm-2-14"/>
+  <autotools id="gtkmm" >
+    <!-- Release 2.16.0. Although they have a gtkmm-2-16 branch, they
+         seem to be doing development in it instead of on their master
+         branch, so it isn't stable. -->
+    <branch tag="f4d59b36d4b2f728bf18a1ec6db46d5dad13f96d"/>
     <dependencies>
       <dep package="glibmm"/>
       <dep package="cairomm"/>
