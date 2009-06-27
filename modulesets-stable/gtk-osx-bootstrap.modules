@@ -19,6 +19,10 @@
 	      href="http://www.fontconfig.org/release/"/>
   <repository type="tarball" name="icon-theme"
 	      href="http://icon-theme.freedesktop.org/releases/"/>
+  <repository type="tarball" name="ftp.gnu.org"
+              href="http://ftp.gnu.org/gnu/"/>
+  <repository type="tarball" name="curl.haxx.se"
+              href="http://curl.haxx.se/download/"/>
 
   <autotools id="libpng" autogenargs="--enable-shared" autogen-sh="configure">
     <branch version="1.2.37" module="libpng/libpng-1.2.37.tar.bz2"
@@ -168,6 +172,17 @@
     </dependencies>
   </autotools>
 
+  <!-- 10.5 has 7.16.3, which is too old for some things. Otherwise can be skipped. -->
+  <autotools id="libcurl" autogen-sh="configure">
+    <branch repo="curl.haxx.se" module="curl-7.19.5.tar.bz2" version="7.19.5" />
+  </autotools>
+
+  <!-- 10.4 has 1.28 which is too old, 10.5 has 2.3 which is OK. -->
+  <autotools id="bison" autogen-sh="configure">
+    <branch repo="ftp.gnu.org" module="bison/bison-2.4.1.tar.bz2" 
+            version="2.4.1"/> 
+  </autotools>
+
   <metamodule id="meta-gtk-osx-bootstrap">
     <dependencies>
       <dep package="libpng"/>
@@ -176,6 +191,7 @@
       <dep package="libtiff"/>
       <dep package="libxml2"/>
       <dep package="libxslt"/>
+      <dep package="bison"/>
       <dep package="gtk-osx-docbook"/>
       <dep package="gnome-doc-utils"/>
       <dep package="expat"/>

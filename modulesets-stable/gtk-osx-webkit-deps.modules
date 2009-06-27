@@ -7,28 +7,7 @@
   <repository type="svn" name="svn.webkit.org"
               href="http://svn.webkit.org/repository/webkit/releases/WebKitGTK/"/>
   <repository type="git" name="git.debian.org" href="git://git.debian.org/"/>
-  <repository type="tarball" name="ftp.gnu.org"
-              href="http://ftp.gnu.org/gnu/"/>
-  <repository type="tarball" name="curl.haxx.se"
-              href="http://curl.haxx.se/download/"/>
 
-  <metamodule id="meta-webkit-deps">
-    <dependencies>
-      <dep package="libcurl"/>
-      <dep package="bison"/>
-    </dependencies>
-  </metamodule>
-
-  <!-- 10.5 has 7.16.3, which is too old for some things. Otherwise can be skipped. -->
-  <autotools id="libcurl" autogen-sh="configure">
-    <branch repo="curl.haxx.se" module="curl-7.19.5.tar.bz2" version="7.19.5" />
-  </autotools>
-
-  <!-- 10.4 has 1.28 which is too old, 10.5 has 2.3 which is OK. -->
-  <autotools id="bison" autogen-sh="configure">
-    <branch repo="ftp.gnu.org" module="bison/bison-2.4.1.tar.bz2" 
-            version="2.4.1"/> 
-  </autotools>
 
   <!-- Not sure which HTTP backend is best for the mac build yet,
        leave this here. 
