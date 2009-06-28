@@ -27,6 +27,7 @@
             md5sum="a7bba377ff10ec35d812ef59ba6469f8"/>
     <dependencies>
       <dep package="bison"/>
+      <dep package="flex"/>
     </dependencies>
     <after>
       <dep package="glib"/>
