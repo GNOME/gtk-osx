@@ -208,6 +208,8 @@
   </autotools>
 
   <!-- GEGL-0.22 won't build with BABL-0.1.0. -->
+  <!-- Pass -disable-altivec on PPC; there's a bug which wasn't fixed
+     until january 2009 that prevents it building -->
   <autotools id="babl" >
     <branch repo="ftp.gtk.org" version="0.0.22" 
             module="babl/0.0/babl-0.0.22.tar.bz2"/>
