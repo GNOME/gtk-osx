@@ -1,4 +1,4 @@
-<?xml version="1.0"?><!--*- mode: xml; indent-tabs-mode: nil -*-->
+<?xml version="1.0"?>
 <!DOCTYPE moduleset SYSTEM "moduleset.dtd">
 <?xml-stylesheet type="text/xsl" href="moduleset.xsl"?>
 <moduleset>
@@ -121,5 +121,24 @@
       <dep package="glib"/>
     </dependencies>
   </autotools>
+
+  <repository type="git" name="git.debian.org" href="git://git.debian.org/"/>
+
+    <autotools id="WebKit" autogenargs="--disable-video --with-http-backend=curl --disable-dom-storage --disable-database --disable-icon-database --disable-svg --with-target=quartz --with-font-backend=pango --disable-offline-web-applications"
+      makefile="GNUmakefile">
+    <branch repo="git.debian.org" module="git/pkg-webkit/upstream.git"
+      checkoutdir="WebKit" revision="filtered"/>
+    <dependencies>
+      <dep package="libsoup"/>
+      <dep package="enchant"/>
+    </dependencies>
+  <after>
+      <dep package="meta-gtk-osx-core"/>
+      <dep package="libcurl"/>
+      <dep package="bison"/>
+      <!--dep package="gst-plugins-base"/-->
+    </after>
+  </autotools>
+
   
 </moduleset>
