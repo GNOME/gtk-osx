@@ -34,7 +34,6 @@
   <include href="gtk-osx-bootstrap.modules"/>
   <include href="gtk-osx-python.modules"/>
   <include href="gtk-osx-gstreamer.modules"/>
-  <include href="gtk-osx-webkit-deps.modules"/>
   <include href="gtk-osx-gtkmm.modules"/>
   <include href="gtk-osx-themes.modules"/>
   <include href="gtk-osx-random.modules"/>
