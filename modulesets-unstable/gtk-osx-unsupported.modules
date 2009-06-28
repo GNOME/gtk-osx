@@ -1,0 +1,144 @@
+<?xml version="1.0"?>
+<!DOCTYPE moduleset SYSTEM "moduleset.dtd">
+<?xml-stylesheet type="text/xsl" href="moduleset.xsl"?>
+<moduleset>
+  <repository type="git" name="git.gnome.org" default="yes"
+              href="git://git.gnome.org/"/>
+  <repository type='git' name='git.gnu.org' 
+              href="git://git.savannah.gnu.org/"/>
+  <repository type='svn' name='cvs.gnupg.org' href="svn://cvs.gnupg.org/" />
+  <repository type='tarball' name='ftp.gnupg.org' href="ftp://ftp.gnupg.org/" />
+  <repository type='tarball' name='ftp.gnu.org' href="ftp://ftp.gnu.org/gnu/"/>
+  <repository type="cvs" name="gnutls.gnupg.org"
+              cvsroot=":pserver:anoncvs@cvs.gnupg.org:/cvs/gnutls"
+              password="anoncvs"/>
+  <repository type="svn" name="abisource/enchant" 
+              href="http://svn.abisource.com/" />
+  <repository type="svn" name="svn.debian.org" href="svn://svn.debian.org/"/>
+  <repository type="git" name="git.debian.org"
+              href="git://git.debian.org/git/"/>
+  <repository type='svn' name='libproxy.google.com'
+              href='http://libproxy.googlecode.com/svn/'
+              tags-template="tags/%(tag)s"/>
+
+  <metamodule id="meta-gtk-osx-unsupported">
+    <dependencies>
+      <dep package="gnome-mime-data"/>
+      <dep package="iso-codes"/>
+    </dependencies>
+  </metamodule>
+
+  <autotools id="gnome-mime-data">
+   <branch />
+    <dependencies>
+      <dep package="gnome-common"/>
+      <dep package="glib"/>
+    </dependencies>
+  </autotools>
+
+  <autotools id="iso-codes" >
+    <branch repo="git.debian.org" 
+            module="iso-codes/iso-codes"/>
+
+  </autotools>
+
+  <autotools id="gnutls" autogen-sh="configure">
+ <!--   <branch repo='git.gnu.org' tag='gnutls_2_8_1' module="gnutls"/> -->
+    <branch repo='ftp.gnu.org' version='2.8.1' 
+            module="gnutls/gnutls-2.8.1.tar.bz2"/>
+    <dependencies>
+      <dep package="libgcrypt" />
+      <dep package="libtasn1" />
+   <!--   <dep package="opencdk" /> -->
+    </dependencies>
+  </autotools>
+<!-- Not Required -->
+  <autotools id="opencdk" supports-non-srcdir-builds="no" 
+             autogenargs="--enable-maintainer-mode"
+	     autogen-template="%(srcdir)s/%(autogen-sh)s &amp;&amp; %(srcdir)s/configure --prefix %(prefix)s --libdir %(libdir)s %(autogenargs)s">
+    <!-- No tags yet, this is right after import from CVS. -->
+    <branch repo="git.gnu.org" module="opencdk"
+            />
+    <dependencies>
+      <dep package="libgcrypt" />
+    </dependencies>
+  </autotools>
+
+  <autotools id="libgpg-error" 
+             autogen-template="%(srcdir)s/%(autogen-sh)s &amp;&amp; %(srcdir)s/configure --prefix %(prefix)s --libdir %(libdir)s %(autogenargs)s">
+    <branch repo='cvs.gnupg.org' module="libgpg-error" 
+            />
+  </autotools>
+
+  <autotools id="libgcrypt"     autogen-sh="configure">
+ 
+<!-- CVS version requires fig2dev, an X11 utility.   
+     <branch repo='cvs.gnupg.org'  module='libgcrypt'/> -->
+    <branch repo='ftp.gnupg.org' version='1.4.4'
+	    module='gcrypt/libgcrypt/libgcrypt-1.4.4.tar.bz2'/>
+    <dependencies>
+      <dep package="libgpg-error" />
+    </dependencies>
+  </autotools>
+
+  <autotools id="libtasn1" supports-non-srcdir-builds="no" >
+    <!-- Git repository is missing files required to build libtasn1
+    <branch repo="git.gnu.org" /> -->
+    <branch repo="ftp.gnu.org" version='2.2'
+	    module="gnutls/libtasn1-2.2.tar.gz"/>
+  </autotools>
+
+  <autotools id="libsoup">
+    <branch />
+    <dependencies>
+      <dep package="glib"/>
+      <dep package="gnutls"/>
+      <dep package='libproxy'/>
+      <dep package='gconf'/>
+      <dep package='sqlite'/>
+      <dep package="libxml2"/>
+    </dependencies>
+  </autotools>
+
+   <autotools id="enchant" >
+     <!-- No version. Doesn't seem to have been touched in a while. -->
+    <branch repo="abisource/enchant" module="enchant"/>
+    <dependencies>
+      <dep package="glib"/>
+    </dependencies>
+  </autotools>
+
+  <autotools id='libproxy' autogenargs='CFLAGS=" "' 
+	     autogen-template="%(srcdir)s/%(autogen-sh)s &amp;&amp; %(srcdir)s/configure --prefix %(prefix)s --libdir %(libdir)s %(autogenargs)s">
+    <branch repo='libproxy.google.com' 
+             />
+  </autotools>
+
+<!-- GNET is deprecated in favor of Glib/Gio. Don't build this unless you have to -->
+  <autotools id="gnet" autogenargs="--enable-glib2">
+    <branch />
+    <dependencies>
+      <dep package="glib"/>
+    </dependencies>
+  </autotools>
+
+  <repository type="git" name="git.debian.org" href="git://git.debian.org/"/>
+
+    <autotools id="WebKit" autogenargs="--disable-video --with-http-backend=curl --disable-dom-storage --disable-database --disable-icon-database --disable-svg --with-target=quartz --with-font-backend=pango --disable-offline-web-applications"
+      makefile="GNUmakefile">
+    <branch repo="git.debian.org" module="git/pkg-webkit/upstream.git"
+      checkoutdir="WebKit" revision="filtered"/>
+    <dependencies>
+      <dep package="libsoup"/>
+      <dep package="enchant"/>
+    </dependencies>
+  <after>
+      <dep package="meta-gtk-osx-core"/>
+      <dep package="libcurl"/>
+      <dep package="bison"/>
+      <!--dep package="gst-plugins-base"/-->
+    </after>
+  </autotools>
+
+  
+</moduleset>

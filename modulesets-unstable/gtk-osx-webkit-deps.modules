@@ -5,6 +5,12 @@
   <repository type="git" name="git.gnome.org" default="yes" 
               href="git://git.gnome.org/"/>
   <repository type="git" name="git.debian.org" href="git://git.debian.org/"/>
+  <repository type="git" name="git.gnu.org" href="git://git.savannah.gnu.org/"/>
+<!--  <repository type="cvs" name="curl.haxx.se" 
+              cvsroot=":pserver:anonymous@cool.haxx.se:/cvsroot/curl"
+              password=""/> -->
+  <repository type="tarball" name="curl.haxx.se"
+              href="http://curl.haxx.se/download/"/>
 
   <metamodule id="meta-webkit-deps">
     <dependencies>
@@ -14,33 +20,40 @@
   </metamodule>
 
   <!-- 10.5 has 7.16.3, which is too old for some things. Otherwise can be skipped. -->
-  <tarball id="libcurl" version="7.18.1">
-    <source href="http://curl.haxx.se/download/curl-7.18.1.tar.bz2"
-            md5sum="805834fc1136ff7600d2179bc0386c5a" size="1700966"/>
-  </tarball>
+  <!-- Buildconf too clever, insists on glibtoolize because it's
+       Darwin.  Use the tarball. -->
+  <autotools id="libcurl" autogen-sh="configure">
+     <branch repo="curl.haxx.se" module="curl-7.19.5.tar.bz2" version="7.19.5" />
+<!--   <branch repo="curl.haxx.se" module="curl" revision="curl-7_19_5"/> -->
+  </autotools>
+
 
   <!-- 10.4 has 1.28 which is too old, 10.5 has 2.3 which is OK. -->
-  <tarball id="bison" version="2.3">
-    <source href="http://ftp.gnu.org/gnu/bison/bison-2.3.tar.bz2"
-            md5sum="c18640c6ec31a169d351e3117ecce3ec" size="1080319"/>
-  </tarball>
+   <autotools id="bison" >
+    <branch repo="git.gnu.org" module="bison.git"
+            revision="branch-2.4.2"/> 
+  </autotools>
 
-  <!-- Not sure which HTTP backend is best for the mac build yet, leave this here. -->
+  <!-- Not sure which HTTP backend is best for the mac build yet,
+       leave this here.  NOTE: Up to date version is in unsupported.
   <autotools id="libsoup">
-    <branch />
+    <branch revision="gnome-2-26"/>
     <after>
       <dep package="meta-gtk-osx-core"/>
     </after>
   </autotools>
-
+-->
     <autotools id="WebKit" autogenargs="--disable-video --with-http-backend=curl --disable-dom-storage --disable-database --disable-icon-database --disable-svg --with-target=quartz --with-font-backend=pango --disable-offline-web-applications"
       makefile="GNUmakefile">
     <branch repo="git.debian.org" module="git/pkg-webkit/upstream.git"
       checkoutdir="WebKit" revision="filtered"/>
-    <after>
+    <dependencies>
+      <dep package="libsoup"/>
+      <dep package="enchant"/>
+    </dependencies>
+  <after>
       <dep package="meta-gtk-osx-core"/>
       <dep package="libcurl"/>
-      <dep package="libsoup"/>
       <dep package="bison"/>
       <!--dep package="gst-plugins-base"/-->
     </after>

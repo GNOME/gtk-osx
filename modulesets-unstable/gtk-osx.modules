@@ -1,12 +1,12 @@
-<?xml version="1.0"?><!--*- mode: nxml; indent-tabs-mode: nil -*-->
+<?xml version="1.0"?>
 <!DOCTYPE moduleset SYSTEM "moduleset.dtd">
 <?xml-stylesheet type="text/xsl" href="moduleset.xsl"?>
 <moduleset>
   <repository type="git" name="git.gnome.org" default="yes"
-      href="git://git.gnome.org/"/>
+              href="git://git.gnome.org/"/>
   <repository type="git" name="github" href="git://github.com/"/>
-  <repository type="tarball" name="github-sane" 
-              href="http://cloud.github.com/downloads/"/>
+  <repository type="git" name="cairographics" 
+              href="git://anongit.freedesktop.org/git/"/>
 
   <!-- This module set works a bit differently than for example the
        GNOME ones do. It's split up in seperate pieces:
@@ -95,15 +95,15 @@
     </after>
   </autotools>
 
-  <tarball id="pixman" version="0.14.0" autogenargs="--disable-gtk">
-    <source href="http://cairographics.org/releases/pixman-0.14.0.tar.gz"/>
+  <autotools id="pixman" autogenargs="--disable-gtk">
+    <branch repo="cairographics" module="pixman" />
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
     </after>
-  </tarball>
+  </autotools>
 
-  <tarball id="cairo" version="1.8.6" autogenargs="--enable-pdf --enable-quartz --disable-xlib">
-    <source href="http://cairographics.org/releases/cairo-1.8.6.tar.gz"/>
+  <autotools id="cairo" autogenargs="--enable-pdf --enable-quartz --disable-xlib">
+    <branch repo="cairographics" module="cairo" />
     <dependencies>
       <dep package="pixman"/>
     </dependencies>
@@ -112,11 +112,11 @@
       <dep package="fontconfig"/>
       <dep package="freetype"/>
     </after>
-  </tarball>
+  </autotools>
 
   <autotools id="ige-mac-integration" autogenargs="--disable-python">
     <branch repo="github"
-	    module="jralls/ige-mac-integration.git" />
+	    module="jralls/ige-mac-integration" />
     <dependencies>
       <dep package="gtk+"/>
     </dependencies>
