@@ -1,0 +1,81 @@
+<?xml version="1.0"?>
+<!DOCTYPE moduleset SYSTEM "moduleset.dtd">
+<?xml-stylesheet type="text/xsl" href="moduleset.xsl"?>
+<!-- NOTE WELL: This moduleset does not use tarballs, because the checkoutdir directive will break (the tarballs won't checkout in those directories). -->
+
+<moduleset>
+  <repository type="tarball" name="ftp.gnome.org" default="yes"
+              href="http://ftp.gnome.org/"/>
+  <repository type="tarball" name="github" 
+              href="http://github.com/"/>
+  <repository type="tarball" name="easyb" 
+              href="http://www.easyb.ch/files/gtk/"/>
+  
+  
+  <metamodule id="glib-universal">
+    <dependencies>
+      <dep package="gettext-fw"/>
+      <dep package="glib-ppc"/>
+      <dep package="glib-i386"/>
+      <dep package="lipo-glib"/>
+    </dependencies>
+    <after>
+      <dep package="meta-gtk-osx-bootstrap"/>
+      <dep package="gtk-doc"/> 
+    </after>
+  </metamodule>
+
+  <autotools id="glib-i386" makeinstallargs="DESTDIR=$JHBUILD_SOURCE/glib-u/build/i386 install">
+     <branch module="glib/2.20/glib-2.20.3.tar.bz2"  version="2.20.3"
+            md5sum="1173688c58b4b62809c83bb07a2cf71a" 
+            checkoutdir="glib-u/i386"/>
+ </autotools>
+ 
+ <autotools id="glib-ppc" makeinstallargs="DESTDIR=$JHBUILD_SOURCE/glib-u/build/ppc install">
+    <branch module="glib/2.20/glib-2.20.3.tar.bz2"  version="2.20.3"
+            md5sum="1173688c58b4b62809c83bb07a2cf71a"
+            checkoutdir="glib-u/ppc" />
+ </autotools>
+ 
+  <autotools id="lipo-glib" makeinstallargs="DIR=glib-u  install"
+             autogen-template="echo 'make glib universal and install'" 
+             makeargs="DIR=glib-u"  >
+    <branch repo="easyb" checkoutdir="lipoit" module="lipoit.tar.gz" 
+            version="0.0.1"/>
+  </autotools>
+  
+  <metamodule id="gtk-universal">
+    <dependencies>
+      <dep package="pango"/>
+      <dep package="atk"/>
+      <dep package="gnome-icon-theme"/>
+      <dep package="gtk-ppc"/>
+      <dep package="gtk-i386"/>
+      <dep package="lipo-gtk"/>
+      <dep package="gtk-engines"/>
+      <dep package="ige-mac-integration"/>
+    </dependencies>
+  </metamodule>
+  
+  <autotools id="gtk-i386" 
+             makeinstallargs="DESTDIR=$JHBUILD_SOURCE/gtk-u/build/i386 install">
+     <branch module="gtk+/2.16/gtk+-2.16.2.tar.bz2" version="2.16.2"
+            md5sm="396e98df15f6e4005e360b5710660ce3" checkoutdir="gtk-u/i386"/>
+ </autotools>
+ 
+ <autotools id="gtk-ppc" 
+            makeinstallargs="DESTDIR=$JHBUILD_SOURCE/gtk-u/build/ppc install">
+    <branch module="gtk+/2.16/gtk+-2.16.2.tar.bz2" version="2.16.2"
+            md5sm="396e98df15f6e4005e360b5710660ce3" checkoutdir="gtk-u/ppc" />
+ </autotools>
+ 
+  <autotools id="lipo-gtk" autogen-template="make DIR=gtk-u clean" 
+             makeargs="DIR=gtk-u"  makeinstallargs="DIR=gtk-u install">
+    <branch repo="easyb" checkoutdir="lipoit" module="lipoit.tar.gz" 
+            version="0.0.1"/>
+  </autotools>
+
+
+
+
+</moduleset>
