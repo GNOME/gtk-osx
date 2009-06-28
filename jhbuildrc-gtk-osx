@@ -193,9 +193,11 @@ if _osx_version.startswith("7."):
 elif _osx_version.startswith("8."):
     # Tiger, we want to use the python version from jhbuild.
     _gtk_osx_use_jhbuild_python = True
+    _gtk_osx_use_jhbuild_bison_flex = True
 else:
     # Leopard or newer.
     _gtk_osx_use_jhbuild_python = False
+    _gtk_osx_use_jhbuild_bison_flex = False
 
 # Import optional user RC for further customization. You can override
 # the prefix or default build setup for example, or CFLAGS or
@@ -238,6 +240,8 @@ os.environ['PREFIX'] = prefix # Deprecated, please move to JHBUILD_PREFIX.
 os.environ['JHBUILD_PREFIX'] = prefix
 os.environ['JHBUILD_SOURCE'] = checkoutroot
 
+#some packages go off and find /usr/lib/gm4, which is broken
+os.environ["M4"] = prefix + "/bin/m4"
 os.environ['LIBTOOLIZE'] = prefix + '/bin/libtoolize'
 
 # By default, we want the system perl and python, not from macports or
@@ -251,6 +255,10 @@ if not _gtk_osx_use_jhbuild_python:
         os.environ["PYTHON"] = "/usr/bin/python"
 else:
     os.environ["PYTHON"] = prefix + "/bin/python"
+
+if not _gtk_osx_use_jhbuild_bison_flex:
+    skip.append('bison')
+    skip.append('flex')
 
 # Use libxml/libxslt from the system. Append to the pkg-config path to
 # get the system versions picked up.
@@ -305,6 +313,7 @@ for _framework in _frameworks.split(":"):
             environ_prepend("LDFLAGS", "-L" + _framework + "/Resources/dev/lib", " ")
         if os.path.exists(_framework + "/Resources/dev/share/aclocal"):
             prependpath("ACLOCAL_FLAGS", _framework + "/Resources/dev/share/aclocal")
+
 
 # We do some crude extra argument parsing just to add support for
 # getting environment variables. Used in framework creation to pick up

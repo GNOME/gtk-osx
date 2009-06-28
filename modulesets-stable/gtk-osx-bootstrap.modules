@@ -183,6 +183,12 @@
             version="2.4.1"/> 
   </autotools>
 
+  <!-- 10.4 has 2.5.4, too old for gstreamer (and probably others as well -->
+  <autotools id="flex" autogen-sh="configure">
+    <branch repo="sourceforge" module="flex/flex-2.5.35.tar.bz2" 
+	    version="2.5.35"/>
+  </autotools>
+
   <metamodule id="meta-gtk-osx-bootstrap">
     <dependencies>
       <dep package="libpng"/>
@@ -192,6 +198,7 @@
       <dep package="libxml2"/>
       <dep package="libxslt"/>
       <dep package="bison"/>
+      <dep package="flex"/>
       <dep package="gtk-osx-docbook"/>
       <dep package="gnome-doc-utils"/>
       <dep package="expat"/>
