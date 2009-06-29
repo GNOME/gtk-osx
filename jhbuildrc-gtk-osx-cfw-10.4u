@@ -19,7 +19,7 @@ modules = [
          #"meta-gstreamer",
          "WebKit"
          ]
-moduleset = "gtk-osx-universal"
+#moduleset = "gtk-osx-universal" Use the primary moduleset
 
 alwaysautogen = False
 
