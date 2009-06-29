@@ -122,9 +122,7 @@
     </dependencies>
   </autotools>
 
-  <repository type="git" name="git.debian.org" href="git://git.debian.org/"/>
-
-    <autotools id="WebKit" autogenargs="--disable-video --with-http-backend=curl --disable-dom-storage --disable-database --disable-icon-database --disable-svg --with-target=quartz --with-font-backend=pango --disable-offline-web-applications"
+  <autotools id="WebKit" autogenargs="--disable-video --with-http-backend=curl --disable-dom-storage --disable-database --disable-icon-database --disable-svg --with-target=quartz --with-font-backend=pango --disable-offline-web-applications"
       makefile="GNUmakefile">
     <branch repo="git.debian.org" module="git/pkg-webkit/upstream.git"
       checkoutdir="WebKit" revision="filtered"/>
