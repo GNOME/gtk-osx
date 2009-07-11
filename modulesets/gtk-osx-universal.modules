@@ -10,7 +10,7 @@
               href="http://www.easyb.ch/files/gtk/"/>
   
   
-  <metamodule id="glib-universal">
+  <metamodule id="meta-glib-universal">
     <dependencies>
       <dep package="gettext-fw"/>
       <dep package="glib-ppc"/>
@@ -42,8 +42,9 @@
     <branch repo="easyb" checkoutdir="lipoit" module="lipoit.tar.gz" version="0.0.1"/>
   </autotools>
   
-  <metamodule id="gtk-universal">
+  <metamodule id="meta-gtk-universal">
     <dependencies>
+      <dep package="meta-glib-universal"/>
       <dep package="pango"/>
       <dep package="atk"/>
       <dep package="gnome-icon-theme"/>
