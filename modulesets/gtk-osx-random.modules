@@ -150,7 +150,8 @@
     <branch module="dbus/dbus-1.2.12.tar.gz"  version="1.2.12" 
 	    repo="dbus.freedesktop.org">
       <patch file="http://github.com/jralls/gnucash-on-osx/raw/master/patches/dbus-install.patch"/>
-    </branch>
+       <patch file="http://gimponosx.svn.sourceforge.net/viewvc/gimponosx/GimpPorts/ports/devel/dbus/files/dbus-sysdeps-unix.c.diff"/>
+   </branch>
     <after>
       <dep package="gtk+"/>
     </after>
