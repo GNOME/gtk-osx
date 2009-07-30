@@ -121,10 +121,11 @@
     </after>
   </autotools>
 
-  <autotools id="ige-mac-integration" autogenargs="--disable-python">
+  <autotools id="ige-mac-integration" autogen-sh="configure"
+             autogenargs="--disable-python">
     <branch repo="sourceforge"
-	    module="gtk-osx/ige-mac-integration-0.8.4.tar.gz"
-            version="0.8.4" />
+	    module="gtk-osx/ige-mac-integration-0.8.6.tar.gz"
+            version="0.8.6" />
     <dependencies>
       <dep package="gtk+"/>
     </dependencies>
