@@ -146,7 +146,7 @@
   <!-- This stays as a tarball so that the patches can be applied -->
   <autotools id="dbus" autogen-sh='configure'
 	   autogenargs="--disable-selinux --without-x 
-	   --with-session-socket-dir=$PREFIX/tmp">
+	   --with-session-socket-dir=/var/tmp">
     <branch module="dbus/dbus-1.2.12.tar.gz"  version="1.2.12" 
 	    repo="dbus.freedesktop.org">
       <patch file="http://github.com/jralls/gnucash-on-osx/raw/master/patches/dbus-install.patch"/>
