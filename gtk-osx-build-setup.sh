@@ -81,7 +81,8 @@ if [ ! -f $HOME/.jhbuildrc-custom ]; then
 fi
 
 echo "Installing gtk-osx moduleset files..."
-MODULES="gtk-osx-gstreamer.modules gtk-osx-gtkmm.modules gtk-osx-python.modules gtk-osx-random.modules gtk-osx-themes.modules gtk-osx-unsupported.modules gtk-osx-webkit-deps.modules gtk-osx.modules gtk-osx-bootstrap.modules"
+MODULES="gtk-osx-gstreamer.modules gtk-osx-gtkmm.modules gtk-osx-python.modules gtk-osx-random.modules gtk-osx-themes.modules gtk-osx-unsupported.modules gtk-osx-webkit-deps.modules gtk-osx.modules gtk-osx-bootstrap.modules gtk-osx-universal.modules"
+
 for m in $MODULES; do
     get_moduleset_from_git $m
 done
