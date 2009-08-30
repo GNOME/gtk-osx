@@ -66,7 +66,7 @@
     </after>
   </autotools>
 
-  <autotools id="gtk-quartz-engine" autogen-sh="configure">
+  <autotools id="gtk-quartz-engine">
     <branch module="gtk-osx/gtk-quartz-engine-0.1.tar.gz"
             repo="sourceforge" version="0.1" />
     <after>
