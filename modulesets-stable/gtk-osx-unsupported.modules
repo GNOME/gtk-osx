@@ -66,17 +66,26 @@
   </autotools>
 -->
 
+  <autotools id="gnome-keyring">
+    <branch module="gnome-keyring/2.26/gnome-keyring-2.26.1.tar.bz2" 
+	    version="2.26.1" md5sum="060b349a0aae130fdd3cd0a9827258c6"/>
+    <dependencies>
+      <dep package="gtk+"/>
+      <dep package="libgcrypt"/>
+      <dep package="libtasn1"/>
+    </dependencies>
+  </autotools>
+
   <autotools id="libsoup" autogen-sh="configure" >
-    <!-- Development version, should revert to 2.26.2-->
-    <branch module="libsoup/2.27/libsoup-2.27.2.tar.bz2"
-            version="2.27.2" md5sum="6ea5e7780488efe4565790cf4937cce3"/>
+    <!-- Development version demanded by WebKit -->
+    <branch module="libsoup/2.27/libsoup-2.27.4.tar.bz2"
+            version="2.27.4" md5sum="c9b676621f1b89245ec5cec0c67198b7" />
     <dependencies>
       <dep package="glib"/>
       <dep package="gnutls"/>
-      <dep package='libproxy'/>
       <dep package='gconf'/>
-      <dep package='sqlite'/>
       <dep package="libxml2"/>
+      <dep package="gnome-keyring"/>
     </dependencies>
   </autotools>
 

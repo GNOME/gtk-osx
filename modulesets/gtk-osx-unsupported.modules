@@ -88,6 +88,15 @@
 	    module="gnutls/libtasn1-2.2.tar.gz"/>
   </autotools>
 
+  <autotools id="gnome-keyring">
+    <branch tag="GNOME_KEYRING_2_26_1"/>
+    <dependencies>
+      <dep package="gtk+"/>
+      <dep package="libgcrypt"/>
+      <dep package="libtasn1"/>
+    </dependencies>
+  </autotools>
+
   <autotools id="libsoup">
     <branch revision="gnome-2-26"/>
     <dependencies>
@@ -97,6 +106,7 @@
       <dep package='gconf'/>
       <dep package='sqlite'/>
       <dep package="libxml2"/>
+      <dep package="gnome-keyring"/>
     </dependencies>
   </autotools>
 
