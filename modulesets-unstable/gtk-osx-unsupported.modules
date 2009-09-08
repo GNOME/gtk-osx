@@ -120,8 +120,7 @@
 
   <autotools id='libproxy' autogenargs='CFLAGS=" "' 
 	     autogen-template="%(srcdir)s/%(autogen-sh)s &amp;&amp; %(srcdir)s/configure --prefix %(prefix)s --libdir %(libdir)s %(autogenargs)s">
-    <branch repo='libproxy.google.com' 
-             />
+    <branch repo='libproxy.google.com' module="trunk"             />
   </autotools>
 
 <!-- GNET is deprecated in favor of Glib/Gio. Don't build this unless you have to -->
