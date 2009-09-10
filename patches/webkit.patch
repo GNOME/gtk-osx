@@ -1,0 +1,22 @@
+ diff -u WebCore/plugins/pluginview.h~ WebCore/plugins/pluginview.h
+--- a/WebCore/plugins/pluginview.h       2009-07-20 03:05:08.000000000 -0700
++++ b/WebCore/plugins/pluginview.h        2009-09-10 15:01:08.000000000 -0700
+@@ -288,15 +288,15 @@
+ 
+ private:
+ 
+-#if PLATFORM(GTK) || defined(Q_WS_X11)
++#if defined(XP_MACOSX) || PLATFORM(GTK) || defined(Q_WS_X11)
+         void setNPWindowIfNeeded();
+-#elif defined(XP_MACOSX)
++#endif
++#if defined(XP_MACOSX)
+         NP_CGContext m_npCgContext;
+         OwnPtr<Timer<PluginView> > m_nullEventTimer;
+         NPDrawingModel m_drawingModel;
+         NPEventModel m_eventModel;
+ 
+-        void setNPWindowIfNeeded();
+         void nullEventTimerFired(Timer<PluginView>*);
+         Point globalMousePosForPlugin() const;
+ #endif
