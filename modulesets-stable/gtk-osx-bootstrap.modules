@@ -66,11 +66,7 @@
        it used to be a huge amount of work, but might be easier these
        days.
 
-       Note that you have to tag the github repo, use the tag here to
-       be able to download a tarball, then use the right checkout dir
-       to get jhbuild to understand that the name is not matching the
-       URL.
-  -->
+   -->
   <autotools id="gtk-osx-docbook" autogen-sh="configure" >
      <branch repo="sourceforge" module="gtk-osx/gtk-osx-docbook-1.0.tar.gz"
 	     version="1.0"/>
