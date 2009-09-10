@@ -9,9 +9,8 @@
   <repository type="tarball" name="sourceforge" 
               href="http://downloads.sourceforge.net/sourceforge/"/>
 
-<!-- Note: liboil/motovec/motovec.c on PPC: comment out the defines in
-     lines 43 & 44, they cause linkage failures -->
-  <autotools id="liboil" autogen-sh="configure">
+  <autotools id="liboil" autogen-sh="configure"
+	     makerags=" CFLAGS=-DHAVE_SYMBOL_UNDERSCORE">
     <branch repo="liboil" module="liboil-0.3.16.tar.gz" version="0.3.16" />
   </autotools>
 
