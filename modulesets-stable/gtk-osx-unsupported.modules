@@ -15,7 +15,11 @@
               href="ftp://pkg-isocodes.alioth.debian.org/pub/"/>
   <repository type='tarball' name='libproxy.google.com'
               href='http://libproxy.googlecode.com/files/'/>
-  <repository type="git" name="git.debian.org" href="git://git.debian.org/"/>
+  <repository type="tarball" name="webkit.org"
+              href="http://www.webkitgtk.org/"/>
+  <repository type="svn" name="svn.webkit.org"
+	      href="http://svn.webkit.org/repository/"/>
+
 
   <metamodule id="meta-gtk-osx-unsupported">
     <dependencies>
@@ -118,15 +122,52 @@
 	    module="gnutls/libtasn1-2.2.tar.gz"/>
   </autotools>
 
-    <autotools id="WebKit" autogenargs="--disable-video --with-http-backend=curl --disable-dom-storage --disable-database --disable-icon-database --disable-svg --with-target=quartz --with-font-backend=pango --disable-offline-web-applications"
-      makefile="GNUmakefile">
-    <branch repo="git.debian.org" module="git/pkg-webkit/upstream.git"
-      checkoutdir="WebKit" revision="filtered"/>
+  <autotools id="at-spi" autogen-sh='configure'  autogenargs="--without-x">
+    <branch module="at-spi/1.26/at-spi-1.26.0.tar.bz2" version="1.26"
+	    md5sum="3f2f7d29b45eff08adf56af0d31d3984"/>
+  </autotools>
+
+  <autotools id="panelapplet" autogen-sh="configure">
+    <branch module="libpanelappletmm/2.26/libpanelapplet-2.26.0.tar.bz2"
+	    version="2.26.0" md5sum="def2bc3298dd9ffc3838bf5245e5939e"/>
+  </autotools>
+
+  <autotools id="libgail" autogen-sh="configure">
+    <branch module="libgail-gnome/1.20/libgail-gnome-1.20.1.tar.bz2"
+	    version="1.20.1" md5sum="5c5b71af5a8ab2a9403bdae52b20e46c"/>
+    <dependencies>
+      <dep package="at-spi"/>
+      <dep package="panelapplet"/>
+    </dependencies>
+  </autotools>
+
+  <autotools id="WebKit" autogen-sh="configure"
+	     autogenargs="--with-target=quartz --disable-video">
+    <branch repo="webkit.org" module="webkit-1.1.12.tar.gz" version="1.1.12">
+<patch file="http://github.com/jralls/gtk-osx-build/raw/master/patches/webkit.patch" strip="1"/>
+    </branch>
     <dependencies>
       <dep package="libsoup"/>
       <dep package="enchant"/>
+      <!--dep package="libgail"/-->
     </dependencies>
-  <after>
+    <after>
+      <dep package="meta-gtk-osx-core"/>
+      <dep package="libcurl"/>
+      <dep package="bison"/>
+      <!--dep package="gst-plugins-base"/-->
+    </after>
+  </autotools>
+
+  <autotools id="WebKit-svn" 
+	     autogenargs="--with-target=quartz --disable-video">
+    <branch repo="svn.webkit.org" module="webkit/trunk" checkoutdir="WebKit"/>
+    <dependencies>
+      <dep package="libsoup"/>
+      <dep package="enchant"/>
+      <!--dep package="libgail"/-->
+    </dependencies>
+    <after>
       <dep package="meta-gtk-osx-core"/>
       <dep package="libcurl"/>
       <dep package="bison"/>

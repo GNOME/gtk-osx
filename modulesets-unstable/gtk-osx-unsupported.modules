@@ -14,12 +14,11 @@
               password="anoncvs"/>
   <repository type="svn" name="abisource/enchant" 
               href="http://svn.abisource.com/" />
-  <repository type="svn" name="svn.debian.org" href="svn://svn.debian.org/"/>
-  <repository type="git" name="git.debian.org"
-              href="git://git.debian.org/git/"/>
   <repository type='svn' name='libproxy.google.com'
               href='http://libproxy.googlecode.com/svn/'
               tags-template="tags/%(tag)s"/>
+  <repository type="svn" name="svn.webkit.org"
+	      href="http://svn.webkit.org/repository/"/>
 
   <metamodule id="meta-gtk-osx-unsupported">
     <dependencies>
@@ -142,6 +141,22 @@
       <dep package="enchant"/>
     </dependencies>
   <after>
+      <dep package="meta-gtk-osx-core"/>
+      <dep package="libcurl"/>
+      <dep package="bison"/>
+      <!--dep package="gst-plugins-base"/-->
+    </after>
+  </autotools>
+
+  <autotools id="WebKit" 
+	     autogenargs="--with-target=quartz --disable-video">
+    <branch repo="svn.webkit.org" module="webkit/trunk" checkoutdir="WebKit"/>
+    <dependencies>
+      <dep package="libsoup"/>
+      <dep package="enchant"/>
+      <!--dep package="libgail"/-->
+    </dependencies>
+    <after>
       <dep package="meta-gtk-osx-core"/>
       <dep package="libcurl"/>
       <dep package="bison"/>
