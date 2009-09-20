@@ -168,7 +168,7 @@
     </after>
   </autotools>
 
-  <!-- Note: --disable-defaults-service removes dependency on "PolicyKit"
+  <!-- Note: -disable-defaults-service removes dependency on "PolicyKit"
        which is available only through svn or from Linux distros -->
   <autotools id="gconf" autogenargs="--disable-defaults-service">
     <branch />
