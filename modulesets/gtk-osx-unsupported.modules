@@ -6,6 +6,8 @@
               href="git://git.gnome.org/"/>
   <repository type='git' name='git.gnu.org' 
               href="git://git.savannah.gnu.org/"/>
+  <repository type='git' name='git.debian.org'
+	      href="git://git.debian.org/git/"/>
   <repository type='svn' name='cvs.gnupg.org' href="svn://cvs.gnupg.org/" />
   <repository type='tarball' name='ftp.gnupg.org' href="ftp://ftp.gnupg.org/" />
   <repository type='tarball' name='ftp.gnu.org' href="ftp://ftp.gnu.org/gnu/"/>
