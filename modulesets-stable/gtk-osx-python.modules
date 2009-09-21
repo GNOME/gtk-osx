@@ -9,12 +9,15 @@
               href="http://icon-theme.freedesktop.org/releases/"/>
   <repository type="tarball" name="cairographics.org" 
               href="http://cairographics.org/releases/"/>
+  <repository type="tarball" name="sourceforge" 
+              href="http://downloads.sourceforge.net/sourceforge/"/>
 
   <metamodule id="meta-gtk-osx-python">
     <dependencies>
       <dep package="pycairo"/>
       <dep package="pygobject"/>
       <dep package="pygtk"/>
+      <dep package="ige-mac-integration-python"/>
     </dependencies>
   </metamodule>
 
@@ -45,5 +48,16 @@
       <dep package="libglade"/>
     </dependencies>
   </autotools>
+
+  <autotools id="ige-mac-integration-python" autogen-sh="configure"
+             autogenargs="--enable-python">
+    <branch repo="sourceforge"
+	    module="gtk-osx/ige-mac-integration-0.8.6.tar.gz"
+            version="0.8.6" />
+    <dependencies>
+      <dep package="pygtk"/>
+    </dependencies>
+  </autotools>
+
 
 </moduleset>
