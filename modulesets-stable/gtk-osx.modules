@@ -90,7 +90,9 @@
   <autotools id="gtk+"  autogen-sh="configure"
              autogenargs="--with-gdktarget=quartz --without-libjasper">
     <branch module="gtk+/2.16/gtk+-2.16.2.tar.bz2" version="2.16.2"
-            md5sm="396e98df15f6e4005e360b5710660ce3"/>
+            md5sm="396e98df15f6e4005e360b5710660ce3">
+      <patch file="http://github.com/jralls/gtk-osx-build/raw/master/patches/gdk-quartz-cursor.patch"/>
+    </branch>
     <dependencies>
       <dep package="pango"/>
       <dep package="atk"/>
