@@ -111,7 +111,7 @@
   </autotools>
 
   <autotools id="cairo"  autogen-sh="configure"
-             autogenargs="--enable-pdf --enable-quartz --disable-xlib">
+             autogenargs="--enable-pdf --enable-quartz --enable-xlib=no --without-x">
     <branch module="cairo-1.8.8.tar.gz"  version="1.8.8" repo="cairographics"/>
     <dependencies>
       <dep package="pixman"/>

@@ -97,7 +97,8 @@
     </branch>
   </autotools>
 
-  <autotools id="fontconfig" autogen-sh="configure">
+  <autotools id="fontconfig" autogen-sh="configure" 
+	     autogenargs="--disable-docs">
     <branch repo="fontconfig" version="2.6.0" module="fontconfig-2.6.0.tar.gz"/>
     <dependencies>
       <dep package="expat"/>

@@ -150,7 +150,7 @@ prefix = os.path.join(_root, "inst")
 
 # Extra arguments to pass to all autogen.sh scripts.
 #
-autogenargs='--disable-static --disable-gtk-doc --disable-docs --disable-scrollkeeper'
+autogenargs='--disable-static'
 alwaysautogen = True
 
 # Set debugging format to the old one from Tiger and earlier since the
