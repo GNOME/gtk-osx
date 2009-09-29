@@ -53,7 +53,7 @@
     </dependencies>
   </autotools>
 
-  <autotools id='libproxy' autogen-sh='configure' autogenargs='CFLAGS=" "' >
+  <autotools id='libproxy' autogen-sh='configure' >
     <branch version='0.2.3' module='libproxy-0.2.3.tar.gz'
             repo='libproxy.google.com'/>
   </autotools>
