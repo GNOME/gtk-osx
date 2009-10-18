@@ -1,6 +1,5 @@
-diff -c /Users/john/gtk/source/gtk\+-2.18.2/gdk/quartz/gdkwindow-quartz.c\~ /Users/john/gtk/source/gtk\+-2.18.2/gdk/quartz/gdkwindow-quartz.c
-*** /Users/john/gtk/source/gtk+-2.18.2/gdk/quartz/gdkwindow-quartz.c~	Mon Sep 28 09:40:34 2009
---- /Users/john/gtk/source/gtk+-2.18.2/gdk/quartz/gdkwindow-quartz.c	Sun Oct 18 16:32:26 2009
+*** a/gdk/quartz/gdkwindow-quartz.c~	Mon Sep 28 09:40:34 2009
+--- b/gdk/quartz/gdkwindow-quartz.c	Sun Oct 18 16:32:26 2009
 ***************
 *** 2984,2989 ****
 --- 2984,3002 ----
