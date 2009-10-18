@@ -12,7 +12,7 @@
   <repository type="tarball" name="sourceforge" 
 	      href="http://downloads.sourceforge.net/sourceforge/"/>
   <repository type="tarball" name="jpeg"
-	      href="ftp://anonymous:needsemail%40forsomereason.com@ftp.uu.net"/>
+	      href="http://www.ijg.org/files/"/>
   <repository type="tarball" name="remotesensing"
 	      href="ftp://ftp.remotesensing.org/pub/"/>
   <repository type="tarball" name="fontconfig"
@@ -39,22 +39,18 @@
       on OS X, and regenerates config.guess. For some reason the
       "makefile" argument doesn't work so I'm using make*args.
  -->
-  <autotools id="libjpeg" makeargs="-f makefile.gtkosx" 
-	     makeinstallargs="-f makefile.gtkosx install"
-             autogen-template="%(srcdir)s/configure --prefix %(prefix)s %(autogenargs)s --disable-static --enable-shared">
-    <branch module="graphics/jpeg/jpegsrc.v6b.tar.gz" version="6b-2"
+  <autotools id="libjpeg">	     
+    <branch module="jpegsrc.v7.tar.gz" version="7"
             repo="jpeg"
-            md5sum="dbd5f3b47ed13132f04c685d608a7547" size="613261"
-            checkoutdir="jpeg-6b">
-          <patch file="http://github.com/jralls/gtk-osx-build/raw/master/patches/libjpeg-libtool-build.patch" strip="1"/>
+            checkoutdir="jpeg-7">
+          <!-- patch file="http://github.com/jralls/gtk-osx-build/raw/master/patches/libjpeg-libtool-build.patch" strip="1"/ -->
     </branch>
   </autotools>
 
   <autotools id="libtiff" autogen-sh="configure"
 	     autogenargs="--without-x --without-apple-opengl-framework">
-    <branch version="3.8.2" module="libtiff/tiff-3.8.2.tar.gz"
-	    repo="remotesensing"
-            md5sum="fbb6f446ea4ed18955e2714934e5b698" size="1336295"/>
+    <branch version="3.9.1" module="libtiff/tiff-3.9.1.tar.gz"
+	    repo="remotesensing"/>
     <dependencies>
       <dep package="libjpeg"/>
     </dependencies>
