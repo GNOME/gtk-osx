@@ -153,16 +153,6 @@ prefix = os.path.join(_root, "inst")
 autogenargs='--disable-static'
 alwaysautogen = True
 
-# Set debugging format to the old one from Tiger and earlier since the
-# new default in Leopard breaks many things. Also set gnu89 as the new
-# default gnu99 changes how extern inline works, breaking, glib's
-# inline setup, until glib is fixed. FIXME: Make it possible to
-# override the optimization flag and also don't overwrite any user set
-# CFLAGS/CXXFLAGS.
-#
-os.environ['CFLAGS'] = "-O2 -gstabs+3 -std=gnu89"
-os.environ['CXXFLAGS'] = "-O2 -gstabs+3"
-
 # Use the included install-check program if available. It won't update
 # timestamps if the header hasn't changed, which speeds up builds.
 #
