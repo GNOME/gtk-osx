@@ -138,7 +138,7 @@
     <branch repo="sourceforge"
 	    module="gtk-osx/ige-mac-integration-0.8.6.tar.gz"
             version="0.8.6">
-      <patch file="http://github.com/jralls/gtk-osx-build/raw/master/patches/ige-mac-integration-focus.patch" strip="1"/>
+      <patch file="http://github.com/jralls/gtk-osx-build/raw/master/patches/ige-mac-integration.patch" strip="1"/>
     </branch>
     <dependencies>
       <dep package="gtk+"/>
