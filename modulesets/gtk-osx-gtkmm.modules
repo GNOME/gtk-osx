@@ -16,7 +16,7 @@
   </metamodule>
 
   <autotools id="cairomm" >
-    <branch module="cairomm" tag="v1.8.0" 
+    <branch module="cairomm" tag="v1.8.2" 
             repo="cairographics" />
     <dependencies>
       <dep package="cairo"/>
@@ -24,7 +24,7 @@
   </autotools>
 
   <autotools id="glibmm" >
-    <branch revision="glibmm-2-20"/>
+    <branch revision="glibmm-2.22.1"/>
     <dependencies>
       <dep package="glib"/>
       <dep package="libsigc++2"/>
@@ -32,8 +32,7 @@
   </autotools>
 
   <autotools id="pangomm" >
-    <!-- Release 2.24.0 -->
-    <branch tag="d4dfd3c1d5331511b31a14eb6ddf2effc6db6731"/>
+     <branch tag="pangomm-2.26.0"/>
     <dependencies>
       <dep package="glibmm"/>
       <dep package="cairomm"/>
@@ -43,23 +42,19 @@
 
   <autotools id="doxygen" 
              autogen-template="%(srcdir)s/configure --prefix %(prefix)s">
-    <branch tag="Release_1_5_9"
+    <branch tag="Release_1_6_1_20091004"
             repo="doxygen" />
   </autotools>
 
   <autotools id="libsigc++2" >
-    <!-- Release 2.2.3 -->
-    <branch tag="40a593f55083c86154fae33728b9ca93eb287929"/>
+    <branch tag="libsigc++-2.2.4.2"/>
     <dependencies>
       <dep package="doxygen"/>
     </dependencies>
   </autotools>
 
   <autotools id="gtkmm" >
-    <!-- Release 2.16.0. Although they have a gtkmm-2-16 branch, they
-         seem to be doing development in it instead of on their master
-         branch, so it isn't stable. -->
-    <branch tag="f4d59b36d4b2f728bf18a1ec6db46d5dad13f96d"/>
+    <branch tag="gtkmm-2.18.2"/>
     <dependencies>
       <dep package="glibmm"/>
       <dep package="cairomm"/>

@@ -13,8 +13,8 @@
   <metamodule id="meta-glib-universal">
     <dependencies>
       <dep package="gettext-fw"/>
-      <dep package="glib-ppc"/>
       <dep package="glib-i386"/>
+      <dep package="glib-ppc"/>
       <dep package="lipo-glib"/>
     </dependencies>
     <after>
@@ -24,14 +24,14 @@
   </metamodule>
 
   <autotools id="glib-i386" makeinstallargs="DESTDIR=$JHBUILD_SOURCE/glib-u/build/i386 install">
-    <branch checkoutdir="glib-u/i386" module="glib" revision="glib-2-20">
+    <branch checkoutdir="glib-u/i386" module="glib" revision="glib-2-22">
     </branch>
     <after>
     </after>
  </autotools>
  
  <autotools id="glib-ppc" makeinstallargs="DESTDIR=$JHBUILD_SOURCE/glib-u/build/ppc install">
-    <branch checkoutdir="glib-u/ppc" module="glib" revision="glib-2-20">
+    <branch checkoutdir="glib-u/ppc" module="glib" revision="glib-2-22">
     </branch>
     <after>
     </after>
@@ -57,14 +57,14 @@
   </metamodule>
   
   <autotools id="gtk-i386" makeinstallargs="DESTDIR=$JHBUILD_SOURCE/gtk-u/build/i386 install">
-    <branch checkoutdir="gtk-u/i386" module="gtk+" revision="gtk-2-16">
+    <branch checkoutdir="gtk-u/i386" module="gtk+" revision="gtk-2-18">
     </branch>
     <after>
     </after>
  </autotools>
  
  <autotools id="gtk-ppc" makeinstallargs="DESTDIR=$JHBUILD_SOURCE/gtk-u/build/ppc install">
-    <branch checkoutdir="gtk-u/ppc" module="gtk+" revision="gtk-2-16">
+    <branch checkoutdir="gtk-u/ppc" module="gtk+" revision="gtk-2-18">
     </branch>
     <after>
     </after>

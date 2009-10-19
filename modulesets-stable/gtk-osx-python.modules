@@ -21,7 +21,9 @@
     </dependencies>
   </metamodule>
 
-<!-- Pycairo 1.8.4 requires Python 2.6. You can go install this if you like, but jhbuild installs only 2.5, which is also what Leopard comes with. -->
+<!-- Pycairo 1.8.4+ requires Python 2.6. Leopard comes only with 2.5,
+     so pycairo is by default held at 1.8.2. Use pycairo-python2.6 if
+     you want a more recent version. -->
   <autotools id="pycairo" autogen-sh="configure">
     <branch module="pycairo-1.8.2.tar.gz" repo="cairographics.org"
             version="1.8.2" md5sum="bbfc0c2fef08dfb0c5b8baa5f0b67a87"/>
@@ -30,17 +32,25 @@
     </after>
   </autotools>
 
+  <autotools id="pycairo-python2.6" autogen-sh="configure">
+    <branch module="pycairo-1.8.8.tar.gz" repo="cairographics.org"
+            version="1.8.8" md5sum="054da6c125cb427a003f5fd6c54f853e"/>
+    <after>
+      <dep package="meta-gtk-osx-core"/>
+    </after>
+  </autotools>
+
   <autotools id="pygobject" autogen-sh="configure">
-    <branch version="2.18.0" module="pygobject/2.18/pygobject-2.18.0.tar.bz2"
-            md5sum="522b813219a6ad14b85b25d953b08727"/>
+    <branch version="2.20.0" module="pygobject/2.20/pygobject-2.20.0.tar.bz2"
+            hash="sha256:41e923a3f4426a3e19f6d154c424e3dac6f39defca77af602ac6272ce270fa81"/>
     <dependencies>
       <dep package="meta-gtk-osx-core"/>
     </dependencies>
   </autotools>
 
   <autotools id="pygtk" autogen-sh="configure">
-    <branch version="2.15.1" module="pygtk/2.15/pygtk-2.15.1.tar.bz2"
-            md5sum="f8ef885df57bd022b2bfc138f6590c21"/>
+    <branch version="2.16.0" module="pygtk/2.16/pygtk-2.16.0.tar.bz2"
+            hash="sha256:7fae5e01af217a01738eae41c38ad7f86d1f538f444300d0fa2847aafb7444a8"/>
     <dependencies>
       <dep package="pygobject"/>
       <dep package="meta-gtk-osx-core"/>

@@ -8,6 +8,8 @@
               href="http://downloads.sourceforge.net/sourceforge/"/>
   <repository type="tarball" name="cairographics"
               href="http://cairographics.org/releases/"/>
+  <repository type="tarball" name="ftp.gnu.org"
+              href="http://ftp.gnu.org/gnu/"/>
 
   <!-- This module set works a bit differently than for example the
        GNOME ones do. It's split up in seperate pieces:
@@ -51,20 +53,29 @@
     </after>
   </metamodule>
 
+  <autotools id='libiconv' autogen-sh='configure'>
+    <branch module="libiconv/libiconv-1.13.1.tar.gz" version="1.1.3.1"
+            repo="ftp.gnu.org"/>
+  </autotools>
+
   <autotools id="glib" autogen-sh="configure">
-    <branch module="glib/2.20/glib-2.20.3.tar.bz2"  version="2.20.3"
-            md5sum="1173688c58b4b62809c83bb07a2cf71a"/>
+    <branch module="glib/2.22/glib-2.22.2.tar.bz2"  version="2.22.2"
+            hash="sha256:a4a41d02fc2d3f5effa1fc3466918e0b3ab60e9eb0a08139b997f2649cbacca3"/>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
       <dep package="gtk-doc"/> 
+      <dep package="libiconv"/>
     </after>
   </autotools>
 
   <autotools id="pango"  autogen-sh="configure"
              autogenargs="--without-x --with-included-modules=basic-atsui"
              makeargs="-k -C modules; make">
-    <branch version="1.24.3" module="pango/1.24/pango-1.24.3.tar.bz2"
-            md5sum="63979efe16fe5abaa93c8ea48959e8f3"/>
+    <!-- The last version that will build on Tiger is 1.24.5
+    branch version="1.26.0" module="pango/1.26/pango-1.26.0.tar.bz2"
+            hash="sha256:e1bfaefd2614ff86d531152f31fbf4a61aea723eef19b132733ccd3eb8d9a6c3"/ -->
+    <branch version="1.24.5" module="pango/1.24/pango-1.24.5.tar.bz2"
+            hash="sha256:0f733d1ec3e8dafcae152d7ac58f1090bee1fd856176c8fee0e81b0e42392f4e"/>
     <dependencies>
       <dep package="glib"/>
       <dep package="cairo"/>
@@ -77,8 +88,8 @@
   </autotools>
 
  <autotools id="atk" autogen-sh="configure">
-    <branch module="atk/1.26/atk-1.26.0.tar.bz2" version="1.26.0"
-            md5sum="719229408019c548855673840679f156"/>
+    <branch module="atk/1.28/atk-1.28.0.tar.bz2" version="1.28.0"
+            hash="sha256:e4da9fe580d2d55f4e77a138c553b4b32654dfb06bf0715592cc9dbd6355fe87"/>
     <dependencies>
       <dep package="glib"/>
     </dependencies>
@@ -89,10 +100,9 @@
 
   <autotools id="gtk+"  autogen-sh="configure"
              autogenargs="--with-gdktarget=quartz --without-libjasper">
-    <branch module="gtk+/2.16/gtk+-2.16.2.tar.bz2" version="2.16.2"
-            md5sm="396e98df15f6e4005e360b5710660ce3">
-      <patch file="http://github.com/jralls/gtk-osx-build/raw/master/patches/gdk-quartz-cursor.patch" strip="1"/>
-    </branch>
+    <branch module="gtk+/2.18/gtk+-2.18.2.tar.bz2" version="2.18.2"
+            hash="sha256:5e0832e154b4accab8286ae724ddbad5d701f4af6a9291582d1430b9f360f5f1">
+      <patch file="http://github.com/jralls/gtk-osx-build/raw/master/patches/gdk-quartz-input-window.patch" strip="1"/>    </branch>
     <dependencies>
       <dep package="pango"/>
       <dep package="atk"/>
@@ -103,7 +113,7 @@
   </autotools>
 
   <autotools id="pixman" autogenargs="--disable-gtk" autogen-sh="configure">
-    <branch version="0.15.12" module="pixman-0.15.12.tar.gz" 
+    <branch version="0.16.0" module="pixman-0.16.0.tar.gz" 
             repo="cairographics"/>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>

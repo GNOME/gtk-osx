@@ -45,14 +45,21 @@
 
   <autotools id="gnutls" autogen-sh="configure">
  <!--   <branch repo='git.gnu.org' tag='gnutls_2_8_1' module="gnutls"/> -->
-    <branch repo='ftp.gnu.org' version='2.8.1' 
-            module="gnutls/gnutls-2.8.1.tar.bz2"/>
+    <branch repo='ftp.gnu.org' version='2.8.4' 
+            module="gnutls/gnutls-2.8.4.tar.bz2"/>
     <dependencies>
       <dep package="libgcrypt" />
       <dep package="libtasn1" />
    <!--   <dep package="opencdk" /> -->
     </dependencies>
   </autotools>
+
+  <autotools id='libproxy'
+	     autogen-template="%(srcdir)s/%(autogen-sh)s &amp;&amp; %(srcdir)s/configure --prefix %(prefix)s --libdir %(libdir)s %(autogenargs)s">
+    <branch repo='libproxy.google.com' 
+            tag="libproxy-0.3.1" />
+  </autotools>
+
 <!-- Not Required -->
   <autotools id="opencdk" supports-non-srcdir-builds="no" 
              autogenargs="--enable-maintainer-mode"
@@ -62,6 +69,37 @@
             tag="e79ee9f244dbc94f570a35b09af026e933a08f11"/>
     <dependencies>
       <dep package="libgcrypt" />
+    </dependencies>
+  </autotools>
+
+  <autotools id="gnome-keyring">
+    <branch tag="GNOME_KEYRING_2_28_0"/>
+    <dependencies>
+      <dep package="gtk+"/>
+      <dep package="libgcrypt"/>
+      <dep package="libtasn1"/>
+    </dependencies>
+  </autotools>
+
+  <autotools id="libsoup">
+    <branch tag="LIBSOUP_2_28_0"/>
+    <dependencies>
+      <dep package="glib"/>
+      <dep package="gnutls"/>
+      <dep package='libproxy'/>
+      <dep package='gconf'/>
+      <dep package='sqlite'/>
+      <dep package="libxml2"/>
+      <dep package="gnome-keyring"/>
+    </dependencies>
+  </autotools>
+
+   <autotools id="enchant" >
+     <!-- No version. Doesn't seem to have been touched in a while. -->
+    <branch repo="abisource/enchant" module="enchant"
+	    tag="enchant-1-5-0"/>
+    <dependencies>
+      <dep package="glib"/>
     </dependencies>
   </autotools>
 
@@ -85,44 +123,24 @@
   <autotools id="libtasn1" supports-non-srcdir-builds="no" >
     <!-- Git repository is missing files required to build libtasn1
     <branch repo="git.gnu.org" tag="libtasn1_2_2"  module="libtasn1"/> -->
-    <branch repo="ftp.gnu.org" version='2.2'
-	    module="gnutls/libtasn1-2.2.tar.gz"/>
+    <branch repo="ftp.gnu.org" version='2.3'
+	    module="gnutls/libtasn1-2.3.tar.gz"/>
   </autotools>
 
-  <autotools id="gnome-keyring">
-    <branch tag="GNOME_KEYRING_2_26_1"/>
+  <autotools id="at-spi" autogen-sh='configure'  autogenargs="--without-x">
+    <branch module="at-spi" branch="gnome-2-28"/>
+  </autotools>
+
+  <autotools id="panelapplet" autogen-sh="configure">
+    <branch module="libpanelappletmm" tag="2.26.0"/>
+  </autotools>
+
+  <autotools id="libgail" autogen-sh="configure">
+    <branch module="libgail-gnome" tag="LIBGAIL_GNOME_1_20_1"/>
     <dependencies>
-      <dep package="gtk+"/>
-      <dep package="libgcrypt"/>
-      <dep package="libtasn1"/>
+      <dep package="at-spi"/>
+      <dep package="panelapplet"/>
     </dependencies>
-  </autotools>
-
-  <autotools id="libsoup">
-    <branch revision="gnome-2-26"/>
-    <dependencies>
-      <dep package="glib"/>
-      <dep package="gnutls"/>
-      <dep package='libproxy'/>
-      <dep package='gconf'/>
-      <dep package='sqlite'/>
-      <dep package="libxml2"/>
-      <dep package="gnome-keyring"/>
-    </dependencies>
-  </autotools>
-
-   <autotools id="enchant" >
-     <!-- No version. Doesn't seem to have been touched in a while. -->
-    <branch repo="abisource/enchant" module="enchant"/>
-    <dependencies>
-      <dep package="glib"/>
-    </dependencies>
-  </autotools>
-
-  <autotools id='libproxy'
-	     autogen-template="%(srcdir)s/%(autogen-sh)s &amp;&amp; %(srcdir)s/configure --prefix %(prefix)s --libdir %(libdir)s %(autogenargs)s">
-    <branch repo='libproxy.google.com' 
-            tag="libproxy-0.2.3" />
   </autotools>
 
 <!-- GNET is deprecated in favor of Glib/Gio. Don't build this unless you have to -->
@@ -135,6 +153,7 @@
 
   <autotools id="WebKit" 
 	     autogenargs="--with-target=quartz --disable-video">
+    <!-- Tags are for Safari versions, not much help to us. -->
     <branch repo="svn.webkit.org" module="webkit/trunk" checkoutdir="WebKit"/>
     <dependencies>
       <dep package="libsoup"/>

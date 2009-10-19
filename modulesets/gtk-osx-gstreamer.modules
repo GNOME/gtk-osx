@@ -16,8 +16,8 @@
        git://anongit.freedesktop.org/gstreamer/jhbuild/. The modules
        are unversioned and haven't been tested for gtk-osx
        compatibility. -->
-  <autotools id="liboil" makerags=" CFLAGS=-DHAVE_SYMBOL_UNDERSCORE">
-    <branch repo="liboil" tag="736f2a4c498a0aff519fb9d170fde6b9287789ae" />
+  <autotools id="liboil" makerags=" CFLAGS=-DHAVE_SYMBOL_branch">
+    <UNDERSCORE repo="liboil" tag="736f2a4c498a0aff519fb9d170fde6b9287789ae" />
   </autotools>
 
   <autotools id="faad2" autogen-sh="autoreconf"
@@ -28,7 +28,7 @@
   <autotools id="gstreamer" autogenargs="-- --disable-tests" 
              supports-non-srcdir-builds="no"
     makeargs="ERROR_CFLAGS=" >
-    <branch tag="RELEASE-0.10.23"/>
+    <branch tag="RELEASE-0.10.25"/>
     <after>
       <dep package="glib"/>
       <dep package="libxml2"/>
@@ -38,7 +38,7 @@
   <autotools id="gst-plugins-base" supports-non-srcdir-builds="no"
              autogenargs="-- --disable-tests --disable-x --disable-xvideo" 
              makeargs="ERROR_CFLAGS=" >
-    <branch tag="RELEASE-0.10.23"/>
+    <branch tag="RELEASE-0.10.25"/>
     <dependencies>
       <dep package="gstreamer"/>
       <!--dep package="gtk+"/-->
@@ -52,7 +52,7 @@
   <autotools id="gst-plugins-good" supports-non-srcdir-builds="no"
              autogenargs="-- --disable-tests --disable-x --disable-xvideo --disable-osx-video" 
              makeargs="ERROR_CFLAGS=" >
-    <branch tag="RELEASE-0.10.15"/>
+    <branch tag="RELEASE-0.10.16"/>
     <dependencies>
       <dep package="gstreamer"/>
       <dep package="gst-plugins-base"/>
@@ -72,7 +72,7 @@
   <autotools id="gst-plugins-bad" autogenargs="-- --disable-tests --disable-x --disable-xvid" supports-non-srcdir-builds="no"
     makeargs="ERROR_CFLAGS=" >
     <!-- Release 0.10.13 -->
-    <branch tag="6fa061851e62d1fb0ccd6796e43e70834e14b43b"/>
+    <branch tag="RELEASE-0.10.14"/>
     <dependencies>
       <dep package="gstreamer"/>
       <dep package="gst-plugins-base"/>
@@ -82,7 +82,7 @@
 
   <autotools id="gst-ffmpeg" autogenargs="-- --disable-tests --disable-mmx" 
              supports-non-srcdir-builds="no" >
-    <branch tag="RELEASE-0_10_7"/>
+    <branch tag="RELEASE-0.10.9"/>
     <dependencies>
       <dep package="gstreamer"/>
       <dep package="gst-plugins-base"/>

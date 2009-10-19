@@ -26,15 +26,13 @@
   </metamodule>
 
   <autotools id="glib-i386" makeinstallargs="DESTDIR=$JHBUILD_SOURCE/glib-u/build/i386 install">
-     <branch module="glib/2.20/glib-2.20.3.tar.bz2"  version="2.20.3"
-            md5sum="1173688c58b4b62809c83bb07a2cf71a" 
-            checkoutdir="glib-u/i386"/>
+     <branch module="glib/2.22/glib-2.22.2.tar.bz2"  version="2.22.2"
+            hash="sha256:a4a41d02fc2d3f5effa1fc3466918e0b3ab60e9eb0a08139b997f2649cbacca3"  checkoutdir="glib-u/i386"/>
  </autotools>
  
  <autotools id="glib-ppc" makeinstallargs="DESTDIR=$JHBUILD_SOURCE/glib-u/build/ppc install">
-    <branch module="glib/2.20/glib-2.20.3.tar.bz2"  version="2.20.3"
-            md5sum="1173688c58b4b62809c83bb07a2cf71a"
-            checkoutdir="glib-u/ppc" />
+    <branch module="glib/2.22/glib-2.22.2.tar.bz2"  version="2.22.2"
+            hash="sha256:a4a41d02fc2d3f5effa1fc3466918e0b3ab60e9eb0a08139b997f2649cbacca3"  checkoutdir="glib-u/ppc" />
  </autotools>
  
   <autotools id="lipo-glib" makeinstallargs="DIR=glib-u  install"
@@ -60,14 +58,14 @@
   
   <autotools id="gtk-i386" 
              makeinstallargs="DESTDIR=$JHBUILD_SOURCE/gtk-u/build/i386 install">
-     <branch module="gtk+/2.16/gtk+-2.16.2.tar.bz2" version="2.16.2"
-            md5sm="396e98df15f6e4005e360b5710660ce3" checkoutdir="gtk-u/i386"/>
+     <branch module="gtk+/2.16/gtk+-2.18.2.tar.bz2" version="2.18.2"
+             hash="sha256:5e0832e154b4accab8286ae724ddbad5d701f4af6a9291582d1430b9f360f5f1"  checkoutdir="gtk-u/i386"/>
  </autotools>
  
  <autotools id="gtk-ppc" 
             makeinstallargs="DESTDIR=$JHBUILD_SOURCE/gtk-u/build/ppc install">
-    <branch module="gtk+/2.16/gtk+-2.16.2.tar.bz2" version="2.16.2"
-            md5sm="396e98df15f6e4005e360b5710660ce3" checkoutdir="gtk-u/ppc" />
+    <branch module="gtk+/2.16/gtk+-2.18.2.tar.bz2" version="2.18.2"
+	    hash="sha256:5e0832e154b4accab8286ae724ddbad5d701f4af6a9291582d1430b9f360f5f1"  checkoutdir="gtk-u/ppc" />
  </autotools>
  
   <autotools id="lipo-gtk" autogen-template="make DIR=gtk-u clean" 

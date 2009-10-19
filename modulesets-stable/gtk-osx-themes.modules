@@ -22,9 +22,8 @@
   </metamodule>
 
   <autotools id="icon-naming-utils" autogen-sh="configure">
-    <branch repo="tango.freedesktop.org"  version="0.8.7"
-            module="icon-naming-utils-0.8.7.tar.gz"
-            md5sum="4abe604721ce2ccb67f451aa7ceb44d6" size="69675"/>
+    <branch repo="tango.freedesktop.org"  version="0.8.90"
+            module="icon-naming-utils-0.8.90.tar.bz2"/>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
     </after>
@@ -32,8 +31,8 @@
 
   <autotools id="tango-icon-theme" autogenargs="--disable-icon-framing"
              autogen-sh="configure">
-    <branch repo="tango.freedesktop.org" version="0.8.1"
-            module="tango-icon-theme-0.8.0.tar.bz2"/>
+    <branch repo="tango.freedesktop.org" version="0.8.90"
+            module="tango-icon-theme-0.8.90.tar.bz2"/>
     <dependencies>
       <dep package="icon-naming-utils"/>
       <dep package="hicolor-icon-theme"/>
@@ -50,8 +49,8 @@
   </autotools>
 
   <autotools id="gnome-icon-theme" autogen-sh="configure">
-    <branch module="gnome-icon-theme/2.26/gnome-icon-theme-2.26.0.tar.bz2"
-            version="2.26.0" md5sum="36a4e5e1b2c7c053779a9a399f6146a2"/>
+    <branch module="gnome-icon-theme/2.28/gnome-icon-theme-2.28.0.tar.bz2"
+            version="2.28.0" hash="sha256:31ecbd459ae059672793e46c773742897cb95e22ca5900ccdfb2a22aa30f3884"/>
     <dependencies>
       <dep package="hicolor-icon-theme"/>
       <dep package="icon-naming-utils"/>
@@ -59,8 +58,16 @@
   </autotools>
 
   <autotools id="gtk-engines" autogen-sh="configure">
-    <branch module="gtk-engines/2.18/gtk-engines-2.18.2.tar.bz2"
-            version="2.18.2" md5sum="68c7d012923bf40fab47765e82de0676"/>
+    <branch module="gtk-engines/2.18/gtk-engines-2.18.4.tar.bz2"
+            version="2.18.4" hash="sha256:846e138c45f951451246fa7550e883ba695c2597ffe74b24fafd0cc5c21e1272"/>
+    <after>
+      <dep package="meta-gtk-osx-core"/>
+    </after>
+  </autotools>
+
+  <autotools id="gtk-css-engine" autogen-sh="configure">
+    <branch module="gtk-css-engine/0.3/gtk-css-engine.0.3.tar.bz2"
+            version="0.3" hash="sha256:c1d0000e00516b50f976db7726cd3f5e6318182704ad04be980d4ec7731e75d4"/>
     <after>
       <dep package="meta-gtk-osx-core"/>
     </after>

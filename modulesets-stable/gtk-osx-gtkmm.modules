@@ -16,7 +16,8 @@
   </metamodule>
 
   <autotools id="cairomm" autogen-sh="configure">
-    <branch module="cairomm-1.8.0.tar.gz" version="1.8.0" 
+    <branch module="cairomm-1.8.2.tar.gz" version="1.8.2" 
+	    hash="sha1:f3324c1659c0293335cb10b7431c73a3d4d994af"
             repo="cairographics" />
     <dependencies>
       <dep package="cairo"/>
@@ -24,8 +25,8 @@
   </autotools>
 
   <autotools id="glibmm" autogen-sh="configure">
-    <branch module="glibmm/2.20/glibmm-2.20.0.tar.bz2" version="2.20.0"
-            md5sum="38fa409b531144c238b6e2532e351799"/>
+    <branch module="glibmm/2.22/glibmm-2.22.1.tar.bz2" version="2.22.1"
+            hash="sha256:f105ff4afdcdf7da7f310affdbe698058958f01e94ab65ac1c35e46e20ecb6c0"/>
     <dependencies>
       <dep package="glib"/>
       <dep package="libsigc++2"/>
@@ -33,8 +34,8 @@
   </autotools>
 
   <autotools id="pangomm" autogen-sh="configure">
-    <branch module="pangomm/2.24/pangomm-2.24.0.tar.bz2" version="2.24.0"
-            md5sum="fa0f44c37499433455857becad4bbcda"/>
+    <branch module="pangomm/2.26/pangomm-2.26.0.tar.bz2" version="2.26.0"
+            hash="sha256:bf26ebe42c12c81e5c32ceca80ff226a01c8d80d4db2a4cc3463d5bf241b095e"/>
     <dependencies>
       <dep package="glibmm"/>
       <dep package="cairomm"/>
@@ -44,21 +45,21 @@
 
   <autotools id="doxygen" 
              autogen-template="%(srcdir)s/configure --prefix %(prefix)s">
-    <branch module="doxygen-1.5.9.src.tar.gz" version="1.5.9"
+    <branch module="doxygen-1.6.1.src.tar.gz" version="1.6.1"
             repo="doxygen" />
   </autotools>
 
   <autotools id="libsigc++2" autogen-sh="configure">
-    <branch module="libsigc++/2.2/libsigc++-2.2.3.tar.bz2" version="2.2.3"
-            md5sum="f4574b343eebc4bff66a9e1e5ce6e490"/>
+    <branch module="libsigc++/2.2/libsigc++-2.2.4.tar.bz2" version="2.2.4"
+            hash="sha256:c8019d8e8a3bb7a83a66ebe5146327448f1cc061a55537bdf4a98f4d6a576771"/>
     <dependencies>
       <dep package="doxygen"/>
     </dependencies>
   </autotools>
 
   <autotools id="gtkmm" autogen-sh="configure">
-    <branch module="gtkmm/2.16/gtkmm-2.16.0.tar.bz2" version="2.16.0"
-            md5sum="a82e3b5b93008421ff67df16d1e51ec2"/>
+    <branch module="gtkmm/2.18/gtkmm-2.18.2.tar.bz2" version="2.18.2"
+            hash="sha256:dfc003e22ecdc046cbae731b24e077ed87efa0f9ca57a0735dfe716c560b474e"/>
     <dependencies>
       <dep package="glibmm"/>
       <dep package="cairomm"/>

@@ -73,16 +73,17 @@
   </autotools>
 
    <autotools id="vala">
-    <branch repo="ftp.gnome.org" module="vala/0.7/vala-0.7.3.tar.bz2"
-            version="0.7.3" md5sum="8e8bb3d30a4f7ca3fab75db82beaa60e"/>
-    <after>
+    <branch repo="ftp.gnome.org" module="vala/0.7/vala-0.7.7.tar.bz2"
+            version="0.7.7" hash="sha256:ebb1afbb0a61dd8f5f8ef13512e789697e98d5ad5f98739120f3b3cc02d46d8f"/>
+   <after>
       <dep package="meta-gtk-osx-bootstrap"/>
       <dep package="meta-gtk-osx-core"/>
     </after>
   </autotools>
 <!-- Vala requires an installed vala compiler to build from git. Note
      that the tarball above is the latest release, so a git d/l would
-     be superfluous.-->
+     be superfluous. It's provided here anyway so that vala developers
+     can easily clone the repo inside the jhbuild environment.-->
   <autotools id="vala-git">
     <branch/>
     <dependencies>
@@ -95,7 +96,7 @@
        doing a formal release, so if you're using this it probably
        will pay to override the revision. -->
   <autotools id="devhelp">
-    <branch tag="DEVHELP_0_23"/>
+    <branch tag="DEVHELP_2_28_0_1"/>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
       <dep package="meta-gtk-osx-themes"/>
@@ -108,7 +109,7 @@
   </autotools>
 
   <autotools id="glade3">
-    <branch tag="GLADE_3_6_6"/>
+    <branch tag="GLADE_3_6_7"/>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
       <dep package="meta-gtk-osx-themes"/>
@@ -117,7 +118,7 @@
   </autotools>
 
   <autotools id="gtksourceview">
-    <branch tag="GTKSOURCEVIEW_2_7_1"/>
+    <branch tag="GTKSOURCEVIEW_2_8_1"/>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
       <dep package="meta-gtk-osx-core"/>
@@ -134,7 +135,7 @@
 
   <autotools id="ORBit2">
     <!-- Release 2.14.17 -->
-    <branch tag="777769cc9254a959fde10d67010619db26a3c53c"/>
+    <branch tag="ORBIT2_2_14_17"/>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
     </after>
@@ -147,7 +148,7 @@
   <autotools id="dbus" autogen-sh='configure'
 	   autogenargs="--disable-selinux --without-x 
 	   --with-session-socket-dir=/var/tmp">
-    <branch module="dbus/dbus-1.2.12.tar.gz"  version="1.2.12" 
+    <branch module="dbus/dbus-1.2.16.tar.gz"  version="1.2.16" 
 	    repo="dbus.freedesktop.org">
       <patch file="http://github.com/jralls/gnucash-on-osx/raw/master/patches/dbus-install.patch"/>
        <patch file="http://gimponosx.svn.sourceforge.net/viewvc/gimponosx/GimpPorts/ports/devel/dbus/files/dbus-sysdeps-unix.c.diff"/>
@@ -159,7 +160,7 @@
 
   <autotools id="dbus-glib" autogenargs="--disable-selinux">
     <branch repo="git.freedesktop.org" module="dbus/dbus-glib" 
-            tag="dbus-glib_0.80"/>
+            tag="dbus-glib-0.82"/>
     <dependencies>
       <dep package="libxml2"/>
       <dep package="dbus"/>
@@ -170,10 +171,10 @@
     </after>
   </autotools>
 
-  <!-- Later versions of GConf require something called "PolicyKit"
+  <!-- Note: -disable-defaults-service removes dependency on "PolicyKit"
        which is available only through svn or from Linux distros -->
-  <autotools id="gconf">
-    <branch tag="GCONF_2_26_0"/>
+  <autotools id="gconf" autogenargs="--disable-defaults-service">
+    <branch tag="GCONF_2_28_0"/>
     <dependencies>
       <dep package="ORBit2"/>
       <dep package="libxml2"/>
@@ -188,7 +189,7 @@
   </autotools>
 
   <autotools id="shared-mime-info" supports-non-srcdir-builds="no" >
-    <branch module="shared-mime-info" tag="RELEASE-0-60"
+    <branch module="shared-mime-info" tag="RELEASE-0-70"
             repo="mime.freedesktop.org"/>
     <dependencies>
       <dep package="intltool"/>
@@ -213,15 +214,12 @@
     </dependencies>
   </autotools>
 
-  <!-- GEGL-0.22 won't build with BABL-0.1.0. HEAD from both should work OK. -->
-  <autotools id="babl">
-    <!-- Release 0.0.22 These guys don't really understand tagging. -->
-    <branch tag="7d95a0933d6f19696c4b7051242f9861df02be35"/>
+   <autotools id="babl">
+     <branch tag="BABL_0_1_0"/>
   </autotools>
 
   <autotools id="gegl">
-    <!-- Release 0.22 -->
-    <branch tag="22c119e72ae4df6f2bd72c7879eb41800e6fd3ff"/>
+    <branch tag="GEGL_0_1_0_REAL"/>
     <dependencies>
       <dep package="babl"/>
     </dependencies>
@@ -237,6 +235,7 @@
     </after>
   </autotools>
 
+<!-- SQLite3 is provided by MacOSX in /usr/lib/libsqlite.3.dylib -->
   <autotools id="sqlite" autogenargs="--disable-tcl --enable-threadsafe" >
     <!-- Another package with a non-standard repository structure. Tarballs
     are easier.-->

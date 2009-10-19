@@ -27,7 +27,7 @@
   </metamodule>
 
   <autotools id="icon-naming-utils" >
-    <branch repo="icon.freedesktop.org" tag="ICON_NAMING_UTILS_0_8_7"/>
+    <branch repo="icon.freedesktop.org" tag="ICON_NAMING_UTILS_0_8_907"/>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
     </after>
@@ -38,8 +38,8 @@
        ParserOptions.ini. Use the tarball -->
   <autotools id="tango-icon-theme" autogenargs="--disable-icon-framing" 
              autogen-sh="configure">
-    <branch repo="tango-rel.freedesktop.org" version="0.8.1"
-            module="tango-icon-theme-0.8.0.tar.bz2"/>
+    <branch repo="tango-rel.freedesktop.org" version="0.8.90"
+            module="tango-icon-theme-0.8.90.tar.bz2"/>
     <dependencies>
       <dep package="icon-naming-utils"/>
       <dep package="hicolor-icon-theme"/>
@@ -54,7 +54,7 @@
   </autotools>
 
   <autotools id="gnome-icon-theme">
-    <branch tag="GNOME_ICON_THEME_2_26_0"/>
+    <branch tag="gnome-2-28"/>
     <dependencies>
       <dep package="hicolor-icon-theme"/>
       <dep package="icon-naming-utils"/>
@@ -62,7 +62,14 @@
   </autotools>
 
   <autotools id="gtk-engines">
-    <branch tag="GTK_ENGINES_2_18_2"/>
+    <branch tag="GTK_ENGINES_2_18_4"/>
+    <after>
+      <dep package="meta-gtk-osx-core"/>
+    </after>
+  </autotools>
+
+  <autotools id="gtk-css-engine">
+    <branch tag="gtk-css-engine-0.3.1"/>
     <after>
       <dep package="meta-gtk-osx-core"/>
     </after>

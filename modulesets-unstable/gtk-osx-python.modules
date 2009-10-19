@@ -44,4 +44,15 @@
     </dependencies>
   </autotools>
 
+  <autotools id="ige-mac-integration">
+    <branch repo="github"
+	    module="jralls/ige-mac-integration" />
+    <dependencies>
+      <dep package="gtk+"/>
+    </dependencies>
+    <after>
+      <dep package="meta-gtk-osx-bootstrap"/>
+    </after>
+  </autotools>
+
 </moduleset>

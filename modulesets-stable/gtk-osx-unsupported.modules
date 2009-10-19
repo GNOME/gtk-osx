@@ -44,8 +44,8 @@
   </autotools>
 
   <autotools id="gnutls" autogen-sh="configure">
-    <branch repo='ftp.gnu.org' version='2.8.1' 
-            module="gnutls/gnutls-2.8.1.tar.bz2"/>
+    <branch repo='ftp.gnu.org' version='2.8.4' 
+            module="gnutls/gnutls-2.8.4.tar.bz2"/>
     <dependencies>
       <dep package="libgcrypt" />
       <dep package="libtasn1" />
@@ -54,7 +54,7 @@
   </autotools>
 
   <autotools id='libproxy' autogen-sh='configure' >
-    <branch version='0.2.3' module='libproxy-0.2.3.tar.gz'
+    <branch version='0.3.1' module='libproxy-0.3.1.tar.bz2'
             repo='libproxy.google.com'/>
   </autotools>
 
@@ -71,8 +71,8 @@
 -->
 
   <autotools id="gnome-keyring">
-    <branch module="gnome-keyring/2.26/gnome-keyring-2.26.1.tar.bz2" 
-	    version="2.26.1" md5sum="060b349a0aae130fdd3cd0a9827258c6"/>
+    <branch module="gnome-keyring/2.28/gnome-keyring-2.28.0.tar.bz2" 
+	    version="2.28.0" hash="sha256:1b3234f1feac6a619a9a61a0b5f67ab8cd89d94aeeec9a5cc2d78b81d9d8cab4"/>
     <dependencies>
       <dep package="gtk+"/>
       <dep package="libgcrypt"/>
@@ -82,8 +82,8 @@
 
   <autotools id="libsoup" autogen-sh="configure" >
     <!-- Development version demanded by WebKit -->
-    <branch module="libsoup/2.27/libsoup-2.27.4.tar.bz2"
-            version="2.27.4" md5sum="c9b676621f1b89245ec5cec0c67198b7" />
+    <branch module="libsoup/2.28/libsoup-2.28.0.tar.bz2"
+            version="2.28.0" hash="sha256:647217d395d560375551056e291d697543d424eb6363e101c334a01a0b8c6fb6" />
     <dependencies>
       <dep package="glib"/>
       <dep package="gnutls"/>
@@ -95,9 +95,9 @@
   </autotools>
 
   <autotools id="enchant" autogen-sh="configure" >
-    <branch module="1.4.2/enchant-1.4.2.tar.gz" version="1.4.2"
-	    repo="abisource/enchant" size='595192'
-	    md5sum="fe4558269ff59f569ab9581c907d58cb" />
+    <branch module="1.5.0/enchant-1.5.0.tar.gz" version="1.5.0"
+	    repo="abisource/enchant" size='593039'
+	    md5sum="7dfaed14e142b4a0004b770c9568ed02" />
     <dependencies>
       <dep package="glib"/>
     </dependencies>
@@ -118,13 +118,13 @@
 
   <autotools id="libtasn1" supports-non-srcdir-builds="no"
 	     autogen-sh="configure">
-    <branch repo="ftp.gnu.org" version='2.2'
-	    module="gnutls/libtasn1-2.2.tar.gz"/>
+    <branch repo="ftp.gnu.org" version='2.3'
+	    module="libtasn1/libtasn1-2.3.tar.gz"/>
   </autotools>
 
   <autotools id="at-spi" autogen-sh='configure'  autogenargs="--without-x">
-    <branch module="at-spi/1.26/at-spi-1.26.0.tar.bz2" version="1.26"
-	    md5sum="3f2f7d29b45eff08adf56af0d31d3984"/>
+    <branch module="at-spi/1.28/at-spi-1.28.0.tar.bz2" version="1.28"
+	    hash="sha256:ebe22221dc6a9852e6cf6c4d1e8d78bd19d0fda76a8eb8fc46655e9c9b096667"/>
   </autotools>
 
   <autotools id="panelapplet" autogen-sh="configure">

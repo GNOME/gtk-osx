@@ -38,8 +38,8 @@
        ParserOptions.ini. Use the tarball -->
   <autotools id="tango-icon-theme" autogenargs="--disable-icon-framing" 
              autogen-sh="configure">
-    <branch repo="tango-rel.freedesktop.org" version="0.8.1"
-            module="tango-icon-theme-0.8.0.tar.bz2"/>
+    <branch repo="tango-rel.freedesktop.org" version="0.8.90"
+            module="tango-icon-theme-0.8.90.tar.bz2"/>
     <dependencies>
       <dep package="icon-naming-utils"/>
       <dep package="hicolor-icon-theme"/>
@@ -62,6 +62,13 @@
   </autotools>
 
   <autotools id="gtk-engines">
+    <branch />
+    <after>
+      <dep package="meta-gtk-osx-core"/>
+    </after>
+  </autotools>
+
+  <autotools id="gtk-css-engine">
     <branch />
     <after>
       <dep package="meta-gtk-osx-core"/>

@@ -22,8 +22,8 @@
 
   <autotools id="gstreamer" autogenargs="-- --disable-tests" supports-non-srcdir-builds="no"
     makeargs="ERROR_CFLAGS=" autogen-sh="configure">
-    <branch module="gstreamer/gstreamer-0.10.23.tar.gz" version="0.10.23"
-            md5sum="a7bba377ff10ec35d812ef59ba6469f8"/>
+    <branch module="gstreamer/gstreamer-0.10.25.tar.gz" version="0.10.25"
+            md5sum="3b0af3cc6899f04e3a0bad341095b79c"/>
     <dependencies>
       <dep package="bison"/>
       <dep package="flex"/>
@@ -36,8 +36,8 @@
 
   <autotools id="gst-plugins-base" autogenargs="-- --disable-tests --disable-x --disable-xvideo" supports-non-srcdir-builds="no"
     makeargs="ERROR_CFLAGS=" autogen-sh="configure">
-    <branch module="gst-plugins-base/gst-plugins-base-0.10.23.tar.gz"
-            version="0.10.23" md5sum="e3662b1099e91f0b6ed0c103d5001222"/>
+    <branch module="gst-plugins-base/gst-plugins-base-0.10.25.tar.bz2"
+            version="0.10.25" md5sum="d29669dd79276c5cd94e1613c03cd9ab"/>
     <dependencies>
       <dep package="gstreamer"/>
       <!--dep package="gtk+"/-->
@@ -50,8 +50,8 @@
 
   <autotools id="gst-plugins-good" autogenargs="-- --disable-tests --disable-x --disable-xvideo --disable-osx-video" supports-non-srcdir-builds="no"
     makeargs="ERROR_CFLAGS=" autogen-sh="configure">
-    <branch module="gst-plugins-good/gst-plugins-good-0.10.15.tar.gz"
-            version="0.10.15" md5sum="b2f917c1d031fd9b877737fb870870fe"/>
+    <branch module="gst-plugins-good/gst-plugins-good-0.10.16.tar.bz2"
+            version="0.10.16" md5sum="f0af97464bb6e060a99df39bb21b7a42"/>
     <dependencies>
       <dep package="gstreamer"/>
       <dep package="gst-plugins-base"/>
@@ -70,8 +70,8 @@
 
   <autotools id="gst-plugins-bad" autogenargs="-- --disable-tests --disable-x --disable-xvid" supports-non-srcdir-builds="no"
     makeargs="ERROR_CFLAGS=" autogen-sh="configure">
-    <branch module="gst-plugins-bad/gst-plugins-bad-0.10.13.tar.gz"
-            version="0.10.13" md5sum="60cd24efc92cfd2847e7c4074f9fc868"/>
+    <branch module="gst-plugins-bad/gst-plugins-bad-0.10.14.tar.bz2"
+            version="0.10.14" md5sum="6be38b04fc76cdfef3a3b02b8434efa2"/>
     <dependencies>
       <dep package="gstreamer"/>
       <dep package="gst-plugins-base"/>
@@ -81,8 +81,8 @@
 
   <autotools id="gst-ffmpeg" autogenargs="-- --disable-tests --disable-mmx" 
              supports-non-srcdir-builds="no" autogen-sh="configure" >
-    <branch module="gst-ffmpeg/gst-ffmpeg-0.10.7.tar.gz"
-            version="0.10.7" md5sum="ee113dae3055abfe2cb92ae106765f49"/>
+    <branch module="gst-ffmpeg/gst-ffmpeg-0.10.9.tar.bz2"
+            version="0.10.9" md5sum="138f995ebcba966cbc3493d0550ec055"/>
     <dependencies>
       <dep package="gstreamer"/>
       <dep package="gst-plugins-base"/>
