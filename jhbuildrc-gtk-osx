@@ -135,7 +135,7 @@ use_local_modulesets = True
 
 # A list of the modules to build.
 #
-modules = [ 'meta-gtk-osx-core' ]
+modules = [ 'meta-gtk-osx-bootstrap', 'meta-gtk-osx-core' ]
 
 # A list of modules to skip.
 #
