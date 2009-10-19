@@ -1,0 +1,15 @@
+diff --git a/pango/pangoatsui-fontmap.c b/pango/pangoatsui-fontmap.c
+index f433440..0b54060 100644
+--- a/pango/pangoatsui-fontmap.c
++++ b/pango/pangoatsui-fontmap.c
+@@ -799,7 +799,9 @@ pango_atsui_font_map_init (PangoATSUIFontMap *atsuifontmap)
+ 
+       family = g_object_new (PANGO_TYPE_ATSUI_FAMILY, NULL);
+       family->family_name = g_strdup ([family_name UTF8String]);
+-  
++      if (family->family_name == NULL)
++	continue;
++
+       members = [manager availableMembersOfFontFamily:family_name];
+       if ([members count] > 0)
+         {

@@ -75,7 +75,9 @@
     branch version="1.26.0" module="pango/1.26/pango-1.26.0.tar.bz2"
             hash="sha256:e1bfaefd2614ff86d531152f31fbf4a61aea723eef19b132733ccd3eb8d9a6c3"/ -->
     <branch version="1.24.5" module="pango/1.24/pango-1.24.5.tar.bz2"
-            hash="sha256:0f733d1ec3e8dafcae152d7ac58f1090bee1fd856176c8fee0e81b0e42392f4e"/>
+            hash="sha256:0f733d1ec3e8dafcae152d7ac58f1090bee1fd856176c8fee0e81b0e42392f4e">
+  <patch file="http://github.com/jralls/gtk-osx-build/raw/master/patches/pangoatsui-fontname.patch" strip="1"/> 
+    </branch>
     <dependencies>
       <dep package="glib"/>
       <dep package="cairo"/>
@@ -102,7 +104,8 @@
              autogenargs="--with-gdktarget=quartz --without-libjasper">
     <branch module="gtk+/2.18/gtk+-2.18.2.tar.bz2" version="2.18.2"
             hash="sha256:5e0832e154b4accab8286ae724ddbad5d701f4af6a9291582d1430b9f360f5f1">
-      <patch file="http://github.com/jralls/gtk-osx-build/raw/master/patches/gdk-quartz-input-window.patch" strip="1"/>    </branch>
+      <patch file="http://github.com/jralls/gtk-osx-build/raw/master/patches/gdk-quartz-input-window.patch" strip="1"/> 
+   </branch>
     <dependencies>
       <dep package="pango"/>
       <dep package="atk"/>
