@@ -64,7 +64,7 @@
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
       <dep package="gtk-doc"/> 
-      <dep package="libiconv"/>
+      <!-- dep package="libiconv"/ -->
     </after>
   </autotools>
 
