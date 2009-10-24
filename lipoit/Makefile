@@ -3,12 +3,13 @@ DEST=$(ROOT)/universal
 
 LIPO=./lipo-r.sh
 INSTALL=cp -RXf
+ARCH=ppc i386 x86_64
 
 all: lipoit
 
 lipoit: clean
 	-mkdir -p $(DEST)
-	$(LIPO) $(ROOT) "ppc i386" $(DEST)
+	$(LIPO) $(ROOT) ${ARCH} $(DEST)
 
 install:
 	$(INSTALL) $(DEST)/* /
