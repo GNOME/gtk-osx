@@ -3,7 +3,7 @@ DEST=$(ROOT)/universal
 
 LIPO=./lipo-r.sh
 INSTALL=cp -RXf
-ARCH=ppc i386 x86_64
+ARCH="ppc i386 x86_64"
 
 all: lipoit
 
