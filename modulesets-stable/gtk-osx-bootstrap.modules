@@ -24,6 +24,11 @@
   <repository type="tarball" name="curl.haxx.se"
               href="http://curl.haxx.se/download/"/>
 
+  <autotools id='libiconv' autogen-sh='configure'>
+    <branch module="libiconv/libiconv-1.13.1.tar.gz" version="1.1.3.1"
+            repo="ftp.gnu.org"/>
+  </autotools>
+
   <autotools id="libpng" autogenargs="--enable-shared" autogen-sh="configure">
     <branch version="1.2.40" module="libpng/libpng-1.2.40.tar.bz2"
 	    repo="sourceforge"/>
@@ -33,17 +38,15 @@
   <autotools id="gettext-fw" autogen-sh="configure">
     <branch repo="ftp.gnu.org"
 	    module="gettext/gettext-0.17.tar.gz" version="0.17.0" />
+    <dependencies>
+      <dep package="libiconv"/>
+    </dependencies>
   </autotools>
 
- <!-- The patch only adds a makefile that can build shared libraries
-      on OS X, and regenerates config.guess. For some reason the
-      "makefile" argument doesn't work so I'm using make*args.
- -->
   <autotools id="libjpeg">	     
     <branch module="jpegsrc.v7.tar.gz" version="7"
             repo="jpeg"
             checkoutdir="jpeg-7">
-          <!-- patch file="http://github.com/jralls/gtk-osx-build/raw/master/patches/libjpeg-libtool-build.patch" strip="1"/ -->
     </branch>
   </autotools>
 
