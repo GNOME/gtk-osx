@@ -14,6 +14,11 @@
       <dep package="gtkmm"/>
     </dependencies>
   </metamodule>
+ 
+
+  <autotools id="mm-common">
+    <branch module="mm-common" tag="mm-common-0.8"/>
+  </autotools>
 
   <autotools id="cairomm" >
     <branch module="cairomm" tag="v1.8.2" 
@@ -50,6 +55,7 @@
     <branch tag="libsigc++-2.2.4.2"/>
     <dependencies>
       <dep package="doxygen"/>
+      <dep package="mm-common"/>
     </dependencies>
   </autotools>
 
