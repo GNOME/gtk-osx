@@ -31,7 +31,6 @@
        - gtk-osx-unsupported.modules: more testing stuff, competely unsupported.
   -->
 
-  <include href="http://github.com/jralls/gtk-osx-build/raw/master/modulesets-stable/gtk-osx-bootstrap.modules"/>
   <include href="gtk-osx-python.modules"/>
   <include href="gtk-osx-gstreamer.modules"/>
   <include href="gtk-osx-gtkmm.modules"/>
@@ -39,6 +38,7 @@
   <include href="gtk-osx-random.modules"/>
   <include href="gtk-osx-unsupported.modules"/>
   <include href="gtk-osx-universal.modules"/>
+  <include href="http://github.com/jralls/gtk-osx-build/raw/master/modulesets-stable/gtk-osx-bootstrap.modules"/>
 
   <metamodule id="meta-gtk-osx-core">
     <dependencies>
