@@ -89,7 +89,7 @@
 	    module="gnutls/libtasn1-2.2.tar.gz"/>
   </autotools>
 
-  <autotools id="gnome-keyring">
+  <autotools id="gnome-keyring" autogenargs="--disable-pam">
     <branch/>
     <dependencies>
       <dep package="gtk+"/>
