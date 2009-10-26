@@ -5,6 +5,7 @@
 
   <repository type="git" name="git.gnome.org" default="yes" 
               href="git://git.gnome.org/"/>
+  <repository type="git" name="github" href="git://github.com/"/>
   <repository type="cvs" name="cairographics" 
               cvsroot=":pserver:anoncvs@anoncvs.freedesktop.org:/cvs/cairo"
               password=""/>
