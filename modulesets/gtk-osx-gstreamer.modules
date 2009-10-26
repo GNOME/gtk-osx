@@ -17,7 +17,7 @@
        are unversioned and haven't been tested for gtk-osx
        compatibility. -->
   <autotools id="liboil" makerags=" CFLAGS=-DHAVE_SYMBOL_branch">
-    <UNDERSCORE repo="liboil" tag="736f2a4c498a0aff519fb9d170fde6b9287789ae" />
+    <branch repo="liboil" tag="736f2a4c498a0aff519fb9d170fde6b9287789ae" />
   </autotools>
 
   <autotools id="faad2" autogen-sh="autoreconf"
