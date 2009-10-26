@@ -28,9 +28,13 @@ lipo_internal () {
                 if [ -d "$i" ]; then
                         lipo_internal "$1" "$2" "$3" "$j"
                 elif [ -L "$i" ]; then
-                        $LIPO_DEBUG ln -s "`readlink "$i"`" "$3$j"
+                        $LIPO_DEBUG ln -s "`readlink \"$i\"`" "$3$j"
                 else
-                        ((file -b "$i" | grep -q text) || (file -b "$i" | grep -q byte-compiled ) || (( file -b "$i" | grep -q i386) && ( file -b "$i" | grep -q ppc ))) && {
+                        ((file -b "$i" | grep -q text) ||\
+                         (file -b "$i" | grep -q byte-compiled ) ||\
+                         (file -b "$i" | grep -q libtool) ||\
+                         (file -b "$i" | grep -q universal)) &&\
+                       {
                                 $LIPO_DEBUG cp "$i" "$3$j"
                         } || {
                                 unset k
