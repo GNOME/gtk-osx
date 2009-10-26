@@ -54,7 +54,7 @@
   </autotools>
 
   <autotools id="gnome-icon-theme">
-    <branch tag="gnome-2-28"/>
+    <branch revision="gnome-2-28"/>
     <dependencies>
       <dep package="hicolor-icon-theme"/>
       <dep package="icon-naming-utils"/>
