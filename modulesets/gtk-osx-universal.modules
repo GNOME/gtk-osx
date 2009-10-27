@@ -91,8 +91,52 @@
     <branch repo="sourceforge" module="gtk-osx/lipoit-0.0.2.tar.gz" 
 	    version="0.0.2"/>
   </autotools>
+
+  <autotools id="glibmm-i386" makeinstallargs="DESTDIR=$JHBUILD_SOURCE/glibmm-u/build/i386 install">
+    <branch checkoutdir="glibmm-u/i386" module="glib" tag="2.22.1">
+    </branch>
+    <after>
+    </after>
+ </autotools>
+
+  <autotools id="glibmm-ppc" makeinstallargs="DESTDIR=$JHBUILD_SOURCE/glibmm-u/build/ppc install">
+    <branch checkoutdir="glibmm-u/ppc" module="glib" tag="2.22.1">
+    </branch>
+    <after>
+    </after>
+ </autotools>
+
+  <autotools id="glibmm-x86_64" makeinstallargs="DESTDIR=$JHBUILD_SOURCE/glibmm-u/build/x86_64 install">
+    <branch checkoutdir="glibmm-u/x86_64" module="glib" tag="2.22.1">
+    </branch>
+    <after>
+    </after>
+ </autotools>
+
+  <autotools id="lipo-glibmm" autogen-template="echo 'make glibmm universal and install'" 
+             makeargs="DIR=glibmm-u"  makeinstallargs="DIR=glibmm-u  install">
+    <branch repo="sourceforge" module="gtk-osx/lipoit-0.0.2.tar.bz2" 
+	    version="0.0.2"/>
   </autotools>
 
+  <metamodule id="meta-glibmm-universal">
+    <dependencies>
+      <dep package="meta-glib-universal"/>
+      <dep package="libsigc++2"/>
+      <dep package="glibmm-i386"/>
+      <dep package="glibmm-ppc"/>
+      <dep package="glibmm-x86_64"/>
+      <dep package="lipo-glibmm"/>
+    </dependencies>
+  </metamodule>
+
+   <metamodule id="meta-gtkmm-universal">
+    <dependencies>
+      <dep package="meta-gtk-universal"/>
+      <dep package="meta-glibmm-universal"/>
+      <dep package="gtkmm"/>
+    </dependencies>
+  </metamodule>
 
 
 
