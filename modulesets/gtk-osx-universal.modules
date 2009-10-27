@@ -88,7 +88,9 @@
  
   <autotools id="lipo-gtk" autogen-template="make DIR=gtk-u clean" 
              makeargs="DIR=gtk-u"  makeinstallargs="DIR=gtk-u install">
-    <branch repo="easyb" checkoutdir="lipoit" module="lipoit.tar.gz" version="0.0.1"/>
+    <branch repo="sourceforge" module="gtk-osx/lipoit-0.0.2.tar.gz" 
+	    version="0.0.2"/>
+  </autotools>
   </autotools>
 
 
