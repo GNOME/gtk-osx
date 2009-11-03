@@ -29,7 +29,7 @@
   </autotools>
 
   <autotools id="glibmm" >
-    <branch revision="glibmm-2.22.1"/>
+    <branch tag="2.22.1"/>
     <dependencies>
       <dep package="glib"/>
       <dep package="libsigc++2"/>
