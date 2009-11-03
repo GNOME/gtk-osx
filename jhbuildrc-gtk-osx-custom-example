@@ -19,6 +19,11 @@
 # You can skip modules.
 #
 # skip.append("libglade")
+#
+#or put them back:
+#
+# if "libglade" in skip:
+#	skip.remove("libglade")
 
 # Set this to True/False if you want to force using or not building
 # and using python as part of jhbuild. If not set, the script will use
@@ -39,5 +44,40 @@ elif _jhb == "FW":
     # checkoutroot = os.path.expanduser("~/Source/gtk-fw")
     # prefix = "/opt/gtk-fw"
     pass
+
+# Set up a particular target and SDK:
+#
+# setup_sdk(target="10.4", sdk_version="10.4u", architectures=["i386"])
+#
+# or set up to cross-compile a ppc build from an intel machine:
+#
+# setup_ppc_build()
+#
+# or a universal build:
+#
+# setup_universal_build(target="10.5", sdk_version="10.5", 
+#                        architectures=["ppc", "i386"])
+
+
+# Modify the arguments passed to configure:
+#
+# autogenargs["libglade"] = "--enable-static"
+#
+# or simply  add to them:
+#
+# append_autogenargs("libglade", "--enable-static")
+#
+# Tell Git to use a different module and branch:
+#
+# branches["gtk-engines"] = ("gtk-css-engine", "bzr")
+#
+# Or just switch branches
+#
+# branches["gtk+"] = (None, "gtk-2-18")
+#
+# Set an environment variable:
+#
+# os.environ["CC"] = "/usr/bin/gcc-4.0"
+
 
 # And more...
