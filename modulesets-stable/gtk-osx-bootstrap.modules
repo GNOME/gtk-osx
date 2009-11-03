@@ -34,7 +34,7 @@
 	    repo="sourceforge"/>
   </autotools>
 
-  <!-- We use this in the framework creating setup only. -->
+  <!-- We use this in the framework and universal build creating setup only. -->
   <autotools id="gettext-fw" autogen-sh="configure">
     <branch repo="ftp.gnu.org"
 	    module="gettext/gettext-0.17.tar.gz" version="0.17.0" />
