@@ -194,7 +194,7 @@
 
   <autotools id="gimp"  autogen-sh="configure"
              autogenargs="--disable-python --disable-print --without-x
-                          --without-dbus --without-gnomevfs"
+                          --without-dbus --without-gnomevfs --without-wmf"
              makeargs='LDFLAGS="-framework Carbon"'>
     <branch module="gimp/v2.6/gimp-2.6.7.tar.bz2" version="2.6.7" 
             md5sum="77ed86a8de9b48587efb24f2b115ad38" repo="gimp"/>

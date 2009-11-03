@@ -200,7 +200,7 @@
 
   <autotools id="gimp" 
              autogenargs="--disable-python --disable-print --without-x
-                          --without-dbus --without-gnomevfs"
+                          --without-dbus --without-gnomevfs4echo  --without-wmf"
              makeargs='LDFLAGS="-framework Carbon"'>
     <branch revision="gimp-2-6"/>
     <after>
