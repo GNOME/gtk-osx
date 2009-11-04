@@ -52,7 +52,7 @@ jhbuild.commands.register_command(_cmd_get_srcdir)
 # Find out what we're building on
 _osx_version = os.popen("uname -r").read().strip()
 _machine = os.popen("machine").read().strip()
-if _machine = "i486" and _osx_version.startswith("10"):
+if _machine == "i486" and _osx_version.startswith("10"):
     _machine = "x86_64"
 if _machine == "ppc" :
     _default_arch = "ppc"
