@@ -270,7 +270,7 @@ def setup_ppc_build():
 def setup_universal_build(target="10.5", sdk_version="10.5", 
                           architectures=['ppc', 'i386', 'x86_64']): 
 # No point in attempting the impossible
-    if _osx_version.startwith("8"):
+    if _osx_version.startswith("8"):
         target = "10.4"
         sdk_version = "10.4u"
         architectures = ["ppc", "i386"]
@@ -297,10 +297,10 @@ def setup_universal_build(target="10.5", sdk_version="10.5",
 
 
 
-    _cflags = '-isysroot ' + _sdkdir + ' -mmacosx-version-min=' + _target
+    _cflags = '-isysroot ' + _sdkdir + ' -mmacosx-version-min=' + target
     _cxxflags = _cflags
     _cppflags = '-I' + prefix + '/include -isysroot ' + _sdkdir
-    _ldflags = '-L' + prefix + '/lib -Wl,-syslibroot,' + _sdkdir +' -mmacosx-version-min=' + _target
+    _ldflags = '-L' + prefix + '/lib -Wl,-syslibroot,' + _sdkdir +' -mmacosx-version-min=' + target
 
     autogenargs += " --disable-dependency-tracking"
 
