@@ -143,7 +143,7 @@ def setup_sdk(target, sdk_version, architectures=[_default_arch]):
 
     # To pick up cups-config from the right place. 
     #
-    os.environ["CUPS_CONFIG"] = os.path.join(sdkdir, "usr/bin")
+    os.environ["CUPS_CONFIG"] = os.path.join(sdkdir, "usr/bin/cups-config")
 
     os.environ["MACOSX_DEPLOYMENT_TARGET"] = target
 
