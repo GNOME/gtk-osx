@@ -6,15 +6,15 @@
               href="git://git.gnome.org/"/>
   <repository type="tarball" name="github" 
               href="http://github.com/"/>
-  <repository type="tarball" name="easyb" 
-              href="http://www.easyb.ch/files/gtk/"/>
+  <repository type="tarball" name="sourceforge" 
+              href="http://downloads.sourceforge.net/sourceforge/"/>
   
-  
-  <metamodule id="glib-universal">
+  <metamodule id="meta-glib-universal">
     <dependencies>
       <dep package="gettext-fw"/>
-      <dep package="glib-ppc"/>
       <dep package="glib-i386"/>
+      <dep package="glib-ppc"/>
+      <dep package="glib-x86_64"/>
       <dep package="lipo-glib"/>
     </dependencies>
     <after>
@@ -24,14 +24,21 @@
   </metamodule>
 
   <autotools id="glib-i386" makeinstallargs="DESTDIR=$JHBUILD_SOURCE/glib-u/build/i386 install">
-    <branch checkoutdir="glib-u/i386" module="glib" >
+    <branch checkoutdir="glib-u/i386" module="glib" revision="glib-2-22">
     </branch>
     <after>
     </after>
  </autotools>
  
- <autotools id="glib-ppc" makeinstallargs="DESTDIR=$JHBUILD_SOURCE/glib-u/build/ppc install">
-    <branch checkoutdir="glib-u/ppc" module="glib" >
+   <autotools id="glib-x86_64" makeinstallargs="DESTDIR=$JHBUILD_SOURCE/glib-u/build/x86_64 install">
+    <branch checkoutdir="glib-u/x86_64" module="glib" revision="glib-2-22">
+    </branch>
+    <after>
+    </after>
+ </autotools>
+ 
+<autotools id="glib-ppc" makeinstallargs="DESTDIR=$JHBUILD_SOURCE/glib-u/build/ppc install">
+    <branch checkoutdir="glib-u/ppc" module="glib" revision="glib-2-22">
     </branch>
     <after>
     </after>
@@ -39,31 +46,41 @@
  
   <autotools id="lipo-glib" autogen-template="echo 'make glib universal and install'" 
              makeargs="DIR=glib-u"  makeinstallargs="DIR=glib-u  install">
-    <branch repo="easyb" checkoutdir="lipoit" module="lipoit.tar.gz" version="0.0.1"/>
+    <branch repo="sourceforge" module="gtk-osx/lipoit-0.0.2.tar.bz2" 
+	    version="0.0.2"/>
   </autotools>
   
-  <metamodule id="gtk-universal">
+  <metamodule id="meta-gtk-universal">
     <dependencies>
+      <dep package="meta-glib-universal"/>
       <dep package="pango"/>
       <dep package="atk"/>
       <dep package="gnome-icon-theme"/>
       <dep package="gtk-ppc"/>
       <dep package="gtk-i386"/>
+      <dep package="gtk-x86_64"/>
       <dep package="lipo-gtk"/>
       <dep package="gtk-engines"/>
       <dep package="ige-mac-integration"/>
     </dependencies>
   </metamodule>
   
-  <autotools id="gtk-i386" makeinstallargs="DESTDIR=$JHBUILD_SOURCE/gtk-u/build/i386 install">
-    <branch checkoutdir="gtk-u/i386" module="gtk+" >
+  <autotools id="gtk-i386" makeinstallargs="DESTDIR=$JHBUILD_SOURCE/gtk-u/build/i386 install" autogenargs="--with-gdktarget=quartz --without-libjasper --disable-glibtest">
+    <branch checkoutdir="gtk-u/i386" module="gtk+" revision="gtk-2-18">
     </branch>
     <after>
     </after>
  </autotools>
  
- <autotools id="gtk-ppc" makeinstallargs="DESTDIR=$JHBUILD_SOURCE/gtk-u/build/ppc install">
-    <branch checkoutdir="gtk-u/ppc" module="gtk+" >
+  <autotools id="gtk-x86_64" makeinstallargs="DESTDIR=$JHBUILD_SOURCE/gtk-u/build/x86_64 install" autogenargs="--with-gdktarget=quartz --without-libjasper --disable-glibtest">
+    <branch checkoutdir="gtk-u/x86_64" module="gtk+" revision="gtk-2-18">
+    </branch>
+    <after>
+    </after>
+ </autotools>
+ 
+ <autotools id="gtk-ppc" makeinstallargs="DESTDIR=$JHBUILD_SOURCE/gtk-u/build/ppc install" autogenargs="--with-gdktarget=quartz --without-libjasper --disable-glibtest">
+    <branch checkoutdir="gtk-u/ppc" module="gtk+" revision="gtk-2-18">
     </branch>
     <after>
     </after>
@@ -71,9 +88,55 @@
  
   <autotools id="lipo-gtk" autogen-template="make DIR=gtk-u clean" 
              makeargs="DIR=gtk-u"  makeinstallargs="DIR=gtk-u install">
-    <branch repo="easyb" checkoutdir="lipoit" module="lipoit.tar.gz" version="0.0.1"/>
+    <branch repo="sourceforge" module="gtk-osx/lipoit-0.0.2.tar.gz" 
+	    version="0.0.2"/>
   </autotools>
 
+  <autotools id="glibmm-i386" makeinstallargs="DESTDIR=$JHBUILD_SOURCE/glibmm-u/build/i386 install">
+    <branch checkoutdir="glibmm-u/i386" module="glib" tag="2.22.1">
+    </branch>
+    <after>
+    </after>
+ </autotools>
+
+  <autotools id="glibmm-ppc" makeinstallargs="DESTDIR=$JHBUILD_SOURCE/glibmm-u/build/ppc install">
+    <branch checkoutdir="glibmm-u/ppc" module="glib" tag="2.22.1">
+    </branch>
+    <after>
+    </after>
+ </autotools>
+
+  <autotools id="glibmm-x86_64" makeinstallargs="DESTDIR=$JHBUILD_SOURCE/glibmm-u/build/x86_64 install">
+    <branch checkoutdir="glibmm-u/x86_64" module="glib" tag="2.22.1">
+    </branch>
+    <after>
+    </after>
+ </autotools>
+
+  <autotools id="lipo-glibmm" autogen-template="echo 'make glibmm universal and install'" 
+             makeargs="DIR=glibmm-u"  makeinstallargs="DIR=glibmm-u  install">
+    <branch repo="sourceforge" module="gtk-osx/lipoit-0.0.2.tar.bz2" 
+	    version="0.0.2"/>
+  </autotools>
+
+  <metamodule id="meta-glibmm-universal">
+    <dependencies>
+      <dep package="meta-glib-universal"/>
+      <dep package="libsigc++2"/>
+      <dep package="glibmm-i386"/>
+      <dep package="glibmm-ppc"/>
+      <dep package="glibmm-x86_64"/>
+      <dep package="lipo-glibmm"/>
+    </dependencies>
+  </metamodule>
+
+   <metamodule id="meta-gtkmm-universal">
+    <dependencies>
+      <dep package="meta-gtk-universal"/>
+      <dep package="meta-glibmm-universal"/>
+      <dep package="gtkmm"/>
+    </dependencies>
+  </metamodule>
 
 
 
