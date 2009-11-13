@@ -108,7 +108,7 @@
     </dependencies>
   </autotools>
 
-  <autotools id="glade3">
+  <autotools id="glade3" autogenargs="--disable-scrollkeeper">
     <branch tag="GLADE_3_6_7"/>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>

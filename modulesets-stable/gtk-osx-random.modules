@@ -98,7 +98,8 @@
     </dependencies>
   </autotools>
 
-  <autotools id="glade3" autogen-sh="configure">
+  <autotools id="glade3" autogen-sh="configure" 
+	     autogenargs="--disable-scrollkeeper">
     <branch module="glade3/3.6/glade3-3.6.7.tar.bz2" version="3.6.7"
             hash="sha256:117905d5b52781e0ffa861e38f47acda0e6bff992c5015408be74a7669769f81"/>
     <after>
