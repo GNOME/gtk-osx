@@ -42,7 +42,7 @@
 
   <autotools id="pygobject">
     <!-- pygobject-2.20.0 -->
-    <branch revision="	66b12f7d2f54143ea80b4f8aec863b26800363d6"/>
+    <branch tag="66b12f7d2f54143ea80b4f8aec863b26800363d6"/>
     <dependencies>
       <dep package="meta-gtk-osx-core"/>
     </dependencies>
