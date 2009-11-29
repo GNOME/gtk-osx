@@ -110,7 +110,7 @@
   </autotools>
 
   <autotools id="gtksourceview" autogen-sh="configure">
-    <branch module="gtksourceview/2.7/gtksourceview-2.8.1.tar.bz2"
+    <branch module="gtksourceview/2.8/gtksourceview-2.8.1.tar.bz2"
             version="2.8.1" hash="sha256:e67e8222675228a7cc1ef7da0a3367f3d67d2a0ca2eb50e668e48caf116f390a"/>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
