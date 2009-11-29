@@ -297,7 +297,7 @@ def setup_universal_build(target="10.5", sdk_version="10.5",
 
 
 
-    _cflags = '-isysroot ' + _sdkdir + ' -mmacosx-version-min=' + target
+    _cflags = '-O1 -ggdb3 -isysroot ' + _sdkdir + ' -mmacosx-version-min=' + target
     _cxxflags = _cflags
     _cppflags = '-I' + prefix + '/include -isysroot ' + _sdkdir
     _ldflags = '-L' + prefix + '/lib -Wl,-syslibroot,' + _sdkdir +' -mmacosx-version-min=' + target
