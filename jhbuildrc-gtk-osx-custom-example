@@ -31,25 +31,28 @@
 #
 # _gtk_osx_use_jhbuild_python = True
 
-# Override the source checkout and installation directories.  Note
-# that if you redefine prefix, you probably want to also redefine
-# _exec_prefix; otherwise it will stay defined as the default prefix
-# (~/gtk/inst) from .jhbuildrc. It's used to define the M4 and
-# LIBTOOLIZE environment variables.
-#
+# Override the source checkout and installation directories.  
+
 _jhb = os.environ.get("JHB")
 if _jhb is None:
     # The default setup...
     # checkoutroot = os.path.expanduser("~/Source/gtk")
     # prefix = "/opt/gtk"
-    # _exec_prefix = prefix
     pass
 elif _jhb == "FW":
     # The framework build...
     # checkoutroot = os.path.expanduser("~/Source/gtk-fw")
     # prefix = "/opt/gtk-fw"
-    # _exec_prefix = prefix
     pass
+
+# In addition, you can override _exec_prefix (used to set $M4 and
+# $LIBTOOLIZE); by default it's set to prefix. You might want to reset
+# it if you want to bootstrap to one directory and build in another
+# (or more likely, several others). Similarly, you can override
+# tarballdir so that you need download tarballs only once for multiple
+# builds.
+# _exec_prefix = os.path.join(os.path.expanduser("~"), "Source", "bootstrap")
+# tarballdir = os.path.join(os.path.expanduser("~"), "Source", "Download")
 
 # Set up a particular target and SDK:
 #

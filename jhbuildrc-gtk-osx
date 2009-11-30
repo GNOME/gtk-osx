@@ -351,7 +351,8 @@ skip.append('guile')
 _root = os.path.expanduser("~/gtk")
 checkoutroot = os.path.join(_root, "source")
 prefix = os.path.join(_root, "inst")
-_exec_prefix = prefix
+_exec_prefix = None
+tarballdir = None
 # Extra arguments to pass to all autogen.sh scripts.
 #
 autogenargs='--disable-static'
@@ -380,10 +381,6 @@ else:
     _gtk_osx_use_jhbuild_python = False
     _gtk_osx_use_jhbuild_bison_flex = False
 
-# Default location for tarball download is into checkoutroot/pkgs. If
-# you do multiple builds with different checkoutroots, you'll want to
-# override this to somewhere common (~/.local/pkgs is one alternative)
-tarballdir = os.path.join(checkoutroot, 'pkgs')
 
 # Import optional user RC for further customization. You can override
 # the prefix or default build setup for example, or CFLAGS or
@@ -419,6 +416,21 @@ if _build != "":
     except EnvironmentError, e:
         print "Couldn't find the file '.jhbuildrc-" + _build + "', exiting."
         raise SystemExit
+
+# The following parameters were set to None at the top of the file;
+# they're set here to their default values after processing the
+# customizations, but tested to make sure that if they've been
+# customized, it will stick.
+
+# Default location for tarball download is into checkoutroot/pkgs. If
+# you do multiple builds with different checkoutroots, you'll want to
+# override this to somewhere common (~/.local/pkgs is one alternative)
+if tarballdir == None:
+    tarballdir = os.path.join(checkoutroot, 'pkgs')
+# _exec_prefix is used to set $M4 and $LIBTOOLIZE. We set it here to
+# prefix if it wasn't over-ridden in .jhbuildrc-custom
+if _exec_prefix == None:
+    _exec_prefix = prefix
 
 
 os.environ['PREFIX'] = prefix # Deprecated, please move to JHBUILD_PREFIX.
