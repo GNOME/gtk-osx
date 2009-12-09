@@ -1,11 +1,16 @@
---- a/configure	2008-03-03 09:41:58.000000000 -0800
-+++ b/configure	2009-10-04 17:55:33.000000000 -0700
-@@ -20208,6 +20208,8 @@
-                 DEBUG="-g -Wall -D__NO_MATH_INLINES -fsigned-char -mv8"
-                 CFLAGS="-O20 -ffast-math -D__NO_MATH_INLINES -fsigned-char -mv8"
-                 PROFILE="-pg -g -O20 -D__NO_MATH_INLINES -fsigned-char -mv8" ;;
-+	*darwin*)
-+		;;
-         *)
-                 DEBUG="-g -Wall -D__NO_MATH_INLINES -fsigned-char"
-                 CFLAGS="-O20 -D__NO_MATH_INLINES -fsigned-char"
+diff -c /usr/local/src/gnucash/libdbi-drivers-0.8.3-1/configure.in\~ /usr/local/src/gnucash/libdbi-drivers-0.8.3-1/configure.in
+*** a/configure.in	Mon Mar  3 09:41:41 2008
+--- b/configure.in	Tue Dec  8 17:05:50 2009
+***************
+*** 63,68 ****
+--- 63,70 ----
+                  DEBUG="-g -Wall -D__NO_MATH_INLINES -fsigned-char -mv8"
+                  CFLAGS="-O20 -ffast-math -D__NO_MATH_INLINES -fsigned-char -mv8"
+                  PROFILE="-pg -g -O20 -D__NO_MATH_INLINES -fsigned-char -mv8" ;;
++ 	*-darwin-*)
++ 		;;	
+          *)
+                  DEBUG="-g -Wall -D__NO_MATH_INLINES -fsigned-char"
+                  CFLAGS="-O20 -D__NO_MATH_INLINES -fsigned-char"
+
+Diff finished.  Tue Dec  8 17:06:44 2009
