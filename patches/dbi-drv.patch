@@ -7,7 +7,7 @@ diff -c /usr/local/src/gnucash/libdbi-drivers-0.8.3-1/configure.in\~ /usr/local/
                   DEBUG="-g -Wall -D__NO_MATH_INLINES -fsigned-char -mv8"
                   CFLAGS="-O20 -ffast-math -D__NO_MATH_INLINES -fsigned-char -mv8"
                   PROFILE="-pg -g -O20 -D__NO_MATH_INLINES -fsigned-char -mv8" ;;
-+ 	*-darwin-*)
++ 	*-*-darwin*)
 + 		;;	
           *)
                   DEBUG="-g -Wall -D__NO_MATH_INLINES -fsigned-char"
