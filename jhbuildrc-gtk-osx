@@ -54,12 +54,12 @@ _osx_version = os.popen("uname -r").read().strip()
 _machine = os.popen("machine").read().strip()
 if _machine == "i486" and _osx_version.startswith("10"):
     _machine = "x86_64"
-if _machine == "ppc" :
+if _machine.startswith("ppc") :
     _default_arch = "ppc"
 else:
     _default_arch = "i386"
 
-
+print "Default Architecture %s\n" % _default_arch
 # Some utitily functions used here and in custom files:
 #
 def environ_append(key, value, separator=' '):
@@ -229,12 +229,13 @@ def setup_sdk_10_4():
 # setup_sdk("10.4", "10.4", "ppc") and all will be well (or with "10.5"
 # instead of "10.4" if you're building Tiger-incompatable versions).
 def setup_ppc_build(): 
+    print "Setup PPC"
     _sdkdir = setup_sdk(target="10.4", sdk_version="10.5", architectures=["ppc"])
 
-    _cflags = '-isysroot ' + _sdkdir + ' -mmacosx-version-min=' + target
+    _cflags = '-isysroot ' + _sdkdir + ' -mmacosx-version-min=10.4'
     _cxxflags = _cflags
     _cppflags = '-I' + prefix + '/include -isysroot ' + _sdkdir
-    _ldflags = '-L' + prefix + '/lib -Wl,-syslibroot,' + _sdkdir +' -mmacosx-version-min=' + target
+    _ldflags = '-L' + prefix + '/lib -Wl,-syslibroot,' + _sdkdir +' -mmacosx-version-min=10.4'
 
     environ_append('CFLAGS', '-arch ppc')
     environ_append('CXXFLAGS', '-arch ppc')
