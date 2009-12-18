@@ -52,9 +52,9 @@ jhbuild.commands.register_command(_cmd_get_srcdir)
 # Find out what we're building on
 _osx_version = os.popen("uname -r").read().strip()
 _machine = os.popen("machine").read().strip()
-if _machine == "i486" and _osx_version.startswith("10"):
-    _machine = "x86_64"
-if _machine.startswith("ppc") :
+if ((_machine == "i486") and (_osx_version.startswith("10"))):
+    _default_arch = "x86_64"
+elif _machine.startswith("ppc") :
     _default_arch = "ppc"
 else:
     _default_arch = "i386"
@@ -139,13 +139,35 @@ def get_sdkdir(sdk_name):
 # binary, you need to build gettext-fw before meta-gtk-osx-bootstrap.
 #
 def setup_sdk(target, sdk_version, architectures=[_default_arch]):
-    sdkdir = get_sdkdir(make_sdk_name(sdk_version))
-
-    # To pick up cups-config from the right place. 
-    #
-    os.environ["CUPS_CONFIG"] = os.path.join(sdkdir, "usr/bin/cups-config")
 
     os.environ["MACOSX_DEPLOYMENT_TARGET"] = target
+    sdkdir = None
+
+    if sdk_version != "native":
+        sdkdir = get_sdkdir(make_sdk_name(sdk_version))
+
+        # Seems like we need this since many libraries otherwise only look for
+        # various dependencies (e.g. libiconv) in /usr/lib, hence pulling in
+        # the wrong -L that doesn't have fat binaries on pre-10.5.
+        #
+        environ_prepend("LDFLAGS", "-L" + sdkdir + "/usr/lib")
+        environ_prepend("CFLAGS", "-I" + sdkdir + "/usr/include")
+        environ_prepend("CXXFLAGS", "-I" + sdkdir + "/usr/include")
+        environ_prepend("CPPFLAGS", "-I" + sdkdir + "/usr/include")
+
+        # It looks like -isysroot is broken when building on 10.4, causing link
+        # problems. But we don't really need to set it for 10.4 so just
+        # skip that.
+        #
+        if not _osx_version.startswith("8."):
+            environ_append("CFLAGS", "-isysroot " + sdkdir)
+            environ_append("CXXFLAGS", "-isysroot " + sdkdir)
+            environ_append("LDFLAGS", "-isysroot " + sdkdir)
+
+            # To pick up cups-config from the right place. 
+            #
+            os.environ["CUPS_CONFIG"] = os.path.join(sdkdir, 
+                                                     "usr/bin/cups-config")
 
     # There isn't a gcc-4.2 include or library in the 10.4 SDK
     #
@@ -162,24 +184,6 @@ def setup_sdk(target, sdk_version, architectures=[_default_arch]):
     if ('x86_64' in architectures):
         skip.append("ige-mac-integration")
         skip.append("ige-mac-integration-py")
-
-    # Seems like we need this since many libraries otherwise only look for
-    # various dependencies (e.g. libiconv) in /usr/lib, hence pulling in
-    # the wrong -L that doesn't have fat binaries on pre-10.5.
-    #
-    environ_prepend("LDFLAGS", "-L" + sdkdir + "/usr/lib")
-    environ_prepend("CFLAGS", "-I" + sdkdir + "/usr/include")
-    environ_prepend("CXXFLAGS", "-I" + sdkdir + "/usr/include")
-    environ_prepend("CPPFLAGS", "-I" + sdkdir + "/usr/include")
-
-    # It looks like -isysroot is broken when building on 10.4, causing link
-    # problems. But we don't really need to set it for 10.4 so just
-    # skip that.
-    #
-    if not _osx_version.startswith("8."):
-        environ_append("CFLAGS", "-isysroot " + sdkdir)
-        environ_append("CXXFLAGS", "-isysroot " + sdkdir)
-        environ_append("LDFLAGS", "-isysroot " + sdkdir)
 
     # If we're building on Snow Leopard for 32-bit, we need to make
     # sure that Perl and Python are working in 32-bit mode.
@@ -234,6 +238,9 @@ def setup_ppc_build():
     print "Setup PPC"
     _sdkdir = setup_sdk(target="10.4", sdk_version="10.5", architectures=["ppc"])
 
+    if _sdkdir == None:
+        raise Exception("Cross-compiling without specifying an SDK is not supported")
+
     _cflags = '-isysroot ' + _sdkdir + ' -mmacosx-version-min=10.4'
     _cxxflags = _cflags
     _cppflags = '-I' + prefix + '/include -isysroot ' + _sdkdir
@@ -280,6 +287,8 @@ def setup_universal_build(target="10.5", sdk_version="10.5",
 
     global autogenargs
     _sdkdir = setup_sdk(target, sdk_version, architectures)
+    if _sdkdir == None:
+        raise Exception("Cross-compiling without specifying an SDK is not supported")
     _s = " "
     os.environ["ARCH"] = _s.join(architectures)
 # some dancing around to build only the architectures specified for
