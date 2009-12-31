@@ -169,6 +169,13 @@ def setup_sdk(target, sdk_version, architectures=[_default_arch]):
             os.environ["CUPS_CONFIG"] = os.path.join(sdkdir, 
                                                      "usr/bin/cups-config")
 
+    #Glib and autoconf-2.63 have issues with endianness
+    #
+    if architectures == ["i386"] or architectures == ["x86_64"]:
+        append_autogenargs("glib", "ac_cv_c_bigendian=no")
+    elif architectures == ["ppc"]:
+        append_autogenargs("glib", "ac_cv_c_bigendian=yes")
+
     # There isn't a gcc-4.2 include or library in the 10.4 SDK
     #
     if sdk_version.startswith("10.4") and _osx_version.startswith("10.0"):
