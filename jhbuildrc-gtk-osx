@@ -513,6 +513,12 @@ append_autogenargs("gettext", "--without-emacs --disable-java --disable-native-j
 #
 append_autogenargs("freetype", 'CFLAGS="$CFLAGS -std=c99"')
 
+#GConf needs to be built static, overriding the generic autogenargs,
+#but including it in the module puts it in front of where autogenargs
+#puts --disable-static, so we need the override here.
+#
+append_autogenargs("gconf", "--enable-static")
+
 # Support prepending frameworks to the setup so they are picked up
 # instead of things from the prefix or /usr.
 #
