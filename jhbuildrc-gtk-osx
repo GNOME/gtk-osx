@@ -239,12 +239,14 @@ def setup_sdk(target, sdk_version, architectures=[_default_arch]):
 # This is a convenience function for older .jhbuildrc-customs.
 def setup_sdk_10_4():
     print "*** Using setup_sdk_10_4() is deprecated. Use setup_sdk instead. ***"
-    return setup_sdk(target="10.4", sdk_version="10.4u")
+    if _default_arch == "x86_64":
+            return setup_sdk("10.4", "10.4u", ["i386"])
+    return setup_sdk("10.4", "10.4u")
 
 # For cross-compiling on an intel system. The need to build tool
 # packages universal for cross-compilation means that it will take
 # longer than necessary on a ppc machine, so just call
-# setup_sdk("10.4", "10.4", "ppc") and all will be well (or with "10.5"
+# setup_sdk("10.4", "10.4", ["ppc"]) and all will be well (or with "10.5"
 # instead of "10.4" if you're building Tiger-incompatable versions).
 def setup_ppc_build(): 
     print "Setup PPC"
