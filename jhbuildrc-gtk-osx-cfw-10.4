@@ -27,40 +27,12 @@ _root = os.path.expanduser("~/Source/gtkfw")
 checkoutroot = os.path.join(_root, "source")
 prefix = os.path.join(_root, "inst")
 
-_sdkdir = setup_sdk_10_4()
 
 # Needed to get the various sublibraries to find and use the same
 # symbols.
 #
 environ_append('LDFLAGS', '-Wl,-flat_namespace')
 
-# Need to point some modules to the right place so we don't pick up
-# things from /usr/lib.
-#
-append_autogenargs("gettext", "--with-libiconv-prefix=" + _sdkdir + "/usr")
-
-# For unknown reasons, iconv is not picked up correctly without this
-# (possibly due to using -flat_namespace....).
-#
-append_autogenargs('glib', ' --with-libiconv=gnu')
-
-# Replace branch  for some modules.
-#
-# RC: Bummer, we cannot override the tag...only branch...
-#set_git_branch("glib", "2.20.2")
-#set_git_branch("gtk+", "2.16.1")
-#set_git_branch("atk", "ATK_1_26_0")
-#set_git_branch("pango", "1.24.2")
-#set_git_branch("libglade", "LIBGLADE_2_6_4")
-#set_git_branch("gtk-engines", "GTK_ENGINES_2_18_2")
-#set_git_branch("gnome-icon-theme", "tags/GNOME_ICON_THEME_2_26_0")
-#set_git_branch("glibmm", "glibmm-2.20.0")
-#set_git_branch("pangomm", "d4dfd3c1d5331511b31a14eb6ddf2effc6db6731") #2.24.0
-
-# Python modules.
-#
-#set_git_branch("pygobject", "tags/PYGOBJECT_2_14_2")
-#set_git_branch("pygtk", "tags/PYGTK_2_12_1")
 
 # Skip those for now.
 #
