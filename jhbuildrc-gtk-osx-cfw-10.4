@@ -28,12 +28,6 @@ checkoutroot = os.path.join(_root, "source")
 prefix = os.path.join(_root, "inst")
 
 
-# Needed to get the various sublibraries to find and use the same
-# symbols.
-#
-environ_append('LDFLAGS', '-Wl,-flat_namespace')
-
-
 # Skip those for now.
 #
 skip.append("gst-plugins-ugly")
