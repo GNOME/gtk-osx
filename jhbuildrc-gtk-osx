@@ -79,7 +79,7 @@ elif _machine.startswith("ppc") :
 else:
     _default_arch = "i386"
 
-
+#print "Default Architecture %s\n" % _default_arch
 # Some utitily functions used here and in custom files:
 #
 def environ_append(key, value, separator=' '):
