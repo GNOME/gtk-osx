@@ -206,6 +206,12 @@ def setup_sdk(target, sdk_version, architectures=[_default_arch]):
     #
         append_autogenargs('glib', ' --with-libiconv=gnu')
 
+    # When NLS is enabled for popt, it gets all confused about which
+    # libintl and which libiconv it's supposed to use. This isn't the
+    # right thing to do, but it needs better understanding of
+    # gettext.m4 than I can muster to fix it.
+        append_autogenargs('popt', '--disable-nls')
+
     # ige-mac-integration doesn't support 64-bit (it uses Carbon).
     #
     if ('x86_64' in architectures):
