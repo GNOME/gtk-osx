@@ -143,10 +143,8 @@
 
   <autotools id="WebKit" autogen-sh="configure"
 	     autogenargs="--with-target=quartz --disable-video --with-font-backend=pango">
-    <!--branch repo="webkit.org" module="webkit-1.1.12.tar.gz" version="1.1.12">
-      <patch file="http://github.com/jralls/gtk-osx-build/raw/master/patches/webkit.patch" strip="1"/-->
-    <branch repo="webkit.org" module="webkit-1.1.15.4.tar.gz" version="1.1.15">
-      <patch file="http://github.com/jralls/gtk-osx-build/raw/master/patches/webkit.patch" strip="1"/>
+    <branch repo="webkit.org" module="webkit-1.1.12.tar.gz" version="1.1.12">
+<patch file="http://github.com/jralls/gtk-osx-build/raw/master/patches/webkit.patch" strip="1"/>
     </branch>
     <dependencies>
       <dep package="libsoup"/>
