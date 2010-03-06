@@ -91,6 +91,7 @@
       <dep package="libxml2"/>
       <dep package="libproxy"/>
       <dep package="gnome-keyring"/>
+      <dep package='sqlite'/>
     </dependencies>
   </autotools>
 
