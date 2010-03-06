@@ -523,6 +523,9 @@ environ_append('LDFLAGS', '-Wl,-headerpad_max_install_names')
 environ_prepend('LDFLAGS', '-L' + prefix + '/lib')
 environ_prepend('CPPFLAGS', '-I' + prefix + '/include')
 
+# Make sure that ltdl can find our libraries
+addpath("LTDL_LIBRARY_PATH", prefix + "/lib")
+
 # Add additional Python/Perl paths so that our modules can be found.
 #
 _version = 'python' + str(sys.version_info[0]) + '.' + str(sys.version_info[1])
