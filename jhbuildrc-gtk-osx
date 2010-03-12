@@ -119,8 +119,8 @@ def setup_debug():
 # orderFront:] if gcc is passed -O0 for 64-bit compilation. The old
 # stabs+ debug format also doesn't work. See Snow Leopard in the Wiki
 # for more information about debugging.
-    environ_prepend('CFLAGS', "-O1 -ggdb3")
-    environ_prepend('CXXFLAGS', "-O1 -ggdb3")
+    environ_prepend('CFLAGS', "-O0 -ggdb3")
+    environ_prepend('CXXFLAGS', "-O0 -ggdb3")
 
 def setup_release():
     environ_prepend('CFLAGS', "-O2")
