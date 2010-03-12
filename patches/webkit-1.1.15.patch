@@ -886,8 +886,8 @@ index 54c1065..1aa48cc 100644
  #endif
 Index: WebCore/icu/unicode/usearch.h
 ===================================================================
---- WebCore/icu/unicode/usearch.h	(revision 55240)
-+++ WebCore/icu/unicode/usearch.h	(working copy)
+--- a/WebCore/icu/unicode/usearch.h	(revision 55240)
++++ b/WebCore/icu/unicode/usearch.h	(working copy)
 @@ -0,0 +1,643 @@
 +/*
 +**********************************************************************
@@ -1534,8 +1534,8 @@ Index: WebCore/icu/unicode/usearch.h
 +#endif
 Index: WebCore/icu/unicode/ucoleitr.h
 ===================================================================
-+-- WebCore/icu/unicode/ucoleitr.h	(revision 55240)
-+++ WebCore/icu/unicode/ucoleitr.h	(working copy)
++-- a/WebCore/icu/unicode/ucoleitr.h	(revision 55240)
++++ b/WebCore/icu/unicode/ucoleitr.h	(working copy)
 @@ -0,0 +1,268 @@
 +/*
 +*******************************************************************************
