@@ -72,7 +72,8 @@ jhbuild.commands.register_command(_getenv)
 # Find out what we're building on
 _osx_version = os.popen("uname -r").read().strip()
 _machine = os.popen("machine").read().strip()
-if ((_machine == "i486") and (_osx_version.startswith("10"))):
+_64bit = os.popen("sysctl hw.cpu64bit_capable").read().strip().endswith("1")
+if ((_64bit) and (_osx_version.startswith("10"))):
     _default_arch = "x86_64"
 elif _machine.startswith("ppc") :
     _default_arch = "ppc"
