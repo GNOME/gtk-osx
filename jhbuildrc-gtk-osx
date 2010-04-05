@@ -202,6 +202,7 @@ def setup_sdk(target, sdk_version, architectures=[_default_arch]):
     if sdk_version.startswith("10.4") and _osx_version.startswith("10.0"):
         os.environ["CC"] = "/usr/bin/gcc-4.0"
         os.environ["CXX"] = "/usr/bin/g++-4.0"
+        append_autogenargs("gnutls", "--disable-guile")
 
     # For unknown reasons, iconv is not picked up correctly without this
     #
