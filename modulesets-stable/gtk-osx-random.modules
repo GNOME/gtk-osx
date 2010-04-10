@@ -242,9 +242,7 @@
     <branch  module="libgsf/1.14/libgsf-1.14.16.tar.bz2" version="1.14.16"
 	     hash="sha256:11fd8fca1bdbcfa426276a124ad083cca9632f03cf766523bcdfb2fca0b08908"/>
     <dependencies>
-      <dep package="glib"/>
-      <dep package="gnome-vfs"/>
-      <dep package="libbonobo"/>
+      <dep package="libxml2"/>
     </dependencies>
   </autotools>
 
