@@ -58,12 +58,25 @@
     </after>
   </autotools>
 
+  <autotools id="libffi">
+    <branch module="atgreen/libffi" repo="github"/>
+  </autotools>
+
+  <autotools id="gobject-introspection">
+    <branch/>
+    <dependencies>
+      <dep package="glib"/>
+      <dep package="libffi"/>
+    </dependencies>
+  </autotools>
+
   <autotools id="pango" 
              autogenargs="--without-x --with-included-modules=basic-atsui"
              makeargs="-k -C modules; make">
     <branch />
     <dependencies>
       <dep package="glib"/>
+      <!-- dep package="gobject-introspection"/ -->
       <dep package="cairo"/>
       <dep package="fontconfig"/>
       <dep package="freetype"/>

@@ -49,6 +49,26 @@ class _cmd_get_srcdir(jhbuild.commands.Command):
 
 jhbuild.commands.register_command(_cmd_get_srcdir)
 
+class _getenv(jhbuild.commands.Command):
+    doc = "Retrieve an environment variable set within jhbuild"
+
+    name = "gtk-osx-getenv"
+    usage_args = 'envvar'
+
+    def run(self, config, options, args):
+ #       module_set = jhbuild.moduleset.load(config)
+
+        if not args:
+            raise FatalError("No environment variable")
+
+        var = args[0]
+        if not os.environ.has_key(var):
+            raise FatalError("variable " + var + " not defined in jhbuild environment")
+        print os.environ[var]
+
+jhbuild.commands.register_command(_getenv)
+        
+
 # Find out what we're building on
 _osx_version = os.popen("uname -r").read().strip()
 _machine = os.popen("machine").read().strip()
@@ -59,7 +79,7 @@ elif _machine.startswith("ppc") :
 else:
     _default_arch = "i386"
 
-print "Default Architecture %s\n" % _default_arch
+#print "Default Architecture %s\n" % _default_arch
 # Some utitily functions used here and in custom files:
 #
 def environ_append(key, value, separator=' '):
@@ -99,8 +119,8 @@ def setup_debug():
 # orderFront:] if gcc is passed -O0 for 64-bit compilation. The old
 # stabs+ debug format also doesn't work. See Snow Leopard in the Wiki
 # for more information about debugging.
-    environ_prepend('CFLAGS', "-O1 -ggdb3")
-    environ_prepend('CXXFLAGS', "-O1 -ggdb3")
+    environ_prepend('CFLAGS', "-O0 -ggdb3")
+    environ_prepend('CXXFLAGS', "-O0 -ggdb3")
 
 def setup_release():
     environ_prepend('CFLAGS', "-O2")
@@ -169,6 +189,13 @@ def setup_sdk(target, sdk_version, architectures=[_default_arch]):
             os.environ["CUPS_CONFIG"] = os.path.join(sdkdir, 
                                                      "usr/bin/cups-config")
 
+    #Glib and autoconf-2.63 have issues with endianness
+    #
+    if architectures == ["i386"] or architectures == ["x86_64"]:
+        append_autogenargs("glib", "ac_cv_c_bigendian=no")
+    elif architectures == ["ppc"]:
+        append_autogenargs("glib", "ac_cv_c_bigendian=yes")
+
     # There isn't a gcc-4.2 include or library in the 10.4 SDK
     #
     if sdk_version.startswith("10.4") and _osx_version.startswith("10.0"):
@@ -178,6 +205,7 @@ def setup_sdk(target, sdk_version, architectures=[_default_arch]):
     # For unknown reasons, iconv is not picked up correctly without this
     #
         append_autogenargs('glib', ' --with-libiconv=gnu')
+
 
     # ige-mac-integration doesn't support 64-bit (it uses Carbon).
     #
@@ -191,6 +219,11 @@ def setup_sdk(target, sdk_version, architectures=[_default_arch]):
     if  _osx_version.startswith("10.") and architectures == ["i386"]:
         os.environ["VERSIONER_PERL_PREFER_32_BIT"] = "yes"
         os.environ["VERSIONER_PYTHON_PREFER_32_BIT"] = "yes"
+
+    #SDK 10.4 doesn't support gcc4.2.
+    if  _osx_version.startswith("10.") and sdk_version.startswith("10.4"):
+        os.environ["CC"] = "/usr/bin/gcc-4.0"
+        os.environ["CXX"] = "/usr/bin/g++-4.0"
     
     # Set the -arch flags for everything we're building.
     #
@@ -227,12 +260,14 @@ def setup_sdk(target, sdk_version, architectures=[_default_arch]):
 # This is a convenience function for older .jhbuildrc-customs.
 def setup_sdk_10_4():
     print "*** Using setup_sdk_10_4() is deprecated. Use setup_sdk instead. ***"
-    return setup_sdk(target="10.4", sdk_version="10.4u")
+    if _default_arch == "x86_64":
+            return setup_sdk("10.4", "10.4u", ["i386"])
+    return setup_sdk("10.4", "10.4u")
 
 # For cross-compiling on an intel system. The need to build tool
 # packages universal for cross-compilation means that it will take
 # longer than necessary on a ppc machine, so just call
-# setup_sdk("10.4", "10.4", "ppc") and all will be well (or with "10.5"
+# setup_sdk("10.4", "10.4", ["ppc"]) and all will be well (or with "10.5"
 # instead of "10.4" if you're building Tiger-incompatable versions).
 def setup_ppc_build(): 
     print "Setup PPC"
@@ -488,6 +523,9 @@ environ_append('LDFLAGS', '-Wl,-headerpad_max_install_names')
 environ_prepend('LDFLAGS', '-L' + prefix + '/lib')
 environ_prepend('CPPFLAGS', '-I' + prefix + '/include')
 
+# Make sure that ltdl can find our libraries
+addpath("LTDL_LIBRARY_PATH", prefix + "/lib")
+
 # Add additional Python/Perl paths so that our modules can be found.
 #
 _version = 'python' + str(sys.version_info[0]) + '.' + str(sys.version_info[1])
@@ -502,6 +540,15 @@ os.environ['XML_CATALOG_FILES'] = prefix + '/etc/xml/catalog'
 # Speed up gettext build by disabling unneeded stuff.
 #
 append_autogenargs("gettext", "--without-emacs --disable-java --disable-native-java --disable-libasprintf --disable-csharp")
+#Freetype has -ansi added by its configure, but uses c99 code
+#
+append_autogenargs("freetype", 'CFLAGS="$CFLAGS -std=c99"')
+
+#GConf needs to be built static, overriding the generic autogenargs,
+#but including it in the module puts it in front of where autogenargs
+#puts --disable-static, so we need the override here.
+#
+append_autogenargs("gconf", "--enable-static")
 
 # Support prepending frameworks to the setup so they are picked up
 # instead of things from the prefix or /usr.
@@ -530,10 +577,10 @@ for _framework in _frameworks.split(":"):
 # getting environment variables. Used in framework creation to pick up
 # the jhbuild prefix.
 #
-_value = parse_custom_argument("getenv")
-if _value:
-    print os.environ.get(_value, "")
-    raise SystemExit
+#_value = parse_custom_argument("getenv")
+#if _value:
+#    print os.environ.get(_value, "")
+#    raise SystemExit
 
 if _build:
     if "shell" in sys.argv:
