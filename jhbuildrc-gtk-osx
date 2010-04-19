@@ -597,5 +597,10 @@ if not _ran_recursively and _gtk_osx_prompt_prefix:
 # recursively.
 os.unsetenv("JHB")
 
+#Python's setup is seriously obnoxious about building on a Mac with an
+#SDK unless you're doing a Universal build. BASECFLAGS turns that off
+#and forces it to use the CFLAGS we set up.
+os.environ["BASECFLAGS"] = os.environ["CFLAGS"]
+
 if "shell" in sys.argv:
     print "Entered jhbuild shell, type 'exit' to return."
