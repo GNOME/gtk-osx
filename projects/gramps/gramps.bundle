@@ -15,7 +15,9 @@
   </main-binary>
 
   <!-- We need to pack our own Python to avoid compatibility problems. -->
-  <binary>${prefix}/bin/python</binary>
+  <binary>
+    ${prefix}/bin/python
+  </binary>
 
   <!-- Copy in GTK+ modules. Note the use of the
        "${pkg:module:variable}" macro, which evaluates to a pkg-config
@@ -49,15 +51,11 @@
   </binary>
 
   <binary>
-    ${prefix}/lib/libxslt.1.dylib
-  </binary>
-
-  <binary>
-    ${prefix}/lib/libxml2.2.dylib
-  </binary>
-
-  <binary>
     ${prefix}/lib/libgoocanvas.3.dylib
+  </binary>
+
+  <binary>
+    ${prefix}/lib/libigemacintegration.0.dylib
   </binary>
 
   <!-- Translation filenames, one for each program or library that you
@@ -83,6 +81,9 @@
     ${prefix}/share/gramps/
   </data>
 
+  <data>
+    ${prefix}/share/locale
+  </data>
 
   <!-- Copy in the themes data. You may want to trim this to save space
        in your bundle. -->

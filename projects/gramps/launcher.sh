@@ -13,8 +13,7 @@ bundle_data="$bundle_res"/share
 bundle_etc="$bundle_res"/etc
 
 export DYLD_LIBRARY_PATH="$bundle_lib"
-export XDG_CONFIG_DIRS="$bundle_etc"/xdg
-export XDG_DATA_DIRS="$bundle_data"
+export LD_LIBRARY_PATH="$DYLD_LIBRARY_PATH"
 export GTK_DATA_PREFIX="$bundle_res"
 export GTK_EXE_PREFIX="$bundle_res"
 export GTK_PATH="$bundle_res"
@@ -25,7 +24,7 @@ export GDK_PIXBUF_MODULE_FILE="$bundle_etc/gtk-2.0/gdk-pixbuf.loaders"
 export PANGO_RC_FILE="$bundle_etc/pango/pangorc"
 
 #Set $PYTHON to point inside the bundle
-export PYTHON="$bundle_bin/python"
+export PYTHON="$bundle_contents/MacOS/python"
 #Add the bundle's python modules
 PYTHONPATH="$bundle_lib/python2.6:$PYTHONPATH"
 PYTHONPATH="$bundle_lib/python2.6/site-packages:$PYTHONPATH"
@@ -61,4 +60,4 @@ fi
 
 #Note that we're calling $PYTHON here to override the version in
 #pygtk-demo's shebang.
-$EXEC $PYTHON "$GRAMPSDIR/gramps.py" "$@"
+exec $PYTHON "$GRAMPSDIR/gramps.py" "$@"

@@ -25,20 +25,29 @@
 <!--
 Special instructions:
 Gramps uses BerkeleyDB (BDB) via Python. BDB is normally included in Linux systems, but Apple prefers other mechanisms for data storage, so it isn't included on Macs. BDB won't build in the source directory, so you need to build it on its own. Fortunately, it has no dependencies and everything else will build without it, so after running
- jhbuild bootstrap && jhbuild --moduleset=http://github.com/jralls/gtk-osx-build/raw/master/projects/gramps/gramps.modules build meta-gtk-osx-bootstrap gramps
+ jhbuild bootstrap && jhbuild &double-hyphen;moduleset=http://github.com/jralls/gtk-osx-build/raw/master/projects/gramps/gramps.modules build meta-gtk-osx-bootstrap gramps
 
 Add the following lines to your .jhbuildrc-custom
 builddir_pattern="%s/build_unix"
 buildroot=checkoutroot
 
-and run jhbuild  --moduleset=http://github.com/jralls/gtk-osx-build/raw/master/projects/gramps/gramps.modules buildone berkeleydb
+and run jhbuild  &double-hyphen;moduleset=http://github.com/jralls/gtk-osx-build/raw/master/projects/gramps/gramps.modules buildone berkeleydb 
 
 after which you can run GRAMPS from the commandline.
 
 If you're going to bundle GRAMPS, you'll need to add 
 _gtk_osx_use_jhbuild_python = True
 
-to your .jhbuildrc-custom and pass the &double-hyphen;ignore-system argument to jhbuild bootstrap. (That &double-hyphen; entity is fake, but double-hyphens aren't allowed in xml comments. Just substitute a real double-hyphen when you type it on the command line.) 
+to your .jhbuildrc-custom and pass the &double-hyphen;ignore-system argument to jhbuild bootstrap. (That &double-hyphen; entity is fake, but double-hyphens aren't allowed in xml comments. Just substitute a real double-hyphen when you type it on the command line.) After running bootstrap, you'll need to build berkeleydb (see above) and then comment out those two lines and do:
+
+jhbuild shell
+cd checkoutroot/Python-2.6.5 (substituting the actual path to checkoutroot)
+make && make install
+cd 
+chmod +w $PREFIX/lib/libpython2.6.dylib
+ige-mac-bundler gramps/gramps.bundle
+
+
 -->
 
 
@@ -47,9 +56,11 @@ to your .jhbuildrc-custom and pass the &double-hyphen;ignore-system argument to 
 
   <autotools id="gramps" autogen-sh="configure">
     <branch module="gramps/gramps-3.2.0.tar.gz" version="3.2.0"
-	    repo="sourceforge"/>
+	    repo="sourceforge">
+      <patch file="http://github.com/jralls/gtk-osx-build/raw/master/patches/gramps.patch" strip="0"/>
+    </branch>
     <dependencies>
-      <dep package="pygtk"/>
+      <dep package="meta-gtk-osx-python"/>
       <dep package="pyWebKitGtk"/>
       <dep package="librsvg2"/>
       <dep package="pygoocanvas"/>
@@ -60,7 +71,7 @@ to your .jhbuildrc-custom and pass the &double-hyphen;ignore-system argument to 
   <autotools id="gramps-svn" >
     <branch module="gramps" repo="gramps"/>
     <dependencies>
-      <dep package="pygtk"/>
+      <dep package="meta-gtk-osx-python"/>
       <dep package="pyWebKitGtk"/>
       <dep package="librsvg2"/>
       <dep package="pygoocanvas"/>
@@ -92,8 +103,10 @@ to your .jhbuildrc-custom and pass the &double-hyphen;ignore-system argument to 
     </dependencies>
   </autotools>
 
+<!-- Later versions of librsvg2 require libxml2-2.7, available only in
+     Snow Leopard -->
   <autotools id="librsvg2" >
-    <branch module="librsvg/2.26/librsvg-2.26.2.tar.bz2" version="2.26.2"
+    <branch module="librsvg/2.22/librsvg-2.22.3.tar.bz2" version="2.22.3"
 	    repo="ftp.gnome.org"/>
     <dependencies>
       <dep package="libxml2"/>
@@ -106,13 +119,15 @@ to your .jhbuildrc-custom and pass the &double-hyphen;ignore-system argument to 
     <branch module="goocanvas/0.15/goocanvas-0.15.tar.bz2" version="0.15"
 	    repo="ftp.gnome.org"/>
     <dependencies>
-      <dep package="gtk+"/>
+¡      <dep package="gtk+"/>
     </dependencies>
   </autotools>
 
   <autotools id="pygoocanvas" version="0.9">
     <branch module="pygoocanvas-0.9.0.tar.gz" version="0.9.0"
-	    repo="pygoocanvas"/>
+	    repo="pygoocanvas">
+      <patch file="http://github.com/jralls/gtk-osx-build/raw/master/patches/pygoocanvas.patch" strip="0"/>
+    </branch>
 
     <dependencies>
       <dep package="goocanvas"/>
