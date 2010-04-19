@@ -1,0 +1,52 @@
+--- src/gui/viewmanager.py	2010-04-19 13:28:00.000000000 -0700
++++ src/gui/viewmanager.py	2010-04-19 15:03:33.000000000 -0700
+@@ -50,7 +50,7 @@
+ #
+ #-------------------------------------------------------------------------
+ import gtk
+-
++from igemacintegration import *
+ #-------------------------------------------------------------------------
+ #
+ # GRAMPS modules
+@@ -754,6 +754,24 @@
+ 
+         self.uimanager.add_ui_from_string(UIDEFAULT)
+         self.uimanager.ensure_update()
++#Set up mac menu integration
++        self.macmenu = MacMenu()
++        menubar = self.uimanager.get_widget("/MenuBar")
++        menubar.hide()
++        quit_item = self.uimanager.get_widget("/MenuBar/FileMenu/Quit")
++        about_item = self.uimanager.get_widget("/MenuBar/HelpMenu/About")
++        prefs_item = self.uimanager.get_widget("/MenuBar/EditMenu/Preferences")
++        self.macmenu.set_menu_bar(menubar)
++        self.macmenu.set_quit_menu_item(quit_item)
++        group = self.macmenu.add_app_menu_group()
++        group.add_app_menu_item(about_item, None)
++        group = self.macmenu.add_app_menu_group()
++        group.add_app_menu_item(prefs_item, None)
++#Set up Dock integration
++        self.macdock = MacDock()
++        self.macdock.connect('quit-activate', lambda d: self.quit())
++
++
+ 
+     def preferences_activate(self, obj):
+         """
+@@ -1192,6 +1210,7 @@
+                     self.__connect_active_page(category_page, view_page)
+ 
+                     self.uimanager.ensure_update()
++                    #self.macmenu.sync()
+ 
+                     while gtk.events_pending():
+                         gtk.main_iteration()
+@@ -1444,6 +1463,7 @@
+         self.report_menu_ui_id = self.uistate.uimanager.add_ui_from_string(uidef)
+         self.uimanager.insert_action_group(self.reportactions, 1)
+         self.uistate.uimanager.ensure_update()
++        #self.macmenu.sync() FIXME -- not implemented
+ 
+     def build_plugin_menu(self, text, item_list, categories, func):
+         """

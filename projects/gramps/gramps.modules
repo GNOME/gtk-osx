@@ -58,6 +58,7 @@ ige-mac-bundler gramps/gramps.bundle
     <branch module="gramps/gramps-3.2.0.tar.gz" version="3.2.0"
 	    repo="sourceforge">
       <patch file="http://github.com/jralls/gtk-osx-build/raw/master/patches/gramps.patch" strip="0"/>
+      <patch file="http://github.com/jralls/gtk-osx-build/raw/master/patches/gramps-macui.patch" strip="0"/>
     </branch>
     <dependencies>
       <dep package="meta-gtk-osx-python"/>
