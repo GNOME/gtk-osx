@@ -21,6 +21,8 @@
 	      href="https://gramps-addons.svn.sourceforge.net/svnroot/gramps-addons/"/>
   <repository type="tarball" name="oracle"
 	      href="http://download.oracle.com/"/>
+  <repository type="tarball" name="pymodules"
+	      href="http://pypi.python.org/packages/source/"/>
 
 <!--
 Special instructions:
@@ -66,6 +68,8 @@ ige-mac-bundler gramps/gramps.bundle
       <dep package="librsvg2"/>
       <dep package="pygoocanvas"/>
       <dep package="shared-mime-info"/>
+      <dep package="pyenchant"/>
+      <dep package="pygtk-extras"/>
     </dependencies>
   </autotools>
 
@@ -135,6 +139,11 @@ ige-mac-bundler gramps/gramps.bundle
       <dep package="pygtk"/>
     </dependencies>
   </autotools>
+
+  <distutils id="pyenchant">
+    <branch repo="pymodules" module="p/pyenchant/pyenchant-1.6.1.tar.gz"
+	    version="1.6.1"/>
+  </distutils>
 
   <distutils id="pyxdg">
     <branch repo="pyxdg" module="pyxdg-0.17.tar.gz" version="0.17"
