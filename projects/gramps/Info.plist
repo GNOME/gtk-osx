@@ -9,7 +9,7 @@
     <key>CFBundleGetInfoString</key>
     <string>3.2.1, (C) 1997-2010 The GRAMPS Team http://www.gramps-project.org</string>
     <key>CFBundleIconFile</key>
-    <string>Giggle.icns</string>
+    <string>gramps.icns</string>
     <key>CFBundleIdentifier</key>
     <string>org.gtk.demo</string>
     <key>CFBundleInfoDictionaryVersion</key>
