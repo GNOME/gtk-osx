@@ -56,8 +56,9 @@ ige-mac-bundler gramps/gramps.bundle
 
   <include href="http://github.com/jralls/gtk-osx-build/raw/master/modulesets-stable/gtk-osx.modules"/>
 
+
   <autotools id="gramps" autogen-sh="configure">
-    <branch module="gramps/gramps-3.2.0.tar.gz" version="3.2.0"
+    <branch module="gramps/gramps-3.2.2.tar.gz" version="3.2.2"
 	    repo="sourceforge">
       <patch file="http://github.com/jralls/gtk-osx-build/raw/master/patches/gramps.patch" strip="0"/>
       <patch file="http://github.com/jralls/gtk-osx-build/raw/master/patches/gramps-macui.patch" strip="0"/>
