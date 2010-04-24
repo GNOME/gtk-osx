@@ -13,6 +13,7 @@ bundle_data="$bundle_res"/share
 bundle_etc="$bundle_res"/etc
 
 export DYLD_LIBRARY_PATH="$bundle_lib"
+export XDG_DATA_DIRS="$bundle_data"
 export LD_LIBRARY_PATH="$DYLD_LIBRARY_PATH"
 export GTK_DATA_PREFIX="$bundle_res"
 export GTK_EXE_PREFIX="$bundle_res"
@@ -28,6 +29,8 @@ export PYTHON="$bundle_contents/MacOS/python"
 #Add the bundle's python modules
 PYTHONPATH="$bundle_lib/python2.6:$PYTHONPATH"
 PYTHONPATH="$bundle_lib/python2.6/site-packages:$PYTHONPATH"
+PYTHONPATH="$bundle_lib/python2.6/site-packages/gtk-2.0:$PYTHONPATH"
+PYTHONPATH="$bundle_lib/python2.6/lib-dynload:$PYTHONPATH"
 #Add our program's modules to $PYTHONPATH. 
 PYTHONPATH="$bundle_lib/pygtk/2.0:$PYTHONPATH"
 export PYTHONPATH
