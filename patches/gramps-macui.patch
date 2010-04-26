@@ -1,0 +1,69 @@
+--- src/gui/viewmanager.py	2010-04-24 10:07:12.000000000 -0700
++++ src/gui/viewmanager.py	2010-04-24 10:01:06.000000000 -0700
+@@ -35,6 +35,7 @@
+ from gen.ggettext import gettext as _
+ from cStringIO import StringIO
+ from collections import defaultdict
++from constfunc import mac
+ 
+ #-------------------------------------------------------------------------
+ #
+@@ -50,6 +51,8 @@
+ #
+ #-------------------------------------------------------------------------
+ import gtk
++if mac():
++    from igemacintegration import *
+ 
+ #-------------------------------------------------------------------------
+ #
+@@ -259,6 +262,11 @@
+         self.tool_menu_ui_id = None
+         self.reportactions = None
+         self.report_menu_ui_id = None
++        if mac():
++            self.macmenu = MacMenu()
++#Set up Dock integration
++            self.macdock = MacDock()
++            self.macdock.connect('quit-activate', lambda d: self.quit())
+ 
+         self.show_sidebar = config.get('interface.view')
+         self.show_toolbar = config.get('interface.toolbar-on')
+@@ -754,6 +762,19 @@
+ 
+         self.uimanager.add_ui_from_string(UIDEFAULT)
+         self.uimanager.ensure_update()
++#Set up mac menu integration
++        if mac():
++            menubar = self.uimanager.get_widget("/MenuBar")
++            menubar.hide()
++            quit_item = self.uimanager.get_widget("/MenuBar/FileMenu/Quit")
++            about_item = self.uimanager.get_widget("/MenuBar/HelpMenu/About")
++            prefs_item = self.uimanager.get_widget("/MenuBar/EditMenu/Preferences")
++            self.macmenu.set_menu_bar(menubar)
++            self.macmenu.set_quit_menu_item(quit_item)
++            group = self.macmenu.add_app_menu_group()
++            group.add_app_menu_item(about_item, None)
++            group = self.macmenu.add_app_menu_group()
++            group.add_app_menu_item(prefs_item, None)
+ 
+     def preferences_activate(self, obj):
+         """
+@@ -1192,6 +1213,8 @@
+                     self.__connect_active_page(category_page, view_page)
+ 
+                     self.uimanager.ensure_update()
++                    if mac():
++                        self.macmenu.sync(self.menubar)
+ 
+                     while gtk.events_pending():
+                         gtk.main_iteration()
+@@ -1237,6 +1260,8 @@
+         self.undo_history_close()
+ 
+         self.uistate.window.window.set_cursor(None)
++        if mac():
++            self.macmenu.sync(self.menubar)
+ 
+     def _post_load_newdb(self, filename, filetype, title=None):
+         """

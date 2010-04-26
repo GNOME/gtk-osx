@@ -255,4 +255,12 @@
     </after>
   </autotools>
 
+  <autotools id="gtkspell">
+    <branch module="gtkspell/gtkspell-2.0.16.tar.gz" repo="sourceforge"
+	    version="2.0.16"/>
+    <dependencies>
+      <dep package="enchant"/>
+    </dependencies>
+  </autotools>
+
 </moduleset>
