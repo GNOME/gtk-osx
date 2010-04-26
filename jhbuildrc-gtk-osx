@@ -378,6 +378,12 @@ def setup_universal_build(target="10.5", sdk_version="10.5",
     append_autogenargs("glibmm_i386", _i386_args)
     append_autogenargs("glibmm_x86_64", _x86_64_args)
 
+###### End Setup Universal Build #######
+###### End Function Definitions  #######
+
+
+##### The following configuration can be overridden in custom files ######
+
 # Moduleset to use. You can override this in .jhbuildrc-custom or on
 # the command line.
 #
@@ -429,6 +435,7 @@ else:
     _gtk_osx_use_jhbuild_python = False
     _gtk_osx_use_jhbuild_bison_flex = False
 
+###### Import Customizations ######
 
 # Import optional user RC for further customization. You can override
 # the prefix or default build setup for example, or CFLAGS or
@@ -443,6 +450,8 @@ if os.path.exists(_userrc):
 # builds, for example.
 #
 _build = os.environ.get('JHB', _gtk_osx_default_build)
+
+###### Everything Below Uses (and Overrides) customizations! #######
 
 # Check and warn if jhbuild is started from within jhbuild, since that
 # will mess up environment variables, especially if different build
