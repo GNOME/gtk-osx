@@ -258,6 +258,11 @@ def setup_sdk(target, sdk_version, architectures=[_default_arch]):
     environ_append("CXXFLAGS", "-mmacosx-version-min=" + target)
     environ_append("LDFLAGS", "-mmacosx-version-min=" + target)
 
+    #Overcome Python's obnoxious misconfiguration of portable builds 
+    if len(architectures) == 1:
+        os.environ["BUILDCFLAGS"] = os.environ["CFLAGS"]
+
+
     return sdkdir
 # This is a convenience function for older .jhbuildrc-customs.
 def setup_sdk_10_4():
