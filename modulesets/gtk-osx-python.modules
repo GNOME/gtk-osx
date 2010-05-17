@@ -60,7 +60,7 @@
   </autotools>
 
   <autotools id="ige-mac-integration">
-    <branch repo="github" tag="ige-mac-integration-0.9.0"
+    <branch repo="github" tag="ige-mac-integration-0.9.1"
 	    module="jralls/ige-mac-integration" />
     <dependencies>
       <dep package="gtk+"/>
