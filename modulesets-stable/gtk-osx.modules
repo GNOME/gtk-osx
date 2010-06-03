@@ -100,7 +100,8 @@
     <branch module="gtk+/2.18/gtk+-2.18.2.tar.bz2" version="2.18.2"
             hash="sha256:5e0832e154b4accab8286ae724ddbad5d701f4af6a9291582d1430b9f360f5f1">
       <patch file="http://github.com/jralls/gtk-osx-build/raw/master/patches/gdk-quartz-input-window.patch" strip="1"/> 
-   </branch>
+      <patch file="http://github.com/jralls/gtk-osx-build/raw/master/patches/gtkselection.patch" strip="1"/>
+    </branch>
     <dependencies>
       <dep package="pango"/>
       <dep package="atk"/>
