@@ -489,7 +489,7 @@ index 0000000..19c864a
 + *************************************************************/
 +
 +gboolean
-+_gtk_selection_notify (GtkWidget	       *widget,
++gtk_selection_notify (GtkWidget	       *widget,
 +		       GdkEventSelection *event)
 +{
 +  g_print ("Selection_Notifications should not occur in quartz\n");  
