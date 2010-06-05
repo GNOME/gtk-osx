@@ -894,3 +894,327 @@ index 5c7db9c..ffedfd3 100644
  
  /*************************************************************
   * gtk_selection_retrieval_timeout:
+--- a/gtk/Makefile.in	2009-10-05 13:46:09.000000000 -0700
++++ b/gtk/Makefile.in	2010-06-03 12:37:55.000000000 -0700
+@@ -156,31 +156,31 @@
+ 	gtkrecentchooserwidget.c gtkrecentchooserutils.c \
+ 	gtkrecentchooser.c gtkrecentfilter.c gtkrecentmanager.c \
+ 	gtkruler.c gtkscale.c gtkscalebutton.c gtkscrollbar.c \
+-	gtkscrolledwindow.c gtkselection.c gtkseparator.c \
+-	gtkseparatormenuitem.c gtkseparatortoolitem.c gtksettings.c \
+-	gtksizegroup.c gtkshow.c gtksocket.c gtkspinbutton.c \
+-	gtkstatusbar.c gtkstatusicon.c gtkstock.c gtkstyle.c \
+-	gtktable.c gtktearoffmenuitem.c gtktestutils.c gtktextbtree.c \
+-	gtktextbuffer.c gtktextbufferrichtext.c \
+-	gtktextbufferserialize.c gtktextchild.c gtktextdisplay.c \
+-	gtktextiter.c gtktextlayout.c gtktextmark.c gtktextsegment.c \
+-	gtktexttag.c gtktexttagtable.c gtktexttypes.c gtktextutil.c \
+-	gtktextview.c gtkthemes.c gtktoggleaction.c gtktogglebutton.c \
+-	gtktoggletoolbutton.c gtktoolbar.c gtktoolbutton.c \
+-	gtktoolitem.c gtktoolshell.c gtktooltip.c gtktreedatalist.c \
+-	gtktreednd.c gtktreemodel.c gtktreemodelfilter.c \
+-	gtktreemodelsort.c gtktreeselection.c gtktreesortable.c \
+-	gtktreestore.c gtktreeview.c gtktreeviewcolumn.c \
+-	gtktypebuiltins.c gtktypeutils.c gtkuimanager.c gtkvbbox.c \
+-	gtkvbox.c gtkvolumebutton.c gtkviewport.c gtkvpaned.c \
+-	gtkvruler.c gtkvscale.c gtkvscrollbar.c gtkvseparator.c \
+-	gtkwidget.c gtkwindow-decorate.c gtkwindow.c gtkclipboard.c \
+-	gtkdnd.c gtkclipboard-quartz.c gtkdnd-quartz.c gtkquartz.c \
+-	gtktext.c gtktree.c gtktreeitem.c gtkclist.c gtkcombo.c \
+-	gtkctree.c gtkfilesel.c gtkitemfactory.c gtklist.c \
+-	gtklistitem.c gtkoldeditable.c gtkoptionmenu.c gtkpixmap.c \
+-	gtkpreview.c gtkprogress.c gtksignal.c gtktipsquery.c \
+-	gtktooltips.c gtkcustompaperunixdialog.c \
++	gtkscrolledwindow.c gtkseparator.c gtkseparatormenuitem.c \
++	gtkseparatortoolitem.c gtksettings.c gtksizegroup.c gtkshow.c \
++	gtksocket.c gtkspinbutton.c gtkstatusbar.c gtkstatusicon.c \
++	gtkstock.c gtkstyle.c gtktable.c gtktearoffmenuitem.c \
++	gtktestutils.c gtktextbtree.c gtktextbuffer.c \
++	gtktextbufferrichtext.c gtktextbufferserialize.c \
++	gtktextchild.c gtktextdisplay.c gtktextiter.c gtktextlayout.c \
++	gtktextmark.c gtktextsegment.c gtktexttag.c gtktexttagtable.c \
++	gtktexttypes.c gtktextutil.c gtktextview.c gtkthemes.c \
++	gtktoggleaction.c gtktogglebutton.c gtktoggletoolbutton.c \
++	gtktoolbar.c gtktoolbutton.c gtktoolitem.c gtktoolshell.c \
++	gtktooltip.c gtktreedatalist.c gtktreednd.c gtktreemodel.c \
++	gtktreemodelfilter.c gtktreemodelsort.c gtktreeselection.c \
++	gtktreesortable.c gtktreestore.c gtktreeview.c \
++	gtktreeviewcolumn.c gtktypebuiltins.c gtktypeutils.c \
++	gtkuimanager.c gtkvbbox.c gtkvbox.c gtkvolumebutton.c \
++	gtkviewport.c gtkvpaned.c gtkvruler.c gtkvscale.c \
++	gtkvscrollbar.c gtkvseparator.c gtkwidget.c \
++	gtkwindow-decorate.c gtkwindow.c gtkselection.c gtkclipboard.c \
++	gtkdnd.c gtkselection-quartz.c gtkclipboard-quartz.c \
++	gtkdnd-quartz.c gtkquartz.c gtktext.c gtktree.c gtktreeitem.c \
++	gtkclist.c gtkcombo.c gtkctree.c gtkfilesel.c gtkitemfactory.c \
++	gtklist.c gtklistitem.c gtkoldeditable.c gtkoptionmenu.c \
++	gtkpixmap.c gtkpreview.c gtkprogress.c gtksignal.c \
++	gtktipsquery.c gtktooltips.c gtkcustompaperunixdialog.c \
+ 	gtkpagesetupunixdialog.c gtkprinter.c gtkprinteroption.c \
+ 	gtkprinteroptionset.c gtkprinteroptionwidget.c gtkprintjob.c \
+ 	gtkprintoperation-unix.c gtkprintunixdialog.c \
+@@ -191,8 +191,10 @@
+ 	gtkplug-win32.c gtksocket-win32.c gtkwin32embed.c \
+ 	gtkwin32embedwidget.c gtkmountoperation-stub.c \
+ 	gtksearchenginequartz.c gtkplug-stub.c gtksocket-stub.c
+-@USE_QUARTZ_FALSE@am__objects_1 = gtkclipboard.lo gtkdnd.lo
+-@USE_QUARTZ_TRUE@am__objects_1 = gtkclipboard-quartz.lo \
++@USE_QUARTZ_FALSE@am__objects_1 = gtkselection.lo gtkclipboard.lo \
++@USE_QUARTZ_FALSE@	gtkdnd.lo
++@USE_QUARTZ_TRUE@am__objects_1 = gtkselection.lo \
++@USE_QUARTZ_TRUE@	gtkselection-quartz.lo gtkclipboard-quartz.lo \
+ @USE_QUARTZ_TRUE@	gtkdnd-quartz.lo gtkquartz.lo
+ am__objects_2 = gtkquery.lo gtksearchengine.lo \
+ 	gtksearchenginesimple.lo fnmatch.lo gtkaboutdialog.lo \
+@@ -242,7 +244,7 @@
+ 	gtkrecentchooserutils.lo gtkrecentchooser.lo \
+ 	gtkrecentfilter.lo gtkrecentmanager.lo gtkruler.lo gtkscale.lo \
+ 	gtkscalebutton.lo gtkscrollbar.lo gtkscrolledwindow.lo \
+-	gtkselection.lo gtkseparator.lo gtkseparatormenuitem.lo \
++	gtkseparator.lo gtkseparatormenuitem.lo \
+ 	gtkseparatortoolitem.lo gtksettings.lo gtksizegroup.lo \
+ 	gtkshow.lo gtksocket.lo gtkspinbutton.lo gtkstatusbar.lo \
+ 	gtkstatusicon.lo gtkstock.lo gtkstyle.lo gtktable.lo \
+@@ -344,31 +346,31 @@
+ 	gtkrecentchooserwidget.c gtkrecentchooserutils.c \
+ 	gtkrecentchooser.c gtkrecentfilter.c gtkrecentmanager.c \
+ 	gtkruler.c gtkscale.c gtkscalebutton.c gtkscrollbar.c \
+-	gtkscrolledwindow.c gtkselection.c gtkseparator.c \
+-	gtkseparatormenuitem.c gtkseparatortoolitem.c gtksettings.c \
+-	gtksizegroup.c gtkshow.c gtksocket.c gtkspinbutton.c \
+-	gtkstatusbar.c gtkstatusicon.c gtkstock.c gtkstyle.c \
+-	gtktable.c gtktearoffmenuitem.c gtktestutils.c gtktextbtree.c \
+-	gtktextbuffer.c gtktextbufferrichtext.c \
+-	gtktextbufferserialize.c gtktextchild.c gtktextdisplay.c \
+-	gtktextiter.c gtktextlayout.c gtktextmark.c gtktextsegment.c \
+-	gtktexttag.c gtktexttagtable.c gtktexttypes.c gtktextutil.c \
+-	gtktextview.c gtkthemes.c gtktoggleaction.c gtktogglebutton.c \
+-	gtktoggletoolbutton.c gtktoolbar.c gtktoolbutton.c \
+-	gtktoolitem.c gtktoolshell.c gtktooltip.c gtktreedatalist.c \
+-	gtktreednd.c gtktreemodel.c gtktreemodelfilter.c \
+-	gtktreemodelsort.c gtktreeselection.c gtktreesortable.c \
+-	gtktreestore.c gtktreeview.c gtktreeviewcolumn.c \
+-	gtktypebuiltins.c gtktypeutils.c gtkuimanager.c gtkvbbox.c \
+-	gtkvbox.c gtkvolumebutton.c gtkviewport.c gtkvpaned.c \
+-	gtkvruler.c gtkvscale.c gtkvscrollbar.c gtkvseparator.c \
+-	gtkwidget.c gtkwindow-decorate.c gtkwindow.c gtkclipboard.c \
+-	gtkdnd.c gtkclipboard-quartz.c gtkdnd-quartz.c gtkquartz.c \
+-	gtktext.c gtktree.c gtktreeitem.c gtkclist.c gtkcombo.c \
+-	gtkctree.c gtkfilesel.c gtkitemfactory.c gtklist.c \
+-	gtklistitem.c gtkoldeditable.c gtkoptionmenu.c gtkpixmap.c \
+-	gtkpreview.c gtkprogress.c gtksignal.c gtktipsquery.c \
+-	gtktooltips.c gtkcustompaperunixdialog.c \
++	gtkscrolledwindow.c gtkseparator.c gtkseparatormenuitem.c \
++	gtkseparatortoolitem.c gtksettings.c gtksizegroup.c gtkshow.c \
++	gtksocket.c gtkspinbutton.c gtkstatusbar.c gtkstatusicon.c \
++	gtkstock.c gtkstyle.c gtktable.c gtktearoffmenuitem.c \
++	gtktestutils.c gtktextbtree.c gtktextbuffer.c \
++	gtktextbufferrichtext.c gtktextbufferserialize.c \
++	gtktextchild.c gtktextdisplay.c gtktextiter.c gtktextlayout.c \
++	gtktextmark.c gtktextsegment.c gtktexttag.c gtktexttagtable.c \
++	gtktexttypes.c gtktextutil.c gtktextview.c gtkthemes.c \
++	gtktoggleaction.c gtktogglebutton.c gtktoggletoolbutton.c \
++	gtktoolbar.c gtktoolbutton.c gtktoolitem.c gtktoolshell.c \
++	gtktooltip.c gtktreedatalist.c gtktreednd.c gtktreemodel.c \
++	gtktreemodelfilter.c gtktreemodelsort.c gtktreeselection.c \
++	gtktreesortable.c gtktreestore.c gtktreeview.c \
++	gtktreeviewcolumn.c gtktypebuiltins.c gtktypeutils.c \
++	gtkuimanager.c gtkvbbox.c gtkvbox.c gtkvolumebutton.c \
++	gtkviewport.c gtkvpaned.c gtkvruler.c gtkvscale.c \
++	gtkvscrollbar.c gtkvseparator.c gtkwidget.c \
++	gtkwindow-decorate.c gtkwindow.c gtkselection.c gtkclipboard.c \
++	gtkdnd.c gtkselection-quartz.c gtkclipboard-quartz.c \
++	gtkdnd-quartz.c gtkquartz.c gtktext.c gtktree.c gtktreeitem.c \
++	gtkclist.c gtkcombo.c gtkctree.c gtkfilesel.c gtkitemfactory.c \
++	gtklist.c gtklistitem.c gtkoldeditable.c gtkoptionmenu.c \
++	gtkpixmap.c gtkpreview.c gtkprogress.c gtksignal.c \
++	gtktipsquery.c gtktooltips.c gtkcustompaperunixdialog.c \
+ 	gtkpagesetupunixdialog.c gtkprinter.c gtkprinteroption.c \
+ 	gtkprinteroptionset.c gtkprinteroptionwidget.c gtkprintjob.c \
+ 	gtkprintoperation-unix.c gtkprintunixdialog.c \
+@@ -430,31 +432,31 @@
+ 	gtkrecentchooserwidget.c gtkrecentchooserutils.c \
+ 	gtkrecentchooser.c gtkrecentfilter.c gtkrecentmanager.c \
+ 	gtkruler.c gtkscale.c gtkscalebutton.c gtkscrollbar.c \
+-	gtkscrolledwindow.c gtkselection.c gtkseparator.c \
+-	gtkseparatormenuitem.c gtkseparatortoolitem.c gtksettings.c \
+-	gtksizegroup.c gtkshow.c gtksocket.c gtkspinbutton.c \
+-	gtkstatusbar.c gtkstatusicon.c gtkstock.c gtkstyle.c \
+-	gtktable.c gtktearoffmenuitem.c gtktestutils.c gtktextbtree.c \
+-	gtktextbuffer.c gtktextbufferrichtext.c \
+-	gtktextbufferserialize.c gtktextchild.c gtktextdisplay.c \
+-	gtktextiter.c gtktextlayout.c gtktextmark.c gtktextsegment.c \
+-	gtktexttag.c gtktexttagtable.c gtktexttypes.c gtktextutil.c \
+-	gtktextview.c gtkthemes.c gtktoggleaction.c gtktogglebutton.c \
+-	gtktoggletoolbutton.c gtktoolbar.c gtktoolbutton.c \
+-	gtktoolitem.c gtktoolshell.c gtktooltip.c gtktreedatalist.c \
+-	gtktreednd.c gtktreemodel.c gtktreemodelfilter.c \
+-	gtktreemodelsort.c gtktreeselection.c gtktreesortable.c \
+-	gtktreestore.c gtktreeview.c gtktreeviewcolumn.c \
+-	gtktypebuiltins.c gtktypeutils.c gtkuimanager.c gtkvbbox.c \
+-	gtkvbox.c gtkvolumebutton.c gtkviewport.c gtkvpaned.c \
+-	gtkvruler.c gtkvscale.c gtkvscrollbar.c gtkvseparator.c \
+-	gtkwidget.c gtkwindow-decorate.c gtkwindow.c gtkclipboard.c \
+-	gtkdnd.c gtkclipboard-quartz.c gtkdnd-quartz.c gtkquartz.c \
+-	gtktext.c gtktree.c gtktreeitem.c gtkclist.c gtkcombo.c \
+-	gtkctree.c gtkfilesel.c gtkitemfactory.c gtklist.c \
+-	gtklistitem.c gtkoldeditable.c gtkoptionmenu.c gtkpixmap.c \
+-	gtkpreview.c gtkprogress.c gtksignal.c gtktipsquery.c \
+-	gtktooltips.c gtkcustompaperunixdialog.c \
++	gtkscrolledwindow.c gtkseparator.c gtkseparatormenuitem.c \
++	gtkseparatortoolitem.c gtksettings.c gtksizegroup.c gtkshow.c \
++	gtksocket.c gtkspinbutton.c gtkstatusbar.c gtkstatusicon.c \
++	gtkstock.c gtkstyle.c gtktable.c gtktearoffmenuitem.c \
++	gtktestutils.c gtktextbtree.c gtktextbuffer.c \
++	gtktextbufferrichtext.c gtktextbufferserialize.c \
++	gtktextchild.c gtktextdisplay.c gtktextiter.c gtktextlayout.c \
++	gtktextmark.c gtktextsegment.c gtktexttag.c gtktexttagtable.c \
++	gtktexttypes.c gtktextutil.c gtktextview.c gtkthemes.c \
++	gtktoggleaction.c gtktogglebutton.c gtktoggletoolbutton.c \
++	gtktoolbar.c gtktoolbutton.c gtktoolitem.c gtktoolshell.c \
++	gtktooltip.c gtktreedatalist.c gtktreednd.c gtktreemodel.c \
++	gtktreemodelfilter.c gtktreemodelsort.c gtktreeselection.c \
++	gtktreesortable.c gtktreestore.c gtktreeview.c \
++	gtktreeviewcolumn.c gtktypebuiltins.c gtktypeutils.c \
++	gtkuimanager.c gtkvbbox.c gtkvbox.c gtkvolumebutton.c \
++	gtkviewport.c gtkvpaned.c gtkvruler.c gtkvscale.c \
++	gtkvscrollbar.c gtkvseparator.c gtkwidget.c \
++	gtkwindow-decorate.c gtkwindow.c gtkselection.c gtkclipboard.c \
++	gtkdnd.c gtkselection-quartz.c gtkclipboard-quartz.c \
++	gtkdnd-quartz.c gtkquartz.c gtktext.c gtktree.c gtktreeitem.c \
++	gtkclist.c gtkcombo.c gtkctree.c gtkfilesel.c gtkitemfactory.c \
++	gtklist.c gtklistitem.c gtkoldeditable.c gtkoptionmenu.c \
++	gtkpixmap.c gtkpreview.c gtkprogress.c gtksignal.c \
++	gtktipsquery.c gtktooltips.c gtkcustompaperunixdialog.c \
+ 	gtkpagesetupunixdialog.c gtkprinter.c gtkprinteroption.c \
+ 	gtkprinteroptionset.c gtkprinteroptionwidget.c gtkprintjob.c \
+ 	gtkprintoperation-unix.c gtkprintunixdialog.c \
+@@ -516,31 +518,31 @@
+ 	gtkrecentchooserwidget.c gtkrecentchooserutils.c \
+ 	gtkrecentchooser.c gtkrecentfilter.c gtkrecentmanager.c \
+ 	gtkruler.c gtkscale.c gtkscalebutton.c gtkscrollbar.c \
+-	gtkscrolledwindow.c gtkselection.c gtkseparator.c \
+-	gtkseparatormenuitem.c gtkseparatortoolitem.c gtksettings.c \
+-	gtksizegroup.c gtkshow.c gtksocket.c gtkspinbutton.c \
+-	gtkstatusbar.c gtkstatusicon.c gtkstock.c gtkstyle.c \
+-	gtktable.c gtktearoffmenuitem.c gtktestutils.c gtktextbtree.c \
+-	gtktextbuffer.c gtktextbufferrichtext.c \
+-	gtktextbufferserialize.c gtktextchild.c gtktextdisplay.c \
+-	gtktextiter.c gtktextlayout.c gtktextmark.c gtktextsegment.c \
+-	gtktexttag.c gtktexttagtable.c gtktexttypes.c gtktextutil.c \
+-	gtktextview.c gtkthemes.c gtktoggleaction.c gtktogglebutton.c \
+-	gtktoggletoolbutton.c gtktoolbar.c gtktoolbutton.c \
+-	gtktoolitem.c gtktoolshell.c gtktooltip.c gtktreedatalist.c \
+-	gtktreednd.c gtktreemodel.c gtktreemodelfilter.c \
+-	gtktreemodelsort.c gtktreeselection.c gtktreesortable.c \
+-	gtktreestore.c gtktreeview.c gtktreeviewcolumn.c \
+-	gtktypebuiltins.c gtktypeutils.c gtkuimanager.c gtkvbbox.c \
+-	gtkvbox.c gtkvolumebutton.c gtkviewport.c gtkvpaned.c \
+-	gtkvruler.c gtkvscale.c gtkvscrollbar.c gtkvseparator.c \
+-	gtkwidget.c gtkwindow-decorate.c gtkwindow.c gtkclipboard.c \
+-	gtkdnd.c gtkclipboard-quartz.c gtkdnd-quartz.c gtkquartz.c \
+-	gtktext.c gtktree.c gtktreeitem.c gtkclist.c gtkcombo.c \
+-	gtkctree.c gtkfilesel.c gtkitemfactory.c gtklist.c \
+-	gtklistitem.c gtkoldeditable.c gtkoptionmenu.c gtkpixmap.c \
+-	gtkpreview.c gtkprogress.c gtksignal.c gtktipsquery.c \
+-	gtktooltips.c gtkcustompaperunixdialog.c \
++	gtkscrolledwindow.c gtkseparator.c gtkseparatormenuitem.c \
++	gtkseparatortoolitem.c gtksettings.c gtksizegroup.c gtkshow.c \
++	gtksocket.c gtkspinbutton.c gtkstatusbar.c gtkstatusicon.c \
++	gtkstock.c gtkstyle.c gtktable.c gtktearoffmenuitem.c \
++	gtktestutils.c gtktextbtree.c gtktextbuffer.c \
++	gtktextbufferrichtext.c gtktextbufferserialize.c \
++	gtktextchild.c gtktextdisplay.c gtktextiter.c gtktextlayout.c \
++	gtktextmark.c gtktextsegment.c gtktexttag.c gtktexttagtable.c \
++	gtktexttypes.c gtktextutil.c gtktextview.c gtkthemes.c \
++	gtktoggleaction.c gtktogglebutton.c gtktoggletoolbutton.c \
++	gtktoolbar.c gtktoolbutton.c gtktoolitem.c gtktoolshell.c \
++	gtktooltip.c gtktreedatalist.c gtktreednd.c gtktreemodel.c \
++	gtktreemodelfilter.c gtktreemodelsort.c gtktreeselection.c \
++	gtktreesortable.c gtktreestore.c gtktreeview.c \
++	gtktreeviewcolumn.c gtktypebuiltins.c gtktypeutils.c \
++	gtkuimanager.c gtkvbbox.c gtkvbox.c gtkvolumebutton.c \
++	gtkviewport.c gtkvpaned.c gtkvruler.c gtkvscale.c \
++	gtkvscrollbar.c gtkvseparator.c gtkwidget.c \
++	gtkwindow-decorate.c gtkwindow.c gtkselection.c gtkclipboard.c \
++	gtkdnd.c gtkselection-quartz.c gtkclipboard-quartz.c \
++	gtkdnd-quartz.c gtkquartz.c gtktext.c gtktree.c gtktreeitem.c \
++	gtkclist.c gtkcombo.c gtkctree.c gtkfilesel.c gtkitemfactory.c \
++	gtklist.c gtklistitem.c gtkoldeditable.c gtkoptionmenu.c \
++	gtkpixmap.c gtkpreview.c gtkprogress.c gtksignal.c \
++	gtktipsquery.c gtktooltips.c gtkcustompaperunixdialog.c \
+ 	gtkpagesetupunixdialog.c gtkprinter.c gtkprinteroption.c \
+ 	gtkprinteroptionset.c gtkprinteroptionwidget.c gtkprintjob.c \
+ 	gtkprintoperation-unix.c gtkprintunixdialog.c \
+@@ -799,6 +801,7 @@
+ PACKAGE_NAME = @PACKAGE_NAME@
+ PACKAGE_STRING = @PACKAGE_STRING@
+ PACKAGE_TARNAME = @PACKAGE_TARNAME@
++PACKAGE_URL = @PACKAGE_URL@
+ PACKAGE_VERSION = @PACKAGE_VERSION@
+ PANGO_PREFIX = @PANGO_PREFIX@
+ PATH_SEPARATOR = @PATH_SEPARATOR@
+@@ -1133,25 +1136,25 @@
+ 	gtkrecentchooserwidget.c gtkrecentchooserutils.c \
+ 	gtkrecentchooser.c gtkrecentfilter.c gtkrecentmanager.c \
+ 	gtkruler.c gtkscale.c gtkscalebutton.c gtkscrollbar.c \
+-	gtkscrolledwindow.c gtkselection.c gtkseparator.c \
+-	gtkseparatormenuitem.c gtkseparatortoolitem.c gtksettings.c \
+-	gtksizegroup.c gtkshow.c gtksocket.c gtkspinbutton.c \
+-	gtkstatusbar.c gtkstatusicon.c gtkstock.c gtkstyle.c \
+-	gtktable.c gtktearoffmenuitem.c gtktestutils.c gtktextbtree.c \
+-	gtktextbuffer.c gtktextbufferrichtext.c \
+-	gtktextbufferserialize.c gtktextchild.c gtktextdisplay.c \
+-	gtktextiter.c gtktextlayout.c gtktextmark.c gtktextsegment.c \
+-	gtktexttag.c gtktexttagtable.c gtktexttypes.c gtktextutil.c \
+-	gtktextview.c gtkthemes.c gtktoggleaction.c gtktogglebutton.c \
+-	gtktoggletoolbutton.c gtktoolbar.c gtktoolbutton.c \
+-	gtktoolitem.c gtktoolshell.c gtktooltip.c gtktreedatalist.c \
+-	gtktreednd.c gtktreemodel.c gtktreemodelfilter.c \
+-	gtktreemodelsort.c gtktreeselection.c gtktreesortable.c \
+-	gtktreestore.c gtktreeview.c gtktreeviewcolumn.c \
+-	gtktypebuiltins.c gtktypeutils.c gtkuimanager.c gtkvbbox.c \
+-	gtkvbox.c gtkvolumebutton.c gtkviewport.c gtkvpaned.c \
+-	gtkvruler.c gtkvscale.c gtkvscrollbar.c gtkvseparator.c \
+-	gtkwidget.c gtkwindow-decorate.c gtkwindow.c \
++	gtkscrolledwindow.c gtkseparator.c gtkseparatormenuitem.c \
++	gtkseparatortoolitem.c gtksettings.c gtksizegroup.c gtkshow.c \
++	gtksocket.c gtkspinbutton.c gtkstatusbar.c gtkstatusicon.c \
++	gtkstock.c gtkstyle.c gtktable.c gtktearoffmenuitem.c \
++	gtktestutils.c gtktextbtree.c gtktextbuffer.c \
++	gtktextbufferrichtext.c gtktextbufferserialize.c \
++	gtktextchild.c gtktextdisplay.c gtktextiter.c gtktextlayout.c \
++	gtktextmark.c gtktextsegment.c gtktexttag.c gtktexttagtable.c \
++	gtktexttypes.c gtktextutil.c gtktextview.c gtkthemes.c \
++	gtktoggleaction.c gtktogglebutton.c gtktoggletoolbutton.c \
++	gtktoolbar.c gtktoolbutton.c gtktoolitem.c gtktoolshell.c \
++	gtktooltip.c gtktreedatalist.c gtktreednd.c gtktreemodel.c \
++	gtktreemodelfilter.c gtktreemodelsort.c gtktreeselection.c \
++	gtktreesortable.c gtktreestore.c gtktreeview.c \
++	gtktreeviewcolumn.c gtktypebuiltins.c gtktypeutils.c \
++	gtkuimanager.c gtkvbbox.c gtkvbox.c gtkvolumebutton.c \
++	gtkviewport.c gtkvpaned.c gtkvruler.c gtkvscale.c \
++	gtkvscrollbar.c gtkvseparator.c gtkwidget.c \
++	gtkwindow-decorate.c gtkwindow.c \
+ 	$(gtk_clipboard_dnd_c_sources) gtktext.c gtktree.c \
+ 	gtktreeitem.c gtkclist.c gtkcombo.c gtkctree.c gtkfilesel.c \
+ 	gtkitemfactory.c gtklist.c gtklistitem.c gtkoldeditable.c \
+@@ -1208,8 +1211,8 @@
+ 	gtkmountoperation-stub.c
+ 
+ @USE_QUARTZ_TRUE@@USE_WIN32_FALSE@@USE_X11_FALSE@gtk_use_quartz_c_sources_CFLAGS = "-xobjective-c"
+-@USE_QUARTZ_FALSE@gtk_clipboard_dnd_c_sources = gtkclipboard.c gtkdnd.c
+-@USE_QUARTZ_TRUE@gtk_clipboard_dnd_c_sources = gtkclipboard-quartz.c gtkdnd-quartz.c gtkquartz.c
++@USE_QUARTZ_FALSE@gtk_clipboard_dnd_c_sources = gtkselection.c gtkclipboard.c gtkdnd.c
++@USE_QUARTZ_TRUE@gtk_clipboard_dnd_c_sources = gtkselection.c gtkselection-quartz.c gtkclipboard-quartz.c gtkdnd-quartz.c gtkquartz.c
+ @USE_QUARTZ_TRUE@gtk_clipboard_dnd_h_sources = gtkquartz.h
+ @USE_QUARTZ_FALSE@gtk_clipboard_dnd_c_sources_CFLAGS = 
+ @USE_QUARTZ_TRUE@gtk_clipboard_dnd_c_sources_CFLAGS = "-xobjective-c"
+@@ -1922,6 +1925,7 @@
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gtksearchenginequartz.Plo@am__quote@
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gtksearchenginesimple.Plo@am__quote@
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gtksearchenginetracker.Plo@am__quote@
++@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gtkselection-quartz.Plo@am__quote@
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gtkselection.Plo@am__quote@
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gtkseparator.Plo@am__quote@
+ @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/gtkseparatormenuitem.Plo@am__quote@
