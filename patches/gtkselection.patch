@@ -427,7 +427,7 @@ index 0000000..19c864a
 + * Return value: %TRUE if the event was handled, otherwise false
 + **/
 +gboolean
-+_gtk_selection_clear (GtkWidget         *widget,
++gtk_selection_clear (GtkWidget         *widget,
 +		     GdkEventSelection *event)
 +{
 +  gtk_selection_clear_targets (widget, event->selection);
@@ -489,7 +489,7 @@ index 0000000..19c864a
 + *************************************************************/
 +
 +gboolean
-+gtk_selection_notify (GtkWidget	       *widget,
++_gtk_selection_notify (GtkWidget	       *widget,
 +		       GdkEventSelection *event)
 +{
 +  g_print ("Selection_Notifications should not occur in quartz\n");  
