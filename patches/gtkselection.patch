@@ -148,7 +148,7 @@ new file mode 100644
 index 0000000..19c864a
 --- /dev/null
 +++ b/gtk/gtkselection-quartz.c
-@@ -0,0 +1,663 @@
+@@ -0,0 +1,668 @@
 +/* GTK - The GIMP Toolkit
 + * Copyright (C) 1995-1997 Peter Mattis, Spencer Kimball and Josh MacDonald
 + *
@@ -568,8 +568,13 @@ index 0000000..19c864a
 +			gpointer owner)
 +{
 +  GtkWidget *widget = GTK_WIDGET (owner);
++  GdkEventSelection event;
++  event.type = GDK_SELECTION_CLEAR;
++  event.selection = GDK_SELECTION_PRIMARY;
++  event.window = gtk_widget_get_window(widget);
 +  g_signal_emit_by_name (widget,
 +			 "selection-clear-event",
++			 &event,
 +			 NULL);
 +}
 +
