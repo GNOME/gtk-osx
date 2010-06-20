@@ -66,8 +66,8 @@
   </autotools>
 
   <autotools id="gtk-css-engine" autogen-sh="configure">
-    <branch module="gtk-css-engine/0.3/gtk-css-engine.0.3.1.tar.bz2"
-            version="0.3" hash="sha256:c1d0000e00516b50f976db7726cd3f5e6318182704ad04be980d4ec7731e75d4"/>
+    <branch module="gtk-css-engine/0.3/gtk-css-engine-0.3.1.tar.bz2"
+            version="0.3.1" hash="sha256:c1d0000e00516b50f976db7726cd3f5e6318182704ad04be980d4ec7731e75d4"/>
     <after>
       <dep package="meta-gtk-osx-core"/>
     </after>
