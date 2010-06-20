@@ -4,12 +4,16 @@
 <moduleset>
   <repository type="tarball" name="ftp.gnome.org" default="yes" 
               href="http://ftp.gnome.org/pub/GNOME/sources/"/>
+  <repository type="git" name="git.gnome.org"
+              href="git://git.gnome.org/"/>
   <repository type="tarball" name="sourceforge" 
 	      href="http://downloads.sourceforge.net/sourceforge/"/>
   <repository type="tarball" name="tango.freedesktop.org"
               href="http://tango.freedesktop.org/releases/"/>
   <repository type="tarball" name="icon-theme.freedesktop.org"
 	      href="http://icon-theme.freedesktop.org/releases"/>
+  <repository type="git" name="freedesktop.git"
+	      href="git://anongit.freedesktop.org/git/"/>
 
   <metamodule id="meta-gtk-osx-themes">
     <dependencies>
@@ -65,9 +69,31 @@
     </after>
   </autotools>
 
-  <autotools id="gtk-css-engine" autogen-sh="configure">
-    <branch module="gtk-css-engine/0.3/gtk-css-engine-0.3.1.tar.bz2"
-            version="0.3.1" hash="sha256:c1d0000e00516b50f976db7726cd3f5e6318182704ad04be980d4ec7731e75d4"/>
+  <autotools id="librsvg">
+    <branch module="librsvg/2.26/librsvg-2.26.3.tar.bz2" version="2.26.3"
+	    hash="sha256:c0005f9471b4bd3ba4873d165d8e481ee6b1d124dda4efc6bdc24b7da024b7e5"/>
+  </autotools>
+
+  <autotools id="libcroco">
+    <branch module="libcroco/0.6/libcroco-0.6.2.tar.bz2" version="0.6.2"
+	    hash="sha256:be24853f64c09b63d39e563fb0222e29bae1a33c3d9f6cbffc0bc27669371749"/>
+    <dependencies>
+      <dep package="librsvg"/>
+    </dependencies>
+  </autotools>
+
+  <autotools id="libccss" autogenargs="--disable-examples">
+    <branch module="ccss" repo="freedesktop.git"/>
+    <dependencies>
+      <dep package="libcroco"/>
+    </dependencies>
+  </autotools>
+
+  <autotools id="gtk-css-engine" >
+    <branch module="gtk-css-engine" repo="git.gnome.org"/>
+    <dependencies>
+      <dep package="libccss"/>
+    </dependencies>
     <after>
       <dep package="meta-gtk-osx-core"/>
     </after>
