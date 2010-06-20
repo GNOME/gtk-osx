@@ -189,6 +189,14 @@ def setup_sdk(target, sdk_version, architectures=[_default_arch]):
             #
             os.environ["CUPS_CONFIG"] = os.path.join(sdkdir, 
                                                      "usr/bin/cups-config")
+    if (sdk_version == "10.6" or 
+        _osx_version.startswith("10") and sdk_version == "native"):
+            # Use libxml/libxslt from the system. Append to the
+            # pkg-config path to get the system versions picked up.
+            #
+            skip.append("libxml2")
+            skip.append("libxslt")
+            addpath("PKG_CONFIG_PATH", "/usr/lib/pkgconfig")
 
     #Glib and autoconf-2.63 have issues with endianness
     #
@@ -515,13 +523,6 @@ else:
 if not _gtk_osx_use_jhbuild_bison_flex:
     skip.append('bison')
     skip.append('flex')
-
-# Use libxml/libxslt from the system. Append to the pkg-config path to
-# get the system versions picked up.
-#
-skip.append("libxml2")
-skip.append("libxslt")
-addpath("PKG_CONFIG_PATH", "/usr/lib/pkgconfig")
 
 # The option "headerpad_max_install_names" is there to leave some room for
 # changing the library locations with install_name_tool. Note that GNU
