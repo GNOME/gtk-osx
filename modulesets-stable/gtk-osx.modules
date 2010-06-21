@@ -54,8 +54,8 @@
   </metamodule>
 
   <autotools id="glib" autogen-sh="configure">
-    <branch module="glib/2.22/glib-2.22.2.tar.bz2"  version="2.22.2"
-            hash="sha256:a4a41d02fc2d3f5effa1fc3466918e0b3ab60e9eb0a08139b997f2649cbacca3"/>
+    <branch module="glib/2.24/glib-2.24.1.tar.bz2"  version="2.24.1"
+            hash="sha256:014c3da960bf17117371075c16495f05f36501db990851ceea658f15d2ea6d04"/>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
       <dep package="gtk-doc"/> 
@@ -66,11 +66,11 @@
   <autotools id="pango"  autogen-sh="configure"
              autogenargs="--without-x --with-included-modules=basic-atsui"
              makeargs="-k -C modules; make">
-    <!-- The last version that will build on Tiger is 1.24.5
-    branch version="1.26.0" module="pango/1.26/pango-1.26.0.tar.bz2"
-            hash="sha256:e1bfaefd2614ff86d531152f31fbf4a61aea723eef19b132733ccd3eb8d9a6c3"/ -->
-    <branch version="1.24.5" module="pango/1.24/pango-1.24.5.tar.bz2"
-            hash="sha256:0f733d1ec3e8dafcae152d7ac58f1090bee1fd856176c8fee0e81b0e42392f4e">
+    <!-- The last version that will build on Tiger is 1.24.5 -->
+    <branch version="1.28.1" module="pango/1.28/pango-1.28.1.tar.bz2"
+            hash="sha256:8f3eaab506f613dd25bb1fa65ea87a145d523d066d90c227bdb3016523451bc2">
+<!--    <branch version="1.24.5" module="pango/1.24/pango-1.24.5.tar.bz2"
+            hash="sha256:0f733d1ec3e8dafcae152d7ac58f1090bee1fd856176c8fee0e81b0e42392f4e">-->
   <patch file="http://github.com/jralls/gtk-osx-build/raw/master/patches/pangoatsui-fontname.patch" strip="1"/> 
     </branch>
     <dependencies>
@@ -85,8 +85,8 @@
   </autotools>
 
  <autotools id="atk" autogen-sh="configure">
-    <branch module="atk/1.28/atk-1.28.0.tar.bz2" version="1.28.0"
-            hash="sha256:e4da9fe580d2d55f4e77a138c553b4b32654dfb06bf0715592cc9dbd6355fe87"/>
+    <branch module="atk/1.30/atk-1.30.0.tar.bz2" version="1.30.0"
+            hash="sha256:92b9b1213cafc68fe9c3806273b968c26423237d7b1f631dd83dc5270b8c268c"/>
     <dependencies>
       <dep package="glib"/>
     </dependencies>
@@ -97,8 +97,8 @@
 
   <autotools id="gtk+"  autogen-sh="configure"
              autogenargs="--with-gdktarget=quartz --without-libjasper">
-    <branch module="gtk+/2.18/gtk+-2.18.2.tar.bz2" version="2.18.2"
-            hash="sha256:5e0832e154b4accab8286ae724ddbad5d701f4af6a9291582d1430b9f360f5f1">
+    <branch module="gtk+/2.20/gtk+-2.20.1.tar.bz2" version="2.20.1"
+            hash="sha256:0e081731d21e34ff45c82199490c2889504fa8b3c7e117c043e82ababaec0f65">
       <patch file="http://github.com/jralls/gtk-osx-build/raw/master/patches/gdk-quartz-input-window.patch" strip="1"/> 
       <patch file="http://github.com/jralls/gtk-osx-build/raw/master/patches/gtkselection.patch" strip="1"/>
       <patch file="http://github.com/jralls/gtk-osx-build/raw/master/patches/gtkcups.patch" strip="1"/>

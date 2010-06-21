@@ -62,8 +62,8 @@
   </autotools>
 
   <autotools id="gtk-engines" autogen-sh="configure">
-    <branch module="gtk-engines/2.18/gtk-engines-2.18.4.tar.bz2"
-            version="2.18.4" hash="sha256:846e138c45f951451246fa7550e883ba695c2597ffe74b24fafd0cc5c21e1272"/>
+    <branch module="gtk-engines/2.20/gtk-engines-2.20.1.tar.bz2"
+            version="2.18.4" hash="sha256:c502ee4778e1a8e232f430fb575146a0880266471d19dbd78ee51eaa769da614"/>
     <after>
       <dep package="meta-gtk-osx-core"/>
     </after>
