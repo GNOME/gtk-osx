@@ -69,6 +69,11 @@
     </after>
   </autotools>
 
+  <autotools id="murrine-engine" autogen-sh="configure">
+    <branch module="murrine/0.90/murrine-0.90.3.tar.bz2" version="0.90.3"
+	    hash="sha256:c61ff7614e68b705560612ea7485454d1a7947422ac8cfe11d75e45370e2f0ba"/>
+  </autotools>
+
   <autotools id="librsvg">
     <branch module="librsvg/2.26/librsvg-2.26.3.tar.bz2" version="2.26.3"
 	    hash="sha256:c0005f9471b4bd3ba4873d165d8e481ee6b1d124dda4efc6bdc24b7da024b7e5"/>
