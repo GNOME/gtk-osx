@@ -23,6 +23,8 @@
               href="http://ftp.gnu.org/gnu/"/>
   <repository type="tarball" name="curl.haxx.se"
               href="http://curl.haxx.se/download/"/>
+  <repository type="tarball" name="xmlsoft.org"
+	      href="ftp://xmlsoft.org/libxml2/"/>
 
   <autotools id='libiconv' autogen-sh='configure'>
     <branch module="libiconv/libiconv-1.13.1.tar.gz" version="1.1.3.1"
@@ -129,13 +131,13 @@
   </autotools>
 
   <autotools id="libxml2" autogen-sh="configure">
-    <branch version="2.6.30" module="libxml2/2.6/libxml2-2.6.30.tar.bz2"
-	    md5sum="cbc6d381daaa836b90a7ab449c1bc1ae"/>
+    <branch version="2.7.7" module="libxml2-2.7.7.tar.gz"
+	    repo="xmlsoft.org"/>
   </autotools>
 
   <autotools id="libxslt" autogen-sh="configure">
-    <branch version="1.1.22" module="libxslt/1.1/libxslt-1.1.22.tar.bz2"
-	    md5sum="f2061dddea77257488601e20e2f3b5a7"/>
+    <branch version="1.1.26" module="libxslt-1.1.26.tar.gz"
+	    repo="xmlsoft.org"/>
     <dependencies>
       <dep package="libxml2"/>
     </dependencies>
