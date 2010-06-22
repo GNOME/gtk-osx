@@ -102,6 +102,7 @@
       <patch file="http://github.com/jralls/gtk-osx-build/raw/master/patches/gdk-quartz-input-window.patch" strip="1"/> 
       <patch file="http://github.com/jralls/gtk-osx-build/raw/master/patches/gtkselection.patch" strip="1"/>
       <patch file="http://github.com/jralls/gtk-osx-build/raw/master/patches/gtkcups.patch" strip="1"/>
+      <patch file="http://github.com/jralls/gtk-osx-build/raw/master/patches/gdkwindow-quartz.patch" strip="1"/>
     </branch>
     <dependencies>
       <dep package="pango"/>
