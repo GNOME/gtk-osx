@@ -51,7 +51,7 @@
   </metamodule>
 
   <autotools id="glib">
-    <branch revision="glib-2-22"/>
+    <branch revision="glib-2-24"/>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
       <dep package="gtk-doc"/> <!-- FIXME: http://bugs.gnome.org/546640 -->
@@ -74,7 +74,7 @@
   </autotools>
 
  <autotools id="atk">
-    <branch revision="gnome-2-28"/>
+    <branch revision="gnome-2-30"/>
     <dependencies>
       <dep package="glib"/>
     </dependencies>
@@ -84,7 +84,7 @@
   </autotools>
 
   <autotools id="gtk+" autogenargs="--with-gdktarget=quartz --without-libjasper">
-    <branch revision="gtk-2-18"/>
+    <branch revision="gtk-2-20"/>
     <dependencies>
       <dep package="pango"/>
       <dep package="atk"/>
@@ -95,7 +95,7 @@
   </autotools>
 
   <autotools id="pixman" autogenargs="--disable-gtk">
-    <branch repo="cairographics" module="pixman" tag="pixman-0.15.12"/>
+    <branch repo="cairographics" module="pixman" tag="pixman-0.16.0"/>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
     </after>
