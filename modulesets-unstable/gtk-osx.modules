@@ -50,7 +50,7 @@
     </after>
   </metamodule>
 
-  <autotools id="glib">
+  <autotools id="glib" autogenargs="--disable-dtrace">
     <branch />
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
@@ -107,7 +107,7 @@
     </after>
   </autotools>
 
-  <autotools id="pixman" autogenargs="--disable-gtk">
+  <autotools id="pixman" autogenargs="--disable-gtk --disable-openmp">
     <branch repo="cairographics" module="pixman" />
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
