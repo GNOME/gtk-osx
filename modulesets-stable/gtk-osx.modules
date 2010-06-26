@@ -136,8 +136,8 @@
   <autotools id="ige-mac-integration" autogen-sh="configure"
              autogenargs="--disable-python">
     <branch repo="sourceforge"
-	    module="gtk-osx/ige-mac-integration-0.9.3.tar.gz"
-            version="0.9.3">
+	    module="gtk-osx/ige-mac-integration-0.9.4.tar.gz"
+            version="0.9.4">
     </branch>
     <dependencies>
       <dep package="gtk+"/>
