@@ -53,7 +53,7 @@
   <autotools id="pygtk" autogen-sh="configure">
     <branch version="2.16.0" module="pygtk/2.16/pygtk-2.16.0.tar.bz2"
             hash="sha256:7fae5e01af217a01738eae41c38ad7f86d1f538f444300d0fa2847aafb7444a8">
-      <patch file="http://github.com/jralls/gtk-osx-build/raw/master/patches/pygtk.patch" strip="0"/>
+      <patch file="http://github.com/jralls/gtk-osx-build/raw/master/patches/pygtk.patch" strip="1"/>
     </branch>
     <dependencies>
       <dep package="pygobject"/>
