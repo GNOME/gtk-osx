@@ -1,14 +1,13 @@
-diff --git a/gtk/gtk.override b/gtk/gtk.override
-index fa05771..bdf9c27 100644
---- a/gtk/gtk.override
-+++ b/gtk/gtk.override
-@@ -1195,7 +1195,8 @@ pygtk_main_watch_finalize(GSource *source)
+--- a/gtk/gtk.override	2010-07-15 09:51:18.000000000 +0200
++++ b/gtk/gtk.override	2010-07-15 10:02:45.000000000 +0200
+@@ -1194,8 +1194,8 @@
+     PySignalWatchSource *real_source = (PySignalWatchSource*)source;
  
      if (source != NULL) {
- 	if (real_source->fds[0] != 0)
+-	if (real_source->fds[0] != 0)
 -	    close(real_source->fds[0]);
++//	if (real_source->fds[0] != 0)
 +//	    close(real_source->fds[0]);
-+ 	    continue;
  	
  	if (real_source->fds[1] != 0) {
  #if HAVE_PYSIGNAL_SETWAKEUPFD
