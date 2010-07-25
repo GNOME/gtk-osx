@@ -13,8 +13,8 @@
 	      href="http://downloads.sourceforge.net/sourceforge/"/>
   <repository type="tarball" name="jpeg"
 	      href="http://www.ijg.org/files/"/>
-  <repository type="tarball" name="remotesensing"
-	      href="ftp://ftp.remotesensing.org/pub/"/>
+  <repository type="tarball" name="libtiff"
+	      href="http://download.osgeo.org/"/>
   <repository type="tarball" name="fontconfig"
 	      href="http://www.fontconfig.org/release/"/>
   <repository type="tarball" name="icon-theme"
@@ -55,7 +55,7 @@
   <autotools id="libtiff" autogen-sh="configure"
 	     autogenargs="--without-x --without-apple-opengl-framework">
     <branch version="3.9.1" module="libtiff/tiff-3.9.1.tar.gz"
-	    repo="remotesensing"/>
+	    repo="libtiff"/>
     <dependencies>
       <dep package="libjpeg"/>
     </dependencies>
