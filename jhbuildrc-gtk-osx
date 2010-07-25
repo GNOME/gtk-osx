@@ -180,6 +180,10 @@ def setup_sdk(target, sdk_version, architectures=[_default_arch]):
         # problems. But we don't really need to set it for 10.4 so just
         # skip that.
         #
+
+#Apple Documentation says that "-syslibroot" is the arg to pass to the
+#linker, but we are using the compiler to control the linker, and
+#everything seems to be working correctly.
         if not _osx_version.startswith("8."):
             environ_append("CFLAGS", "-isysroot " + sdkdir)
             environ_append("CXXFLAGS", "-isysroot " + sdkdir)
