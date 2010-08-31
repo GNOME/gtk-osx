@@ -97,7 +97,7 @@
   </autotools>
 
   <autotools id="gtk+" 
-	     autogenargs="--with-gdktarget=quartz --without-libjasper">
+	     autogenargs="--with-gdktarget=quartz --enable-introspection=no">
     <branch revision="gtk-2-22" checkoutdir="gtk+-2.0"/>
     <dependencies>
       <dep package="pango"/>
@@ -109,7 +109,7 @@
   </autotools>
 
   <autotools id="gtk+-3.0" 
-	     autogenargs="--with-gdktarget=quartz --without-libjasper">
+	     autogenargs="--with-gdktarget=quartz --enable-introspection=no">
     <branch checkoutdir="gtk+-3.0"/>
     <dependencies>
       <dep package="pango"/>

@@ -96,7 +96,7 @@
   </autotools>
 
   <autotools id="gtk+"  autogen-sh="configure"
-             autogenargs="--with-gdktarget=quartz --without-libjasper">
+             autogenargs="--with-gdktarget=quartz --enable-introspection=no">
     <branch module="gtk+/2.20/gtk+-2.20.1.tar.bz2" version="2.20.1"
             hash="sha256:0e081731d21e34ff45c82199490c2889504fa8b3c7e117c043e82ababaec0f65">
       <patch file="http://github.com/jralls/gtk-osx-build/raw/master/patches/gtkselection.patch" strip="1"/>
