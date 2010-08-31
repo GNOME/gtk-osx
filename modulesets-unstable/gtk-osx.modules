@@ -76,7 +76,7 @@
     <branch />
     <dependencies>
       <dep package="glib"/>
-      <!-- dep package="gobject-introspection"/ -->
+      <dep package="gobject-introspection"/>
       <dep package="cairo"/>
       <dep package="fontconfig"/>
       <dep package="freetype"/>
@@ -96,11 +96,26 @@
     </after>
   </autotools>
 
+  <autotools id="gobject-introspection">
+    <branch/>
+    <dependencies>
+      <dep package="glib"/>
+    </dependencies>
+  </autotools>
+
+  <autotools id="gir-repository">
+    <branch/>
+    <dependencies>
+      <dep package="gobject-introspection"/>
+    </dependencies>
+  </autotools>
+
   <autotools id="gtk+" 
 	     autogenargs="--with-gdktarget=quartz --enable-introspection=no">
     <branch revision="gtk-2-22" checkoutdir="gtk+-2.0"/>
     <dependencies>
       <dep package="pango"/>
+      <dep package="gir-repository"/>
       <dep package="atk"/>
     </dependencies>
     <after>

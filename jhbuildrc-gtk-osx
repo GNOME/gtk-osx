@@ -558,6 +558,7 @@ append_autogenargs("gettext", "--without-emacs --disable-java --disable-native-j
 #Freetype has -ansi added by its configure, but uses c99 code
 #
 append_autogenargs("freetype", 'CFLAGS="$CFLAGS -std=c99"')
+append_autogenargs("gobject-introspection", 'CFLAGS="$CFLAGS -std=c99"')
 
 #GConf needs to be built static, overriding the generic autogenargs,
 #but including it in the module puts it in front of where autogenargs
