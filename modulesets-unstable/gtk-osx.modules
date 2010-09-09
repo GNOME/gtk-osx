@@ -117,12 +117,20 @@
     </after>
   </autotools>
 
+  <autotools id="gdk-pixbuf">
+    <branch />
+    <after>
+      <dep package="pango"/>
+    </after>
+  </autotools>
+
   <autotools id="gtk+-3.0" 
 	     autogenargs="--with-gdktarget=quartz">
     <branch module="gtk+" checkoutdir="gtk+-3.0"/>
     <dependencies>
       <dep package="pango"/>
       <dep package="gir-repository"/>
+      <dep package="gdk-pixbuf"/>
      <dep package="atk"/>
     </dependencies>
     <after>
@@ -152,9 +160,6 @@
   <autotools id="ige-mac-integration" autogenargs="--disable-python">
     <branch repo="github"
 	    module="jralls/ige-mac-integration" />
-    <dependencies>
-      <dep package="gtk+"/>
-    </dependencies>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
     </after>
