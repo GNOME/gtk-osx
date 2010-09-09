@@ -10,6 +10,8 @@
               href="http://cairographics.org/releases/"/>
   <repository type="tarball" name="ftp.gnu.org"
               href="http://ftp.gnu.org/gnu/"/>
+  <repository type="tarball" name="github.com"
+              href="http://github.com/"/>
 
   <!-- This module set works a bit differently than for example the
        GNOME ones do. It's split up in seperate pieces:
@@ -63,6 +65,29 @@
     </after>
   </autotools>
 
+  <autotools id="libffi">
+    <branch module="atgreen/libffi/tarball/v3.0.9" repo="github.com" 
+            version="3.0.9" checkoutdir="atgreen-libffi-873d687"/>
+  </autotools>
+
+  <autotools id="gobject-introspection">
+    <branch module="gobject-introspection/0.9/gobject-introspection-0.9.3.tar.bz2"
+            version="0.9.2"/>
+    <dependencies>
+      <dep package="glib"/>
+      <dep package="cairo"/>
+     <dep package="libffi"/>
+    </dependencies>
+  </autotools>
+
+   <autotools id="gir-repository">
+    <branch module="gir-repository/0.6/gir-repository-0.6.5.tar.bz2" 
+            version="0.6.5"/>
+    <dependencies>
+      <dep package="gobject-introspection"/>
+    </dependencies>
+  </autotools>
+
   <autotools id="pango"  autogen-sh="configure"
              autogenargs="--without-x --with-included-modules=basic-atsui"
              makeargs="-k -C modules; make">
@@ -76,6 +101,7 @@
     <dependencies>
       <dep package="glib"/>
       <dep package="cairo"/>
+      <dep package="gobject-introspection"/>
       <dep package="fontconfig"/>
       <dep package="freetype"/>
     </dependencies>
@@ -96,17 +122,20 @@
   </autotools>
 
   <autotools id="gtk+"  autogen-sh="configure"
-             autogenargs="--with-gdktarget=quartz --enable-introspection=no">
+             autogenargs="--with-gdktarget=quartz">
     <branch module="gtk+/2.20/gtk+-2.20.1.tar.bz2" version="2.20.1"
             hash="sha256:0e081731d21e34ff45c82199490c2889504fa8b3c7e117c043e82ababaec0f65">
       <patch file="http://github.com/jralls/gtk-osx-build/raw/master/patches/gtkselection.patch" strip="1"/>
       <patch file="http://github.com/jralls/gtk-osx-build/raw/master/patches/gtkcups.patch" strip="1"/>
       <patch file="http://github.com/jralls/gtk-osx-build/raw/master/patches/gdkwindow-quartz.patch" strip="1"/>
       <patch file="http://github.com/jralls/gtk-osx-build/raw/master/patches/gtk_meta.patch" strip="1"/>
+      <patch file="http://github.com/jralls/gtk-osx-build/raw/master/patches/gtk-introspection.patch" strip="1"/>
+      <patch file="http://github.com/jralls/gtk-osx-build/raw/master/patches/gtk-keyhash.patch" strip="1"/>
     </branch>
     <dependencies>
       <dep package="pango"/>
       <dep package="atk"/>
+      <dep package="gir-repository"/>
     </dependencies>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>

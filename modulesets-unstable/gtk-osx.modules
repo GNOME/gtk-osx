@@ -66,7 +66,15 @@
     <branch/>
     <dependencies>
       <dep package="glib"/>
-      <dep package="libffi"/>
+      <dep package="cairo"/>
+     <dep package="libffi"/>
+    </dependencies>
+  </autotools>
+
+   <autotools id="gir-repository">
+    <branch/>
+    <dependencies>
+      <dep package="gobject-introspection"/>
     </dependencies>
   </autotools>
 
@@ -96,20 +104,6 @@
     </after>
   </autotools>
 
-  <autotools id="gobject-introspection">
-    <branch/>
-    <dependencies>
-      <dep package="glib"/>
-    </dependencies>
-  </autotools>
-
-  <autotools id="gir-repository">
-    <branch/>
-    <dependencies>
-      <dep package="gobject-introspection"/>
-    </dependencies>
-  </autotools>
-
   <autotools id="gtk+" 
 	     autogenargs="--with-gdktarget=quartz --enable-introspection=no">
     <branch revision="gtk-2-22" checkoutdir="gtk+-2.0"/>
@@ -124,11 +118,12 @@
   </autotools>
 
   <autotools id="gtk+-3.0" 
-	     autogenargs="--with-gdktarget=quartz --enable-introspection=no">
-    <branch checkoutdir="gtk+-3.0"/>
+	     autogenargs="--with-gdktarget=quartz">
+    <branch module="gtk+" checkoutdir="gtk+-3.0"/>
     <dependencies>
       <dep package="pango"/>
-      <dep package="atk"/>
+      <dep package="gir-repository"/>
+     <dep package="atk"/>
     </dependencies>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
