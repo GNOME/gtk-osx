@@ -1,0 +1,15 @@
+diff --git a/gtk/gtkkeyhash.c b/gtk/gtkkeyhash.c
+index cbe0b77..969bef5 100644
+--- a/gtk/gtkkeyhash.c
++++ b/gtk/gtkkeyhash.c
+@@ -428,8 +428,8 @@ _gtk_key_hash_lookup (GtkKeyHash      *key_hash,
+ 	   */
+           modifiers = entry->modifiers;
+           if (gdk_keymap_map_virtual_modifiers (key_hash->keymap, &modifiers) &&
+-	      ((modifiers & ~consumed_modifiers & mask & ~vmods) == (state & ~consumed_modifiers & mask & ~vmods) ||
+-	       (modifiers & ~consumed_modifiers & mask & ~xmods) == (state & ~consumed_modifiers & mask & ~xmods)))
++	      ((modifiers & ~consumed_modifiers & mask) == (state & ~consumed_modifiers & mask & ~vmods) ||
++	       (modifiers & ~consumed_modifiers & mask) == (state & ~consumed_modifiers & mask & ~xmods)))
+ 	    {
+ 	      gint i;
+ 
