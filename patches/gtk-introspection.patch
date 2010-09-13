@@ -30,7 +30,7 @@ diff -c /Users/john/gtk/source/gtk\+-2.20.1/gtk/Makefile.am.orig /Users/john/gtk
  gtk_c_sources += $(gtk_use_win32_c_sources)
  else
  if USE_QUARTZ
-+libgtk_quartz_3_0_la_CFLAGS = "-xobjective-c"
++libgtk_quartz_2_0_la_CFLAGS = "-xobjective-c"
  gtk_private_h_sources += gtksearchenginequartz.h
  gtk_c_sources += $(gtk_use_quartz_c_sources)
 -gtk_use_quartz_c_sources_CFLAGS = "-xobjective-c"
@@ -212,7 +212,7 @@ Diff finished.  Thu Sep  9 10:26:26 2010
  	gtkmountoperation-stub.c
  
 -@USE_QUARTZ_TRUE@@USE_WIN32_FALSE@@USE_X11_FALSE@gtk_use_quartz_c_sources_CFLAGS = "-xobjective-c"
-+@USE_QUARTZ_TRUE@@USE_WIN32_FALSE@@USE_X11_FALSE@libgtk_quartz_3_0_la_CFLAGS = "-xobjective-c"
++@USE_QUARTZ_TRUE@@USE_WIN32_FALSE@@USE_X11_FALSE@libgtk_quartz_2_0_la_CFLAGS = "-xobjective-c"
  @USE_QUARTZ_FALSE@gtk_clipboard_dnd_c_sources = gtkselection.c gtkclipboard.c gtkdnd.c
 -@USE_QUARTZ_TRUE@gtk_clipboard_dnd_c_sources = gtkselection.c gtkselection-quartz.c gtkclipboard-quartz.c gtkdnd-quartz.c gtkquartz.c
 +@USE_QUARTZ_TRUE@gtk_clipboard_dnd_c_sources = gtkselection.c gtkselection-quartz.c gtkclipboard-quartz.c gtkdnd-quartz.c
