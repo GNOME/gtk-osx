@@ -101,7 +101,7 @@
     <dependencies>
       <dep package="glib"/>
       <dep package="cairo"/>
-      <dep package="gobject-introspection"/>
+<!--      <dep package="gobject-introspection"/> -->
       <dep package="fontconfig"/>
       <dep package="freetype"/>
     </dependencies>
@@ -135,7 +135,7 @@
     <dependencies>
       <dep package="pango"/>
       <dep package="atk"/>
-      <dep package="gir-repository"/>
+<!--      <dep package="gir-repository"/> -->
     </dependencies>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
