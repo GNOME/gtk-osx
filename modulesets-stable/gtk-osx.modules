@@ -128,7 +128,6 @@
       <patch file="http://github.com/jralls/gtk-osx-build/raw/master/patches/gtkselection.patch" strip="1"/>
       <patch file="http://github.com/jralls/gtk-osx-build/raw/master/patches/gtkcups.patch" strip="1"/>
       <patch file="http://github.com/jralls/gtk-osx-build/raw/master/patches/gdkwindow-quartz.patch" strip="1"/>
-      <patch file="http://github.com/jralls/gtk-osx-build/raw/master/patches/gtk_meta.patch" strip="1"/>
       <patch file="http://github.com/jralls/gtk-osx-build/raw/master/patches/gtk-introspection.patch" strip="1"/>
       <patch file="http://github.com/jralls/gtk-osx-build/raw/master/patches/gtk-keyhash.patch" strip="1"/>
     </branch>
