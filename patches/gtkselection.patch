@@ -12,13 +12,12 @@ index c327eb9..0e60b71 100644
    return TRUE;
  }
  
-@@ -40,7 +41,8 @@ GdkWindow*
+@@ -40,7 +41,7 @@ GdkWindow*
  gdk_selection_owner_get_for_display (GdkDisplay *display,
  				     GdkAtom     selection)
  {
 -  /* FIXME: Implement */
-+  g_print ("Not a valid interface on Quartz. Use GtkSelection.\n");
-+  g_return_val_if_reached(NULL);
++ /* Quartz doesn't have an X-selection, so it doesn't have a gdk_selection. */
    return NULL;
  }
  
