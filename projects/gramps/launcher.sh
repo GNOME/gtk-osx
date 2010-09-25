@@ -35,6 +35,8 @@ PYTHONPATH="$bundle_lib/python2.6/lib-dynload:$PYTHONPATH"
 PYTHONPATH="$bundle_lib/pygtk/2.0:$PYTHONPATH"
 export PYTHONPATH
 export GRAMPSDIR="$bundle_data"/gramps
+export GRAMPSI18N="$bundle_data"/locale
+export GRAMPSHOME="$HOME/Library/Application Data/GRAMPS"
 
 # We need a UTF-8 locale.
 lang=`defaults read .GlobalPreferences AppleLocale 2>/dev/null`
