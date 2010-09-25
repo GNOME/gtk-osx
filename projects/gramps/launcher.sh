@@ -65,4 +65,4 @@ fi
 
 #Note that we're calling $PYTHON here to override the version in
 #pygtk-demo's shebang.
-exec $PYTHON "$GRAMPSDIR/gramps.py" "$@"
+exec $PYTHON -O "$GRAMPSDIR/gramps.py" "$@"
