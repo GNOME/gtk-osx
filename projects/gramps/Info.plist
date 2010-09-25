@@ -11,7 +11,7 @@
     <key>CFBundleIconFile</key>
     <string>gramps.icns</string>
     <key>CFBundleIdentifier</key>
-    <string>org.gtk.demo</string>
+    <string>org.gramps-project.gramps</string>
     <key>CFBundleInfoDictionaryVersion</key>
     <string>6.0</string>
     <key>CFBundlePackageType</key>
