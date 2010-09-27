@@ -213,13 +213,6 @@ def setup_sdk(target, sdk_version, architectures=[_default_arch]):
     #
         append_autogenargs('glib', ' --with-libiconv=gnu')
 
-
-    # ige-mac-integration doesn't support 64-bit (it uses Carbon).
-    #
-    if ('x86_64' in architectures):
-        skip.append("ige-mac-integration")
-        skip.append("ige-mac-integration-py")
-
     # If we're building on Snow Leopard for 32-bit, we need to make
     # sure that Perl and Python are working in 32-bit mode.
     #
