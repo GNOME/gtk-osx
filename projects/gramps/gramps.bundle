@@ -80,7 +80,7 @@
     ${prefix}/share/locale
   </translations>
 
-  <translations dest="${bundle}/Contents/Resources" name="gramps">
+  <translations  name="gramps">
     ${prefix}/share/locale
   </translations>
 
@@ -109,10 +109,6 @@
 
   <data>
     ${prefix}/share/mime-info/
-  </data>
-
-  <data>
-    ${prefix}/share/locale
   </data>
 
   <!-- Copy in the themes data. You may want to trim this to save space
