@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<moduleset>
+
+  <repository type="tarball" name="sourceforge" default="yes"
+              href="http://downloads.sourceforge.net/sourceforge/"/>
+  <repository type="bzr" name="launchpad"
+	      href="http://bazaar.launchpad.net"/>
+  <repository type="tarball" name="effbot"
+	      href="http://effbot.org/media/downloads/"/>
+  <repository type="git" name="github"
+	      href="git://github.com/"/>
+
+  <include href="http://github.com/jralls/gtk-osx-build/raw/master/modulesets-stable/gtk-osx.modules"/>
+
+  <distutils id="zim">
+    <branch module="zim" repo="launchpad"/>
+    <dependencies>
+      <dep package="meta-gtk-osx-python"/>
+    </dependencies>
+  </distutils>
+
+  <distutils id="pyblio-core">
+    <branch module="pybliographer/pyblio-core-1.3.4.tar.gz" version="1.3.4"/>
+    <dependencies>
+      <dep package="meta-gtk-osx-python"/>
+      <!--dep package="twisted"/ Twisted is provided by OSX -->
+      <dep package="elementree"/>
+      <dep package="numpy"/>
+    </dependencies>
+  </distutils>
+
+  <autotools id="pyblio">
+    <branch module="pybliographer/pyblio-1.3.4.tar.gz" version="1.3.4"/>
+    <dependencies>
+      <dep package="pyblio-core"/>
+      <dep package="pybibtex"/>
+    </dependencies>
+  </autotools>
+
+  <distutils id="pybibtex">
+    <branch module="pybliographer/python-bibtex-1.2.4.tar.gz" version="1.2.4"/>
+    <dependencies>
+      <dep package="meta-gtk-osx-python"/>
+      <dep package="recode"/>
+    </dependencies>
+  </distutils>
+
+  <autotools id="recode">
+    <branch module="pinard/Recode.git" repo="github" checkoutdir="Recode"/>
+  </autotools>
+
+  <distutils id="numpy">
+    <branch module="numpy/numpy-1.4.1.tar.gz" version="1.4.1"/>
+    <dependencies>
+      <dep package="meta-gtk-osx-python"/>
+    </dependencies>
+  </distutils>
+
+  <distutils id="elementree">
+    <branch module="elementtree-1.2.6-20050316.tar.gz" version="1.2.6"
+	    repo="effbot"/>
+  </distutils>
+
+
+</moduleset>
