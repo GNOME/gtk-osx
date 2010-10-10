@@ -95,11 +95,6 @@
     </dependencies>
   </autotools>
 
-  <autotools id="hunspell" autogen-sh="configure">
-    <branch module="hunspell/hunspell-1.2.12.tar.gz" version="1.2.12"
-	    repo="sourceforge"/>
-  </autotools>
-
   <autotools id="enchant" autogen-sh="configure" >
     <branch module="1.5.0/enchant-1.5.0.tar.gz" version="1.5.0"
 	    repo="abisource/enchant" size='593039'

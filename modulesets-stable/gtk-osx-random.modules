@@ -255,6 +255,11 @@
     </after>
   </autotools>
 
+  <autotools id="hunspell" autogen-sh="configure">
+    <branch module="hunspell/hunspell-1.2.12.tar.gz" version="1.2.12"
+	    repo="sourceforge"/>
+  </autotools>
+
   <autotools id="gtkspell">
     <branch module="gtkspell/gtkspell-2.0.16.tar.gz" repo="sourceforge"
 	    version="2.0.16"/>
