@@ -537,7 +537,8 @@ addpath("LTDL_LIBRARY_PATH", prefix + "/lib")
 # Add additional Python/Perl paths so that our modules can be found.
 #
 _version = 'python' + str(sys.version_info[0]) + '.' + str(sys.version_info[1])
-prependpath('PYTHONPATH', prefix + '/lib/' + _version + '/site-packages/gtk-2.0')
+prependpath('PYTHONPATH', os.path.join(prefix , 'lib',  _version, 'site-packages', 'gtk-2.0'))
+prependpath('PYTHONPATH', os.path.join(prefix , 'lib',  _version))
 prependpath('PERL5LIB', prefix + '/lib/perl5/vendor_perl')
 prependpath('PERL5LIB', prefix + '/lib/perl5/site_perl')
 
