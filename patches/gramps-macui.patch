@@ -2,13 +2,19 @@ Index: src/gui/viewmanager.py
 ===================================================================
 --- a/src/gui/viewmanager.py	(revision 15926)
 +++ b/src/gui/viewmanager.py	(working copy)
-@@ -50,7 +50,8 @@
+@@ -50,7 +50,14 @@
  #
  #-------------------------------------------------------------------------
  import gtk
 -
 +if gtk.gdk.WINDOWING == "quartz":
-+    from gtk_osxapplication import *
++    try:
++        from gtk_osxapplication import *
++        _gtkosxapplication = True
++    except:
++        _gtkosxapplication = False
++else:
++    _gtkosxapplication = False
  #-------------------------------------------------------------------------
  #
  # GRAMPS modules
@@ -16,7 +22,7 @@ Index: src/gui/viewmanager.py
          the view categories are accessible in the sidebar.
          """
          CLIManager.__init__(self, dbstate, False)
-+        if gtk.gdk.WINDOWING == "quartz":
++        if _gtkosxapplication:
 +            self.macapp = OSXApplication()
 +
          self.view_category_order = view_category_order
@@ -26,7 +32,7 @@ Index: src/gui/viewmanager.py
  
          self.__build_main_window()
          self.__connect_signals()
-+        if gtk.gdk.WINDOWING == "quartz":
++        if _gtkosxapplication:
 +            self.macapp.ready()
          
          self.do_reg_plugins()
@@ -35,7 +41,7 @@ Index: src/gui/viewmanager.py
          """
          self.window.connect('delete-event', self.quit)
          self.notebook.connect('switch-page', self.change_category)
-+        if gtk.gdk.WINDOWING == "quartz":
++        if _gtkosxapplication:
 +            self.macapp.connect('NSApplicationWillTerminate', self.quit)
  
      def __init_lists(self):
@@ -44,7 +50,7 @@ Index: src/gui/viewmanager.py
  
          self.uimanager.add_ui_from_string(UIDEFAULT)
          self.uimanager.ensure_update()
-+        if gtk.gdk.WINDOWING == "quartz":
++        if _gtkosxapplication:
 +            menubar = self.uimanager.get_widget("/MenuBar")
 +            menubar.hide()
 +            quit_item = self.uimanager.get_widget("/MenuBar/FileMenu/Quit")
@@ -60,7 +66,7 @@ Index: src/gui/viewmanager.py
                      self.__connect_active_page(category_page, view_page)
  
                      self.uimanager.ensure_update()
-+                    if gtk.gdk.WINDOWING == "quartz":
++                    if _gtkosxapplication:
 +                        self.macapp.sync_menubar()
  
                      while gtk.events_pending():
