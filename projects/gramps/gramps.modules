@@ -26,28 +26,23 @@
 
 <!--
 Special instructions:
-Gramps uses BerkeleyDB (BDB) via Python. BDB is normally included in Linux systems, but Apple prefers other mechanisms for data storage, so it isn't included on Macs. BDB won't build in the source directory, so you need to build it on its own. Fortunately, it has no dependencies and everything else will build without it, so after running
+Gramps uses BerkeleyDB (BDB) via Python. BDB is normally included in Linux systems, but Apple prefers other mechanisms for data storage, so it isn't included on Macs.
  jhbuild bootstrap && jhbuild &double-hyphen;moduleset=http://github.com/jralls/gtk-osx-build/raw/master/projects/gramps/gramps.modules build meta-gtk-osx-bootstrap gramps
-
-Add the following lines to your .jhbuildrc-custom
-builddir_pattern="%s/build_unix"
-buildroot=checkoutroot
-
-and run jhbuild  &double-hyphen;moduleset=http://github.com/jralls/gtk-osx-build/raw/master/projects/gramps/gramps.modules buildone berkeleydb 
-
-after which you can run GRAMPS from the commandline.
 
 If you're going to bundle GRAMPS, you'll need to add 
 _gtk_osx_use_jhbuild_python = True
 
-to your .jhbuildrc-custom and pass the &double-hyphen;ignore-system argument to jhbuild bootstrap. (That &double-hyphen; entity is fake, but double-hyphens aren't allowed in xml comments. Just substitute a real double-hyphen when you type it on the command line.) After running bootstrap, you'll need to build berkeleydb (see above) and then comment out those two lines and do:
+to your .jhbuildrc-custom and pass the &double-hyphen;ignore-system argument to jhbuild bootstrap. (That &double-hyphen; entity is fake because double-hyphens aren't allowed in xml comments. Just substitute a real double-hyphen when you type it on the command line.) 
 
-jhbuild shell
-cd checkoutroot/Python-2.6.5 (substituting the actual path to checkoutroot)
-make && make install
-cd 
+Open a jhbuild shell.
+
+For reasons known only to themselves, the Python project have set up their makefiles to create libpython without write privs, so you need to 
+
 chmod +w $PREFIX/lib/libpython2.6.dylib
-ige-mac-bundler gramps/gramps.bundle
+
+before running 
+
+ige-mac-bundler gtk-osx-build/projects/gramps/gramps.bundle
 
 
 -->
