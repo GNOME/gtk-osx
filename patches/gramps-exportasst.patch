@@ -1,0 +1,14 @@
+--- src/ExportAssistant.py~	2010-05-16 22:31:23.000000000 -0700
++++ src/ExportAssistant.py	2010-10-11 16:15:55.000000000 -0700
+@@ -536,7 +536,10 @@
+         
+     def close(self, *obj) :
+         #clean up ManagedWindow menu, then destroy window, bring forward parent
+-        
++
++        if gtk.gdk.WINDOWING == "quartz":
++            self.destroy()
++
+         ManagedWindow.ManagedWindow.close(self,*obj)
+ 
+     def get_intro_text(self):
