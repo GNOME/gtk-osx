@@ -9,8 +9,6 @@
 	      href="http://pywebkitgtk.googlecode.com/files/"/>
   <repository type="tarball" name="ftp.gnome.org"
 	      href="http://ftp.gnome.org/pub/GNOME/sources/"/>
-  <repository type="tarball" name="pygoocanvas"
-	      href="http://download.berlios.de/pygoocanvas/"/>
   <repository type="tarball" name="pyxdg"
 	      href="http://www.gnome.org/~fpeters/pyxdg/"/>
   <repository type="tarball" name="xdg-utils"
@@ -124,9 +122,9 @@ ige-mac-bundler gtk-osx-build/projects/gramps/gramps.bundle
     </dependencies>
   </autotools>
 
-  <autotools id="pygoocanvas" version="0.9">
-    <branch module="pygoocanvas-0.9.0.tar.gz" version="0.9.0"
-	    repo="pygoocanvas">
+  <autotools id="pygoocanvas" version="0.14.1">
+    <branch module="pygoocanvas/0.14/pygoocanvas-0.14.1.tar.gz" version="0.14.1"
+	    repo="ftp.gnome.org">
       <patch file="http://github.com/jralls/gtk-osx-build/raw/master/patches/pygoocanvas.patch" strip="0"/>
     </branch>
 
