@@ -14,7 +14,7 @@
 
   <metamodule id="meta-gtk-osx-python">
     <dependencies>
-      <dep package="pycairo"/>
+      <dep package="pycairo-python2.6"/>
       <dep package="pygobject"/>
       <dep package="pygtk"/>
       <dep package="ige-mac-integration-python"/>
