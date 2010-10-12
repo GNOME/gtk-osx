@@ -208,6 +208,7 @@ def setup_sdk(target, sdk_version, architectures=[_default_arch]):
         append_autogenargs("glib", "ac_cv_c_bigendian=no")
     elif architectures == ["ppc"]:
         append_autogenargs("glib", "ac_cv_c_bigendian=yes")
+        append_autogenargs("gmp", "CFLAGS=-force_cpusubtype_ALL $CFLAGS")
 
     # For unknown reasons, iconv is not picked up correctly without this
     #
