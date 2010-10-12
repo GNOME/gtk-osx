@@ -126,7 +126,6 @@ ige-mac-bundler gtk-osx-build/projects/gramps/gramps.bundle
   <autotools id="pygoocanvas" version="0.14.1">
     <branch module="pygoocanvas/0.14/pygoocanvas-0.14.1.tar.gz" version="0.14.1"
 	    repo="ftp.gnome.org">
-      <patch file="http://github.com/jralls/gtk-osx-build/raw/master/patches/pygoocanvas.patch" strip="0"/>
     </branch>
 
     <dependencies>
