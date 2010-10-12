@@ -40,9 +40,10 @@
     </after>
   </autotools>
 
-  <autotools id="pygobject" autogen-sh="configure">
-    <branch version="2.20.0" module="pygobject/2.20/pygobject-2.20.0.tar.bz2"
-            hash="sha256:41e923a3f4426a3e19f6d154c424e3dac6f39defca77af602ac6272ce270fa81"/>
+  <autotools id="pygobject" autogen-sh="configure" 
+	     autogenargs="--disable-introspection">
+    <branch version="2.26.0" module="pygobject/2.26/pygobject-2.26.0.tar.bz2"
+            hash="sha256:5554acff9c27b647144143b0459359864e4a6f2ff62c7ba21cf310ad755cf7c7"/>
     <dependencies>
       <dep package="meta-gtk-osx-core"/>
     </dependencies>
@@ -50,15 +51,16 @@
 
 <!-- The patch addresses bug 613783, a hang during shutdown of PyGtk
      programs that use threads. -->
-  <autotools id="pygtk" autogen-sh="configure">
-    <branch version="2.16.0" module="pygtk/2.16/pygtk-2.16.0.tar.bz2"
-            hash="sha256:7fae5e01af217a01738eae41c38ad7f86d1f538f444300d0fa2847aafb7444a8">
-      <patch file="http://github.com/jralls/gtk-osx-build/raw/master/patches/pygtk.patch" strip="1"/>
+  <autotools id="pygtk" autogen-sh="configure" 
+	     autogenargs="--disable-introspection">
+    <branch version="2.22.0" module="pygtk/2.22/pygtk-2.22.0.tar.bz2"
+            hash="sha256:4acf0ef2bde8574913c40ee4a43d9c4f43bb77b577b67147271b534501a54cc8">
+      <!--patch file="http://github.com/jralls/gtk-osx-build/raw/master/patches/pygtk.patch" strip="1"/-->
     </branch>
     <dependencies>
       <dep package="pygobject"/>
       <dep package="meta-gtk-osx-core"/>
-      <dep package="pycairo"/>
+      <dep package="pycairo-python2.6"/>
       <dep package="libglade"/>
     </dependencies>
   </autotools>

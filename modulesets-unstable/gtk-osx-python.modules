@@ -28,14 +28,14 @@
     </after>
   </autotools>
 
-  <autotools id="pygobject">
+  <autotools id="pygobject" autogenargs="--disable-introspection">
     <branch />
     <dependencies>
       <dep package="meta-gtk-osx-core"/>
     </dependencies>
   </autotools>
 
-  <autotools id="pygtk">
+  <autotools id="pygtk" autogenargs="--disable-introspection">
     <branch />
     <dependencies>
       <dep package="pygobject"/>

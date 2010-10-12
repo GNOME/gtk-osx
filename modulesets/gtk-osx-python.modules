@@ -40,17 +40,15 @@
     </after>
   </autotools>
 
-  <autotools id="pygobject">
-    <!-- pygobject-2.20.0 -->
-    <branch tag="66b12f7d2f54143ea80b4f8aec863b26800363d6"/>
+  <autotools id="pygobject" autogenargs="--disable-introspection">
+    <branch tag="PYGOBJECT_2_26_0"/>
     <dependencies>
       <dep package="meta-gtk-osx-core"/>
     </dependencies>
   </autotools>
 
-  <autotools id="pygtk">
-    <!-- pygtk-2.16.0 -->
-    <branch tag="20506cb86533272acc2a7a3a905122fe76f506f2"/>
+  <autotools id="pygtk" autogenargs="--disable-introspection">
+    <branch tag="PYGTK_2_22_0"/>
     <dependencies>
       <dep package="pygobject"/>
       <dep package="meta-gtk-osx-core"/>
