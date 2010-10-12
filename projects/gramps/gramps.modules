@@ -99,6 +99,7 @@ ige-mac-bundler gtk-osx-build/projects/gramps/gramps.bundle
 	    repo="pywebkitgtk"/>
     <dependencies>
       <dep package="WebKit"/>
+      <dep package="sqlite"/>
     </dependencies>
   </autotools>
 
