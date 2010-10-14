@@ -1,0 +1,13 @@
+diff -c /usr/local/gtk-stable/src/gramps-3.2.3/src/gui/grampsgui.py\~ /usr/local/gtk-stable/src/gramps-3.2.3/src/gui/grampsgui.py
+--- a/src/gui/grampsgui.py	Sun May 16 22:31:19 2010
++++ b/src/gui/grampsgui.py	Tue Oct 12 18:16:41 2010
+@@ -370,4 +370,7 @@
+     gobject.threads_init()
+     
+     gobject.timeout_add(100, __startgramps, errors, argparser, priority=100)
++
++    if os.path.exists(os.path.join(const.DATA_DIR, "gramps.accel")):
++        gtk.accel_map_load(os.path.join(const.DATA_DIR, "gramps.accel"))
+     gtk.main()
+
+Diff finished.  Tue Oct 12 21:45:50 2010

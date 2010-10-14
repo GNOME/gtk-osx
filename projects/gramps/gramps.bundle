@@ -133,6 +133,10 @@
     ${project}/gtkrc
   </data>
 
+  <data dest="${bundle}/Contents/Resources/share/gramps/data/accel.gramps">
+    ${project}/gramps.accel
+  </data>
+
   <!-- Icon themes to copy. The "icons" property can be either of
        "auto", "all", or "none". All or none should be
        self-explanatory, while auto means that the script will try to
