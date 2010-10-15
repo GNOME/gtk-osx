@@ -13,7 +13,6 @@ bundle_data="$bundle_res"/share
 bundle_etc="$bundle_res"/etc
 
 export DYLD_LIBRARY_PATH="$bundle_lib"
-export XDG_DATA_DIRS="$bundle_data"
 export LD_LIBRARY_PATH="$DYLD_LIBRARY_PATH"
 export GTK_DATA_PREFIX="$bundle_res"
 export GTK_EXE_PREFIX="$bundle_res"
@@ -36,9 +35,7 @@ PYTHONPATH="$bundle_lib/pygtk/2.0:$PYTHONPATH"
 export PYTHONPATH
 export GRAMPSDIR="$bundle_data"/gramps
 export GRAMPSI18N="$bundle_data"/locale
-export GRAMPSHOME="$HOME/Library/Application Data/GRAMPS"
-
-fi
+export GRAMPSHOME="$HOME/Library/Application Support"
 
 # Set the locale-related variables appropriately:
 unset LANG LC_MESSAGES LC_MONETARY
