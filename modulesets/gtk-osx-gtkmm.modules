@@ -37,7 +37,7 @@
   </autotools>
 
   <autotools id="pangomm" >
-     <branch tag="pangomm-2.26.0"/>
+     <branch tag="pangomm-2.26.2"/>
     <dependencies>
       <dep package="glibmm"/>
       <dep package="cairomm"/>
@@ -52,7 +52,7 @@
   </autotools>
 
   <autotools id="libsigc++2" >
-    <branch tag="libsigc++-2.2.4.2"/>
+    <branch tag="libsigc++-2.2.8"/>
     <dependencies>
       <dep package="doxygen"/>
       <dep package="mm-common"/>
@@ -60,7 +60,7 @@
   </autotools>
 
   <autotools id="gtkmm" >
-    <branch tag="gtkmm-2.18.2"/>
+    <branch revision="gtkmm-2-22"/>
     <dependencies>
       <dep package="glibmm"/>
       <dep package="cairomm"/>
