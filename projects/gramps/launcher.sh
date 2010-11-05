@@ -12,6 +12,8 @@ bundle_bin="$bundle_res"/bin
 bundle_data="$bundle_res"/share
 bundle_etc="$bundle_res"/etc
 
+export XDG_DATA_DIRS="$bundle_data"
+
 export DYLD_LIBRARY_PATH="$bundle_lib"
 export LD_LIBRARY_PATH="$DYLD_LIBRARY_PATH"
 export GTK_DATA_PREFIX="$bundle_res"
