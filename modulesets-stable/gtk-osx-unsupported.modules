@@ -38,8 +38,8 @@
   </autotools>
 
   <autotools id="iso-codes" autogen-sh="configure" >
-    <branch repo="iso-codes" version="3.9"
-            module="pkg-isocodes/iso-codes-3.9.tar.gz"/>
+    <branch repo="iso-codes" version="3.21"
+            module="pkg-isocodes/iso-codes-3.21.tar.bz2"/>
 
   </autotools>
 
