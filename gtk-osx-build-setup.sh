@@ -25,7 +25,7 @@
 #
 
 SOURCE=$HOME/Source
-BASEURL="http://github.com/jralls/gtk-osx-build/raw/master"
+BASEURL="https://github.com/jralls/gtk-osx-build/raw/master"
 
 do_exit()
 {
