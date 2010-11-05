@@ -11,7 +11,7 @@
   <repository type="tarball" name="ftp.gnu.org"
               href="http://ftp.gnu.org/gnu/"/>
   <repository type="tarball" name="github.com"
-              href="http://github.com/"/>
+              href="https://github.com/"/>
 
   <!-- This module set works a bit differently than for example the
        GNOME ones do. It's split up in seperate pieces:
@@ -96,7 +96,7 @@
             hash="sha256:8f3eaab506f613dd25bb1fa65ea87a145d523d066d90c227bdb3016523451bc2">
 <!--    <branch version="1.24.5" module="pango/1.24/pango-1.24.5.tar.bz2"
             hash="sha256:0f733d1ec3e8dafcae152d7ac58f1090bee1fd856176c8fee0e81b0e42392f4e">-->
-  <patch file="http://github.com/jralls/gtk-osx-build/raw/master/patches/pangoatsui-fontname.patch" strip="1"/> 
+  <patch file="https://github.com/jralls/gtk-osx-build/raw/master/patches/pangoatsui-fontname.patch" strip="1"/> 
     </branch>
     <dependencies>
       <dep package="glib"/>
@@ -125,12 +125,12 @@
              autogenargs="--with-gdktarget=quartz">
     <branch module="gtk+/2.20/gtk+-2.20.1.tar.bz2" version="2.20.1"
             hash="sha256:0e081731d21e34ff45c82199490c2889504fa8b3c7e117c043e82ababaec0f65">
-      <patch file="http://github.com/jralls/gtk-osx-build/raw/master/patches/gtkselection.patch" strip="1"/>
-      <patch file="http://github.com/jralls/gtk-osx-build/raw/master/patches/gtkcups.patch" strip="1"/>
-      <patch file="http://github.com/jralls/gtk-osx-build/raw/master/patches/gdkwindow-quartz.patch" strip="1"/>
-      <patch file="http://github.com/jralls/gtk-osx-build/raw/master/patches/gtk-introspection.patch" strip="1"/>
-      <patch file="http://github.com/jralls/gtk-osx-build/raw/master/patches/gtk-keyhash.patch" strip="1"/>
-      <patch file="http://github.com/jralls/gtk-osx-build/raw/master/patches/gtk-relocation.patch" strip="1"/>
+      <patch file="https://github.com/jralls/gtk-osx-build/raw/master/patches/gtkselection.patch" strip="1"/>
+      <patch file="https://github.com/jralls/gtk-osx-build/raw/master/patches/gtkcups.patch" strip="1"/>
+      <patch file="https://github.com/jralls/gtk-osx-build/raw/master/patches/gdkwindow-quartz.patch" strip="1"/>
+      <patch file="https://github.com/jralls/gtk-osx-build/raw/master/patches/gtk-introspection.patch" strip="1"/>
+      <patch file="https://github.com/jralls/gtk-osx-build/raw/master/patches/gtk-keyhash.patch" strip="1"/>
+      <patch file="https://github.com/jralls/gtk-osx-build/raw/master/patches/gtk-relocation.patch" strip="1"/>
     </branch>
     <dependencies>
       <dep package="pango"/>

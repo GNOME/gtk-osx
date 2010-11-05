@@ -150,7 +150,7 @@
 	   --with-session-socket-dir=/var/tmp">
     <branch module="dbus/dbus-1.2.16.tar.gz"  version="1.2.16" 
 	    repo="dbus.freedesktop.org">
-      <patch file="http://github.com/jralls/gnucash-on-osx/raw/master/patches/dbus-install.patch"/>
+      <patch file="https://github.com/jralls/gnucash-on-osx/raw/master/patches/dbus-install.patch"/>
        <patch file="http://gimponosx.svn.sourceforge.net/viewvc/gimponosx/GimpPorts/ports/devel/dbus/files/dbus-sysdeps-unix.c.diff"/>
    </branch>
     <after>
