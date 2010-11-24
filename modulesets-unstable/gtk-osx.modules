@@ -128,7 +128,7 @@
 
   <autotools id="gtk+-3.0" 
 	     autogenargs="--with-gdktarget=quartz">
-    <branch module="gtk+" checkoutdir="gtk+-3.0"/>
+    <branch module="gtk+" checkoutdir="gtk+-3.0" revision="quartz-integration"/>
     <dependencies>
       <dep package="pango"/>
       <dep package="gir-repository"/>
