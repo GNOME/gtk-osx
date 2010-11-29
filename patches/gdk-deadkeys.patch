@@ -1,5 +1,5 @@
---- gdk/quartz/gdkkeys-quartz.c.orig	2010-11-27 18:04:40.000000000 -0800
-+++ gdk/quartz/gdkkeys-quartz.c	2010-11-28 15:46:42.000000000 -0800
+--- a/gdk/quartz/gdkkeys-quartz.c	2010-11-27 18:04:40.b/b000000000 -0800
++++ b/gdk/quartz/gdkkeys-quartz.c	2010-11-28 15:46:42.000000000 -0800
 @@ -182,7 +182,58 @@
    { 0x001d, GDK_Right },
    { 0x001e, GDK_Up },
