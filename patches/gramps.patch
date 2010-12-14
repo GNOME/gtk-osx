@@ -2,6 +2,15 @@ Index: src/GrampsDisplay.py
 ===================================================================
 --- src/GrampsDisplay.py	(revision 15090)
 +++ src/GrampsDisplay.py	(working copy)
+@@ -23,6 +23,7 @@
+ import const
+ import locale
+ import os
++import gtk
+ 
+ #list of manuals on wiki, map locale code to wiki extension, add language codes
+ #completely, or first part, so pt_BR if Brazilian portugeze wiki manual, and 
+
 @@ -85,7 +85,10 @@
      Open a file or url with the default application. This should work
      on GNOME, KDE, XFCE, ... as we use a freedesktop application
