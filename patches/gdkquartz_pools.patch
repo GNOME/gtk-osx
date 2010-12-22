@@ -1,6 +1,6 @@
 diff -c /Users/john/Library/Gnucash-svn/src/gtk\+-2.20.1/gdk/quartz/gdkeventloop-quartz.c\~ /Users/john/Library/Gnucash-svn/src/gtk\+-2.20.1/gdk/quartz/gdkeventloop-quartz.c
---- /a/gdk/quartz/gdkeventloop-quartz.c	Thu Apr  8 19:29:55 2010
-+++ /b/gdk/quartz/gdkeventloop-quartz.c	Tue Dec 21 14:29:39 2010
+--- a/gdk/quartz/gdkeventloop-quartz.c	Thu Apr  8 19:29:55 2010
++++ dele b/gdk/quartz/gdkeventloop-quartz.c	Tue Dec 21 14:29:39 2010
 @@ -640,13 +640,14 @@
     * releasing NSAutoReleasePools not properly nested with CFRunLoop
     * runs seems to cause problems.
