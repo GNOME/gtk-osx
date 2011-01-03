@@ -132,7 +132,8 @@
       <patch file="https://github.com/jralls/gtk-osx-build/raw/master/patches/gtk-keyhash.patch" strip="1"/>
       <patch file="https://github.com/jralls/gtk-osx-build/raw/master/patches/gtk-relocation.patch" strip="1"/>
       <patch file="https://github.com/jralls/gtk-osx-build/raw/master/patches/gdk-deadkeys.patch" strip="1"/>
-      <patch file="https://github.com/jralls/gtk-osx-build/raw/master/patches/gdkquartz_pools.patch" strip="1"/>
+      <patch file="https://github.com/jralls/gtk-osx-build/raw/master/patches/gdkeventloop.patch" strip="1"/>
+      <patch file="https://github.com/jralls/gtk-osx-build/raw/master/patches/gtkdndmemory.patch" strip="1"/>
     </branch>
     <dependencies>
       <dep package="pango"/>
