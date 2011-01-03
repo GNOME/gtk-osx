@@ -6,7 +6,7 @@
               href="git://git.gnome.org/"/>
   <repository type='git' name='git.gnu.org' 
               href="git://git.savannah.gnu.org/"/>
-  <repository type='svn' name='cvs.gnupg.org' href="svn://cvs.gnupg.org/" />
+  <repository type='git' name='git.gnupg.org' href="git://git.gnupg.org/" />
   <repository type='tarball' name='ftp.gnupg.org' href="ftp://ftp.gnupg.org/" />
   <repository type='tarball' name='ftp.gnu.org' href="ftp://ftp.gnu.org/gnu/"/>
   <repository type="cvs" name="gnutls.gnupg.org"
@@ -65,10 +65,9 @@
     </dependencies>
   </autotools>
 
-  <autotools id="libgpg-error" 
+  <autotools id="libgpg-error" autogen-sh="autogen.sh"
              autogen-template="%(srcdir)s/%(autogen-sh)s &amp;&amp; %(srcdir)s/configure --prefix %(prefix)s --libdir %(libdir)s %(autogenargs)s">
-    <branch repo='cvs.gnupg.org' module="libgpg-error" 
-            />
+    <branch repo='git.gnupg.org' module="libgpg-error" />
   </autotools>
 
   <autotools id="libgcrypt"     autogen-sh="configure">
@@ -85,11 +84,11 @@
   <autotools id="libtasn1" supports-non-srcdir-builds="no" >
     <!-- Git repository is missing files required to build libtasn1
     <branch repo="git.gnu.org" /> -->
-    <branch repo="ftp.gnu.org" version='2.2'
-	    module="gnutls/libtasn1-2.2.tar.gz"/>
+    <branch repo="ftp.gnu.org" version='2.9'
+	    module="libtasn1/libtasn1-2.9.tar.gz"/>
   </autotools>
 
-  <autotools id="gnome-keyring" autogenargs="--disable-pam">
+  <autotools id="gnome-keyring" autogenargs="--disable-pam --without-root-certs">
     <branch/>
     <dependencies>
       <dep package="gtk+"/>
@@ -119,10 +118,9 @@
     </dependencies>
   </autotools>
 
-  <autotools id='libproxy' 
-	     autogen-template="%(srcdir)s/%(autogen-sh)s &amp;&amp; %(srcdir)s/configure --prefix %(prefix)s --libdir %(libdir)s %(autogenargs)s">
-    <branch repo='libproxy.google.com' module="trunk"             />
-  </autotools>
+  <cmake id='libproxy'>
+    <branch repo='libproxy.google.com' module="trunk" />
+  </cmake>
 
 <!-- GNET is deprecated in favor of Glib/Gio. Don't build this unless you have to -->
   <autotools id="gnet" autogenargs="--enable-glib2">
