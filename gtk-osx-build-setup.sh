@@ -35,7 +35,8 @@ do_exit()
 
 get_moduleset_from_git()
 {
-    curl -s "$BASEURL/modulesets-stable/$1" -o $SOURCE/jhbuild/modulesets/$1
+    curl -s "$BASEURL/modulesets-stable/$1" -o $SOURCE/jhbuild/modulesets/$1 || \
+	do_exit "Unable to download $1"
 }
 
 if test x`which svn` == x; then
@@ -49,7 +50,8 @@ fi
 mkdir -p $SOURCE 2>/dev/null || do_exit "The directory $SOURCE could not be created. Check permissions and try again."
 
 rm -f tmp-jhbuild-revision
-curl -s $BASEURL/jhbuild-revision -o tmp-jhbuild-revision
+curl -s $BASEURL/jhbuild-revision -o tmp-jhbuild-revision || \
+    do_exit "Unable to retrieve stable jhbuild revision"
 JHBUILD_REVISION=`cat tmp-jhbuild-revision 2>/dev/null`
 if test x"$JHBUILD_REVISION" = x; then
     do_exit "Could not find jhbuild revision to use."
@@ -60,24 +62,26 @@ JHBUILD_REVISION_OPTION="origin refs/tags/$JHBUILD_REVISION"
 echo "Checking out jhbuild ($JHBUILD_REVISION) from git..."
 if ! test -d $SOURCE/jhbuild; then
     cd $SOURCE 
-    git clone git://git.gnome.org/jhbuild 
+    git clone git://git.gnome.org/jhbuild || do_exit "Failed to clone jhbuild."
     cd jhbuild
-    git checkout -b stable $JHBUILD_REVISION;
+    git checkout -b stable $JHBUILD_REVISION || \
+	do_exit "Checkout of stable branch failed";
 else
-    cd $SOURCE/jhbuild && git pull $JHBUILD_REVISION_OPTION >/dev/null;
+    cd $SOURCE/jhbuild && git pull $JHBUILD_REVISION_OPTION >/dev/null || \
+	do_exit "Update of jhbuild failed";
 fi
 
 echo "Installing jhbuild..."
-(cd $SOURCE/jhbuild && make -f Makefile.plain DISABLE_GETTEXT=1 install >/dev/null)
+(cd $SOURCE/jhbuild && make -f Makefile.plain DISABLE_GETTEXT=1 install >/dev/null) || do_exit "Jhbuild installation failed"
 
 echo "Installing jhbuild configuration..."
-curl -s $BASEURL/jhbuildrc-gtk-osx -o $HOME/.jhbuildrc
+curl -s $BASEURL/jhbuildrc-gtk-osx -o $HOME/.jhbuildrc || do_exit "Didn't get jhbuildrc"
 curl -s $BASEURL/jhbuildrc-gtk-osx-fw-10.4 -o $HOME/.jhbuildrc-fw-10.4
 curl -s $BASEURL/jhbuildrc-gtk-osx-cfw-10.4 -o $HOME/.jhbuildrc-cfw-10.4
 curl -s $BASEURL/jhbuildrc-gtk-osx-cfw-10.4u -o $HOME/.jhbuildrc-cfw-10.4u
 curl -s $BASEURL/jhbuildrc-gtk-osx-fw-10.4-test -o $HOME/.jhbuildrc-fw-10.4-test
 if [ ! -f $HOME/.jhbuildrc-custom ]; then
-    curl -s $BASEURL/jhbuildrc-gtk-osx-custom-example -o $HOME/.jhbuildrc-custom
+    curl -s $BASEURL/jhbuildrc-gtk-osx-custom-example -o $HOME/.jhbuildrc-custom || do_exit "Didn't get jhbuildrc-custom"
 fi
 
 echo "Installing gtk-osx moduleset files..."
