@@ -104,7 +104,7 @@
   </autotools>
 
   <autotools id="gtk+" autogenargs="--with-gdktarget=quartz --enable-introspection=no">
-    <branch revision="gtk-2-22"/>
+    <branch revision="gtk-2-24-quartz"/>
     <dependencies>
       <dep package="pango"/>
       <dep package="atk"/>
