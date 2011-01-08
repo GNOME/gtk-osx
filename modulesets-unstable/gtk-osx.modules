@@ -127,7 +127,7 @@
   </autotools>
 
   <autotools id="gtk+-3.0"
-	     autogenargs="--with-gdktarget=quartz">
+	     autogenargs="--enable-quartz-backend">
     <branch module="gtk+" checkoutdir="gtk+-3.0" revision="quartz-integration"/>
     <dependencies>
       <dep package="pango"/>
