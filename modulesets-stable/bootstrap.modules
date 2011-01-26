@@ -1,0 +1,116 @@
+<?xml version="1.0" standalone="no"?> <!--*- mode: nxml -*-->
+<?xml-stylesheet type="text/xsl" href="moduleset.xsl"?>
+<moduleset>
+  <repository type="tarball" name="ftp.gnu.org"
+      href="ftp://ftp.gnu.org/gnu/"/>
+  <repository type="tarball" name="pkgconfig"
+      href="http://pkgconfig.freedesktop.org/releases/"/>
+  <repository type="tarball" name="python"
+      href="http://www.python.org/ftp/python/"/>
+  <repository type="tarball" name="sourceforge"
+      href="http://dfn.dl.sourceforge.net/sourceforge/"/>
+
+  <autotools id="gettext" autogen-sh="configure">
+    <branch repo="ftp.gnu.org"
+	    module="gettext/gettext-0.17.tar.gz" version="0.17"
+            size="11640890" md5sum="58a2bc6d39c0ba57823034d55d65d606">
+      <patch file = "gettext-0.17-open.patch" strip="2"/>
+    </branch>
+  </autotools>
+
+  <autotools id="m4" autogen-sh="configure">
+    <branch repo="ftp.gnu.org"
+	    module="m4/m4-1.4.11.tar.bz2" version="1.4.11"
+	    size="928910" md5sum="96ec473c2a6f203976c028e896a01b28" />
+  </autotools>
+
+  <autotools id="autoconf" autogen-sh="configure">
+    <branch repo="ftp.gnu.org"
+            module="autoconf/autoconf-2.65.tar.bz2" version="2.65"
+            size="1332522" md5sum="a6de1cc6434cd64038b0a0ae4e252b33" />
+    <dependencies>
+      <dep package="m4"/>
+    </dependencies>
+  </autotools>
+
+  <autotools id="libtool" autogen-sh="configure">
+    <branch repo="ftp.gnu.org"
+            module="libtool/libtool-2.2.6a.tar.gz" version="2.2.6a"
+            size="2870524" md5sum="8ca1ea241cd27ff9832e045fe9afe4fd"
+            checkoutdir="libtool-2.2.6">
+    </branch>
+  </autotools>
+
+  <autotools id="automake-1.8" autogen-sh="configure">
+    <branch repo="ftp.gnu.org"
+            module="automake/automake-1.8.5.tar.bz2" version="1.8.5"
+            size="663182" md5sum="0114aa6d7dc32112834b68105fb8d7e2" />
+  </autotools>
+  <autotools id="automake-1.9" autogen-sh="configure">
+    <branch repo="ftp.gnu.org"
+            module="automake/automake-1.9.6.tar.bz2" version="1.9.6"
+            size="765505" md5sum="c11b8100bb311492d8220378fd8bf9e0" />
+  </autotools>
+  <autotools id="automake-1.10" autogen-sh="configure">
+    <branch repo="ftp.gnu.org"
+            module="automake/automake-1.10.3.tar.bz2" version="1.10.3"
+            size="957505" md5sum="b8e67fb458da396bc35555af7ef2b49f" />
+  </autotools>
+  <autotools id="automake-1.11" autogen-sh="configure">
+    <branch repo="ftp.gnu.org" 	 
+	    module="automake/automake-1.11.1.tar.bz2" version="1.11.1"
+	    size="1066685" md5sum="c2972c4d9b3e29c03d5f2af86249876f" />
+  </autotools> 	 
+	 
+  <autotools id="pkg-config" autogen-sh="configure">
+    <branch repo="pkgconfig"
+            module="pkg-config-0.25.tar.gz" version="0.25"
+            size="988899" md5sum="a3270bab3f4b69b7dc6dbdacbcae9745" />
+  </autotools>
+
+  <autotools id="python" autogenargs="--enable-shared" autogen-sh="configure">
+    <branch repo="python"
+            module="2.5.5/Python-2.5.5.tar.bz2" version="2.5.5"
+            size="9822917" md5sum="1d00e2fb19418e486c30b850df625aa3">
+      <patch file="python-2.5.2-lib64.patch" strip="1" />
+    </branch>
+  </autotools>
+
+  <tarball id="gmp" version="4.3.1">
+    <source href="ftp://ftp.gnu.org/gnu/gmp/gmp-4.3.1.tar.bz2"
+            size="1881090" md5sum="26cec15a90885042dd4a15c4003b08ae"/>
+  </tarball>
+
+  <autotools id="guile" autogenargs="--enable-error-on-warning=no">
+    <branch repo="ftp.gnu.org" module="guile/guile-1.8.7.tar.gz"
+            version="1.8.7"
+            hash="sha1:24cd2f06439c76d41d982a7384fe8a0fe5313b54"
+            md5sum="991b5b3efcbbc3f7507d05bc42f80a5e"
+            size="4026804">
+      <!-- Patch to build with gcc 4.5. http://savannah.gnu.org/bugs/?29583
+           Remove when 1.8.8 released. Patch from:
+           http://git.savannah.gnu.org/cgit/guile.git/commit/?id=445f31fc06d338f0cafda188d0287f935c2edc3c
+        -->
+      <patch file="guile-1.8.7-445f31fc06.patch" strip="2"/>
+    </branch>
+    <dependencies>
+      <dep package="gmp"/>
+    </dependencies>
+  </autotools>
+
+  <metamodule id="meta-bootstrap">
+    <dependencies>
+      <dep package="gettext" />
+      <dep package="autoconf" />
+      <dep package="libtool" />
+      <dep package="automake-1.8" />
+      <dep package="automake-1.9" />
+      <dep package="automake-1.10" />
+      <dep package="automake-1.11" />
+      <dep package="pkg-config" />
+      <dep package="python" />
+      <dep package="guile" />
+    </dependencies>
+  </metamodule>
+
+</moduleset>
