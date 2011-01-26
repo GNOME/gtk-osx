@@ -547,9 +547,6 @@ prependpath('PERL5LIB', prefix + '/lib/perl5/site_perl')
 #
 os.environ['XML_CATALOG_FILES'] = prefix + '/etc/xml/catalog'
 
-# Speed up gettext build by disabling unneeded stuff.
-#
-append_autogenargs("gettext", "--without-emacs --disable-java --disable-native-java --disable-libasprintf --disable-csharp")
 #Freetype has -ansi added by its configure, but uses c99 code
 #
 append_autogenargs("freetype", 'CFLAGS="$CFLAGS -std=c99"')
