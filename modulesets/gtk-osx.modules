@@ -51,7 +51,7 @@
   </metamodule>
 
   <autotools id="glib">
-    <branch revision="glib-2-24"/>
+    <branch revision="glib-2-27"/>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
       <dep package="gtk-doc"/> <!-- FIXME: http://bugs.gnome.org/546640 -->
