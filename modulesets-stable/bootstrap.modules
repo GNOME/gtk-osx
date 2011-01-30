@@ -8,14 +8,24 @@
   <repository type="tarball" name="python"
       href="http://www.python.org/ftp/python/"/>
   <repository type="tarball" name="sourceforge"
-      href="http://dfn.dl.sourceforge.net/sourceforge/"/>
+      href="http://downloads.sourceforge.net/sourceforge/"/>
+  <repository type="tarball" name="xmlsoft.org"
+	      href="ftp://xmlsoft.org/libxml2/"/>
 
-  <autotools id="gettext" autogen-sh="configure">
+  <autotools id='libiconv' autogen-sh='configure'>
+    <branch module="libiconv/libiconv-1.13.1.tar.gz" version="1.1.3.1"
+            repo="ftp.gnu.org"/>
+  </autotools>
+
+  <autotools id="gettext" autogen-sh="configure"
+	     autogenargs="--without-emacs --disable-java --disable-native-java --disable-libasprintf --disable-csharp">
     <branch repo="ftp.gnu.org"
-	    module="gettext/gettext-0.17.tar.gz" version="0.17"
-            size="11640890" md5sum="58a2bc6d39c0ba57823034d55d65d606">
-      <patch file = "gettext-0.17-open.patch" strip="2"/>
+	    module="gettext/gettext-0.18.1.1.tar.gz" version="0.18.1.1"
+            size="15139737" md5sum="3dd55b952826d2b32f51308f2f91aa89">
     </branch>
+    <dependencies>
+      <dep package="libiconv"/>
+    </dependencies>
   </autotools>
 
   <autotools id="m4" autogen-sh="configure">
@@ -57,11 +67,11 @@
             size="957505" md5sum="b8e67fb458da396bc35555af7ef2b49f" />
   </autotools>
   <autotools id="automake-1.11" autogen-sh="configure">
-    <branch repo="ftp.gnu.org" 	 
+    <branch repo="ftp.gnu.org"
 	    module="automake/automake-1.11.1.tar.bz2" version="1.11.1"
 	    size="1066685" md5sum="c2972c4d9b3e29c03d5f2af86249876f" />
-  </autotools> 	 
-	 
+  </autotools>
+
   <autotools id="pkg-config" autogen-sh="configure">
     <branch repo="pkgconfig"
             module="pkg-config-0.25.tar.gz" version="0.25"
@@ -70,37 +80,40 @@
 
   <autotools id="python" autogenargs="--enable-shared" autogen-sh="configure">
     <branch repo="python"
-            module="2.5.5/Python-2.5.5.tar.bz2" version="2.5.5"
-            size="9822917" md5sum="1d00e2fb19418e486c30b850df625aa3">
-      <patch file="python-2.5.2-lib64.patch" strip="1" />
+	    module="2.6.6/Python-2.6.6.tar.bz2" version="2.6.6">
     </branch>
   </autotools>
 
-  <tarball id="gmp" version="4.3.1">
-    <source href="ftp://ftp.gnu.org/gnu/gmp/gmp-4.3.1.tar.bz2"
-            size="1881090" md5sum="26cec15a90885042dd4a15c4003b08ae"/>
-  </tarball>
+   <autotools id="libxml2" autogen-sh="configure">
+    <branch version="2.7.7" module="libxml2-2.7.7.tar.gz"
+	    repo="xmlsoft.org"/>
+  </autotools>
 
-  <autotools id="guile" autogenargs="--enable-error-on-warning=no">
-    <branch repo="ftp.gnu.org" module="guile/guile-1.8.7.tar.gz"
-            version="1.8.7"
-            hash="sha1:24cd2f06439c76d41d982a7384fe8a0fe5313b54"
-            md5sum="991b5b3efcbbc3f7507d05bc42f80a5e"
-            size="4026804">
-      <!-- Patch to build with gcc 4.5. http://savannah.gnu.org/bugs/?29583
-           Remove when 1.8.8 released. Patch from:
-           http://git.savannah.gnu.org/cgit/guile.git/commit/?id=445f31fc06d338f0cafda188d0287f935c2edc3c
-        -->
-      <patch file="guile-1.8.7-445f31fc06.patch" strip="2"/>
-    </branch>
+  <autotools id="libxslt" autogen-sh="configure">
+    <branch version="1.1.26" module="libxslt-1.1.26.tar.gz"
+	    repo="xmlsoft.org"/>
     <dependencies>
-      <dep package="gmp"/>
+      <dep package="libxml2"/>
     </dependencies>
+  </autotools>
+
+  <!-- 10.4 has 1.28 which is too old, 10.5 & 10.6 have 2.3 which is OK. -->
+  <autotools id="bison" autogen-sh="configure">
+    <branch repo="ftp.gnu.org" module="bison/bison-2.4.1.tar.bz2"
+            version="2.4.1"/>
+  </autotools>
+
+  <!-- 10.4 has 2.5.4, too old for gstreamer (and probably others as well)
+10.6 has 2.5.35, 10.5 2.5.33 -->
+  <autotools id="flex" autogen-sh="configure">
+    <branch repo="sourceforge" module="flex/flex-2.5.35.tar.bz2"
+	    version="2.5.35"/>
   </autotools>
 
   <metamodule id="meta-bootstrap">
     <dependencies>
-      <dep package="gettext" />
+      <dep package="gettext" /> <!-- Pulls in libiconv, needed for 64-bit -->
+      <dep package="m4"/>	<!-- Can be skipped for Leopard and later -->
       <dep package="autoconf" />
       <dep package="libtool" />
       <dep package="automake-1.8" />
@@ -109,7 +122,10 @@
       <dep package="automake-1.11" />
       <dep package="pkg-config" />
       <dep package="python" />
-      <dep package="guile" />
+      <dep package="libxml2"/> <!-- included for compatibility -->
+      <dep package="libxslt"/> <!-- included for compatibility -->
+      <dep package="bison"/>   <!-- included for Tiger, skipped otherwise -->
+      <dep package="flex"/>    <!-- included for Tiger, skipped otherwise -->
     </dependencies>
   </metamodule>
 
