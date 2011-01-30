@@ -66,9 +66,16 @@ if ! test -d $SOURCE/jhbuild; then
     cd jhbuild
     git checkout -b stable $JHBUILD_REVISION || \
 	do_exit "Checkout of stable branch failed";
+    mv modulesets/bootstrap.modules modulesets/bootstrap.modules.dist;
 else
-    cd $SOURCE/jhbuild && git pull $JHBUILD_REVISION_OPTION >/dev/null || \
+    cd $SOURCE/jhbuild || do_exit "Can't cd to $SOURCE/jhbuild."
+    if [ -f modulesets/bootstrap.modules.dist ]; then
+	rm modulesets/bootstrap.modules
+	mv modulesets/bootstrap.modules.dist modulesets/bootstrap.modules;
+    fi
+    git pull $JHBUILD_REVISION_OPTION >/dev/null || \
 	do_exit "Update of jhbuild failed";
+    mv modulesets/bootstrap.modules modulesets/bootstrap.modules.dist;
 fi
 
 echo "Installing jhbuild..."
@@ -85,7 +92,7 @@ if [ ! -f $HOME/.jhbuildrc-custom ]; then
 fi
 
 echo "Installing gtk-osx moduleset files..."
-MODULES="gtk-osx-gstreamer.modules gtk-osx-gtkmm.modules gtk-osx-python.modules gtk-osx-random.modules gtk-osx-themes.modules gtk-osx-unsupported.modules gtk-osx-webkit-deps.modules gtk-osx.modules gtk-osx-bootstrap.modules gtk-osx-universal.modules"
+MODULES="bootstrap.modules gtk-osx-bootstrap.modules gtk-osx.modules gtk-osx-gstreamer.modules gtk-osx-gtkmm.modules gtk-osx-python.modules gtk-osx-random.modules gtk-osx-themes.modules gtk-osx-unsupported.modules gtk-osx-universal.modules"
 
 for m in $MODULES; do
     get_moduleset_from_git $m
@@ -93,7 +100,7 @@ done
 
 if test "x`echo $PATH | grep $HOME/.local/bin`" == x; then
     echo "PATH does not contain $HOME/.local/bin, it is recommended that you add that."
-    echo 
+    echo
 fi
 
 echo "Done."
