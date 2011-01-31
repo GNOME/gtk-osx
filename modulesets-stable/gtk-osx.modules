@@ -75,6 +75,7 @@
             version="0.10.1"
             hash="sha256:59033bcb428fd507f9b8399424e847ab24d5e1fe5d587f6915be9940fde69890">
       <patch file="https://github.com/jralls/gtk-osx-build/raw/master/patches/girscanner-objc.patch" strip="1"/> 
+    </branch>
     <dependencies>
       <dep package="glib"/>
       <dep package="cairo"/>
