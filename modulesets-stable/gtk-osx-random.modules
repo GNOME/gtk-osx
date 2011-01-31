@@ -155,7 +155,6 @@
     <branch module="dbus-glib/dbus-glib-0.82.tar.gz"   version="0.80" 
 	    repo="dbus.freedesktop.org"/>
     <dependencies>
-      <dep package="libxml2"/>
       <dep package="dbus"/>
     </dependencies>
     <after>
@@ -172,7 +171,6 @@
             hash="sha256:d057dcfe2bfb2a80e592349c2a78d7dce12d19542aeced466c64fb701c806ac8"/>
     <dependencies>
       <dep package="ORBit2"/>
-      <dep package="libxml2"/>
       <dep package="dbus-glib"/>
     </dependencies>
   </autotools>
@@ -188,7 +186,6 @@
             repo="hadess"/>
     <dependencies>
       <dep package="intltool"/>
-      <dep package="libxml2"/>
       <dep package="glib"/>
     </dependencies>
   </autotools>
@@ -242,7 +239,6 @@
     <branch  module="libgsf/1.14/libgsf-1.14.16.tar.bz2" version="1.14.16"
 	     hash="sha256:11fd8fca1bdbcfa426276a124ad083cca9632f03cf766523bcdfb2fca0b08908"/>
     <dependencies>
-      <dep package="libxml2"/>
     </dependencies>
   </autotools>
 
