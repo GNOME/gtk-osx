@@ -71,8 +71,10 @@
   </autotools>
 
   <autotools id="gobject-introspection">
-    <branch module="gobject-introspection/0.9/gobject-introspection-0.9.3.tar.bz2"
-            version="0.9.2"/>
+    <branch module="gobject-introspection/0.10/gobject-introspection-0.10.1.tar.bz2"
+            version="0.10.1"
+            hash="sha256:59033bcb428fd507f9b8399424e847ab24d5e1fe5d587f6915be9940fde69890">
+      <patch file="https://github.com/jralls/gtk-osx-build/raw/master/patches/girscanner-objc.patch" strip="1"/> 
     <dependencies>
       <dep package="glib"/>
       <dep package="cairo"/>
