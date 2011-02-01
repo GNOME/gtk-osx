@@ -103,11 +103,19 @@
     </after>
   </autotools>
 
+  <autotools id="gdk-pixbuf">
+    <branch tag="2.23.0"/>
+    <after>
+      <dep package="pango"/>
+    </after>
+  </autotools>
+
   <autotools id="gtk+" autogenargs="--with-gdktarget=quartz --enable-introspection=no">
     <branch revision="gtk-2-24-quartz"/>
     <dependencies>
       <dep package="pango"/>
       <dep package="atk"/>
+      <dep package="gdk-pixbuf"/>
     </dependencies>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
