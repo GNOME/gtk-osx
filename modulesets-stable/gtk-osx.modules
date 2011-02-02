@@ -56,8 +56,8 @@
   </metamodule>
 
   <autotools id="glib" autogen-sh="configure">
-    <branch module="glib/2.24/glib-2.24.1.tar.bz2"  version="2.24.1"
-            hash="sha256:014c3da960bf17117371075c16495f05f36501db990851ceea658f15d2ea6d04"/>
+    <branch module="glib/2.27/glib-2.27.3.tar.bz2"  version="2.27.3"
+            hash="sha256:c44177b635e88639361eb1daf7aaa33315a00aaf46db5accf2f11920c7ff1919"/>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
       <dep package="gtk-doc"/> 
@@ -95,8 +95,8 @@
              autogenargs="--without-x --with-included-modules=basic-atsui"
              makeargs="-k -C modules; make">
     <!-- The last version that will build on Tiger is 1.24.5 -->
-    <branch version="1.28.1" module="pango/1.28/pango-1.28.1.tar.bz2"
-            hash="sha256:8f3eaab506f613dd25bb1fa65ea87a145d523d066d90c227bdb3016523451bc2">
+    <branch version="1.28.3" module="pango/1.28/pango-1.28.3.tar.bz2"
+            hash="sha256:5e278bc9430cc7bb00270f183360d262c5006b51248e8b537ea904573f200632">
 <!--    <branch version="1.24.5" module="pango/1.24/pango-1.24.5.tar.bz2"
             hash="sha256:0f733d1ec3e8dafcae152d7ac58f1090bee1fd856176c8fee0e81b0e42392f4e">-->
   <patch file="https://github.com/jralls/gtk-osx-build/raw/master/patches/pangoatsui-fontname.patch" strip="1"/> 
@@ -114,8 +114,8 @@
   </autotools>
 
  <autotools id="atk" autogen-sh="configure">
-    <branch module="atk/1.30/atk-1.30.0.tar.bz2" version="1.30.0"
-            hash="sha256:92b9b1213cafc68fe9c3806273b968c26423237d7b1f631dd83dc5270b8c268c"/>
+    <branch module="atk/1.32/atk-1.32.0.tar.bz2" version="1.32.0"
+            hash="sha256:e9a3e598f75c4db1af914f8b052dd9f7e89e920a96cc187c18eb06b8339cb16e"/>
     <dependencies>
       <dep package="glib"/>
     </dependencies>
@@ -124,12 +124,20 @@
     </after>
   </autotools>
 
-  <autotools id="gtk+"  autogen-sh="configure"
-             autogenargs="--with-gdktarget=quartz">
-    <branch module="gtk+/2.20/gtk+-2.20.1.tar.bz2" version="2.20.1"
-            hash="sha256:0e081731d21e34ff45c82199490c2889504fa8b3c7e117c043e82ababaec0f65">
+  <autotools id="gdk-pixbuf">
+    <branch module="gdk-pixbuf/2.23/gdk-pixbuf-2.23.0.tar.bz2" version="2.23.0"
+            hash="sha256:e17081abe08e62491e25ce972eaf8f6325307289b9ab55111ccaf64ad058e2d0"/>
+    <after>
+      <dep package="pango"/>
+    </after>
+  </autotools>
+
+  <autotools id="gtk+" autogen-sh="configure"
+             autogenargs="--with-gdktarget=quartz"
+             autogen-template="autoreconf -fis && %(srcdir)s/%(autogen-sh)s --prefix %(prefix)s --libdir %(libdir)s %(autogenargs)s">
+    <branch module="gtk+/2.24/gtk+-2.24.0.tar.bz2" version="2.24.0"
+            hash="sha256:cbed1a7b8cd1e471388a00f22557dd061334698a0c1aece11b7ed6541d115606">
       <patch file="https://github.com/jralls/gtk-osx-build/raw/master/patches/gtkselection.patch" strip="1"/>
-      <patch file="https://github.com/jralls/gtk-osx-build/raw/master/patches/gtkcups.patch" strip="1"/>
       <patch file="https://github.com/jralls/gtk-osx-build/raw/master/patches/gdkwindow-quartz.patch" strip="1"/>
       <patch file="https://github.com/jralls/gtk-osx-build/raw/master/patches/gtk-introspection.patch" strip="1"/>
       <patch file="https://github.com/jralls/gtk-osx-build/raw/master/patches/gtk-keyhash.patch" strip="1"/>
@@ -142,6 +150,7 @@
       <dep package="pango"/>
       <dep package="atk"/>
 <!--      <dep package="gir-repository"/> -->
+      <dep package="gdk-pixbuf"/>
     </dependencies>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
@@ -149,7 +158,7 @@
   </autotools>
 
   <autotools id="pixman" autogenargs="--disable-gtk" autogen-sh="configure">
-    <branch version="0.16.0" module="pixman-0.16.0.tar.gz" 
+    <branch version="0.21.4" module="pixman-0.21.4.tar.gz"
             repo="cairographics"/>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
@@ -158,7 +167,8 @@
 
   <autotools id="cairo"  autogen-sh="configure"
              autogenargs="--enable-pdf --enable-quartz --enable-xlib=no --without-x">
-    <branch module="cairo-1.8.8.tar.gz"  version="1.8.8" repo="cairographics"/>
+    <branch module="cairo-1.10.2.tar.gz"  version="1.10.2"
+            repo="cairographics"/>
     <dependencies>
       <dep package="pixman"/>
     </dependencies>
