@@ -11,7 +11,7 @@
 
   <autotools id="liboil" autogen-sh="configure"
 	     makerags=" CFLAGS=-DHAVE_SYMBOL_UNDERSCORE">
-    <branch repo="liboil" module="liboil-0.3.16.tar.gz" version="0.3.16" />
+    <branch repo="liboil" module="liboil-0.3.17.tar.gz" version="0.3.17" />
   </autotools>
 
   <autotools id="faad2" autogen-sh="autoreconf"
@@ -22,22 +22,21 @@
 
   <autotools id="gstreamer" autogenargs="-- --disable-tests" supports-non-srcdir-builds="no"
     makeargs="ERROR_CFLAGS=" autogen-sh="configure">
-    <branch module="gstreamer/gstreamer-0.10.25.tar.gz" version="0.10.25"
-            md5sum="3b0af3cc6899f04e3a0bad341095b79c"/>
+    <branch module="gstreamer/0.10/gstreamer-0.10.32.tar.bz2" version="0.10.32"
+            hash="sha256:3bf4e46a186ee9a1f5e212aaf651d67cffb4f5f05345a7c99ae71d5d992be133"/>
     <dependencies>
       <dep package="bison"/>
       <dep package="flex"/>
     </dependencies>
     <after>
       <dep package="glib"/>
-      <dep package="libxml2"/>
     </after>
   </autotools>
 
   <autotools id="gst-plugins-base" autogenargs="-- --disable-tests --disable-x --disable-xvideo" supports-non-srcdir-builds="no"
     makeargs="ERROR_CFLAGS=" autogen-sh="configure">
-    <branch module="gst-plugins-base/gst-plugins-base-0.10.25.tar.bz2"
-            version="0.10.25" md5sum="d29669dd79276c5cd94e1613c03cd9ab"/>
+    <branch module="gst-plugins-base/0.10/gst-plugins-base-0.10.32.tar.bz2"
+            version="0.10.32" hash="sha256:e9aabfac83f6480896da0686e9c911989f896fbad634821b7771ed84a446172b"/>
     <dependencies>
       <dep package="gstreamer"/>
       <!--dep package="gtk+"/-->
@@ -50,44 +49,17 @@
 
   <autotools id="gst-plugins-good" autogenargs="-- --disable-tests --disable-x --disable-xvideo --disable-osx-video" supports-non-srcdir-builds="no"
     makeargs="ERROR_CFLAGS=" autogen-sh="configure">
-    <branch module="gst-plugins-good/gst-plugins-good-0.10.16.tar.bz2"
-            version="0.10.16" md5sum="f0af97464bb6e060a99df39bb21b7a42"/>
+    <branch module="gst-plugins-good/gst-plugins-good-0.10.27.tar.bz2"
+            version="0.10.27" hash="sha256a9d801c3d42b456a6ebc0b95f68c44f153f756ec0fbd4877197c469cc67771fa:"/>
     <dependencies>
       <dep package="gstreamer"/>
       <dep package="gst-plugins-base"/>
     </dependencies>
   </autotools>
 
-  <autotools id="gst-plugins-ugly" autogenargs="-- --disable-tests" supports-non-srcdir-builds="no"
-    makeargs="ERROR_CFLAGS=" autogen-sh="configure">
-    <branch module="gst-plugins-ugly/gst-plugins-ugly-0.10.12.tar.gz"
-            version="0.10.12" md5sum="44d048a18db20318803c8ae66dbfff56"/>
-    <dependencies>
-      <dep package="gstreamer"/>
-      <dep package="gst-plugins-base"/>
-    </dependencies>
-  </autotools>
+ <!-- The gst-ffmpeg, gst-plugins-bad and gst-plugins-ugly packages have been
+      removed from gnome sources. -->
 
-  <autotools id="gst-plugins-bad" autogenargs="-- --disable-tests --disable-x --disable-xvid" supports-non-srcdir-builds="no"
-    makeargs="ERROR_CFLAGS=" autogen-sh="configure">
-    <branch module="gst-plugins-bad/gst-plugins-bad-0.10.14.tar.bz2"
-            version="0.10.14" md5sum="6be38b04fc76cdfef3a3b02b8434efa2"/>
-    <dependencies>
-      <dep package="gstreamer"/>
-      <dep package="gst-plugins-base"/>
-      <dep package="faad2"/>
-    </dependencies>
-  </autotools>
-
-  <autotools id="gst-ffmpeg" autogenargs="-- --disable-tests --disable-mmx" 
-             supports-non-srcdir-builds="no" autogen-sh="configure" >
-    <branch module="gst-ffmpeg/gst-ffmpeg-0.10.9.tar.bz2"
-            version="0.10.9" md5sum="138f995ebcba966cbc3493d0550ec055"/>
-    <dependencies>
-      <dep package="gstreamer"/>
-      <dep package="gst-plugins-base"/>
-    </dependencies>
-  </autotools>
 
   <metamodule id="meta-gstreamer">
     <dependencies>
@@ -95,10 +67,7 @@
       <dep package="gstreamer"/>
       <dep package="gst-plugins-base"/>
       <dep package="gst-plugins-good"/>
-      <!--dep package="gst-plugins-ugly"/-->
-      <dep package="gst-plugins-bad"/>
-      <dep package="gst-ffmpeg"/>
-    </dependencies>
+      </dependencies>
   </metamodule>
 
 </moduleset>
