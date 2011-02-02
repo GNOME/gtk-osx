@@ -33,17 +33,18 @@
   </autotools>
 
   <autotools id="pycairo-python2.6" autogen-sh="configure">
-    <branch module="pycairo-1.8.8.tar.gz" repo="cairographics.org"
-            version="1.8.8" md5sum="054da6c125cb427a003f5fd6c54f853e"/>
+    <branch module="pycairo-1.8.10.tar.gz" repo="cairographics.org"
+            version="1.8.10"
+	    hash="sha1:7497700ddf25158f63f501c9ecbbdd3d9a4c717b"/>
     <after>
       <dep package="meta-gtk-osx-core"/>
     </after>
   </autotools>
 
-  <autotools id="pygobject" autogen-sh="configure" 
+  <autotools id="pygobject" autogen-sh="configure"
 	     autogenargs="--disable-introspection">
-    <branch version="2.26.0" module="pygobject/2.26/pygobject-2.26.0.tar.bz2"
-            hash="sha256:5554acff9c27b647144143b0459359864e4a6f2ff62c7ba21cf310ad755cf7c7"/>
+    <branch version="2.27.0" module="pygobject/2.27/pygobject-2.27.0.tar.bz2"
+            hash="sha256:7594bd86c5b92a4ba1f26927800f1b29e1ec5c246cad67aa085c279d6425b8a2"/>
     <dependencies>
       <dep package="meta-gtk-osx-core"/>
     </dependencies>
@@ -68,8 +69,8 @@
   <autotools id="ige-mac-integration-python" autogen-sh="configure"
              autogenargs="--enable-python">
     <branch repo="sourceforge"
-	    module="gtk-osx/ige-mac-integration-0.9.6.tar.bz2"
-            version="0.9.6" />
+	    module="gtk-osx/ige-mac-integration-0.9.7.tar.bz2"
+            version="0.9.7" />
     <dependencies>
       <dep package="pygtk"/>
     </dependencies>
