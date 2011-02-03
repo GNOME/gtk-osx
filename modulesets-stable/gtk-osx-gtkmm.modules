@@ -43,7 +43,7 @@
     </dependencies>
   </autotools>
 
-  <autotools id="doxygen" 
+  <autotools id="doxygen"
              autogen-template="%(srcdir)s/configure --prefix %(prefix)s">
     <branch module="doxygen-1.7.3.src.tar.gz" version="1.7.3"
             repo="doxygen" />
