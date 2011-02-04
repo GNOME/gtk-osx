@@ -53,8 +53,8 @@
   </autotools>
 
   <autotools id="gnome-icon-theme" autogen-sh="configure">
-    <branch module="gnome-icon-theme/2.28/gnome-icon-theme-2.28.0.tar.bz2"
-            version="2.28.0" hash="sha256:31ecbd459ae059672793e46c773742897cb95e22ca5900ccdfb2a22aa30f3884"/>
+    <branch module="gnome-icon-theme/2.30/gnome-icon-theme-2.30.3.tar.bz2"
+            version="2.30.3" hash="sha256:417e2f9d77843a6dbdcb1f6fa70dd55992aae5621c6ad8a64e5baa3cb893dac7"/>
     <dependencies>
       <dep package="hicolor-icon-theme"/>
       <dep package="icon-naming-utils"/>
@@ -62,21 +62,21 @@
   </autotools>
 
   <autotools id="gtk-engines" autogen-sh="configure">
-    <branch module="gtk-engines/2.20/gtk-engines-2.20.1.tar.bz2"
-            version="2.18.4" hash="sha256:c502ee4778e1a8e232f430fb575146a0880266471d19dbd78ee51eaa769da614"/>
+    <branch module="gtk-engines/2.20/gtk-engines-2.20.2.tar.bz2"
+            version="2.20.2" hash="sha256:15b680abca6c773ecb85253521fa100dd3b8549befeecc7595b10209d62d66b5"/>
     <after>
       <dep package="meta-gtk-osx-core"/>
     </after>
   </autotools>
 
   <autotools id="murrine-engine" autogen-sh="configure">
-    <branch module="murrine/0.90/murrine-0.90.3.tar.bz2" version="0.90.3"
-	    hash="sha256:c61ff7614e68b705560612ea7485454d1a7947422ac8cfe11d75e45370e2f0ba"/>
+    <branch module="murrine/0.98/murrine-0.98.1.1.tar.bz2" version="0.98.1.1"
+	    hash="sha256:e6a2af72674403d06c03e067d915004e8d9cdeec206f3350c7f3ee595b139912"/>
   </autotools>
 
   <autotools id="librsvg">
-    <branch module="librsvg/2.26/librsvg-2.26.3.tar.bz2" version="2.26.3"
-	    hash="sha256:c0005f9471b4bd3ba4873d165d8e481ee6b1d124dda4efc6bdc24b7da024b7e5"/>
+    <branch module="librsvg/2.32/librsvg-2.32.1.tar.bz2" version="2.32.1"
+	    hash="sha256:91b98051f352fab8a6257688d6b2fd665b4648ed66144861f2f853ccf876d334"/>
   </autotools>
 
   <autotools id="libcroco">
@@ -95,7 +95,8 @@
   </autotools>
 
   <autotools id="gtk-css-engine" >
-    <branch module="gtk-css-engine" repo="git.gnome.org"/>
+    <branch module="gtk-css-engine/0.3/gtk-css-engine-0.3.1.tar.bz2"
+	    version="0.3.1" hash="sha256:c1d0000e00516b50f976db7726cd3f5e6318182704ad04be980d4ec7731e75d4"/>
     <dependencies>
       <dep package="libccss"/>
     </dependencies>
