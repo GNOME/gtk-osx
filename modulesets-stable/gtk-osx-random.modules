@@ -4,12 +4,8 @@
 <moduleset>
   <repository type="tarball" name="ftp.gnome.org" default="yes"
               href="http://ftp.gnome.org/pub/GNOME/sources/"/>
-  <repository type="tarball" name="ftp.gnome.org" 
-	      href="ftp://ftp.gnome.org/pub/gnome/sources/"/>
   <repository type="tarball" name="ftp.gtk.org" 
 	      href="ftp://ftp.gtk.org/pub/"/>
-  <repository type="tarball" name="littlecms"
-              href="http://www.littlecms.com/"/>
   <repository type="tarball" name="hadess"
               href="http://freedesktop.org/~hadess/"/>
   <repository type="tarball" name="gimp"
@@ -38,11 +34,9 @@
       <dep package="glade3"/>
     </dependencies>
   </metamodule>
-  <!-- Loudmouth seems to be a bit of a football. See
-       modulesets/gtk-osx-random.modules for more info on where the
-       development is happening. Note that when the current devs are
-       ready for a new stable release, they probably won't be able to
-       put it on gnome.org. -->
+  <!-- Loudmouth is an abandoned Imendio project, now developed on
+       Github. This is the last release from gnome, and is the last
+       known to work on Leopard. -->
   <autotools id="loudmouth" autogenargs="--with-ssl=openssl">
     <branch version="1.4.3" module="loudmouth/1.4/loudmouth-1.4.3.tar.bz2" 
             md5sum="55339ca42494690c3942ee1465a96937"/>
@@ -52,6 +46,8 @@
     </after>
   </autotools>
 
+<!-- Libglade's functions are now part of Gtk+ with different names and
+Libglade itself is deprecated. This is the last release. -->
   <autotools id="libglade" autogen-sh="configure">
     <branch module="libglade/2.6/libglade-2.6.4.tar.bz2" version="2.6.4"
             md5sum="d1776b40f4e166b5e9c107f1c8fe4139"/>
@@ -60,7 +56,7 @@
       <dep package="meta-gtk-osx-core"/>
     </after>
   </autotools>
-
+<!-- Gossip has received no updates other than translations since December 2009 -->
   <autotools id="gossip" autogen-sh="configure">
     <branch module="gossip/0.31/gossip-0.31.tar.bz2" version="0.31"
             md5sum="feacf7a78ced249268898d2a3f7063cd"/>
@@ -76,17 +72,18 @@
   </autotools>
 
     <autotools id="vala" autogen-sh="configure">
-    <branch repo="ftp.gnome.org" module="vala/0.7/vala-0.7.7.tar.bz2"
-            version="0.7.7" hash="sha256:ebb1afbb0a61dd8f5f8ef13512e789697e98d5ad5f98739120f3b3cc02d46d8f"/>
+    <branch repo="ftp.gnome.org" module="vala/0.10/vala-0.10.3.tar.bz2"
+            version="0.10.3" hash="sha256:338b9869ad5c585b58540ffc9b576cbe44709864da2582c7ebc7a5d817004974"/>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
       <dep package="meta-gtk-osx-core"/>
     </after>
   </autotools>
 
+<!-- This is, I think, the last Gtk+2 version -->
   <autotools id="devhelp" autogen-sh="configure">
-    <branch module="devhelp/2.28/devhelp-2.28.0.1.tar.bz2" version="2.28.0.1"
-            hash="sha256:cf36cbfbf5f032c87df4efd992a50469e89a0dd3c16911b506792ad74592ca4c"/>
+    <branch module="devhelp/2.32/devhelp-2.32.0.tar.bz2" version="2.32.0"
+            hash="sha256:61b342cbaf27379be9baa5df1f34c9464916601ec4378fa7e1c76fcc686553e4"/>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
       <dep package="meta-gtk-osx-themes"/>
@@ -97,7 +94,7 @@
       <dep package="libglade"/>
     </dependencies>
   </autotools>
-
+<!-- There's a 3.8 branch in Git but no releases on ftp.gnome.org. There are also 3.9 tags, suggesting that Glade will go 4.0 for Gtk+3 -->
   <autotools id="glade3" autogen-sh="configure" 
 	     autogenargs="--disable-scrollkeeper">
     <branch module="glade3/3.6/glade3-3.6.7.tar.bz2" version="3.6.7"
@@ -110,8 +107,8 @@
   </autotools>
 
   <autotools id="gtksourceview" autogen-sh="configure">
-    <branch module="gtksourceview/2.8/gtksourceview-2.8.1.tar.bz2"
-            version="2.8.1" hash="sha256:e67e8222675228a7cc1ef7da0a3367f3d67d2a0ca2eb50e668e48caf116f390a"/>
+    <branch module="gtksourceview/2.10/gtksourceview-2.10.5.tar.bz2"
+            version="2.10.5" hash="sha256:c585773743b1df8a04b1be7f7d90eecdf22681490d6810be54c81a7ae152191e"/>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
       <dep package="meta-gtk-osx-core"/>
@@ -119,8 +116,8 @@
   </autotools>
 
   <autotools id="libIDL" autogen-sh="configure">
-    <branch module="libIDL/0.8/libIDL-0.8.13.tar.bz2" version="0.8.13"
-            md5sum="b43b289a859eb38a710f70622c46e571"/>
+    <branch module="libIDL/0.8/libIDL-0.8.14.tar.bz2" version="0.8.14"
+            hash="sha256:c5d24d8c096546353fbc7cedf208392d5a02afe9d56ebcc1cccb258d7c4d2220"/>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
       <dep package="meta-gtk-osx-core"/>
@@ -128,8 +125,8 @@
   </autotools>
 
   <autotools id="ORBit2" autogen-sh="configure">
-    <branch module="ORBit2/2.14/ORBit2-2.14.17.tar.bz2" version="2.14.17"
-            md5sum="10bfb957fa4a8935a0b4afaee7d71df7"/>
+    <branch module="ORBit2/2.14/ORBit2-2.14.19.tar.bz2" version="2.14.19"
+            hash="sha256:55c900a905482992730f575f3eef34d50bda717c197c97c08fa5a6eafd857550"/>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
     </after>
@@ -139,9 +136,9 @@
   </autotools>
 
   <autotools id="dbus" autogen-sh='configure'
-	   autogenargs="--disable-selinux --without-x 
+	   autogenargs="--disable-selinux --without-x
 	   --with-session-socket-dir=/var/tmp">
-    <branch module="dbus/dbus-1.2.16.tar.gz"  version="1.2.16" 
+    <branch module="dbus/dbus-1.4.1.tar.gz"  version="1.4.1"
 	    repo="dbus.freedesktop.org">
       <patch file="https://github.com/jralls/gnucash-on-osx/raw/master/patches/dbus-install.patch"/>
       <!--patch file="http://gimponosx.svn.sourceforge.net/viewvc/gimponosx/GimpPorts/ports/devel/dbus/files/dbus-sysdeps-unix.c.diff"/ -->
@@ -150,9 +147,9 @@
       <dep package="gtk+"/>
     </after>
   </autotools>
-
+<!-- NB: dbus support is now built into glib -->
   <autotools id="dbus-glib" autogenargs="--disable-selinux">
-    <branch module="dbus-glib/dbus-glib-0.82.tar.gz"   version="0.80" 
+    <branch module="dbus-glib/dbus-glib-0.92.tar.gz"   version="0.92" 
 	    repo="dbus.freedesktop.org"/>
     <dependencies>
       <dep package="dbus"/>
@@ -167,8 +164,8 @@
        which is available only through svn or from Linux distros -->
   <autotools id="gconf" autogen-sh="configure"
 	     autogenargs="--disable-defaults-service">
-    <branch module="GConf/2.28/GConf-2.28.0.tar.bz2" version="2.28.0"
-            hash="sha256:d057dcfe2bfb2a80e592349c2a78d7dce12d19542aeced466c64fb701c806ac8"/>
+    <branch module="GConf/2.32/GConf-2.32.1.tar.bz2" version="2.32.1"
+            hash="sha256:f2d06c1ab52ac54e9f025e9bdeb08460f27a7fe6f9e660aa39d9f059dafecd18"/>
     <dependencies>
       <dep package="ORBit2"/>
       <dep package="dbus-glib"/>
@@ -176,13 +173,13 @@
   </autotools>
 
   <autotools id="lcms" autogen-sh="configure">
-    <branch module="lcms-1.18a.tar.gz" version="1.18" repo="littlecms"
-            checkoutdir="lcms-1.18"/>
+    <branch module="lcms/lcms2-2.1.tar.gz" version="2.1" repo="sourceforge"
+            checkoutdir="lcms-2.1"/>
   </autotools>
 
   <autotools id="shared-mime-info"  autogen-sh="configure"
              supports-non-srcdir-builds="no" >
-    <branch module="shared-mime-info-0.70.tar.bz2" version="0.70"
+    <branch module="shared-mime-info-0.90.tar.bz2" version="0.90"
             repo="hadess"/>
     <dependencies>
       <dep package="intltool"/>
@@ -194,8 +191,8 @@
              autogenargs="--disable-python --disable-print --without-x
                           --without-dbus --without-gnomevfs --without-wmf"
              makeargs='LDFLAGS="-framework Carbon"'>
-    <branch module="gimp/v2.6/gimp-2.6.7.tar.bz2" version="2.6.7" 
-            md5sum="77ed86a8de9b48587efb24f2b115ad38" repo="gimp"/>
+    <branch module="gimp/v2.6/gimp-2.6.11.tar.bz2" version="2.6.11"
+            md5sum="bb2939fe13e54fc7255cef5d097bb5dd" repo="gimp"/>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
       <dep package="meta-gtk-osx-core"/>
@@ -208,13 +205,13 @@
   </autotools>
 
   <autotools id="babl" >
-    <branch repo="ftp.gtk.org" version="0.1.0" 
-            module="babl/0.1/babl-0.1.0.tar.bz2"/>
+    <branch repo="ftp.gtk.org" version="0.1.2"
+            module="babl/0.1/babl-0.1.2.tar.bz2"/>
   </autotools>
 
   <autotools id="gegl" autogen-sh="configure" autogenargs="--disable-docs">
-    <branch repo="ftp.gtk.org" version="0.1.0" 
-            module="gegl/0.1/gegl-0.1.0.tar.bz2"/>
+    <branch repo="ftp.gtk.org" version="0.1.2"
+            module="gegl/0.1/gegl-0.1.2.tar.bz2"/>
     <dependencies>
       <dep package="babl"/>
     </dependencies>
@@ -222,7 +219,7 @@
 
   <autotools id="poppler"  autogen-sh="configure"
            autogenargs="--disable-qt --disable-qt4 --without-x --disable-gtk-test --enable-xpdf-headers">
-    <branch module="poppler-0.12.0.tar.gz" version="0.12.0" 
+    <branch module="poppler-0.16.2.tar.gz" version="0.16.2"
             repo="poppler.freedesktop.org"/>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
@@ -232,19 +229,20 @@
 
 <!-- SQLite3 is provided by MacOSX in /usr/lib/libsqlite.3.dylib -->
   <autotools id="sqlite" autogenargs="--disable-tcl --enable-threadsafe" >
-    <branch module="sqlite-3.6.15.tar.gz" version='3.6.15' repo="sqlite"/>
+    <branch module="sqlite-autoconf-3070500.tar.gz" version='3.7.5'
+	    repo="sqlite"/>
   </autotools>
 
   <autotools id="libgsf" autogenargs="--without-python">
-    <branch  module="libgsf/1.14/libgsf-1.14.16.tar.bz2" version="1.14.16"
-	     hash="sha256:11fd8fca1bdbcfa426276a124ad083cca9632f03cf766523bcdfb2fca0b08908"/>
+    <branch  module="libgsf/1.14/libgsf-1.14.19.tar.bz2" version="1.14.19"
+	     hash="sha256:8cf82ce95ef97e61bae02099d2f39e4d814747b546899b7c28a695e15391b56c"/>
     <dependencies>
     </dependencies>
   </autotools>
-
+<!-- Libart_lgpl is deprecated by gnome. This is probably the last release. -->
   <autotools id="libart_lgpl">
-    <branch   module="libart_lgpl/2.3/libart_lgpl-2.3.20.tar.bz2" 
-	      version="2.3.20" md5sum="d0ce67f2ebcef1e51a83136c69242a73"/>
+    <branch   module="libart_lgpl/2.3/libart_lgpl-2.3.21.tar.bz2"
+	      version="2.3.21" hash="sha256:fdc11e74c10fc9ffe4188537e2b370c0abacca7d89021d4d303afdf7fd7476fa"/>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
       <dep package="meta-gtk-osx-core"/>
@@ -252,7 +250,7 @@
   </autotools>
 
   <autotools id="hunspell" autogen-sh="configure">
-    <branch module="hunspell/hunspell-1.2.12.tar.gz" version="1.2.12"
+    <branch module="hunspell/hunspell-1.2.14.tar.gz" version="1.2.14"
 	    repo="sourceforge"/>
   </autotools>
 
