@@ -2,19 +2,19 @@
 <!DOCTYPE moduleset SYSTEM "moduleset.dtd">
 <?xml-stylesheet type="text/xsl" href="moduleset.xsl"?>
 <moduleset>
-  <repository type="tarball" name="ftp.gnome.org" default="yes" 
+  <repository type="tarball" name="ftp.gnome.org" default="yes"
               href="http://ftp.gnome.org/pub/GNOME/sources/"/>
-  <repository type='tarball' name='michael.68k.org' 
+  <repository type='tarball' name='michael.68k.org'
               href="http://www.68k.org/~michael/"/>
   <repository type='tarball' name='ftp.gnu.org' href="ftp://ftp.gnu.org/gnu/"/>
  <repository type='tarball' name='ftp.gnupg.org' href="ftp://ftp.gnupg.org/" />
   <repository type="svn" name="svn.debian.org" href="svn://svn.debian.org/"/>
-  <repository type="tarball" name="abisource/enchant" 
+  <repository type="tarball" name="abisource/enchant"
               href="http://www.abisource.com/downloads/enchant/" />
   <repository type="tarball" name="iso-codes"
               href="ftp://pkg-isocodes.alioth.debian.org/pub/"/>
   <repository type='tarball' name='libproxy.google.com'
-              href='http://libproxy.googlecode.com/files/'/>
+              href='http://libproxy.googlecode.com/downloads/'/>
   <repository type="tarball" name="curl.haxx.se"
               href="http://curl.haxx.se/download/"/>
   <repository type="tarball" name="webkit.org"
@@ -40,14 +40,14 @@
   </autotools>
 
   <autotools id="iso-codes" autogen-sh="configure" >
-    <branch repo="iso-codes" version="3.21"
-            module="pkg-isocodes/iso-codes-3.21.tar.bz2"/>
+    <branch repo="iso-codes" version="3.24"
+            module="pkg-isocodes/iso-codes-3.24.tar.bz2"/>
 
   </autotools>
 
   <autotools id="gnutls" autogen-sh="configure">
-    <branch repo='ftp.gnu.org' version='2.8.4' 
-            module="gnutls/gnutls-2.8.4.tar.bz2"/>
+    <branch repo='ftp.gnu.org' version='2.10.4'
+            module="gnutls/gnutls-2.10.4.tar.bz2"/>
     <dependencies>
       <dep package="libgcrypt" />
       <dep package="libtasn1" />
@@ -56,12 +56,12 @@
   </autotools>
 
   <autotools id='libproxy' autogen-sh='configure' >
-    <branch version='0.3.1' module='libproxy-0.3.1.tar.bz2'
+    <branch version='0.3.1' module='libproxy-0.4.6.tar.bz2'
             repo='libproxy.google.com'/>
   </autotools>
 
 <!-- Deprecated, obsolete
-  <autotools id="opencdk" supports-non-srcdir-builds="no" 
+  <autotools id="opencdk" supports-non-srcdir-builds="no"
              autogen-sh="configure">
     <branch repo="ftp.gnu.org" version='0.6.6'
 	    module="gnutls/opencdk-0.6.6.tar.bz2"
@@ -73,8 +73,8 @@
 -->
 
   <autotools id="gnome-keyring">
-    <branch module="gnome-keyring/2.28/gnome-keyring-2.28.0.tar.bz2" 
-	    version="2.28.0" hash="sha256:1b3234f1feac6a619a9a61a0b5f67ab8cd89d94aeeec9a5cc2d78b81d9d8cab4"/>
+    <branch module="gnome-keyring/2.32/gnome-keyring-2.32.1.tar.bz2"
+	    version="2.32.0" hash="sha256:31fecec1430a97f59a6159a5a2ea8d6a1b44287f1e9e595b3594df46bf7f18f9"/>
     <dependencies>
       <dep package="gtk+"/>
       <dep package="libgcrypt"/>
@@ -83,9 +83,8 @@
   </autotools>
 
   <autotools id="libsoup" autogen-sh="configure" >
-    <!-- Development version demanded by WebKit -->
-    <branch module="libsoup/2.28/libsoup-2.28.0.tar.bz2"
-            version="2.28.0" hash="sha256:647217d395d560375551056e291d697543d424eb6363e101c334a01a0b8c6fb6" />
+    <branch module="libsoup/2.32/libsoup-2.32.2.tar.bz2"
+            version="2.32.2" hash="sha256:96e6973c8b7459523c0f44e7aec69528ff2fbd388e8ddc415f91bcc42f50777f" />
     <dependencies>
       <dep package="glib"/>
       <dep package="gnutls"/>
@@ -96,7 +95,7 @@
     </dependencies>
   </autotools>
 
-  <autotools id="enchant" autogen-sh="configure" 
+  <autotools id="enchant" autogen-sh="configure"
 	     autogenargs="--with-myspell-dir=/Library/Dictionaries">
     <branch module="1.6.0/enchant-1.6.0.tar.gz" version="1.6.0"
 	    repo="abisource/enchant"/>
@@ -106,13 +105,13 @@
   </autotools>
 
    <autotools id="libgpg-error" autogen-sh="configure">
-    <branch repo='ftp.gnupg.org' version='1.7'
-	    module="gcrypt/libgpg-error/libgpg-error-1.7.tar.bz2"/>
+    <branch repo='ftp.gnupg.org' version='1.10'
+	    module="gcrypt/libgpg-error/libgpg-error-1.10.tar.bz2"/>
   </autotools>
 
   <autotools id="libgcrypt" autogen-sh="configure">
-    <branch repo='ftp.gnupg.org' version='1.4.4'
-	    module='gcrypt/libgcrypt/libgcrypt-1.4.4.tar.bz2'/>
+    <branch repo='ftp.gnupg.org' version='1.4.6'
+	    module='gcrypt/libgcrypt/libgcrypt-1.4.6.tar.bz2'/>
     <dependencies>
       <dep package="libgpg-error" />
     </dependencies>
@@ -120,8 +119,8 @@
 
   <autotools id="libtasn1" supports-non-srcdir-builds="no"
 	     autogen-sh="configure">
-    <branch repo="ftp.gnu.org" version='2.3'
-	    module="libtasn1/libtasn1-2.3.tar.gz"/>
+    <branch repo="ftp.gnu.org" version='2.9'
+	    module="libtasn1/libtasn1-2.9.tar.gz"/>
   </autotools>
 
    <!-- 10.5 has 7.16.3, which is too old for some things. Otherwise can be skipped. -->
@@ -148,7 +147,7 @@
     </after>
   </autotools>
 
-  <autotools id="WebKit-svn" 
+  <autotools id="WebKit-svn"
 	     autogenargs="--with-target=quartz --disable-video --with-font-backend=pango">
     <branch repo="svn.webkit.org" module="webkit/trunk" checkoutdir="WebKit"/>
     <dependencies>
