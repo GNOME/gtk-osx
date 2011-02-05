@@ -173,8 +173,8 @@ Libglade itself is deprecated. This is the last release. -->
   </autotools>
 
   <autotools id="lcms" autogen-sh="configure">
-    <branch module="lcms/lcms2-2.1.tar.gz" version="2.1" repo="sourceforge"
-            checkoutdir="lcms-2.1"/>
+    <branch module="lcms/lcms-1.19.tar.gz" version="1.19" repo="sourceforge"
+            checkoutdir="lcms-1.19"/>
   </autotools>
 
   <autotools id="shared-mime-info"  autogen-sh="configure"
