@@ -134,7 +134,7 @@
 
   <autotools id="gtk+" autogen-sh="configure"
              autogenargs="--with-gdktarget=quartz"
-             autogen-template="autoreconf -fis && %(srcdir)s/%(autogen-sh)s --prefix %(prefix)s --libdir %(libdir)s %(autogenargs)s">
+             autogen-template="autoreconf -fis &amp;&amp; %(srcdir)s/%(autogen-sh)s --prefix %(prefix)s --libdir %(libdir)s %(autogenargs)s">
     <branch module="gtk+/2.24/gtk+-2.24.0.tar.bz2" version="2.24.0"
             hash="sha256:cbed1a7b8cd1e471388a00f22557dd061334698a0c1aece11b7ed6541d115606">
       <patch file="https://github.com/jralls/gtk-osx-build/raw/master/patches/gtkselection.patch" strip="1"/>
