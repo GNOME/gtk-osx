@@ -35,7 +35,7 @@
 
   <autotools id="pangomm" autogen-sh="configure">
     <branch module="pangomm/2.27/pangomm-2.27.1.tar.bz2" version="2.27.1"
-            hash="sha256:f105ff4afdcdf7da7f310affdbe698058958f01e94ab65ac1c35e46e20ecb6c0"/>
+            hash="sha256:be3a0cf41589dab65e2d0ee3896f025179aa3676be70b87c50e1dd769becc79d"/>
     <dependencies>
       <dep package="glibmm"/>
       <dep package="cairomm"/>
