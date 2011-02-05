@@ -32,10 +32,10 @@
     </after>
   </autotools>
 
+<!-- Pycairo 1.8.10 (and later, presumably) requires Python3. -->
   <autotools id="pycairo-python2.6" autogen-sh="configure">
-    <branch module="pycairo-1.8.10.tar.gz" repo="cairographics.org"
-            version="1.8.10"
-	    hash="sha1:7497700ddf25158f63f501c9ecbbdd3d9a4c717b"/>
+    <branch module="pycairo-1.8.8.tar.gz" repo="cairographics.org"
+            version="1.8.8" md5sum="054da6c125cb427a003f5fd6c54f853e"/>
     <after>
       <dep package="meta-gtk-osx-core"/>
     </after>
