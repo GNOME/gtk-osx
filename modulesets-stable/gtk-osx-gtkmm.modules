@@ -43,18 +43,17 @@
     </dependencies>
   </autotools>
 
-  <autotools id="doxygen"
-             autogen-template="%(srcdir)s/configure --prefix %(prefix)s">
-    <branch module="doxygen-1.7.3.src.tar.gz" version="1.7.3"
-            repo="doxygen" />
   </autotools>
 
-  <autotools id="libsigc++2" autogen-sh="configure">
+<!-- libsigc++ depends on doxygen for documentation, but doxygen
+     doesn't build correctly under gtk-osx. It builds fine on its own,
+     of course, and there are OSX binaries available on their
+     website. If you want the docs, install it separately and renable
+     documentation in your jhbuildrc-custom. -->
+  <autotools id="libsigc++2" autogen-sh="configure"
+	     autogen-args="--disable-documentation">
     <branch module="libsigc++/2.2/libsigc++-2.2.8.tar.bz2" version="2.2.8"
             hash="sha256:0fd75fd8249e09ae2fd3ffd20c3fbaea11b47d71ba5ba2340ed98b6bdca40ea8"/>
-    <dependencies>
-      <dep package="doxygen"/>
-    </dependencies>
   </autotools>
 
   <autotools id="gtkmm" autogen-sh="configure">
