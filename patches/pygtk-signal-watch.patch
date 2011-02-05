@@ -1,0 +1,15 @@
+diff --git a/gtk/gtk.override b/gtk/gtk.override
+index 75018f4..7261d9c 100644
+--- a/gtk/gtk.override
++++ b/gtk/gtk.override
+@@ -1152,8 +1152,9 @@ pygtk_main_watch_check(GSource *source)
+     PySignalWatchSource *real_source = (PySignalWatchSource *)source;
+     GPollFD *poll_fd = &real_source->fd;
+     int data_size = 0;
++    char dummy;
+     if (poll_fd->revents & G_IO_IN)
+-        data_size = read(poll_fd->fd, 0, 1);
++        data_size = read(poll_fd->fd, &dummy, 1);
+ #endif
+ 
+     state = pyg_gil_state_ensure();
