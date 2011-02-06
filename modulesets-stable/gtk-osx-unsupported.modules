@@ -55,10 +55,11 @@
     </dependencies>
   </autotools>
 
-  <cmake id='libproxy'>
-    <branch version='0.3.1' module='libproxy-0.4.6.tar.gz'
+<!-- Libsoup doesn't work with newer versions of libproxy -->
+  <autotools id='libproxy'>
+    <branch version='0.3.1' module='libproxy-0.3.1.tar.gz'
             repo='libproxy.google.com'/>
-  </cmake>
+  </autotools>
 
 <!-- Deprecated, obsolete
   <autotools id="opencdk" supports-non-srcdir-builds="no"
