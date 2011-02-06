@@ -14,7 +14,7 @@
   <repository type="tarball" name="iso-codes"
               href="ftp://pkg-isocodes.alioth.debian.org/pub/"/>
   <repository type='tarball' name='libproxy.google.com'
-              href='http://libproxy.googlecode.com/downloads/'/>
+              href='http://libproxy.googlecode.com/files/'/>
   <repository type="tarball" name="curl.haxx.se"
               href="http://curl.haxx.se/download/"/>
   <repository type="tarball" name="webkit.org"
