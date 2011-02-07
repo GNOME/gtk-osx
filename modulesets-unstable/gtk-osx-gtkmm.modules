@@ -15,6 +15,11 @@
     </dependencies>
   </metamodule>
 
+<!-- mm-common is C++ glue code needed only to build from git. -->
+  <autotools id="mm-common">
+    <branch module="mm-common"/>
+  </autotools>
+
   <autotools id="cairomm" >
     <branch module="cairomm"  
             repo="cairographics" />
