@@ -16,11 +16,13 @@
       <dep package="pycairo"/>
       <dep package="pygobject"/>
       <dep package="pygtk"/>
-    </dependencies>
+      <dep package="ige-mac-integration-python"/>
+   </dependencies>
   </metamodule>
 
  <!-- Pycairo >1.8.4 requires Python 2.6. jhbuild installs only 2.5,
-      which is also what Leopard comes with. -->
+      which is also what Leopard comes with. PyCairo 1.8.10 requires
+      Python3. -->
  <autotools id="pycairo" >
     <branch module="pycairo" repo="cairographics" />
     <after>
@@ -45,10 +47,11 @@
     </dependencies>
   </autotools>
 
-  <autotools id="ige-mac-integration">
+  <autotools id="ige-mac-integration-python">
     <branch repo="github"
 	    module="jralls/ige-mac-integration" />
     <dependencies>
+      <dep package="pygobject"/>
       <dep package="gtk+"/>
     </dependencies>
     <after>
