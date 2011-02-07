@@ -63,8 +63,9 @@
 
   <autotools id="gnome-keyring" autogenargs="--disable-pam">
     <branch module="gnome-keyring/2.32/gnome-keyring-2.32.1.tar.bz2"
-	    version="2.32.1" hash="sha256:31fecec1430a97f59a6159a5a2ea8d6a1b44287f1e9e595b3594df46bf7f18f9"
-      <patch file="https://github.com/jralls/gtk-osx-build/raw/master/patches/gnome-keyring-dumb-typo.patch" strip="1"/ >/>
+	    version="2.32.1" hash="sha256:31fecec1430a97f59a6159a5a2ea8d6a1b44287f1e9e595b3594df46bf7f18f9">
+      <patch file="https://github.com/jralls/gtk-osx-build/raw/master/patches/gnome-keyring-dumb-typo.patch" strip="1"/>
+    </branch>
     <dependencies>
       <dep package="gtk+"/>
       <dep package="libgcrypt"/>
