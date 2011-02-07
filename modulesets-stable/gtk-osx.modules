@@ -91,6 +91,7 @@
     </dependencies>
   </autotools>
 
+<!-- PangoFt2 and hence freetype and fontconfig are required by WebKitGtk -->
   <autotools id="pango"  autogen-sh="configure"
              autogenargs="--without-x --with-included-modules=basic-atsui"
              makeargs="-k -C modules; make">
