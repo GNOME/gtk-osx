@@ -1,0 +1,15 @@
+--- a/egg/egg-asn1x.c	Mon Oct 18 19:11:38 2010
++++ b/egg/egg-asn1x.c	Sat Feb  5 15:35:40 2011
+@@ -1988,8 +1988,8 @@
+ 	guchar buf[sizeof (gulong)];
+ 	gint bytes, i, off;
+ 
+-	for (i = 0; i < sizeof (ulong); ++i) {
+-		off = sizeof (ulong) - (i + 1);
++	for (i = 0; i < sizeof (gulong); ++i) {
++		off = sizeof (gulong) - (i + 1);
+ 		buf[i] = (value >> (off * 8)) & 0xFF;
+ 	}
+ 
+
+Diff finished.  Sat Feb  5 15:37:29 2011

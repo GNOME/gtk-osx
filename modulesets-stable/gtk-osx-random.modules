@@ -136,12 +136,12 @@ Libglade itself is deprecated. This is the last release. -->
   </autotools>
 
   <autotools id="dbus" autogen-sh='configure'
-	   autogenargs="--disable-selinux --without-x
+	   autogenargs="--disable-selinux --without-x --disable-launchd
 	   --with-session-socket-dir=/var/tmp">
     <branch module="dbus/dbus-1.4.1.tar.gz"  version="1.4.1"
 	    repo="dbus.freedesktop.org">
       <patch file="https://github.com/jralls/gnucash-on-osx/raw/master/patches/dbus-install.patch"/>
-      <!--patch file="http://gimponosx.svn.sourceforge.net/viewvc/gimponosx/GimpPorts/ports/devel/dbus/files/dbus-sysdeps-unix.c.diff"/ -->
+      <patch file="https://github.com/jralls/gnucash-on-osx/raw/master/patches/dbus-msg-nosignal.patch"/>
     </branch>
     <after>
       <dep package="gtk+"/>
@@ -188,8 +188,9 @@ Libglade itself is deprecated. This is the last release. -->
   </autotools>
 
   <autotools id="gimp"  autogen-sh="configure"
-             autogenargs="--disable-python --disable-print --without-x
-                          --without-dbus --without-gnomevfs --without-wmf"
+             autogenargs="--disable-python --without-x
+                          --without-dbus --without-gnomevfs --without-wmf --enable-binreloc "
+	     autogen-template="autoreconf -fis &amp;&amp; $(srcdir)s/%(autogen-sh)s --prefix %(prefix)s --libdir %(libdir)s %(autogenargs)s"
              makeargs='LDFLAGS="-framework Carbon"'>
     <branch module="gimp/v2.6/gimp-2.6.11.tar.bz2" version="2.6.11"
             md5sum="bb2939fe13e54fc7255cef5d097bb5dd" repo="gimp"/>

@@ -57,25 +57,14 @@
 
 <!-- Libsoup doesn't work with newer versions of libproxy -->
   <autotools id='libproxy'>
-    <branch version='0.3.1' module='libproxy-0.3.1.tar.gz'
+    <branch version='0.3.1' module='libproxy-0.3.1.tar.bz2'
             repo='libproxy.google.com'/>
   </autotools>
 
-<!-- Deprecated, obsolete
-  <autotools id="opencdk" supports-non-srcdir-builds="no"
-             autogen-sh="configure">
-    <branch repo="ftp.gnu.org" version='0.6.6'
-	    module="gnutls/opencdk-0.6.6.tar.bz2"
-            size="481904" md5sum="813d62d7afe7b2c2d8f3df0a6c9d9331" />
-    <dependencies>
-      <dep package="libgcrypt" />
-    </dependencies>
-  </autotools>
--->
-
-  <autotools id="gnome-keyring">
+  <autotools id="gnome-keyring" autogenargs="--disable-pam">
     <branch module="gnome-keyring/2.32/gnome-keyring-2.32.1.tar.bz2"
-	    version="2.32.0" hash="sha256:31fecec1430a97f59a6159a5a2ea8d6a1b44287f1e9e595b3594df46bf7f18f9"/>
+	    version="2.32.1" hash="sha256:31fecec1430a97f59a6159a5a2ea8d6a1b44287f1e9e595b3594df46bf7f18f9"
+      <patch file="https://github.com/jralls/gtk-osx-build/raw/master/patches/gnome-keyring-dumb-typo.patch" strip="1"/ >/>
     <dependencies>
       <dep package="gtk+"/>
       <dep package="libgcrypt"/>
