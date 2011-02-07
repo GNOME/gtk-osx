@@ -27,13 +27,13 @@
   </metamodule>
 
   <autotools id="icon-naming-utils" >
-    <branch repo="icon.freedesktop.org" tag="ICON_NAMING_UTILS_0_8_907"/>
+    <branch repo="icon.freedesktop.org" tag="ICON_NAMING_UTILS_0_8_90"/>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
     </after>
   </autotools>
 
-  <!-- Requires Inkscape to build icons from SVG and for wome reason
+  <!-- Requires Inkscape to build icons from SVG and for some reason
        the perl is wedged, looking in the wrong place for
        ParserOptions.ini. Use the tarball -->
   <autotools id="tango-icon-theme" autogenargs="--disable-icon-framing" 
@@ -54,7 +54,7 @@
   </autotools>
 
   <autotools id="gnome-icon-theme">
-    <branch revision="gnome-2-28"/>
+    <branch revision="gnome-2-30"/>
     <dependencies>
       <dep package="hicolor-icon-theme"/>
       <dep package="icon-naming-utils"/>
@@ -62,14 +62,36 @@
   </autotools>
 
   <autotools id="gtk-engines">
-    <branch tag="GTK_ENGINES_2_18_4"/>
+    <branch revision="gtk-engines-2-20"/>
     <after>
       <dep package="meta-gtk-osx-core"/>
     </after>
   </autotools>
 
+  <autotools id="murrine-engine">
+    <branch module="murrine" tag="173b7fc19f15b87ffe1bed4de661007b15719aa5"/>
+  </autotools>
+
+  <autotools id="librsvg">
+    <branch module="librsvg" rebision="gnoe-2-32"/>
+  </autotools>
+
+  <autotools id="libcroco">
+    <branch revision="libcroco-0-6-0"/>
+  </autotools>
+
+  <autotools id="libcss" autogenargs="--disable-examples">
+    <branch module="ccss" repo="freedesktop.org"/>
+    <dependencies>
+      <dep package="libcroco"/>
+    </dependencies>
+  </autotools>
+
   <autotools id="gtk-css-engine">
     <branch tag="gtk-css-engine-0.3.1"/>
+    <dependencies>
+      <dep package="libccss"/>
+    </dependencies>
     <after>
       <dep package="meta-gtk-osx-core"/>
     </after>

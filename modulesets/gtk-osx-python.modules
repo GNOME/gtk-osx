@@ -6,9 +6,11 @@
   <repository type="git" name="git.gnome.org" default="yes" 
               href="git://git.gnome.org/"/>
   <repository type="git" name="github" href="git://github.com/"/>
-  <repository type="cvs" name="cairographics" 
+  <repository type="cvs" name="cairographics-cvs" 
               cvsroot=":pserver:anoncvs@anoncvs.freedesktop.org:/cvs/cairo"
               password=""/>
+  <repository type="git" name="cairographics"
+              href="git://anongit.freedesktop.org/git/"/>
 
 
   <metamodule id="meta-gtk-osx-python">
@@ -24,24 +26,23 @@
      you want a more recent version. -->
  <autotools id="pycairo" >
     <!-- This is CVS, so it's revision, not tag --> 
-    <!-- CVS was having problems when testing run; this may have issues. -->
-    <branch module="pycairo" repo="cairographics" revision="RELEASE_1_8_2"/>
+    <branch module="pycairo" repo="cairographics-cvs" revision="RELEASE_1_8_2"/>
     <after>
       <dep package="meta-gtk-osx-core"/>
     </after>
   </autotools>
 
-<autotools id="pycairo-python2.6" >
-    <!-- This is CVS, so it's revision, not tag --> 
-    <!-- CVS was having problems when testing run; this may have issues. -->
-    <branch module="pycairo" repo="cairographics" revision="RELEASE_1_8_6"/>
+  <autotools id="pycairo-python2.6" >
+    <!-- These guys don't use tags -->
+    <branch module="py2cairo" repo="cairographics" 
+	    tag="06f2d1063409fa5b1974ec033c746a549839d237"/>
     <after>
       <dep package="meta-gtk-osx-core"/>
     </after>
   </autotools>
 
   <autotools id="pygobject" autogenargs="--disable-introspection">
-    <branch tag="PYGOBJECT_2_26_0"/>
+    <branch tag="d9bab3b185bb59bd29e3c3f6225f3636f58ec45e"/>
     <dependencies>
       <dep package="meta-gtk-osx-core"/>
     </dependencies>
@@ -57,8 +58,8 @@
     </dependencies>
   </autotools>
 
-  <autotools id="ige-mac-integration">
-    <branch repo="github" tag="ige-mac-integration-0.9.6"
+  <autotools id="ige-mac-integration-python">
+    <branch repo="github" tag="ige-mac-integration-0.9.7"
 	    module="jralls/ige-mac-integration" />
     <dependencies>
       <dep package="gtk+"/>
@@ -66,6 +67,14 @@
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
     </after>
+  </autotools>
+
+  <autotools id="pygtk-extras">
+    <branch module="gnome-python-extras" revision="gnome-2-24"/>
+    <dependencies>
+      <dep package="pygtk"/>
+      <dep package="gtkspell"/>
+    </dependencies>
   </autotools>
 
 </moduleset>

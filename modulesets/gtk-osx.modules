@@ -5,7 +5,7 @@
   <repository type="git" name="git.gnome.org" default="yes"
               href="git://git.gnome.org/"/>
   <repository type="git" name="github" href="git://github.com/"/>
-  <repository type="git" name="cairographics" 
+  <repository type="git" name="cairographics"
               href="git://anongit.freedesktop.org/git/"/>
 
   <!-- This module set works a bit differently than for example the
@@ -51,7 +51,7 @@
   </metamodule>
 
   <autotools id="glib">
-    <branch tag="2.27.5"/>
+    <branch tag="2.27.3"/>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
       <dep package="gtk-doc"/> <!-- FIXME: http://bugs.gnome.org/546640 -->
@@ -63,7 +63,7 @@
   </autotools>
 
   <autotools id="gobject-introspection">
-    <branch tag="GOBJECT_INTROSPECTION_0_9_3"/>
+    <branch tag="GOBJECT_INTROSPECTION_0_10_1"/>
     <dependencies>
       <dep package="glib"/>
       <dep package="cairo"/>
@@ -78,10 +78,10 @@
     </dependencies>
   </autotools>
 
-  <autotools id="pango" 
+  <autotools id="pango"
              autogenargs="--without-x --with-included-modules=basic-atsui"
              makeargs="-k -C modules; make">
-    <branch tag="1.24.3"/>
+    <branch tag="1.28.3"/>
     <dependencies>
       <dep package="glib"/>
       <dep package="cairo"/>
@@ -123,14 +123,14 @@
   </autotools>
 
   <autotools id="pixman" autogenargs="--disable-gtk">
-    <branch repo="cairographics" module="pixman" tag="pixman-0.16.0"/>
+    <branch repo="cairographics" module="pixman" tag="pixman-0.21.4"/>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
     </after>
   </autotools>
 
   <autotools id="cairo" autogenargs="--enable-pdf --enable-quartz --enable-xlib=no --without-x">
-    <branch repo="cairographics" module="cairo" revision="1.8"/>
+    <branch repo="cairographics" module="cairo" revision="1.10"/>
     <dependencies>
       <dep package="pixman"/>
     </dependencies>

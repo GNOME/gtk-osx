@@ -4,11 +4,11 @@
 <moduleset>
  <repository type="git" name="gstreamer" default="yes"
               href="git://anongit.freedesktop.org/gstreamer/"/>
-  <repository type="tarball" name="sourceforge" 
+  <repository type="tarball" name="sourceforge"
               href="http://downloads.sourceforge.net/sourceforge/" />
   <repository type="git" name="liboil"
               href="git://anongit.freedesktop.org/"/>
-  <repository type="cvs" name="faac.sourceforge.net" 
+  <repository type="cvs" name="faac.sourceforge.net"
               cvsroot=":pserver:anonymous@faac.cvs.sourceforge.net:/cvsroot/faac/"
 	       password=""/>
 
@@ -17,7 +17,7 @@
        are unversioned and haven't been tested for gtk-osx
        compatibility. -->
   <autotools id="liboil" makerags=" CFLAGS=-DHAVE_SYMBOL_branch">
-    <branch repo="liboil" tag="736f2a4c498a0aff519fb9d170fde6b9287789ae" />
+    <branch repo="liboil" tag="liboil-0.3.17" />
   </autotools>
 
   <autotools id="faad2" autogen-sh="autoreconf"
@@ -25,10 +25,10 @@
     <branch repo="faac.sourceforge.net" module="faad2" tag="FAAD2_2_7" />
   </autotools>
 
-  <autotools id="gstreamer" autogenargs="-- --disable-tests" 
+  <autotools id="gstreamer" autogenargs="-- --disable-tests"
              supports-non-srcdir-builds="no"
     makeargs="ERROR_CFLAGS=" >
-    <branch tag="RELEASE-0.10.25"/>
+    <branch tag="RELEASE-0.10.32"/>
     <after>
       <dep package="glib"/>
       <dep package="libxml2"/>
@@ -36,9 +36,9 @@
   </autotools>
 
   <autotools id="gst-plugins-base" supports-non-srcdir-builds="no"
-             autogenargs="-- --disable-tests --disable-x --disable-xvideo" 
+             autogenargs="-- --disable-tests --disable-x --disable-xvideo"
              makeargs="ERROR_CFLAGS=" >
-    <branch tag="RELEASE-0.10.25"/>
+    <branch tag="RELEASE-0.10.32"/>
     <dependencies>
       <dep package="gstreamer"/>
       <!--dep package="gtk+"/-->
@@ -50,9 +50,9 @@
   </autotools>
 
   <autotools id="gst-plugins-good" supports-non-srcdir-builds="no"
-             autogenargs="-- --disable-tests --disable-x --disable-xvideo --disable-osx-video" 
+             autogenargs="-- --disable-tests --disable-x --disable-xvideo --disable-osx-video"
              makeargs="ERROR_CFLAGS=" >
-    <branch tag="RELEASE-0.10.16"/>
+    <branch tag="RELEASE-0.10.27"/>
     <dependencies>
       <dep package="gstreamer"/>
       <dep package="gst-plugins-base"/>
@@ -61,8 +61,7 @@
 
   <autotools id="gst-plugins-ugly" autogenargs="-- --disable-tests" supports-non-srcdir-builds="no"
     makeargs="ERROR_CFLAGS=" >
-    <!-- Release 0.10.12 -->
-    <branch tag="5a62da12b074428d393802df1e41ad3333b015ce"/>
+    <branch tag="RElEASE-0.10.17"/>
     <dependencies>
       <dep package="gstreamer"/>
       <dep package="gst-plugins-base"/>
@@ -71,8 +70,7 @@
 
   <autotools id="gst-plugins-bad" autogenargs="-- --disable-tests --disable-x --disable-xvid" supports-non-srcdir-builds="no"
     makeargs="ERROR_CFLAGS=" >
-    <!-- Release 0.10.13 -->
-    <branch tag="RELEASE-0.10.14"/>
+    <branch tag="RELEASE-0.10.21"/>
     <dependencies>
       <dep package="gstreamer"/>
       <dep package="gst-plugins-base"/>
@@ -80,9 +78,9 @@
     </dependencies>
   </autotools>
 
-  <autotools id="gst-ffmpeg" autogenargs="-- --disable-tests --disable-mmx" 
+  <autotools id="gst-ffmpeg" autogenargs="-- --disable-tests --disable-mmx"
              supports-non-srcdir-builds="no" >
-    <branch tag="RELEASE-0.10.9"/>
+    <branch tag="RELEASE-0.10.11"/>
     <dependencies>
       <dep package="gstreamer"/>
       <dep package="gst-plugins-base"/>

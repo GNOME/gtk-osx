@@ -23,6 +23,12 @@
               href="http://downloads.sourceforge.net/sourceforge/"/>
   <repository type="tarball" name="sqlite" href="http://www.sqlite.org/"/>
 
+  <repository type="cvs" name="hunspell-cvs"
+	      cvsroot=":pserver:anonymous@hunspell.cvs.sourceforge.net:/cvsroot/hunspell"
+	      password=""/>
+  <repository type="cvs" name="gtkspell-cvs"
+	      cvsroot=":pserver:anonymous@gtkspell.cvs.sourceforge.net:/cvsroot/gtkspell"
+	      password=""/>
 
     <metamodule id="meta-gtk-osx-random">
     <dependencies>
@@ -36,15 +42,14 @@
     </dependencies>
   </metamodule>
 
-  <!-- Loudmouth seems to be a bit of a football. This is pointed at
-       the dev on github who's done the most recent work, though the
-       release in question is from the original author. The project
-       website is at http://www.loudmouth-project.org/, but it's a bit
-       out of date. -->
+  <!-- Loudmouth is an abandoned Imendio project, now developed on
+       Github. This is pointed at the dev on github who's done the
+       most recent work, though the release in question is from the
+       original author.  -->
   <autotools id="loudmouth" autogenargs="--with-ssl=openssl">
 <!-- Release 1.4.3, immediately after which loudmouth requires openssl-0.9.8f; Leopard provides only 0.9.7. -->
-    <branch tag="b0c0551776079953cbd7132b69a0dd3c8e05886c" repo="github" 
-            module="engineyard/loudmouth" />
+    <branch tag="b0c0551776079953cbd7132b69a0dd3c8e05886c" repo="github"
+            module="mcabberengineyard/loudmouth" />
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
       <dep package="glib"/>
@@ -72,18 +77,18 @@
     </dependencies>
   </autotools>
 
-   <autotools id="vala">
-    <branch repo="ftp.gnome.org" module="vala/0.7/vala-0.7.7.tar.bz2"
-            version="0.7.7" hash="sha256:ebb1afbb0a61dd8f5f8ef13512e789697e98d5ad5f98739120f3b3cc02d46d8f"/>
-   <after>
+  <autotools id="vala" autogen-sh="configure">
+    <branch repo="ftp.gnome.org" module="vala/0.10/vala-0.10.3.tar.bz2"
+	    version="0.10.3" hash="sha256:338b9869ad5c585b58540ffc9b576cbe44709864da2582c7ebc7a5d817004974"/>
+    <after>
       <dep package="meta-gtk-osx-bootstrap"/>
       <dep package="meta-gtk-osx-core"/>
     </after>
   </autotools>
-<!-- Vala requires an installed vala compiler to build from git. Note
-     that the tarball above is the latest release, so a git d/l would
-     be superfluous. It's provided here anyway so that vala developers
-     can easily clone the repo inside the jhbuild environment.-->
+  <!-- Vala requires an installed vala compiler to build from git. Note
+       that the tarball above is the latest release, so a git d/l would
+       be superfluous. It's provided here anyway so that vala developers
+       can easily clone the repo inside the jhbuild environment.-->
   <autotools id="vala-git">
     <branch/>
     <dependencies>
@@ -91,12 +96,8 @@
     </dependencies>
   </autotools>
 
-  <!-- Devhelp is another Richard Hult/Imendio project. It seems to be
-       actively maintained by others, but no one may get around to
-       doing a formal release, so if you're using this it probably
-       will pay to override the revision. -->
   <autotools id="devhelp">
-    <branch tag="DEVHELP_2_28_0_1"/>
+    <branch revision="gnome-2-32"/>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
       <dep package="meta-gtk-osx-themes"/>
@@ -109,7 +110,7 @@
   </autotools>
 
   <autotools id="glade3" autogenargs="--disable-scrollkeeper">
-    <branch tag="GLADE_3_6_7"/>
+    <branch revision="glade-3-8"/>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
       <dep package="meta-gtk-osx-themes"/>
@@ -118,7 +119,7 @@
   </autotools>
 
   <autotools id="gtksourceview">
-    <branch tag="GTKSOURCEVIEW_2_8_1"/>
+    <branch revision="gnome-2-30"/>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
       <dep package="meta-gtk-osx-core"/>
@@ -126,7 +127,7 @@
   </autotools>
 
   <autotools id="libIDL">
-    <branch tag="LIBIDL_0_8_13"/>
+    <branch tag="LIBIDL_0_8_14"/>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
       <dep package="meta-gtk-osx-core"/>
@@ -134,8 +135,8 @@
   </autotools>
 
   <autotools id="ORBit2">
-    <!-- Release 2.14.17 -->
-    <branch tag="ORBIT2_2_14_17"/>
+    <!-- Release 2.14.19 -->
+    <branch tag="ORBIT2_2_14_19"/>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
     </after>
@@ -145,14 +146,14 @@
   </autotools>
 
   <!-- This stays as a tarball so that the patches can be applied -->
-  <autotools id="dbus" autogen-sh='configure'
-	   autogenargs="--disable-selinux --without-x 
+    <autotools id="dbus" autogen-sh='configure'
+	   autogenargs="--disable-selinux --without-x --disable-launchd
 	   --with-session-socket-dir=/var/tmp">
-    <branch module="dbus/dbus-1.2.16.tar.gz"  version="1.2.16" 
+    <branch module="dbus/dbus-1.4.1.tar.gz"  version="1.4.1"
 	    repo="dbus.freedesktop.org">
       <patch file="https://github.com/jralls/gnucash-on-osx/raw/master/patches/dbus-install.patch"/>
-       <patch file="http://gimponosx.svn.sourceforge.net/viewvc/gimponosx/GimpPorts/ports/devel/dbus/files/dbus-sysdeps-unix.c.diff"/>
-   </branch>
+      <patch file="https://github.com/jralls/gnucash-on-osx/raw/master/patches/dbus-msg-nosignal.patch"/>
+    </branch>
     <after>
       <dep package="gtk+"/>
     </after>
@@ -160,7 +161,7 @@
 
   <autotools id="dbus-glib" autogenargs="--disable-selinux">
     <branch repo="git.freedesktop.org" module="dbus/dbus-glib" 
-            tag="dbus-glib-0.82"/>
+            tag="dbus-glib-0.92"/>
     <dependencies>
       <dep package="libxml2"/>
       <dep package="dbus"/>
@@ -174,7 +175,7 @@
   <!-- Note: -disable-defaults-service removes dependency on "PolicyKit"
        which is available only through svn or from Linux distros -->
   <autotools id="gconf" autogenargs="--disable-defaults-service">
-    <branch tag="GCONF_2_28_0"/>
+    <branch revision="gnome-2-32"/>
     <dependencies>
       <dep package="ORBit2"/>
       <dep package="libxml2"/>
@@ -184,12 +185,12 @@
 
   <!-- These folks don't make their repository available.-->
   <autotools id="lcms" autogen-sh="configure">
-    <branch module="lcms/lcms-1.18a.tar.gz" version="1.18" repo="sourceforge"
-            checkoutdir="lcms-1.18"/>
+    <branch module="lcms/lcms-1.19.tar.gz" version="1.19" repo="sourceforge"
+            checkoutdir="lcms-1.19"/>
   </autotools>
 
   <autotools id="shared-mime-info" supports-non-srcdir-builds="no" >
-    <branch module="shared-mime-info" tag="RELEASE-0-70"
+    <branch module="shared-mime-info" tag="RELEASE-0-9"
             repo="mime.freedesktop.org"/>
     <dependencies>
       <dep package="intltool"/>
@@ -215,20 +216,21 @@
   </autotools>
 
    <autotools id="babl">
-     <branch tag="BABL_0_1_0"/>
+<!-- Release 0.1.2; there are newer ones, but this is the latest tarball -->
+     <branch tag="2bbfd9bf7ac807072d2b9c7030e837e1c4432f7f"/>
   </autotools>
 
   <autotools id="gegl">
-    <branch tag="GEGL_0_1_0_REAL"/>
+    <branch tag="GEGL_0_1_2"/>
     <dependencies>
       <dep package="babl"/>
     </dependencies>
   </autotools>
 
- <autotools id="poppler"  
+ <autotools id="poppler"
            autogenargs="--disable-qt --disable-qt4 --without-x --disable-gtk-test --enable-xpdf-headers">
-    <branch repo="git.freedesktop.org" module="poppler/poppler" 
-            tag="poppler-0.10.7"/>
+    <branch repo="git.freedesktop.org" module="poppler/poppler"
+            revision="poppler-0.16"/>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
       <dep package="meta-gtk-osx-core"/>
@@ -239,7 +241,21 @@
   <autotools id="sqlite" autogenargs="--disable-tcl --enable-threadsafe" >
     <!-- Another package with a non-standard repository structure. Tarballs
     are easier.-->
-    <branch module="sqlite-3.6.15.tar.gz" version='3.6.15' repo="sqlite"/>
+    <branch module="sqlite-autoconf-3070500.tar.gz" version='3.7.5'
+	    repo="sqlite"/>
+  </autotools>
+
+  <autotools id="hunspell" >
+    <branch module="hunspell" version="1.2.14"
+	    repo="hunspell-cvs"/>
+  </autotools>
+
+  <autotools id="gtkspell">
+    <branch module="gtkspell" repo="gtkspell-cvs"
+	    version="2.0.16"/>
+    <dependencies>
+      <dep package="enchant"/>
+    </dependencies>
   </autotools>
 
 </moduleset>

@@ -4,7 +4,7 @@
 <moduleset>
   <repository type="git" name="git.gnome.org" default="yes"
               href="git://git.gnome.org/"/>
-  <repository type='git' name='git.gnu.org' 
+  <repository type='git' name='git.gnu.org'
               href="git://git.savannah.gnu.org/"/>
   <repository type='git' name='git.debian.org'
 	      href="git://git.debian.org/git/"/>
@@ -14,7 +14,7 @@
   <repository type="cvs" name="gnutls.gnupg.org"
               cvsroot=":pserver:anoncvs@cvs.gnupg.org:/cvs/gnutls"
               password="anoncvs"/>
-  <repository type="svn" name="abisource/enchant" 
+  <repository type="svn" name="abisource/enchant"
               href="http://svn.abisource.com/" />
   <repository type='svn' name='libproxy.google.com'
               href='http://libproxy.googlecode.com/svn/'
@@ -38,14 +38,14 @@
   </autotools>
 
   <autotools id="iso-codes" >
-    <branch repo="git.debian.org" tag="iso-codes/3.10"
+    <branch repo="git.debian.org" tag="iso-codes/3.24"
             module="iso-codes/iso-codes"/>
 
   </autotools>
 
   <autotools id="gnutls" autogen-sh="configure">
  <!--   <branch repo='git.gnu.org' tag='gnutls_2_8_1' module="gnutls"/> -->
-    <branch repo='ftp.gnu.org' version='2.8.4' 
+    <branch repo='ftp.gnu.org' version='2.8.4'
             module="gnutls/gnutls-2.8.4.tar.bz2"/>
     <dependencies>
       <dep package="libgcrypt" />
@@ -54,26 +54,15 @@
     </dependencies>
   </autotools>
 
+<!-- Libsoup doesn't work with newer versions of libproxy -->
   <autotools id='libproxy'
 	     autogen-template="%(srcdir)s/%(autogen-sh)s &amp;&amp; %(srcdir)s/configure --prefix %(prefix)s --libdir %(libdir)s %(autogenargs)s">
-    <branch repo='libproxy.google.com' 
+    <branch repo='libproxy.google.com'
             tag="libproxy-0.3.1" />
   </autotools>
 
-<!-- Not Required -->
-  <autotools id="opencdk" supports-non-srcdir-builds="no" 
-             autogenargs="--enable-maintainer-mode"
-	     autogen-template="%(srcdir)s/%(autogen-sh)s &amp;&amp; %(srcdir)s/configure --prefix %(prefix)s --libdir %(libdir)s %(autogenargs)s">
-    <!-- No tags yet, this is right after import from CVS. -->
-    <branch repo="git.gnu.org" module="opencdk"
-            tag="e79ee9f244dbc94f570a35b09af026e933a08f11"/>
-    <dependencies>
-      <dep package="libgcrypt" />
-    </dependencies>
-  </autotools>
-
   <autotools id="gnome-keyring">
-    <branch tag="GNOME_KEYRING_2_28_0"/>
+    <branch revision="gnome-2-32"/>
     <dependencies>
       <dep package="gtk+"/>
       <dep package="libgcrypt"/>
@@ -82,7 +71,7 @@
   </autotools>
 
   <autotools id="libsoup">
-    <branch tag="LIBSOUP_2_28_0"/>
+    <branch revision="gnome-2-32"/>
     <dependencies>
       <dep package="glib"/>
       <dep package="gnutls"/>
@@ -95,26 +84,25 @@
   </autotools>
 
    <autotools id="enchant" >
-     <!-- No version. Doesn't seem to have been touched in a while. -->
     <branch repo="abisource/enchant" module="enchant"
-	    tag="enchant-1-5-0"/>
+	    tag="enchant-1-6-0"/>
     <dependencies>
       <dep package="glib"/>
     </dependencies>
   </autotools>
 
-  <autotools id="libgpg-error" 
+  <autotools id="libgpg-error"
              autogen-template="%(srcdir)s/%(autogen-sh)s &amp;&amp; %(srcdir)s/configure --prefix %(prefix)s --libdir %(libdir)s %(autogenargs)s">
-    <branch repo='cvs.gnupg.org' module="libgpg-error" 
-            tag="libgpg-error-1.7"/>
+    <branch repo='cvs.gnupg.org' module="libgpg-error"
+            tag="libgpg-error-1.10"/>
   </autotools>
 
   <autotools id="libgcrypt"     autogen-sh="configure">
- 
-<!-- CVS version requires fig2dev, an X11 utility.   
+
+<!-- CVS version requires fig2dev, an X11 utility.
      <branch repo='cvs.gnupg.org' tag="libgcrypt-1.4.4" module='libgcrypt'/> -->
-    <branch repo='ftp.gnupg.org' version='1.4.4'
-	    module='gcrypt/libgcrypt/libgcrypt-1.4.4.tar.bz2'/>
+    <branch repo='ftp.gnupg.org' version='1.4.6'
+	    module='gcrypt/libgcrypt/libgcrypt-1.4.6.tar.bz2'/>
     <dependencies>
       <dep package="libgpg-error" />
     </dependencies>
@@ -123,35 +111,11 @@
   <autotools id="libtasn1" supports-non-srcdir-builds="no" >
     <!-- Git repository is missing files required to build libtasn1
     <branch repo="git.gnu.org" tag="libtasn1_2_2"  module="libtasn1"/> -->
-    <branch repo="ftp.gnu.org" version='2.3'
-	    module="gnutls/libtasn1-2.3.tar.gz"/>
+    <branch repo="ftp.gnu.org" version='2.9'
+	    module="gnutls/libtasn1-2.9.tar.gz"/>
   </autotools>
 
-  <autotools id="at-spi" autogen-sh='configure'  autogenargs="--without-x">
-    <branch module="at-spi" branch="gnome-2-28"/>
-  </autotools>
-
-  <autotools id="panelapplet" autogen-sh="configure">
-    <branch module="libpanelappletmm" tag="2.26.0"/>
-  </autotools>
-
-  <autotools id="libgail" autogen-sh="configure">
-    <branch module="libgail-gnome" tag="LIBGAIL_GNOME_1_20_1"/>
-    <dependencies>
-      <dep package="at-spi"/>
-      <dep package="panelapplet"/>
-    </dependencies>
-  </autotools>
-
-<!-- GNET is deprecated in favor of Glib/Gio. Don't build this unless you have to -->
-  <autotools id="gnet" autogenargs="--enable-glib2">
-    <branch tag="GNET_2_0_8"/>
-    <dependencies>
-      <dep package="glib"/>
-    </dependencies>
-  </autotools>
-
-  <autotools id="WebKit" 
+  <autotools id="WebKit"
 	     autogenargs="--with-target=quartz --disable-video">
     <!-- Tags are for Safari versions, not much help to us. -->
     <branch repo="svn.webkit.org" module="webkit/trunk" checkoutdir="WebKit"/>
@@ -168,5 +132,5 @@
     </after>
   </autotools>
 
-  
+
 </moduleset>
