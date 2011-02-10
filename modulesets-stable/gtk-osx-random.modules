@@ -164,8 +164,11 @@ Libglade itself is deprecated. This is the last release. -->
        which is available only through svn or from Linux distros -->
   <autotools id="gconf" autogen-sh="configure"
 	     autogenargs="--disable-defaults-service">
-    <branch module="GConf/2.32/GConf-2.32.1.tar.bz2" version="2.32.1"
-            hash="sha256:f2d06c1ab52ac54e9f025e9bdeb08460f27a7fe6f9e660aa39d9f059dafecd18"/>
+     <branch module="GConf/2.28/GConf-2.28.0.tar.bz2" version="2.28.0"
+	     hash="sha256:d057dcfe2bfb2a80e592349c2a78d7dce12d19542aeced466c64fb701c806ac8"/>
+<!-- GConf-2.32 uses gdbus, which doesn't work for OSX -->
+	   <!--branch module="GConf/2.32/GConf-2.32.1.tar.bz2" version="2.32.1"
+            hash="sha256:f2d06c1ab52ac54e9f025e9bdeb08460f27a7fe6f9e660aa39d9f059dafecd18"/ -->
     <dependencies>
       <dep package="ORBit2"/>
       <dep package="dbus-glib"/>
