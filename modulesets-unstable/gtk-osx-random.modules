@@ -156,8 +156,7 @@
   </autotools>
 
   <autotools id="dbus-glib" autogenargs="--disable-selinux">
-    <branch repo="git.freedesktop.org" module="dbus/dbus-glib" 
-            />
+    <branch repo="git.freedesktop.org" module="dbus/dbus-glib" />
     <dependencies>
       <dep package="libxml2"/>
       <dep package="dbus"/>
@@ -170,8 +169,9 @@
 
   <!-- Note: -disable-defaults-service removes dependency on "PolicyKit"
        which is available only through svn or from Linux distros -->
+<!-- Pegged at gnome-2-28 until gdbus is fixed for OSX -->
   <autotools id="gconf" autogenargs="--disable-defaults-service">
-    <branch />
+    <branch revision="gnome-2-28"/>
     <dependencies>
       <dep package="ORBit2"/>
       <dep package="libxml2"/>
