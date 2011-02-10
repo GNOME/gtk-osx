@@ -1,5 +1,5 @@
---- dbus/dbus-sysdeps-unix.c~	2010-12-16 05:53:48.000000000 -0800
-+++ dbus/dbus-sysdeps-unix.c	2011-02-05 15:15:00.000000000 -0800
+--- a/dbus/dbus-sysdeps-unix.c	2010-12-16 05:53:48.000000000 -0800
++++ b/dbus/dbus-sysdeps-unix.c	2011-02-05 15:15:00.000000000 -0800
 @@ -204,7 +204,7 @@
                      int               start,
                      int               len)
