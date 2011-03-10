@@ -105,9 +105,9 @@
     </after>
   </autotools>
 
-  <autotools id="gtk-quartz-engine">
-    <branch module="gtk-osx/gtk-quartz-engine-0.1.tar.gz"
-            repo="sourceforge" version="0.1" />
+  <autotools id="gtk-quartz-engine" autogen-sh="autogen.sh">
+    <branch module="gtk-osx/gtk-quartz-engine-0.2.tar.gz"
+            repo="sourceforge" version="0.2" />
     <after>
       <dep package="meta-gtk-osx-core"/>
     </after>
