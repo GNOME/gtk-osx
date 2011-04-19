@@ -11,7 +11,6 @@
   
   <metamodule id="meta-glib-universal">
     <dependencies>
-      <dep package="gettext-fw"/>
       <dep package="glib-i386"/>
       <dep package="glib-ppc"/>
       <dep package="glib-x86_64"/>
