@@ -115,6 +115,19 @@
     </after>
   </autotools>
 
+  <autotools id="gtk+-3.0"
+	     autogenargs="--enable-quartz-backend">
+    <branch module="gtk+" checkoutdir="gtk+-3.0" revision="quartz-integration"/>
+    <dependencies>
+      <dep package="pango"/>
+      <dep package="gdk-pixbuf"/>
+     <dep package="atk"/>
+    </dependencies>
+    <after>
+      <dep package="meta-gtk-osx-bootstrap"/>
+    </after>
+  </autotools>
+
   <autotools id="pixman" autogenargs="--disable-gtk">
     <branch repo="cairographics" module="pixman" tag="pixman-0.21.4"/>
     <after>
