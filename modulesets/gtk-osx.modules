@@ -71,13 +71,6 @@
     </dependencies>
   </autotools>
 
-   <autotools id="gir-repository">
-    <branch tag="GIR_REPOSITORY_0_6_5"/>
-    <dependencies>
-      <dep package="gobject-introspection"/>
-    </dependencies>
-  </autotools>
-
   <autotools id="pango"
              autogenargs="--without-x --with-included-modules=basic-atsui"
              makeargs="-k -C modules; make">
