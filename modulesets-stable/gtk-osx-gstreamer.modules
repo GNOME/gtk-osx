@@ -24,10 +24,6 @@
     makeargs="ERROR_CFLAGS=" autogen-sh="configure">
     <branch module="gstreamer/gstreamer-0.10.32.tar.bz2" version="0.10.32"
             hash="sha256:3bf4e46a186ee9a1f5e212aaf651d67cffb4f5f05345a7c99ae71d5d992be133"/>
-    <dependencies>
-      <dep package="bison"/>
-      <dep package="flex"/>
-    </dependencies>
     <after>
       <dep package="glib"/>
     </after>
