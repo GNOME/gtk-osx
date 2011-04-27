@@ -22,7 +22,7 @@
 
   <autotools id="gstreamer" autogenargs="-- --disable-tests" supports-non-srcdir-builds="no"
     makeargs="ERROR_CFLAGS=" autogen-sh="configure">
-    <branch module="gstreamer/0.10/gstreamer-0.10.32.tar.bz2" version="0.10.32"
+    <branch module="gstreamer/gstreamer-0.10.32.tar.bz2" version="0.10.32"
             hash="sha256:3bf4e46a186ee9a1f5e212aaf651d67cffb4f5f05345a7c99ae71d5d992be133"/>
     <dependencies>
       <dep package="bison"/>
@@ -35,7 +35,7 @@
 
   <autotools id="gst-plugins-base" autogenargs="-- --disable-tests --disable-x --disable-xvideo" supports-non-srcdir-builds="no"
     makeargs="ERROR_CFLAGS=" autogen-sh="configure">
-    <branch module="gst-plugins-base/0.10/gst-plugins-base-0.10.32.tar.bz2"
+    <branch module="gst-plugins-base/gst-plugins-base-0.10.32.tar.bz2"
             version="0.10.32" hash="sha256:e9aabfac83f6480896da0686e9c911989f896fbad634821b7771ed84a446172b"/>
     <dependencies>
       <dep package="gstreamer"/>
