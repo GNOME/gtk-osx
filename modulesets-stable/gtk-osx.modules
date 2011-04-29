@@ -2,9 +2,9 @@
 <!DOCTYPE moduleset SYSTEM "moduleset.dtd">
 <?xml-stylesheet type="text/xsl" href="moduleset.xsl"?>
 <moduleset>
-  <repository type="tarball" name="ftp.gnome.org" default="yes" 
+  <repository type="tarball" name="ftp.gnome.org" default="yes"
               href="http://ftp.gnome.org/pub/GNOME/sources/"/>
-  <repository type="tarball" name="sourceforge" 
+  <repository type="tarball" name="sourceforge"
               href="http://downloads.sourceforge.net/sourceforge/"/>
   <repository type="tarball" name="cairographics"
               href="http://cairographics.org/releases/"/>
@@ -60,13 +60,12 @@
             hash="sha256:c44177b635e88639361eb1daf7aaa33315a00aaf46db5accf2f11920c7ff1919"/>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
-      <dep package="gtk-doc"/> 
-      <!-- dep package="libiconv"/ -->
+      <dep package="gtk-doc"/>
     </after>
   </autotools>
 
   <autotools id="libffi">
-    <branch module="atgreen/libffi/tarball/v3.0.9" repo="github.com" 
+    <branch module="atgreen/libffi/tarball/v3.0.9" repo="github.com"
             version="3.0.9" checkoutdir="atgreen-libffi-873d687"/>
   </autotools>
 
@@ -74,7 +73,7 @@
     <branch module="gobject-introspection/0.10/gobject-introspection-0.10.1.tar.bz2"
             version="0.10.1"
             hash="sha256:59033bcb428fd507f9b8399424e847ab24d5e1fe5d587f6915be9940fde69890">
-      <patch file="https://github.com/jralls/gtk-osx-build/raw/master/patches/girscanner-objc.patch" strip="1"/> 
+      <patch file="https://github.com/jralls/gtk-osx-build/raw/master/patches/girscanner-objc.patch" strip="1"/>
     </branch>
     <dependencies>
       <dep package="glib"/>
@@ -92,7 +91,7 @@
             hash="sha256:5e278bc9430cc7bb00270f183360d262c5006b51248e8b537ea904573f200632">
 <!--    <branch version="1.24.5" module="pango/1.24/pango-1.24.5.tar.bz2"
             hash="sha256:0f733d1ec3e8dafcae152d7ac58f1090bee1fd856176c8fee0e81b0e42392f4e">-->
-  <patch file="https://github.com/jralls/gtk-osx-build/raw/master/patches/pangoatsui-fontname.patch" strip="1"/> 
+  <patch file="https://github.com/jralls/gtk-osx-build/raw/master/patches/pangoatsui-fontname.patch" strip="1"/>
     </branch>
     <dependencies>
       <dep package="glib"/>
