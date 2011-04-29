@@ -215,7 +215,7 @@
     <branch />
   </autotools>
 
-  <autotools id="gegl">
+  <autotools id="gegl" autogen-args="--disable-docs">
     <branch />
     <dependencies>
       <dep package="babl"/>
