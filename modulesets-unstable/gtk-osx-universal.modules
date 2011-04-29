@@ -23,21 +23,21 @@
   </metamodule>
 
   <autotools id="glib-i386" makeinstallargs="DESTDIR=$JHBUILD_SOURCE/glib-u/build/i386 install">
-    <branch checkoutdir="glib-u/i386" module="glib" revision="glib-2-22">
+    <branch checkoutdir="glib-u/i386" module="glib">
     </branch>
     <after>
     </after>
  </autotools>
  
    <autotools id="glib-x86_64" makeinstallargs="DESTDIR=$JHBUILD_SOURCE/glib-u/build/x86_64 install">
-    <branch checkoutdir="glib-u/x86_64" module="glib" revision="glib-2-22">
+    <branch checkoutdir="glib-u/x86_64" module="glib" >
     </branch>
     <after>
     </after>
  </autotools>
  
 <autotools id="glib-ppc" makeinstallargs="DESTDIR=$JHBUILD_SOURCE/glib-u/build/ppc install">
-    <branch checkoutdir="glib-u/ppc" module="glib" revision="glib-2-22">
+    <branch checkoutdir="glib-u/ppc" module="glib">
     </branch>
     <after>
     </after>
@@ -54,8 +54,8 @@
       <dep package="meta-glib-universal"/>
       <dep package="pango"/>
       <dep package="atk"/>
-      <dep package="gnome-icon-theme"/>
-      <dep package="gtk-ppc"/>
+      <!--dep package="gtk-ppc"/-->
+      <dep package="gdk-pixbuf"/>
       <dep package="gtk-i386"/>
       <dep package="gtk-x86_64"/>
       <dep package="lipo-gtk"/>
@@ -64,22 +64,22 @@
     </dependencies>
   </metamodule>
   
-  <autotools id="gtk-i386" makeinstallargs="DESTDIR=$JHBUILD_SOURCE/gtk-u/build/i386 install" autogenargs="--with-gdktarget=quartz --without-libjasper --disable-glibtest">
-    <branch checkoutdir="gtk-u/i386" module="gtk+" revision="gtk-2-18">
+  <autotools id="gtk-i386" makeinstallargs="DESTDIR=$JHBUILD_SOURCE/gtk-u/build/i386 install" autogenargs="--enable-quartz-backend">
+    <branch checkoutdir="gtk-u/i386" module="gtk+" revision="quartz-integration">
     </branch>
     <after>
     </after>
  </autotools>
  
-  <autotools id="gtk-x86_64" makeinstallargs="DESTDIR=$JHBUILD_SOURCE/gtk-u/build/x86_64 install" autogenargs="--with-gdktarget=quartz --without-libjasper --disable-glibtest">
-    <branch checkoutdir="gtk-u/x86_64" module="gtk+" revision="gtk-2-18">
+  <autotools id="gtk-x86_64" makeinstallargs="DESTDIR=$JHBUILD_SOURCE/gtk-u/build/x86_64 install" autogenargs="--enable-quartz-backend">
+    <branch checkoutdir="gtk-u/x86_64" module="gtk+" revision="quartz-integration">
     </branch>
     <after>
     </after>
  </autotools>
  
- <autotools id="gtk-ppc" makeinstallargs="DESTDIR=$JHBUILD_SOURCE/gtk-u/build/ppc install" autogenargs="--with-gdktarget=quartz --without-libjasper --disable-glibtest">
-    <branch checkoutdir="gtk-u/ppc" module="gtk+" revision="gtk-2-18">
+ <autotools id="gtk-ppc" makeinstallargs="DESTDIR=$JHBUILD_SOURCE/gtk-u/build/ppc install" autogenargs="--enable-quartz-backend">
+    <branch checkoutdir="gtk-u/ppc" module="gtk+" revision="quartz-integration">
     </branch>
     <after>
     </after>
