@@ -93,8 +93,8 @@
 
   <perl id="perl-xml-parser" makeargs="EXPATLIBPATH=${prefix}/lib EXPATINCPATH=${prefix}/include">
     <branch repo="cpan"
-        module="authors/id/M/MS/MSERGEANT/XML-Parser-2.36.tar.gz"
-	version="2.36"/>
+        module="authors/id/C/CH/CHORNY/XML-Parser-2.40.tar.gz"
+	version="2.40"/>
     <dependencies>
       <dep package="expat"/>
     </dependencies>
