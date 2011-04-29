@@ -83,14 +83,6 @@
     </dependencies>
   </autotools>
 
-   <autotools id="gir-repository">
-    <branch module="gir-repository/0.6/gir-repository-0.6.5.tar.bz2" 
-            version="0.6.5"/>
-    <dependencies>
-      <dep package="gobject-introspection"/>
-    </dependencies>
-  </autotools>
-
 <!-- PangoFt2 and hence freetype and fontconfig are required by WebKitGtk -->
   <autotools id="pango"  autogen-sh="configure"
              autogenargs="--without-x --with-included-modules=basic-atsui"
@@ -150,7 +142,6 @@
     <dependencies>
       <dep package="pango"/>
       <dep package="atk"/>
-<!--      <dep package="gir-repository"/> -->
       <dep package="gdk-pixbuf"/>
     </dependencies>
     <after>
