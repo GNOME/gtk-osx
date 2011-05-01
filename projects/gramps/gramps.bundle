@@ -63,20 +63,28 @@
     ${prefix}/lib/libdb-4.dylib
   </binary>
 
-   <binary>
+  <binary>
     ${prefix}/lib/libenchant.dylib
-  </binary>
-
-   <binary>
-    ${prefix}/lib/libgettextpo.0.dylib
-  </binary>
-
-   <binary>
-    ${prefix}/lib/libproxy.0.dylib
   </binary>
 
   <binary>
     ${prefix}/lib/enchant
+  </binary>
+
+  <binary>
+     ${prefix}/lib/libgettextpo.0.dylib
+  </binary>
+
+  <binary>
+    ${prefix}/lib/libproxy.0.dylib
+  </binary>
+
+  <binary>
+    ${prefix}/lib/libhunspell-1.2.0.dylib
+  </binary>
+
+  <binary>
+    ${prefix}/lib/libtiff.3.dylib
   </binary>
 
 <!-- Translation filenames, one for each program or library that you
