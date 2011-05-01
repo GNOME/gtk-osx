@@ -55,10 +55,11 @@
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
       <dep package="gtk-doc"/> <!-- FIXME: http://bugs.gnome.org/546640 -->
+      <dep package="libffi"/>
     </after>
   </autotools>
 
-  <autotools id="libffi">
+  <autotools id="libffi" autogen-args="--disable-builddir">
     <branch module="atgreen/libffi" repo="github"/>
   </autotools>
 

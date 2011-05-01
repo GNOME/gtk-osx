@@ -239,9 +239,11 @@ def setup_sdk(target, sdk_version, architectures=[_default_arch]):
     if architectures == ["i386"]:
         append_autogenargs("glib", "--build=i486-apple-darwin")
         append_autogenargs("gmp", "ABI=32")
+        append_autogenargs("libffi", "--build=i486-apple-darwin")
     elif architectures == ["x86_64"]:
         append_autogenargs("glib", "--build=x86_64-apple-darwin")
         append_autogenargs("gmp", "ABI=64")
+        append_autogenargs("libffi", "--build=x86_64-apple-darwin")
 
 
     # Tiger has a somewhat messed-up resolv.h, so we need to explicitly
