@@ -105,7 +105,6 @@
       <dep package='libproxy'/>
       <dep package='gconf'/>
       <dep package='sqlite'/>
-      <dep package="libxml2"/>
       <dep package="gnome-keyring"/>
     </dependencies>
   </autotools>
