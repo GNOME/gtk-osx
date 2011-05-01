@@ -80,7 +80,7 @@
 
   <autotools id="python" autogenargs="--enable-shared" autogen-sh="configure">
     <branch repo="python"
-	    module="2.6.6/Python-2.6.6.tar.bz2" version="2.6.6">
+	    module="2.7.1/Python-2.7.1.tar.bz2" version="2.7.1">
     </branch>
   </autotools>
 
