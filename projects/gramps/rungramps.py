@@ -38,6 +38,7 @@ _languages = ""
 _collation = ""
 _locale = ""
 _language = ""
+LC_COLLATE = ""
 try:
     _languages = subprocess.Popen(
         [defaults,  "read", "-app", "Gramps", "AppleLanguages"],
