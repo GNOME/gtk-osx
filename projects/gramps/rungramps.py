@@ -25,7 +25,7 @@ os.environ["LD_LIBRARY_PATH"]=_lib_path
 os.environ["GTK_PATH"] = _res_path
 os.environ["GTK2_RC_FILES"] = os.path.join(_gtk2_conf, "gtkrc")
 os.environ["GTK_IM_MODULE_FILE"]= os.path.join(_gtk2_conf, "immodules")
-os.environ["GDK_PIXBUF_LOADERS"] = os.path.join(_gtk2_conf, "gdk-pixbuf.loaders")
+os.environ["GDK_PIXBUF_MODULE_FILE"] = os.path.join(_gtk2_conf, "gdk-pixbuf.loaders")
 os.environ["PANGO_RC_FILES"] = os.path.join(_conf_path, "pango", "pangorc")
 
 os.environ["GRAMPSDIR"] = _gramps_path
