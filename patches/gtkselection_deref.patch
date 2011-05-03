@@ -10,3 +10,13 @@
        if (pair->target == target)
  	{
            if (info)
+--- a/gtk/gtkdnd-quartz.c~        2011-05-01 18:50:47.000000000 -0700
++++ b/gtk/gtkdnd-quartz.c 2011-05-02 22:38:08.000000000 -0700
+@@ -499,6 +499,7 @@
+     gtk_target_list_unref (site->target_list);
+ 
+   g_free (site);
++  site = NULL;
+ }
+ 
+ void 
