@@ -129,7 +129,8 @@ elif len(_language) == 2:
 else:
     LC_ALL = _language
 
-os.environ["LC_ALL"] = LC_ALL #Spell-checker dictionary support
+os.environ["LANGUAGE"] = LC_ALL
+os.environ["LC_ALL"] = LC_ALL + ".UTF-8" #Spell-checker dictionary support
 
 #LaunchServices sticks this argument on the front of argument
 #lists. It must make sense to somebody, but Gramps isn't that
