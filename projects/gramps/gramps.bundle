@@ -36,7 +36,7 @@
   </binary>
 
   <binary recurse="True">
-    ${prefix}/lib/python2.6/*.so
+    ${prefix}/lib/python2.7/*.so
   </binary>
 
   <binary>
@@ -103,7 +103,7 @@
   <!-- We have to pull in the python modules, which are mixed python
        and loadable modules.  -->
   <data recurse="True">
-    ${prefix}/lib/python2.6/*.py
+    ${prefix}/lib/python2.7/*.py
   </data>
 
   <data>
