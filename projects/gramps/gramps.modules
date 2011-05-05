@@ -77,7 +77,6 @@ ige-mac-bundler gtk-osx-build/projects/gramps/gramps.bundle
     <branch module="gramps" revision="maintenance/gramps33" repo="gramps"/>
     <dependencies>
       <dep package="meta-gtk-osx-python"/>
-      <dep package="pyWebKitGtk"/>
       <dep package="librsvg2"/>
       <dep package="pygoocanvas"/>
       <dep package="shared-mime-info"/>
@@ -92,7 +91,6 @@ ige-mac-bundler gtk-osx-build/projects/gramps/gramps.bundle
     <branch module="gramps" repo="gramps"/>
     <dependencies>
       <dep package="meta-gtk-osx-python"/>
-      <dep package="pyWebKitGtk"/>
       <dep package="librsvg2"/>
       <dep package="pygoocanvas"/>
       <dep package="shared-mime-info"/>
