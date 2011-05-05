@@ -30,7 +30,7 @@
     </after>
   </autotools>
 
-  <autotools id="pygobject" autogenargs="--disable-introspection">
+  <autotools id="pygobject">
     <branch />
     <dependencies>
       <dep package="meta-gtk-osx-core"/>
