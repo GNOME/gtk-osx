@@ -13,7 +13,7 @@ _conf_path = os.path.join(_res_path, "etc");
 _gtk2_conf = os.path.join(_conf_path, "gtk-2.0")
 sys.path = [_gramps_path,
             os.path.join(_pylib_path, "lib-dynload"),
-            os.path.join(_site_lib_path, "pyenchant-1.6.1-py2.7.egg"),
+            os.path.join(_site_lib_path, "pyenchant-1.6.1-py2.6.egg"),
             os.path.join(_site_lib_path, "gtk-2.0"),
             _site_lib_path,
             _pylib_path]
