@@ -188,13 +188,13 @@ ige-mac-bundler gtk-osx-build/projects/gramps/gramps.bundle
     </dependencies>
   </autotools>
 
-  <autotools id="osmgpsmap-py">
+  <autotools id="osmgpsmap-py" autogen-sh="gnome-autogen.sh">
     <branch module="osm-gps-map/python-osmgpsmap-0.7.3.tar.gz" repo="stowers"
 	    version="0.7.3"/>
     <dependencies>
       <dep package="osmgpsmap"/>
        <dep package="pygtk"/>
-       <dep package="pycairo"/>
+       <dep package="pycairo-python2.6"/>
       <dep package="pygobject"/>
   </dependencies>
   </autotools>
