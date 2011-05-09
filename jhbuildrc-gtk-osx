@@ -105,6 +105,10 @@ def append_autogenargs(module, args):
     old_value = module_autogenargs.get(module, autogenargs)
     module_autogenargs[module] = old_value + " " + args
 
+def remove_autogenargs(module, args):
+    arg_string = module_autogenargs.get(module, autogenargs)
+    module_autogenargs[module] = arg_string.replace(args, "")
+
 # Call either setup_debug or setup_release in your .jhbuildrc-custom
 # or other customization file to get the compilation flags.
 def setup_debug():
