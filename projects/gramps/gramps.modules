@@ -23,6 +23,8 @@
 	      href="http://pypi.python.org/packages/source/"/>
   <repository type="tarball" name="stowers"
 	     href="http://www.johnstowers.co.nz/files/"/>
+  <repository type="tarball" name="graphviz"
+	      href="http://www.graphviz.org/pub/graphviz/stable/SOURCES"/>
 
 <!--
 Special instructions:
@@ -84,6 +86,7 @@ ige-mac-bundler gtk-osx-build/projects/gramps/gramps.bundle
       <dep package="hunspell"/>
       <dep package="pygtk-extras"/>
       <dep package="osmgpsmap-py"/>
+      <dep package="graphviz"/>
    </dependencies>
   </autotools>
 
@@ -98,6 +101,7 @@ ige-mac-bundler gtk-osx-build/projects/gramps/gramps.bundle
       <dep package="hunspell"/>
       <dep package="pygtk-extras"/>
       <dep package="osmgpsmap-py"/>
+      <dep package="graphviz"/>
    </dependencies>
   </autotools>
 
@@ -141,7 +145,7 @@ ige-mac-bundler gtk-osx-build/projects/gramps/gramps.bundle
     <branch module="goocanvas/0.15/goocanvas-0.15.tar.bz2" version="0.15"
 	    repo="ftp.gnome.org"/>
     <dependencies>
-¡      <dep package="gtk+"/>
+      <dep package="gtk+"/>
     </dependencies>
   </autotools>
 
@@ -149,7 +153,6 @@ ige-mac-bundler gtk-osx-build/projects/gramps/gramps.bundle
     <branch module="pygoocanvas/0.14/pygoocanvas-0.14.1.tar.gz" version="0.14.1"
 	    repo="ftp.gnome.org">
     </branch>
-
     <dependencies>
       <dep package="goocanvas"/>
       <dep package="pygtk"/>
@@ -197,6 +200,14 @@ ige-mac-bundler gtk-osx-build/projects/gramps/gramps.bundle
        <dep package="pycairo-python2.6"/>
       <dep package="pygobject"/>
   </dependencies>
+  </autotools>
+
+  <autotools id="graphviz">
+    <branch module="graphviz-2.28.0.tar.gz" version="2.28.0" repo="graphviz"/>
+    <dependencies>
+      <dep package="pango"/>
+      <dep package="zlib"/>
+    </dependencies>
   </autotools>
 
 </moduleset>
