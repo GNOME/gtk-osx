@@ -22,6 +22,9 @@
   <repository type="tarball" name="sourceforge"
               href="http://downloads.sourceforge.net/sourceforge/"/>
   <repository type="tarball" name="sqlite" href="http://www.sqlite.org/"/>
+  <repository type="cvs" name="gtkspell"
+	      cvsroot=":pserver:anonymous@gtkspell.cvs.sourceforge.net:/cvsroot/gtkspell"
+	      password=""/>
 
 
     <metamodule id="meta-gtk-osx-random">
@@ -148,7 +151,7 @@
     <branch module="dbus/dbus-1.4.1.tar.gz"  version="1.4.1"
 	    repo="dbus.freedesktop.org">
       <patch file="https://github.com/jralls/gnucash-on-osx/raw/master/patches/dbus-install.patch"/>
-      <patch file="https://github.com/jralls/gtk-osx-build/raw/master/patches/dbus-msg-nosignal.patch"/>
+      <patch file="https://github.com/jralls/gtk-osx-build/raw/master/patches/dbus-msg-nosignal.patch" strip="1"/>
     </branch>
     <after>
       <dep package="gtk+"/>
@@ -232,6 +235,28 @@
     <!-- Another package with a non-standard repository structure. Tarballs
     are easier.-->
     <branch module="sqlite-3.6.15.tar.gz" version='3.6.15' repo="sqlite"/>
+  </autotools>
+
+  <autotools id="goocanvas">
+    <branch/>
+    <dependencies>
+      <dep package="gtk+"/>
+    </dependencies>
+  </autotools>
+
+  <autotools id="libgsf" autogenargs="--without-python">
+    <branch/>
+  </autotools>
+
+  <autotools id="gtkspell">
+    <branch module="gtkspell2" repo="gtkspell"/>
+    <dependencies>
+      <dep package="enchant"/>
+    </dependencies>
+  </autotools>
+
+  <autotools id="librsvg">
+    <branch/>
   </autotools>
 
 </moduleset>

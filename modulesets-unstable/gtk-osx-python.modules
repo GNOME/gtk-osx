@@ -47,6 +47,13 @@
     </dependencies>
   </autotools>
 
+  <autotools id="pygoocanvas">
+    <branch/>
+    <dependencies>
+      <dep package="goocanvas"/>
+    </dependencies>
+  </autotools>
+
   <autotools id="ige-mac-integration-python">
     <branch repo="github"
 	    module="jralls/ige-mac-integration" />
