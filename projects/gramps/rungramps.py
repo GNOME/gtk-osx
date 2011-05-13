@@ -1,11 +1,12 @@
 #!/usr/bin/env python
 import sys, os, subprocess
 
+_py_v = "2.7"
 _home = os.environ["HOME"]
 _res_path = os.path.normpath(os.path.join(sys.path[0], "..", "Resources"))
 _lib_path = os.path.join(_res_path, "lib")
 _share_path = os.path.join(_res_path, "share")
-_pylib_path = os.path.join(_lib_path, "python2.7")
+_pylib_path = os.path.join(_lib_path, "python" + _py_v)
 _site_lib_path = os.path.join(_pylib_path, "site-packages")
 _gramps_path = os.path.join(_share_path, "gramps")
 _gramps_locale = os.path.join(_share_path, "locale")
@@ -13,7 +14,7 @@ _conf_path = os.path.join(_res_path, "etc");
 _gtk2_conf = os.path.join(_conf_path, "gtk-2.0")
 sys.path = [_gramps_path,
             os.path.join(_pylib_path, "lib-dynload"),
-            os.path.join(_site_lib_path, "pyenchant-1.6.1-py2.6.egg"),
+            os.path.join(_site_lib_path, "pyenchant-1.6.1-py" + _py_v + ".egg"),
             os.path.join(_site_lib_path, "gtk-2.0"),
             _site_lib_path,
             _pylib_path]
