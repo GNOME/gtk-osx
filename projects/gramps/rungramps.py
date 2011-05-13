@@ -39,7 +39,7 @@ _languages = ""
 _collation = ""
 _locale = ""
 _language = ""
-LC_COLLATE = ""
+
 try:
     _languages = subprocess.Popen(
         [defaults,  "read", "-app", "Gramps", "AppleLanguages"],
@@ -71,7 +71,7 @@ for _lang in _languages:
         break
     elif os.path.exists(os.path.join(_gramps_locale, _lang[:2], "LC_MESSAGES",
                                      "gramps.mo")):
-        LANG = _lang[:2]
+        LANG = _lang
         break
 try:
     _collation=subprocess.Popen(
@@ -89,39 +89,44 @@ if not _collation:
     except:
         pass
 if _collation:
-    if LANG == "C" and not _language and os.path.exists(os.path.join(_gramps_locale, _collation,
-                                                   "LC_MESSAGES", "gramps.mo")):
-        LANG = _collation
-    LC_COLLATE = _collation
-if LANG == "C" and not _language:
+   os.environ["LC_COLLATE"] = _collation
+   if LANG == "C" and not _language:
+        if os.path.exists(os.path.join(_gramps_locale, _collation[:5],
+                                       "LC_MESSAGES", "gramps.mo")):
+            LANG = _collation[:5]
+        elif os.path.exists(os.path.join(_gramps_locale, _collation[:2],
+                                         "LC_MESSAGES", "gramps.mo")):
+            LANG = _collation[:5]
+
+try:
+    _locale=subprocess.Popen(
+        [defaults, "read", "-app", "Gramps", "AppleLocale"],
+        stderr=open("/dev/null"),
+        stdout=subprocess.PIPE).communicate()[0]
+except:
+    pass
+if not _locale:
     try:
         _locale=subprocess.Popen(
-            [defaults, "read", "-app", "Gramps", "AppleLocale"],
+            [defaults, "read", "-g", "AppleLocale"],
             stderr=open("/dev/null"),
             stdout=subprocess.PIPE).communicate()[0]
     except:
         pass
-    if not _locale:
-        try:
-            _locale=subprocess.Popen(
-                [defaults, "read", "-g", "AppleLocale"],
-                stderr=open("/dev/null"),
-                stdout=subprocess.PIPE).communicate()[0]
-        except:
-            pass
-    if _locale:
+if _locale:
+    os.environ["LC_TIME"] = _locale
+    if LANG == "C" and not _language:
         if os.path.exists(os.path.join(_gramps_locale, _locale[:5],
                                        "LC_MESSAGES", "gramps.mo")):
             LANG = _locale[:5]
         elif os.path.exists(os.path.join(_gramps_locale, _locale[:2],
                                          "LC_MESSAGES", "gramps.mo")):
-            LANG = _locale[:2]
+            LANG = _locale[:5]
 
 os.environ["LANG"] = LANG
 if not _language:
     _language = LANG
-if LC_COLLATE:
-    os.environ["LC_COLLATE"] = LC_COLLATE
+
 if _language == "C" or _language == "en":
     LC_ALL = "en_US"
 elif len(_language) == 2:
