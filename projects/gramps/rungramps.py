@@ -5,6 +5,7 @@ _py_v = "2.7"
 _home = os.environ["HOME"]
 _res_path = os.path.normpath(os.path.join(sys.path[0], "..", "Resources"))
 _lib_path = os.path.join(_res_path, "lib")
+_bin_path = os.path.join(_res_path, "bin")
 _share_path = os.path.join(_res_path, "share")
 _pylib_path = os.path.join(_lib_path, "python" + _py_v)
 _site_lib_path = os.path.join(_pylib_path, "site-packages")
@@ -20,6 +21,7 @@ sys.path = [_gramps_path,
             _pylib_path]
 
 sys.prefix = _res_path
+os.environ["PATH"] = _bin_path
 os.environ["XDG_DATA_DIRS"]=_share_path
 os.environ["DYLD_LIBRARY_PATH"]=_lib_path
 os.environ["LD_LIBRARY_PATH"]=_lib_path
