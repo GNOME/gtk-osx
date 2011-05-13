@@ -119,14 +119,13 @@
   <data recurse="True">
     ${prefix}/lib/python2.7/*.py
   </data>
-  <!-- Don't understand why, but Python2.7 demands that these two --
-    -- directories be avaiable to start up -->
-  <data>
-    ${prefix}/include/python2.7/
-  </data>
 
   <data>
     ${prefix}/lib/python2.7/config/
+  </data>
+
+  <data>
+    ${prefix}/include/python2.7/pyconfig.h
   </data>
 
   <data>
