@@ -147,7 +147,8 @@
   <!-- This stays as a tarball so that the patches can be applied -->
   <autotools id="dbus" autogen-sh='configure'
 	   autogenargs="--disable-selinux --without-x --disable-launchd
-	   --with-session-socket-dir=/var/tmp">
+	   --with-session-socket-dir=/var/tmp --enable-launchd
+	   --with-launchd-agent-dir=$PREFIX/etc/dbus-1">
     <branch module="dbus/dbus-1.4.1.tar.gz"  version="1.4.1"
 	    repo="dbus.freedesktop.org">
       <patch file="https://github.com/jralls/gnucash-on-osx/raw/master/patches/dbus-install.patch"/>
