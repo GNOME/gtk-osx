@@ -1,5 +1,5 @@
---- src/gui/viewmanager.py.orig	2011-04-30 23:54:24.000000000 -0700
-+++ src/gui/viewmanager.py	2011-05-29 16:05:19.000000000 -0700
+--- a/src/gui/viewmanager.py	2011-04-30 23:54:24.000000000 -0700
++++ b/src/gui/viewmanager.py	2011-05-29 16:05:19.000000000 -0700
 @@ -36,7 +36,7 @@
  from cStringIO import StringIO
  from collections import defaultdict

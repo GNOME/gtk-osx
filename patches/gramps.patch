@@ -1,7 +1,7 @@
 Index: src/GrampsDisplay.py
 ===================================================================
---- src/GrampsDisplay.py	(revision 15090)
-+++ src/GrampsDisplay.py	(working copy)
+--- a/src/GrampsDisplay.py	(revision 15090)
++++ b/src/GrampsDisplay.py	(working copy)
 @@ -23,6 +23,7 @@
  import const
  import locale
