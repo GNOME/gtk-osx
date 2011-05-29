@@ -62,6 +62,7 @@ ige-mac-bundler gtk-osx-build/projects/gramps/gramps.bundle
       <patch file="http://github.com/jralls/gtk-osx-build/raw/master/patches/gramps-macui.patch" strip="1"/>
       <patch file="http://github.com/jralls/gtk-osx-build/raw/master/patches/gramps-accelmap.patch" strip="1"/>
       <patch file="http://github.com/jralls/gtk-osx-build/raw/master/patches/gramps-pedigree.patch" strip="1"/>
+      <patch file="http://github.com/jralls/gtk-osx-build/raw/master/patches/gramps-accel.patch" strip="0"/>
     </branch>
     <dependencies>
       <dep package="meta-gtk-osx-python"/>
