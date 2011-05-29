@@ -1,0 +1,130 @@
+--- a/src/constfunc.py	2011-05-29 15:55:12.000000000 -0700
++++ b/src/constfunc.py	2011-05-29 15:54:54.000000000 -0700
+@@ -75,3 +75,55 @@
+     if platform.system() in WINDOWS:
+         return True
+     return False
++
++## The following functions do import gtk, but only when called. They
++## should only be called after translation system has been
++## initialized!
++
++def is_quartz():
++    """
++    Tests to see if Python is currently running with gtk and 
++    windowing system is Mac OS-X's "quartz".
++    """
++    if mac():
++        try:
++            import gtk
++        except:
++            return False
++        return gtk.gdk.WINDOWING == "quartz"
++    return False
++
++def has_display():
++    """
++    Tests to see if Python is currently running with gtk and 
++    windowing system is Mac OS-X's "quartz".
++    """
++    # FIXME: currently, gtk.init_check() requires all strings
++    # in argv, and we might have unicode.
++    temp, sys.argv = sys.argv, sys.argv[:1]
++    try:
++        import gtk
++    except:
++        return False
++    try:
++        gtk.init_check()
++        sys.argv = temp
++        return True
++    except:
++        sys.argv = temp
++        return False
++
++# A couple of places add menu accelerators using <alt>, which doesn't
++# work with Gtk-quartz. <Meta> is the usually correct replacement, but
++# in one case the key is a number, and <meta>number is used by Spaces
++# (a mac feature), so we'll use control instead.
++
++def mod_key():
++    """
++    Returns a string to pass to an accelerator map.
++    """
++
++    if is_quartz():
++        return "<ctrl>"
++
++    return "<alt>"
+--- a/src/plugins/view/htmlrenderer.py	2011-04-30 23:54:19.000000000 -0700
++++ b/src/plugins/view/htmlrenderer.py	2011-05-29 15:42:19.000000000 -0700
+@@ -36,7 +36,7 @@
+ import os
+ import locale
+ import urlparse
+-
++from constfunc import mod_key
+ #-------------------------------------------------------------------------
+ #
+ # GTK/Gnome modules
+@@ -589,7 +589,7 @@
+         self.back_action = gtk.ActionGroup(self.title + '/Back')
+         self.back_action.add_actions([
+             ('Back', gtk.STOCK_GO_BACK, _("_Back"), 
+-             "<ALT>Left", _("Go to the previous page in the history"), 
++             "%sLeft" % mod_key(), _("Go to the previous page in the history"), 
+              self.go_back)
+             ])
+         self._add_action_group(self.back_action)
+@@ -597,7 +597,7 @@
+         self.forward_action = gtk.ActionGroup(self.title + '/Forward')
+         self.forward_action.add_actions([
+             ('Forward', gtk.STOCK_GO_FORWARD, _("_Forward"), 
+-             "<ALT>Right", _("Go to the next page in the history"), 
++             "%sRight" %mod_key, _("Go to the next page in the history"), 
+              self.go_forward)
+             ])
+         self._add_action_group(self.forward_action)
+--- a/src/gui/views/navigationview.py	2011-04-30 23:54:22.000000000 -0700
++++ b/src/gui/views/navigationview.py	2011-05-29 15:36:01.000000000 -0700
+@@ -49,6 +49,7 @@
+ from gui.views.pageview import PageView
+ from gen.ggettext import sgettext as _
+ from Utils import navigation_label
++from constfunc import mod_key
+ 
+ DISABLED = -1
+ MRU_SIZE = 10
+@@ -277,7 +278,7 @@
+         self.fwd_action = gtk.ActionGroup(self.title + '/Forward')
+         self.fwd_action.add_actions([
+             ('Forward', gtk.STOCK_GO_FORWARD, _("_Forward"), 
+-             "<ALT>Right", _("Go to the next person in the history"), 
++             "%sRight" % mod_key(), _("Go to the next person in the history"), 
+              self.fwd_clicked)
+             ])
+ 
+@@ -285,12 +286,12 @@
+         self.back_action = gtk.ActionGroup(self.title + '/Backward')
+         self.back_action.add_actions([
+             ('Back', gtk.STOCK_GO_BACK, _("_Back"), 
+-             "<ALT>Left", _("Go to the previous person in the history"), 
++             "%sLeft" % mod_key(), _("Go to the previous person in the history"), 
+              self.back_clicked)
+             ])
+ 
+         self._add_action('HomePerson', gtk.STOCK_HOME, _("_Home"), 
+-                         accel="<Alt>Home", 
++                         accel="%sHome" % mod_key(), 
+                          tip=_("Go to the default person"), callback=self.home)
+ 
+         self.other_action = gtk.ActionGroup(self.title + '/PersonOther')
+@@ -429,7 +430,7 @@
+         for index, handle in enumerate(mitems):
+             name, obj = navigation_label(self.dbstate.db, nav_type, handle)
+             data.append(('%s%02d'%(nav_type, index), None,  name,
+-                         "<alt>%d" % index, None,
++                         "%s%d" % (mod_key(), index), None,
+                          make_callback(hobj.push, handle)))
+  
+         self.mru_action = gtk.ActionGroup(nav_type)

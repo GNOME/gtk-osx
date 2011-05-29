@@ -1,13 +1,20 @@
-Index: src/gui/viewmanager.py
-===================================================================
---- a/src/gui/viewmanager.py	(revision 15926)
-+++ b/src/gui/viewmanager.py	(working copy)
-@@ -50,7 +50,14 @@
+--- src/gui/viewmanager.py.orig	2011-04-30 23:54:24.000000000 -0700
++++ src/gui/viewmanager.py	2011-05-29 16:05:19.000000000 -0700
+@@ -36,7 +36,7 @@
+ from cStringIO import StringIO
+ from collections import defaultdict
+ import sys
+-
++from constfunc import is_quartz
+ #-------------------------------------------------------------------------
+ #
+ # set up logging
+@@ -51,7 +51,14 @@
  #
  #-------------------------------------------------------------------------
  import gtk
 -
-+if gtk.gdk.WINDOWING == "quartz":
++if is_quartz()
 +    try:
 +        from gtk_osxapplication import *
 +        _gtkosxapplication = True
@@ -18,7 +25,7 @@ Index: src/gui/viewmanager.py
  #-------------------------------------------------------------------------
  #
  # GRAMPS modules
-@@ -245,6 +246,9 @@
+@@ -246,6 +253,9 @@
          the view categories are accessible in the sidebar.
          """
          CLIManager.__init__(self, dbstate, False)
@@ -28,7 +35,7 @@ Index: src/gui/viewmanager.py
          self.view_category_order = view_category_order
          #set pluginmanager to GUI one
          self._pmgr = GuiPluginManager.get_instance()
-@@ -267,6 +271,8 @@
+@@ -268,6 +278,8 @@
  
          self.__build_main_window()
          self.__connect_signals()
@@ -37,7 +44,7 @@ Index: src/gui/viewmanager.py
          
          self.do_reg_plugins()
          #plugins loaded now set relationship class
-@@ -410,6 +416,8 @@
+@@ -411,6 +423,8 @@
          """
          self.window.connect('delete-event', self.quit)
          self.notebook.connect('switch-page', self.change_category)
@@ -46,7 +53,7 @@ Index: src/gui/viewmanager.py
  
      def __init_lists(self):
          """
-@@ -754,6 +762,15 @@
+@@ -755,6 +769,15 @@
  
          self.uimanager.add_ui_from_string(UIDEFAULT)
          self.uimanager.ensure_update()
@@ -62,7 +69,7 @@ Index: src/gui/viewmanager.py
  
      def preferences_activate(self, obj):
          """
-@@ -1192,6 +1209,8 @@
+@@ -1193,6 +1216,8 @@
                      self.__connect_active_page(category_page, view_page)
  
                      self.uimanager.ensure_update()
