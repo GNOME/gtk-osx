@@ -1,11 +1,11 @@
 --- a/src/plugins/view/pedigreeview.py	Wed Oct 13 17:27:23 2010
 +++ b/src/plugins/view/pedigreeview.py	Sat Nov 13 10:55:01 2010
-@@ -32,3 +32,4 @@
+@@ -32,6 +32,7 @@
  from cgi import escape
  import math
  import sys
 +from constfunc import is_quartz
-
+ 
  #-------------------------------------------------------------------------
  #
 @@ -40,11 +41,14 @@
