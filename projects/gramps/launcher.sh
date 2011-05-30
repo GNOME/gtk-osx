@@ -1,6 +1,6 @@
 #!/bin/sh
 name="`basename $0`"
-tmp="`pwd`/$0"
+tmp="$0"
 tmp=`dirname "$tmp"`
 tmp=`dirname "$tmp"`
 bundle=`dirname "$tmp"`
@@ -120,7 +120,7 @@ if test -n $LANG; then
 #our two letter language code and pick the first one, special casing
 #english to set en_US
     elif test $LANG == "en"; then
-	export LC_MESSAGES="en_US"
+	export LC_MESSAGES="en_US.UTF-8"
     else
 	LOC=`find $PREFIX/share/locale -name $LANG???`
 	echo "Locales $LOC"
@@ -130,8 +130,8 @@ if test -n $LANG; then
     fi
 else
 #All efforts have failed, so default to US english
-    export LANG="en_US"
-    export LC_MESSAGES="en_US"
+    export LANG="en_US.UTF-8"
+    export LC_MESSAGES="en_US.UTF-8"
 fi
 CURRENCY=`echo $APPLELOCALE |  sed -En 's/.*currency=([[:alpha:]]+).*/\1/p'`
 if test "x$CURRENCY" != "x"; then 
@@ -154,7 +154,7 @@ if test -z "$LC_MONETARY"; then
 fi
 
 #To turn on the appropriate dictionary:
-export LC_ALL=$LC_MESSAGES
+export LANG="$LC_MESSAGES.UTF-8"
 
 unset APPLELOCALE  FILES LOC
 
