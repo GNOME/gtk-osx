@@ -5,7 +5,7 @@
     <prefix name="default">${env:JHBUILD_PREFIX}</prefix>
     <destination overwrite="yes">${env:HOME}/Desktop</destination>
     <run-install-name-tool/>
-    <launcher-script>${project}/launcher.sh</launcher-script >
+    <launcher-script>${project}/gramps.launcher</launcher-script >
   </meta>
 
   <plist>${project}/Info.plist</plist>
