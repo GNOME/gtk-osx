@@ -175,7 +175,7 @@
     ${project}/gtkrc
   </data>
 
-  <data dest="${bundle}/Contents/Resources/share/gramps/data/accel.gramps">
+  <data dest="${bundle}/Contents/Resources/share/gramps/data/gramps.accel">
     ${project}/gramps.accel
   </data>
 
