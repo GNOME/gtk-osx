@@ -14,7 +14,7 @@
  #-------------------------------------------------------------------------
  import gtk
 -
-+if is_quartz()
++if is_quartz():
 +    try:
 +        from gtk_osxapplication import *
 +        _gtkosxapplication = True

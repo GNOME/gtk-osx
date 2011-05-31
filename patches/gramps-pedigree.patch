@@ -16,7 +16,7 @@
 -    import cairo
 -    cairo_available = True
 -except:
-+if gtk.gdk.WINDOWING == "quartz":
++if is_quartz():
      cairo_available = False
 +else:
 +    try:

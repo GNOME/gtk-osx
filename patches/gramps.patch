@@ -15,7 +15,7 @@ Index: src/GrampsDisplay.py
      on GNOME, KDE, XFCE, ... as we use a freedesktop application
      """
 -    prog = find_binary('xdg-open')
-+    if is_quartz()
++    if is_quartz():
 +        prog = find_binary('open')
 +    else:
 +        prog = find_binary('xdg-open')
