@@ -119,11 +119,9 @@ if test -n $LANG; then
     elif test $LANG == "en"; then
 	export LC_MESSAGES="en_US.UTF-8"
     else
-	LOC=`find $PREFIX/share/locale -name $LANG???`
-	echo "Locales $LOC"
-	for L in $LOC; do 
-	    export LC_MESSAGES=$L
-	done
+	declare -a LOC
+	LOC=`find "/usr/share/locale" -name $LANG???`
+	export LC_MESSAGES=`basename $LOC[0]`
     fi
 else
 #All efforts have failed, so default to US english
@@ -133,8 +131,8 @@ fi
 CURRENCY=`echo $APPLELOCALE |  sed -En 's/.*currency=([[:alpha:]]+).*/\1/p'`
 if test "x$CURRENCY" != "x"; then 
 #The user has set a special currency. Gtk doesn't install LC_MONETARY files, but Apple does in /usr/share/locale, so we're going to look there for a locale to set LC_CURRENCY to.
-    if test -f /usr/local/share/$LC_MESSAGES/LC_MONETARY; then
-	if test -a `cat /usr/local/share/$LC_MESSAGES/LC_MONETARY` == $CURRENCY; then
+    if test -f /usr/share/$LC_MESSAGES/LC_MONETARY; then
+	if test -a `cat /usr/share/$LC_MESSAGES/LC_MONETARY` == $CURRENCY; then
 	    export LC_MONETARY=$LC_MESSAGES
 	fi
     fi
@@ -151,8 +149,9 @@ if test -z "$LC_MONETARY"; then
 fi
 
 #To turn on the appropriate dictionary:
-export LANG="$LC_MESSAGES.UTF-8"
-
+if [ -z $LANG ]; then
+    export LANG="$LC_MESSAGES.UTF-8"
+fi
 unset APPLELOCALE  FILES LOC
 
 # Strip out the argument added by the OS.
