@@ -25,8 +25,11 @@ export GTK_IM_MODULE_FILE="$bundle_etc/gtk-2.0/gtk.immodules"
 export GTK2_RC_FILES="$bundle_etc/gtk-2.0/gtkrc"
 
 #Set $PYTHON to point inside the bundle
+PYVER=2.6
 export PYTHON="$bundle_contents/MacOS/python"
 export PYTHONHOME="$bundle_res"
+PYTHONPATH="$bundle_lib/python$PYVER/site-packages/pyenchant-1.6.1-py$PYVER.egg:$PYTHONPATH"
+export PYTHONPATH="$bundle_lib/python$PYVER/site-packages/gtk-2.0:$PYTHONPATH"
 
 export GRAMPSDIR="$bundle_data"/gramps
 export GRAMPSI18N="$bundle_data"/locale
