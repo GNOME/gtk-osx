@@ -46,8 +46,8 @@
   </autotools>
 
   <autotools id="gnutls" autogen-sh="configure">
-    <branch repo='ftp.gnu.org' version='2.10.4'
-            module="gnutls/gnutls-2.10.4.tar.bz2"/>
+    <branch repo='ftp.gnu.org' version='2.12.6'
+            module="gnutls/gnutls-2.12.6.tar.bz2"/>
     <dependencies>
       <dep package="libgcrypt" />
       <dep package="libtasn1" />
