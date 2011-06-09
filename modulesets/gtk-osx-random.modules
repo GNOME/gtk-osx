@@ -163,7 +163,6 @@
     <branch repo="git.freedesktop.org" module="dbus/dbus-glib" 
             tag="dbus-glib-0.92"/>
     <dependencies>
-      <dep package="libxml2"/>
       <dep package="dbus"/>
     </dependencies>
     <after>
@@ -179,7 +178,6 @@
     <branch revision="gnome-2-28"/>
     <dependencies>
       <dep package="ORBit2"/>
-      <dep package="libxml2"/>
       <dep package="dbus-glib"/>
     </dependencies>
   </autotools>
@@ -195,7 +193,6 @@
             repo="mime.freedesktop.org"/>
     <dependencies>
       <dep package="intltool"/>
-      <dep package="libxml2"/>
       <dep package="glib"/>
     </dependencies>
   </autotools>

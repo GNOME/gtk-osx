@@ -121,7 +121,6 @@
     <branch version="1.11" module="gtk-doc/1.11/gtk-doc-1.11.tar.bz2"
 	    md5sum="b5e268c71fa90aad890cf53715664d0a"/>
     <dependencies>
-      <dep package="libxslt"/>
       <dep package="gtk-osx-docbook"/>
       <dep package="gnome-doc-utils"/>
     </dependencies>
