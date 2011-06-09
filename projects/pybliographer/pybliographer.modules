@@ -16,7 +16,7 @@
   <repository type="tarball" name="zkota.github.com"
 	      href="http://github.com/zkota/"/>
 
-  <include href="http://github.com/jralls/gtk-osx-build/raw/master/modulesets-stable/gtk-osx.modules"/>
+  <include href="http://raw.github.com/jralls/gtk-osx-build/master/modulesets-stable/gtk-osx.modules"/>
 
   <distutils id="zim">
     <branch module="zim" repo="launchpad"/>
@@ -102,7 +102,7 @@
   <autotools id="libgnomeui" >
     <branch module="libgnomeui/2.24/libgnomeui-2.24.2.tar.bz2" version="2.24.2"
 	    repo="ftp.gnome.org" hash="sha256:ae7459b3ddee78258bb2d619fd199b0b24647f1df45fc397fee83d659c354910">
-	<patch file="http://github.com/jralls/gnucash-on-osx/raw/master/patches/libgnomeui.patch" skip="0"/> 
+	<patch file="http://raw.github.com/jralls/gnucash-on-osx/master/patches/libgnomeui.patch" skip="0"/> 
     </branch>
     <dependencies>
       <dep package="libbonoboui"/>

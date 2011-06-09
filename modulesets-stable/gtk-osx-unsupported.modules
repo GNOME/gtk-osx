@@ -69,7 +69,7 @@ branch module="gnome-keyring/2.32/gnome-keyring-2.32.1.tar.bz2"
 	    version="s.28.2"
 	    hash="sha256:d2d686fb2528ee045bbcd9f18d0d452e0eb88c2265a1947f639152b61a5987f6">
       <!-- This patch is for gnome-keyring 2.32.1
-	   patch file="https://github.com/jralls/gtk-osx-build/raw/master/patches/gnome-keyring-dumb-typo.patch" strip="1"/-->
+	   patch file="https://raw.github.com/jralls/gtk-osx-build/master/patches/gnome-keyring-dumb-typo.patch" strip="1"/-->
     </branch>
     <dependencies>
       <dep package="gtk+"/>
@@ -127,10 +127,10 @@ branch module="gnome-keyring/2.32/gnome-keyring-2.32.1.tar.bz2"
   <autotools id="WebKit" autogen-sh="configure"
 	     autogenargs="--with-target=quartz --disable-video --with-font-backend=pango">
     <!--branch repo="webkit.org" module="webkit-1.1.12.tar.gz" version="1.1.12">
-      <patch file="https://github.com/jralls/gtk-osx-build/raw/master/patches/webkit.patch" strip="1"/ -->
+      <patch file="https://raw.github.com/jralls/gtk-osx-build/master/patches/webkit.patch" strip="1"/ -->
     <branch repo="webkit.org" module="webkit-1.1.15.4.tar.gz" version="1.1.15">
-      <patch file="https://github.com/jralls/gtk-osx-build/raw/master/patches/webkit-1.1.15.patch" strip="1"/>
-      <patch file="https://github.com/jralls/gtk-osx-build/raw/master/patches/webkit-disallowctype.patch" strip="1"/>
+      <patch file="https://raw.github.com/jralls/gtk-osx-build/master/patches/webkit-1.1.15.patch" strip="1"/>
+      <patch file="https://raw.github.com/jralls/gtk-osx-build/master/patches/webkit-disallowctype.patch" strip="1"/>
     </branch>
     <dependencies>
       <dep package="libsoup"/>

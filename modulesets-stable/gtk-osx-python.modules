@@ -55,7 +55,7 @@
 	     autogenargs="--disable-introspection">
     <branch version="2.22.0" module="pygtk/2.22/pygtk-2.22.0.tar.bz2"
             hash="sha256:4acf0ef2bde8574913c40ee4a43d9c4f43bb77b577b67147271b534501a54cc8">
-      <patch file="https://github.com/jralls/gtk-osx-build/raw/master/patches/pygtk-signal-watch.patch" strip="1"/>
+      <patch file="https://raw.github.com/jralls/gtk-osx-build/master/patches/pygtk-signal-watch.patch" strip="1"/>
     </branch>
     <dependencies>
       <dep package="pygobject"/>

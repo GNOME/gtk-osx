@@ -73,7 +73,7 @@
     <branch module="gobject-introspection/0.10/gobject-introspection-0.10.1.tar.bz2"
             version="0.10.1"
             hash="sha256:59033bcb428fd507f9b8399424e847ab24d5e1fe5d587f6915be9940fde69890">
-      <patch file="https://github.com/jralls/gtk-osx-build/raw/master/patches/girscanner-objc.patch" strip="1"/>
+      <patch file="https://raw.github.com/jralls/gtk-osx-build/master/patches/girscanner-objc.patch" strip="1"/>
     </branch>
     <dependencies>
       <dep package="glib"/>
@@ -91,7 +91,7 @@
             hash="sha256:5e278bc9430cc7bb00270f183360d262c5006b51248e8b537ea904573f200632">
 <!--    <branch version="1.24.5" module="pango/1.24/pango-1.24.5.tar.bz2"
             hash="sha256:0f733d1ec3e8dafcae152d7ac58f1090bee1fd856176c8fee0e81b0e42392f4e">-->
-  <patch file="https://github.com/jralls/gtk-osx-build/raw/master/patches/pangoatsui-fontname.patch" strip="1"/>
+  <patch file="https://raw.github.com/jralls/gtk-osx-build/master/patches/pangoatsui-fontname.patch" strip="1"/>
     </branch>
     <dependencies>
       <dep package="glib"/>
@@ -129,15 +129,15 @@
              autogen-template="autoreconf -fis &amp;&amp; %(srcdir)s/%(autogen-sh)s --prefix %(prefix)s --libdir %(libdir)s %(autogenargs)s">
     <branch module="gtk+/2.24/gtk+-2.24.0.tar.bz2" version="2.24.0"
             hash="sha256:cbed1a7b8cd1e471388a00f22557dd061334698a0c1aece11b7ed6541d115606">
-      <patch file="https://github.com/jralls/gtk-osx-build/raw/master/patches/gtkselection.patch" strip="1"/>
-      <patch file="https://github.com/jralls/gtk-osx-build/raw/master/patches/gdkwindow-quartz.patch" strip="1"/>
-      <patch file="https://github.com/jralls/gtk-osx-build/raw/master/patches/gtk-introspection.patch" strip="1"/>
-      <patch file="https://github.com/jralls/gtk-osx-build/raw/master/patches/gtk-keyhash.patch" strip="1"/>
-      <patch file="https://github.com/jralls/gtk-osx-build/raw/master/patches/gtk-relocation.patch" strip="1"/>
-      <patch file="https://github.com/jralls/gtk-osx-build/raw/master/patches/gdk-deadkeys.patch" strip="1"/>
-      <patch file="https://github.com/jralls/gtk-osx-build/raw/master/patches/gdkeventloop.patch" strip="1"/>
-      <patch file="https://github.com/jralls/gtk-osx-build/raw/master/patches/gtkdndmemory.patch" strip="1"/>
-      <patch file="https://github.com/jralls/gtk-osx-build/raw/master/patches/gtkselection_deref.patch" strip="1"/>
+      <patch file="https://raw.github.com/jralls/gtk-osx-build/master/patches/gtkselection.patch" strip="1"/>
+      <patch file="https://raw.github.com/jralls/gtk-osx-build/master/patches/gdkwindow-quartz.patch" strip="1"/>
+      <patch file="https://raw.github.com/jralls/gtk-osx-build/master/patches/gtk-introspection.patch" strip="1"/>
+      <patch file="https://raw.github.com/jralls/gtk-osx-build/master/patches/gtk-keyhash.patch" strip="1"/>
+      <patch file="https://raw.github.com/jralls/gtk-osx-build/master/patches/gtk-relocation.patch" strip="1"/>
+      <patch file="https://raw.github.com/jralls/gtk-osx-build/master/patches/gdk-deadkeys.patch" strip="1"/>
+      <patch file="https://raw.github.com/jralls/gtk-osx-build/master/patches/gdkeventloop.patch" strip="1"/>
+      <patch file="https://raw.github.com/jralls/gtk-osx-build/master/patches/gtkdndmemory.patch" strip="1"/>
+      <patch file="https://raw.github.com/jralls/gtk-osx-build/master/patches/gtkselection_deref.patch" strip="1"/>
     </branch>
     <dependencies>
       <dep package="pango"/>
