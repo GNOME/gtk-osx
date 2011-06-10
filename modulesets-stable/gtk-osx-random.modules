@@ -22,6 +22,12 @@
   <repository type="tarball" name="dbus.freedesktop.org"
 	      href="http://dbus.freedesktop.org/releases/"/>
   <repository type="tarball" name="sqlite" href="http://www.sqlite.org/"/>
+  <repository type="tarball" name="oracle"
+	      href="http://download.oracle.com/"/>
+  <repository type="tarball" name="ftp.gnu.org"
+	      href="ftp://ftp.gnu.org/gnu/"/>
+  <repository type="tarball" name="gmplib.org"
+	      href="ftp://ftp.gmplib.org/pub/"/>
 
   <metamodule id="meta-gtk-osx-random">
     <dependencies>
@@ -208,7 +214,20 @@ Libglade itself is deprecated. This is the last release. -->
     </dependencies>
   </autotools>
 
-  <autotools id="babl" >
+    <autotools id='readline' >
+    <branch repo="ftp.gnu.org" module="readline/readline-6.0.tar.gz"
+	    version="6.0"/>
+  </autotools>
+
+  <autotools id="berkeleydb" autogen-sh="dist/configure"
+         autogen-template="cd build_unix; ../%(autogen-sh)s --prefix %(prefix)s --libdir %(libdir)s %(autogenargs)s" makeargs="-C build_unix" 
+         makeinstallargs="-C build_unix install">
+
+    <branch module="berkeley-db/db-4.7.25.NC.tar.gz" version="4.7.25"
+        repo="oracle" />
+  </autotools>
+
+<autotools id="babl" >
     <branch repo="ftp.gtk.org" version="0.1.2"
             module="babl/0.1/babl-0.1.2.tar.bz2"/>
   </autotools>
@@ -265,5 +284,19 @@ Libglade itself is deprecated. This is the last release. -->
       <dep package="enchant"/>
     </dependencies>
   </autotools>
+
+  <autotools id="gmp">
+    <!--branch repo="ftp.gnu.org" module="gmp/gmp-5.0.0.tar.bz2" version="5.0.0"/-->
+    <branch repo="ftp.gnu.org" module="gmp/gmp-4.3.1.tar.bz2" version="4.3.1"/>
+  </autotools>
+
+  <autotools id="guile" autogen-sh="configure">
+    <branch repo="ftp.gnu.org" module="guile/guile-1.8.8.tar.gz"
+	    version="1.8.8"/>
+    <dependencies>
+      <dep package="gmp"/>
+    </dependencies>
+  </autotools>
+
 
 </moduleset>

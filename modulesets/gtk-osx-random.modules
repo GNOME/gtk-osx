@@ -256,4 +256,18 @@
     </dependencies>
   </autotools>
 
+  <!-- gmp uses Mercurial, so we stick with the tarball to avoid
+       having to install yet another vcs tool. -->
+ <autotools id="gmp">
+    <!--branch repo="ftp.gnu.org" module="gmp/gmp-5.0.0.tar.bz2" version="5.0.0"/-->
+    <branch repo="ftp.gnu.org" module="gmp/gmp-4.3.1.tar.bz2" version="4.3.1"/>
+  </autotools>
+
+  <autotools id="guile">
+    <branch repo="savannah" module="guile.git" tag="release_1_8_8"/>
+    <dependencies>
+      <dep package="gmp"/>
+    </dependencies>
+  </autotools>
+
 </moduleset>

@@ -28,6 +28,11 @@
     </dependencies>
   </autotools>
 
+  <autotools id='readline' >
+    <branch repo="ftp.gnu.org" module="readline/readline-6.0.tar.gz"
+	    version="6.0"/>
+  </autotools>
+
   <autotools id="m4" autogen-sh="configure">
     <branch repo="ftp.gnu.org"
 	    module="m4/m4-1.4.11.tar.bz2" version="1.4.11"
@@ -126,7 +131,8 @@
       <dep package="libxslt"/> <!-- included for compatibility -->
       <dep package="bison"/>   <!-- included for Tiger, skipped otherwise -->
       <dep package="flex"/>    <!-- included for Tiger, skipped otherwise -->
-    </dependencies>
+      <dep package="readline"/>
+   </dependencies>
   </metamodule>
 
 </moduleset>
