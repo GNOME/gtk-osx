@@ -9,6 +9,10 @@
   <repository type="cvs" name="cairographics" 
               cvsroot=":pserver:anoncvs@anoncvs.freedesktop.org:/cvs/cairo"
               password=""/>
+  <repository type="tarball" name="python"
+	      href="http://www.python.org/ftp/python/"/>
+  <repository type="tarball" name="oracle"
+	      href="http://download.oracle.com/"/>
 
 
   <metamodule id="meta-gtk-osx-python">
@@ -20,12 +24,32 @@
    </dependencies>
   </metamodule>
 
- <!-- Pycairo >1.8.4 requires Python 2.6. jhbuild installs only 2.5,
-      which is also what Leopard comes with. PyCairo 1.8.10 requires
+   <autotools id="berkeleydb" autogen-sh="dist/configure"
+         autogen-template="cd build_unix; ../%(autogen-sh)s --prefix %(prefix)s --libdir %(libdir)s %(autogenargs)s" makeargs="-C build_unix"
+         makeinstallargs="-C build_unix install">
+
+    <branch module="berkeley-db/db-4.7.25.NC.tar.gz" version="4.7.25"
+        repo="oracle" />
+  </autotools>
+
+  <autotools id="python" autogenargs="--enable-shared" autogen-sh="configure">
+    <branch repo="python"
+	    module="2.6.6/Python-2.6.6.tar.bz2" version="2.6.6">
+    </branch>
+    <after>
+      <dep package="berkeleydb"/>
+    </after>
+  </autotools>
+
+<!-- Pycairo >1.8.4 requires Python 2.6. PyCairo 1.8.10 requires
       Python3. -->
  <autotools id="pycairo" >
-    <branch module="pycairo" repo="cairographics" />
+    <branch module="py2cairo" repo="cairographics" />
+    <dependencies>
+      <dep package="cairo"/>
+    </dependencies>
     <after>
+      <dep package="python"/>
       <dep package="meta-gtk-osx-core"/>
     </after>
   </autotools>
@@ -35,6 +59,9 @@
     <dependencies>
       <dep package="meta-gtk-osx-core"/>
     </dependencies>
+    <after>
+      <dep package="python"/>
+    </after>
   </autotools>
 
   <autotools id="pygtk" autogenargs="--disable-introspection">

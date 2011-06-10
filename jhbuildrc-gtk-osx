@@ -440,11 +440,9 @@ if _osx_version.startswith("7."):
     raise SystemExit
 elif _osx_version.startswith("8."):
     # Tiger, we want to use the python version from jhbuild.
-    _gtk_osx_use_jhbuild_python = True
     _gtk_osx_use_jhbuild_bison_flex = True
 else:
     # Leopard or newer.
-    _gtk_osx_use_jhbuild_python = False
     _gtk_osx_use_jhbuild_bison_flex = False
 
 ###### Import Customizations ######
@@ -511,18 +509,6 @@ os.environ['JHBUILD_SOURCE'] = checkoutroot
 # override it to somewhere else in jhbuildrc-custom if you like.
 os.environ["M4"] = _exec_prefix + "/bin/m4"
 os.environ['LIBTOOLIZE'] = _exec_prefix + '/bin/libtoolize'
-
-# By default, we want the system perl and python, not from macports or
-# so.
-#
-os.environ["PERL"] = "/usr/bin/perl"
-os.environ["INTLTOOL_PERL"] = "/usr/bin/perl"
-if not _gtk_osx_use_jhbuild_python:
-    skip.append('python')
-    if os.environ.get("PYTHON", "") == "":
-        os.environ["PYTHON"] = "/usr/bin/python"
-else:
-    os.environ["PYTHON"] = prefix + "/bin/python"
 
 if not _gtk_osx_use_jhbuild_bison_flex:
     skip.append('bison')
@@ -609,11 +595,6 @@ if not _ran_recursively and _gtk_osx_prompt_prefix:
 # Unset this so we don't mess with the check for not starting
 # recursively.
 os.unsetenv("JHB")
-
-#Python's setup is seriously obnoxious about building on a Mac with an
-#SDK unless you're doing a Universal build. BASECFLAGS turns that off
-#and forces it to use the CFLAGS we set up.
-os.environ["BASECFLAGS"] = os.environ["CFLAGS"]
 
 if "shell" in sys.argv:
     print "Entered jhbuild shell, type 'exit' to return."

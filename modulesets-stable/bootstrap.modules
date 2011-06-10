@@ -83,12 +83,6 @@
             size="988899" md5sum="a3270bab3f4b69b7dc6dbdacbcae9745" />
   </autotools>
 
-  <autotools id="python" autogenargs="--enable-shared" autogen-sh="configure">
-    <branch repo="python"
-	    module="2.7.1/Python-2.7.1.tar.bz2" version="2.7.1">
-    </branch>
-  </autotools>
-
    <autotools id="libxml2" autogen-sh="configure">
     <branch version="2.7.7" module="libxml2-2.7.7.tar.gz"
 	    repo="xmlsoft.org"/>
@@ -126,7 +120,6 @@
       <dep package="automake-1.10" />
       <dep package="automake-1.11" />
       <dep package="pkg-config" />
-      <dep package="python" />
       <dep package="libxml2"/> <!-- included for compatibility -->
       <dep package="libxslt"/> <!-- included for compatibility -->
       <dep package="bison"/>   <!-- included for Tiger, skipped otherwise -->

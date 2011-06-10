@@ -11,6 +11,10 @@
               href="http://cairographics.org/releases/"/>
   <repository type="tarball" name="sourceforge" 
               href="http://downloads.sourceforge.net/sourceforge/"/>
+  <repository type="tarball" name="python"
+	      href="http://www.python.org/ftp/python/"/>
+  <repository type="tarball" name="oracle"
+	      href="http://download.oracle.com/"/>
 
   <metamodule id="meta-gtk-osx-python">
     <dependencies>
@@ -21,14 +25,36 @@
     </dependencies>
   </metamodule>
 
+  <autotools id="berkeleydb" autogen-sh="dist/configure"
+         autogen-template="cd build_unix; ../%(autogen-sh)s --prefix %(prefix)s --libdir %(libdir)s %(autogenargs)s" makeargs="-C build_unix" 
+         makeinstallargs="-C build_unix install">
+
+    <branch module="berkeley-db/db-4.7.25.NC.tar.gz" version="4.7.25"
+        repo="oracle" />
+  </autotools>
+
+  <autotools id="python" autogenargs="--enable-shared" autogen-sh="configure">
+    <branch repo="python"
+	    module="2.6.6/Python-2.6.6.tar.bz2" version="2.6.6">
+    </branch>
+    <after>
+      <dep package="berkeleydb"/>
+    </after>
+  </autotools>
+
+
 <!-- Pycairo 1.8.4+ requires Python 2.6. Leopard comes only with 2.5,
      so pycairo is by default held at 1.8.2. Use pycairo-python2.6 if
      you want a more recent version. -->
   <autotools id="pycairo" autogen-sh="configure">
     <branch module="pycairo-1.8.2.tar.gz" repo="cairographics.org"
             version="1.8.2" md5sum="bbfc0c2fef08dfb0c5b8baa5f0b67a87"/>
+    <dependencies>
+      <dep package="cairo"/>
+    </dependencies>
     <after>
-      <dep package="meta-gtk-osx-core"/>
+      <dep package="python"/>
+     <dep package="meta-gtk-osx-core"/>
     </after>
   </autotools>
 
@@ -36,7 +62,11 @@
   <autotools id="pycairo-python2.6" autogen-sh="configure">
     <branch module="pycairo-1.8.8.tar.gz" repo="cairographics.org"
             version="1.8.8" md5sum="054da6c125cb427a003f5fd6c54f853e"/>
+    <dependencies>
+      <dep package="cairo"/>
+    </dependencies>
     <after>
+      <dep package="python"/>
       <dep package="meta-gtk-osx-core"/>
     </after>
   </autotools>
@@ -48,6 +78,9 @@
     <dependencies>
       <dep package="meta-gtk-osx-core"/>
     </dependencies>
+    <after>
+      <dep package="python"/>
+    </after>
   </autotools>
 
 <!-- The patch addresses bug 640738. -->
