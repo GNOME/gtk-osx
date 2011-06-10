@@ -45,7 +45,7 @@
 
   </autotools>
 
-  <autotools id="gnutls" autogen-sh="configure">
+  <autotools id="gnutls" autogen-sh="configure" autogenargs="--with-libgcrypt">
     <branch repo='ftp.gnu.org' version='2.12.6'
             module="gnutls/gnutls-2.12.6.tar.bz2"/>
     <dependencies>
