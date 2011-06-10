@@ -94,8 +94,10 @@
       <dep package="pygobject"/>
       <dep package="meta-gtk-osx-core"/>
       <dep package="pycairo-python2.6"/>
-      <dep package="libglade"/>
     </dependencies>
+    <after>
+      <dep package="libglade"/>
+    </after>
   </autotools>
 
   <autotools id="ige-mac-integration-python" autogen-sh="configure"

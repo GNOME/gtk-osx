@@ -70,8 +70,10 @@
       <dep package="pygobject"/>
       <dep package="meta-gtk-osx-core"/>
       <dep package="pycairo"/>
-      <dep package="libglade"/>
     </dependencies>
+    <after>
+      <dep package="libglade"/>
+    </after>
   </autotools>
 
   <autotools id="pygoocanvas">
