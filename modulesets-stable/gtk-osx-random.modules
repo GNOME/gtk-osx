@@ -14,10 +14,6 @@
               href="http://poppler.freedesktop.org/"/>
   <repository type="tarball" name="sourceforge" 
               href="http://downloads.sourceforge.net/sourceforge/"/>
-  <repository type="tarball" name="inkscape.svn.sourceforge.net" 
-              href="https://inkscape.svn.sourceforge.net/svnroot/inkscape/"/>
-  <repository type="svn" name="ardour" 
-              href="http://subversion.ardour.org/svn/"/>
   <repository type="git" name="github.com" href="git://github.com/"/>
   <repository type="tarball" name="dbus.freedesktop.org"
 	      href="http://dbus.freedesktop.org/releases/"/>
@@ -100,7 +96,7 @@ Libglade itself is deprecated. This is the last release. -->
       <dep package="libglade"/>
     </dependencies>
   </autotools>
-<!-- There's a 3.8 branch in Git but no releases on ftp.gnome.org. There are also 3.9 tags, suggesting that Glade will go 4.0 for Gtk+3 -->
+
   <autotools id="glade3" autogen-sh="configure" 
 	     autogenargs="--disable-scrollkeeper">
     <branch module="glade3/3.6/glade3-3.6.7.tar.bz2" version="3.6.7"
@@ -219,14 +215,6 @@ Libglade itself is deprecated. This is the last release. -->
 	    version="6.0"/>
   </autotools>
 
-  <autotools id="berkeleydb" autogen-sh="dist/configure"
-         autogen-template="cd build_unix; ../%(autogen-sh)s --prefix %(prefix)s --libdir %(libdir)s %(autogenargs)s" makeargs="-C build_unix" 
-         makeinstallargs="-C build_unix install">
-
-    <branch module="berkeley-db/db-4.7.25.NC.tar.gz" version="4.7.25"
-        repo="oracle" />
-  </autotools>
-
 <autotools id="babl" >
     <branch repo="ftp.gtk.org" version="0.1.2"
             module="babl/0.1/babl-0.1.2.tar.bz2"/>
@@ -256,12 +244,14 @@ Libglade itself is deprecated. This is the last release. -->
 	    repo="sqlite"/>
   </autotools>
 
-  <autotools id="libgsf" autogenargs="--without-python">
-    <branch  module="libgsf/1.14/libgsf-1.14.19.tar.bz2" version="1.14.19"
-	     hash="sha256:8cf82ce95ef97e61bae02099d2f39e4d814747b546899b7c28a695e15391b56c"/>
+  <autotools id="goocanvas">
+    <branch module="goocanvas/2.0/goocanvas-2.0.0.tar.bz2" version="2.0.0"/>
     <dependencies>
+      <dep package="gtk+"/>
     </dependencies>
   </autotools>
+
+
 <!-- Libart_lgpl is deprecated by gnome. This is probably the last release. -->
   <autotools id="libart_lgpl">
     <branch   module="libart_lgpl/2.3/libart_lgpl-2.3.21.tar.bz2"
