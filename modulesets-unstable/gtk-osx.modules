@@ -120,7 +120,7 @@
   </autotools>
 
   <autotools id="gtk+-3.0"
-	     autogenargs="--enable-quartz-backend">
+	     autogenargs="--enable-quartz-backend --disable-colord">
     <branch module="gtk+" checkoutdir="gtk+-3.0" revision="quartz-integration"/>
     <dependencies>
       <dep package="pango"/>
