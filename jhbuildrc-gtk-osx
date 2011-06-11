@@ -430,7 +430,7 @@ _exec_prefix = None
 tarballdir = None
 # Extra arguments to pass to all autogen.sh scripts.
 #
-autogenargs='--disable-static'
+autogenargs=''
 alwaysautogen = True
 
 # Use the included install-check program if available. It won't update
