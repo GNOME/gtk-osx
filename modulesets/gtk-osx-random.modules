@@ -263,6 +263,10 @@
     </dependencies>
   </autotools>
 
+  <autotools id="libgsf" autogenargs="--without-python">
+    <branch tag="LIBGSF_1_14_19"/>
+  </autotools>
+
   <!-- gmp uses Mercurial, so we stick with the tarball to avoid
        having to install yet another vcs tool. -->
  <autotools id="gmp">

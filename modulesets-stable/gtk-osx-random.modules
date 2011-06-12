@@ -275,6 +275,11 @@ Libglade itself is deprecated. This is the last release. -->
     </dependencies>
   </autotools>
 
+  <autotools id="libgsf" autogenargs="--without-python">
+    <branch  module="libgsf/1.14/libgsf-1.14.19.tar.bz2" version="1.14.19"
+	     hash="sha256:8cf82ce95ef97e61bae02099d2f39e4d814747b546899b7c28a695e15391b56c"/>
+  </autotools>
+
   <autotools id="gmp">
     <!--branch repo="ftp.gnu.org" module="gmp/gmp-5.0.0.tar.bz2" version="5.0.0"/-->
     <branch repo="ftp.gnu.org" module="gmp/gmp-4.3.1.tar.bz2" version="4.3.1"/>
