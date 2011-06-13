@@ -25,7 +25,7 @@
        binaries link to are also copied in automatically.
   -->
   <binary>
-    ${prefix}/lib/gdk-pixbuf-2.0/${pkg:gdk-pixbuf-2.0:gdk_pixbuf_binary_version}/loaders/*.so
+    ${prefix}/lib/gdk-pixbuf-2.0/${pkg:gdk-pixbuf-2.0:gdk_pixbuf_binary_version}/
   </binary>
 <!-- Copy in the theme engines. -->
   <binary>
@@ -47,7 +47,7 @@
   </binary>
 
   <binary recurse="True">
-    ${prefix}/lib/python2.7/*.so
+    ${prefix}/lib/python2.6/*.so
   </binary>
 
   <binary>
@@ -87,6 +87,14 @@
   </binary>
 
   <binary>
+     ${prefix}/lib/libgettextlib-0.18.1.dylib
+  </binary>
+
+  <binary>
+     ${prefix}/lib/libgettextsrc-0.18.1.dylib
+  </binary>
+
+  <binary>
     ${prefix}/lib/libproxy.0.dylib
   </binary>
 
@@ -114,16 +122,16 @@
   <!-- We have to pull in the python modules, which are mixed python
        and loadable modules.  -->
   <data recurse="True">
-    ${prefix}/lib/python2.7/*.py
+    ${prefix}/lib/python2.6/*.py
   </data>
 
-  <data>
+  <!--data>
     ${prefix}/lib/python2.7/config/
   </data>
 
   <data>
     ${prefix}/include/python2.7/pyconfig.h
-  </data>
+  </data-->
 
   <data>
     ${prefix}/share/gramps/
