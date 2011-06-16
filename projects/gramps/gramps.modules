@@ -229,7 +229,7 @@ ige-mac-bundler gtk-osx-build/projects/gramps/gramps.bundle
   </autotools>
 
   <distutils id="scons">
-    <branch repo="sourceforge" module="scons/scons-2.0.1" version="2.0.1"/>
+    <branch repo="sourceforge" module="scons/scons-2.0.1.tar.gz" version="2.0.1"/>
   </distutils>
 
   <autotools id="pyexiv2">
