@@ -29,6 +29,8 @@
 	      href="http://launchpad.net/"/>
   <repository type="tarball" name="exiv2.org"
 	      href="http://exiv2.org/"/>
+  <repository type="tarball" name="pythonware"
+	      href="http://effbot.org/downloads/"/>
 
 <!--
 Special instructions:
@@ -240,8 +242,13 @@ ige-mac-bundler gtk-osx-build/projects/gramps/gramps.bundle
       <dep package="scons"/>
     </dependencies>
     <after>
+      <dep package="pil"/>
       <dep package="boost"/>
     </after>
   </autotools>
+
+  <distutils id="pil">
+    <branch module="Imaging-1.1.7.tar.gz" version="1.1.7" repo="pythonware"/>
+  </distutils>
 
 </moduleset>
