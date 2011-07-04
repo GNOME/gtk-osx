@@ -24,7 +24,7 @@
    </dependencies>
   </metamodule>
 
-   <autotools id="berkeleydb" autogen-sh="dist/configure"
+   <autotools id="berkeleydb4.7" autogen-sh="dist/configure"
          autogen-template="cd build_unix; ../%(autogen-sh)s --prefix %(prefix)s --libdir %(libdir)s %(autogenargs)s" makeargs="-C build_unix"
          makeinstallargs="-C build_unix install">
 
@@ -32,24 +32,60 @@
         repo="oracle" />
   </autotools>
 
-  <autotools id="python" autogenargs="--enable-shared" autogen-sh="configure">
+  <autotools id="python2.6" autogenargs="--enable-shared" autogen-sh="configure">
     <branch repo="python"
 	    module="2.6.6/Python-2.6.6.tar.bz2" version="2.6.6">
     </branch>
     <after>
-      <dep package="berkeleydb"/>
+      <dep package="berkeleydb4.7"/>
     </after>
   </autotools>
 
+   <autotools id="berkeleydb4.8" autogen-sh="dist/configure"
+         autogen-template="cd build_unix; ../%(autogen-sh)s --prefix %(prefix)s --libdir %(libdir)s %(autogenargs)s" makeargs="-C build_unix"
+         makeinstallargs="-C build_unix install">
+
+    <branch module="berkeley-db/db-4.8.30.NC.tar.gz" version="4.8.30"
+        repo="oracle" />
+  </autotools>
+
+  <autotools id="python2.7" autogenargs="--enable-shared" autogen-sh="configure">
+    <branch repo="python"
+	    module="2.7.2/Python-2.7.2.tar.bz2" version="2.7.2">
+    </branch>
+    <after>
+      <dep package="berkeleydb4.8"/>
+    </after>
+  </autotools>
+
+   <autotools id="berkeleydb5.0" autogen-sh="dist/configure"
+         autogen-template="cd build_unix; ../%(autogen-sh)s --prefix %(prefix)s --libdir %(libdir)s %(autogenargs)s" makeargs="-C build_unix"
+         makeinstallargs="-C build_unix install">
+
+    <branch module="berkeley-db/db-5.0.32.NC.tar.gz" version="5.0.32"
+        repo="oracle" />
+  </autotools>
+
+  <autotools id="python3.2" autogenargs="--enable-shared" autogen-sh="configure">
+    <branch repo="python"
+	    module="3.2/Python-3.2.tar.bz2" version="3.2">
+    </branch>
+    <after>
+      <dep package="berkeleydb5.0"/>
+    </after>
+  </autotools>
+
+
+
 <!-- Pycairo >1.8.4 requires Python 2.6. PyCairo 1.8.10 requires
-      Python3. -->
+      Python2.7. -->
  <autotools id="pycairo" >
-    <branch module="py2cairo" repo="cairographics" />
+    <branch module="pycairo" repo="cairographics" />
     <dependencies>
       <dep package="cairo"/>
     </dependencies>
     <after>
-      <dep package="python"/>
+      <dep package="python2.7"/>
       <dep package="meta-gtk-osx-core"/>
     </after>
   </autotools>
@@ -60,7 +96,7 @@
       <dep package="meta-gtk-osx-core"/>
     </dependencies>
     <after>
-      <dep package="python"/>
+      <dep package="python2.7"/>
     </after>
   </autotools>
 
