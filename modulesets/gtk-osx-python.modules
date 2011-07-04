@@ -29,13 +29,13 @@
          autogen-template="cd build_unix; ../%(autogen-sh)s --prefix %(prefix)s --libdir %(libdir)s %(autogenargs)s" makeargs="-C build_unix"
          makeinstallargs="-C build_unix install">
 
-    <branch module="berkeley-db/db-4.7.25.NC.tar.gz" version="4.7.25"
+    <branch module="berkeley-db/db-4.8.30.NC.tar.gz" version="4.8.30"
         repo="oracle" />
   </autotools>
 
   <autotools id="python" autogenargs="--enable-shared" autogen-sh="configure">
     <branch repo="python"
-	    module="2.6.6/Python-2.6.6.tar.bz2" version="2.6.6">
+	    module="2.7.2/Python-2.7.2.tar.bz2" version="2.7.2">
     </branch>
     <after>
       <dep package="berkeleydb"/>
@@ -46,8 +46,7 @@
      so pycairo is by default held at 1.8.2. Use pycairo-python2.6 if
      you want a more recent version. -->
  <autotools id="pycairo" >
-    <!-- This is CVS, so it's revision, not tag --> 
-    <branch module="pycairo" repo="cairographics-cvs" revision="RELEASE_1_8_2"/>
+    <branch module="pycairo" repo="cairographics" tag="1.8.22"/>
     <dependencies>
       <dep package="cairo"/>
     </dependencies>
@@ -59,8 +58,7 @@
 
   <autotools id="pycairo-python2.6" >
     <!-- These guys don't use tags -->
-    <branch module="py2cairo" repo="cairographics" 
-	    tag="06f2d1063409fa5b1974ec033c746a549839d237"/>
+    <branch module="pycairo" repo="cairographics" tag="1.8.8"/>
     <dependencies>
       <dep package="cairo"/>
     </dependencies>

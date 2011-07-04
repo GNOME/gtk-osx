@@ -29,13 +29,13 @@
          autogen-template="cd build_unix; ../%(autogen-sh)s --prefix %(prefix)s --libdir %(libdir)s %(autogenargs)s" makeargs="-C build_unix" 
          makeinstallargs="-C build_unix install">
 
-    <branch module="berkeley-db/db-4.7.25.NC.tar.gz" version="4.7.25"
+    <branch module="berkeley-db/db-4.8.30.NC.tar.gz" version="4.8.30"
         repo="oracle" />
   </autotools>
 
   <autotools id="python" autogenargs="--enable-shared" autogen-sh="configure">
     <branch repo="python"
-	    module="2.6.6/Python-2.6.6.tar.bz2" version="2.6.6">
+	    module="2.7.2/Python-2.7.2.tar.bz2" version="2.7.2">
     </branch>
     <after>
       <dep package="berkeleydb"/>
