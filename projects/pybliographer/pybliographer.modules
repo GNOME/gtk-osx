@@ -90,8 +90,6 @@
     <branch module="libgnome/2.26/libgnome-2.26.0.tar.bz2" version="2.26.0"
 	    md5sum="a5634fe9ddc54bbb726cbaaa35abc0b9" repo="ftp.gnome.org"/>
     <dependencies>
-      <dep package="libxml2"/>
-      <dep package="libxslt"/>
       <dep package="libbonobo"/>
       <dep package="gnome-vfs"/>
       <dep package="gconf"/>
@@ -141,7 +139,6 @@
       <dep package="ORBit2"/>
       <dep package="intltool"/>
       <dep package="gnome-common"/>
-      <dep package="libxml2"/>
       <dep package="dbus-glib"/>
     </dependencies>
   </autotools>
