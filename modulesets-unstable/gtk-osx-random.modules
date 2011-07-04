@@ -187,8 +187,8 @@
   </autotools>
 
   <autotools id="shared-mime-info" supports-non-srcdir-builds="no" >
-    <branch module="shared-mime-info" 
-            repo="mime.freedesktop.org"/>
+    <branch module="xdg/shared-mime-info" 
+            repo="git.freedesktop.org"/>
     <dependencies>
       <dep package="intltool"/>
       <dep package="glib"/>
