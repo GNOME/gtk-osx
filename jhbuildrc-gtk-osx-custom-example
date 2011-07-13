@@ -115,6 +115,8 @@ elif _osx_version.startswith("9"):
     _target = "10.5"
 elif _osx_version.startswith("10"):
     _target = "10.6"
+elif _osx_version.startswith("11"):
+    _target = "10.7"
 
 setup_sdk(target=_target, sdk_version="native", architectures=[_default_arch])
 #
