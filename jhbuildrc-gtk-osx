@@ -276,6 +276,14 @@ def setup_sdk(target, sdk_version, architectures=[_default_arch]):
     #Overcome Python's obnoxious misconfiguration of portable builds
     if len(architectures) == 1:
         os.environ["BUILDCFLAGS"] = os.environ["CFLAGS"]
+    #Glib wants to use posix_memalign if it's available, but it's only
+    #available after 10.6, and there's no weak linking support for it:
+    if ((target == "10.4" or target == "10.5")
+        and (sdk_version == "10.6" or sdk_version == "10.7"
+             or sdk_version == "native"
+             and (_osx_version.startswith("10")
+                  or _osx_version.startswith("11"))));
+        append_autogenargs("glib", "ac_cv_compliant_posix_memalign=no")
 
 
     return sdkdir
