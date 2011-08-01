@@ -144,8 +144,8 @@ def get_sdkdir(sdk_name):
     return os.path.join("/Developer/SDKs", sdk_name)
 #
 # This is the workhorse of the setup. Call this function with the
-# target OSX version (10.4, 10.5, or 10.6), the sdk version you want
-# to use (10.4u, 10.5, or 10.6), and a list of architectures. As you
+# target OSX version (10.4, 10.5, 10.6, or 10.7), the sdk version you want
+# to use (10.4u, 10.5, 10.6 or 10.7), and a list of architectures. As you
 # can see, the architectures defaults to a single build of i386 or
 # ppc, depending on your machine. I386 is chosen for intel
 # architectures as a default to ensure compatibility: 64-bit hasn't
