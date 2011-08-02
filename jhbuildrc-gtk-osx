@@ -282,7 +282,7 @@ def setup_sdk(target, sdk_version, architectures=[_default_arch]):
         and (sdk_version == "10.6" or sdk_version == "10.7"
              or sdk_version == "native"
              and (_osx_version.startswith("10")
-                  or _osx_version.startswith("11"))));
+                  or _osx_version.startswith("11")))):
         append_autogenargs("glib", "ac_cv_compliant_posix_memalign=no")
 
 

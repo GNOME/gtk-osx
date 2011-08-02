@@ -139,9 +139,10 @@
       <patch file="https://raw.github.com/jralls/gtk-osx-build/master/patches/gtkdndmemory.patch" strip="1"/>
       <patch file="https://raw.github.com/jralls/gtk-osx-build/master/patches/gtkselection_deref.patch" strip="1"/>
       <patch file="https://raw.github.com/jralls/gtk-osx-build/master/patches/gtk-borderless.patch" strip="1"/>
-      <patch file="https://raw.github.com/jralls/gtk-osx-build/master/patches/gtk2-empty-clip.patch" strip="1"/>
-      <patch file="https://raw.github.com/jralls/gtk-osx-build/master/patches/gtkgtk2-lion-resize.patch" strip="1"/>
+      <patch file="https://raw.github.com/jralls/gtk-osx-build/master/patches/gtk2-lion-resize.patch" strip="1"/>
       <patch file="https://raw.github.com/jralls/gtk-osx-build/master/patches/gdk-quartz-version.patch" strip="1"/>
+      <patch file="https://raw.github.com/jralls/gtk-osx-build/master/patches/gtk2-empty-clip.patch" strip="1"/>
+
     </branch>
     <dependencies>
       <dep package="pango"/>
