@@ -59,7 +59,7 @@
     </after>
   </autotools>
 
-  <autotools id="libffi" autogen-args="--disable-builddir">
+  <autotools id="libffi" autogenargs="--disable-builddir">
     <branch module="atgreen/libffi" repo="github"/>
   </autotools>
 
