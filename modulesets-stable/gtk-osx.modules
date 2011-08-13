@@ -130,7 +130,6 @@
     <branch module="gtk+/2.24/gtk+-2.24.0.tar.bz2" version="2.24.0"
             hash="sha256:cbed1a7b8cd1e471388a00f22557dd061334698a0c1aece11b7ed6541d115606">
       <patch file="https://raw.github.com/jralls/gtk-osx-build/master/patches/gtkselection.patch" strip="1"/>
-      <patch file="https://raw.github.com/jralls/gtk-osx-build/master/patches/gdkwindow-quartz.patch" strip="1"/>
       <patch file="https://raw.github.com/jralls/gtk-osx-build/master/patches/gtk-introspection.patch" strip="1"/>
       <patch file="https://raw.github.com/jralls/gtk-osx-build/master/patches/gtk-keyhash.patch" strip="1"/>
       <patch file="https://raw.github.com/jralls/gtk-osx-build/master/patches/gtk-relocation.patch" strip="1"/>
