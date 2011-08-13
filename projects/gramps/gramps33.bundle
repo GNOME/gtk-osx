@@ -47,7 +47,7 @@
   </binary>
 
   <binary recurse="True">
-    ${prefix}/lib/python2.6/*.so
+    ${prefix}/lib/python2.7/*.so
   </binary>
 
   <binary>
@@ -122,16 +122,16 @@
   <!-- We have to pull in the python modules, which are mixed python
        and loadable modules.  -->
   <data recurse="True">
-    ${prefix}/lib/python2.6/*.py
+    ${prefix}/lib/python2.7/*.py
   </data>
 
-  <!--data>
+  <data>
     ${prefix}/lib/python2.7/config/
   </data>
 
   <data>
     ${prefix}/include/python2.7/pyconfig.h
-  </data-->
+  </data>
 
   <data>
     ${prefix}/share/gramps/

@@ -28,7 +28,7 @@ export GVBINDIR="$bundle_lib/graphviz"
 
 
 #Set $PYTHON to point inside the bundle
-PYVER=2.6
+PYVER=2.7
 export PYTHON="$bundle_contents/MacOS/python"
 export PYTHONHOME="$bundle_res"
 PYTHONPATH="$bundle_lib/python$PYVER/site-packages/pyenchant-1.6.1-py$PYVER.egg:$PYTHONPATH"
