@@ -39,7 +39,7 @@ export GRAMPSI18N="$bundle_data"/locale
 export GRAMPSHOME="$HOME/Library/Application Support"
 
 # Strip out the argument added by the OS.
-if [ x`echo "x$1" | /usr/bin/sed -e "s/^x-psn_.*//"` == x ]; then
+if expr "x$1" : '^x-psn_' > /dev/null; then
     shift 1
 fi
 exec $PYTHON -O "$GRAMPSDIR/gramps.py" "$@"
