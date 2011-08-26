@@ -153,5 +153,5 @@ unset APPLELOCALE  FILES LOC
 if /bin/expr "x$1" : '^x-psn_' > /dev/null; then
     shift 1
 fi
-exec $PYTHON -O "$GRAMPSDIR/gramps.py" "$@"
+exec "$PYTHON" -O "$GRAMPSDIR/gramps.py" "$@"
 
