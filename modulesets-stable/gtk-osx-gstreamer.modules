@@ -46,7 +46,7 @@
   <autotools id="gst-plugins-good" autogenargs="-- --disable-tests --disable-x --disable-xvideo --disable-osx-video" supports-non-srcdir-builds="no"
     makeargs="ERROR_CFLAGS=" autogen-sh="configure">
     <branch module="gst-plugins-good/gst-plugins-good-0.10.27.tar.bz2"
-            version="0.10.27" hash="sha256a9d801c3d42b456a6ebc0b95f68c44f153f756ec0fbd4877197c469cc67771fa:"/>
+            version="0.10.27" hash="sha256:a9d801c3d42b456a6ebc0b95f68c44f153f756ec0fbd4877197c469cc67771fa:"/>
     <dependencies>
       <dep package="gstreamer"/>
       <dep package="gst-plugins-base"/>
