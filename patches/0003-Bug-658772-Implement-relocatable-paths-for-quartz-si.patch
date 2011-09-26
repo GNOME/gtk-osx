@@ -1,37 +1,39 @@
+From 7e0d64a32bc9d0afa855e717d5b1eacc305b3458 Mon Sep 17 00:00:00 2001
+From: John Ralls <jralls@ceridwen.us>
+Date: Mon, 13 Dec 2010 15:01:02 -0800
+Subject: [PATCH 03/15] Bug 658772: Implement relocatable paths for quartz,
+ similar to those in Win32.
+
+The motivation was a complaint in the Gtk OSX forum that GTK didn't seem to be able to find its translations when bundled.
+---
+ gtk/gtkprivate.h |    4 +-
+ gtk/gtkquartz.c  |   68 ++++++++++++++++++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 70 insertions(+), 2 deletions(-)
+
 diff --git a/gtk/gtkprivate.h b/gtk/gtkprivate.h
-index 7ba5a5d..b3fcf40 100644
+index 7ba5a5d..3933dc5 100644
 --- a/gtk/gtkprivate.h
 +++ b/gtk/gtkprivate.h
-@@ -95,6 +95,27 @@ const gchar *_gtk_get_data_prefix ();
+@@ -74,7 +74,7 @@ typedef enum
+ #define GTK_PRIVATE_SET_FLAG(wid,flag)    G_STMT_START{ (GTK_PRIVATE_FLAGS (wid) |= (PRIVATE_ ## flag)); }G_STMT_END
+ #define GTK_PRIVATE_UNSET_FLAG(wid,flag)  G_STMT_START{ (GTK_PRIVATE_FLAGS (wid) &= ~(PRIVATE_ ## flag)); }G_STMT_END
  
- #endif /* G_OS_WIN32 */
+-#ifdef G_OS_WIN32
++#if defined G_OS_WIN32 || defined GDK_WINDOWING_QUARTZ
  
-+/* Likewise for quartz */
-+#ifdef  GDK_WINDOWING_QUARTZ
-+
-+const gchar *_gtk_quartz_get_datadir ();
-+const gchar *_gtk_quartz_get_libdir ();
-+const gchar *_gtk_quartz_get_sysconfdir ();
-+const gchar *_gtk_quartz_get_localedir ();
-+const gchar *_gtk_quartz_get_data_prefix ();
-+
-+#undef GTK_DATADIR
-+#define GTK_DATADIR _gtk_quartz_get_datadir ()
-+#undef GTK_LIBDIR
-+#define GTK_LIBDIR _gtk_quartz_get_libdir ()
-+#undef GTK_LOCALEDIR
-+#define GTK_LOCALEDIR _gtk_quartz_get_localedir ()
-+#undef GTK_SYSCONFDIR
-+#define GTK_SYSCONFDIR _gtk_quartz_get_sysconfdir ()
-+#undef GTK_DATA_PREFIX
-+#define GTK_DATA_PREFIX _gtk_quartz_get_data_prefix ()
-+
-+#endif /*  GDK_WINDOWING_QUARTZ */
+ const gchar *_gtk_get_datadir ();
+ const gchar *_gtk_get_libdir ();
+@@ -93,7 +93,7 @@ const gchar *_gtk_get_data_prefix ();
+ #undef GTK_DATA_PREFIX
+ #define GTK_DATA_PREFIX _gtk_get_data_prefix ()
+ 
+-#endif /* G_OS_WIN32 */
++#endif /* G_OS_WIN32 || GDK_WINDOWING_QUARTZ */
+ 
  gboolean _gtk_fnmatch (const char *pattern,
  		       const char *string,
- 		       gboolean    no_leading_period);
 diff --git a/gtk/gtkquartz.c b/gtk/gtkquartz.c
-index 265d9ff..80b9e87 100644
+index 265d9ff..5b54104 100644
 --- a/gtk/gtkquartz.c
 +++ b/gtk/gtkquartz.c
 @@ -322,3 +322,71 @@ _gtk_quartz_set_selection_data_for_pasteboard (NSPasteboard     *pasteboard,
@@ -64,7 +66,7 @@ index 265d9ff..80b9e87 100644
 +}
 +
 +const gchar *
-+_gtk_quartz_get_datadir (void)
++_gtk_get_datadir (void)
 +{
 +  gchar *resource_dir = get_bundle_path();
 +  gchar *retval = g_build_filename(resource_dir, "share", NULL);
@@ -73,7 +75,7 @@ index 265d9ff..80b9e87 100644
 +}
 +
 +const gchar *
-+_gtk_quartz_get_libdir (void)
++_gtk_get_libdir (void)
 +{
 +  gchar *resource_dir = get_bundle_path();
 +  gchar *retval = g_build_filename(resource_dir, "lib", NULL);
@@ -82,7 +84,7 @@ index 265d9ff..80b9e87 100644
 +}
 +
 +const gchar *
-+_gtk_quartz_get_localedir (void)
++_gtk_get_localedir (void)
 +{
 +
 +  gchar *resource_dir = get_bundle_path();
@@ -92,7 +94,7 @@ index 265d9ff..80b9e87 100644
 +}
 +
 +const gchar *
-+_gtk_quartz_get_sysconfdir (void)
++_gtk_get_sysconfdir (void)
 +{
 +  gchar *resource_dir = get_bundle_path();
 +  gchar *retval = g_build_filename(resource_dir, "etc", NULL);
@@ -101,8 +103,11 @@ index 265d9ff..80b9e87 100644
 +}
 +
 +const gchar *
-+_gtk_quartz_get_data_prefix (void)
++_gtk_get_data_prefix (void)
 +{
 +  return get_bundle_path();
 +}
 +
+-- 
+1.7.6.3.dirty
+

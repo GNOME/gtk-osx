@@ -1,0 +1,329 @@
+From f2a96fb87408010775730a5b89c26ea5120cf2f2 Mon Sep 17 00:00:00 2001
+From: Michael Natterer <mitch@lanedo.com>
+Date: Mon, 19 Sep 2011 00:32:52 +0200
+Subject: [PATCH 13/15] Bug 659406 - Abstract what triggers a context menu
+
+Add _gtk_button_event_triggers_context_menu() and use it instead
+of checking for event->button == 3, so context menus are invoked
+correctly on the Mac.
+---
+ gtk/gtkcolorsel.c             |    5 ++---
+ gtk/gtkentry.c                |   18 +++++++++---------
+ gtk/gtkfilechooserdefault.c   |    4 ++--
+ gtk/gtklabel.c                |   23 ++++++++++++-----------
+ gtk/gtklinkbutton.c           |    4 ++--
+ gtk/gtkmain.c                 |   21 +++++++++++++++++++++
+ gtk/gtkmountoperation.c       |    3 +--
+ gtk/gtknotebook.c             |    2 +-
+ gtk/gtkprivate.h              |    2 ++
+ gtk/gtkrecentchooserdefault.c |    4 ++--
+ gtk/gtkstatusicon.c           |    8 ++++----
+ gtk/gtktextview.c             |   12 ++++++------
+ gtk/gtktoolbar.c              |    2 +-
+ 13 files changed, 65 insertions(+), 43 deletions(-)
+
+diff --git a/gtk/gtkcolorsel.c b/gtk/gtkcolorsel.c
+index 6c65d9e..4981e74 100644
+--- a/gtk/gtkcolorsel.c
++++ b/gtk/gtkcolorsel.c
+@@ -1436,9 +1436,8 @@ palette_press (GtkWidget      *drawing_area,
+   GtkColorSelection *colorsel = GTK_COLOR_SELECTION (data);
+ 
+   gtk_widget_grab_focus (drawing_area);
+-  
+-  if (event->button == 3 &&
+-      event->type == GDK_BUTTON_PRESS)
++
++  if (_gtk_button_event_triggers_context_menu (event))
+     {
+       do_popup (colorsel, drawing_area, event->time);
+       return TRUE;
+diff --git a/gtk/gtkentry.c b/gtk/gtkentry.c
+index 8e2c2b2..2c9c5a4 100644
+--- a/gtk/gtkentry.c
++++ b/gtk/gtkentry.c
+@@ -3688,8 +3688,15 @@ gtk_entry_button_press (GtkWidget      *widget,
+     }
+   
+   tmp_pos = gtk_entry_find_position (entry, event->x + entry->scroll_offset);
+-    
+-  if (event->button == 1)
++
++  if (_gtk_button_event_triggers_context_menu (event))
++    {
++      gtk_entry_do_popup (entry, event);
++      entry->button = 0;	/* Don't wait for release, since the menu will gtk_grab_add */
++
++      return TRUE;
++    }
++  else if (event->button == 1)
+     {
+       gboolean have_selection = gtk_editable_get_selection_bounds (editable, &sel_start, &sel_end);
+       
+@@ -3810,13 +3817,6 @@ gtk_entry_button_press (GtkWidget      *widget,
+           gtk_widget_error_bell (widget);
+         }
+     }
+-  else if (event->button == 3 && event->type == GDK_BUTTON_PRESS)
+-    {
+-      gtk_entry_do_popup (entry, event);
+-      entry->button = 0;	/* Don't wait for release, since the menu will gtk_grab_add */
+-
+-      return TRUE;
+-    }
+ 
+   return FALSE;
+ }
+diff --git a/gtk/gtkfilechooserdefault.c b/gtk/gtkfilechooserdefault.c
+index 44c2d17..256cc20 100644
+--- a/gtk/gtkfilechooserdefault.c
++++ b/gtk/gtkfilechooserdefault.c
+@@ -3419,7 +3419,7 @@ shortcuts_button_press_event_cb (GtkWidget             *widget,
+   if (in_press)
+     return FALSE;
+ 
+-  if (event->button != 3)
++  if (!_gtk_button_event_triggers_context_menu (event))
+     return FALSE;
+ 
+   in_press = TRUE;
+@@ -4097,7 +4097,7 @@ list_button_press_event_cb (GtkWidget             *widget,
+   if (in_press)
+     return FALSE;
+ 
+-  if (event->button != 3)
++  if (!_gtk_button_event_triggers_context_menu (event))
+     return FALSE;
+ 
+   in_press = TRUE;
+diff --git a/gtk/gtklabel.c b/gtk/gtklabel.c
+index 01225b1..c539537 100644
+--- a/gtk/gtklabel.c
++++ b/gtk/gtklabel.c
+@@ -4189,16 +4189,16 @@ gtk_label_button_press (GtkWidget      *widget,
+ 
+   if (info->active_link)
+     {
+-      if (event->button == 1)
++      if (_gtk_button_event_triggers_context_menu (event))
+         {
+           info->link_clicked = 1;
+-          gtk_widget_queue_draw (widget);
++          gtk_label_do_popup (label, event);
++          return TRUE;
+         }
+-      else if (event->button == 3 && event->type == GDK_BUTTON_PRESS)
++      else if (event->button == 1)
+         {
+           info->link_clicked = 1;
+-          gtk_label_do_popup (label, event);
+-          return TRUE;
++          gtk_widget_queue_draw (widget);
+         }
+     }
+ 
+@@ -4208,7 +4208,13 @@ gtk_label_button_press (GtkWidget      *widget,
+   info->in_drag = FALSE;
+   info->select_words = FALSE;
+ 
+-  if (event->button == 1)
++  if (_gtk_button_event_triggers_context_menu (event))
++    {
++      gtk_label_do_popup (label, event);
++
++      return TRUE;
++    }
++  else if (event->button == 1)
+     {
+       if (!gtk_widget_has_focus (widget))
+ 	{
+@@ -4271,12 +4277,7 @@ gtk_label_button_press (GtkWidget      *widget,
+ 
+       return TRUE;
+     }
+-  else if (event->button == 3 && event->type == GDK_BUTTON_PRESS)
+-    {
+-      gtk_label_do_popup (label, event);
+ 
+-      return TRUE;
+-    }
+   return FALSE;
+ }
+ 
+diff --git a/gtk/gtklinkbutton.c b/gtk/gtklinkbutton.c
+index a3f246f..bae8ec3 100644
+--- a/gtk/gtklinkbutton.c
++++ b/gtk/gtklinkbutton.c
+@@ -36,8 +36,8 @@
+ #include "gtkstock.h"
+ #include "gtkshow.h"
+ #include "gtktooltip.h"
+-
+ #include "gtklinkbutton.h"
++#include "gtkprivate.h"
+ 
+ #include "gtkintl.h"
+ #include "gtkalias.h"
+@@ -455,7 +455,7 @@ gtk_link_button_button_press (GtkWidget      *widget,
+   if (!gtk_widget_has_focus (widget))
+     gtk_widget_grab_focus (widget);
+ 
+-  if ((event->button == 3) && (event->type == GDK_BUTTON_PRESS))
++  if (_gtk_button_event_triggers_context_menu (event))
+     {
+       gtk_link_button_do_popup (GTK_LINK_BUTTON (widget), event);
+       
+diff --git a/gtk/gtkmain.c b/gtk/gtkmain.c
+index d081f70..bc19aed 100644
+--- a/gtk/gtkmain.c
++++ b/gtk/gtkmain.c
+@@ -2632,5 +2632,26 @@ _gtk_boolean_handled_accumulator (GSignalInvocationHint *ihint,
+   return continue_emission;
+ }
+ 
++gboolean
++_gtk_button_event_triggers_context_menu (GdkEventButton *event)
++{
++  if (event->type == GDK_BUTTON_PRESS)
++    {
++      if (event->button == 3 &&
++          ! (event->state & (GDK_BUTTON1_MASK | GDK_BUTTON2_MASK)))
++        return TRUE;
++
++#ifdef GDK_WINDOWING_QUARTZ
++      if (event->button == 1 &&
++          ! (event->state & (GDK_BUTTON2_MASK | GDK_BUTTON3_MASK)) &&
++          (event->state & GDK_CONTROL_MASK))
++        return TRUE;
++#endif
++    }
++
++  return FALSE;
++}
++
++
+ #define __GTK_MAIN_C__
+ #include "gtkaliasdef.c"
+diff --git a/gtk/gtkmountoperation.c b/gtk/gtkmountoperation.c
+index 0747ed5..6ddaabf 100644
+--- a/gtk/gtkmountoperation.c
++++ b/gtk/gtkmountoperation.c
+@@ -1171,8 +1171,7 @@ on_button_press_event_for_process_tree_view (GtkWidget      *widget,
+ 
+   ret = FALSE;
+ 
+-  /* Ignore double-clicks and triple-clicks */
+-  if (event->button == 3 && event->type == GDK_BUTTON_PRESS)
++  if (_gtk_button_event_triggers_context_menu (event))
+     {
+       ret = do_popup_menu_for_process_tree_view (widget, event, op);
+     }
+diff --git a/gtk/gtknotebook.c b/gtk/gtknotebook.c
+index 254f6b8..a8c8057 100644
+--- a/gtk/gtknotebook.c
++++ b/gtk/gtknotebook.c
+@@ -2681,7 +2681,7 @@ gtk_notebook_button_press (GtkWidget      *widget,
+   if (arrow)
+     return gtk_notebook_arrow_button_press (notebook, arrow, event->button);
+ 
+-  if (event->button == 3 && notebook->menu)
++  if (notebook->menu && _gtk_button_event_triggers_context_menu (event))
+     {
+       gtk_menu_popup (GTK_MENU (notebook->menu), NULL, NULL, 
+ 		      NULL, NULL, 3, event->time);
+diff --git a/gtk/gtkprivate.h b/gtk/gtkprivate.h
+index 00440cb..27aaf1f 100644
+--- a/gtk/gtkprivate.h
++++ b/gtk/gtkprivate.h
+@@ -130,6 +130,8 @@ gboolean _gtk_fnmatch (const char *pattern,
+ #define GTK_MODIFY_SELECTION_MOD_MASK GDK_MOD2_MASK
+ #endif
+ 
++gboolean _gtk_button_event_triggers_context_menu (GdkEventButton *event);
++
+ G_END_DECLS
+ 
+ #endif /* __GTK_PRIVATE_H__ */
+diff --git a/gtk/gtkrecentchooserdefault.c b/gtk/gtkrecentchooserdefault.c
+index 676d599..1ab48e2 100644
+--- a/gtk/gtkrecentchooserdefault.c
++++ b/gtk/gtkrecentchooserdefault.c
+@@ -1893,8 +1893,8 @@ recent_view_button_press_cb (GtkWidget      *widget,
+ 			     gpointer        user_data)
+ {
+   GtkRecentChooserDefault *impl = GTK_RECENT_CHOOSER_DEFAULT (user_data);
+-  
+-  if (event->button == 3)
++
++  if (_gtk_button_event_triggers_context_menu (event))
+     {
+       GtkTreePath *path;
+       gboolean res;
+diff --git a/gtk/gtkstatusicon.c b/gtk/gtkstatusicon.c
+index bd43da1..ab8fe79 100644
+--- a/gtk/gtkstatusicon.c
++++ b/gtk/gtkstatusicon.c
+@@ -1750,14 +1750,14 @@ gtk_status_icon_button_press (GtkStatusIcon  *status_icon,
+   if (handled)
+     return TRUE;
+ 
+-  if (event->button == 1 && event->type == GDK_BUTTON_PRESS)
++  if (_gtk_button_event_triggers_context_menu (event))
+     {
+-      emit_activate_signal (status_icon);
++      emit_popup_menu_signal (status_icon, event->button, event->time);
+       return TRUE;
+     }
+-  else if (event->button == 3 && event->type == GDK_BUTTON_PRESS)
++  else if (event->button == 1 && event->type == GDK_BUTTON_PRESS)
+     {
+-      emit_popup_menu_signal (status_icon, event->button, event->time);
++      emit_activate_signal (status_icon);
+       return TRUE;
+     }
+ 
+diff --git a/gtk/gtktextview.c b/gtk/gtktextview.c
+index 2061b5b..9ddddec 100644
+--- a/gtk/gtktextview.c
++++ b/gtk/gtktextview.c
+@@ -4352,7 +4352,12 @@ gtk_text_view_button_press_event (GtkWidget *widget, GdkEventButton *event)
+     {
+       gtk_text_view_reset_im_context (text_view);
+ 
+-      if (event->button == 1)
++      if (_gtk_button_event_triggers_context_menu (event))
++        {
++	  gtk_text_view_do_popup (text_view, event);
++	  return TRUE;
++        }
++      else if (event->button == 1)
+         {
+           /* If we're in the selection, start a drag copy/move of the
+            * selection; otherwise, start creating a new selection.
+@@ -4402,11 +4407,6 @@ gtk_text_view_button_press_event (GtkWidget *widget, GdkEventButton *event)
+ 					   text_view->editable);
+           return TRUE;
+         }
+-      else if (event->button == 3)
+-        {
+-	  gtk_text_view_do_popup (text_view, event);
+-	  return TRUE;
+-        }
+     }
+   else if ((event->type == GDK_2BUTTON_PRESS ||
+ 	    event->type == GDK_3BUTTON_PRESS) &&
+diff --git a/gtk/gtktoolbar.c b/gtk/gtktoolbar.c
+index 17e2f8f..1388a65 100644
+--- a/gtk/gtktoolbar.c
++++ b/gtk/gtktoolbar.c
+@@ -2699,7 +2699,7 @@ static gboolean
+ gtk_toolbar_button_press (GtkWidget      *toolbar,
+     			  GdkEventButton *event)
+ {
+-  if (event->button == 3)
++  if (_gtk_button_event_triggers_context_menu (event))
+     {
+       gboolean return_value;
+       
+
+

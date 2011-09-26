@@ -1,0 +1,52 @@
+From 1280340f539644de8e8766d76bcbd65b253bb346 Mon Sep 17 00:00:00 2001
+From: Kristian Rietveld <kris@gtk.org>
+Date: Sat, 24 Sep 2011 17:32:21 -0700
+Subject: [PATCH 05/15] Bug 657770 - Write to released memory in
+ gtkdnd-quartz.c
+
+Clear the Drag paste board just before the info->context is released.
+This way the GtkDragSourceOwner is released just before the drag context
+is and thus can pasteboard:provideDataForType: not accidentally access
+an already released drag context
+---
+ gtk/gtkdnd-quartz.c |   14 ++++++++++++++
+ 1 files changed, 14 insertions(+), 0 deletions(-)
+
+diff --git a/gtk/gtkdnd-quartz.c b/gtk/gtkdnd-quartz.c
+index 8dd47b9..5688568 100644
+--- a/gtk/gtkdnd-quartz.c
++++ b/gtk/gtkdnd-quartz.c
+@@ -1835,6 +1835,9 @@ gtk_drag_set_default_icon (GdkColormap   *colormap,
+ static void
+ gtk_drag_source_info_destroy (GtkDragSourceInfo *info)
+ {
++  NSPasteboard *pasteboard;
++  NSAutoreleasePool *pool;
++
+   if (info->icon_pixbuf)
+     g_object_unref (info->icon_pixbuf);
+ 
+@@ -1849,10 +1852,21 @@ gtk_drag_source_info_destroy (GtkDragSourceInfo *info)
+ 
+   gtk_target_list_unref (info->target_list);
+ 
++  pool = [[NSAutoreleasePool alloc] init];
++
++  /* Empty the pasteboard, so that it will not accidentally access
++   * info->context after it has been destroyed.
++   */
++  pasteboard = [NSPasteboard pasteboardWithName: NSDragPboard];
++  [pasteboard declareTypes: nil owner: nil];
++
++  [pool release];
++
+   gtk_drag_clear_source_info (info->context);
+   g_object_unref (info->context);
+ 
+   g_free (info);
++  info = NULL;
+ }
+ 
+ static gboolean
+
+

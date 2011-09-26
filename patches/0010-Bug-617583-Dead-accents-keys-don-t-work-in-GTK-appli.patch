@@ -1,11 +1,28 @@
---- a/gdk/quartz/gdkkeys-quartz.c	2010-11-27 18:04:40.b/b000000000 -0800
-+++ b/gdk/quartz/gdkkeys-quartz.c	2010-11-28 15:46:42.000000000 -0800
-@@ -182,7 +182,58 @@
+From a601126aa92db1da327298d2bcc94764a356ea52 Mon Sep 17 00:00:00 2001
+From: John Ralls <jralls@ceridwen.us>
+Date: Fri, 9 Sep 2011 10:12:40 +0200
+Subject: [PATCH 10/15] Bug 617583 - Dead accents keys don't work in GTK+
+ applications on OSX
+
+Handle dead keys in special_ucs_table and have them converted by
+UCKeyTranslate(), so all dead key combinations can be entered.
+Later, this should be handled in the input method, just as it's
+done for X11/Win32.
+---
+ gdk/quartz/gdkkeys-quartz.c |   77 ++++++++++++++++++++++++++++++++++++++++---
+ 1 files changed, 72 insertions(+), 5 deletions(-)
+
+diff --git a/gdk/quartz/gdkkeys-quartz.c b/gdk/quartz/gdkkeys-quartz.c
+index 52b0867..8c7e6f1 100644
+--- a/gdk/quartz/gdkkeys-quartz.c
++++ b/gdk/quartz/gdkkeys-quartz.c
+@@ -182,7 +182,60 @@ const static struct {
    { 0x001d, GDK_Right },
    { 0x001e, GDK_Up },
    { 0x001f, GDK_Down },
 -  { 0x007f, GDK_Delete }
 +  { 0x007f, GDK_Delete },
++  { 0xf027, GDK_dead_acute },
 +  { 0xf060, GDK_dead_grave },
 +  { 0xf300, GDK_dead_grave },
 +  { 0xf0b4, GDK_dead_acute },
@@ -27,6 +44,7 @@
 +  { 0xf308, GDK_dead_diaeresis },
 +  { 0xf2da, GDK_dead_abovering },
 +  { 0xf30A, GDK_dead_abovering },
++  { 0xf022, GDK_dead_doubleacute },
 +  { 0xf2dd, GDK_dead_doubleacute },
 +  { 0xf30B, GDK_dead_doubleacute },
 +  { 0xf2c7, GDK_dead_caron },
@@ -60,7 +78,7 @@
  };
  
  static void
-@@ -330,10 +381,10 @@
+@@ -330,10 +383,10 @@ maybe_update_keymap (void)
  		  UniChar uc;
  		  
  		  key_code = modifiers[j] | i;
@@ -73,17 +91,19 @@
  		                        &state, 4, &nChars, chars);
  
  
-@@ -346,7 +397,21 @@
+@@ -345,8 +398,22 @@ maybe_update_keymap (void)
+ 		    {
  		      int k;
  		      gboolean found = FALSE;
- 		      
+-		      
 -		      uc = chars[0];
++
 +		      /* A few <Shift><Option>keys return two
 +		       * characters, the first of which is U+00a0,
 +		       * which isn't interesting; so we return the
 +		       * second. More sophisticated handling is the
 +		       * job of a GtkIMContext.
-+		       
++		       *
 +		       * If state isn't zero, it means that it's a
 +		       * dead key of some sort. Some of those are
 +		       * enumerated in the special_ucs_table with the
@@ -91,8 +111,9 @@
 +		       * private use range. Here we do the same.
 +		       */
 +		      if (state != 0)
-+			  chars[nChars - 1] |= 0xf000;
++			chars[nChars - 1] |= 0xf000;
 +		      uc = chars[nChars - 1];
  
  		      for (k = 0; k < G_N_ELEMENTS (special_ucs_table); k++) 
  			{
+

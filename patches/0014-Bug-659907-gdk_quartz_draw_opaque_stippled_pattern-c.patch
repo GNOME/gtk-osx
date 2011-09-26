@@ -1,0 +1,25 @@
+From 86bdbe35b30cd1f10624628800db66e5d8e6673e Mon Sep 17 00:00:00 2001
+From: Steffen Gutmann <muibase@yahoo.com>
+Date: Fri, 23 Sep 2011 09:01:44 +0200
+Subject: [PATCH 14/15] Bug 659907 - gdk_quartz_draw_opaque_stippled_pattern
+ crashes
+
+---
+ gdk/quartz/gdkgc-quartz.c |    2 +-
+ 1 files changed, 1 insertions(+), 1 deletions(-)
+
+diff --git a/gdk/quartz/gdkgc-quartz.c b/gdk/quartz/gdkgc-quartz.c
+index d922154..cfdde77 100644
+--- a/gdk/quartz/gdkgc-quartz.c
++++ b/gdk/quartz/gdkgc-quartz.c
+@@ -426,7 +426,7 @@ gdk_quartz_draw_opaque_stippled_pattern (void         *info,
+   CGContextFillRect (context, rect);
+ 
+   CGContextClipToMask (context, rect, pattern_image);
+-  color = _gdk_quartz_colormap_get_cgcolor_from_pixel (info,
++  color = _gdk_quartz_colormap_get_cgcolor_from_pixel (pinfo->drawable,
+                                                        _gdk_gc_get_fg_pixel (gc));
+   CGContextSetFillColorWithColor (context, color);
+   CGColorRelease (color);
+
+

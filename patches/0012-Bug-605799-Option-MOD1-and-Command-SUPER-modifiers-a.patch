@@ -1,0 +1,835 @@
+From 2123991148d68ca1d0ea451b8bbc58306d0378c9 Mon Sep 17 00:00:00 2001
+From: Michael Natterer <mitch@lanedo.com>
+Date: Fri, 16 Sep 2011 15:39:23 +0200
+Subject: [PATCH 12/15] Bug 605799 - Option (MOD1) and Command (SUPER)
+ modifiers are switched
+
+- maps Alt/Option to MOD1 as on all other platforms
+- maps Command to MOD2
+- maps MOD2 to the virtual META
+- fixes (?) group handling in gdkkeys-quartz.c
+- fixes text input by adding GTK_NO_TEXT_INPUT_MOD_MASK instead
+  of hardcoding something that doesn't match a Mac
+- disables mnemonics
+- sets the default accel modifier to META on quartz
+- adds <Primary> as possible modifier to GtkAccelGroup which
+  automatically maps to Control or Meta, depending on the platform
+- fixes GtkCellRendererAccel to recognize virtual modifiers
+- changes default stock items to GTK_NO_TEXT_INPUT_MOD_MASK instead
+  of hardcoding GDK_CONTROL_MASK
+---
+ gdk/quartz/gdkevents-quartz.c |    8 +++--
+ gdk/quartz/gdkkeys-quartz.c   |   18 +++++++---
+ gtk/gtkaccelgroup.c           |   36 ++++++++++++++++++++
+ gtk/gtkcellrendereraccel.c    |    5 ++-
+ gtk/gtkentry.c                |    2 +-
+ gtk/gtkfilechooserdefault.c   |    7 +---
+ gtk/gtkiconview.c             |   46 +++++++++++++-------------
+ gtk/gtkimcontextsimple.c      |    2 +-
+ gtk/gtkimmulticontext.c       |    2 +-
+ gtk/gtkprivate.h              |   18 ++++++++++
+ gtk/gtkrc.key.mac             |    2 +
+ gtk/gtkstock.c                |   23 +++++++------
+ gtk/gtktextview.c             |    4 +-
+ gtk/gtktreeprivate.h          |    8 ++--
+ gtk/gtktreeview.c             |   74 ++++++++++++++++++++--------------------
+ 15 files changed, 161 insertions(+), 94 deletions(-)
+
+diff --git a/gdk/quartz/gdkevents-quartz.c b/gdk/quartz/gdkevents-quartz.c
+index 9e27329..4625070 100644
+--- a/gdk/quartz/gdkevents-quartz.c
++++ b/gdk/quartz/gdkevents-quartz.c
+@@ -271,8 +271,10 @@ get_keyboard_modifiers_from_ns_event (NSEvent *nsevent)
+     modifiers |= GDK_SHIFT_MASK;
+   if (nsflags & NSControlKeyMask)
+     modifiers |= GDK_CONTROL_MASK;
+-  if (nsflags & NSCommandKeyMask)
++  if (nsflags & NSAlternateKeyMask)
+     modifiers |= GDK_MOD1_MASK;
++  if (nsflags & NSCommandKeyMask)
++    modifiers |= GDK_MOD2_MASK;
+ 
+   return modifiers;
+ }
+@@ -908,7 +910,7 @@ fill_key_event (GdkWindow    *window,
+         {
+         case GDK_Meta_R:
+         case GDK_Meta_L:
+-          mask = GDK_MOD1_MASK;
++          mask = GDK_MOD2_MASK;
+           break;
+         case GDK_Shift_R:
+         case GDK_Shift_L:
+@@ -919,7 +921,7 @@ fill_key_event (GdkWindow    *window,
+           break;
+         case GDK_Alt_R:
+         case GDK_Alt_L:
+-          mask = GDK_MOD5_MASK;
++          mask = GDK_MOD1_MASK;
+           break;
+         case GDK_Control_R:
+         case GDK_Control_L:
+diff --git a/gdk/quartz/gdkkeys-quartz.c b/gdk/quartz/gdkkeys-quartz.c
+index 8c7e6f1..9fffc70 100644
+--- a/gdk/quartz/gdkkeys-quartz.c
++++ b/gdk/quartz/gdkkeys-quartz.c
+@@ -547,8 +547,8 @@ gdk_keymap_get_entries_for_keyval (GdkKeymap     *keymap,
+       (*n_keys)++;
+ 
+       key.keycode = i / KEYVALS_PER_KEYCODE;
+-      key.group = 0;
+-      key.level = i % KEYVALS_PER_KEYCODE;
++      key.group = (i % KEYVALS_PER_KEYCODE) >= 2;
++      key.level = i % 2;
+ 
+       g_array_append_val (keys_array, key);
+     }
+@@ -606,7 +606,7 @@ gdk_keymap_get_entries_for_keycode (GdkKeymap     *keymap,
+ 	  GdkKeymapKey key;
+ 
+ 	  key.keycode = hardware_keycode;
+-	  key.group = i / 2;
++	  key.group = i >= 2;
+ 	  key.level = i % 2;
+ 
+ 	  g_array_append_val (keys_array, key);
+@@ -666,6 +666,11 @@ translate_keysym (guint           hardware_keycode,
+         tmp_keyval = upper;
+     }
+ 
++  if (effective_group)
++    *effective_group = group;
++  if (effective_level)
++    *effective_level = level;
++
+   return tmp_keyval;
+ }
+ 
+@@ -723,14 +728,17 @@ void
+ gdk_keymap_add_virtual_modifiers (GdkKeymap       *keymap,
+                                   GdkModifierType *state)
+ {
+-  /* FIXME: For now, we've mimiced the Windows backend. */
++  if (*state & GDK_MOD2_MASK)
++    *state |= GDK_META_MASK;
+ }
+ 
+ gboolean
+ gdk_keymap_map_virtual_modifiers (GdkKeymap       *keymap,
+                                   GdkModifierType *state)
+ {
+-  /* FIXME: For now, we've mimiced the Windows backend. */
++  if (*state & GDK_META_MASK)
++    *state |= GDK_MOD2_MASK;
++
+   return TRUE;
+ }
+ 
+diff --git a/gtk/gtkaccelgroup.c b/gtk/gtkaccelgroup.c
+index 4c21943..eb2a937 100644
+--- a/gtk/gtkaccelgroup.c
++++ b/gtk/gtkaccelgroup.c
+@@ -35,6 +35,7 @@
+ #include "gtkmain.h"		/* For _gtk_boolean_handled_accumulator */
+ #include "gdk/gdkkeysyms.h"
+ #include "gtkmarshalers.h"
++#include "gtkprivate.h"
+ #include "gtkalias.h"
+ 
+ /**
+@@ -1121,6 +1122,20 @@ is_hyper (const gchar *string)
+ 	  (string[6] == '>'));
+ }
+ 
++static inline gboolean
++is_primary (const gchar *string)
++{
++  return ((string[0] == '<') &&
++	  (string[1] == 'p' || string[1] == 'P') &&
++	  (string[2] == 'r' || string[2] == 'R') &&
++	  (string[3] == 'i' || string[3] == 'I') &&
++	  (string[4] == 'm' || string[4] == 'M') &&
++	  (string[5] == 'a' || string[5] == 'A') &&
++	  (string[6] == 'r' || string[6] == 'R') &&
++	  (string[7] == 'y' || string[7] == 'Y') &&
++	  (string[8] == '>'));
++}
++
+ /**
+  * gtk_accelerator_parse:
+  * @accelerator:      string representing an accelerator
+@@ -1167,6 +1182,12 @@ gtk_accelerator_parse (const gchar     *accelerator,
+ 	      len -= 9;
+ 	      mods |= GDK_RELEASE_MASK;
+ 	    }
++	  else if (len >= 9 && is_primary (accelerator))
++	    {
++	      accelerator += 9;
++	      len -= 9;
++	      mods |= GTK_DEFAULT_ACCEL_MOD_MASK;
++	    }
+ 	  else if (len >= 9 && is_control (accelerator))
+ 	    {
+ 	      accelerator += 9;
+@@ -1280,6 +1301,7 @@ gtk_accelerator_name (guint           accelerator_key,
+ 		      GdkModifierType accelerator_mods)
+ {
+   static const gchar text_release[] = "<Release>";
++  static const gchar text_primary[] = "<Primary>";
+   static const gchar text_shift[] = "<Shift>";
+   static const gchar text_control[] = "<Control>";
+   static const gchar text_mod1[] = "<Alt>";
+@@ -1290,6 +1312,7 @@ gtk_accelerator_name (guint           accelerator_key,
+   static const gchar text_meta[] = "<Meta>";
+   static const gchar text_super[] = "<Super>";
+   static const gchar text_hyper[] = "<Hyper>";
++  GdkModifierType saved_mods;
+   guint l;
+   gchar *keyval_name;
+   gchar *accelerator;
+@@ -1300,9 +1323,15 @@ gtk_accelerator_name (guint           accelerator_key,
+   if (!keyval_name)
+     keyval_name = "";
+ 
++  saved_mods = accelerator_mods;
+   l = 0;
+   if (accelerator_mods & GDK_RELEASE_MASK)
+     l += sizeof (text_release) - 1;
++  if (accelerator_mods & GTK_DEFAULT_ACCEL_MOD_MASK)
++    {
++      l += sizeof (text_primary) - 1;
++      accelerator_mods &= ~GTK_DEFAULT_ACCEL_MOD_MASK; /* consume the default accel */
++    }
+   if (accelerator_mods & GDK_SHIFT_MASK)
+     l += sizeof (text_shift) - 1;
+   if (accelerator_mods & GDK_CONTROL_MASK)
+@@ -1327,6 +1356,7 @@ gtk_accelerator_name (guint           accelerator_key,
+ 
+   accelerator = g_new (gchar, l + 1);
+ 
++  accelerator_mods = saved_mods;
+   l = 0;
+   accelerator[l] = 0;
+   if (accelerator_mods & GDK_RELEASE_MASK)
+@@ -1334,6 +1364,12 @@ gtk_accelerator_name (guint           accelerator_key,
+       strcpy (accelerator + l, text_release);
+       l += sizeof (text_release) - 1;
+     }
++  if (accelerator_mods & GTK_DEFAULT_ACCEL_MOD_MASK)
++    {
++      strcpy (accelerator + l, text_primary);
++      l += sizeof (text_primary) - 1;
++      accelerator_mods &= ~GTK_DEFAULT_ACCEL_MOD_MASK; /* consume the default accel */
++    }
+   if (accelerator_mods & GDK_SHIFT_MASK)
+     {
+       strcpy (accelerator + l, text_shift);
+diff --git a/gtk/gtkcellrendereraccel.c b/gtk/gtkcellrendereraccel.c
+index dedbfda..846b1ec 100644
+--- a/gtk/gtkcellrendereraccel.c
++++ b/gtk/gtkcellrendereraccel.c
+@@ -427,11 +427,14 @@ grab_key_callback (GtkWidget            *widget,
+                                        event->group,
+ 				       NULL, NULL, NULL, &consumed_modifiers);
+ 
++  accel_mods = event->state;
++  gdk_keymap_add_virtual_modifiers (gdk_keymap_get_for_display (display), &accel_mods);
++
+   accel_key = gdk_keyval_to_lower (event->keyval);
+   if (accel_key == GDK_ISO_Left_Tab) 
+     accel_key = GDK_Tab;
+ 
+-  accel_mods = event->state & gtk_accelerator_get_default_mod_mask ();
++  accel_mods &= gtk_accelerator_get_default_mod_mask ();
+ 
+   /* Filter consumed modifiers 
+    */
+diff --git a/gtk/gtkentry.c b/gtk/gtkentry.c
+index 0a833cf..8e2c2b2 100644
+--- a/gtk/gtkentry.c
++++ b/gtk/gtkentry.c
+@@ -3696,7 +3696,7 @@ gtk_entry_button_press (GtkWidget      *widget,
+       entry->select_words = FALSE;
+       entry->select_lines = FALSE;
+ 
+-      if (event->state & GDK_SHIFT_MASK)
++      if (event->state & GTK_EXTEND_SELECTION_MOD_MASK)
+ 	{
+ 	  _gtk_entry_reset_im_context (entry);
+ 	  
+diff --git a/gtk/gtkfilechooserdefault.c b/gtk/gtkfilechooserdefault.c
+index 9e636c2..44c2d17 100644
+--- a/gtk/gtkfilechooserdefault.c
++++ b/gtk/gtkfilechooserdefault.c
+@@ -3687,18 +3687,15 @@ browse_files_key_press_event_cb (GtkWidget   *widget,
+ 				 gpointer     data)
+ {
+   GtkFileChooserDefault *impl;
+-  int modifiers;
+ 
+   impl = (GtkFileChooserDefault *) data;
+ 
+-  modifiers = gtk_accelerator_get_default_mod_mask ();
+-
+   if ((event->keyval == GDK_KEY_slash
+        || event->keyval == GDK_KEY_KP_Divide
+ #ifdef G_OS_UNIX
+        || event->keyval == GDK_KEY_asciitilde
+ #endif
+-       ) && ! (event->state & (~GDK_SHIFT_MASK & modifiers)))
++       ) && !(event->state & GTK_NO_TEXT_INPUT_MOD_MASK))
+     {
+       location_popup_handler (impl, event->string);
+       return TRUE;
+@@ -3715,7 +3712,7 @@ browse_files_key_press_event_cb (GtkWidget   *widget,
+        || event->keyval == GDK_KEY_KP_Enter
+        || event->keyval == GDK_KEY_space
+        || event->keyval == GDK_KEY_KP_Space)
+-      && ((event->state & modifiers) == 0)
++      && !(event->state & gtk_accelerator_get_default_mod_mask ())
+       && !(impl->action == GTK_FILE_CHOOSER_ACTION_SELECT_FOLDER ||
+ 	   impl->action == GTK_FILE_CHOOSER_ACTION_CREATE_FOLDER))
+     {
+diff --git a/gtk/gtkiconview.c b/gtk/gtkiconview.c
+index 8ce402f..54b3f3b 100644
+--- a/gtk/gtkiconview.c
++++ b/gtk/gtkiconview.c
+@@ -183,8 +183,8 @@ struct _GtkIconViewPrivate
+   guint reorderable : 1;
+   guint empty_view_drop :1;
+ 
+-  guint ctrl_pressed : 1;
+-  guint shift_pressed : 1;
++  guint modify_selection_pressed : 1;
++  guint extend_selection_pressed : 1;
+ 
+   guint draw_focus : 1;
+ };
+@@ -2177,7 +2177,7 @@ gtk_icon_view_button_press (GtkWidget      *widget,
+ 	      gtk_icon_view_set_cursor_item (icon_view, item, cursor_cell);
+ 	    }
+ 	  else if (icon_view->priv->selection_mode == GTK_SELECTION_MULTIPLE &&
+-		   (event->state & GDK_SHIFT_MASK))
++		   (event->state & GTK_EXTEND_SELECTION_MOD_MASK))
+ 	    {
+ 	      gtk_icon_view_unselect_all_internal (icon_view);
+ 
+@@ -2194,7 +2194,7 @@ gtk_icon_view_button_press (GtkWidget      *widget,
+ 	    {
+ 	      if ((icon_view->priv->selection_mode == GTK_SELECTION_MULTIPLE ||
+ 		  ((icon_view->priv->selection_mode == GTK_SELECTION_SINGLE) && item->selected)) &&
+-		  (event->state & GDK_CONTROL_MASK))
++		  (event->state & GTK_MODIFY_SELECTION_MOD_MASK))
+ 		{
+ 		  item->selected = !item->selected;
+ 		  gtk_icon_view_queue_draw_item (icon_view, item);
+@@ -2239,7 +2239,7 @@ gtk_icon_view_button_press (GtkWidget      *widget,
+       else
+ 	{
+ 	  if (icon_view->priv->selection_mode != GTK_SELECTION_BROWSE &&
+-	      !(event->state & GDK_CONTROL_MASK))
++	      !(event->state & GTK_MODIFY_SELECTION_MOD_MASK))
+ 	    {
+ 	      dirty = gtk_icon_view_unselect_all_internal (icon_view);
+ 	    }
+@@ -3856,10 +3856,10 @@ gtk_icon_view_real_move_cursor (GtkIconView     *icon_view,
+ 
+   if (gtk_get_current_event_state (&state))
+     {
+-      if ((state & GDK_CONTROL_MASK) == GDK_CONTROL_MASK)
+-        icon_view->priv->ctrl_pressed = TRUE;
+-      if ((state & GDK_SHIFT_MASK) == GDK_SHIFT_MASK)
+-        icon_view->priv->shift_pressed = TRUE;
++      if ((state & GTK_MODIFY_SELECTION_MOD_MASK) == GTK_MODIFY_SELECTION_MOD_MASK)
++        icon_view->priv->modify_selection_pressed = TRUE;
++      if ((state & GTK_EXTEND_SELECTION_MOD_MASK) == GTK_EXTEND_SELECTION_MOD_MASK)
++        icon_view->priv->extend_selection_pressed = TRUE;
+     }
+   /* else we assume not pressed */
+ 
+@@ -3882,8 +3882,8 @@ gtk_icon_view_real_move_cursor (GtkIconView     *icon_view,
+       g_assert_not_reached ();
+     }
+ 
+-  icon_view->priv->ctrl_pressed = FALSE;
+-  icon_view->priv->shift_pressed = FALSE;
++  icon_view->priv->modify_selection_pressed = FALSE;
++  icon_view->priv->extend_selection_pressed = FALSE;
+ 
+   icon_view->priv->draw_focus = TRUE;
+ 
+@@ -4154,15 +4154,15 @@ gtk_icon_view_move_cursor_up_down (GtkIconView *icon_view,
+       return;
+     }
+ 
+-  if (icon_view->priv->ctrl_pressed ||
+-      !icon_view->priv->shift_pressed ||
++  if (icon_view->priv->modify_selection_pressed ||
++      !icon_view->priv->extend_selection_pressed ||
+       !icon_view->priv->anchor_item ||
+       icon_view->priv->selection_mode != GTK_SELECTION_MULTIPLE)
+     icon_view->priv->anchor_item = item;
+ 
+   gtk_icon_view_set_cursor_item (icon_view, item, cell);
+ 
+-  if (!icon_view->priv->ctrl_pressed &&
++  if (!icon_view->priv->modify_selection_pressed &&
+       icon_view->priv->selection_mode != GTK_SELECTION_NONE)
+     {
+       dirty = gtk_icon_view_unselect_all_internal (icon_view);
+@@ -4209,15 +4209,15 @@ gtk_icon_view_move_cursor_page_up_down (GtkIconView *icon_view,
+   if (!item)
+     return;
+ 
+-  if (icon_view->priv->ctrl_pressed ||
+-      !icon_view->priv->shift_pressed ||
++  if (icon_view->priv->modify_selection_pressed ||
++      !icon_view->priv->extend_selection_pressed ||
+       !icon_view->priv->anchor_item ||
+       icon_view->priv->selection_mode != GTK_SELECTION_MULTIPLE)
+     icon_view->priv->anchor_item = item;
+ 
+   gtk_icon_view_set_cursor_item (icon_view, item, -1);
+ 
+-  if (!icon_view->priv->ctrl_pressed &&
++  if (!icon_view->priv->modify_selection_pressed &&
+       icon_view->priv->selection_mode != GTK_SELECTION_NONE)
+     {
+       dirty = gtk_icon_view_unselect_all_internal (icon_view);
+@@ -4291,15 +4291,15 @@ gtk_icon_view_move_cursor_left_right (GtkIconView *icon_view,
+       return;
+     }
+ 
+-  if (icon_view->priv->ctrl_pressed ||
+-      !icon_view->priv->shift_pressed ||
++  if (icon_view->priv->modify_selection_pressed ||
++      !icon_view->priv->extend_selection_pressed ||
+       !icon_view->priv->anchor_item ||
+       icon_view->priv->selection_mode != GTK_SELECTION_MULTIPLE)
+     icon_view->priv->anchor_item = item;
+ 
+   gtk_icon_view_set_cursor_item (icon_view, item, cell);
+ 
+-  if (!icon_view->priv->ctrl_pressed &&
++  if (!icon_view->priv->modify_selection_pressed &&
+       icon_view->priv->selection_mode != GTK_SELECTION_NONE)
+     {
+       dirty = gtk_icon_view_unselect_all_internal (icon_view);
+@@ -4338,15 +4338,15 @@ gtk_icon_view_move_cursor_start_end (GtkIconView *icon_view,
+   if (!item)
+     return;
+ 
+-  if (icon_view->priv->ctrl_pressed ||
+-      !icon_view->priv->shift_pressed ||
++  if (icon_view->priv->modify_selection_pressed ||
++      !icon_view->priv->extend_selection_pressed ||
+       !icon_view->priv->anchor_item ||
+       icon_view->priv->selection_mode != GTK_SELECTION_MULTIPLE)
+     icon_view->priv->anchor_item = item;
+ 
+   gtk_icon_view_set_cursor_item (icon_view, item, -1);
+ 
+-  if (!icon_view->priv->ctrl_pressed &&
++  if (!icon_view->priv->modify_selection_pressed &&
+       icon_view->priv->selection_mode != GTK_SELECTION_NONE)
+     {
+       dirty = gtk_icon_view_unselect_all_internal (icon_view);
+diff --git a/gtk/gtkimcontextsimple.c b/gtk/gtkimcontextsimple.c
+index 9ef18a9..d496166 100644
+--- a/gtk/gtkimcontextsimple.c
++++ b/gtk/gtkimcontextsimple.c
+@@ -871,7 +871,7 @@ gtk_im_context_simple_filter_keypress (GtkIMContext *context,
+       (context_simple->in_hex_sequence && !hex_keyval && 
+        !is_hex_start && !is_hex_end && !is_escape && !is_backspace))
+     {
+-      if (event->state & (GDK_MOD1_MASK | GDK_CONTROL_MASK) ||
++      if (event->state & GTK_NO_TEXT_INPUT_MOD_MASK ||
+ 	  (context_simple->in_hex_sequence && context_simple->modifiers_dropped &&
+ 	   (event->keyval == GDK_Return || 
+ 	    event->keyval == GDK_ISO_Enter ||
+diff --git a/gtk/gtkimmulticontext.c b/gtk/gtkimmulticontext.c
+index 6185667..34f34b6 100644
+--- a/gtk/gtkimmulticontext.c
++++ b/gtk/gtkimmulticontext.c
+@@ -330,7 +330,7 @@ gtk_im_multicontext_filter_keypress (GtkIMContext *context,
+   if (slave)
+     return gtk_im_context_filter_keypress (slave, event);
+   else if (event->type == GDK_KEY_PRESS &&
+-           (event->state & (GDK_MOD1_MASK | GDK_CONTROL_MASK)) == 0)
++           (event->state & GTK_NO_TEXT_INPUT_MOD_MASK) == 0)
+     {
+       gunichar ch;
+ 
+diff --git a/gtk/gtkprivate.h b/gtk/gtkprivate.h
+index 3933dc5..00440cb 100644
+--- a/gtk/gtkprivate.h
++++ b/gtk/gtkprivate.h
+@@ -112,6 +112,24 @@ gboolean _gtk_fnmatch (const char *pattern,
+ #define GTK_DEFAULT_ACCEL_MOD_MASK GDK_META_MASK
+ #endif
+ 
++/* When any of these modifiers are active, a key
++ * event cannot produce a symbol, so should be
++ * skipped when handling text input
++ */
++#ifndef GDK_WINDOWING_QUARTZ
++#define GTK_NO_TEXT_INPUT_MOD_MASK (GDK_MOD1_MASK | GDK_CONTROL_MASK)
++#else
++#define GTK_NO_TEXT_INPUT_MOD_MASK (GDK_MOD2_MASK | GDK_CONTROL_MASK)
++#endif
++
++#ifndef GDK_WINDOWING_QUARTZ
++#define GTK_EXTEND_SELECTION_MOD_MASK GDK_SHIFT_MASK
++#define GTK_MODIFY_SELECTION_MOD_MASK GDK_CONTROL_MASK
++#else
++#define GTK_EXTEND_SELECTION_MOD_MASK GDK_SHIFT_MASK
++#define GTK_MODIFY_SELECTION_MOD_MASK GDK_MOD2_MASK
++#endif
++
+ G_END_DECLS
+ 
+ #endif /* __GTK_PRIVATE_H__ */
+diff --git a/gtk/gtkrc.key.mac b/gtk/gtkrc.key.mac
+index 7b6e8d1..5389ffe 100644
+--- a/gtk/gtkrc.key.mac
++++ b/gtk/gtkrc.key.mac
+@@ -1,3 +1,5 @@
++gtk-enable-mnemonics = 0
++
+ binding "gtk-mac-alt-arrows"
+ {
+   bind "<alt>Right"           { "move-cursor" (words, 1, 0) }
+diff --git a/gtk/gtkstock.c b/gtk/gtkstock.c
+index 66b0ed5..5cb64ec 100644
+--- a/gtk/gtkstock.c
++++ b/gtk/gtkstock.c
+@@ -32,6 +32,7 @@
+ #include "gtkiconfactory.h"
+ #include "gtkintl.h"
+ #include <gdk/gdkkeysyms.h>
++#include "gtkprivate.h"
+ #include "gtkalias.h"
+ 
+ /**
+@@ -326,18 +327,18 @@ static const GtkStockItem builtin_items [] =
+   { GTK_STOCK_CANCEL, NC_("Stock label", "_Cancel"), 0, 0, GETTEXT_PACKAGE },
+   { GTK_STOCK_CDROM, NC_("Stock label", "_CD-Rom"), 0, 0, GETTEXT_PACKAGE },
+   { GTK_STOCK_CLEAR, NC_("Stock label", "_Clear"), 0, 0, GETTEXT_PACKAGE },
+-  { GTK_STOCK_CLOSE, NC_("Stock label", "_Close"), GDK_CONTROL_MASK, 'w', GETTEXT_PACKAGE },
++  { GTK_STOCK_CLOSE, NC_("Stock label", "_Close"), GTK_DEFAULT_ACCEL_MOD_MASK, 'w', GETTEXT_PACKAGE },
+   { GTK_STOCK_CONNECT, NC_("Stock label", "C_onnect"), 0, 0, GETTEXT_PACKAGE },
+   { GTK_STOCK_CONVERT, NC_("Stock label", "_Convert"), 0, 0, GETTEXT_PACKAGE },
+-   { GTK_STOCK_COPY, NC_("Stock label", "_Copy"), GDK_CONTROL_MASK, 'c', GETTEXT_PACKAGE },
+-  { GTK_STOCK_CUT, NC_("Stock label", "Cu_t"), GDK_CONTROL_MASK, 'x', GETTEXT_PACKAGE },
++   { GTK_STOCK_COPY, NC_("Stock label", "_Copy"), GTK_DEFAULT_ACCEL_MOD_MASK, 'c', GETTEXT_PACKAGE },
++  { GTK_STOCK_CUT, NC_("Stock label", "Cu_t"), GTK_DEFAULT_ACCEL_MOD_MASK, 'x', GETTEXT_PACKAGE },
+   { GTK_STOCK_DELETE, NC_("Stock label", "_Delete"), 0, 0, GETTEXT_PACKAGE },
+   { GTK_STOCK_DISCARD, NC_("Stock label", "_Discard"), 0, 0, GETTEXT_PACKAGE },
+   { GTK_STOCK_DISCONNECT, NC_("Stock label", "_Disconnect"), 0, 0, GETTEXT_PACKAGE },
+   { GTK_STOCK_EXECUTE, NC_("Stock label", "_Execute"), 0, 0, GETTEXT_PACKAGE },
+   { GTK_STOCK_EDIT, NC_("Stock label", "_Edit"), 0, 0, GETTEXT_PACKAGE },
+-  { GTK_STOCK_FIND, NC_("Stock label", "_Find"), GDK_CONTROL_MASK, 'f', GETTEXT_PACKAGE },
+-  { GTK_STOCK_FIND_AND_REPLACE, NC_("Stock label", "Find and _Replace"), GDK_CONTROL_MASK, 'r', GETTEXT_PACKAGE },
++  { GTK_STOCK_FIND, NC_("Stock label", "_Find"), GTK_DEFAULT_ACCEL_MOD_MASK, 'f', GETTEXT_PACKAGE },
++  { GTK_STOCK_FIND_AND_REPLACE, NC_("Stock label", "Find and _Replace"), GTK_DEFAULT_ACCEL_MOD_MASK, 'r', GETTEXT_PACKAGE },
+   { GTK_STOCK_FLOPPY, NC_("Stock label", "_Floppy"), 0, 0, GETTEXT_PACKAGE },
+   { GTK_STOCK_FULLSCREEN, NC_("Stock label", "_Fullscreen"), 0, 0, GETTEXT_PACKAGE },
+   { GTK_STOCK_LEAVE_FULLSCREEN, NC_("Stock label", "_Leave Fullscreen"), 0, 0, GETTEXT_PACKAGE },
+@@ -358,7 +359,7 @@ static const GtkStockItem builtin_items [] =
+   /* This is a navigation label as in "go up" */
+   { GTK_STOCK_GO_UP, NC_("Stock label, navigation", "_Up"), 0, 0, GETTEXT_PACKAGE "-navigation" },
+   { GTK_STOCK_HARDDISK, NC_("Stock label", "_Harddisk"), 0, 0, GETTEXT_PACKAGE },
+-  { GTK_STOCK_HELP, NC_("Stock label", "_Help"), GDK_CONTROL_MASK, 'h', GETTEXT_PACKAGE },
++  { GTK_STOCK_HELP, NC_("Stock label", "_Help"), GTK_DEFAULT_ACCEL_MOD_MASK, 'h', GETTEXT_PACKAGE },
+   { GTK_STOCK_HOME, NC_("Stock label", "_Home"), 0, 0, GETTEXT_PACKAGE },
+   { GTK_STOCK_INDENT, NC_("Stock label", "Increase Indent"), 0, 0, GETTEXT_PACKAGE },
+   { GTK_STOCK_UNINDENT, NC_("Stock label", "Decrease Indent"), 0, 0, GETTEXT_PACKAGE },
+@@ -392,10 +393,10 @@ static const GtkStockItem builtin_items [] =
+   /* Media label */
+   { GTK_STOCK_MEDIA_STOP, NC_("Stock label, media", "_Stop"), 0, 0, GETTEXT_PACKAGE "-media" },
+   { GTK_STOCK_NETWORK, NC_("Stock label", "_Network"), 0, 0, GETTEXT_PACKAGE },
+-  { GTK_STOCK_NEW, NC_("Stock label", "_New"), GDK_CONTROL_MASK, 'n', GETTEXT_PACKAGE },
++  { GTK_STOCK_NEW, NC_("Stock label", "_New"), GTK_DEFAULT_ACCEL_MOD_MASK, 'n', GETTEXT_PACKAGE },
+   { GTK_STOCK_NO, NC_("Stock label", "_No"), 0, 0, GETTEXT_PACKAGE },
+   { GTK_STOCK_OK, NC_("Stock label", "_OK"), 0, 0, GETTEXT_PACKAGE },
+-  { GTK_STOCK_OPEN, NC_("Stock label", "_Open"), GDK_CONTROL_MASK, 'o', GETTEXT_PACKAGE },
++  { GTK_STOCK_OPEN, NC_("Stock label", "_Open"), GTK_DEFAULT_ACCEL_MOD_MASK, 'o', GETTEXT_PACKAGE },
+   /* Page orientation */
+   { GTK_STOCK_ORIENTATION_LANDSCAPE, NC_("Stock label", "Landscape"), 0, 0, GETTEXT_PACKAGE },
+   /* Page orientation */
+@@ -405,17 +406,17 @@ static const GtkStockItem builtin_items [] =
+   /* Page orientation */
+   { GTK_STOCK_ORIENTATION_REVERSE_PORTRAIT, NC_("Stock label", "Reverse portrait"), 0, 0, GETTEXT_PACKAGE },
+   { GTK_STOCK_PAGE_SETUP, NC_("Stock label", "Page Set_up"), 0, 0, GETTEXT_PACKAGE },
+-  { GTK_STOCK_PASTE, NC_("Stock label", "_Paste"), GDK_CONTROL_MASK, 'v', GETTEXT_PACKAGE },
++  { GTK_STOCK_PASTE, NC_("Stock label", "_Paste"), GTK_DEFAULT_ACCEL_MOD_MASK, 'v', GETTEXT_PACKAGE },
+   { GTK_STOCK_PREFERENCES, NC_("Stock label", "_Preferences"), 0, 0, GETTEXT_PACKAGE },
+   { GTK_STOCK_PRINT, NC_("Stock label", "_Print"), 0, 0, GETTEXT_PACKAGE },
+   { GTK_STOCK_PRINT_PREVIEW, NC_("Stock label", "Print Pre_view"), 0, 0, GETTEXT_PACKAGE },
+   { GTK_STOCK_PROPERTIES, NC_("Stock label", "_Properties"), 0, 0, GETTEXT_PACKAGE },
+-  { GTK_STOCK_QUIT, NC_("Stock label", "_Quit"), GDK_CONTROL_MASK, 'q', GETTEXT_PACKAGE },
++  { GTK_STOCK_QUIT, NC_("Stock label", "_Quit"), GTK_DEFAULT_ACCEL_MOD_MASK, 'q', GETTEXT_PACKAGE },
+   { GTK_STOCK_REDO, NC_("Stock label", "_Redo"), 0, 0, GETTEXT_PACKAGE },
+   { GTK_STOCK_REFRESH, NC_("Stock label", "_Refresh"), 0, 0, GETTEXT_PACKAGE },
+   { GTK_STOCK_REMOVE, NC_("Stock label", "_Remove"), 0, 0, GETTEXT_PACKAGE },
+   { GTK_STOCK_REVERT_TO_SAVED, NC_("Stock label", "_Revert"), 0, 0, GETTEXT_PACKAGE },
+-  { GTK_STOCK_SAVE, NC_("Stock label", "_Save"), GDK_CONTROL_MASK, 's', GETTEXT_PACKAGE },
++  { GTK_STOCK_SAVE, NC_("Stock label", "_Save"), GTK_DEFAULT_ACCEL_MOD_MASK, 's', GETTEXT_PACKAGE },
+   { GTK_STOCK_SAVE_AS, NC_("Stock label", "Save _As"), 0, 0, GETTEXT_PACKAGE },
+   { GTK_STOCK_SELECT_ALL, NC_("Stock label", "Select _All"), 0, 0, GETTEXT_PACKAGE },
+   { GTK_STOCK_SELECT_COLOR, NC_("Stock label", "_Color"), 0, 0, GETTEXT_PACKAGE },
+diff --git a/gtk/gtktextview.c b/gtk/gtktextview.c
+index 57316f6..2061b5b 100644
+--- a/gtk/gtktextview.c
++++ b/gtk/gtktextview.c
+@@ -4368,7 +4368,7 @@ gtk_text_view_button_press_event (GtkWidget *widget, GdkEventButton *event)
+           if (gtk_text_buffer_get_selection_bounds (get_buffer (text_view),
+                                                     &start, &end) &&
+               gtk_text_iter_in_range (&iter, &start, &end) &&
+-              !(event->state & GDK_SHIFT_MASK))
++              !(event->state & GTK_EXTEND_SELECTION_MOD_MASK))
+             {
+               text_view->drag_start_x = event->x;
+               text_view->drag_start_y = event->y;
+@@ -6295,7 +6295,7 @@ gtk_text_view_start_selection_drag (GtkTextView       *text_view,
+   orig_start = ins;
+   orig_end = bound;
+ 
+-  if (button->state & GDK_SHIFT_MASK)
++  if (button->state & GTK_EXTEND_SELECTION_MOD_MASK)
+     {
+       /* Extend selection */
+       GtkTextIter old_ins, old_bound;
+diff --git a/gtk/gtktreeprivate.h b/gtk/gtktreeprivate.h
+index acd6d69..82c52da 100644
+--- a/gtk/gtktreeprivate.h
++++ b/gtk/gtktreeprivate.h
+@@ -211,8 +211,8 @@ struct _GtkTreeViewPrivate
+   gint rubber_band_status;
+   gint rubber_band_x;
+   gint rubber_band_y;
+-  gint rubber_band_shift;
+-  gint rubber_band_ctrl;
++  gint rubber_band_extend;
++  gint rubber_band_modify;
+ 
+   GtkRBNode *rubber_band_start_node;
+   GtkRBTree *rubber_band_start_tree;
+@@ -276,8 +276,8 @@ struct _GtkTreeViewPrivate
+   /* for DnD */
+   guint empty_view_drop : 1;
+ 
+-  guint ctrl_pressed : 1;
+-  guint shift_pressed : 1;
++  guint modify_selection_pressed : 1;
++  guint extend_selection_pressed : 1;
+ 
+   guint init_hadjust_value : 1;
+ 
+diff --git a/gtk/gtktreeview.c b/gtk/gtktreeview.c
+index 47d0282..33dd907 100644
+--- a/gtk/gtktreeview.c
++++ b/gtk/gtktreeview.c
+@@ -2773,21 +2773,21 @@ gtk_tree_view_button_press (GtkWidget      *widget,
+        */
+       if (event->type == GDK_BUTTON_PRESS)
+         {
+-          if ((event->state & GDK_CONTROL_MASK) == GDK_CONTROL_MASK)
+-            tree_view->priv->ctrl_pressed = TRUE;
+-          if ((event->state & GDK_SHIFT_MASK) == GDK_SHIFT_MASK)
+-            tree_view->priv->shift_pressed = TRUE;
++          if ((event->state & GTK_MODIFY_SELECTION_MOD_MASK) == GTK_MODIFY_SELECTION_MOD_MASK)
++            tree_view->priv->modify_selection_pressed = TRUE;
++          if ((event->state & GTK_EXTEND_SELECTION_MOD_MASK) == GTK_EXTEND_SELECTION_MOD_MASK)
++            tree_view->priv->extend_selection_pressed = TRUE;
+ 
+           focus_cell = _gtk_tree_view_column_get_cell_at_pos (column, event->x - background_area.x);
+           if (focus_cell)
+             gtk_tree_view_column_focus_cell (column, focus_cell);
+ 
+-          if (event->state & GDK_CONTROL_MASK)
++          if (event->state & GTK_MODIFY_SELECTION_MOD_MASK)
+             {
+               gtk_tree_view_real_set_cursor (tree_view, path, FALSE, TRUE);
+               gtk_tree_view_real_toggle_cursor_row (tree_view);
+             }
+-          else if (event->state & GDK_SHIFT_MASK)
++          else if (event->state & GTK_EXTEND_SELECTION_MOD_MASK)
+             {
+               gtk_tree_view_real_set_cursor (tree_view, path, FALSE, TRUE);
+               gtk_tree_view_real_select_cursor_row (tree_view, FALSE);
+@@ -2797,8 +2797,8 @@ gtk_tree_view_button_press (GtkWidget      *widget,
+               gtk_tree_view_real_set_cursor (tree_view, path, TRUE, TRUE);
+             }
+ 
+-          tree_view->priv->ctrl_pressed = FALSE;
+-          tree_view->priv->shift_pressed = FALSE;
++          tree_view->priv->modify_selection_pressed = FALSE;
++          tree_view->priv->extend_selection_pressed = FALSE;
+         }
+ 
+       /* the treeview may have been scrolled because of _set_cursor,
+@@ -2830,10 +2830,10 @@ gtk_tree_view_button_press (GtkWidget      *widget,
+ 	      tree_view->priv->rubber_band_y = event->y + tree_view->priv->dy;
+ 	      tree_view->priv->rubber_band_status = RUBBER_BAND_MAYBE_START;
+ 
+-	      if ((event->state & GDK_CONTROL_MASK) == GDK_CONTROL_MASK)
+-		tree_view->priv->rubber_band_ctrl = TRUE;
+-	      if ((event->state & GDK_SHIFT_MASK) == GDK_SHIFT_MASK)
+-		tree_view->priv->rubber_band_shift = TRUE;
++	      if ((event->state & GTK_MODIFY_SELECTION_MOD_MASK) == GTK_MODIFY_SELECTION_MOD_MASK)
++		tree_view->priv->rubber_band_modify = TRUE;
++	      if ((event->state & GTK_EXTEND_SELECTION_MOD_MASK) == GTK_EXTEND_SELECTION_MOD_MASK)
++		tree_view->priv->rubber_band_extend = TRUE;
+ 	    }
+         }
+ 
+@@ -3791,8 +3791,8 @@ gtk_tree_view_stop_rubber_band (GtkTreeView *tree_view)
+ 
+   /* Clear status variables */
+   tree_view->priv->rubber_band_status = RUBBER_BAND_OFF;
+-  tree_view->priv->rubber_band_shift = 0;
+-  tree_view->priv->rubber_band_ctrl = 0;
++  tree_view->priv->rubber_band_extend = FALSE;
++  tree_view->priv->rubber_band_modify = FALSE;
+ 
+   tree_view->priv->rubber_band_start_node = NULL;
+   tree_view->priv->rubber_band_start_tree = NULL;
+@@ -3837,9 +3837,9 @@ gtk_tree_view_update_rubber_band_selection_range (GtkTreeView *tree_view,
+ 
+       if (select)
+         {
+-	  if (tree_view->priv->rubber_band_shift)
+-	    GTK_RBNODE_SET_FLAG (start_node, GTK_RBNODE_IS_SELECTED);
+-	  else if (tree_view->priv->rubber_band_ctrl)
++	  if (tree_view->priv->rubber_band_extend)
++            GTK_RBNODE_SET_FLAG (start_node, GTK_RBNODE_IS_SELECTED);
++	  else if (tree_view->priv->rubber_band_modify)
+ 	    {
+ 	      /* Toggle the selection state */
+ 	      if (GTK_RBNODE_FLAG_SET (start_node, GTK_RBNODE_IS_SELECTED))
+@@ -3853,9 +3853,9 @@ gtk_tree_view_update_rubber_band_selection_range (GtkTreeView *tree_view,
+       else
+         {
+ 	  /* Mirror the above */
+-	  if (tree_view->priv->rubber_band_shift)
++	  if (tree_view->priv->rubber_band_extend)
+ 	    GTK_RBNODE_UNSET_FLAG (start_node, GTK_RBNODE_IS_SELECTED);
+-	  else if (tree_view->priv->rubber_band_ctrl)
++	  else if (tree_view->priv->rubber_band_modify)
+ 	    {
+ 	      /* Toggle the selection state */
+ 	      if (GTK_RBNODE_FLAG_SET (start_node, GTK_RBNODE_IS_SELECTED))
+@@ -8203,10 +8203,10 @@ gtk_tree_view_real_move_cursor (GtkTreeView       *tree_view,
+ 
+   if (gtk_get_current_event_state (&state))
+     {
+-      if ((state & GDK_CONTROL_MASK) == GDK_CONTROL_MASK)
+-        tree_view->priv->ctrl_pressed = TRUE;
+-      if ((state & GDK_SHIFT_MASK) == GDK_SHIFT_MASK)
+-        tree_view->priv->shift_pressed = TRUE;
++      if ((state & GTK_MODIFY_SELECTION_MOD_MASK) == GTK_MODIFY_SELECTION_MOD_MASK)
++        tree_view->priv->modify_selection_pressed = TRUE;
++      if ((state & GTK_EXTEND_SELECTION_MOD_MASK) == GTK_EXTEND_SELECTION_MOD_MASK)
++        tree_view->priv->extend_selection_pressed = TRUE;
+     }
+   /* else we assume not pressed */
+ 
+@@ -8230,8 +8230,8 @@ gtk_tree_view_real_move_cursor (GtkTreeView       *tree_view,
+       g_assert_not_reached ();
+     }
+ 
+-  tree_view->priv->ctrl_pressed = FALSE;
+-  tree_view->priv->shift_pressed = FALSE;
++  tree_view->priv->modify_selection_pressed = FALSE;
++  tree_view->priv->extend_selection_pressed = FALSE;
+ 
+   return TRUE;
+ }
+@@ -9690,7 +9690,7 @@ gtk_tree_view_move_cursor_up_down (GtkTreeView *tree_view,
+ 
+   if (selection_count == 0
+       && tree_view->priv->selection->type != GTK_SELECTION_NONE
+-      && !tree_view->priv->ctrl_pressed
++      && !tree_view->priv->modify_selection_pressed
+       && selectable)
+     {
+       /* Don't move the cursor, but just select the current node */
+@@ -9759,7 +9759,7 @@ gtk_tree_view_move_cursor_up_down (GtkTreeView *tree_view,
+     {
+       gtk_tree_view_clamp_node_visible (tree_view, cursor_tree, cursor_node);
+ 
+-      if (!tree_view->priv->shift_pressed)
++      if (!tree_view->priv->extend_selection_pressed)
+         {
+           if (! gtk_widget_keynav_failed (GTK_WIDGET (tree_view),
+                                           count < 0 ?
+@@ -10111,7 +10111,7 @@ gtk_tree_view_real_select_cursor_row (GtkTreeView *tree_view,
+       return FALSE;
+     }
+ 
+-  if (!tree_view->priv->shift_pressed && start_editing &&
++  if (!tree_view->priv->extend_selection_pressed && start_editing &&
+       tree_view->priv->focus_column)
+     {
+       if (gtk_tree_view_start_editing (tree_view, cursor_path))
+@@ -10121,9 +10121,9 @@ gtk_tree_view_real_select_cursor_row (GtkTreeView *tree_view,
+ 	}
+     }
+ 
+-  if (tree_view->priv->ctrl_pressed)
++  if (tree_view->priv->modify_selection_pressed)
+     mode |= GTK_TREE_SELECT_MODE_TOGGLE;
+-  if (tree_view->priv->shift_pressed)
++  if (tree_view->priv->extend_selection_pressed)
+     mode |= GTK_TREE_SELECT_MODE_EXTEND;
+ 
+   _gtk_tree_selection_internal_select_node (tree_view->priv->selection,
+@@ -10147,7 +10147,7 @@ gtk_tree_view_real_select_cursor_row (GtkTreeView *tree_view,
+   gtk_widget_grab_focus (GTK_WIDGET (tree_view));
+   _gtk_tree_view_queue_draw_node (tree_view, cursor_tree, cursor_node, NULL);
+ 
+-  if (!tree_view->priv->shift_pressed)
++  if (!tree_view->priv->extend_selection_pressed)
+     gtk_tree_view_row_activated (tree_view, cursor_path,
+                                  tree_view->priv->focus_column);
+     
+@@ -10285,8 +10285,8 @@ gtk_tree_view_real_select_cursor_parent (GtkTreeView *tree_view)
+ 
+       if (gtk_get_current_event_state (&state))
+ 	{
+-	  if ((state & GDK_CONTROL_MASK) == GDK_CONTROL_MASK)
+-	    tree_view->priv->ctrl_pressed = TRUE;
++	  if ((state & GTK_MODIFY_SELECTION_MOD_MASK) == GTK_MODIFY_SELECTION_MOD_MASK)
++	    tree_view->priv->modify_selection_pressed = TRUE;
+ 	}
+ 
+       gtk_tree_view_real_set_cursor (tree_view, cursor_path, TRUE, FALSE);
+@@ -10296,7 +10296,7 @@ gtk_tree_view_real_select_cursor_parent (GtkTreeView *tree_view)
+       gtk_tree_view_queue_draw_path (tree_view, cursor_path, NULL);
+       gtk_tree_path_free (cursor_path);
+ 
+-      tree_view->priv->ctrl_pressed = FALSE;
++      tree_view->priv->modify_selection_pressed = FALSE;
+ 
+       return TRUE;
+     }
+@@ -12579,13 +12579,13 @@ gtk_tree_view_real_set_cursor (GtkTreeView     *tree_view,
+       GtkRBTree *new_tree = NULL;
+       GtkRBNode *new_node = NULL;
+ 
+-      if (clear_and_select && !tree_view->priv->ctrl_pressed)
++      if (clear_and_select && !tree_view->priv->modify_selection_pressed)
+         {
+           GtkTreeSelectMode mode = 0;
+ 
+-          if (tree_view->priv->ctrl_pressed)
++          if (tree_view->priv->modify_selection_pressed)
+             mode |= GTK_TREE_SELECT_MODE_TOGGLE;
+-          if (tree_view->priv->shift_pressed)
++          if (tree_view->priv->extend_selection_pressed)
+             mode |= GTK_TREE_SELECT_MODE_EXTEND;
+ 
+           _gtk_tree_selection_internal_select_node (tree_view->priv->selection,
+
+

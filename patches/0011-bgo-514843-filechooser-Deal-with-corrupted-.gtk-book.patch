@@ -1,0 +1,57 @@
+From 996c6b0cb4cfbc9cf98bafd32cbb4080452d4ffa Mon Sep 17 00:00:00 2001
+From: John Ralls <jralls@ceridwen.us>
+Date: Mon, 12 Sep 2011 14:25:45 -0500
+Subject: [PATCH 11/15] bgo#514843 - [filechooser] Deal with corrupted
+ .gtk-bookmarks gracefully
+
+We weren't checking for the lines in that file being valid UTF-8 strings.
+---
+ gtk/gtkfilesystem.c |   13 +++++++++----
+ 1 files changed, 9 insertions(+), 4 deletions(-)
+
+diff --git a/gtk/gtkfilesystem.c b/gtk/gtkfilesystem.c
+index 6e7be3c..f2897d2 100644
+--- a/gtk/gtkfilesystem.c
++++ b/gtk/gtkfilesystem.c
+@@ -272,6 +272,9 @@ read_bookmarks (GFile *file)
+       if (!*lines[i])
+ 	continue;
+ 
++      if (!g_utf8_validate (lines[i], -1, NULL))
++	continue;
++
+       bookmark = g_slice_new0 (GtkFileSystemBookmark);
+ 
+       if ((space = strchr (lines[i], ' ')) != NULL)
+@@ -297,23 +300,25 @@ save_bookmarks (GFile  *bookmarks_file,
+ {
+   GError *error = NULL;
+   GString *contents;
++  GSList *l;
+ 
+   contents = g_string_new ("");
+ 
+-  while (bookmarks)
++  for (l = bookmarks; l; l = l->next)
+     {
+-      GtkFileSystemBookmark *bookmark;
++      GtkFileSystemBookmark *bookmark = l->data;
+       gchar *uri;
+ 
+-      bookmark = bookmarks->data;
+       uri = g_file_get_uri (bookmark->file);
++      if (!uri)
++	continue;
++
+       g_string_append (contents, uri);
+ 
+       if (bookmark->label)
+ 	g_string_append_printf (contents, " %s", bookmark->label);
+ 
+       g_string_append_c (contents, '\n');
+-      bookmarks = bookmarks->next;
+       g_free (uri);
+     }
+ 
+
+
