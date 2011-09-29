@@ -1,15 +1,21 @@
 This repository is used to maintain the configurations and modulesets
 for building GTK+ OS X with jhbuild.
 
-NOTE: If you only want to build GTK+, just download gtk-osx-build-setup.sh and follow the instructions at:
+NOTE: If you only want to build GTK+, just download
+gtk-osx-build-setup.sh and follow the instructions at:
 
-http://apps.sourceforge.net/trac/gtk-osx/wiki/Build
+ http://live.gnome.org/GTK%2B/OSX/Build
 
-There are 3 modulesets. You can select the one which most suits you by adding the line 
-      moduleset="http://raw.github.com/jralls/gtk-osx-build/master/modulesets/gtk-osx.modules
+There are 3 modulesets. You can select the one which most suits you by
+adding the line
+      moduleset="http://git.gnome.org/browse/gtk-osx/plain/modulesets-stable/gtk-osx.modules"
+
+to your ~/.jhbuildrc-custom, replacing "modulesets-stable" (the default) with 
 
  * modulesets-stable: The default, all tarball-based released sources.
- * modulesets: Sources from VCS repositories when that's available, with stable release revisions set for each module.
- * modulesets-bleed: The bleeding edge modulesets, pulled from VCS repositories and no release revisions.
+ * modulesets: Sources from VCS repositories when that's available,
+   with stable release revisions set for each module.
+ * modulesets-unstable: The bleeding edge modulesets, pulled from VCS
+   repositories with no release revisions. 
 
 

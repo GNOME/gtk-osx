@@ -21,11 +21,11 @@
 # jhbuild build meta-gtk-osx-bootstrap
 # jhbuild build
 #
-# See http://live.gnome.org/GTK%2B/OSX for more information.
+# See http://live.gnome.org/GTK%2B/OSX/Build for more information.
 #
 
 SOURCE=$HOME/Source
-BASEURL="https://raw.github.com/jralls/gtk-osx-build/master"
+BASEURL="http://git.gnome.org/browse/gtk-osx/plain/"
 
 do_exit()
 {

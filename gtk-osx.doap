@@ -19,8 +19,8 @@
   <license rdf:resource="http://usefulinc.com/doap/licenses/gpl" />
   <bug-database rdf:resource="https://sourceforge.net/apps/trac/gtk-osx/newticket" />
   <download-page rdf:resource="https://sourceforge.net/projects/gtk-osx/files/" />
-  <mailing-list rdf:resource="https://lists.sourceforge.net/lists/listinfo/gtk-osx-users" />
-  <mailing-list rdf:resource="https://lists.sourceforge.net/lists/listinfo/gtk-osx-devs" />
+  <mailing-list rdf:resource="http://mail.gnome.org/mailman/listinfo/gtk-osx-users-list" />
+  <mailing-list rdf:resource="http://mail.gnome.org/mailman/listinfo/gtk-osx-devel-list" />
 
 
   <programming-language>Python</programming-language>
