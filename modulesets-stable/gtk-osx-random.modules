@@ -74,8 +74,8 @@ Libglade itself is deprecated. This is the last release. -->
   </autotools>
 
     <autotools id="vala" autogen-sh="configure">
-    <branch repo="ftp.gnome.org" module="vala/0.10/vala-0.10.3.tar.bz2"
-            version="0.10.3" hash="sha256:338b9869ad5c585b58540ffc9b576cbe44709864da2582c7ebc7a5d817004974"/>
+    <branch repo="ftp.gnome.org" module="vala/0.14/vala-0.14.0.tar.bz2"
+            version="0.14.0" hash="sha256:4cbca602e2e2a09803ae33fd7324219bc2c611db5a62a52e733e7d8806acb6f5"/>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
       <dep package="meta-gtk-osx-core"/>
@@ -97,10 +97,11 @@ Libglade itself is deprecated. This is the last release. -->
     </dependencies>
   </autotools>
 
+<!-- Glade 3.8 is the last stable series for Gtk+-2 -->
   <autotools id="glade3" autogen-sh="configure" 
 	     autogenargs="--disable-scrollkeeper">
-    <branch module="glade3/3.6/glade3-3.6.7.tar.bz2" version="3.6.7"
-            hash="sha256:117905d5b52781e0ffa861e38f47acda0e6bff992c5015408be74a7669769f81"/>
+    <branch module="glade3/3.8/glade3-3.8.0.tar.bz2" version="3.8.0"
+            hash="sha256:ad3f726ccd34d210dbec9cc2787cab91f7b4c4b9e7518c00bc72b6d52c9858bb"/>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
       <dep package="meta-gtk-osx-themes"/>
@@ -108,9 +109,33 @@ Libglade itself is deprecated. This is the last release. -->
     </after>
   </autotools>
 
+<!-- Glade 3.10 is the first stable series for Gtk+-3. Note the name
+     change back to just "glade"-->
+  <autotools id="glade" autogen-sh="configure" 
+	     autogenargs="--disable-scrollkeeper">
+    <branch module="glade/3.10/glade3-3.10.0.tar.bz2" version="3.10.0"
+            hash="sha256:7e6a1423f1697d8b40618d0b01f0ebff572ccb80f5818a36af0971c5d1d94253"/>
+    <after>
+      <dep package="meta-gtk-osx-bootstrap"/>
+      <dep package="meta-gtk-osx-themes"/>
+      <dep package="meta-gtk-osx-core"/>
+    </after>
+  </autotools>
+
+<!-- gtksourceview-2.10.5 is the last version that supports Gtk+-2 -->
   <autotools id="gtksourceview" autogen-sh="configure">
     <branch module="gtksourceview/2.10/gtksourceview-2.10.5.tar.bz2"
             version="2.10.5" hash="sha256:c585773743b1df8a04b1be7f7d90eecdf22681490d6810be54c81a7ae152191e"/>
+    <after>
+      <dep package="meta-gtk-osx-bootstrap"/>
+      <dep package="meta-gtk-osx-core"/>
+    </after>
+  </autotools>
+
+
+  <autotools id="gtksourceview3" autogen-sh="configure">
+    <branch module="gtksourceview/3.2/gtksourceview-3.2.0.tar.bz2"
+            version="3.2.0" hash="sha256:82b1028d69fcb24650ebc801454eb688dc3a01c6061c1d77d1cf665f048f050a"/>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
       <dep package="meta-gtk-osx-core"/>
@@ -142,8 +167,8 @@ Libglade itself is deprecated. This is the last release. -->
 	   --with-session-socket-dir=/var/tmp">
     <branch module="dbus/dbus-1.4.1.tar.gz"  version="1.4.1"
 	    repo="dbus.freedesktop.org">
-      <patch file="https://raw.github.com/jralls/gnucash-on-osx/master/patches/dbus-install.patch"/>
-      <patch file="https://raw.github.com/jralls/gtk-osx-build/master/patches/dbus-msg-nosignal.patch" strip="1"/>
+      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/dbus-install.patch"/>
+      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/dbus-msg-nosignal.patch" strip="1"/>
     </branch>
     <after>
       <dep package="gtk+"/>
@@ -168,7 +193,7 @@ Libglade itself is deprecated. This is the last release. -->
 	     autogenargs="--disable-defaults-service">
      <branch module="GConf/2.28/GConf-2.28.0.tar.bz2" version="2.28.0"
 	     hash="sha256:d057dcfe2bfb2a80e592349c2a78d7dce12d19542aeced466c64fb701c806ac8">
-      <patch file="https://raw.github.com/jralls/gtk-osx-build/master/patches/GConf-characters.patch" strip="1"/>
+      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/GConf-characters.patch" strip="1"/>
      </branch>
 <!-- GConf-2.32 uses gdbus, which doesn't work for OSX -->
 	   <!--branch module="GConf/2.32/GConf-2.32.1.tar.bz2" version="2.32.1"
@@ -180,8 +205,8 @@ Libglade itself is deprecated. This is the last release. -->
   </autotools>
 
   <autotools id="lcms" autogen-sh="configure">
-    <branch module="lcms/lcms-1.19.tar.gz" version="1.19" repo="sourceforge"
-            checkoutdir="lcms-1.19"/>
+    <branch module="lcms/lcms2-2.2.tar.gz" version="2.2" repo="sourceforge"
+            />
   </autotools>
 
   <autotools id="shared-mime-info"  autogen-sh="configure"
@@ -213,8 +238,8 @@ Libglade itself is deprecated. This is the last release. -->
   </autotools>
 
     <autotools id='readline' >
-    <branch repo="ftp.gnu.org" module="readline/readline-6.0.tar.gz"
-	    version="6.0"/>
+    <branch repo="ftp.gnu.org" module="readline/readline-6.2.tar.gz"
+	    version="6.2"/>
   </autotools>
 
 <autotools id="babl" >
@@ -232,7 +257,7 @@ Libglade itself is deprecated. This is the last release. -->
 
   <autotools id="poppler"  autogen-sh="configure"
            autogenargs="--disable-qt --disable-qt4 --without-x --disable-gtk-test --enable-xpdf-headers">
-    <branch module="poppler-0.16.2.tar.gz" version="0.16.2"
+    <branch module="poppler-0.16.7.tar.gz" version="0.16.7"
             repo="poppler.freedesktop.org"/>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
@@ -242,17 +267,26 @@ Libglade itself is deprecated. This is the last release. -->
 
 <!-- SQLite3 is provided by MacOSX in /usr/lib/libsqlite.3.dylib -->
   <autotools id="sqlite" autogenargs="--disable-tcl --enable-threadsafe" >
-    <branch module="sqlite-autoconf-3070500.tar.gz" version='3.7.5'
+    <branch module="sqlite-autoconf-3070800.tar.gz" version='3.7.8'
 	    repo="sqlite"/>
   </autotools>
 
   <autotools id="goocanvas">
-    <branch module="goocanvas/2.0/goocanvas-2.0.0.tar.bz2" version="2.0.0"/>
+    <branch module="goocanvas/1.0/goocanvas-1.0.0.tar.bz2" version="1.0.0"
+	    hash="sha256:1c072ef88567cad241fb4addee26e9bd96741b1503ff736d1c152fa6d865711e"/>
     <dependencies>
       <dep package="gtk+"/>
     </dependencies>
   </autotools>
 
+<!-- Goocanvas has numbering issues, because goocanvas-2 is for gtk+-3. -->
+  <autotools id="goocanvas2">
+    <branch module="goocanvas/2.0/goocanvas-2.0.0.tar.bz2" version="2.0.0"
+	    hash="9f8d7f700ad9617adef37e63f58cb2d038d799443e3756040f368ceea7f01331"/>
+    <dependencies>
+      <dep package="gtk+"/>
+    </dependencies>
+  </autotools>
 
 <!-- Libart_lgpl is deprecated by gnome. This is probably the last release. -->
   <autotools id="libart_lgpl">
@@ -265,7 +299,7 @@ Libglade itself is deprecated. This is the last release. -->
   </autotools>
 
   <autotools id="hunspell" autogen-sh="configure">
-    <branch module="hunspell/hunspell-1.2.14.tar.gz" version="1.2.14"
+    <branch module="hunspell/hunspell-1.3.2.tar.gz" version="1.3.2"
 	    repo="sourceforge"/>
   </autotools>
 
@@ -283,13 +317,21 @@ Libglade itself is deprecated. This is the last release. -->
   </autotools>
 
   <autotools id="gmp">
-    <!--branch repo="ftp.gnu.org" module="gmp/gmp-5.0.0.tar.bz2" version="5.0.0"/-->
-    <branch repo="ftp.gnu.org" module="gmp/gmp-4.3.1.tar.bz2" version="4.3.1"/>
+    <!--branch repo="ftp.gnu.org" module="gmp/gmp-5.0.2.tar.bz2" version="5.0.2"/-->
+    <branch repo="ftp.gnu.org" module="gmp/gmp-4.3.2.tar.bz2" version="4.3.2"/>
   </autotools>
 
   <autotools id="guile" autogen-sh="configure">
     <branch repo="ftp.gnu.org" module="guile/guile-1.8.8.tar.gz"
 	    version="1.8.8"/>
+    <dependencies>
+      <dep package="gmp"/>
+    </dependencies>
+  </autotools>
+
+  <autotools id="guile2" autogen-sh="configure">
+    <branch repo="ftp.gnu.org" module="guile/guile-2.0.2.tar.gz"
+	    version="2.0.2"/>
     <dependencies>
       <dep package="gmp"/>
     </dependencies>

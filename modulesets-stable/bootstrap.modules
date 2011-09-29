@@ -29,20 +29,18 @@
   </autotools>
 
   <autotools id='readline' >
-    <branch repo="ftp.gnu.org" module="readline/readline-6.0.tar.gz"
-	    version="6.0"/>
+    <branch repo="ftp.gnu.org" module="readline/readline-6.2.tar.gz"
+	    version="6.2"/>
   </autotools>
 
   <autotools id="m4" autogen-sh="configure">
     <branch repo="ftp.gnu.org"
-	    module="m4/m4-1.4.11.tar.bz2" version="1.4.11"
-	    size="928910" md5sum="96ec473c2a6f203976c028e896a01b28" />
+	    module="m4/m4-1.4.16.tar.bz2" version="1.4.16"/>
   </autotools>
 
   <autotools id="autoconf" autogen-sh="configure">
     <branch repo="ftp.gnu.org"
-            module="autoconf/autoconf-2.65.tar.bz2" version="2.65"
-            size="1332522" md5sum="a6de1cc6434cd64038b0a0ae4e252b33" />
+            module="autoconf/autoconf-2.68.tar.bz2" version="2.68"/>
     <dependencies>
       <dep package="m4"/>
     </dependencies>
@@ -50,10 +48,7 @@
 
   <autotools id="libtool" autogen-sh="configure">
     <branch repo="ftp.gnu.org"
-            module="libtool/libtool-2.2.6a.tar.gz" version="2.2.6a"
-            size="2870524" md5sum="8ca1ea241cd27ff9832e045fe9afe4fd"
-            checkoutdir="libtool-2.2.6">
-    </branch>
+            module="libtool/libtool-2.4.tar.gz" version="2.4"/>
   </autotools>
 
   <autotools id="automake-1.8" autogen-sh="configure">
@@ -77,14 +72,15 @@
 	    size="1066685" md5sum="c2972c4d9b3e29c03d5f2af86249876f" />
   </autotools>
 
+<!-- Pkg-config 0.26 and later requires glib, which requires
+     pkg-config, which, well, you get the idea. -->
   <autotools id="pkg-config" autogen-sh="configure">
     <branch repo="pkgconfig"
-            module="pkg-config-0.25.tar.gz" version="0.25"
-            size="988899" md5sum="a3270bab3f4b69b7dc6dbdacbcae9745" />
+            module="pkg-config-0.25.tar.gz" version="0.25"/>
   </autotools>
 
    <autotools id="libxml2" autogen-sh="configure">
-    <branch version="2.7.7" module="libxml2-2.7.7.tar.gz"
+    <branch version="2.7.8" module="libxml2-2.7.8.tar.gz"
 	    repo="xmlsoft.org"/>
   </autotools>
 

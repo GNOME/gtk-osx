@@ -10,9 +10,8 @@
               href="http://cairographics.org/releases/"/>
   <repository type="tarball" name="ftp.gnu.org"
               href="http://ftp.gnu.org/gnu/"/>
-  <repository type="tarball" name="github.com"
-              href="https://github.com/"/>
-
+  <repository type="tarball" name="sourceware.org"
+              href="ftp://sourceware.org/pub/"/>
   <!-- This module set works a bit differently than for example the
        GNOME ones do. It's split up in seperate pieces:
 
@@ -48,7 +47,7 @@
   <metamodule id="meta-gtk-osx-core">
     <dependencies>
       <dep package="gtk+"/>
-      <dep package="ige-mac-integration"/>
+      <dep package="gtk-mac-integration"/>
     </dependencies>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
@@ -56,8 +55,8 @@
   </metamodule>
 
   <autotools id="glib" autogen-sh="configure">
-    <branch module="glib/2.27/glib-2.27.3.tar.bz2"  version="2.27.3"
-            hash="sha256:c44177b635e88639361eb1daf7aaa33315a00aaf46db5accf2f11920c7ff1919"/>
+    <branch module="glib/2.28/glib-2.28.8.tar.bz2"  version="2.28.8"
+            hash="sha256:222f3055d6c413417b50901008c654865e5a311c73f0ae918b0a9978d1f9466f"/>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
       <dep package="gtk-doc"/>
@@ -65,15 +64,16 @@
   </autotools>
 
   <autotools id="libffi">
-    <branch module="atgreen/libffi/tarball/v3.0.9" repo="github.com"
-            version="3.0.9" checkoutdir="atgreen-libffi-873d687"/>
+    <branch module="libffi/libffi-3.0.10.tar.gz" repo="sourceware.org"
+            version="3.0.10" checkoutdir="atgreen-libffi-873d687"/>
   </autotools>
 
+<!-- This is the latest 0.10 version. Later versions are 1.29 and intended to work with glib 2.29; the minor version of gobject-introspection will track the minor version of glib that it's intended to work with. -->
   <autotools id="gobject-introspection">
-    <branch module="gobject-introspection/0.10/gobject-introspection-0.10.1.tar.bz2"
-            version="0.10.1"
-            hash="sha256:59033bcb428fd507f9b8399424e847ab24d5e1fe5d587f6915be9940fde69890">
-      <patch file="https://raw.github.com/jralls/gtk-osx-build/master/patches/girscanner-objc.patch" strip="1"/>
+    <branch module="gobject-introspection/0.10/gobject-introspection-0.10.8.tar.bz2"
+            version="0.10.8"
+            hash="sha256:5b1387ff37f03db880a2b1cbd6c6b6dfb923a29468d4d8367c458abf7704c61e">
+      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/girscanner-objc.patch" strip="1"/>
     </branch>
     <dependencies>
       <dep package="glib"/>
@@ -87,11 +87,11 @@
              autogenargs="--without-x --with-included-modules=basic-atsui"
              makeargs="-k -C modules; make">
     <!-- The last version that will build on Tiger is 1.24.5 -->
-    <branch version="1.28.3" module="pango/1.28/pango-1.28.3.tar.bz2"
-            hash="sha256:5e278bc9430cc7bb00270f183360d262c5006b51248e8b537ea904573f200632">
+    <branch version="1.28.4" module="pango/1.28/pango-1.28.4.tar.bz2"
+            hash="sha256:7eb035bcc10dd01569a214d5e2bc3437de95d9ac1cfa9f50035a687c45f05a9f">
 <!--    <branch version="1.24.5" module="pango/1.24/pango-1.24.5.tar.bz2"
             hash="sha256:0f733d1ec3e8dafcae152d7ac58f1090bee1fd856176c8fee0e81b0e42392f4e">-->
-  <patch file="https://raw.github.com/jralls/gtk-osx-build/master/patches/pangoatsui-fontname.patch" strip="1"/>
+  <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/pangoatsui-fontname.patch" strip="1"/>
     </branch>
     <dependencies>
       <dep package="glib"/>
@@ -106,8 +106,19 @@
   </autotools>
 
  <autotools id="atk" autogen-sh="configure">
-    <branch module="atk/1.32/atk-1.32.0.tar.bz2" version="1.32.0"
-            hash="sha256:e9a3e598f75c4db1af914f8b052dd9f7e89e920a96cc187c18eb06b8339cb16e"/>
+    <branch module="atk/1.33/atk-1.33.6.tar.bz2" version="1.33.6"
+            hash="sha256:e61c9a7bb2605a6ba698285f5593590c90818592f3d122101b9d42697fd2b0b6"/>
+    <dependencies>
+      <dep package="glib"/>
+    </dependencies>
+    <after>
+      <dep package="meta-gtk-osx-bootstrap"/>
+    </after>
+  </autotools>
+
+ <autotools id="atk2" autogen-sh="configure">
+    <branch module="atk/2.0/atk-2.0.1.tar.bz2" version="2.0.1"
+            hash="sha256:3d81c7d70fc66e5b129567a7706b6f8ff5db18281a818b29d4dd5bcefa3d4a17"/>
     <dependencies>
       <dep package="glib"/>
     </dependencies>
@@ -127,21 +138,39 @@
   <autotools id="gtk+" autogen-sh="configure"
              autogenargs="--with-gdktarget=quartz"
              autogen-template="autoreconf -fis &amp;&amp; %(srcdir)s/%(autogen-sh)s --prefix %(prefix)s --libdir %(libdir)s %(autogenargs)s">
-    <branch module="gtk+/2.24/gtk+-2.24.0.tar.bz2" version="2.24.0"
-            hash="sha256:cbed1a7b8cd1e471388a00f22557dd061334698a0c1aece11b7ed6541d115606">
-      <patch file="https://raw.github.com/jralls/gtk-osx-build/master/patches/gtkselection.patch" strip="1"/>
-      <patch file="https://raw.github.com/jralls/gtk-osx-build/master/patches/gtk-introspection.patch" strip="1"/>
-      <patch file="https://raw.github.com/jralls/gtk-osx-build/master/patches/gtk-keyhash.patch" strip="1"/>
-      <patch file="https://raw.github.com/jralls/gtk-osx-build/master/patches/gtk-relocation.patch" strip="1"/>
-      <patch file="https://raw.github.com/jralls/gtk-osx-build/master/patches/gdk-deadkeys.patch" strip="1"/>
-      <patch file="https://raw.github.com/jralls/gtk-osx-build/master/patches/gdkeventloop.patch" strip="1"/>
-      <patch file="https://raw.github.com/jralls/gtk-osx-build/master/patches/gtkdndmemory.patch" strip="1"/>
-      <patch file="https://raw.github.com/jralls/gtk-osx-build/master/patches/gtkselection_deref.patch" strip="1"/>
-      <patch file="https://raw.github.com/jralls/gtk-osx-build/master/patches/gtk-borderless.patch" strip="1"/>
-      <patch file="https://raw.github.com/jralls/gtk-osx-build/master/patches/gtk2-lion-resize.patch" strip="1"/>
-      <patch file="https://raw.github.com/jralls/gtk-osx-build/master/patches/gdk-quartz-version.patch" strip="1"/>
-      <patch file="https://raw.github.com/jralls/gtk-osx-build/master/patches/gdk-quartz-norects.patch" strip="1"/>
+    <branch module="gtk+/2.24/gtk+-2.24.6.tar.bz2" version="2.24.6"
+            hash="sha256:6f45bdbf9ea27eb3b5f977d7ee2365dede0d0ce454985680c26e5210163bbf37">
+      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0001-Backport-acf1345-Fix-refresh-of-static-autorelease_p.patch" strip="1"/>
+      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0002-Bug-628396-Gtk-build-fails-because-of-objective-c-el.patch" strip="1"/>
+      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0003-Bug-658772-Implement-relocatable-paths-for-quartz-si.patch" strip="1"/>
+      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0004-Bug-571582-GtkSelection-implementation-for-quartz.patch" strip="1"/>
+      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0005-Bug-657770-Write-to-released-memory-in-gtkdnd-quartz.patch" strip="1"/>
+      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0006-Bug-658722-Drag-and-Drop-sometimes-stops-working.patch" strip="1"/>
+      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0007-Bug-658767-Drag-and-Drop-NSEvent-capture-is-racy.patch" strip="1"/>
+      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0008-Implement-GtkDragSourceOwner-pasteboardChangedOwner.patch" strip="1"/>
+      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0009-Implement-recent-items-in-Filechooser.patch" strip="1"/>
+      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0010-Bug-617583-Dead-accents-keys-don-t-work-in-GTK-appli.patch" strip="1"/>
+      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0011-bgo-514843-filechooser-Deal-with-corrupted-.gtk-book.patch" strip="1"/>
+      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0012-Bug-605799-Option-MOD1-and-Command-SUPER-modifiers-a.patch" strip="1"/>
+      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0013-Bug-659406-Abstract-what-triggers-a-context-menu.patch" strip="1"/>
+      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0014-Bug-659907-gdk_quartz_draw_opaque_stippled_pattern-c.patch" strip="1"/>
+      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0015-Bug-653450-gtkfilechooser-crashes-when-adding-favori.patch" strip="1"/>
+    </branch>
+    <dependencies>
+      <dep package="pango"/>
+      <dep package="atk"/>
+      <dep package="gdk-pixbuf"/>
+    </dependencies>
+    <after>
+      <dep package="meta-gtk-osx-bootstrap"/>
+    </after>
+  </autotools>
 
+  <autotools id="gtk+-3" autogen-sh="configure"
+             autogenargs="--with-gdktarget=quartz"
+             autogen-template="autoreconf -fis &amp;&amp; %(srcdir)s/%(autogen-sh)s --prefix %(prefix)s --libdir %(libdir)s %(autogenargs)s">
+    <branch module="gtk+/3.2/gtk+-3.2.0.tar.bz2" version="3.2.0"
+            hash="sha256:b285074ffefb4ff4364f6dd50fe68c7e85b11293e0c1dd3bdeac56052344dadb">
     </branch>
     <dependencies>
       <dep package="pango"/>
@@ -154,8 +183,9 @@
   </autotools>
 
   <autotools id="pixman" autogenargs="--disable-gtk" autogen-sh="configure">
-    <branch version="0.20.2" module="pixman-0.20.2.tar.gz"
-            repo="cairographics"/>
+    <branch version="0.22.2" module="pixman-0.22.2.tar.gz"
+            repo="cairographics"
+            hash="sha1:b42a7aec5119b1e5ce8eed06452645fa3a4892ac"/>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
     </after>
@@ -164,7 +194,8 @@
   <autotools id="cairo"  autogen-sh="configure"
              autogenargs="--enable-pdf --enable-quartz --enable-xlib=no --without-x">
     <branch module="cairo-1.10.2.tar.gz"  version="1.10.2"
-            repo="cairographics"/>
+            repo="cairographics"
+            hash="sha1:ccce5ae03f99c505db97c286a0c9a90a926d3c6e"/>
     <dependencies>
       <dep package="pixman"/>
     </dependencies>
@@ -175,11 +206,11 @@
     </after>
   </autotools>
 
-  <autotools id="ige-mac-integration" autogen-sh="configure"
+  <autotools id="gtk-mac-integration" autogen-sh="configure"
              autogenargs="--disable-python">
-    <branch repo="sourceforge"
-	    module="gtk-osx/ige-mac-integration-0.9.8.tar.bz2"
-            version="0.9.8">
+    <branch module="gtk-mac-integration/1.0/gtk-mac-integration-1.0.0.tar.bz2"
+            version="1.0.0"
+            hash="sha256:6bd3137b3f2e034e769343329dabbdbe1184f272e270613019a82035e5905feb">
     </branch>
     <dependencies>
       <dep package="gtk+"/>

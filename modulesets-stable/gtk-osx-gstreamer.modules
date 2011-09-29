@@ -2,8 +2,8 @@
 <!DOCTYPE moduleset SYSTEM "moduleset.dtd">
 <?xml-stylesheet type="text/xsl" href="moduleset.xsl"?>
 <moduleset>
-  <repository type="tarball" name="gstreamer" default="yes"
-              href="http://gstreamer.freedesktop.org/src/"/>
+  <repository type="tarball" name="ftp.gnome.org" default="yes"
+              href="http://ftp.gnome.org/pub/GNOME/sources/"/>
   <repository type="tarball" name="liboil"
               href="http://liboil.freedesktop.org/download/"/>
   <repository type="tarball" name="sourceforge" 
@@ -22,17 +22,18 @@
 
   <autotools id="gstreamer" autogenargs="-- --disable-tests" supports-non-srcdir-builds="no"
     makeargs="ERROR_CFLAGS=" autogen-sh="configure">
-    <branch module="gstreamer/gstreamer-0.10.32.tar.bz2" version="0.10.32"
-            hash="sha256:3bf4e46a186ee9a1f5e212aaf651d67cffb4f5f05345a7c99ae71d5d992be133"/>
+    <branch module="gstreamer/0.10/gstreamer-0.10.35.tar.bz2" version="0.10.35"
+            hash="sha256:817bfea2cd46e2487b97e2ed9218f0299b32a3de1e5e80b4c7868d17e9089786">
+    </branch>
     <after>
       <dep package="glib"/>
     </after>
   </autotools>
-
+<!-- This doesn't build: see https://bugzilla.gnome.org/show_bug.cgi?id=660302-->
   <autotools id="gst-plugins-base" autogenargs="-- --disable-tests --disable-x --disable-xvideo" supports-non-srcdir-builds="no"
     makeargs="ERROR_CFLAGS=" autogen-sh="configure">
-    <branch module="gst-plugins-base/gst-plugins-base-0.10.32.tar.bz2"
-            version="0.10.32" hash="sha256:e9aabfac83f6480896da0686e9c911989f896fbad634821b7771ed84a446172b"/>
+    <branch module="gst-plugins-base/0.10/gst-plugins-base-0.10.35.tar.bz2"
+            version="0.10.15" hash="256:cd24f01bb5258a1f400bc4f2c212bb7cee9ee23c9ffb80d537a24ef366d17103"/>
     <dependencies>
       <dep package="gstreamer"/>
       <!--dep package="gtk+"/-->
@@ -45,8 +46,8 @@
 
   <autotools id="gst-plugins-good" autogenargs="-- --disable-tests --disable-x --disable-xvideo --disable-osx-video" supports-non-srcdir-builds="no"
     makeargs="ERROR_CFLAGS=" autogen-sh="configure">
-    <branch module="gst-plugins-good/gst-plugins-good-0.10.27.tar.bz2"
-            version="0.10.27" hash="sha256:a9d801c3d42b456a6ebc0b95f68c44f153f756ec0fbd4877197c469cc67771fa:"/>
+    <branch module="gst-plugins-good/0.10/gst-plugins-good-0.10.30.tar.bz2"
+            version="0.10.30" hash="sha256:b12cba90b27d8423cd0a808939098d19db3996cfb9bf528507c6321782e095f6"/>
     <dependencies>
       <dep package="gstreamer"/>
       <dep package="gst-plugins-base"/>
@@ -57,8 +58,9 @@
       removed from gnome sources. -->
 
 
-  <metamodule id="meta-gstreamer">
+  <metamodule id="meta-gtk-osx-gstreamer">
     <dependencies>
+      <dep package="meta-gtk-osx-core"/>
       <dep package="liboil"/>
       <dep package="gstreamer"/>
       <dep package="gst-plugins-base"/>

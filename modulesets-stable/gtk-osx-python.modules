@@ -21,7 +21,7 @@
       <dep package="pycairo-python2.6"/>
       <dep package="pygobject"/>
       <dep package="pygtk"/>
-      <dep package="ige-mac-integration-python"/>
+      <dep package="gtk-mac-integration-python"/>
     </dependencies>
   </metamodule>
 
@@ -61,7 +61,8 @@
 <!-- Pycairo 1.8.10 (and later, presumably) requires Python3. -->
   <autotools id="pycairo-python2.6" autogen-sh="configure">
     <branch module="pycairo-1.8.8.tar.gz" repo="cairographics.org"
-            version="1.8.8" md5sum="054da6c125cb427a003f5fd6c54f853e"/>
+            version="1.8.8"
+	    hash="md5:054da6c125cb427a003f5fd6c54f853e"/>
     <dependencies>
       <dep package="cairo"/>
     </dependencies>
@@ -73,8 +74,8 @@
 
   <autotools id="pygobject" autogen-sh="configure"
 	     autogenargs="--disable-introspection">
-    <branch version="2.27.0" module="pygobject/2.27/pygobject-2.27.0.tar.bz2"
-            hash="sha256:7594bd86c5b92a4ba1f26927800f1b29e1ec5c246cad67aa085c279d6425b8a2"/>
+    <branch version="2.28.6" module="pygobject/2.28/pygobject-2.28.6.tar.bz2"
+            hash="sha256:e4bfe017fa845940184c82a4d8949db3414cb29dfc84815fb763697dc85bdcee"/>
     <dependencies>
       <dep package="meta-gtk-osx-core"/>
     </dependencies>
@@ -83,12 +84,10 @@
     </after>
   </autotools>
 
-<!-- The patch addresses bug 640738. -->
   <autotools id="pygtk" autogen-sh="configure" 
-	     autogenargs="--disable-introspection">
-    <branch version="2.22.0" module="pygtk/2.22/pygtk-2.22.0.tar.bz2"
-            hash="sha256:4acf0ef2bde8574913c40ee4a43d9c4f43bb77b577b67147271b534501a54cc8">
-      <patch file="https://raw.github.com/jralls/gtk-osx-build/master/patches/pygtk-signal-watch.patch" strip="1"/>
+	     autogenargs="CFLAGS=&quot;$CFLAGS -xobjectivec&quot; lt_cv_sys_global_symbol_pipe=&quot;'sed -n -e '\''s/^.*[ ]\([BCDEGRST][BCDEGRST]*\)[ ][ ]*_\([_A-Za-z][_A-Za-z0-9]*\)$/\1 _\2 \2/p'\'' | sed '\''/ __gnu_lto/d'\'''&quot;">
+    <branch version="2.4.0" module="pygtk/2.24/pygtk-2.24.0.tar.bz2"
+            hash="sha256:cd1c1ea265bd63ff669e92a2d3c2a88eb26bcd9e5363e0f82c896e649f206912">
     </branch>
     <dependencies>
       <dep package="pygobject"/>
@@ -100,11 +99,11 @@
     </after>
   </autotools>
 
-  <autotools id="ige-mac-integration-python" autogen-sh="configure"
+  <autotools id="gtk-mac-integration-python" autogen-sh="configure"
              autogenargs="--enable-python">
-    <branch repo="sourceforge"
-	    module="gtk-osx/ige-mac-integration-0.9.8.tar.bz2"
-            version="0.9.8" />
+    <branch module="gtk-mac-integration/1.0/gtk-mac-integration-1.0.0.tar.bz2"
+            version="1.0.0"
+	    hash="sha256:6bd3137b3f2e034e769343329dabbdbe1184f272e270613019a82035e5905feb"/>
     <dependencies>
       <dep package="pygtk"/>
     </dependencies>
