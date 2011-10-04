@@ -103,7 +103,7 @@
              autogenargs="--enable-python">
     <branch module="gtk-mac-integration/1.0/gtk-mac-integration-1.0.1.tar.bz2"
             version="1.0.1"
-	    hash="sha256:6bd3137b3f2e034e769343329dabbdbe1184f272e270613019a82035e5905feb"/>
+	    hash="sha256:417773d32be5304839f6f917a6ce4637d9a642829105ce8f9527f663830b8089"/>
     <dependencies>
       <dep package="pygtk"/>
     </dependencies>
