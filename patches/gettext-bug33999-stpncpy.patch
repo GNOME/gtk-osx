@@ -1,35 +1,7 @@
-From c5728261c324a75f8d23dd7d10cb42dde9420227 Mon Sep 17 00:00:00 2001
-From: Bruno Haible <bruno@clisp.org>
-Date: Mon, 16 Aug 2010 02:09:11 +0200
-Subject: [PATCH] stpncpy: Allow stpncpy to be defined as a macro.
 
----
- ChangeLog       |    8 ++++++++
- lib/string.in.h |    1 +
- m4/stpncpy.m4   |    5 ++++-
- 3 files changed, 13 insertions(+), 1 deletions(-)
-
-diff --git a/ChangeLog b/ChangeLog
-index d86bbc3..86de94d 100644
---- a/ChangeLog
-+++ b/ChangeLog
-@@ -1,3 +1,11 @@
-+2010-08-15  Bruno Haible  <bruno@clisp.org>
-+
-+	stpncpy: Allow stpncpy to be defined as a macro.
-+	* m4/stpncpy.m4 (gl_FUNC_STPNCPY): Don't attempt to redeclare stpncpy
-+	if it's already correctly declared.
-+	* lib/string.in.h (stpncpy): Undefine before redefining.
-+	Reported by Jeremy Huddleston <jeremyhu@macports.org>.
-+
- 2010-08-14  Bruno Haible  <bruno@clisp.org>
- 
- 	Rename module 'memxfrm' to 'amemxfrm'.
-diff --git a/lib/string.in.h b/lib/string.in.h
-index fb73770..bb6aa58 100644
---- a/lib/string.in.h
-+++ b/lib/string.in.h
-@@ -233,6 +233,7 @@ _GL_WARN_ON_USE (stpcpy, "stpcpy is unportable - "
+--- a/gettext-tools/libgettextpo/string.in.h	Sun Apr 25 02:22:40 2010
++++ b/gettext-tools/libgettextpo/string.in.h	Tue Oct  4 14:36:31 2011
+@@ -229,6 +229,7 @@
  #if @GNULIB_STPNCPY@
  # if @REPLACE_STPNCPY@
  #  if !(defined __cplusplus && defined GNULIB_NAMESPACE)
@@ -37,25 +9,49 @@ index fb73770..bb6aa58 100644
  #   define stpncpy rpl_stpncpy
  #  endif
  _GL_FUNCDECL_RPL (stpncpy, char *,
-diff --git a/m4/stpncpy.m4 b/m4/stpncpy.m4
-index d2344ac..158cc08 100644
---- a/m4/stpncpy.m4
-+++ b/m4/stpncpy.m4
-@@ -1,4 +1,4 @@
--# stpncpy.m4 serial 11
-+# stpncpy.m4 serial 12
- dnl Copyright (C) 2002-2003, 2005-2007, 2009-2010 Free Software Foundation,
- dnl Inc.
- dnl This file is free software; the Free Software Foundation
-@@ -25,6 +25,7 @@ AC_DEFUN([gl_FUNC_STPNCPY],
-   dnl   in AIX:     dest + max(0,n-1)
-   dnl Only the glibc return value is useful in practice.
  
-+  AC_CHECK_DECLS_ONCE([stpncpy])
-   AC_CHECK_FUNCS_ONCE([stpncpy])
-   if test $ac_cv_func_stpncpy = yes; then
-     AC_CACHE_CHECK([for working stpncpy], [gl_cv_func_stpncpy], [
-@@ -32,7 +33,9 @@ AC_DEFUN([gl_FUNC_STPNCPY],
+ 	Rename module 'memxfrm' to 'amemxfrm'.
+--- a/gettext-tools/gnulib-lib/string.in.h	Mon May 24 02:42:47 2010
++++ b/gettext-tools/gnulib-lib/string.in.h	Tue Oct  4 14:35:46 2011
+@@ -229,6 +229,7 @@
+ #if @GNULIB_STPNCPY@
+ # if @REPLACE_STPNCPY@
+ #  if !(defined __cplusplus && defined GNULIB_NAMESPACE)
++#   undef stpncpy
+ #   define stpncpy rpl_stpncpy
+ #  endif
+ _GL_FUNCDECL_RPL (stpncpy, char *,
+
+--- a/gettext-runtime/gnulib-lib/string.in.h	Sun Apr 25 02:20:42 2010
++++ b/gettext-runtime/gnulib-lib/string.in.h	Tue Oct  4 14:34:57 2011
+@@ -229,6 +229,7 @@
+ #if @GNULIB_STPNCPY@
+ # if @REPLACE_STPNCPY@
+ #  if !(defined __cplusplus && defined GNULIB_NAMESPACE)
++#   undef stpncpy
+ #   define stpncpy rpl_stpncpy
+ #  endif
+ _GL_FUNCDECL_RPL (stpncpy, char *,
+--- a/gettext-tools/configure	Sun Jun  6 13:12:20 2010
++++ b/gettext-tools/configure	Tue Oct  4 16:29:27 2011
+@@ -40562,6 +40562,16 @@
+ 
+ 
+ 
++      ac_fn_c_check_decl "$LINENO" "stpncpy" "ac_cv_have_decl_stpncpy" "$ac_includes_default"
++if test "x$ac_cv_have_decl_stpncpy" = x""yes; then :
++  ac_have_decl=1
++else
++  ac_have_decl=0
++fi
++
++cat >>confdefs.h <<_ACEOF
++#define HAVE_DECL_STPNCPY $ac_have_decl
++_ACEOF
+ 
+ 
+ 
+@@ -40606,7 +40616,9 @@
  #include <stdlib.h>
  #include <string.h> /* for strcpy */
  /* The stpncpy prototype is missing in <string.h> on AIX 4.  */
@@ -65,6 +61,3 @@ index d2344ac..158cc08 100644
  int main () {
    const char *src = "Hello";
    char dest[10];
--- 
-1.7.2.5
-
