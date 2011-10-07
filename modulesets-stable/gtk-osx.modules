@@ -155,6 +155,7 @@
       <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0013-Bug-659406-Abstract-what-triggers-a-context-menu.patch" strip="1"/>
       <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0014-Bug-659907-gdk_quartz_draw_opaque_stippled_pattern-c.patch" strip="1"/>
       <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0015-Bug-653450-gtkfilechooser-crashes-when-adding-favori.patch" strip="1"/>
+      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/gtk+-Bug-655065-autotestkeywords-ldadd.patch" strip="1"/>
     </branch>
     <dependencies>
       <dep package="pango"/>
