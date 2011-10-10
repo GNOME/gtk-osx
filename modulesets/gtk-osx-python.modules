@@ -5,7 +5,6 @@
 
   <repository type="git" name="git.gnome.org" default="yes" 
               href="git://git.gnome.org/"/>
-  <repository type="git" name="github" href="git://github.com/"/>
   <repository type="cvs" name="cairographics-cvs" 
               cvsroot=":pserver:anoncvs@anoncvs.freedesktop.org:/cvs/cairo"
               password=""/>
@@ -90,9 +89,8 @@
     </after>
   </autotools>
 
-  <autotools id="ige-mac-integration-python">
-    <branch repo="github" tag="ige-mac-integration-0.9.8"
-	    module="jralls/ige-mac-integration" />
+  <autotools id="gtk-mac-integration-python">
+    <branch tag="gtk-mac-integration-1.0.1" />
     <dependencies>
       <dep package="gtk+"/>
     </dependencies>

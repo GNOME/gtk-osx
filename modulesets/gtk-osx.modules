@@ -43,7 +43,7 @@
   <metamodule id="meta-gtk-osx-core">
     <dependencies>
       <dep package="gtk+"/>
-      <dep package="ige-mac-integration"/>
+      <dep package="gtk-mac-integration"/>
     </dependencies>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
@@ -147,10 +147,8 @@
     </after>
   </autotools>
 
-  <autotools id="ige-mac-integration" autogenargs="--disable-python">
-    <branch repo="github"
-	    module="jralls/ige-mac-integration"
-            tag="ige-mac-integration-0.9.8" />
+  <autotools id="gtk-mac-integration" autogenargs="--disable-python">
+    <branch tag="gtk-mac-integration-1.0.1" />
     <dependencies>
       <dep package="gtk+"/>
     </dependencies>
