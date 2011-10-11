@@ -168,8 +168,7 @@
   </autotools>
 
   <autotools id="gtk+-3" autogen-sh="configure"
-             autogenargs="--with-gdktarget=quartz"
-             autogen-template="autoreconf -fis &amp;&amp; %(srcdir)s/%(autogen-sh)s --prefix %(prefix)s --libdir %(libdir)s %(autogenargs)s">
+             autogenargs="--enable-quartz-backend --disable-colord">
     <branch module="gtk+/3.2/gtk+-3.2.0.tar.bz2" version="3.2.0"
             hash="sha256:b285074ffefb4ff4364f6dd50fe68c7e85b11293e0c1dd3bdeac56052344dadb">
     </branch>
