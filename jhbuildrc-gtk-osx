@@ -230,15 +230,12 @@ def setup_sdk(target, sdk_version, architectures=[_default_arch]):
         os.environ["VERSIONER_PYTHON_PREFER_32_BIT"] = "yes"
 
     #SDK 10.4 doesn't support gcc4.2.
-    if  _osx_version.startswith("10.") and sdk_version.startswith("10.4"):
+    if  _osx_version.startswith("8."):
         os.environ["CC"] = "/usr/bin/gcc-4.0"
         os.environ["CXX"] = "/usr/bin/g++-4.0"
-        append_autogenargs("gnutls", "--disable-guile")
     else:
         os.environ["CC"] = "/usr/bin/gcc-4.2"
         os.environ["CXX"] = "/usr/bin/g++-4.2"
-        append_autogenargs("gnutls", "--disable-guile")
-
 
     # Set the -arch flags for everything we're building.
     #
@@ -285,6 +282,7 @@ def setup_sdk(target, sdk_version, architectures=[_default_arch]):
                   or _osx_version.startswith("11")))):
         append_autogenargs("glib", "ac_cv_compliant_posix_memalign=no")
 
+    append_autogenargs("gnutls", "--disable-guile")
 
     return sdkdir
 # This is a convenience function for older .jhbuildrc-customs.
