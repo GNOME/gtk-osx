@@ -127,6 +127,9 @@
 
   <cmake id='libproxy'  cmakeargs="-DWITH_PYTHON=OFF">
     <branch repo='libproxy.google.com' module="trunk" />
+    <dependencies>
+      <dep package="cmake"/>
+    </dependencies>
   </cmake>
 
 <!-- GNET is deprecated in favor of Glib/Gio. Don't build this unless you have to -->
