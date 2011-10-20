@@ -125,7 +125,7 @@
     </dependencies>
   </autotools>
 
-  <cmake id='libproxy'>
+  <cmake id='libproxy'  cmakeargs="-DWITH_PYTHON=OFF">
     <branch repo='libproxy.google.com' module="trunk" />
   </cmake>
 

@@ -63,11 +63,13 @@
   </autotools>
 
 <!-- Libsoup doesn't work with newer versions of libproxy -->
-  <autotools id='libproxy'
-	     autogen-template="%(srcdir)s/%(autogen-sh)s &amp;&amp; %(srcdir)s/configure --prefix %(prefix)s --libdir %(libdir)s %(autogenargs)s">
-    <branch repo='libproxy.google.com'
-            tag="libproxy-0.3.1" />
-  </autotools>
+  <cmake id='libproxy' cmakeargs="-DWITH_PYTHON=OFF">
+    <branch version='0.4.7' module='libproxy-0.4.7.tar.gz'
+            repo='libproxy.google.com'/>
+    <dependencies>
+      <dep package="cmake"/>
+    </dependencies>
+  </cmake>
 
   <autotools id="gnome-keyring">
     <branch revision="gnome-2-32"/>

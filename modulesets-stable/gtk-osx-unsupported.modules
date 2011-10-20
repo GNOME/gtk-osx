@@ -64,9 +64,12 @@
   </autotools>
 
 <!-- Libsoup doesn't work with newer versions of libproxy -->
-  <cmake id='libproxy'>
+  <cmake id='libproxy' cmakeargs="-DWITH_PYTHON=OFF">
     <branch version='0.4.7' module='libproxy-0.4.7.tar.gz'
             repo='libproxy.google.com'/>
+    <dependencies>
+      <dep package="cmake"/>
+    </dependencies>
   </cmake>
 
   <autotools id="gnome-keyring" autogenargs="--disable-pam">
