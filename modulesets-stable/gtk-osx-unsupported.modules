@@ -66,7 +66,9 @@
 <!-- Libsoup doesn't work with newer versions of libproxy -->
   <cmake id='libproxy' cmakeargs="-DWITH_PYTHON=OFF">
     <branch version='0.4.7' module='libproxy-0.4.7.tar.gz'
-            repo='libproxy.google.com'/>
+            repo='libproxy.google.com'>
+      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/libproxy-Bug-052-POSIX_C_SOURCE.patch" strip="1"/>
+    </branch>
     <dependencies>
       <dep package="cmake"/>
     </dependencies>
