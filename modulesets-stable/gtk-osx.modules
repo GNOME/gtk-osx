@@ -76,9 +76,12 @@
   <autotools id="glib-gtk3" autogen-sh="configure">
     <branch module="glib/2.30/glib-2.30.1.tar.bz2"  version="2.30.1"
             hash="sha256:4e560319450f31d85b6cdb2b530c3324a510ca04817e360943d0774327d21804"/>
+    <dependencies>
+      <dep package="libffi"/>
+      <dep package="gtk-doc"/>
+    </dependencies>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
-      <dep package="gtk-doc"/>
     </after>
   </autotools>
 
@@ -106,12 +109,11 @@
             version="1.30.0"
             hash="sha256:72f5b8886d23d4bfff1f9824df00831b48b7ebb98d35a50a8f322cb7ff037d12">
       <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/girscanner-objc.patch" strip="1"/>
-      <patch file="http://git.gnome.org/browse/gtk-osx/plain/0001-scanner-split-CC-environment-variable.patch" strip="1"/>
+      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0001-scanner-split-CC-environment-variable.patch" strip="1"/>
     </branch>
     <dependencies>
       <dep package="glib-gtk3"/>
       <dep package="cairo"/>
-     <dep package="libffi"/>
     </dependencies>
   </autotools>
 
@@ -218,12 +220,12 @@
              autogenargs="--enable-quartz-backend">
     <branch module="gtk+/3.2/gtk+-3.2.0.tar.bz2" version="3.2.0"
             hash="sha256:b285074ffefb4ff4364f6dd50fe68c7e85b11293e0c1dd3bdeac56052344dadb">
-      <patch file="http://git.gnome.org/browse/gtk-osx/plain/0001-Bug-628936-Minimal-change-to-pass-introspection.patch" strip="1"/>
-      <patch file="http://git.gnome.org/browse/gtk-osx/plain/0001-Bug-658772-Directory-paths-for-resource-directories-.patch" strip="1"/>
-      <patch file="http://git.gnome.org/browse/gtk-osx/plain/0002-Quartz-Bug-655057-Eliminate-Compiler-Warning.patch" strip="1"/>
-      <patch file="http://git.gnome.org/browse/gtk-osx/plain/0003-Bug-657770-Write-to-released-memory-in-gtkdnd-quartz.patch" strip="1"/>
-      <patch file="http://git.gnome.org/browse/gtk-osx/plain/0004-Bug-658767-Drag-and-Drop-NSEvent-capture-is-racy.patch" strip="1"/>
-      <patch file="http://git.gnome.org/browse/gtk-osx/plain/0001-Bug-571582-GtkSelection-implementation-for-quartz.patch" strip="1"/>
+      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0001-Bug-628936-Minimal-change-to-pass-introspection.patch" strip="1"/>
+      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0001-Bug-658772-Directory-paths-for-resource-directories-.patch" strip="1"/>
+      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0002-Quartz-Bug-655057-Eliminate-Compiler-Warning.patch" strip="1"/>
+      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0003-Bug-657770-Write-to-released-memory-in-gtkdnd-quartz.patch" strip="1"/>
+      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0004-Bug-658767-Drag-and-Drop-NSEvent-capture-is-racy.patch" strip="1"/>
+      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0001-Bug-571582-GtkSelection-implementation-for-quartz.patch" strip="1"/>
     </branch>
     <dependencies>
       <dep package="glib-gtk3"/>
