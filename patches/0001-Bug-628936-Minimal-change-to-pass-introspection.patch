@@ -1,0 +1,52 @@
+From a628761838ff382c5955209a64256469d5b1c1c3 Mon Sep 17 00:00:00 2001
+From: John Ralls <jralls@ceridwen.us>
+Date: Sun, 21 Nov 2010 13:06:57 -0800
+Subject: [PATCH] Bug 628936: Minimal change to pass introspection.
+
+gobject_introspection's G-ir-scanner doesn't like the -xobjective-c
+option needed to compile ObjectiveC features in quartz implementations
+of certain gtk functions. This rearranges the compiler flag environment
+variables in Makefile so that G-ir-scanner doesn't see them.
+---
+ gtk/Makefile.am |   10 +++-------
+ 1 files changed, 3 insertions(+), 7 deletions(-)
+
+diff --git a/gtk/Makefile.am b/gtk/Makefile.am
+index 8a11903..c3370e8 100644
+--- a/gtk/Makefile.am
++++ b/gtk/Makefile.am
+@@ -54,7 +54,6 @@ AM_CPPFLAGS =						\
+ 	-DGTK_PRINT_BACKEND_ENABLE_UNSUPPORTED		\
+ 	$(GTK_DEBUG_FLAGS)				\
+ 	$(GTK_DEP_CFLAGS)				\
+-	$(gtk_clipboard_dnd_c_sources_CFLAGS)		\
+ 	$(INCLUDED_IMMODULE_DEFINE)
+ 
+ if PLATFORM_WIN32
+@@ -792,7 +791,8 @@ if USE_QUARTZ
+ gtk_private_h_sources += 	\
+ 	gtksearchenginequartz.h
+ gtk_c_sources += $(gtk_use_quartz_c_sources)
+-gtk_use_quartz_c_sources_CFLAGS = "-xobjective-c"
++libgtk_3_la_CFLAGS = "-xobjective-c"
++
+ else
+ gtk_c_sources += $(gtk_use_stub_c_sources)
+ endif
+@@ -805,12 +805,8 @@ gtk_clipboard_dnd_c_sources = 	\
+ 	gtkdnd-quartz.c		\
+ 	gtkquartz.c
+ gtk_clipboard_dnd_h_sources = gtkquartz.h
+-gtk_clipboard_dnd_c_sources_CFLAGS = "-xobjective-c"
+ else
+-gtk_clipboard_dnd_c_sources = 	\
+-	gtkclipboard.c		\
+-	gtkdnd.c
+-gtk_clipboard_dnd_c_sources_CFLAGS =
++gtk_clipboard_dnd_c_sources = gtkclipboard.c gtkdnd.c
+ endif
+ EXTRA_DIST += gtkquartz.h
+ 
+-- 
+1.7.6.3.dirty
+

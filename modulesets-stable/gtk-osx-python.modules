@@ -25,8 +25,17 @@
     </dependencies>
   </metamodule>
 
+  <metamodule id="meta-gtk-osx-python-gtk3">
+    <dependencies>
+      <dep package="meta-gtk-osx-gtk3"/>
+      <dep package="pycairo-python2.6"/>
+      <dep package="pygobject3"/>
+      <dep package="gtk-mac-integration-python"/>
+    </dependencies>
+  </metamodule>
+
   <autotools id="berkeleydb" autogen-sh="dist/configure"
-         autogen-template="cd build_unix; ../%(autogen-sh)s --prefix %(prefix)s --libdir %(libdir)s %(autogenargs)s" makeargs="-C build_unix" 
+         autogen-template="cd build_unix; ../%(autogen-sh)s --prefix %(prefix)s --libdir %(libdir)s %(autogenargs)s" makeargs="-C build_unix"
          makeinstallargs="-C build_unix install">
 
     <branch module="berkeley-db/db-4.8.30.NC.tar.gz" version="4.8.30"
@@ -71,9 +80,8 @@
       <dep package="meta-gtk-osx-core"/>
     </after>
   </autotools>
-
-  <autotools id="pygobject" autogen-sh="configure"
-	     autogenargs="--disable-introspection">
+<!-- PyGObject 2.28 is the last series for Gtk+-2; for co-installation with later versions it installs as pygobject2 and PyGObject 3 installs as pygobject3. Introspection is disabled here, because gir-scanner isn't smart enough to co-install them. -->
+  <autotools id="pygobject" autogen-sh="configure" >
     <branch version="2.28.6" module="pygobject/2.28/pygobject-2.28.6.tar.bz2"
             hash="sha256:e4bfe017fa845940184c82a4d8949db3414cb29dfc84815fb763697dc85bdcee"/>
     <dependencies>
@@ -84,7 +92,18 @@
     </after>
   </autotools>
 
-  <autotools id="pygtk" autogen-sh="configure" 
+   <autotools id="pygobject3" autogen-sh="configure" >
+    <branch version="3.0.1" module="pygobject/3.0/pygobject-3.0.1.tar.bz2"
+            hash="sha256:c8548574ecd232eea90fc7cb647b9150273e9197b1e60129a4fb597825b5d7ad"/>
+    <dependencies>
+      <dep package="meta-gtk-osx-gtk3"/>
+    </dependencies>
+    <after>
+      <dep package="python"/>
+    </after>
+  </autotools>
+
+ <autotools id="pygtk" autogen-sh="configure" 
 	     autogenargs="CFLAGS=&quot;$CFLAGS -xobjective-c&quot; lt_cv_sys_global_symbol_pipe=&quot;'sed -n -e '\''s/^.*[ ]\([BCDEGRST][BCDEGRST]*\)[ ][ ]*_\([_A-Za-z][_A-Za-z0-9]*\)$/\1 _\2 \2/p'\'' | sed '\''/ __gnu_lto/d'\'''&quot;">
     <branch version="2.4.0" module="pygtk/2.24/pygtk-2.24.0.tar.bz2"
             hash="sha256:cd1c1ea265bd63ff669e92a2d3c2a88eb26bcd9e5363e0f82c896e649f206912">
@@ -105,8 +124,11 @@
             version="1.0.1"
 	    hash="sha256:417773d32be5304839f6f917a6ce4637d9a642829105ce8f9527f663830b8089"/>
     <dependencies>
-      <dep package="pygtk"/>
     </dependencies>
+    <after>
+      <dep package="pygtk"/>
+      <dep package="pygobject3"/>
+    </after>
   </autotools>
 
   <autotools id="pygtk-extras">

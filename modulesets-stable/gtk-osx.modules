@@ -54,6 +54,16 @@
     </after>
   </metamodule>
 
+  <metamodule id="meta-gtk-osx-gtk3">
+    <dependencies>
+      <dep package="gtk+-3.0"/>
+      <dep package="gtk-mac-integration"/>
+    </dependencies>
+    <after>
+      <dep package="meta-gtk-osx-bootstrap"/>
+    </after>
+  </metamodule>
+
   <autotools id="glib" autogen-sh="configure">
     <branch module="glib/2.28/glib-2.28.8.tar.bz2"  version="2.28.8"
             hash="sha256:222f3055d6c413417b50901008c654865e5a311c73f0ae918b0a9978d1f9466f"/>
@@ -63,7 +73,16 @@
     </after>
   </autotools>
 
-  <autotools id="libffi">
+  <autotools id="glib-gtk3" autogen-sh="configure">
+    <branch module="glib/2.30/glib-2.30.1.tar.bz2"  version="2.30.1"
+            hash="sha256:4e560319450f31d85b6cdb2b530c3324a510ca04817e360943d0774327d21804"/>
+    <after>
+      <dep package="meta-gtk-osx-bootstrap"/>
+      <dep package="gtk-doc"/>
+    </after>
+  </autotools>
+
+  <autotools id="libffi" autogenargs="--disable-builddir">
     <branch module="libffi/libffi-3.0.10.tar.gz" repo="sourceware.org"
             version="3.0.10" checkoutdir="atgreen-libffi-873d687"/>
   </autotools>
@@ -82,7 +101,21 @@
     </dependencies>
   </autotools>
 
-<!-- PangoFt2 and hence freetype and fontconfig are required by WebKitGtk -->
+  <autotools id="gobject-introspection-gtk3">
+    <branch module="gobject-introspection/1.30/gobject-introspection-1.30.0.tar.bz2"
+            version="1.30.0"
+            hash="sha256:72f5b8886d23d4bfff1f9824df00831b48b7ebb98d35a50a8f322cb7ff037d12">
+      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/girscanner-objc.patch" strip="1"/>
+      <patch file="http://git.gnome.org/browse/gtk-osx/plain/0001-scanner-split-CC-environment-variable.patch" strip="1"/>
+    </branch>
+    <dependencies>
+      <dep package="glib-gtk3"/>
+      <dep package="cairo"/>
+     <dep package="libffi"/>
+    </dependencies>
+  </autotools>
+
+<!-- PangoFt2 and hence freetype and fontconfig are required by WebKitGtk.  -->
   <autotools id="pango"  autogen-sh="configure"
              autogenargs="--without-x --with-included-modules=basic-atsui"
              makeargs="-k -C modules; make">
@@ -94,11 +127,33 @@
   <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/pangoatsui-fontname.patch" strip="1"/>
     </branch>
     <dependencies>
-      <dep package="glib"/>
       <dep package="cairo"/>
-<!--      <dep package="gobject-introspection"/> -->
       <dep package="fontconfig"/>
-      <dep package="freetype"/>
+    </dependencies>
+    <after>
+      <dep package="glib"/>
+      <dep package="glib-gtk3"/>
+      <dep package="gobject-introspection"/>
+      <dep package="gobject-introspection-gtk3"/>
+      <dep package="meta-gtk-osx-bootstrap"/>
+    </after>
+  </autotools>
+
+  <autotools id="pango-gtk3"  autogen-sh="configure"
+             autogenargs="--without-x --with-included-modules=basic-atsui"
+             makeargs="-k -C modules; make">
+    <!-- The last version that will build on Tiger is 1.24.5 -->
+    <branch version="1.29.4" module="pango/1.29/pango-1.29.4.tar.bz2"
+            hash="sha256:f15deecaecf1e9dcb7db0e4947d12b5bcff112586434f8d30a5afd750747ff2b">
+<!--    <branch version="1.24.5" module="pango/1.24/pango-1.24.5.tar.bz2"
+            hash="sha256:0f733d1ec3e8dafcae152d7ac58f1090bee1fd856176c8fee0e81b0e42392f4e">-->
+  <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/pangoatsui-fontname.patch" strip="1"/>
+    </branch>
+    <dependencies>
+      <dep package="cairo"/>
+      <dep package="fontconfig"/>
+      <dep package="glib-gtk3"/>
+      <dep package="gobject-introspection-gtk3"/>
     </dependencies>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
@@ -106,30 +161,20 @@
   </autotools>
 
  <autotools id="atk" autogen-sh="configure">
-    <branch module="atk/1.33/atk-1.33.6.tar.bz2" version="1.33.6"
-            hash="sha256:e61c9a7bb2605a6ba698285f5593590c90818592f3d122101b9d42697fd2b0b6"/>
+    <branch module="atk/2.2/atk-2.2.0.tar.bz2" version="2.2.0"
+            hash="sha256:d201e3f5808aef0b1aec2277bfa61074f68863e405428adb57a73aab5c838450"/>
     <dependencies>
-      <dep package="glib"/>
     </dependencies>
     <after>
-      <dep package="meta-gtk-osx-bootstrap"/>
-    </after>
-  </autotools>
-
- <autotools id="atk2" autogen-sh="configure">
-    <branch module="atk/2.0/atk-2.0.1.tar.bz2" version="2.0.1"
-            hash="sha256:3d81c7d70fc66e5b129567a7706b6f8ff5db18281a818b29d4dd5bcefa3d4a17"/>
-    <dependencies>
       <dep package="glib"/>
-    </dependencies>
-    <after>
+      <dep package="glib-gtk3"/>
       <dep package="meta-gtk-osx-bootstrap"/>
     </after>
   </autotools>
 
   <autotools id="gdk-pixbuf">
-    <branch module="gdk-pixbuf/2.23/gdk-pixbuf-2.23.0.tar.bz2" version="2.23.0"
-            hash="sha256:e17081abe08e62491e25ce972eaf8f6325307289b9ab55111ccaf64ad058e2d0"/>
+    <branch module="gdk-pixbuf/2.24/gdk-pixbuf-2.24.0.tar.bz2" version="2.24.0"
+            hash="sha256:38d2630314e6d91976bffd833236f84fefa440a9038f86dc422820a39f2e3700"/>
     <after>
       <dep package="pango"/>
     </after>
@@ -142,7 +187,7 @@
             hash="sha256:6f45bdbf9ea27eb3b5f977d7ee2365dede0d0ce454985680c26e5210163bbf37">
       <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0001-Backport-acf1345-Fix-refresh-of-static-autorelease_p.patch" strip="1"/>
       <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0002-Bug-628396-Gtk-build-fails-because-of-objective-c-el.patch" strip="1"/>
-      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0003-Bug-658772-Implement-relocatable-paths-for-quartz-si.patch" strip="1"/>
+      <Patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0003-Bug-658772-Implement-relocatable-paths-for-quartz-si.patch" strip="1"/>
       <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0004-Bug-571582-GtkSelection-implementation-for-quartz.patch" strip="1"/>
       <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0005-Bug-657770-Write-to-released-memory-in-gtkdnd-quartz.patch" strip="1"/>
       <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0006-Bug-658722-Drag-and-Drop-sometimes-stops-working.patch" strip="1"/>
@@ -158,24 +203,34 @@
       <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/gtk+-Bug-655065-autotestkeywords-ldadd.patch" strip="1"/>
     </branch>
     <dependencies>
+      <dep package="glib"/>
       <dep package="pango"/>
       <dep package="atk"/>
       <dep package="gdk-pixbuf"/>
+      <dep package="gobject-introspection"/>
     </dependencies>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
     </after>
   </autotools>
 
-  <autotools id="gtk+-3" autogen-sh="configure"
-             autogenargs="--enable-quartz-backend --disable-colord">
+  <autotools id="gtk+-3.0" autogen-sh="configure"
+             autogenargs="--enable-quartz-backend">
     <branch module="gtk+/3.2/gtk+-3.2.0.tar.bz2" version="3.2.0"
             hash="sha256:b285074ffefb4ff4364f6dd50fe68c7e85b11293e0c1dd3bdeac56052344dadb">
+      <patch file="http://git.gnome.org/browse/gtk-osx/plain/0001-Bug-628936-Minimal-change-to-pass-introspection.patch" strip="1"/>
+      <patch file="http://git.gnome.org/browse/gtk-osx/plain/0001-Bug-658772-Directory-paths-for-resource-directories-.patch" strip="1"/>
+      <patch file="http://git.gnome.org/browse/gtk-osx/plain/0002-Quartz-Bug-655057-Eliminate-Compiler-Warning.patch" strip="1"/>
+      <patch file="http://git.gnome.org/browse/gtk-osx/plain/0003-Bug-657770-Write-to-released-memory-in-gtkdnd-quartz.patch" strip="1"/>
+      <patch file="http://git.gnome.org/browse/gtk-osx/plain/0004-Bug-658767-Drag-and-Drop-NSEvent-capture-is-racy.patch" strip="1"/>
+      <patch file="http://git.gnome.org/browse/gtk-osx/plain/0001-Bug-571582-GtkSelection-implementation-for-quartz.patch" strip="1"/>
     </branch>
     <dependencies>
-      <dep package="pango"/>
+      <dep package="glib-gtk3"/>
+      <dep package="pango-gtk3"/>
       <dep package="atk"/>
       <dep package="gdk-pixbuf"/>
+      <dep package="gobject-introspection-gtk3"/>
     </dependencies>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
@@ -213,9 +268,10 @@
             hash="sha256:417773d32be5304839f6f917a6ce4637d9a642829105ce8f9527f663830b8089">
     </branch>
     <dependencies>
-      <dep package="gtk+"/>
     </dependencies>
     <after>
+      <dep package="gtk+"/>
+      <dep package="gtk+-3.0"/>
       <dep package="meta-gtk-osx-bootstrap"/>
     </after>
   </autotools>
