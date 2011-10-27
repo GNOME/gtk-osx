@@ -17,8 +17,6 @@
 	      href="http://www.freedesktop.org/software/fontconfig/release/"/>
   <repository type="tarball" name="icon-theme"
 	      href="http://icon-theme.freedesktop.org/releases/"/>
-  <repository type="tarball" name="ftp.gnu.org"
-              href="http://ftp.gnu.org/gnu/"/>
   <repository type="tarball" name="cmake"
 	      href="http://www.cmake.org/files/"/>
 
