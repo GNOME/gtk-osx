@@ -50,16 +50,37 @@
     </after>
   </metamodule>
 
-  <autotools id="glib">
-    <branch tag="2.27.3"/>
+  <metamodule id="meta-gtk-osx-gtk3">
+    <dependencies>
+      <dep package="gtk+-3.0"/>
+      <dep package="gtk-mac-integration"/>
+    </dependencies>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
-      <dep package="gtk-doc"/> <!-- FIXME: http://bugs.gnome.org/546640 -->
+    </after>
+  </metamodule>
+
+  <autotools id="glib">
+    <branch tag="glib-2-28"/>
+    <after>
+      <dep package="meta-gtk-osx-bootstrap"/>
+      <dep package="gtk-doc"/>
     </after>
   </autotools>
 
-  <autotools id="libffi">
-    <branch module="atgreen/libffi" repo="github" tag="v3.0.9"/>
+  <autotools id="glib-gtk3">
+    <branch tag="glib-2-30" module="glib" checkoutdir="glib-gtk3"/>
+    <dependencies>
+     <dep package="libffi"/>
+    </dependencies>
+    <after>
+      <dep package="meta-gtk-osx-bootstrap"/>
+      <dep package="gtk-doc"/>
+    </after>
+  </autotools>
+
+  <autotools id="libffi" autogenargs="--disable-builddir">
+    <branch module="atgreen/libffi" repo="github" tag="v3.0.10"/>
   </autotools>
 
   <autotools id="gobject-introspection">
@@ -67,19 +88,47 @@
     <dependencies>
       <dep package="glib"/>
       <dep package="cairo"/>
-     <dep package="libffi"/>
+      <dep package="libffi"/>
+    </dependencies>
+  </autotools>
+
+  <autotools id="gobject-introspection-gtk3">
+    <branch tag="gnome-3-2" module="gobject-introspection"/>
+    <dependencies>
+      <dep package="glib-gtk3"/>
+      <dep package="cairo"/>
     </dependencies>
   </autotools>
 
   <autotools id="pango"
              autogenargs="--without-x --with-included-modules=basic-atsui"
              makeargs="-k -C modules; make">
-    <branch tag="1.28.3"/>
+    <branch tag="1.28"/>
     <dependencies>
-      <dep package="glib"/>
       <dep package="cairo"/>
       <dep package="fontconfig"/>
       <dep package="freetype"/>
+    </dependencies>
+    <after>
+      <dep package="glib"/>
+      <dep package="glib-gtk3"/>
+      <dep package="gobject-introspection"/>
+      <dep package="gobject-introspection-gtk3"/>
+      <dep package="meta-gtk-osx-bootstrap"/>
+    </after>
+  </autotools>
+
+  <autotools id="pango-gtk3"
+             autogenargs="--without-x --with-included-modules=basic-atsui"
+             makeargs="-k -C modules; make">
+<!-- Gtk+-3.2.0 is dependent upon pango 1.29.x, but the master branch of pango is dependent upon the master branch of glib. Don't want to go there, so setting this on the 1.29.1 release. -->
+    <branch tag="1.29.1" module="pango" checkoutdir="pango-gtk3"/>
+    <dependencies>
+      <dep package="cairo"/>
+      <dep package="fontconfig"/>
+      <dep package="freetype"/>
+      <dep package="glib-gtk3"/>
+      <dep package="gobject-introspection-gtk3"/>
     </dependencies>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
@@ -87,17 +136,18 @@
   </autotools>
 
  <autotools id="atk">
-    <branch revision="gnome-2-30"/>
+    <branch revision="gnome-3-2"/>
     <dependencies>
-      <dep package="glib"/>
     </dependencies>
     <after>
+      <dep package="glib"/>
+      <dep package="glib-gtk3"/>
       <dep package="meta-gtk-osx-bootstrap"/>
     </after>
   </autotools>
 
   <autotools id="gdk-pixbuf">
-    <branch tag="2.23.0"/>
+    <branch tag="gdk-pixbuf-2-24"/>
     <after>
       <dep package="pango"/>
     </after>
@@ -119,9 +169,11 @@
 	     autogenargs="--enable-quartz-backend --disable-colord">
     <branch module="gtk+" checkoutdir="gtk+-3.0" revision="quartz-integration"/>
     <dependencies>
-      <dep package="pango"/>
+      <dep package="glib-gtk3"/>
+      <dep package="pango-gtk3"/>
+      <dep package="atk"/>
       <dep package="gdk-pixbuf"/>
-     <dep package="atk"/>
+      <dep package="gobject-introspection-gtk3"/>
     </dependencies>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
@@ -129,7 +181,7 @@
   </autotools>
 
   <autotools id="pixman" autogenargs="--disable-gtk">
-    <branch repo="cairographics" module="pixman" tag="pixman-0.21.4"/>
+    <branch repo="cairographics" module="pixman" tag="0.22"/>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
     </after>
@@ -150,9 +202,10 @@
   <autotools id="gtk-mac-integration" autogenargs="--disable-python">
     <branch tag="gtk-mac-integration-1.0.1" />
     <dependencies>
-      <dep package="gtk+"/>
     </dependencies>
     <after>
+      <dep package="gtk+"/>
+      <dep package="gtk+-3.0"/>
       <dep package="meta-gtk-osx-bootstrap"/>
     </after>
   </autotools>

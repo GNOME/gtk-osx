@@ -5,11 +5,10 @@
 
   <repository type="git" name="git.gnome.org" default="yes" 
               href="git://git.gnome.org/"/>
-  <repository type="cvs" name="cairographics-cvs" 
-              cvsroot=":pserver:anoncvs@anoncvs.freedesktop.org:/cvs/cairo"
-              password=""/>
-  <repository type="git" name="cairographics"
-              href="git://anongit.freedesktop.org/git/"/>
+  <repository type="tarball" name="cairographics"
+              href="http://cairographics.org/releases/"/>
+<!--  <repository type="git" name="cairographics"
+              href="git://anongit.freedesktop.org/git/"/> -->
   <repository type="tarball" name="python"
 	      href="http://www.python.org/ftp/python/"/>
   <repository type="tarball" name="oracle"
@@ -21,6 +20,15 @@
       <dep package="pycairo-python2.6"/>
       <dep package="pygobject"/>
       <dep package="pygtk"/>
+    </dependencies>
+  </metamodule>
+
+  <metamodule id="meta-gtk-osx-python-gtk3">
+    <dependencies>
+      <dep package="meta-gtk-osx-gtk3"/>
+      <dep package="pycairo-python2.6"/>
+      <dep package="pygobject3"/>
+      <dep package="gtk-mac-integration-python"/>
     </dependencies>
   </metamodule>
 
@@ -44,8 +52,14 @@
  <!-- Pycairo 1.8.4+ requires Python 2.6. Leopard comes only with 2.5,
      so pycairo is by default held at 1.8.2. Use pycairo-python2.6 if
      you want a more recent version. -->
- <autotools id="pycairo" >
-    <branch module="pycairo" repo="cairographics" tag="1.8.22"/>
+<!-- PyCairo moved their repo from cvs.freedesktop.org to
+     git.freedesktop.org after the release of 1.8.6 without copying
+     history, so releases before that are available only as
+     tarballs. Moreover, they don't use branches nor do they
+     tag. There's no point in using repos here, so we don't. -->
+  <autotools id="pycairo" autogen-sh="configure">
+    <branch module="pycairo-1.8.2.tar.gz" repo="cairographics"
+            version="1.8.2" md5sum="bbfc0c2fef08dfb0c5b8baa5f0b67a87"/>
     <dependencies>
       <dep package="cairo"/>
     </dependencies>
@@ -55,20 +69,24 @@
     </after>
   </autotools>
 
-  <autotools id="pycairo-python2.6" >
-    <!-- These guys don't use tags -->
-    <branch module="pycairo" repo="cairographics" tag="1.8.8"/>
+<!-- Pycairo 1.8.10 (and later, presumably) requires Python3. -->
+  <autotools id="pycairo-python2.6" autogen-sh="configure">
+    <branch module="pycairo-1.8.8.tar.gz" repo="cairographics"
+            version="1.8.8"
+	    hash="md5:054da6c125cb427a003f5fd6c54f853e"/>
     <dependencies>
       <dep package="cairo"/>
     </dependencies>
     <after>
       <dep package="python"/>
       <dep package="meta-gtk-osx-core"/>
+      <dep package="meta-gtk-osx-gtk3"/>
     </after>
   </autotools>
+
 
   <autotools id="pygobject" autogenargs="--disable-introspection">
-    <branch tag="d9bab3b185bb59bd29e3c3f6225f3636f58ec45e"/>
+    <branch tag="pygobject-2-28"/>
     <dependencies>
       <dep package="meta-gtk-osx-core"/>
     </dependencies>
@@ -77,8 +95,21 @@
     </after>
   </autotools>
 
+  <autotools id="pygobject3" autogenargs="--disable-introspection">
+    <branch tag="pygobject-3-0" module="pygobject" checkoutdir="pygobject3"/>
+    <dependencies>
+      <dep package="meta-gtk-osx-gtk3"/>
+    </dependencies>
+    <after>
+      <dep package="python"/>
+    </after>
+  </autotools>
+
+<!-- PyGtk is maintenance-only, since it's unecessary for Gtk3. There
+     is no pygtk-2-24 branch; all maintenance is occuring on
+     master. -->
   <autotools id="pygtk" autogenargs="--disable-introspection">
-    <branch tag="PYGTK_2_22_0"/>
+    <branch tag="master"/>
     <dependencies>
       <dep package="pygobject"/>
       <dep package="meta-gtk-osx-core"/>
@@ -90,12 +121,13 @@
   </autotools>
 
   <autotools id="gtk-mac-integration-python">
-    <branch tag="gtk-mac-integration-1.0.1" />
+    <branch tag="gtk-mac-integration-1.0.1" module="gtk-mac-integration"
+	    checkoutdir="gtk-mac-integration"/>
     <dependencies>
-      <dep package="gtk+"/>
-    </dependencies>
+     </dependencies>
     <after>
-      <dep package="meta-gtk-osx-bootstrap"/>
+      <dep package="pygtk"/>
+      <dep package="pygobject3"/>
     </after>
   </autotools>
 
