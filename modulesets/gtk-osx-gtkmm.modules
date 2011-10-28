@@ -15,11 +15,12 @@
 
 <!-- mm-common is C++ glue code needed only to build from git. -->
   <autotools id="mm-common">
-    <branch module="mm-common" tag="mm-common-0.9.2"/>
+    <branch module="mm-common" tag="0.9.5"/>
   </autotools>
 
   <autotools id="cairomm" >
-    <branch module="cairomm" tag="v1.9.8"
+<!-- 1.10.0, the latest stable release, was built from the master branch. -->
+    <branch module="cairomm" tag="1.10.0"
             repo="cairographics" />
     <dependencies>
       <dep package="cairo"/>
@@ -27,22 +28,40 @@
   </autotools>
 
   <autotools id="glibmm" >
-    <branch tag="2.27.3"/>
+    <branch tag="glibmm-2-28"/>
     <dependencies>
-      <dep package="glib"/>
       <dep package="libsigc++2"/>
     </dependencies>
-  </autotools>
-<!-- Pangomm 2.27.1 requires an untagged version of glibmm -->
-  <autotools id="pangomm" >
-     <branch tag="2.26.3"/>
-    <dependencies>
-      <dep package="glibmm"/>
-      <dep package="cairomm"/>
-      <dep package="pango"/>
-    </dependencies>
+    <after>
+      <dep package="glib"/>
+    </after>
   </autotools>
 
+  <autotools id="glibmm3" >
+    <branch tag="glibmm-2-30" module="glibmm"/>
+    <dependencies>
+      <dep package="libsigc++2"/>
+    </dependencies>
+    <after>
+      <dep package="glib-gtk3"/>
+    </after>
+  </autotools>
+
+<!-- Pangomm's last stable branch was 2-24 -->
+  <autotools id="pangomm" >
+     <branch tag="2.28.2"/>
+    <dependencies>
+       <dep package="cairomm"/>
+    </dependencies>
+    <after>
+      <dep package="glibmm"/>
+      <dep package="glibmm3"/>
+      <dep package="pango"/>
+      <dep package="pango-gtk3"/>
+    </after>
+  </autotools>
+
+<!-- libsigc++'s last stable branch was 2-0 -->
   <autotools id="libsigc++2"  autogen-args="--disable-documentation">
     <branch tag="2.2.8"/>
     <dependencies>
@@ -50,18 +69,34 @@
     </dependencies>
   </autotools>
 
+<!-- atkmm doesn't branch -->
   <autotools id="atkmm">
-    <branch module="atkmm" tag="2.22.2"/>
+    <branch module="atkmm" tag="2.22.5"/>
+    <dependencies>
+      <dep package="atk"/>
+    </dependencies>
   </autotools>
 
   <autotools id="gtkmm" >
-    <branch revision="gtkmm-2-22"/>
+    <branch revision="gtkmm-2-24"/>
     <dependencies>
       <dep package="glibmm"/>
       <dep package="cairomm"/>
       <dep package="pangomm"/>
       <dep package="atkmm"/>
       <dep package="gtk+"/>
+    </dependencies>
+  </autotools>
+
+<!-- Note: This doesn't build at the moment. See https://bugzilla.gnome.org/show_bug.cgi?id=662975. There's a patch for modulesets-stable. -->
+  <autotools id="gtkmm3" >
+    <branch revision="gtkmm-3-2" module="gtkmm"/>
+    <dependencies>
+      <dep package="glibmm3"/>
+      <dep package="cairomm"/>
+      <dep package="pangomm"/>
+      <dep package="atkmm"/>
+      <dep package="gtk+-3.0"/>
     </dependencies>
   </autotools>
 

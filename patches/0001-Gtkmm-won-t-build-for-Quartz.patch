@@ -1,0 +1,105 @@
+From 2c556afe873c540e693934b6f214f7e7e3b92b7e Mon Sep 17 00:00:00 2001
+From: John Ralls <jralls@ceridwen.us>
+Date: Fri, 28 Oct 2011 16:16:18 -0700
+Subject: [PATCH] Gtkmm won't build for Quartz
+
+Adds to configure a pkgconfig read of the gtk+-3.0 target variable and
+uses the result to set appropriate automake conditionals (in theory, a
+particular Gtk+-3 library can contain multiple backends, though this
+isn't strictly true in practice).
+
+Also checks (with PKG_CHECK_MODULES) that Gtk+-3 is installed and makes
+the check for HOST_WINDOWS_NATIVE conditional on having a Win32 backend.
+
+Adds a new target gtkmm_files_x11_hg to src/filelist.am, including
+plug.hg and socket.hg in it; it's added to gtkmm_files_arch_hg only if
+there's an X11 backend to build them against.
+---
+ configure.ac        |   41 ++++++++++++++++++++++++++++++++++++++---
+ gtk/src/filelist.am |    9 +++++++--
+ 2 files changed, 45 insertions(+), 5 deletions(-)
+
+diff --git a/configure.ac b/configure.ac
+index a5e8df4..1515036 100644
+--- a/configure.ac
++++ b/configure.ac
+@@ -46,9 +46,44 @@ AC_PROG_CXX
+ AC_DISABLE_STATIC
+ LT_INIT([win32-dll])
+ 
+-AC_MSG_CHECKING([for native Windows host])
+-AS_CASE([$host_os], [mingw*], [gtkmm_host_windows=yes], [gtkmm_host_windows=no])
+-AC_MSG_RESULT([$gtkmm_host_windows])
++PKG_CHECK_MODULES([GTK], [gtk+-3.0])
++gdk_target_win32=no
++gdk_target_quartz=no
++gdk_target_x11=no
++gdk_target_wayland=no
++gdk_target_broadway=no
++for target in `$PKG_CONFIG --variable=targets gtk+-3.0`; do
++    case "$target" in 
++       win32)
++          gdk_target_win32=yes
++	  ;;
++       quartz)
++          gdk_target_quartz=yes
++	  ;;
++       x11)
++          gdk_target_x11=yes
++	  ;;
++       broadway)
++          gdk_target_broadway=yes
++	  ;;
++       wayland)
++          gdk_target_wayland=yes
++	  ;;
++    esac;
++done
++AM_CONDITIONAL([GDK_TARGET_WIN32], [test "x$gdk_target_win32" = xyes])
++AM_CONDITIONAL([GDK_TARGET_QUARTZ], [test "x$gdk_target_quartz" = xyes])
++AM_CONDITIONAL([GDK_TARGET_X11], [test "x$gdk_target_x11" = xyes])
++AM_CONDITIONAL([GDK_TARGET_BROADWAY], [test "x$gdk_target_broadway" = xyes])
++AM_CONDITIONAL([GDK_TARGET_WAYLAND], [test "x$gdk_target_wayland" = xyes])
++
++if [ "x$GDK_TARGET_WIN32" = xyes ]; then
++   AC_MSG_CHECKING([for native Windows host])
++   AS_CASE([$host_os], [mingw*], [gtkmm_host_windows=yes], [gtkmm_host_windows=no])
++   AC_MSG_RESULT([$gtkmm_host_windows])
++else
++    gtkmm_host_windows = no
++fi
+ AM_CONDITIONAL([HOST_WINDOWS_NATIVE], [test "x$gtkmm_host_windows" = xyes])
+ 
+ # TODO: What exactly does this do?  If both static and shared libraries
+diff --git a/gtk/src/filelist.am b/gtk/src/filelist.am
+index c3b08a1..e665e2b 100644
+--- a/gtk/src/filelist.am
++++ b/gtk/src/filelist.am
+@@ -193,10 +193,12 @@ gtkmm_files_any_hg =		\
+ 
+ gtkmm_files_posix_hg =		\
+ 	pagesetupunixdialog.hg	\
+-	plug.hg			\
+ 	printer.hg		\
+ 	printjob.hg		\
+-	printunixdialog.hg	\
++	printunixdialog.hg
++
++gtkmm_files_xll_hg =            \
++	plug.hg			\
+ 	socket.hg
+ 
+ gtkmm_files_deprecated_hg =	\
+@@ -213,6 +215,9 @@ gtkmm_files_arch_hg =
+ else
+ gtkmm_files_arch_hg = $(gtkmm_files_posix_hg)
+ endif
++if GDK_TARGET_X11
++gtkmm_files_arch_hg += $(gtkmm_files_x11_hg)
++endif
+ if DISABLE_DEPRECATED_API
+ gtkmm_files_used_hg = $(gtkmm_files_any_hg) $(gtkmm_files_arch_hg)
+ else
+-- 
+1.7.6.3.dirty
+
