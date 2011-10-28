@@ -127,6 +127,7 @@
 <!--    <branch version="1.24.5" module="pango/1.24/pango-1.24.5.tar.bz2"
             hash="sha256:0f733d1ec3e8dafcae152d7ac58f1090bee1fd856176c8fee0e81b0e42392f4e">-->
   <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/pangoatsui-fontname.patch" strip="1"/>
+  <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0001-Make-ATSUI-backend-compile-again.patch" strip="1"/>
     </branch>
     <dependencies>
       <dep package="cairo"/>
