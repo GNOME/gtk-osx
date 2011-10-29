@@ -55,11 +55,11 @@ index a5e8df4..1515036 100644
 +	  ;;
 +    esac;
 +done
-+AM_CONDITIONAL([GDK_TARGET_WIN32], [test "x$gdk_target_win32" = xyes])
-+AM_CONDITIONAL([GDK_TARGET_QUARTZ], [test "x$gdk_target_quartz" = xyes])
-+AM_CONDITIONAL([GDK_TARGET_X11], [test "x$gdk_target_x11" = xyes])
-+AM_CONDITIONAL([GDK_TARGET_BROADWAY], [test "x$gdk_target_broadway" = xyes])
-+AM_CONDITIONAL([GDK_TARGET_WAYLAND], [test "x$gdk_target_wayland" = xyes])
++#AM_CONDITIONAL([GTKMM_GDK_HAS_TARGET_WIN32], [test "x$gdk_target_win32" = xyes])
++#AM_CONDITIONAL([GTKMM_GDK_HAS_TARGET_QUARTZ], [test "x$gdk_target_quartz" = xyes])
++AM_CONDITIONAL([GTKMM_GDK_HAS_TARGET_X11], [test "x$gdk_target_x11" = xyes])
++#AM_CONDITIONAL([GTKMM_GDK_HAS_TARGET_BROADWAY], [test "x$gdk_target_broadway" = xyes])
++#AM_CONDITIONAL([GTKMM_GDK_HAS_TARGET_WAYLAND], [test "x$gdk_target_wayland" = xyes])
 +
 +if [ "x$GDK_TARGET_WIN32" = xyes ]; then
 +   AC_MSG_CHECKING([for native Windows host])
