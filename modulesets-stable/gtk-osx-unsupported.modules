@@ -67,6 +67,7 @@
     <branch version='0.4.7' module='libproxy-0.4.7.tar.gz'
             repo='libproxy.google.com'>
       <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/libproxy-Bug-052-POSIX_C_SOURCE.patch" strip="1"/>
+      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0001-Bug-168-libproxy-pc-file.patch" strip="1"/>
     </branch>
     <dependencies>
       <dep package="cmake"/>
