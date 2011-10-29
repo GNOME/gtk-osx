@@ -93,7 +93,19 @@ Libglade itself is deprecated. This is the last release. -->
     </after>
     <dependencies>
       <dep package="WebKit"/>
-      <dep package="libglade"/>
+    </dependencies>
+  </autotools>
+
+  <autotools id="devhelp" autogen-sh="configure">
+    <branch module="devhelp/3.2/devhelp-3.2.0.tar.bz2" version="3.2.0"
+            hash="sha256:1341d1060c094956e8496c9ed68334192ca963fa211489737a0b84a4693c232d"/>
+    <after>
+      <dep package="meta-gtk-osx-bootstrap"/>
+      <dep package="meta-gtk-osx-themes"/>
+      <dep package="meta-gtk-osx-gtk3"/>
+    </after>
+    <dependencies>
+      <dep package="WebKit"/>
     </dependencies>
   </autotools>
 
@@ -118,7 +130,7 @@ Libglade itself is deprecated. This is the last release. -->
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
       <dep package="meta-gtk-osx-themes"/>
-      <dep package="meta-gtk-osx-core"/>
+      <dep package="meta-gtk-osx-gtk3"/>
     </after>
   </autotools>
 
@@ -138,7 +150,7 @@ Libglade itself is deprecated. This is the last release. -->
             version="3.2.0" hash="sha256:82b1028d69fcb24650ebc801454eb688dc3a01c6061c1d77d1cf665f048f050a"/>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
-      <dep package="meta-gtk-osx-core"/>
+      <dep package="meta-gtk-osx-gtk3"/>
     </after>
   </autotools>
 
@@ -148,6 +160,7 @@ Libglade itself is deprecated. This is the last release. -->
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
       <dep package="meta-gtk-osx-core"/>
+      <dep package="meta-gtk-osx-gtk3"/>
     </after>
   </autotools>
 
@@ -271,6 +284,7 @@ Libglade itself is deprecated. This is the last release. -->
 	    repo="sqlite"/>
   </autotools>
 
+<!-- Goocanvas-1 is for gtk+-2. -->
   <autotools id="goocanvas">
     <branch module="goocanvas/1.0/goocanvas-1.0.0.tar.bz2" version="1.0.0"
 	    hash="sha256:1c072ef88567cad241fb4addee26e9bd96741b1503ff736d1c152fa6d865711e"/>
@@ -279,12 +293,12 @@ Libglade itself is deprecated. This is the last release. -->
     </dependencies>
   </autotools>
 
-<!-- Goocanvas has numbering issues, because goocanvas-2 is for gtk+-3. -->
+<!-- Goocanvas-2 is for gtk+-3. -->
   <autotools id="goocanvas2">
     <branch module="goocanvas/2.0/goocanvas-2.0.0.tar.bz2" version="2.0.0"
 	    hash="9f8d7f700ad9617adef37e63f58cb2d038d799443e3756040f368ceea7f01331"/>
     <dependencies>
-      <dep package="gtk+"/>
+      <dep package="gtk+-3.0"/>
     </dependencies>
   </autotools>
 
@@ -312,8 +326,8 @@ Libglade itself is deprecated. This is the last release. -->
   </autotools>
 
   <autotools id="libgsf" autogenargs="--without-python">
-    <branch  module="libgsf/1.14/libgsf-1.14.19.tar.bz2" version="1.14.19"
-	     hash="sha256:8cf82ce95ef97e61bae02099d2f39e4d814747b546899b7c28a695e15391b56c"/>
+    <branch  module="libgsf/1.14/libgsf-1.14.21.tar.bz2" version="1.14.21"
+	     hash="sha256:eef0a9d6eca4e6af6c16b208947e3c958c428b94d22792bdd0b80c08a4b301db"/>
   </autotools>
 
   <autotools id="gmp">
