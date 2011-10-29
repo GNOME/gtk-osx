@@ -8,14 +8,11 @@
               href="git://git.savannah.gnu.org/"/>
   <repository type='git' name='git.debian.org'
 	      href="git://git.debian.org/git/"/>
-  <repository type='svn' name='cvs.gnupg.org' href="svn://cvs.gnupg.org/" />
+  <repository type='git' name='git.gnupg.org' href="git://git.gnupg.org/" />
   <repository type='tarball' name='ftp.gnupg.org' href="ftp://ftp.gnupg.org/" />
   <repository type='tarball' name='ftp.gnu.org' href="ftp://ftp.gnu.org/gnu/"/>
   <repository type="tarball" name="sourceforge" 
               href="http://downloads.sourceforge.net/sourceforge/"/>
-  <repository type="cvs" name="gnutls.gnupg.org"
-              cvsroot=":pserver:anoncvs@cvs.gnupg.org:/cvs/gnutls"
-              password="anoncvs"/>
   <repository type="svn" name="abisource/enchant"
               href="http://svn.abisource.com/" />
   <repository type='svn' name='libproxy.google.com'
@@ -51,9 +48,9 @@
   </autotools>
 
   <autotools id="gnutls" autogen-sh="configure">
- <!--   <branch repo='git.gnu.org' tag='gnutls_2_8_1' module="gnutls"/> -->
-    <branch repo='ftp.gnu.org' version='2.8.4'
-            module="gnutls/gnutls-2.8.4.tar.bz2"/>
+    <branch repo='git.gnu.org' tag='gnutls_2_12_x'/>
+    <!--branch repo='ftp.gnu.org' version='2.12.11'
+            module="gnutls/gnutls-2.12.11.tar.bz2"/-->
     <dependencies>
       <dep package="libgcrypt" />
       <dep package="libtasn1" />
@@ -62,7 +59,7 @@
     </dependencies>
   </autotools>
 
-<!-- Libsoup doesn't work with newer versions of libproxy -->
+<!-- Libproxy needs patches to build correctly.
   <cmake id='libproxy' cmakeargs="-DWITH_PYTHON=OFF">
     <branch version='0.4.7' module='libproxy-0.4.7.tar.gz'
             repo='libproxy.google.com'/>
@@ -70,8 +67,20 @@
       <dep package="cmake"/>
     </dependencies>
   </cmake>
+-->
 
-  <autotools id="gnome-keyring">
+  <cmake id='libproxy' cmakeargs="-DWITH_PYTHON=OFF">
+    <branch version='0.4.7' module='libproxy-0.4.7.tar.gz'
+            repo='libproxy.google.com'>
+      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/libproxy-Bug-052-POSIX_C_SOURCE.patch" strip="1"/>
+      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0001-Bug-168-libproxy-pc-file.patch" strip="1"/>
+    </branch>
+    <dependencies>
+      <dep package="cmake"/>
+    </dependencies>
+  </cmake>
+
+  <autotools id="libgnome-keyring">
     <branch revision="gnome-2-32"/>
     <dependencies>
       <dep package="gtk+"/>
@@ -88,8 +97,30 @@
       <dep package='libproxy'/>
       <dep package='gconf'/>
       <dep package='sqlite'/>
-      <dep package="libxml2"/>
-      <dep package="gnome-keyring"/>
+      <!-- dep package="libxml2"/ -->
+      <dep package="libgnome-keyring"/>
+    </dependencies>
+  </autotools>
+
+  <autotools id="libgnome-keyring-gtk3">
+    <branch revision="gnome-3-2" module="libgnome-keyring"/>
+    <dependencies>
+      <dep package="gtk+-3.0"/>
+      <dep package="libgcrypt"/>
+      <dep package="libtasn1"/>
+    </dependencies>
+  </autotools>
+
+  <autotools id="libsoup-gtk3">
+    <branch revision="gnome-3-2" module="libsoup"/>
+    <dependencies>
+      <dep package="glib"/>
+      <dep package="gnutls"/>
+      <dep package='libproxy'/>
+      <dep package='gconf'/>
+      <dep package='sqlite'/>
+      <!-- dep package="libxml2"/ -->
+      <dep package="libgnome-keyring-gtk3"/>
     </dependencies>
   </autotools>
 
@@ -103,14 +134,14 @@
 
   <autotools id="libgpg-error"
              autogen-template="%(srcdir)s/%(autogen-sh)s &amp;&amp; %(srcdir)s/configure --prefix %(prefix)s --libdir %(libdir)s %(autogenargs)s">
-    <branch repo='cvs.gnupg.org' module="libgpg-error"
+    <branch repo='git.gnupg.org' module="libgpg-error"
             tag="libgpg-error-1.10"/>
   </autotools>
 
   <autotools id="libgcrypt"     autogen-sh="configure">
 
 <!-- CVS version requires fig2dev, an X11 utility.
-     <branch repo='cvs.gnupg.org' tag="libgcrypt-1.4.4" module='libgcrypt'/> -->
+     <branch repo='git.gnupg.org' tag="libgcrypt-1.4.4" module='libgcrypt'/> -->
     <branch repo='ftp.gnupg.org' version='1.4.6'
 	    module='gcrypt/libgcrypt/libgcrypt-1.4.6.tar.bz2'/>
     <dependencies>
