@@ -9,8 +9,6 @@
       href="http://www.python.org/ftp/python/"/>
   <repository type="tarball" name="sourceforge"
       href="http://downloads.sourceforge.net/sourceforge/"/>
-  <repository type="tarball" name="xmlsoft.org"
-	      href="ftp://xmlsoft.org/libxml2/"/>
   <repository type="tarball" name="tukaani.org"
 	      href="http://tukaani.org/"/>
 
@@ -89,19 +87,6 @@
             module="pkg-config-0.25.tar.gz" version="0.25"/>
   </autotools>
 
-   <autotools id="libxml2" autogen-sh="configure">
-    <branch version="2.7.8" module="libxml2-2.7.8.tar.gz"
-	    repo="xmlsoft.org"/>
-  </autotools>
-
-  <autotools id="libxslt" autogen-sh="configure">
-    <branch version="1.1.26" module="libxslt-1.1.26.tar.gz"
-	    repo="xmlsoft.org"/>
-    <dependencies>
-      <dep package="libxml2"/>
-    </dependencies>
-  </autotools>
-
   <!-- 10.4 has 1.28 which is too old, 10.5 & 10.6 have 2.3 which is OK. -->
   <autotools id="bison" autogen-sh="configure">
     <branch repo="ftp.gnu.org" module="bison/bison-2.4.1.tar.bz2"
@@ -126,8 +111,6 @@
       <dep package="automake-1.10" />
       <dep package="automake-1.11" />
       <dep package="pkg-config" />
-      <dep package="libxml2"/> <!-- included for compatibility -->
-      <dep package="libxslt"/> <!-- included for compatibility -->
       <dep package="bison"/>   <!-- included for Tiger, skipped otherwise -->
       <dep package="flex"/>    <!-- included for Tiger, skipped otherwise -->
       <dep package="readline"/>

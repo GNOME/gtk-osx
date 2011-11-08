@@ -199,15 +199,6 @@ def setup_sdk(target, sdk_version, architectures=[_default_arch]):
             #
             os.environ["CUPS_CONFIG"] = os.path.join(sdkdir,
                                                      "usr/bin/cups-config")
-    if (sdk_version == "10.6" or
-        ((_osx_version.startswith("10") or _osx_version.startswith("11") )
-         and sdk_version == "native")):
-            # Use libxml/libxslt from the system. Append to the
-            # pkg-config path to get the system versions picked up.
-            #
-            skip.append("libxml2")
-            skip.append("libxslt")
-            addpath("PKG_CONFIG_PATH", "/usr/lib/pkgconfig")
 
     #Glib and autoconf-2.63 have issues with endianness
     #
