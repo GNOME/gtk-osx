@@ -21,6 +21,8 @@
 	      href="http://www.cmake.org/files/"/>
   <repository type="tarball" name="xmlsoft.org"
 	      href="ftp://xmlsoft.org/libxml2/"/>
+  <repository type="git" name="git.gnome.org"
+              href="git://git.gnome.org/"/>
 
 <!-- Libpng-1.5 has made private struct definitions; gdk-pixbuf 2-23
      hasn't adjusted -->
@@ -70,15 +72,17 @@
 	     version="1.0"/>
   </autotools>
 
-  <!-- This is not gnome-doc-utils, it just contains smallest set of
-       files to make it possible to build packages that use
-       gnome-doc-utils, but with disable-scrollkeeper.
-  -->
-  <autotools id="gnome-doc-utils" >
-    <branch version="0.10.13-fake2" repo="sourceforge"
-	    module="gtk-osx/gnome-doc-utils-0.10.13-fake2.tar.gz"/>
+  <autotools id="gnome-common">
+     <branch repo="git.gnome.org"/>
+  </autotools>
+
+  <autotools id="gnome-doc-utils" autogenargs="--disable-scrollkeeper" >
+    <branch repo="git.gnome.org"/>
     <dependencies>
       <dep package="gtk-osx-docbook"/>
+      <dep package="libxslt"/>
+      <dep package="intltool"/>
+      <dep package="gnome-common"/>
     </dependencies>
   </autotools>
 

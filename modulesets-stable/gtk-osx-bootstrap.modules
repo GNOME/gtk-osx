@@ -70,18 +70,20 @@
 	     version="1.0"/>
   </autotools>
 
-  <!-- This is not gnome-doc-utils, it just contains smallest set of
-       files to make it possible to build packages that use
-       gnome-doc-utils, but with disable-scrollkeeper.
-  -->
-  <autotools id="gnome-doc-utils" >
-    <branch version="0.10.13-fake2" repo="sourceforge"
-	    module="gtk-osx/gnome-doc-utils-0.10.13-fake2.tar.gz"/>
-    <dependencies>
-      <dep package="gtk-osx-docbook"/>
-    </dependencies>
+  <autotools id="gnome-common">
+    <branch module="gnome-common/2.34/gnome-common-2.34.0.tar.bz2" version="2.34.0"
+	    hash="sha256:7a9c4f9ab975501c36be3192aa61641abca045a215d519d7d00527706f1de1df"/>
   </autotools>
 
+  <autotools id="gnome-doc-utils" autogenargs="--disable-scrollkeeper">
+    <branch module="gnome-doc-utils/0.20/gnome-doc-utils-0.20.6.tar.bz2" version="0.20.6"
+	    hash="sha256:091486e370480bf45349ad09dac799211092a02938b26a0d68206172cb6cebbf"/>
+    <dependencies>
+      <dep package="gnome-common"/>
+      <dep package="libxslt"/>
+      <dep package="intltool"/>
+    </dependencies>
+  </autotools>
   <!-- Expat could be skipped for >= 10.5 since it's is part of the SDK there. -->
   <autotools id="expat" autogen-sh="configure">
     <branch module="expat/expat-2.0.1.tar.gz" version="2.0.1"

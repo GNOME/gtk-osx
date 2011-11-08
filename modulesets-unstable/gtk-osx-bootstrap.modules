@@ -74,15 +74,17 @@
 	     version="1.0"/>
   </autotools>
 
-  <!-- This is not gnome-doc-utils, it just contains smallest set of
-       files to make it possible to build packages that use
-       gnome-doc-utils, but with disable-scrollkeeper.
-  -->
-  <autotools id="gnome-doc-utils" >
-    <branch version="0.10.13-fake2" repo="sourceforge"
-	    module="gtk-osx/gnome-doc-utils-0.10.13-fake2.tar.gz"/>
+  <autotools id="gnome-common">
+     <branch repo="git.gnome.org"/>
+  </autotools>
+
+  <autotools id="gnome-doc-utils" autogenargs="--disable-scrollkeeper" >
+    <branch repo="git.gnome.org"/>
     <dependencies>
       <dep package="gtk-osx-docbook"/>
+      <dep package="libxslt"/>
+      <dep package="intltool"/>
+      <dep package="gnome-common"/>
     </dependencies>
   </autotools>
 
