@@ -50,6 +50,16 @@
     </after>
   </metamodule>
 
+  <metamodule id="meta-gtk-osx-gtk3">
+    <dependencies>
+      <dep package="gtk+-3.0"/>
+      <dep package="gtk-mac-integration"/>
+    </dependencies>
+    <after>
+      <dep package="meta-gtk-osx-bootstrap"/>
+    </after>
+  </metamodule>
+
   <autotools id="glib" autogenargs="--disable-dtrace">
     <branch />
     <after>
@@ -77,13 +87,15 @@
              makeargs="-k -C modules; make">
     <branch />
     <dependencies>
-      <dep package="glib"/>
-      <dep package="gobject-introspection"/>
       <dep package="cairo"/>
       <dep package="fontconfig"/>
       <dep package="freetype"/>
     </dependencies>
     <after>
+      <dep package="glib"/>
+      <dep package="gobject-introspection"/>
+      <dep package="glib-gtk3"/>
+      <dep package="gobject-introspection-gtk3"/>
       <dep package="meta-gtk-osx-bootstrap"/>
     </after>
   </autotools>
@@ -120,7 +132,7 @@
   </autotools>
 
   <autotools id="gtk+-3.0"
-	     autogenargs="--enable-quartz-backend --disable-colord">
+	     autogenargs="--enable-quartz-backend --enable-quartz-relocation --disable-colord">
     <branch module="gtk+" checkoutdir="gtk+-3.0" revision="quartz-integration"/>
     <dependencies>
       <dep package="pango"/>
