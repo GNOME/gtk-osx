@@ -125,7 +125,7 @@ Libglade itself is deprecated. This is the last release. -->
      change back to just "glade"-->
   <autotools id="glade" autogen-sh="configure" 
 	     autogenargs="--disable-scrollkeeper">
-    <branch module="glade/3.10/glade3-3.10.0.tar.bz2" version="3.10.0"
+    <branch module="glade/3.10/glade-3.10.0.tar.bz2" version="3.10.0"
             hash="sha256:7e6a1423f1697d8b40618d0b01f0ebff572ccb80f5818a36af0971c5d1d94253"/>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
