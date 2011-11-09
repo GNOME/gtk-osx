@@ -113,7 +113,10 @@ Libglade itself is deprecated. This is the last release. -->
   <autotools id="glade3" autogen-sh="configure" 
 	     autogenargs="--disable-scrollkeeper">
     <branch module="glade3/3.8/glade3-3.8.0.tar.bz2" version="3.8.0"
-            hash="sha256:ad3f726ccd34d210dbec9cc2787cab91f7b4c4b9e7518c00bc72b6d52c9858bb"/>
+            hash="sha256:ad3f726ccd34d210dbec9cc2787cab91f7b4c4b9e7518c00bc72b6d52c9858bb">
+      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/Glade-3-8-Bug-663492-Update-Mac-integration-bindings-to-.patch " strip="1"/>
+      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/Glade-3-8-Bug-663492-Update-Mac-integration-bindings-to-.patch" strip="1"/>
+    </branch>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
       <dep package="meta-gtk-osx-themes"/>
@@ -126,7 +129,10 @@ Libglade itself is deprecated. This is the last release. -->
   <autotools id="glade" autogen-sh="configure" 
 	     autogenargs="--disable-scrollkeeper">
     <branch module="glade/3.10/glade-3.10.0.tar.bz2" version="3.10.0"
-            hash="sha256:7e6a1423f1697d8b40618d0b01f0ebff572ccb80f5818a36af0971c5d1d94253"/>
+            hash="sha256:7e6a1423f1697d8b40618d0b01f0ebff572ccb80f5818a36af0971c5d1d94253">
+      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/Glade-master-Bug-663492-Update-Mac-integration-bindings-to-.patch" strip="1"/>
+      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/Glade-master-Mac-Integration-Fix-up-menu-accelerators-for-Mac.patch" strip="1"/>
+    </branch>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
       <dep package="meta-gtk-osx-themes"/>
