@@ -152,8 +152,9 @@
   </autotools>
 
   <autotools id="intltool" autogen-sh="configure">
-    <branch repo="ftp.gnome.org" module="intltool/0.40/intltool-0.40.6.tar.bz2"
-	    version="0.40.6" md5sum="69bc0353323112f42ad4f9cf351bc3e5"/>
+    <branch repo="intltool" module="0.41.1/+download/intltool-0.41.1.tar.gz"
+	    version="0.41.1"
+	    hash="sha256:06d02133a85b9d6f29cd763050dc9267a6d73ef3008993f5b917cafc7ece96c0"/>
     <dependencies>
       <dep package="gnome-common"/>
       <dep package="perl-xml-parser"/>
