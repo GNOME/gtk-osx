@@ -110,11 +110,20 @@
   </autotools>
 
   <autotools id="glade3" autogenargs="--disable-scrollkeeper">
-    <branch />
+    <branch module="glade" tag="glade-3-8"/>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
       <dep package="meta-gtk-osx-themes"/>
       <dep package="meta-gtk-osx-core"/>
+    </after>
+  </autotools>
+
+  <autotools id="glade" autogenargs="--disable-scrollkeeper">
+    <branch />
+    <after>
+      <dep package="meta-gtk-osx-bootstrap"/>
+      <dep package="meta-gtk-osx-themes"/>
+      <dep package="meta-gtk-osx-gtk3"/>
     </after>
   </autotools>
 
