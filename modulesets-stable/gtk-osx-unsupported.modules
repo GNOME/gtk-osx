@@ -182,11 +182,13 @@ This issue was closed by revision r827.
       <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/webkit-disallowctype.patch" strip="1"/>
     </branch>
     <dependencies>
-      <dep package="libsoup"/>
       <dep package="enchant"/>
     </dependencies>
     <after>
+      <dep package="libsoup"/>
+      <dep package="libsoup-gtk3"/>
       <dep package="meta-gtk-osx-core"/>
+      <dep package="meta-gtk-osx-gtk3"/>
       <dep package="libcurl"/>
       <dep package="bison"/>
     </after>
@@ -196,7 +198,7 @@ This issue was closed by revision r827.
 	     autogenargs="--with-target=quartz --disable-video --with-font-backend=pango">
     <branch repo="svn.webkit.org" module="webkit/trunk" checkoutdir="WebKit"/>
     <dependencies>
-      <dep package="libsoup"/>
+      <dep package="libsoup-gtk3"/>
       <dep package="enchant"/>
       <!--dep package="libgail"/-->
     </dependencies>
