@@ -446,10 +446,10 @@ if _osx_version.startswith("7."):
     raise SystemExit
 elif _osx_version.startswith("8."):
     # Tiger, we want to use the python version from jhbuild.
-    _gtk_osx_use_jhbuild_bison_flex = True
+    _host_tiger = True
 else:
     # Leopard or newer.
-    _gtk_osx_use_jhbuild_bison_flex = False
+    _host_tiger = False
 
 ###### Import Customizations ######
 
@@ -516,7 +516,8 @@ os.environ['JHBUILD_SOURCE'] = checkoutroot
 os.environ["M4"] = _exec_prefix + "/bin/m4"
 os.environ['LIBTOOLIZE'] = _exec_prefix + '/bin/libtoolize'
 
-if not _gtk_osx_use_jhbuild_bison_flex:
+if not _host_tiger:
+    skip.append('make')
     skip.append('bison')
     skip.append('flex')
 
