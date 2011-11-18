@@ -518,6 +518,7 @@ os.environ['LIBTOOLIZE'] = _exec_prefix + '/bin/libtoolize'
 
 if not _host_tiger:
     skip.append('make')
+    skip.append('subversion')
     skip.append('bison')
     skip.append('flex')
 
