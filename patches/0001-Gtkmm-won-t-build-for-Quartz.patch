@@ -85,7 +85,7 @@ index c3b08a1..e665e2b 100644
 -	printunixdialog.hg	\
 +	printunixdialog.hg
 +
-+gtkmm_files_xll_hg =            \
++gtkmm_files_x11_hg =            \
 +	plug.hg			\
  	socket.hg
  
