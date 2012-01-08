@@ -22,6 +22,7 @@
 
 import sys
 import errno
+import re
 
 
 # Register an extra command to get the checkout dir for a module.
@@ -81,6 +82,13 @@ elif _machine.startswith("ppc") :
     _default_arch = "ppc"
 else:
     _default_arch = "i386"
+
+def xcode_ver():
+   _ver = _ver = os.popen("xcodebuild -version").read().strip()
+   exp = re.compile(r'Xcode (\d.\d)')
+   return float(exp.match(_ver).group(1))
+_xcodeversion = xcode_ver()
+print _xcodeversion
 
 #print "Default Architecture %s\n" % _default_arch
 # Some utitily functions used here and in custom files:
@@ -221,9 +229,12 @@ def setup_sdk(target, sdk_version, architectures=[_default_arch]):
         os.environ["VERSIONER_PYTHON_PREFER_32_BIT"] = "yes"
 
     #SDK 10.4 doesn't support gcc4.2.
-    if  _osx_version.startswith("8."):
+    if  _osx_version.startswith("8.") or sdk_version == "10.4u":
         os.environ["CC"] = "/usr/bin/gcc-4.0"
         os.environ["CXX"] = "/usr/bin/g++-4.0"
+    elif _osx_version.startswith("11") and _xcodeversion > 4.0:
+        os.environ["CC"] = "/usr/bin/llvm-gcc-4.2"
+        os.environ["CXX"] = "/usr/bin/llvm-g++-4.2"
     else:
         os.environ["CC"] = "/usr/bin/gcc-4.2"
         os.environ["CXX"] = "/usr/bin/g++-4.2"
@@ -513,8 +524,8 @@ os.environ['JHBUILD_SOURCE'] = checkoutroot
 # Some packages go off and find /usr/lib/gm4, which is broken Note the
 # use of _exec_prefix here. By default it's prefix, but you can
 # override it to somewhere else in jhbuildrc-custom if you like.
-os.environ["M4"] = _exec_prefix + "/bin/m4"
-os.environ['LIBTOOLIZE'] = _exec_prefix + '/bin/libtoolize'
+#os.environ["M4"] = _exec_prefix + "/bin/m4"
+#os.environ['LIBTOOLIZE'] = _exec_prefix + '/bin/libtoolize'
 
 if not _host_tiger:
     skip.append('make')
