@@ -250,7 +250,11 @@
              autogenargs="--enable-pdf --enable-quartz --enable-xlib=no --without-x">
     <branch module="cairo-1.10.2.tar.gz"  version="1.10.2"
             repo="cairographics"
-            hash="sha1:ccce5ae03f99c505db97c286a0c9a90a926d3c6e"/>
+            hash="sha1:ccce5ae03f99c505db97c286a0c9a90a926d3c6e">
+      <patches>
+        <patch  file="http://git.gnome.org/browse/gtk-osx/plain/patches/Cairo-44584-llvm-no-flto.patch"/>
+      </patches>
+    </branch>
     <dependencies>
       <dep package="pixman"/>
     </dependencies>
