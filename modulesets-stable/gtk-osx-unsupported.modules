@@ -14,7 +14,7 @@
   <repository type="tarball" name="abisource/enchant"
               href="http://www.abisource.com/downloads/enchant/" />
   <repository type="tarball" name="iso-codes"
-              href="ftp://pkg-isocodes.alioth.debian.org/pub/"/>
+	      href="http://ftp.us.debian.org/debian/pool/main/i/iso-codes/"/>
   <repository type='tarball' name='libproxy.google.com'
               href='http://libproxy.googlecode.com/files/'/>
   <repository type="tarball" name="curl.haxx.se"
@@ -41,10 +41,8 @@
     </dependencies>
   </autotools>
 
-  <autotools id="iso-codes" autogen-sh="configure" >
-    <branch repo="iso-codes" version="3.24"
-            module="pkg-isocodes/iso-codes-3.24.tar.bz2"/>
-
+  <autotools id="iso-codes" autogen-sh="configure">
+    <branch module="iso-codes_3.32.orig.tar.bz2" version="3.32" repo="iso-codes" checkoutdir="iso-codes-3.28"/>
   </autotools>
 
   <autotools id="zlib">
