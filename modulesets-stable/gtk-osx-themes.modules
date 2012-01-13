@@ -36,7 +36,7 @@
   <autotools id="tango-icon-theme" autogenargs="--disable-icon-framing"
              autogen-sh="configure">
     <branch repo="tango.freedesktop.org" version="0.8.90"
-            module="tango-icon-theme-0.8.90.tar.bz2"/>
+            module="tango-icon-theme-0.8.90.tar.gz"/>
     <dependencies>
       <dep package="icon-naming-utils"/>
       <dep package="hicolor-icon-theme"/>
