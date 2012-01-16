@@ -84,9 +84,14 @@ else:
     _default_arch = "i386"
 
 def xcode_ver():
-   _ver = _ver = os.popen("xcodebuild -version").read().strip()
+   ver = ver = os.popen("xcodebuild -version").read().strip()
    exp = re.compile(r'Xcode (\d.\d)')
-   return float(exp.match(_ver).group(1))
+   vernum = exp.match(ver)
+   if vernum:
+       return float(vernum.group(1))
+   else:
+       return 3.0
+
 _xcodeversion = xcode_ver()
 print _xcodeversion
 
