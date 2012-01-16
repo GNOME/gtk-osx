@@ -62,11 +62,11 @@
 
   <autotools id="glib" autogenargs="--disable-dtrace">
     <branch />
-    <after>
+    <dependencies>
       <dep package="meta-gtk-osx-bootstrap"/>
       <dep package="gtk-doc"/> <!-- FIXME: http://bugs.gnome.org/546640 -->
       <dep package="libffi"/>
-    </after>
+    </dependencies>
   </autotools>
 
   <autotools id="libffi" autogenargs="--disable-builddir">
@@ -90,20 +90,17 @@
       <dep package="cairo"/>
       <dep package="fontconfig"/>
       <dep package="freetype"/>
-    </dependencies>
-    <after>
       <dep package="glib"/>
       <dep package="gobject-introspection"/>
-      <dep package="glib-gtk3"/>
-      <dep package="gobject-introspection-gtk3"/>
       <dep package="meta-gtk-osx-bootstrap"/>
-    </after>
+    </dependencies>
   </autotools>
 
  <autotools id="atk">
     <branch />
     <dependencies>
       <dep package="glib"/>
+      <dep package="gobject-introspection"/>
     </dependencies>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
@@ -115,6 +112,7 @@
     <branch />
     <after>
       <dep package="pango"/>
+      <dep package="gobject-introspection"/>
     </after>
   </autotools>
 
@@ -160,6 +158,7 @@
       <dep package="meta-gtk-osx-bootstrap"/>
       <dep package="fontconfig"/>
       <dep package="freetype"/>
+      <dep package='glib'/>
     </after>
   </autotools>
 
