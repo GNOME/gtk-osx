@@ -234,7 +234,7 @@ def setup_sdk(target, sdk_version, architectures=[_default_arch]):
         os.environ["VERSIONER_PYTHON_PREFER_32_BIT"] = "yes"
 
     #SDK 10.4 doesn't support gcc4.2.
-    if  _osx_version.startswith("8.") or sdk_version == "10.4u":
+    if  _xcodeversion == 3.0 or sdk_version == "10.4u":
         os.environ["CC"] = "/usr/bin/gcc-4.0"
         os.environ["CXX"] = "/usr/bin/g++-4.0"
     elif _osx_version.startswith("11") and _xcodeversion > 4.0:
