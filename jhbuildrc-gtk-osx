@@ -293,6 +293,10 @@ def setup_sdk(target, sdk_version, architectures=[_default_arch]):
 
     append_autogenargs("gnutls", "--disable-guile")
 
+    #Guile doesn't handle optimization well with llvm-gcc
+    if _osx_version.startswith("11") and _xcodeversion > 4.0:
+        append_autogenargs("guile", 'CFLAGS="$CFLAGS -O1"')
+
     return sdkdir
 # This is a convenience function for older .jhbuildrc-customs.
 def setup_sdk_10_4():
