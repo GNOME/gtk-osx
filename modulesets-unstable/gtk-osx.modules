@@ -99,6 +99,7 @@
  <autotools id="atk">
     <branch />
     <dependencies>
+      <dep package="libffi"/>
       <dep package="glib"/>
       <dep package="gobject-introspection"/>
     </dependencies>
@@ -133,6 +134,7 @@
 	     autogenargs="--enable-quartz-backend --enable-quartz-relocation --disable-colord">
     <branch module="gtk+" checkoutdir="gtk+-3.0" revision="quartz-integration"/>
     <dependencies>
+      <dep package="gobject-introspection"/>
       <dep package="pango"/>
       <dep package="gdk-pixbuf"/>
      <dep package="atk"/>
