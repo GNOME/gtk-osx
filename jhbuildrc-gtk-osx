@@ -141,10 +141,12 @@ def setup_debug():
 # for more information about debugging.
     environ_prepend('CFLAGS', "-O0 -ggdb3")
     environ_prepend('CXXFLAGS', "-O0 -ggdb3")
+    environ_prepend('OBJCFLAGS', "-O0 -ggdb3")
 
 def setup_release():
     environ_prepend('CFLAGS', "-O2")
     environ_prepend('CXXFLAGS', "-O2")
+    environ_prepend('OBJCFLAGS', "-O2")
 
 # Set up the environment for building against particular SDK.
 #
@@ -193,6 +195,7 @@ def setup_sdk(target, sdk_version, architectures=[_default_arch]):
         environ_prepend("LDFLAGS", "-L" + sdkdir + "/usr/lib")
         environ_prepend("CFLAGS", "-I" + sdkdir + "/usr/include")
         environ_prepend("CXXFLAGS", "-I" + sdkdir + "/usr/include")
+        environ_prepend("OBJCFLAGS", "-I" + sdkdir + "/usr/include")
         environ_prepend("CPPFLAGS", "-I" + sdkdir + "/usr/include")
 
         # It looks like -isysroot is broken when building on 10.4, causing link
@@ -206,6 +209,7 @@ def setup_sdk(target, sdk_version, architectures=[_default_arch]):
         if not _osx_version.startswith("8."):
             environ_append("CFLAGS", "-isysroot " + sdkdir)
             environ_append("CXXFLAGS", "-isysroot " + sdkdir)
+            environ_append("OBJCFLAGS", "-isysroot " + sdkdir)
             environ_append("LDFLAGS", "-isysroot " + sdkdir)
 
             # To pick up cups-config from the right place.
@@ -249,6 +253,7 @@ def setup_sdk(target, sdk_version, architectures=[_default_arch]):
     for arch in architectures:
         environ_prepend("CFLAGS", "-arch " + arch)
         environ_prepend("CXXFLAGS", "-arch " + arch)
+        environ_prepend("OBJCFLAGS", "-arch " + arch)
         environ_prepend("LDFLAGS", "-arch " + arch)
     # For intel, set glib's build parameter so that it builds the
     # correct atomic asm functions
@@ -277,6 +282,7 @@ def setup_sdk(target, sdk_version, architectures=[_default_arch]):
 
     environ_append("CFLAGS", "-mmacosx-version-min=" + target)
     environ_append("CXXFLAGS", "-mmacosx-version-min=" + target)
+    environ_append("OBJCFLAGS", "-mmacosx-version-min=" + target)
     environ_append("LDFLAGS", "-mmacosx-version-min=" + target)
 
     #Overcome Python's obnoxious misconfiguration of portable builds
@@ -324,6 +330,7 @@ def setup_ppc_build():
 
     environ_append('CFLAGS', '-arch ppc')
     environ_append('CXXFLAGS', '-arch ppc')
+    environ_append('OBJCFLAGS', '-arch ppc')
     environ_append('LDFLAGS', '-arch ppc')
 
     _ppc_args = "CFLAGS='" + _cflags + " -arch ppc' CXXFLAGS='" + _cxxflags + " -arch ppc' LDFLAGS='" + _ldflags + " -arch ppc' --build=powerpc-apple-darwin NM=nm"
