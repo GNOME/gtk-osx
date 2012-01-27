@@ -184,23 +184,10 @@
   <autotools id="gtk+" autogen-sh="configure"
              autogenargs="--with-gdktarget=quartz"
              autogen-template="autoreconf -fis &amp;&amp; %(srcdir)s/%(autogen-sh)s --prefix %(prefix)s --libdir %(libdir)s %(autogenargs)s">
-    <branch module="gtk+/2.24/gtk+-2.24.6.tar.bz2" version="2.24.6"
-            hash="sha256:6f45bdbf9ea27eb3b5f977d7ee2365dede0d0ce454985680c26e5210163bbf37">
-      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0001-Backport-acf1345-Fix-refresh-of-static-autorelease_p.patch" strip="1"/>
-      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0002-Bug-628396-Gtk-build-fails-because-of-objective-c-el.patch" strip="1"/>
-      <Patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0003-Bug-658772-Implement-relocatable-paths-for-quartz-si.patch" strip="1"/>
+    <branch module="gtk+/2.24/gtk+-2.24.9.tar.xz" version="2.24.9">
       <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0004-Bug-571582-GtkSelection-implementation-for-quartz.patch" strip="1"/>
-      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0005-Bug-657770-Write-to-released-memory-in-gtkdnd-quartz.patch" strip="1"/>
       <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0006-Bug-658722-Drag-and-Drop-sometimes-stops-working.patch" strip="1"/>
-      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0007-Bug-658767-Drag-and-Drop-NSEvent-capture-is-racy.patch" strip="1"/>
       <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0008-Implement-GtkDragSourceOwner-pasteboardChangedOwner.patch" strip="1"/>
-      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0009-Implement-recent-items-in-Filechooser.patch" strip="1"/>
-      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0010-Bug-617583-Dead-accents-keys-don-t-work-in-GTK-appli.patch" strip="1"/>
-      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0011-bgo-514843-filechooser-Deal-with-corrupted-.gtk-book.patch" strip="1"/>
-      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0012-Bug-605799-Option-MOD1-and-Command-SUPER-modifiers-a.patch" strip="1"/>
-      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0013-Bug-659406-Abstract-what-triggers-a-context-menu.patch" strip="1"/>
-      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0014-Bug-659907-gdk_quartz_draw_opaque_stippled_pattern-c.patch" strip="1"/>
-      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0015-Bug-653450-gtkfilechooser-crashes-when-adding-favori.patch" strip="1"/>
       <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/gtk+-Bug-655065-autotestkeywords-ldadd.patch" strip="1"/>
     </branch>
     <dependencies>
@@ -217,13 +204,8 @@
 
   <autotools id="gtk+-3.0" autogen-sh="configure"
              autogenargs="--enable-quartz-backend">
-    <branch module="gtk+/3.2/gtk+-3.2.0.tar.bz2" version="3.2.0"
-            hash="sha256:b285074ffefb4ff4364f6dd50fe68c7e85b11293e0c1dd3bdeac56052344dadb">
-      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0001-Bug-628936-Minimal-change-to-pass-introspection.patch" strip="1"/>
-      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0001-Bug-658772-Directory-paths-for-resource-directories-.patch" strip="1"/>
-      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0002-Quartz-Bug-655057-Eliminate-Compiler-Warning.patch" strip="1"/>
-      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0003-Bug-657770-Write-to-released-memory-in-gtkdnd-quartz.patch" strip="1"/>
-      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0004-Bug-658767-Drag-and-Drop-NSEvent-capture-is-racy.patch" strip="1"/>
+    <branch module="gtk+/3.2/gtk+-3.2.3.tar.xz" version="3.2.3"
+            hash="sha256:e2cf20f2510ebbc7be122a1a33dd1f472a7d06aaf16b4f2a63eb048cd9141d3d">
       <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0001-Bug-571582-GtkSelection-implementation-for-quartz.patch" strip="1"/>
     </branch>
     <dependencies>
