@@ -145,9 +145,9 @@ Libglade itself is deprecated. This is the last release. -->
 
 <!-- Glade 3.10 is the first stable series for Gtk+-3. Note the name
      change back to just "glade"-->
-  <autotools id="glade" autogen-sh="configure" 
+  <autotools id="glade" autogen-sh="configure"
 	     autogenargs="--disable-scrollkeeper">
-    <branch module="glade/3.10/glade-3.10.0.tar.bz2" version="3.10.0"
+    <branch module="glade/3.10/glade-3.10.2.tar.bz2" version="3.10.2"
             hash="sha256:7e6a1423f1697d8b40618d0b01f0ebff572ccb80f5818a36af0971c5d1d94253">
       <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/Glade-master-Bug-663492-Update-Mac-integration-bindings-to-.patch" strip="1"/>
       <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/Glade-master-Mac-Integration-Fix-up-menu-accelerators-for-Mac.patch" strip="1"/>
@@ -209,10 +209,8 @@ Libglade itself is deprecated. This is the last release. -->
   <autotools id="dbus" autogen-sh='configure'
 	   autogenargs="--disable-selinux --without-x --disable-launchd
 	   --with-session-socket-dir=/var/tmp">
-    <branch module="dbus/dbus-1.4.1.tar.gz"  version="1.4.1"
+    <branch module="dbus/dbus-1.4.16.tar.gz"  version="1.4.16"
 	    repo="dbus.freedesktop.org">
-      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/dbus-install.patch"/>
-      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/dbus-msg-nosignal.patch" strip="1"/>
     </branch>
     <after>
       <dep package="gtk+"/>

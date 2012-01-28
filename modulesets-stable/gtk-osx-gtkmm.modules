@@ -69,8 +69,8 @@
   </autotools>
 
   <autotools id="gtkmm3" autogen-sh="configure">
-    <branch module="gtkmm/3.0/gtkmm-3.0.1.tar.bz2" version="3.0.1"
-            hash="sha256:fb2d982095919e58ab5757042bf72e2a6243e77825c8ae6f46c41ab66cb68498">
+    <branch module="gtkmm/3.2/gtkmm-3.2.0.tar.bz2" version="3.2.0"
+            hash="sha256:2f28f97692555daf1bdd5178a50be5678f743cd1b09d276f208911b7738a3250">
       <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0001-Gtkmm-won-t-build-for-Quartz.patch" strip="1"/>
     </branch>
     <dependencies>
