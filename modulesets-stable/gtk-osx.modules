@@ -131,12 +131,10 @@
     <dependencies>
       <dep package="cairo"/>
       <dep package="fontconfig"/>
+      <dep package="glib"/>
+      <dep package="gobject-introspection"/>
     </dependencies>
     <after>
-      <dep package="glib"/>
-      <dep package="glib-gtk3"/>
-      <dep package="gobject-introspection"/>
-      <dep package="gobject-introspection-gtk3"/>
       <dep package="meta-gtk-osx-bootstrap"/>
     </after>
   </autotools>
