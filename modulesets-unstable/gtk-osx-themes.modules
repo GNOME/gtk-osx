@@ -14,7 +14,7 @@
               href="git://anongit.freedesktop.org/"/>
   <repository type="git" name="github.com" href="git://github.com/"/>
   <repository type="tarball" name="tango-rel.freedesktop.org"
-              href="http://tango.freedesktop.org/releases/"/>
+              href="https://github.com/jralls/gtk-osx-build/downloads/"/>
 
   <metamodule id="meta-gtk-osx-themes">
     <dependencies>
