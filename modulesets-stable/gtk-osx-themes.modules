@@ -9,7 +9,7 @@
   <repository type="tarball" name="sourceforge" 
 	      href="http://downloads.sourceforge.net/sourceforge/"/>
   <repository type="tarball" name="tango.freedesktop.org"
-              href="https://github.com/jralls/gtk-osx-build/downloads/"/>
+              href="http://tango.freedesktop.org/releases/"/>
   <repository type="tarball" name="icon-theme.freedesktop.org"
 	      href="http://icon-theme.freedesktop.org/releases"/>
   <repository type="git" name="freedesktop.git"
@@ -27,7 +27,7 @@
 
   <autotools id="icon-naming-utils" autogen-sh="configure">
     <branch repo="tango.freedesktop.org"  version="0.8.90"
-            module="icon-naming-utils-0.8.90.tar.bz2"/>
+            module="icon-naming-utils-0.8.90.tar.gz"/>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
     </after>
@@ -36,7 +36,7 @@
   <autotools id="tango-icon-theme" autogenargs="--disable-icon-framing"
              autogen-sh="configure">
     <branch repo="tango.freedesktop.org" version="0.8.90"
-            module="tango-icon-theme-0.8.90.tar.bz2"/>
+            module="tango-icon-theme-0.8.90.tar.gz"/>
     <dependencies>
       <dep package="icon-naming-utils"/>
       <dep package="hicolor-icon-theme"/>
