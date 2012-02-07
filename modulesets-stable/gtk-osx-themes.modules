@@ -18,7 +18,6 @@
   <metamodule id="meta-gtk-osx-themes">
     <dependencies>
       <dep package="tango-icon-theme"/>
-      <dep package="tango-icon-theme-extras"/>
       <dep package="gnome-icon-theme"/>
       <dep package="icon-naming-utils"/>
       <dep package="gtk-engines"/>
@@ -40,15 +39,6 @@
     <dependencies>
       <dep package="icon-naming-utils"/>
       <dep package="hicolor-icon-theme"/>
-    </dependencies>
-  </autotools>
-
-  <autotools id="tango-icon-theme-extras" autogenargs="--disable-icon-framing"
-             autogen-sh="configure">
-    <branch repo="tango.freedesktop.org" version="0.1.0"
-            module="tango-icon-theme-extras-0.1.0.tar.gz"/>
-    <dependencies>
-      <dep package="tango-icon-theme"/>
     </dependencies>
   </autotools>
 
