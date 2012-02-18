@@ -72,28 +72,42 @@ jhbuild.commands.register_command(_getenv)
 
 
 # Find out what we're building on
-_osx_version = os.popen("uname -r").read().strip()
-_machine = os.popen("machine").read().strip()
-_64bit = os.popen("sysctl hw.cpu64bit_capable").read().strip().endswith("1")
-if ((_64bit) and (_osx_version.startswith("10")
-                  or (_osx_version.startswith("11") ))):
-    _default_arch = "x86_64"
-elif _machine.startswith("ppc") :
-    _default_arch = "ppc"
-else:
-    _default_arch = "i386"
+_default_arch = ""
+_osx_version = 0.0
+
+def osx_ver():
+    global _default_arch, _osx_version
+    vstring = os.popen("uname -r").read().strip()
+    mstring = os.popen("machine").read().strip()
+    exp = re.compile(r'(\d+\.\d+)\.\d+')
+    vernum = exp.match(vstring)
+    _osx_version = float(vernum.group(1)) - 4.0
+
+    x64bit = os.popen("sysctl hw.cpu64bit_capable").read().strip().endswith("1")
+    if x64bit and _osx_version >= 6.0:
+        _default_arch = "x86_64"
+    elif mstring.startswith("ppc") :
+        _default_arch = "ppc"
+    else:
+        _default_arch = "i386"
 
 def xcode_ver():
    ver = ver = os.popen("xcodebuild -version").read().strip()
-   exp = re.compile(r'Xcode (\d.\d)')
+   exp = re.compile(r'Xcode (\d+\.\d+)')
    vernum = exp.match(ver)
    if vernum:
        return float(vernum.group(1))
    else:
        return 3.0
 
+osx_ver()
 _xcodeversion = xcode_ver()
-print _xcodeversion
+_xcodepath = None
+if _xcodeversion >= 4.3:
+   _xcodepath = "/Applications/Xcode.app/Contents"
+#For XCode4 we need to disable ppc when building perl:
+if _xcodeversion >= 4.0:
+    os.environ["ARCHFLAGS"]="-arch i386 -arch x86_64"
 
 #print "Default Architecture %s\n" % _default_arch
 # Some utitily functions used here and in custom files:
@@ -156,7 +170,13 @@ def make_sdk_name(sdk_version):
     return "MacOSX" + sdk_version + ".sdk"
 
 def get_sdkdir(sdk_name):
-    return os.path.join("/Developer/SDKs", sdk_name)
+    platformpath = None
+    sdkpath = "Developer/SDKs"
+    if _xcodeversion >= 4.3:
+        platformpath = "Developer/Platforms/MacOSX.platform"
+
+    sdkdir = os.path.join(_xcodepath, platformpath, sdkpath, sdk_name)
+    return sdkdir
 #
 # This is the workhorse of the setup. Call this function with the
 # target OSX version (10.4, 10.5, 10.6, or 10.7), the sdk version you want
@@ -187,7 +207,6 @@ def setup_sdk(target, sdk_version, architectures=[_default_arch]):
 
     if sdk_version != "native":
         sdkdir = get_sdkdir(make_sdk_name(sdk_version))
-
         # Seems like we need this since many libraries otherwise only look for
         # various dependencies (e.g. libiconv) in /usr/lib, hence pulling in
         # the wrong -L that doesn't have fat binaries on pre-10.5.
@@ -206,7 +225,7 @@ def setup_sdk(target, sdk_version, architectures=[_default_arch]):
 #Apple Documentation says that "-syslibroot" is the arg to pass to the
 #linker, but we are using the compiler to control the linker, and
 #everything seems to be working correctly.
-        if not _osx_version.startswith("8."):
+        if not _osx_version < 5.0:
             environ_append("CFLAGS", "-isysroot " + sdkdir)
             environ_append("CXXFLAGS", "-isysroot " + sdkdir)
             environ_append("OBJCFLAGS", "-isysroot " + sdkdir)
@@ -232,8 +251,7 @@ def setup_sdk(target, sdk_version, architectures=[_default_arch]):
     # If we're building on Snow Leopard for 32-bit, we need to make
     # sure that Perl and Python are working in 32-bit mode.
     #
-    if  ((_osx_version.startswith("10.") or _osx_version.startswith("11"))
-         and architectures == ["i386"]):
+    if  _osx_version >= 6.0 and architectures == ["i386"]:
         os.environ["VERSIONER_PERL_PREFER_32_BIT"] = "yes"
         os.environ["VERSIONER_PYTHON_PREFER_32_BIT"] = "yes"
 
@@ -241,7 +259,7 @@ def setup_sdk(target, sdk_version, architectures=[_default_arch]):
     if  _xcodeversion == 3.0 or sdk_version == "10.4u":
         os.environ["CC"] = "/usr/bin/gcc-4.0"
         os.environ["CXX"] = "/usr/bin/g++-4.0"
-    elif _osx_version.startswith("11") and _xcodeversion > 4.0:
+    elif _osx_version >= 7.0 and _xcodeversion > 4.0:
         os.environ["CC"] = "/usr/bin/llvm-gcc-4.2"
         os.environ["CXX"] = "/usr/bin/llvm-g++-4.2"
     else:
@@ -272,7 +290,7 @@ def setup_sdk(target, sdk_version, architectures=[_default_arch]):
 
     # Tiger has a somewhat messed-up resolv.h, so we need to explicitly
     # link libresolv:
-    if _osx_version.startswith("8.") or sdk_version.startswith("10.4"):
+    if _osx_version < 5.0 or sdk_version.startswith("10.4"):
         append_autogenargs("glib", 'LIBS="-lresolv"')
 
     # gettext-fw rebuilds gettext with an in-tree libiconv to get
@@ -293,14 +311,13 @@ def setup_sdk(target, sdk_version, architectures=[_default_arch]):
     if ((target == "10.4" or target == "10.5")
         and (sdk_version == "10.6" or sdk_version == "10.7"
              or sdk_version == "native"
-             and (_osx_version.startswith("10")
-                  or _osx_version.startswith("11")))):
+             and (_osx_version >= 6.0))):
         append_autogenargs("glib", "ac_cv_compliant_posix_memalign=no")
 
     append_autogenargs("gnutls", "--disable-guile")
 
     #Guile doesn't handle optimization well with llvm-gcc
-    if _osx_version.startswith("11") and _xcodeversion > 4.0:
+    if _osx_version >= 7.0 and _xcodeversion > 4.0:
         append_autogenargs("guile", 'CFLAGS="$CFLAGS -O1"')
 
     return sdkdir
@@ -363,7 +380,7 @@ def setup_ppc_build():
 def setup_universal_build(target="10.5", sdk_version="10.5",
                           architectures=['ppc', 'i386', 'x86_64']):
 # No point in attempting the impossible
-    if _osx_version.startswith("8"):
+    if _osx_version < 5.0:
         target = "10.4"
         sdk_version = "10.4u"
         architectures = ["ppc", "i386"]
@@ -470,10 +487,10 @@ _gtk_osx_prompt_prefix = "JH"
 
 _gtk_osx_default_build = ""
 
-if _osx_version.startswith("7."):
+if _osx_version < 4.0:
     print "Error: Mac OS X 10.4 or newer is required, exiting."
     raise SystemExit
-elif _osx_version.startswith("8."):
+elif _osx_version < 5.0:
     # Tiger, we want to use the python version from jhbuild.
     _host_tiger = True
 else:
