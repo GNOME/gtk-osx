@@ -174,8 +174,10 @@ def get_sdkdir(sdk_name):
     sdkpath = "Developer/SDKs"
     if _xcodeversion >= 4.3:
         platformpath = "Developer/Platforms/MacOSX.platform"
-
-    sdkdir = os.path.join(_xcodepath, platformpath, sdkpath, sdk_name)
+    if _xcodepath and platformpath:
+        sdkdir = os.path.join(_xcodepath, platformpath, sdkpath, sdk_name)
+    else:
+        sdkdir = os.path.join("/", sdkpath, sdk_name)
     return sdkdir
 #
 # This is the workhorse of the setup. Call this function with the
