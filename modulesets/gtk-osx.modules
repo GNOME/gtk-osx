@@ -105,12 +105,12 @@
              makeargs="-k -C modules; make">
     <branch tag="1.28"/>
     <dependencies>
+      <dep package="glib"/>
       <dep package="cairo"/>
       <dep package="fontconfig"/>
       <dep package="freetype"/>
     </dependencies>
     <after>
-      <dep package="glib"/>
       <dep package="glib-gtk3"/>
       <dep package="gobject-introspection"/>
       <dep package="gobject-introspection-gtk3"/>
