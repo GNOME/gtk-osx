@@ -229,9 +229,8 @@
     <branch module="cairo-1.10.2.tar.gz"  version="1.10.2"
             repo="cairographics"
             hash="sha1:ccce5ae03f99c505db97c286a0c9a90a926d3c6e">
-      <patches>
-        <patch  file="http://git.gnome.org/browse/gtk-osx/plain/patches/Cairo-44584-llvm-no-flto.patch"/>
-      </patches>
+      <patch  file="http://git.gnome.org/browse/gtk-osx/plain/patches/Cairo-44584-llvm-no-flto.patch" strip="1"/>
+      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0001-quartz-Fix-the-32-bits-build-on-MacOSX-10.7.patch" strip="1"/>
     </branch>
     <dependencies>
       <dep package="pixman"/>
