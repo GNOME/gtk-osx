@@ -184,7 +184,16 @@
       <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0006-Bug-658722-Drag-and-Drop-sometimes-stops-working.patch" strip="1"/>
       <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0008-Implement-GtkDragSourceOwner-pasteboardChangedOwner.patch" strip="1"/>
       <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/gtk+-Bug-655065-autotestkeywords-ldadd.patch" strip="1"/>
-    </branch>
+      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0001-Bug-670373-gtk2-modules-printing-cups-gtkprintbackendcups.patch" strip="1"/>
+      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0002-gtk2-Extract-reasons-and-reasons_desc-arrays-to-file-leve.patch" strip="1"/>
+      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0003-gtk2-Create-enum-PrinterStateLevel.patch" strip="1"/>
+      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0004-gtk2-Extract-printer-setup-variables-into-a-struct.patch" strip="1"/>
+      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0005-gtk2-Extract-function-cups_printer_handle_attribute.patch" strip="1"/>
+      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0006-gtk2-Extract-Function-cups_create_printer.patch" strip="1"/>
+      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0007-gtk2-Move-some-variable-declarations-into-the-scopes-in-w.patch" strip="1"/>
+      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0008-Bug-670373-gtk2-modules-printing-cups-gtkprintbackendcups.patch" strip="1"/>
+      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0009-Bug-670373-gtk2-modules-printing-cups-gtkprintbackendcups.patch" strip="1"/>
+   </branch>
     <dependencies>
       <dep package="glib"/>
       <dep package="pango"/>
@@ -202,6 +211,14 @@
     <branch module="gtk+/3.2/gtk+-3.2.3.tar.xz" version="3.2.3"
             hash="sha256:e2cf20f2510ebbc7be122a1a33dd1f472a7d06aaf16b4f2a63eb048cd9141d3d">
       <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0001-Bug-571582-GtkSelection-implementation-for-quartz.patch" strip="1"/>
+      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0002-gtk3-Extract-reasons-and-reasons_desc-arrays-to-file-leve.patch" strip="1"/>
+      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0003-gtk3-Create-enum-PrinterStateLevel.patch" strip="1"/>
+      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0004-gtk3-Extract-printer-setup-variables-into-a-struct.patch" strip="1"/>
+      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0005-gtk3-Extract-function-cups_printer_handle_attribute.patch" strip="1"/>
+      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0006-gtk3-Extract-Function-cups_create_printer.patch" strip="1"/>
+      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0007-gtk3-Move-some-variable-declarations-into-the-scopes-in-w.patch" strip="1"/>
+      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0008-Bug-670373-gtk3-modules-printing-cups-gtkprintbackendcups.patch" strip="1"/>
+      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0009-Bug-670373-gtk3-modules-printing-cups-gtkprintbackendcups.patch" strip="1"/>
     </branch>
     <dependencies>
       <dep package="glib-gtk3"/>
