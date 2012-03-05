@@ -157,10 +157,8 @@
   <autotools id="dbus" autogen-sh='configure'
 	   autogenargs="--disable-selinux --without-x --disable-launchd
 	   --with-session-socket-dir=/var/tmp">
-    <branch module="dbus/dbus-1.4.1.tar.gz"  version="1.4.1"
+    <branch module="dbus/dbus-1.4.16.tar.gz"  version="1.4.16"
 	    repo="dbus.freedesktop.org">
-      <patch file="https://raw.github.com/jralls/gnucash-on-osx/master/patches/dbus-install.patch"/>
-      <patch file="https://raw.github.com/jralls/gtk-osx-build/master/patches/dbus-msg-nosignal.patch" strip="1"/>
     </branch>
     <after>
       <dep package="gtk+"/>
