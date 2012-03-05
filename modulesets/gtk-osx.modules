@@ -153,7 +153,7 @@
     </after>
   </autotools>
 
-  <autotools id="gtk+" autogenargs="--with-gdktarget=quartz --enable-introspection=no">
+  <autotools id="gtk+" autogenargs="--with-gdktarget=quartz --enable-introspection=no --enable-quartz-relocation">
     <branch revision="gtk-2-24-quartz"/>
     <dependencies>
       <dep package="pango"/>
@@ -166,7 +166,7 @@
   </autotools>
 
   <autotools id="gtk+-3.0"
-	     autogenargs="--enable-quartz-backend --disable-colord">
+	     autogenargs="--enable-quartz-backend --disable-colord  --enable-quartz-relocation">
     <branch module="gtk+" checkoutdir="gtk+-3.0" revision="quartz-integration"/>
     <dependencies>
       <dep package="glib-gtk3"/>

@@ -118,7 +118,7 @@
   </autotools>
 
   <autotools id="gtk+"
-	     autogenargs="--with-gdktarget=quartz --enable-introspection=no">
+	     autogenargs="--with-gdktarget=quartz --enable-introspection=no --enable-quartz-relocation">
     <branch revision="gtk-2-24-quartz" checkoutdir="gtk+-2.0"/>
     <dependencies>
       <dep package="pango"/>
