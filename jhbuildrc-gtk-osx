@@ -476,7 +476,6 @@ tarballdir = None
 # Extra arguments to pass to all autogen.sh scripts.
 #
 autogenargs=''
-alwaysautogen = True
 
 # Use the included install-check program if available. It won't update
 # timestamps if the header hasn't changed, which speeds up builds.
