@@ -21,8 +21,11 @@
               tags-template="tags/%(tag)s"/>
   <repository type="svn" name="svn.webkit.org"
 	      href="http://svn.webkit.org/repository/"/>
-  <repository type="git" name="git.debian.org" href="git://git.debian.org/"/>
-
+  <repository type="git" name="git.webkit.org"
+	      href="git://git.webkit.org/"/>
+   <repository type="git" name="git.debian.org" href="git://git.debian.org/"/>
+  <repository type="git" name="freedesktop"
+	      href="git://anongit.freedesktop.org"/>
  
   <metamodule id="meta-gtk-osx-unsupported">
     <dependencies>
@@ -50,26 +53,21 @@
 	    module="libpng/zlib-1.2.5.tar.gz"/>
   </autotools>
 
-  <autotools id="gnutls" autogen-sh="configure">
- <!--   <branch repo='git.gnu.org' tag='gnutls_2_8_1' module="gnutls"/> -->
-    <branch repo='ftp.gnu.org' version='2.8.1' 
-            module="gnutls/gnutls-2.8.1.tar.bz2"/>
+  <autotools id="p11-kit">
+    <branch repo="freedesktop" module="p11-glue/p11-kit"/>
+  </autotools>
+
+  <autotools id="gnutls" autogen-sh="configure"
+	     autogenargs="--disable-gtk-doc-html"
+	     autogen-template="autoreconf -fis &amp;&amp; %(srcdir)s/configure --prefix %(prefix)s --libdir %(libdir)s %(autogenargs)s">
+    <branch repo='git.gnu.org' tag='gnutls_2_12_x' module="gnutls"/> 
+    <!--<branch repo='ftp.gnu.org' version='2.8.1' 
+            module="gnutls/gnutls-2.8.1.tar.bz2"/ -->
     <dependencies>
+      <dep package="p11-kit"/>
       <dep package="libgcrypt" />
       <dep package="libtasn1" />
       <dep package="zlib"/>
-   <!--   <dep package="opencdk" /> -->
-    </dependencies>
-  </autotools>
-<!-- Not Required -->
-  <autotools id="opencdk" supports-non-srcdir-builds="no" 
-             autogenargs="--enable-maintainer-mode"
-	     autogen-template="%(srcdir)s/%(autogen-sh)s &amp;&amp; %(srcdir)s/configure --prefix %(prefix)s --libdir %(libdir)s %(autogenargs)s">
-    <!-- No tags yet, this is right after import from CVS. -->
-    <branch repo="git.gnu.org" module="opencdk"
-            />
-    <dependencies>
-      <dep package="libgcrypt" />
     </dependencies>
   </autotools>
 
@@ -96,7 +94,7 @@
 	    module="libtasn1/libtasn1-2.9.tar.gz"/>
   </autotools>
 
-  <autotools id="gnome-keyring" autogenargs="--disable-pam --without-root-certs">
+  <autotools id="libgnome-keyring" autogenargs="--disable-pam --without-root-certs">
     <branch/>
     <dependencies>
       <dep package="gtk+"/>
@@ -105,15 +103,32 @@
     </dependencies>
   </autotools>
 
-  <autotools id="libsoup">
-    <branch />
+  <autotools id="glib-networking" autogenargs="--without-ca-certificates">
+    <branch/>
     <dependencies>
       <dep package="glib"/>
       <dep package="gnutls"/>
       <dep package='libproxy'/>
+    </dependencies>
+  </autotools>
+
+   <autotools id="gnome-keyring"
+	      autogenargs="--disable-pam --without-root-certs">
+    <branch/>
+    <dependencies>
+      <dep package="gtk+"/>
+      <dep package="libgcrypt"/>
+      <dep package="libtasn1"/>
+    </dependencies>
+  </autotools>
+
+ <autotools id="libsoup">
+    <branch />
+    <dependencies>
       <dep package='gconf'/>
       <dep package='sqlite'/>
-      <dep package="gnome-keyring"/>
+      <dep package="libgnome-keyring"/>
+      <dep package="glib-networking"/>
     </dependencies>
   </autotools>
 
@@ -125,7 +140,7 @@
     </dependencies>
   </autotools>
 
-  <cmake id='libproxy'  cmakeargs="-DWITH_PYTHON=OFF">
+  <cmake id='libproxy'  cmakeargs="-DWITH_PYTHON=OFF -DWITH_PERL=OFF -DWITH_NM=OF">
     <branch repo='libproxy.google.com' module="trunk" />
     <dependencies>
       <dep package="cmake"/>
@@ -142,12 +157,12 @@
 
 
   <autotools id="WebKit" 
-	     autogenargs="--with-target=quartz --disable-video --with-font-backend=pango">
-    <branch repo="svn.webkit.org" module="webkit/trunk" checkoutdir="WebKit"/>
+	     autogenargs="--with-target=quartz --disable-video --with-font-backend=pango --with-gtk=2.0 --disable-geolocation">
+    <!--branch repo="svn.webkit.org" module="webkit/trunk" checkoutdir="WebKit"/-->
+    <branch repo="git.webkit.org" module="WebKit"/>
     <dependencies>
       <dep package="libsoup"/>
       <dep package="enchant"/>
-      <!--dep package="libgail"/-->
     </dependencies>
     <after>
       <dep package="meta-gtk-osx-core"/>

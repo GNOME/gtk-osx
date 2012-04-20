@@ -648,7 +648,7 @@ Index: Source/JavaScriptCore/icu/unicode/usearch.h
 +#endif
 Index: Source/JavaScriptCore/icu/unicode/ucoleitr.h
 ===================================================================
-+-- a/Source/JavaScriptCore/icu/unicode/ucoleitr.h	(revision 55240)
+--- a/Source/JavaScriptCore/icu/unicode/ucoleitr.h	(revision 55240)
 +++ b/Source/JavaScriptCore/icu/unicode/ucoleitr.h	(working copy)
 @@ -0,0 +1,268 @@
 +/*
