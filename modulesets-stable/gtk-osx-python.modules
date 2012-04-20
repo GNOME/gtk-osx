@@ -63,11 +63,11 @@
     </after>
   </autotools>
 
-<!-- Pycairo 1.8.10 (and later, presumably) requires Python3. -->
+<!-- Cairographics have changed the name to py2cairo for python 2 holdouts. -->
   <autotools id="pycairo-python2.6" autogen-sh="configure">
-    <branch module="pycairo-1.8.8.tar.gz" repo="cairographics.org"
-            version="1.8.8"
-	    hash="md5:054da6c125cb427a003f5fd6c54f853e"/>
+    <branch module="py2cairo-1.10.0.tar.bz2" repo="cairographics.org"
+            version="1.10.0"
+	    hash="sha1:2efa8dfafbd6b8e492adaab07231556fec52d6eb"/>
     <dependencies>
       <dep package="cairo"/>
     </dependencies>
