@@ -12,7 +12,7 @@ diff --git a/modules/printbackends/cups/gtkprintbackendcups.c b/modules/printbac
 index 6055b36..5d99dc0 100644
 --- a/modules/printbackends/cups/gtkprintbackendcups.c
 +++ b/modules/printbackends/cups/gtkprintbackendcups.c
-@@ -2044,12 +2044,8 @@ cups_request_printer_list_cb (GtkPrintBackendCups *cups_backend,
+@@ -1965,12 +1965,8 @@ cups_request_printer_list_cb (GtkPrintBackendCups *cups_backend,
        gboolean status_changed = FALSE;
        GList *node;
        gint i;
@@ -26,7 +26,7 @@ index 6055b36..5d99dc0 100644
        /* Skip leading attributes until we hit a printer...
         */
        while (attr != NULL && ippGetGroupTag (attr) != IPP_TAG_PRINTER)
-@@ -2145,23 +2141,30 @@ cups_request_printer_list_cb (GtkPrintBackendCups *cups_backend,
+@@ -2065,23 +2062,30 @@ cups_request_printer_list_cb (GtkPrintBackendCups *cups_backend,
  
        if (info->state_msg != NULL && strlen (info->state_msg) == 0)
          {
@@ -63,7 +63,7 @@ index 6055b36..5d99dc0 100644
            for (i = 0; i < G_N_ELEMENTS (printer_messages); i++)
              {
                if (strncmp (info->reason_msg, printer_messages[i],
-@@ -2183,23 +2186,21 @@ cups_request_printer_list_cb (GtkPrintBackendCups *cups_backend,
+@@ -2104,23 +2107,21 @@ cups_request_printer_list_cb (GtkPrintBackendCups *cups_backend,
                  info->state_msg = reason_msg_desc;
                else
                  {

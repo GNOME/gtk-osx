@@ -14,7 +14,7 @@ diff --git a/modules/printbackends/cups/gtkprintbackendcups.c b/modules/printbac
 index fab3f40..17f3ddc 100644
 --- a/modules/printbackends/cups/gtkprintbackendcups.c
 +++ b/modules/printbackends/cups/gtkprintbackendcups.c
-@@ -1736,6 +1736,28 @@ typedef enum
+@@ -1657,6 +1657,28 @@ typedef enum
      GTK_PRINTER_STATE_LEVEL_WARNING = 2,
      GTK_PRINTER_STATE_LEVEL_ERROR = 3
    } PrinterStateLevel;
@@ -43,7 +43,7 @@ index fab3f40..17f3ddc 100644
  static void
  cups_request_printer_list_cb (GtkPrintBackendCups *cups_backend,
                                GtkCupsResult       *result,
-@@ -1788,32 +1810,14 @@ cups_request_printer_list_cb (GtkPrintBackendCups *cups_backend,
+@@ -1709,32 +1731,14 @@ cups_request_printer_list_cb (GtkPrintBackendCups *cups_backend,
    for (attr = response->attrs; attr != NULL; attr = attr->next)
      {
        GtkPrinter *printer;
@@ -69,15 +69,15 @@ index fab3f40..17f3ddc 100644
 -      gboolean is_accepting_jobs = TRUE;
 -      gboolean default_printer = FALSE;
 -      gboolean got_printer_type = FALSE;
--      const gchar   *default_cover_before = NULL;
--      const gchar   *default_cover_after = NULL;
+-      gchar   *default_cover_before = NULL;
+-      gchar   *default_cover_after = NULL;
 -      gboolean remote_printer = FALSE;
 -      gchar  **auth_info_required = NULL;
 +      PrinterSetupInfo *info = g_slice_new0 (PrinterSetupInfo);
        
        /* Skip leading attributes until we hit a printer...
         */
-@@ -1950,8 +1954,8 @@ cups_request_printer_list_cb (GtkPrintBackendCups *cups_backend,
+@@ -1871,8 +1875,8 @@ cups_request_printer_list_cb (GtkPrintBackendCups *cups_backend,
          attr = attr->next;
        }
  
@@ -88,7 +88,7 @@ index fab3f40..17f3ddc 100644
        {
          if (attr == NULL)
  	  break;
-@@ -1959,19 +1963,19 @@ cups_request_printer_list_cb (GtkPrintBackendCups *cups_backend,
+@@ -1880,19 +1884,19 @@ cups_request_printer_list_cb (GtkPrintBackendCups *cups_backend,
            continue;
        }
  
@@ -113,7 +113,7 @@ index fab3f40..17f3ddc 100644
                  }
              }
          }
-@@ -1982,10 +1986,13 @@ cups_request_printer_list_cb (GtkPrintBackendCups *cups_backend,
+@@ -1903,10 +1907,13 @@ cups_request_printer_list_cb (GtkPrintBackendCups *cups_backend,
          }
  
        /* remove name from checklist if it was found */
@@ -130,7 +130,7 @@ index fab3f40..17f3ddc 100644
        if (!printer)
          {
  	  GtkPrinterCups *cups_printer;
-@@ -2083,10 +2090,10 @@ cups_request_printer_list_cb (GtkPrintBackendCups *cups_backend,
+@@ -2003,10 +2007,10 @@ cups_request_printer_list_cb (GtkPrintBackendCups *cups_backend,
        else
  	g_object_ref (printer);
  
@@ -144,7 +144,7 @@ index fab3f40..17f3ddc 100644
  
        if (!gtk_printer_is_active (printer))
          {
-@@ -2109,57 +2116,60 @@ cups_request_printer_list_cb (GtkPrintBackendCups *cups_backend,
+@@ -2031,57 +2035,60 @@ cups_request_printer_list_cb (GtkPrintBackendCups *cups_backend,
        cups_request_printer_info (cups_backend, gtk_printer_get_name (printer));
  #endif
  
@@ -226,7 +226,7 @@ index fab3f40..17f3ddc 100644
  
        if (tmp_msg != NULL)
          g_free (tmp_msg);
-@@ -2172,9 +2182,9 @@ cups_request_printer_list_cb (GtkPrintBackendCups *cups_backend,
+@@ -2093,9 +2103,9 @@ cups_request_printer_list_cb (GtkPrintBackendCups *cups_backend,
  
        /* Set printer icon according to importance
           (none, report, warning, error - report is omitted). */
@@ -238,7 +238,7 @@ index fab3f40..17f3ddc 100644
          gtk_printer_set_icon_name (printer, "printer-warning");
        else if (gtk_printer_is_paused (printer))
          gtk_printer_set_icon_name (printer, "printer-paused");
-@@ -2187,7 +2197,8 @@ cups_request_printer_list_cb (GtkPrintBackendCups *cups_backend,
+@@ -2108,7 +2118,8 @@ cups_request_printer_list_cb (GtkPrintBackendCups *cups_backend,
  
        /* The ref is held by GtkPrintBackend, in add_printer() */
        g_object_unref (printer);

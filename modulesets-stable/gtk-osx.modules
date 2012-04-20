@@ -206,10 +206,10 @@
     </after>
   </autotools>
 
-  <autotools id="gtk+-3.0" autogen-sh="configure"
+  <autotools id="gtk+-3.0" autogen-sh="autogen.sh"
              autogenargs="--enable-quartz-backend --enable-quartz-relocation">
-    <branch module="gtk+/3.2/gtk+-3.2.3.tar.xz" version="3.2.3"
-            hash="sha256:e2cf20f2510ebbc7be122a1a33dd1f472a7d06aaf16b4f2a63eb048cd9141d3d">
+    <branch module="gtk+/3.2/gtk+-3.2.4.tar.xz" version="3.2.4"
+            hash="sha256:f981bf514858c00d7084bd6f6c34b3c60b8aebdb959e7aca6faa59ed67c136bd">
       <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0001-Bug-571582-GtkSelection-implementation-for-quartz.patch" strip="1"/>
       <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0002-gtk3-Extract-reasons-and-reasons_desc-arrays-to-file-leve.patch" strip="1"/>
       <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0003-gtk3-Create-enum-PrinterStateLevel.patch" strip="1"/>

@@ -12,7 +12,7 @@ diff --git a/modules/printbackends/cups/gtkprintbackendcups.c b/modules/printbac
 index 12c6ab6..88c7137 100644
 --- a/modules/printbackends/cups/gtkprintbackendcups.c
 +++ b/modules/printbackends/cups/gtkprintbackendcups.c
-@@ -1692,6 +1692,42 @@ find_printer (GtkPrinter  *printer,
+@@ -1613,6 +1613,42 @@ find_printer (GtkPrinter  *printer,
    printer_name = gtk_printer_get_name (printer);
    return g_ascii_strcasecmp (printer_name, find_name);
  }
@@ -55,7 +55,7 @@ index 12c6ab6..88c7137 100644
  
  static void
  cups_request_printer_list_cb (GtkPrintBackendCups *cups_backend,
-@@ -1763,40 +1799,6 @@ cups_request_printer_list_cb (GtkPrintBackendCups *cups_backend,
+@@ -1684,40 +1720,6 @@ cups_request_printer_list_cb (GtkPrintBackendCups *cups_backend,
        gint printer_state_reason_level = 0; /* 0 - none, 1 - report, 2 - warning, 3 - error */
        gboolean interested_in = FALSE;
        gboolean found = FALSE;

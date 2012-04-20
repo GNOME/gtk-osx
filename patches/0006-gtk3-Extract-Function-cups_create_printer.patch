@@ -11,7 +11,7 @@ diff --git a/modules/printbackends/cups/gtkprintbackendcups.c b/modules/printbac
 index d57974e..6055b36 100644
 --- a/modules/printbackends/cups/gtkprintbackendcups.c
 +++ b/modules/printbackends/cups/gtkprintbackendcups.c
-@@ -1887,6 +1887,108 @@ cups_printer_handle_attribute (GtkPrintBackendCups *cups_backend,
+@@ -1808,6 +1808,108 @@ cups_printer_handle_attribute (GtkPrintBackendCups *cups_backend,
      }
  
  }
@@ -120,7 +120,7 @@ index d57974e..6055b36 100644
  static void
  cups_request_printer_list_cb (GtkPrintBackendCups *cups_backend,
                                GtkCupsResult       *result,
-@@ -1941,7 +2043,7 @@ cups_request_printer_list_cb (GtkPrintBackendCups *cups_backend,
+@@ -1872,7 +1964,7 @@ cups_request_printer_list_cb (GtkPrintBackendCups *cups_backend,
        GtkPrinter *printer;
        gboolean status_changed = FALSE;
        GList *node;
@@ -129,7 +129,7 @@ index d57974e..6055b36 100644
        gchar *reason_msg_desc = NULL;
        gchar *tmp_msg = NULL;
        gchar *tmp_msg2 = NULL;
-@@ -2002,99 +2104,10 @@ cups_request_printer_list_cb (GtkPrintBackendCups *cups_backend,
+@@ -1923,99 +2025,10 @@ cups_request_printer_list_cb (GtkPrintBackendCups *cups_backend,
   
        printer = gtk_print_backend_find_printer (backend, info->printer_name);
        if (!printer)

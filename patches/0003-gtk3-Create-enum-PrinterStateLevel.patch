@@ -12,7 +12,7 @@ diff --git a/modules/printbackends/cups/gtkprintbackendcups.c b/modules/printbac
 index 88c7137..fab3f40 100644
 --- a/modules/printbackends/cups/gtkprintbackendcups.c
 +++ b/modules/printbackends/cups/gtkprintbackendcups.c
-@@ -1729,6 +1729,13 @@ static const char * printer_strings[] =
+@@ -1650,6 +1650,13 @@ static const char * printer_strings[] =
      N_("There is a problem on printer '%s'.")
    };
  
