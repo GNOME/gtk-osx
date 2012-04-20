@@ -74,8 +74,8 @@
   </autotools>
 
   <autotools id="glib-gtk3" autogen-sh="configure">
-    <branch module="glib/2.30/glib-2.30.1.tar.bz2"  version="2.30.1"
-            hash="sha256:4e560319450f31d85b6cdb2b530c3324a510ca04817e360943d0774327d21804"/>
+    <branch module="glib/2.30/glib-2.30.3.tar.xz"  version="2.30.3"
+            hash="sha256:e6cbb27c71c445993346e785e8609cc75cea2941e32312e544872feba572dd27"/>
     <dependencies>
       <dep package="libffi"/>
       <dep package="gtk-doc"/>
