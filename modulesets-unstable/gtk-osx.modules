@@ -119,7 +119,7 @@
 
   <autotools id="gtk+"
 	     autogenargs="--with-gdktarget=quartz --enable-introspection=no --enable-quartz-relocation">
-    <branch revision="gtk-2-24-quartz" checkoutdir="gtk+-2.0"/>
+    <branch revision="gtk-2-24" checkoutdir="gtk+-2.0"/>
     <dependencies>
       <dep package="pango"/>
       <dep package="gdk-pixbuf"/>
@@ -132,7 +132,7 @@
 
   <autotools id="gtk+-3.0"
 	     autogenargs="--enable-quartz-backend --enable-quartz-relocation --disable-colord">
-    <branch module="gtk+" checkoutdir="gtk+-3.0" revision="quartz-integration"/>
+    <branch module="gtk+" checkoutdir="gtk+-3.0"/>
     <dependencies>
       <dep package="gobject-introspection"/>
       <dep package="pango"/>
