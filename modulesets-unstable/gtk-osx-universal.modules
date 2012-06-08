@@ -60,7 +60,7 @@
       <dep package="gtk-x86_64"/>
       <dep package="lipo-gtk"/>
       <dep package="gtk-engines"/>
-      <dep package="ige-mac-integration"/>
+      <dep package="gtk-mac-integration"/>
     </dependencies>
   </metamodule>
   
