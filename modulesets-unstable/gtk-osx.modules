@@ -108,6 +108,22 @@
     </after>
   </autotools>
 
+  <autotools id="at-spi2-atk">
+    <branch/>
+    <dependencies>
+      <dep package="dbus"/>
+      <dep package="atk"/>
+      <dep package="at-spi2-core"/>
+    </dependencies>
+  </autotools>
+
+  <autotools id="at-spi2-core">
+    <branch/>
+    <dependencies>
+      <dep package="glib"/>
+      <dep package="dbus"/>
+    </dependencies>
+  </autotools>
 
   <autotools id="gdk-pixbuf">
     <branch />
@@ -137,7 +153,7 @@
       <dep package="gobject-introspection"/>
       <dep package="pango"/>
       <dep package="gdk-pixbuf"/>
-     <dep package="atk"/>
+     <dep package="at-spi2-atk"/>
     </dependencies>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
