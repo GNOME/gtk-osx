@@ -305,6 +305,10 @@ def setup_sdk(target, sdk_version, architectures=[_default_arch]):
     environ_append("OBJCFLAGS", "-mmacosx-version-min=" + target)
     environ_append("LDFLAGS", "-mmacosx-version-min=" + target)
 
+    #Some autogens detect that it's a Mac and use glibtoolize if it's
+    #available. Override this behavior.
+    environ_append('LIBTOOLIZE', os.path.join(prefix, "bin", "libtoolize"))
+
     #Overcome Python's obnoxious misconfiguration of portable builds
     if len(architectures) == 1:
         os.environ["BUILDCFLAGS"] = os.environ["CFLAGS"]
