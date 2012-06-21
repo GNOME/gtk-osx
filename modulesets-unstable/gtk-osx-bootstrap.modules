@@ -94,7 +94,7 @@
 	    repo="sourceforge"/>
   </autotools>
 
-  <autotools id="freetype">
+  <autotools id="freetype" autogen-sh="configure">
     <branch module="freetype/freetype-2.4.6.tar.gz" version="2.4.6"
             repo="sourceforge">
     </branch>
