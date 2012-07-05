@@ -147,13 +147,13 @@
   </autotools>
 
   <autotools id="gtk+-3.0"
-	     autogenargs="--enable-quartz-backend --enable-quartz-relocation --disable-colord">
+	     autogenargs="--enable-quartz-backend --enable-quartz-relocation --disable-colord --without-atk-bridge">
     <branch module="gtk+" checkoutdir="gtk+-3.0"/>
     <dependencies>
       <dep package="gobject-introspection"/>
       <dep package="pango"/>
       <dep package="gdk-pixbuf"/>
-     <dep package="at-spi2-atk"/>
+      <dep package="atk"/>
     </dependencies>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
