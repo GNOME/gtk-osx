@@ -74,8 +74,8 @@
   </autotools>
 
   <autotools id="glib-gtk3" autogen-sh="configure">
-    <branch module="glib/2.30/glib-2.30.3.tar.xz"  version="2.30.3"
-            hash="sha256:e6cbb27c71c445993346e785e8609cc75cea2941e32312e544872feba572dd27"/>
+    <branch module="glib/2.33/glib-2.33.2.tar.xz"  version="2.33.2"
+            hash="sha256:b7163e9f159775d13ecfb433d67c3f0883e0e518e85b2e970d4ad9773d7cd0b4"/>
     <dependencies>
       <dep package="libffi"/>
       <dep package="gtk-doc"/>
@@ -105,11 +105,11 @@
   </autotools>
 
   <autotools id="gobject-introspection-gtk3">
-    <branch module="gobject-introspection/1.30/gobject-introspection-1.30.0.tar.bz2"
-            version="1.30.0"
-            hash="sha256:72f5b8886d23d4bfff1f9824df00831b48b7ebb98d35a50a8f322cb7ff037d12">
+    <branch module="gobject-introspection/1.33/gobject-introspection-1.33.2.tar.xz"
+            version="1.33.2"
+            hash="sha256:86f7325a7a8e1df7eb99d3bed83dead92e1283a8ec167b57727f138a205bb9e7">
       <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/girscanner-objc.patch" strip="1"/>
-      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0001-scanner-split-CC-environment-variable.patch" strip="1"/>
+      <!--patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0001-scanner-split-CC-environment-variable.patch" strip="1"/-->
     </branch>
     <dependencies>
       <dep package="glib-gtk3"/>
@@ -141,9 +141,9 @@
   <autotools id="pango-gtk3"  autogen-sh="configure"
              autogenargs="--without-x --with-included-modules=basic-atsui"
              makeargs="-k -C modules; make">
-    <branch version="1.29.4" module="pango/1.29/pango-1.29.4.tar.bz2"
-            hash="sha256:f15deecaecf1e9dcb7db0e4947d12b5bcff112586434f8d30a5afd750747ff2b">
-      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/pango-CoreText-fix-zero-width-space-bgo-666856.patch" strip="1"/>
+    <branch version="1.30.1" module="pango/1.30/pango-1.30.1.tar.xz"
+            hash="sha256:3a8c061e143c272ddcd5467b3567e970cfbb64d1d1600a8f8e62435556220cbe">
+      <!--patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/pango-CoreText-fix-zero-width-space-bgo-666856.patch" strip="1"/-->
     </branch>
     <dependencies>
       <dep package="cairo"/>
@@ -169,10 +169,11 @@
   </autotools>
 
   <autotools id="gdk-pixbuf">
-    <branch module="gdk-pixbuf/2.24/gdk-pixbuf-2.24.0.tar.bz2" version="2.24.0"
-            hash="sha256:38d2630314e6d91976bffd833236f84fefa440a9038f86dc422820a39f2e3700"/>
+    <branch module="gdk-pixbuf/2.26/gdk-pixbuf-2.26.1.tar.xz" version="2.26.1"
+            hash="sha256:a60af12b58d9cc15ba4c680c6730ce5d38e8d664af1d575a379385b94b4ec7ba"/>
     <after>
       <dep package="pango"/>
+      <dep package="pango-gtk3"/>
     </after>
   </autotools>
 
@@ -208,9 +209,9 @@
 
   <autotools id="gtk+-3.0" autogen-sh="autogen.sh"
              autogenargs="--enable-quartz-backend --enable-quartz-relocation">
-    <branch module="gtk+/3.2/gtk+-3.2.4.tar.xz" version="3.2.4"
-            hash="sha256:f981bf514858c00d7084bd6f6c34b3c60b8aebdb959e7aca6faa59ed67c136bd">
-      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0001-Bug-571582-GtkSelection-implementation-for-quartz.patch" strip="1"/>
+    <branch module="gtk+/3.4/gtk+-3.4.3.tar.xz" version="3.4.3"
+            hash="sha256:846010442a96590469cde16ed6a1fdfe09397e435165459f04d31cfa5713799f">
+      <!--patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0001-Bug-571582-GtkSelection-implementation-for-quartz.patch" strip="1"/>
       <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0002-gtk3-Extract-reasons-and-reasons_desc-arrays-to-file-leve.patch" strip="1"/>
       <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0003-gtk3-Create-enum-PrinterStateLevel.patch" strip="1"/>
       <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0004-gtk3-Extract-printer-setup-variables-into-a-struct.patch" strip="1"/>
@@ -218,7 +219,7 @@
       <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0006-gtk3-Extract-Function-cups_create_printer.patch" strip="1"/>
       <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0007-gtk3-Move-some-variable-declarations-into-the-scopes-in-w.patch" strip="1"/>
       <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0008-Bug-670373-gtk3-modules-printing-cups-gtkprintbackendcups.patch" strip="1"/>
-      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0009-Bug-670373-gtk3-modules-printing-cups-gtkprintbackendcups.patch" strip="1"/>
+      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0009-Bug-670373-gtk3-modules-printing-cups-gtkprintbackendcups.patch" strip="1"/-->
     </branch>
     <dependencies>
       <dep package="glib-gtk3"/>
