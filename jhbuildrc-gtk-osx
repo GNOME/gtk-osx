@@ -305,10 +305,6 @@ def setup_sdk(target, sdk_version, architectures=[_default_arch]):
     environ_append("OBJCFLAGS", "-mmacosx-version-min=" + target)
     environ_append("LDFLAGS", "-mmacosx-version-min=" + target)
 
-    #Some autogens detect that it's a Mac and use glibtoolize if it's
-    #available. Override this behavior.
-    environ_append('LIBTOOLIZE', os.path.join(prefix, "bin", "libtoolize"))
-
     #Overcome Python's obnoxious misconfiguration of portable builds
     if len(architectures) == 1:
         os.environ["BUILDCFLAGS"] = os.environ["CFLAGS"]
@@ -566,6 +562,11 @@ os.environ['JHBUILD_SOURCE'] = checkoutroot
 # override it to somewhere else in jhbuildrc-custom if you like.
 #os.environ["M4"] = _exec_prefix + "/bin/m4"
 #os.environ['LIBTOOLIZE'] = _exec_prefix + '/bin/libtoolize'
+#Some autogens detect that it's a Mac and use glibtoolize if it's
+#available. Override this behavior.
+if not (os.environ.has_key ("LIBTOOLIZE") and os.environ["LIBTOOLIZE"]):
+    environ_append('LIBTOOLIZE', os.path.join(prefix, "bin", "libtoolize"))
+
 
 if not _host_tiger:
     skip.append('make')
