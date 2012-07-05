@@ -92,8 +92,8 @@
   </autotools>
 
    <autotools id="pygobject3" autogen-sh="configure" >
-    <branch version="3.0.1" module="pygobject/3.0/pygobject-3.0.1.tar.bz2"
-            hash="sha256:c8548574ecd232eea90fc7cb647b9150273e9197b1e60129a4fb597825b5d7ad"/>
+    <branch version="3.3.2" module="pygobject/3.3/pygobject-3.3.2.tar.xz"
+            hash="sha256:ed66b86114ab45c4fa484b680f09ccdfb36b7760901028cdf7819a6635911715"/>
     <dependencies>
       <dep package="meta-gtk-osx-gtk3"/>
     </dependencies>
