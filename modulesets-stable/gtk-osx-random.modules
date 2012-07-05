@@ -257,8 +257,11 @@ Libglade itself is deprecated. This is the last release. -->
             repo="hadess"/>
     <dependencies>
       <dep package="intltool"/>
-      <dep package="glib"/>
     </dependencies>
+    <after>
+      <dep package="glib"/>
+      <dep package="glib-gtk3"/>
+    </after>
   </autotools>
 
   <autotools id="gimp"  autogen-sh="configure"
