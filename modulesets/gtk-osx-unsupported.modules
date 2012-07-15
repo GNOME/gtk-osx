@@ -37,7 +37,7 @@
   </autotools>
 
   <autotools id="iso-codes" >
-    <branch repo="git.debian.org" tag="iso-codes/3.24"
+    <branch repo="git.debian.org" tag="iso-codes/3.37"
             module="iso-codes/iso-codes"/>
 
   </autotools>
