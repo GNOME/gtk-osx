@@ -10,7 +10,7 @@
               href="http://downloads.sourceforge.net/sourceforge/"/>
 
   <autotools id="liboil" autogen-sh="configure"
-	     makerags=" CFLAGS=-DHAVE_SYMBOL_UNDERSCORE">
+	     makeargs=" CFLAGS=-DHAVE_SYMBOL_UNDERSCORE">
     <branch repo="liboil" module="liboil-0.3.17.tar.gz" version="0.3.17" />
   </autotools>
 
