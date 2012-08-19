@@ -5,8 +5,10 @@
   <repository type="git" name="git.gnome.org" default="yes"
               href="git://git.gnome.org/"/>
   <repository type="git" name="github" href="git://github.com/"/>
-  <repository type="git" name="cairographics" 
+  <repository type="git" name="freedesktop"
               href="git://anongit.freedesktop.org/git/"/>
+  <repository type="tarball" name="complang"
+	      href="http://www.complang.org/"/>
 
   <!-- This module set works a bit differently than for example the
        GNOME ones do. It's split up in seperate pieces:
@@ -82,12 +84,13 @@
     </dependencies>
   </autotools>
 
-  <autotools id="pango" 
-             autogenargs="--without-x --with-included-modules=basic-atsui"
+  <autotools id="pango"
+             autogenargs="--with-included-modules=basic-coretext --disable-introspection"
              makeargs="-k -C modules; make">
     <branch />
     <dependencies>
       <dep package="cairo"/>
+      <dep package="harfbuzz"/>
       <dep package="fontconfig"/>
       <dep package="freetype"/>
       <dep package="glib"/>
@@ -161,14 +164,14 @@
   </autotools>
 
   <autotools id="pixman" autogenargs="--disable-gtk --disable-openmp">
-    <branch repo="cairographics" module="pixman" />
+    <branch repo="freedesktop" module="pixman" />
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
     </after>
   </autotools>
 
   <autotools id="cairo" autogenargs="--enable-pdf --enable-quartz --enable-xlib=no --without-x">
-    <branch repo="cairographics" module="cairo" />
+    <branch repo="freedesktop" module="cairo" />
     <dependencies>
       <dep package="pixman"/>
     </dependencies>
@@ -177,6 +180,22 @@
       <dep package="fontconfig"/>
       <dep package="freetype"/>
       <dep package='glib'/>
+    </after>
+  </autotools>
+
+<!-- Ragel, like Vala, isn't bootstrappable from git, so we might as well just use the tarball. -->
+  <autotools id="ragel">
+    <branch repo="complang" module="ragel/ragel-6.7.tar.gz" version="6.7"/>
+  </autotools>
+
+  <autotools id="harfbuzz">
+    <branch repo="freedesktop" module="harfbuzz"/>
+    <dependencies>
+      <dep package="ragel"/>
+    </dependencies>
+    <after>
+      <dep package="glib"/>
+      <dep package="cairo"/>
     </after>
   </autotools>
 
