@@ -187,7 +187,7 @@
   <autotools id="ragel"
 	     autogen-template="autoreconf -fis &amp;&amp; %(srcdir)s/%(autogen-sh)s --prefix %(prefix)s --libdir %(libdir)s %(autogenargs)s">
     <branch repo="complang" module="ragel/ragel-6.7.tar.gz" version="6.7">
-      <patch href="http://git.gnome.org/browse/gtk-osx/plain/patches/ragel-configure.in.patch" strip="1"/>
+      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/ragel-configure.in.patch" strip="1"/>
     </branch>
   </autotools>
 
