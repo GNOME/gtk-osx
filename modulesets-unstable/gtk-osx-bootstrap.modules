@@ -36,7 +36,7 @@
   <autotools id="libjpeg">
     <branch module="jpegsrc.v8c.tar.gz" version="8c"
             repo="jpeg"
-            checkoutdir="jpeg-8">
+            checkoutdir="jpeg-8c">
     </branch>
   </autotools>
 
