@@ -90,9 +90,6 @@
     <branch />
     <dependencies>
       <dep package="cairo"/>
-      <dep package="harfbuzz"/>
-      <dep package="fontconfig"/>
-      <dep package="freetype"/>
       <dep package="glib"/>
       <dep package="gobject-introspection"/>
       <dep package="meta-gtk-osx-bootstrap"/>
