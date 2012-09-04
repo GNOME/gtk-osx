@@ -24,10 +24,8 @@
   <repository type="tarball" name="intltool"
 	       href="http://launchpad.net/intltool/trunk/"/>
 
-<!-- Libpng-1.5 has made private struct definitions; gdk-pixbuf 2-23
-     hasn't adjusted -->
   <autotools id="libpng" autogenargs="--enable-shared" autogen-sh="configure">
-    <branch version="1.4.8" module="libpng/libpng-1.4.8.tar.bz2"
+    <branch version="1.5.12" module="libpng/libpng-1.5.12.tar.bz2"
 	    repo="sourceforge"/>
   </autotools>
 
