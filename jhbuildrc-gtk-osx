@@ -92,7 +92,11 @@ def osx_ver():
         _default_arch = "i386"
 
 def xcode_ver():
-   ver = ver = os.popen("xcodebuild -version").read().strip()
+   cmd = os.popen("xcodebuild -version")
+   ver = cmd.read().strip()
+   err = cmd.close()
+   if err:
+       raise RuntimeError 
    exp = re.compile(r'Xcode (\d+\.\d+)')
    vernum = exp.match(ver)
    if vernum:
@@ -101,10 +105,21 @@ def xcode_ver():
        return 3.0
 
 osx_ver()
-_xcodeversion = xcode_ver()
+_xcodeversion = None
+try:
+    _xcodeversion = xcode_ver()
+except:
+    print "Failed to find xcode. Make sure that it's installed and that xcode-select is set properly."
 _xcodepath = None
-if _xcodeversion >= 4.3:
-   _xcodepath = "/Applications/Xcode.app/Contents"
+#Note: You can use $DEVELOPER_DIR to override the default set with xcode-select.
+if _xcodeversion > 3.0:
+    _cmd = os.popen("xcode-select -print-path")
+    _xcodepath = _cmd.read().strip()
+    if _cmd.close():
+        raise RuntimeError
+_toolpath = os.path.join("/usr", "bin")
+if _xcodepath:
+    _toolpath = os.path.join(_xcodepath, "usr", "bin")
 #For XCode4 we need to disable ppc when building perl:
 if _xcodeversion >= 4.0:
     os.environ["ARCHFLAGS"]="-arch i386 -arch x86_64"
@@ -173,7 +188,7 @@ def get_sdkdir(sdk_name):
     platformpath = None
     sdkpath = "Developer/SDKs"
     if _xcodeversion >= 4.3:
-        platformpath = "Developer/Platforms/MacOSX.platform"
+        platformpath = "Platforms/MacOSX.platform"
     if _xcodepath and platformpath:
         sdkdir = os.path.join(_xcodepath, platformpath, sdkpath, sdk_name)
     else:
@@ -259,14 +274,14 @@ def setup_sdk(target, sdk_version, architectures=[_default_arch]):
 
     #SDK 10.4 doesn't support gcc4.2.
     if  _xcodeversion == 3.0 or sdk_version == "10.4u":
-        os.environ["CC"] = "/usr/bin/gcc-4.0"
-        os.environ["CXX"] = "/usr/bin/g++-4.0"
+        os.environ["CC"] = os.path.join(_toolpath, "gcc-4.0")
+        os.environ["CXX"] = os.path.join(_toolpath, "g++-4.0")
     elif _osx_version >= 7.0 and _xcodeversion > 4.0:
-        os.environ["CC"] = "/usr/bin/llvm-gcc-4.2"
-        os.environ["CXX"] = "/usr/bin/llvm-g++-4.2"
+        os.environ["CC"] = os.path.join(_toolpath, "llvm-gcc-4.2")
+        os.environ["CXX"] = os.path.join(_toolpath, "llvm-g++-4.2")
     else:
-        os.environ["CC"] = "/usr/bin/gcc-4.2"
-        os.environ["CXX"] = "/usr/bin/g++-4.2"
+        os.environ["CC"] = os.path.join(_toolpath, "gcc-4.2")
+        os.environ["CXX"] = os.path.join(_toolpath, "g++-4.2")
 
     # Set the -arch flags for everything we're building.
     #
