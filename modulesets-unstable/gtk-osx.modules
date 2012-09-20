@@ -85,7 +85,6 @@
   </autotools>
 
   <autotools id="pango"
-             autogenargs="--with-included-modules=basic-coretext --disable-introspection"
              makeargs="-k -C modules; make">
     <branch />
     <dependencies>
@@ -204,7 +203,8 @@
   <autotools id="gtk-mac-integration" autogenargs="--disable-python">
     <branch/>
     <after>
-      <dep package="meta-gtk-osx-bootstrap"/>
+      <dep package="gtk+"/>
+      <dep package="gtk+-3.0"/>
     </after>
   </autotools>
 

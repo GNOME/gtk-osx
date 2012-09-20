@@ -108,10 +108,13 @@
   <autotools id="libgnome-keyring" autogenargs="--disable-pam --without-root-certs">
     <branch/>
     <dependencies>
-      <dep package="gtk+"/>
       <dep package="libgcrypt"/>
       <dep package="libtasn1"/>
     </dependencies>
+    <after>
+      <dep package="meta-gtk-osx-core"/>
+      <dep package="meta-gtk-osx-gtk3"/>
+    </after>
   </autotools>
 
   <autotools id="glib-networking" autogenargs="--without-ca-certificates">
@@ -136,7 +139,6 @@
  <autotools id="libsoup">
     <branch />
     <dependencies>
-      <dep package='gconf'/>
       <dep package='sqlite'/>
       <dep package="libgnome-keyring"/>
       <dep package="glib-networking"/>
