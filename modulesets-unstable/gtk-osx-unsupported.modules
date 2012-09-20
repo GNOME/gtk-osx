@@ -23,9 +23,11 @@
 	      href="http://svn.webkit.org/repository/"/>
   <repository type="git" name="git.webkit.org"
 	      href="git://git.webkit.org/"/>
-   <repository type="git" name="git.debian.org" href="git://git.debian.org/"/>
+  <repository type="git" name="git.debian.org" href="git://git.debian.org/"/>
   <repository type="git" name="freedesktop"
 	      href="git://anongit.freedesktop.org"/>
+  <repository type="git" name="lysator"
+	      href="git://git.lysator.liu.se/"/>
  
   <metamodule id="meta-gtk-osx-unsupported">
     <dependencies>
@@ -57,17 +59,26 @@
     <branch repo="freedesktop" module="p11-glue/p11-kit"/>
   </autotools>
 
-  <autotools id="gnutls" autogen-sh="configure"
+<!-- Rudely demands TeX to build documentation -->
+  <autotools id="libnettle"
+	     autogenargs="--disable-documentation"
+	     autogen-template="autoreconf -fis &amp;&amp; %(srcdir)s/configure --prefix %(prefix)s --libdir %(libdir)s %(autogenargs)s">
+    <branch repo="lysator" module="nettle/nettle.git"/>
+  </autotools>
+
+  <autotools id="gnutls" autogen-sh="autoreconf"
 	     autogenargs="--disable-gtk-doc-html"
 	     autogen-template="autoreconf -fis &amp;&amp; %(srcdir)s/configure --prefix %(prefix)s --libdir %(libdir)s %(autogenargs)s">
-    <branch repo='git.gnu.org' tag='gnutls_2_12_x' module="gnutls"/> 
-    <!--<branch repo='ftp.gnu.org' version='2.8.1' 
+    <branch repo='git.gnu.org' tag='gnutls_2_12_20' module="gnutls"/>
+    <!--<branch repo='ftp.gnu.org' version='2.8.1'
             module="gnutls/gnutls-2.8.1.tar.bz2"/ -->
     <dependencies>
       <dep package="p11-kit"/>
       <dep package="libgcrypt" />
       <dep package="libtasn1" />
+      <dep package="libnettle" />
       <dep package="zlib"/>
+      <dep package="gmp"/>
     </dependencies>
   </autotools>
 
