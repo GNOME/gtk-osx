@@ -25,8 +25,7 @@
   <metamodule id="meta-gtk-osx-python-gtk3">
     <dependencies>
       <dep package="meta-gtk-osx-gtk3"/>
-      <dep package="py2cairo"/>
-      <dep package="pygobject"/>
+      <dep package="pygobject3"/>
       <dep package="gtk-mac-integration-python"/>
     </dependencies>
   </metamodule>
@@ -109,15 +108,20 @@
     </after>
   </autotools>
 
-  <autotools id="pygobject">
-    <branch />
+  <autotools id="pygobject" autogenargs="--disable-introspection">
+    <branch revision="pygobject-2-28"/>
     <dependencies>
-    </dependencies>
-    <after>
       <dep package="python2.7"/>
       <dep package="meta-gtk-osx-core"/>
+   </dependencies>
+  </autotools>
+
+  <autotools id="pygobject3" >
+    <branch module="pygobject" checkoutdir="pygobject3"/>
+    <dependencies>
+      <dep package="python2.7"/>
       <dep package="meta-gtk-osx-gtk3"/>
-    </after>
+   </dependencies>
   </autotools>
 
 
