@@ -258,6 +258,13 @@
     </dependencies>
   </autotools>
 
+  <autotools id="gtkspell3">
+    <branch module="manisandro/gtkspell3" revision="changes" repo="github"/>
+    <dependencies>
+      <dep package="enchant"/>
+    </dependencies>
+  </autotools>
+
   <autotools id="libgsf" autogenargs="--without-python">
     <branch/>
   </autotools>
@@ -287,7 +294,7 @@
     </dependencies>
   </autotools>
 
-  <autotools id="hunspell">
+  <autotools id="hunspell" autogen-sh="configure">
     <branch repo="hunspell-cvs"/>
   </autotools>
 
