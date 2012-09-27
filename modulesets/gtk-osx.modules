@@ -200,7 +200,7 @@
   </autotools>
 
   <autotools id="gtk-mac-integration" autogenargs="--disable-python">
-    <branch tag="gtk-mac-integration-1.0.1" />
+    <branch tag="gtk-mac-integration-2.0.0" />
     <dependencies>
     </dependencies>
     <after>
