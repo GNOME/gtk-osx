@@ -96,7 +96,7 @@
     </after>
   </autotools>
 
- <autotools id="pycairo" >
+ <distutils id="pycairo" >
     <branch module="pycairo" repo="cairographics" />
     <dependencies>
       <dep package="cairo"/>
@@ -106,7 +106,7 @@
       <dep package="meta-gtk-osx-core"/>
       <dep package="meta-gtk-osx-gtk3"/>
     </after>
-  </autotools>
+ </distutils>
 
   <autotools id="pygobject" autogenargs="--disable-introspection">
     <branch revision="pygobject-2-28"/>
@@ -119,6 +119,7 @@
   <autotools id="pygobject3" >
     <branch module="pygobject" checkoutdir="pygobject3"/>
     <dependencies>
+      <dep package="py2cairo"/>
       <dep package="python2.7"/>
       <dep package="meta-gtk-osx-gtk3"/>
    </dependencies>
