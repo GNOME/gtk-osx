@@ -54,7 +54,18 @@
   <autotools id="libsigc++2" >
      <branch />
     <dependencies>
+      <dep package="mm-common"/>
       <dep package="doxygen"/>
+    </dependencies>
+  </autotools>
+
+  <autotools id="atkmm">
+    <branch/>
+    <dependencies>
+      <dep package="glibmm"/>
+      <dep package="cairomm"/>
+      <dep package="pangomm"/>
+      <dep package="atk"/>
     </dependencies>
   </autotools>
 
@@ -64,8 +75,12 @@
       <dep package="glibmm"/>
       <dep package="cairomm"/>
       <dep package="pangomm"/>
-      <dep package="gtk+"/>
+      <dep package="atkmm"/>
     </dependencies>
+    <after>
+      <dep package="gtk+"/>
+      <dep package="gtk+-3.0"/>
+    </after>
   </autotools>
 
 </moduleset>
