@@ -8,7 +8,7 @@
               href="http://www.68k.org/~michael/"/>
   <repository type='tarball' name='ftp.gnu.org' href="ftp://ftp.gnu.org/gnu/"/>
   <repository type='tarball' name='ftp.gnupg.org' href="ftp://ftp.gnupg.org/" />
-  <repository type="tarball" name="sourceforge" 
+  <repository type="tarball" name="sourceforge"
               href="http://downloads.sourceforge.net/sourceforge/"/>
   <repository type="svn" name="svn.debian.org" href="svn://svn.debian.org/"/>
   <repository type="tarball" name="abisource/enchant"
@@ -20,7 +20,7 @@
   <repository type="tarball" name="curl.haxx.se"
               href="http://curl.haxx.se/download/"/>
   <repository type="tarball" name="webkit.org"
-              href="http://www.webkitgtk.org/"/>
+              href="http://www.webkitgtk.org/releases/"/>
   <repository type="svn" name="svn.webkit.org"
 	      href="http://svn.webkit.org/repository/"/>
 
@@ -58,17 +58,17 @@
   </autotools>
 
   <autotools id="iso-codes" autogen-sh="configure">
-    <branch module="iso-codes_3.38.orig.tar.xz" version="3.38" repo="iso-codes" checkoutdir="iso-codes-3.37"/>
+    <branch module="iso-codes_3.39.orig.tar.xz" version="3.39" repo="iso-codes" checkoutdir="iso-codes-3.39"/>
   </autotools>
 
-  <autotools id="zlib">
-    <branch repo="sourceforge" version="1.2.5"
-	    module="libpng/zlib-1.2.5.tar.gz"/>
+  <autotools id="zlib" autogen-sh="configure">
+    <branch repo="sourceforge" version="1.2.7"
+	    module="libpng/zlib-1.2.7.tar.gz"/>
   </autotools>
 
   <autotools id="gnutls" autogen-sh="configure" autogenargs="--with-libgcrypt --without-p11-kit">
-    <branch repo='ftp.gnu.org' version='2.12.11'
-            module="gnutls/gnutls-2.12.11.tar.bz2"/>
+    <branch repo='ftp.gnu.org' version='2.12.20'
+            module="gnutls/gnutls-2.12.20.tar.bz2"/>
     <dependencies>
       <dep package="libgcrypt" />
       <dep package="libtasn1" />
@@ -78,24 +78,25 @@
   </autotools>
 
   <cmake id='libproxy' cmakeargs="-DWITH_PYTHON=OFF">
-    <branch version='0.4.7' module='libproxy-0.4.7.tar.gz'
+    <branch version='0.4.10' module='libproxy-0.4.10.tar.gz'
             repo='libproxy.google.com'>
-      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/libproxy-Bug-052-POSIX_C_SOURCE.patch" strip="1"/>
-<!-- Comment #1 on issue 168 by dominiqu...@gmail.com: LibProxy doesn't make its pkgconfig file under OSX
+      <!-- patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/libproxy-Bug-052-POSIX_C_SOURCE.patch" strip="1"/>
+ Comment #1 on issue 168 by dominiqu...@gmail.com: LibProxy doesn't make its pkgconfig file under OSX
 http://code.google.com/p/libproxy/issues/detail?id=168
 
 This issue was closed by revision r827.
 -->
-      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0001-Bug-168-libproxy-pc-file.patch" strip="1"/>
+      <!--patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0001-Bug-168-libproxy-pc-file.patch" strip="1"/-->
     </branch>
     <dependencies>
       <dep package="cmake"/>
     </dependencies>
   </cmake>
 
-  <autotools id="libgnome-keyring" autogenargs="--disable-tests">
-    <branch module="libgnome-keyring/3.2/libgnome-keyring-3.2.2.tar.bz2"
-	    version="3.2.2" hash="sha256:5332e1e428aa7c1cece68fb37799681df30eeb8a73d96c354969d401fdfeddd7">
+  <autotools id="libgnome-keyring" autogenargs="--disable-tests"
+	     autogen-sh="configure">
+    <branch module="libgnome-keyring/3.6/libgnome-keyring-3.6.0.tar.xz"
+	    version="3.6.0" hash="sha256:6dca37fb7b37f800f498031ffe303a567410bec09a9bdd877a18865dafcc9830">
     </branch>
     <dependencies>
       <dep package="glib"/>
@@ -107,8 +108,8 @@ This issue was closed by revision r827.
 
   <autotools id="glib-networking" autogen-sh="configure"
 	     autogenargs="--without-ca-certificates">
-    <branch module="glib-networking/2.28/glib-networking-2.28.7.tar.bz2"
-	    version="2.28.7" hash="sha256:98bedfbd530c4b1b53c91025fe82290bafd289d249e4eb549c3b90d23a76021c"/>
+    <branch module="glib-networking/2.34/glib-networking-2.34.0.tar.xz"
+	    version="2.34.0" hash="sha256:c56eb4161671bff9568f3a92a88531ca01217eb7ee8514bb6255730400f877f1"/>
     <dependencies>
       <dep package="gnutls"/>
       <dep package="libgcrypt"/>
@@ -118,21 +119,10 @@ This issue was closed by revision r827.
 <!-- Libsoup's gnome-2-32 branch tags versions on 2.32, gnome-3-0 tags
      2.34, gnome-3-2 tags 2.36 -->
   <autotools id="libsoup" autogen-sh="configure" autogenargs="">
-    <branch module="libsoup/2.34/libsoup-2.34.3.tar.bz2"
-            version="2.34.3" hash="sha256:940fa2777542e564ba7052252ee065adc6c7982c0cae56a4c541a04329fc7dc7" />
+    <branch module="libsoup/2.40/libsoup-2.40.1.tar.xz"
+            version="2.40.1" hash="sha256:77a55d57e7e8055acd2f44e0cc889b9ba48052e8b7f07e829157d57417ac650a" />
     <dependencies>
       <dep package="glib"/>
-      <dep package="glib-networking"/>
-      <dep package="libgnome-keyring"/>
-      <dep package='sqlite'/>
-    </dependencies>
-  </autotools>
-
-  <autotools id="libsoup-gtk3" autogen-sh="configure" autogenargs="">
-    <branch module="libsoup/2.36/libsoup-2.36.1.tar.bz2" version="2.36.1"
-	    hash="sha256:c387eefd8214c458965b1d6e3490cea33b5bb6c81798cac90cde96136dc19401" />
-    <dependencies>
-      <dep package="glib-gtk3"/>
       <dep package="glib-networking"/>
       <dep package="libgnome-keyring"/>
       <dep package='sqlite'/>
@@ -163,13 +153,13 @@ This issue was closed by revision r827.
 
   <autotools id="libtasn1" supports-non-srcdir-builds="no"
 	     autogen-sh="configure">
-    <branch repo="ftp.gnu.org" version='2.9'
-	    module="libtasn1/libtasn1-2.9.tar.gz"/>
+    <branch repo="ftp.gnu.org" version='2.14'
+	    module="libtasn1/libtasn1-2.14.tar.gz"/>
   </autotools>
 
    <!-- 10.5 has 7.16.3, which is too old for some things. Otherwise can be skipped. -->
   <autotools id="libcurl" autogen-sh="configure">
-    <branch repo="curl.haxx.se" module="curl-7.19.6.tar.bz2" version="7.19.6" />
+    <branch repo="curl.haxx.se" module="curl-7.28.0.tar.bz2" version="7.28.0" />
   </autotools>
 
   <autotools id="WebKit" autogen-sh="configure"
@@ -183,10 +173,9 @@ This issue was closed by revision r827.
     </branch>
     <dependencies>
       <dep package="enchant"/>
+      <dep package="libsoup"/>
     </dependencies>
     <after>
-      <dep package="libsoup"/>
-      <dep package="libsoup-gtk3"/>
       <dep package="meta-gtk-osx-core"/>
       <dep package="meta-gtk-osx-gtk3"/>
     </after>

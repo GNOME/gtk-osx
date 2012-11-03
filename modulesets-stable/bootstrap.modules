@@ -19,9 +19,7 @@
   </autotools>
  
   <autotools id="xz" autogen-sh="configure">
-    <branch repo="tukaani.org" module="xz/xz-5.0.1.tar.bz2" version="5.0.1"
-            size="1005959" md5sum="cb6c7a58cec4d663a395c54d186ca0c6"
-            hash="sha256:9b380f502d37085a60821484a3a13747454638927cc36033be64970512451ed8"/>
+    <branch repo="tukaani.org" module="xz/xz-5.0.4.tar.bz2" version="5.0.4"/>
   </autotools>
 
   <autotools id="apr">
@@ -53,7 +51,7 @@
     </branch>
   </autotools>
 
-  <autotools id='readline' >
+  <autotools id='readline' autogen-sh="configure">
     <branch repo="ftp.gnu.org" module="readline/readline-6.2.tar.gz"
 	    version="6.2"/>
   </autotools>
@@ -65,7 +63,7 @@
 
   <autotools id="autoconf" autogen-sh="configure">
     <branch repo="ftp.gnu.org"
-            module="autoconf/autoconf-2.68.tar.bz2" version="2.68"/>
+            module="autoconf/autoconf-2.69.tar.xz" version="2.69"/>
     <dependencies>
       <dep package="m4"/>
     </dependencies>
@@ -93,10 +91,14 @@
   </autotools>
   <autotools id="automake-1.11" autogen-sh="configure">
     <branch repo="ftp.gnu.org"
-	    module="automake/automake-1.11.1.tar.bz2" version="1.11.1"
-	    size="1066685" md5sum="c2972c4d9b3e29c03d5f2af86249876f" />
+	    module="automake/automake-1.11.6.tar.xz" version="1.11.6"/>
   </autotools>
 
+  <autotools id="automake-1.12" autogen-sh="configure">
+    <branch repo="ftp.gnu.org"
+	    module="automake/automake-1.12.4.tar.xz" version="1.12.4"/>
+
+  </autotools>
 <!-- Pkg-config 0.26 and later requires glib, which requires
      pkg-config, which, well, you get the idea. -->
   <autotools id="pkg-config" autogen-sh="configure">
@@ -106,15 +108,15 @@
 
   <!-- 10.4 has 1.28 which is too old, 10.5 & 10.6 have 2.3 which is OK. -->
   <autotools id="bison" autogen-sh="configure">
-    <branch repo="ftp.gnu.org" module="bison/bison-2.4.1.tar.bz2"
-            version="2.4.1"/>
+    <branch repo="ftp.gnu.org" module="bison/bison-2.6.3.tar.bz2"
+            version="2.6.3"/>
   </autotools>
 
   <!-- 10.4 has 2.5.4, too old for gstreamer (and probably others as well)
 10.6 has 2.5.35, 10.5 2.5.33 -->
   <autotools id="flex" autogen-sh="configure">
-    <branch repo="sourceforge" module="flex/flex-2.5.35.tar.bz2"
-	    version="2.5.35"/>
+    <branch repo="sourceforge" module="flex/flex-2.5.37.tar.bz2"
+	    version="2.5.37"/>
   </autotools>
 
   <metamodule id="meta-bootstrap">
@@ -130,6 +132,7 @@
       <dep package="automake-1.9" />
       <dep package="automake-1.10" />
       <dep package="automake-1.11" />
+      <dep package="automake-1.12" />
       <dep package="pkg-config" />
       <dep package="bison"/>   <!-- included for Tiger, skipped otherwise -->
       <dep package="flex"/>    <!-- included for Tiger, skipped otherwise -->

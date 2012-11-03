@@ -30,6 +30,15 @@
     </dependencies>
   </metamodule>
 
+  <metamodule id="meta-gtk-osx-python3-gtk3">
+    <dependencies>
+      <dep package="meta-gtk-osx-gtk3"/>
+      <dep package="pycairo-python3"/>
+      <dep package="pygobject3"/>
+      <dep package="gtk-mac-integration-python"/>
+    </dependencies>
+  </metamodule>
+
   <autotools id="berkeleydb" autogen-sh="dist/configure"
          autogen-template="cd build_unix; ../%(autogen-sh)s --prefix %(prefix)s --libdir %(libdir)s %(autogenargs)s" makeargs="-C build_unix"
          makeinstallargs="-C build_unix install">
@@ -40,13 +49,19 @@
 
   <autotools id="python" autogenargs="--enable-shared" autogen-sh="configure">
     <branch repo="python"
-	    module="2.7.2/Python-2.7.2.tar.bz2" version="2.7.2">
+	    module="2.7.3/Python-2.7.3.tar.xz" version="2.7.3">
     </branch>
     <after>
       <dep package="berkeleydb"/>
     </after>
   </autotools>
 
+  <autotools id="python3" autogenargs="--enable-shared" autogen-sh="configure">
+    <branch repo="python" module="3.3.0/Python-3.3.0.tar.xz" version="3.3.0"/>
+    <after>
+      <dep package="berkeleydb"/>
+    </after>
+  </autotools>
 
 <!-- Pycairo 1.8.4+ requires Python 2.6. Leopard comes only with 2.5,
      so pycairo is by default held at 1.8.2. Use pycairo-python2.6 if
@@ -64,7 +79,8 @@
   </autotools>
 
 <!-- Cairographics have changed the name to py2cairo for python 2 holdouts. -->
-  <autotools id="pycairo-python2.6" autogen-sh="configure">
+<!-- They also broke configure (left install-sh out of the tarball) but waf works -->
+  <waf id="pycairo-python2.6">
     <branch module="py2cairo-1.10.0.tar.bz2" repo="cairographics.org"
             version="1.10.0"
 	    hash="sha1:2efa8dfafbd6b8e492adaab07231556fec52d6eb"/>
@@ -75,12 +91,28 @@
       <dep package="python"/>
       <dep package="meta-gtk-osx-core"/>
     </after>
+  </waf>
+
+<!-- Pycairo-python3 for those who've made the leap. -->
+  <autotools id="pycairo-python3" autogen-sh="configure">
+    <branch module="pycairo-1.10.0.tar.bz2" repo="cairographics.org"
+            version="1.10.0"
+	    hash="sha1:2efa8dfafbd6b8e492adaab07231556fec52d6eb"/>
+    <dependencies>
+      <dep package="cairo"/>
+    </dependencies>
+    <after>
+      <dep package="python"/>
+      <dep package="meta-gtk-osx-core"/>
+    </after>
   </autotools>
+
 <!-- PyGObject 2.28 is the last series for Gtk+-2; for co-installation
      with later versions it installs as pygobject2 and PyGObject 3
      installs as pygobject3. Introspection is disabled here, because
      gir-scanner isn't smart enough to co-install them. -->
-  <autotools id="pygobject" autogen-sh="configure" >
+  <autotools id="pygobject" autogen-sh="configure"
+	     autogenargs="--disable-introspection">
     <branch version="2.28.6" module="pygobject/2.28/pygobject-2.28.6.tar.bz2"
             hash="sha256:e4bfe017fa845940184c82a4d8949db3414cb29dfc84815fb763697dc85bdcee"/>
     <dependencies>
@@ -92,8 +124,8 @@
   </autotools>
 
    <autotools id="pygobject3" autogen-sh="configure" >
-    <branch version="3.3.2" module="pygobject/3.3/pygobject-3.3.2.tar.xz"
-            hash="sha256:ed66b86114ab45c4fa484b680f09ccdfb36b7760901028cdf7819a6635911715"/>
+    <branch version="3.4.1" module="pygobject/3.4/pygobject-3.4.1.tar.xz"
+            hash="sha256:21dbef53f5a29bcb547f36ba42e021f71981e1c50e8f89526e393d77b36a8b1f"/>
     <dependencies>
       <dep package="meta-gtk-osx-gtk3"/>
     </dependencies>
@@ -102,7 +134,8 @@
     </after>
   </autotools>
 
- <autotools id="pygtk" autogen-sh="configure" 
+<!-- Pygtk is discontinued, this is the last release -->
+ <autotools id="pygtk" autogen-sh="configure"
 	     autogenargs="CFLAGS=&quot;$CFLAGS -xobjective-c&quot; lt_cv_sys_global_symbol_pipe=&quot;'sed -n -e '\''s/^.*[ ]\([BCDEGRST][BCDEGRST]*\)[ ][ ]*_\([_A-Za-z][_A-Za-z0-9]*\)$/\1 _\2 \2/p'\'' | sed '\''/ __gnu_lto/d'\'''&quot;">
     <branch version="2.24.0" module="pygtk/2.24/pygtk-2.24.0.tar.bz2"
             hash="sha256:cd1c1ea265bd63ff669e92a2d3c2a88eb26bcd9e5363e0f82c896e649f206912">
@@ -120,9 +153,9 @@
 
   <autotools id="gtk-mac-integration-python" autogen-sh="configure"
              autogenargs="--enable-python">
-    <branch module="gtk-mac-integration/2.0/gtk-mac-integration-2.0.0.tar.bz2"
-            version="2.0.0"
-	    hash="sha256:17773d32be5304839f6f917a6ce4637d9a642829105ce8f9527f663830b8089"/>
+    <branch module="gtk-mac-integration/2.0/gtk-mac-integration-2.0.1.tar.bz2"
+            version="2.0.1"
+	    hash="sha256:1a3f6c418819499bbf63a1bb8da7f725eb07c3a929028b7bd0c3d5cd5077a181"/>
     <dependencies>
     </dependencies>
     <after>
@@ -131,7 +164,7 @@
     </after>
   </autotools>
 
-  <autotools id="pygtk-extras">
+  <autotools id="pygtk-extras" autogen-sh="configure">
     <branch module="gnome-python-extras/2.25/gnome-python-extras-2.25.3.tar.bz2"
 	    version="2.25.3"/>
     <dependencies>

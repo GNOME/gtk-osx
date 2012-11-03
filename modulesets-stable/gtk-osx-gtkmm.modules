@@ -15,6 +15,12 @@
     </dependencies>
   </metamodule>
 
+  <metamodule id="meta-gtk-osx-gtkmm3">
+    <dependencies>
+      <dep package="gtkmm3"/>
+    </dependencies>
+  </metamodule>
+
   <autotools id="cairomm" autogen-sh="configure">
     <branch module="cairomm-1.10.0.tar.gz" version="1.10.0"
 	    hash="sha1:f08bf8a331067f0d1e876523f07238fba6b26b99"
@@ -25,26 +31,17 @@
   </autotools>
 
   <autotools id="glibmm" autogen-sh="configure">
-    <branch module="glibmm/2.28/glibmm-2.28.2.tar.bz2" version="2.28.2"
-            hash="sha256:7b67178363f8494c94f8b3dd704a4c8db7ad75a253fc84a4ad229e5e179ec192"/>
+    <branch module="glibmm/2.34/glibmm-2.34.0.tar.xz" version="2.34.0"
+            hash="sha256:ae5b8221fdace1771d2ae401b52afdca8b64ee12bd0f956fb4e92d482ddc1cbf"/>
     <dependencies>
       <dep package="glib"/>
       <dep package="libsigc++2"/>
     </dependencies>
   </autotools>
 
-  <autotools id="glibmm3" autogen-sh="configure">
-    <branch module="glibmm/2.28/glibmm-2.28.2.tar.bz2" version="2.28.2"
-            hash="sha256:7b67178363f8494c94f8b3dd704a4c8db7ad75a253fc84a4ad229e5e179ec192"/>
-    <dependencies>
-      <dep package="glib-gtk3"/>
-      <dep package="libsigc++2"/>
-    </dependencies>
-  </autotools>
-
   <autotools id="pangomm" autogen-sh="configure">
-    <branch module="pangomm/2.28/pangomm-2.28.2.tar.bz2" version="2.28.2"
-            hash="sha256:ec1d97245eada5cf18d0e7af3f6e31498f25623b4a354589d631d2dff92fd88f"/>
+    <branch module="pangomm/2.28/pangomm-2.28.4.tar.xz" version="2.28.4"
+            hash="sha256:778dcb66a793cbfd52a9f92ee5a71b888c3603a913fc1ddc48a30204de6d6c82"/>
     <dependencies>
       <dep package="glibmm"/>
       <dep package="cairomm"/>
@@ -53,8 +50,8 @@
   </autotools>
 
   <autotools id="atkmm" autogen-sh="configure">
-    <branch module="atkmm/2.22/atkmm-2.22.5.tar.bz2" version="2.22.5"
-	    hash="sha256:61e03e5e67952c8fd9919049fae680bd0f2a1547344394f36b98b05b34b7be6c"/>
+    <branch module="atkmm/2.22/atkmm-2.22.6.tar.xz" version="2.22.6"
+	    hash="sha256:0a74295106b9e3ae552b169eb4e098b8b825c4115045b9d5134a6c79a238aeb6"/>
   </autotools>
 
 <!-- libsigc++ depends on doxygen for documentation, but doxygen
@@ -64,17 +61,17 @@
      documentation in your jhbuildrc-custom. -->
   <autotools id="libsigc++2" autogen-sh="configure"
 	     autogen-args="--disable-documentation">
-    <branch module="libsigc++/2.2/libsigc++-2.2.8.tar.bz2" version="2.2.8"
-            hash="sha256:0fd75fd8249e09ae2fd3ffd20c3fbaea11b47d71ba5ba2340ed98b6bdca40ea8"/>
+    <branch module="libsigc++/2.2/libsigc++-2.2.11.tar.xz" version="2.2.11"
+            hash="sha256:9834045f74f56752c2c6b3cdc195c30ab8314ad22dc8e626d6f67f940f1e4957"/>
   </autotools>
 
   <autotools id="gtkmm3" autogen-sh="configure">
-    <branch module="gtkmm/3.2/gtkmm-3.2.0.tar.bz2" version="3.2.0"
-            hash="sha256:2f28f97692555daf1bdd5178a50be5678f743cd1b09d276f208911b7738a3250">
-      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0001-Gtkmm-won-t-build-for-Quartz.patch" strip="1"/>
+    <branch module="gtkmm/3.6/gtkmm-3.6.0.tar.xz" version="3.6.0"
+            hash="sha256:888154d5c8acec083aa15e8dab68d977a393ade7257f0630becfa9a223fa2359">
+      <!--patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0001-Gtkmm-won-t-build-for-Quartz.patch" strip="1"/-->
     </branch>
     <dependencies>
-      <dep package="glibmm3"/>
+      <dep package="glibmm"/>
       <dep package="cairomm"/>
       <dep package="pangomm"/>
       <dep package="atkmm"/>

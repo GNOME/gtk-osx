@@ -12,6 +12,7 @@
               href="http://ftp.gnu.org/gnu/"/>
   <repository type="tarball" name="sourceware.org"
               href="ftp://sourceware.org/pub/"/>
+
   <!-- This module set works a bit differently than for example the
        GNOME ones do. It's split up in seperate pieces:
 
@@ -65,19 +66,8 @@
   </metamodule>
 
   <autotools id="glib" autogen-sh="configure">
-    <branch module="glib/2.28/glib-2.28.8.tar.bz2"  version="2.28.8"
-            hash="sha256:222f3055d6c413417b50901008c654865e5a311c73f0ae918b0a9978d1f9466f">
-      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/glib-iconv.patch" strip="1"/>
-    </branch>
-    <after>
-      <dep package="meta-gtk-osx-bootstrap"/>
-      <dep package="gtk-doc"/>
-    </after>
-  </autotools>
-
-  <autotools id="glib-gtk3" autogen-sh="configure">
-    <branch module="glib/2.33/glib-2.33.2.tar.xz"  version="2.33.2"
-            hash="sha256:b7163e9f159775d13ecfb433d67c3f0883e0e518e85b2e970d4ad9773d7cd0b4"/>
+    <branch module="glib/2.34/glib-2.34.1.tar.xz"  version="2.34.1"
+            hash="sha256:6e84dc9d84b104725b34d255421ed7ac3629e49f437d37addde5ce3891c2e2f1"/>
     <dependencies>
       <dep package="libffi"/>
       <dep package="gtk-doc"/>
@@ -87,13 +77,14 @@
     </after>
   </autotools>
 
-  <autotools id="libffi" autogenargs="--disable-builddir">
-    <branch module="libffi/libffi-3.0.10.tar.gz" repo="sourceware.org"
-            version="3.0.10" checkoutdir="atgreen-libffi-873d687"/>
+  <autotools id="libffi" autogenargs="--disable-builddir"
+             autogen-sh="configure">
+    <branch module="libffi/libffi-3.0.11.tar.gz" repo="sourceware.org"
+            version="3.0.11" checkoutdir="atgreen-libffi-873d687"/>
   </autotools>
 
-<!-- This is the latest 0.10 version. Later versions are 1.29 and intended to work with glib 2.29; the minor version of gobject-introspection will track the minor version of glib that it's intended to work with. -->
-  <autotools id="gobject-introspection">
+<!-- This is the latest 0.10 version. Later versions are 1.29 and intended to work with glib 2.29; the minor version of gobject-introspection will track the minor version of glib that it's intended to work with. Note that in the unlikely event you need to introspect Gtk+-2.0, you need to build Glib 1.28 and use this gobject-introspection. The default is to *not* introspect Gtk+-2.0 and to use the latest GLib and Gobject-Introspection with Gtk3 -->
+  <autotools id="gobject-introspection-10" autogen-sh="configure">
     <branch module="gobject-introspection/0.10/gobject-introspection-0.10.8.tar.bz2"
             version="0.10.8"
             hash="sha256:5b1387ff37f03db880a2b1cbd6c6b6dfb923a29468d4d8367c458abf7704c61e">
@@ -106,66 +97,44 @@
     </dependencies>
   </autotools>
 
-  <autotools id="gobject-introspection-gtk3">
-    <branch module="gobject-introspection/1.33/gobject-introspection-1.33.2.tar.xz"
-            version="1.33.2"
-            hash="sha256:86f7325a7a8e1df7eb99d3bed83dead92e1283a8ec167b57727f138a205bb9e7">
+  <autotools id="gobject-introspection" autogen-sh="configure">
+    <branch module="gobject-introspection/1.34/gobject-introspection-1.34.1.tar.xz"
+            version="1.34.1"
+            hash="sha256:bf40470c863dbb292ec52d1e84495e9334ea954e3a0ee59d6ff5f8161ea53abd">
       <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/girscanner-objc.patch" strip="1"/>
-      <!--patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0001-scanner-split-CC-environment-variable.patch" strip="1"/-->
     </branch>
     <dependencies>
-      <dep package="glib-gtk3"/>
-      <dep package="cairo"/>
-    </dependencies>
-  </autotools>
-
-<!-- PangoFt2 and hence freetype and fontconfig are required by WebKitGtk.  -->
-  <autotools id="pango"  autogen-sh="configure"
-             autogenargs="--without-x --with-included-modules=basic-atsui"
-             makeargs="-k -C modules; make">
-    <!-- The last version that will build on Tiger is 1.24.5 -->
-    <branch version="1.28.4" module="pango/1.28/pango-1.28.4.tar.bz2"
-            hash="sha256:7eb035bcc10dd01569a214d5e2bc3437de95d9ac1cfa9f50035a687c45f05a9f">
-<!--    <branch version="1.24.5" module="pango/1.24/pango-1.24.5.tar.bz2"
-            hash="sha256:0f733d1ec3e8dafcae152d7ac58f1090bee1fd856176c8fee0e81b0e42392f4e">-->
-    </branch>
-    <dependencies>
-      <dep package="cairo"/>
-      <dep package="fontconfig"/>
       <dep package="glib"/>
-      <dep package="gobject-introspection"/>
+      <dep package="cairo"/>
     </dependencies>
-    <after>
-      <dep package="meta-gtk-osx-bootstrap"/>
-    </after>
   </autotools>
 
-  <autotools id="pango-gtk3"  autogen-sh="configure"
-             autogenargs="--without-x --with-included-modules=basic-atsui"
+ <autotools id="pango"  autogen-sh="configure"
+             autogenargs="--without-x"
              makeargs="-k -C modules; make">
-    <branch version="1.30.1" module="pango/1.30/pango-1.30.1.tar.xz"
-            hash="sha256:3a8c061e143c272ddcd5467b3567e970cfbb64d1d1600a8f8e62435556220cbe">
-      <!--patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/pango-CoreText-fix-zero-width-space-bgo-666856.patch" strip="1"/-->
+    <branch version="1.32.1" module="pango/1.32/pango-1.32.1.tar.xz"
+            hash="sha256:484babf7e1ac4bf959a0babe8168f180acb516932d70e2985de5f6e2961fcd82">
+      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0001-Fix-relative-module-paths.patch" strip="1"/>
     </branch>
     <dependencies>
       <dep package="cairo"/>
-      <dep package="fontconfig"/>
-      <dep package="glib-gtk3"/>
-      <dep package="gobject-introspection-gtk3"/>
-    </dependencies>
+     </dependencies>
     <after>
+      <dep package="gobject-introspection"/>
+      <dep package="meta-gtk-osx-freetype"/>
+      <dep package="glib"/>
       <dep package="meta-gtk-osx-bootstrap"/>
     </after>
   </autotools>
 
  <autotools id="atk" autogen-sh="configure">
-    <branch module="atk/2.2/atk-2.2.0.tar.bz2" version="2.2.0"
-            hash="sha256:d201e3f5808aef0b1aec2277bfa61074f68863e405428adb57a73aab5c838450"/>
+    <branch module="atk/2.6/atk-2.6.0.tar.xz" version="2.6.0"
+            hash="sha256:eff663f90847620bb68c9c2cbaaf7f45e2ff44163b9ab3f10d15be763680491f"/>
     <dependencies>
     </dependencies>
     <after>
       <dep package="glib"/>
-      <dep package="glib-gtk3"/>
+      <dep package="glib"/>
       <dep package="meta-gtk-osx-bootstrap"/>
     </after>
   </autotools>
@@ -178,37 +147,28 @@
     </after>
   </autotools>
 
-  <autotools id="gdk-pixbuf-gtk3">
-    <branch module="gdk-pixbuf/2.26/gdk-pixbuf-2.26.1.tar.xz" version="2.26.1"
-            hash="sha256:a60af12b58d9cc15ba4c680c6730ce5d38e8d664af1d575a379385b94b4ec7ba"/>
+  <autotools id="gdk-pixbuf-gtk3" autogen-sh="configure">
+    <branch module="gdk-pixbuf/2.26/gdk-pixbuf-2.26.4.tar.xz" version="2.26.4"
+            hash="sha256:a91458645f078debf204fef8bb06b30f356fcb5d48f65395132a5dba2b3510be"/>
     <after>
-      <dep package="pango-gtk3"/>
+      <dep package="pango"/>
     </after>
   </autotools>
 
   <autotools id="gtk+" autogen-sh="configure"
-             autogenargs="--with-gdktarget=quartz --enable-quartz-relocation"
+             autogenargs="--with-gdktarget=quartz --enable-quartz-relocation --disable-introspection"
              autogen-template="autoreconf -fis &amp;&amp; %(srcdir)s/%(autogen-sh)s --prefix %(prefix)s --libdir %(libdir)s %(autogenargs)s">
-    <branch module="gtk+/2.24/gtk+-2.24.9.tar.xz" version="2.24.9">
+    <branch module="gtk+/2.24/gtk+-2.24.13.tar.xz" version="2.24.13"
+            hash="sha256:35e1a01e46b02970b02ee9f299390d0aa57c1215ad2667bcd584b72f4ea6513d">
       <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0004-Bug-571582-GtkSelection-implementation-for-quartz.patch" strip="1"/>
-      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0006-Bug-658722-Drag-and-Drop-sometimes-stops-working.patch" strip="1"/>
       <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0008-Implement-GtkDragSourceOwner-pasteboardChangedOwner.patch" strip="1"/>
-      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/gtk+-Bug-655065-Better-Fix.patch" strip="1"/>
-      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0001-Bug-670373-gtk2-modules-printing-cups-gtkprintbackendcups.patch" strip="1"/>
-      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0002-gtk2-Extract-reasons-and-reasons_desc-arrays-to-file-leve.patch" strip="1"/>
-      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0003-gtk2-Create-enum-PrinterStateLevel.patch" strip="1"/>
-      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0004-gtk2-Extract-printer-setup-variables-into-a-struct.patch" strip="1"/>
-      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0005-gtk2-Extract-function-cups_printer_handle_attribute.patch" strip="1"/>
-      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0006-gtk2-Extract-Function-cups_create_printer.patch" strip="1"/>
-      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0007-gtk2-Move-some-variable-declarations-into-the-scopes-in-w.patch" strip="1"/>
-      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0008-Bug-670373-gtk2-modules-printing-cups-gtkprintbackendcups.patch" strip="1"/>
-      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0009-Bug-670373-gtk2-modules-printing-cups-gtkprintbackendcups.patch" strip="1"/>
+      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0006-Bug-658722-Drag-and-Drop-sometimes-stops-working.patch" strip="1"/>
    </branch>
     <dependencies>
       <dep package="glib"/>
       <dep package="pango"/>
       <dep package="atk"/>
-      <dep package="gdk-pixbuf"/>
+      <dep package="gdk-pixbuf-gtk3"/>
       <dep package="gobject-introspection"/>
     </dependencies>
     <after>
@@ -218,24 +178,15 @@
 
   <autotools id="gtk+-3.0" autogen-sh="autogen.sh"
              autogenargs="--enable-quartz-backend --enable-quartz-relocation">
-    <branch module="gtk+/3.4/gtk+-3.4.3.tar.xz" version="3.4.3"
-            hash="sha256:846010442a96590469cde16ed6a1fdfe09397e435165459f04d31cfa5713799f">
-      <!--patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0001-Bug-571582-GtkSelection-implementation-for-quartz.patch" strip="1"/>
-      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0002-gtk3-Extract-reasons-and-reasons_desc-arrays-to-file-leve.patch" strip="1"/>
-      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0003-gtk3-Create-enum-PrinterStateLevel.patch" strip="1"/>
-      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0004-gtk3-Extract-printer-setup-variables-into-a-struct.patch" strip="1"/>
-      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0005-gtk3-Extract-function-cups_printer_handle_attribute.patch" strip="1"/>
-      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0006-gtk3-Extract-Function-cups_create_printer.patch" strip="1"/>
-      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0007-gtk3-Move-some-variable-declarations-into-the-scopes-in-w.patch" strip="1"/>
-      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0008-Bug-670373-gtk3-modules-printing-cups-gtkprintbackendcups.patch" strip="1"/>
-      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0009-Bug-670373-gtk3-modules-printing-cups-gtkprintbackendcups.patch" strip="1"/-->
-    </branch>
+    <branch module="gtk+/3.6/gtk+-3.6.1.tar.xz" version="3.6.1"
+            hash="sha256:fe6c89ae40145b077d7291105e81d4f876be01bf21ddfb9cba449f6be49d7996">
+     </branch>
     <dependencies>
-      <dep package="glib-gtk3"/>
-      <dep package="pango-gtk3"/>
+      <dep package="glib"/>
+      <dep package="pango"/>
       <dep package="atk"/>
       <dep package="gdk-pixbuf-gtk3"/>
-      <dep package="gobject-introspection-gtk3"/>
+      <dep package="gobject-introspection"/>
     </dependencies>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
@@ -243,9 +194,9 @@
   </autotools>
 
   <autotools id="pixman" autogenargs="--disable-gtk" autogen-sh="configure">
-    <branch version="0.22.2" module="pixman-0.22.2.tar.gz"
+    <branch version="0.26.2" module="pixman-0.26.2.tar.gz"
             repo="cairographics"
-            hash="sha1:b42a7aec5119b1e5ce8eed06452645fa3a4892ac"/>
+            hash="sha1:3c7d72b5b52e6d301efc68aa480f0737a641bdd3"/>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
     </after>
@@ -253,11 +204,11 @@
 
   <autotools id="cairo"  autogen-sh="configure"
              autogenargs="--enable-pdf --enable-quartz --enable-xlib=no --without-x">
-    <branch module="cairo-1.10.2.tar.gz"  version="1.10.2"
+    <branch module="cairo-1.12.6.tar.xz"  version="1.12.6"
             repo="cairographics"
-            hash="sha1:ccce5ae03f99c505db97c286a0c9a90a926d3c6e">
-      <patch  file="http://git.gnome.org/browse/gtk-osx/plain/patches/Cairo-44584-llvm-no-flto.patch" strip="1"/>
-      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0001-quartz-Fix-the-32-bits-build-on-MacOSX-10.7.patch" strip="1"/>
+            hash="sha1:a383c6cb4495e18848ea43e1031c294aa9417a43">
+      <!--patch  file="http://git.gnome.org/browse/gtk-osx/plain/patches/Cairo-44584-llvm-no-flto.patch" strip="1"/>
+      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0001-quartz-Fix-the-32-bits-build-on-MacOSX-10.7.patch" strip="1"/-->
     </branch>
     <dependencies>
       <dep package="pixman"/>
@@ -271,9 +222,9 @@
 
   <autotools id="gtk-mac-integration" autogen-sh="configure"
              autogenargs="--disable-python">
-    <branch module="gtk-mac-integration/2.0/gtk-mac-integration-2.0.0.tar.xz"
-            version="2.0.0"
-            hash="sha256:44c6461e7b2b058bd4c9c7a28903e2a25fa5a5b1eeea49331c4fe7043a042436">
+    <branch module="gtk-mac-integration/2.0/gtk-mac-integration-2.0.1.tar.xz"
+            version="2.0.1"
+            hash="sha256:1a3f6c418819499bbf63a1bb8da7f725eb07c3a929028b7bd0c3d5cd5077a181">
     </branch>
     <dependencies>
     </dependencies>

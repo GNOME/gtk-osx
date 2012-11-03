@@ -64,16 +64,22 @@
 	    hash="sha256:e6a2af72674403d06c03e067d915004e8d9cdeec206f3350c7f3ee595b139912"/>
   </autotools>
 
-  <autotools id="librsvg">
-    <branch module="librsvg/2.32/librsvg-2.32.1.tar.bz2" version="2.32.1"
-	    hash="sha256:91b98051f352fab8a6257688d6b2fd665b4648ed66144861f2f853ccf876d334"/>
+  <autotools id="librsvg2" autogenargs="--disable-Bsymbolic">
+    <branch module="librsvg/2.36/librsvg-2.36.4.tar.xz" version="2.36.4"
+	    hash="sha256:1021935204798f4f0ad3004a09b583668ea94a48593461b147fdcff68a18e6c2"/>
+    <dependencies>
+      <dep package="libcroco"/>
+      <dep package="libgsf"/>
+      <!--dep package="libart_lgpl"/><goffice.modules -->
+    </dependencies>
   </autotools>
 
-  <autotools id="libcroco">
-    <branch module="libcroco/0.6/libcroco-0.6.2.tar.bz2" version="0.6.2"
-	    hash="sha256:be24853f64c09b63d39e563fb0222e29bae1a33c3d9f6cbffc0bc27669371749"/>
+  <autotools id="libcroco" autogenargs="--disable-Bsymbolic"
+	     autogen-sh="configure">
+    <branch module="libcroco/0.6/libcroco-0.6.8.tar.xz" version="0.6.8"
+	    hash="sha256:ea6e1b858c55219cefd7109756bff5bc1a774ba7a55f7d3ccd734d6b871b8570"/>
     <dependencies>
-      <dep package="librsvg"/>
+      <!--dep package="librsvg"/-->
     </dependencies>
   </autotools>
 
