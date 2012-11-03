@@ -304,14 +304,11 @@ def setup_sdk(target, sdk_version, architectures=[_default_arch]):
     if architectures == ["i386"]:
         append_autogenargs("glib", "--build=i486-apple-darwin")
         append_autogenargs("gmp", "ABI=32")
-        append_autogenargs("libffi", "--build=i486-apple-darwin")
         append_autogenargs("liboil", "--host=i486-apple-darwin")
     elif architectures == ["x86_64"]:
         append_autogenargs("glib", "--build=x86_64-apple-darwin")
         append_autogenargs("gmp", "ABI=64")
-        append_autogenargs("libffi", "--build=x86_64-apple-darwin")
         append_autogenargs("liboil", "--host=x86_64-apple-darwin")
-
 
     # Tiger has a somewhat messed-up resolv.h, so we need to explicitly
     # link libresolv:
@@ -344,6 +341,13 @@ def setup_sdk(target, sdk_version, architectures=[_default_arch]):
     #Guile doesn't handle optimization well with llvm-gcc
     if _osx_version >= 7.0 and xcodeversion > 4.0:
         append_autogenargs("guile", 'CFLAGS="$CFLAGS -O1"')
+    #Defining ARCHFLAGS globally messes up waf, so we need to define
+    #it here for our two perl modules:
+    if architectures != ['ppc']:
+        module_extra_env.update(
+            {"perl-xml-simple":{"ARCHFLAGS":"-arch i386 -arch x86_64"},
+             "perl-xml-parser":{"ARCHFLAGS":"-arch i386 -arch x86_64"}})
+
 
     return sdkdir
 
@@ -397,7 +401,6 @@ def setup_ppc_build():
     append_autogenargs("OpenSP", _ppc_args)
     append_autogenargs("libdbi", _ppc_args)
     append_autogenargs("libdbi-drivers", _ppc_args)
-
 
 # This is the function to call to build universal binaries. By default
 # it will build a ppc/i386/x86_64 universal binary for 10.5 and
