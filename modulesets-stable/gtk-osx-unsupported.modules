@@ -170,10 +170,12 @@ This issue was closed by revision r827.
       <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/webkit-1.6-missing-icu-files.patch" strip="1"/>
       <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/webkit-1.6-missing-utf8-include.patch" strip="1"/>
       <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/webkit-1.6-enable-blob.patch" strip="1"/>
+      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/webkit-1.6-gnome-3.6-fixup.patch" strip="0"/>
     </branch>
     <dependencies>
       <dep package="enchant"/>
       <dep package="libsoup"/>
+      <dep package="meta-gtk-osx-freetype"/>
     </dependencies>
     <after>
       <dep package="meta-gtk-osx-core"/>
