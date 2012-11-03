@@ -13,9 +13,15 @@
     </dependencies>
   </metamodule>
 
+  <metamodule id="meta-gtk-osx-gtkmm3">
+    <dependencies>
+      <dep package="gtkmm3"/>
+    </dependencies>
+  </metamodule>
+
 <!-- mm-common is C++ glue code needed only to build from git. -->
   <autotools id="mm-common">
-    <branch module="mm-common" tag="0.9.5"/>
+    <branch module="mm-common" tag="0.9.6"/>
   </autotools>
 
   <autotools id="cairomm" >
@@ -28,7 +34,7 @@
   </autotools>
 
   <autotools id="glibmm" >
-    <branch tag="glibmm-2-28"/>
+    <branch tag="glibmm-2-34"/>
     <dependencies>
       <dep package="libsigc++2"/>
     </dependencies>
@@ -37,19 +43,9 @@
     </after>
   </autotools>
 
-  <autotools id="glibmm3" >
-    <branch tag="glibmm-2-30" module="glibmm"/>
-    <dependencies>
-      <dep package="libsigc++2"/>
-    </dependencies>
-    <after>
-      <dep package="glib-gtk3"/>
-    </after>
-  </autotools>
-
 <!-- Pangomm's last stable branch was 2-24 -->
   <autotools id="pangomm" >
-     <branch tag="2.28.2"/>
+     <branch tag="2.28.4"/>
     <dependencies>
        <dep package="cairomm"/>
     </dependencies>
@@ -57,13 +53,17 @@
       <dep package="glibmm"/>
       <dep package="glibmm3"/>
       <dep package="pango"/>
-      <dep package="pango-gtk3"/>
     </after>
   </autotools>
 
+<!-- libsigc++ depends on doxygen for documentation, but doxygen
+     doesn't build correctly under gtk-osx. It builds fine on its own,
+     of course, and there are OSX binaries available on their
+     website. If you want the docs, install it separately and renable
+     documentation in your jhbuildrc-custom. -->
 <!-- libsigc++'s last stable branch was 2-0 -->
   <autotools id="libsigc++2"  autogen-args="--disable-documentation">
-    <branch tag="2.2.8"/>
+    <branch tag="2.2.11"/>
     <dependencies>
       <dep package="mm-common"/>
     </dependencies>
@@ -71,7 +71,7 @@
 
 <!-- atkmm doesn't branch -->
   <autotools id="atkmm">
-    <branch module="atkmm" tag="2.22.5"/>
+    <branch module="atkmm" tag="2.22.6"/>
     <dependencies>
       <dep package="atk"/>
     </dependencies>
@@ -88,9 +88,8 @@
     </dependencies>
   </autotools>
 
-<!-- Note: This doesn't build at the moment. See https://bugzilla.gnome.org/show_bug.cgi?id=662975. There's a patch for modulesets-stable. -->
   <autotools id="gtkmm3" >
-    <branch revision="gtkmm-3-2" module="gtkmm"/>
+    <branch revision="gtkmm-3-6" module="gtkmm"/>
     <dependencies>
       <dep package="glibmm3"/>
       <dep package="cairomm"/>

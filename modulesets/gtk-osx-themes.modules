@@ -46,7 +46,7 @@
   </autotools>
 
   <autotools id="gnome-icon-theme">
-    <branch revision="gnome-2-30"/>
+    <branch tag="3.6.0"/>
     <dependencies>
       <dep package="hicolor-icon-theme"/>
       <dep package="icon-naming-utils"/>
@@ -65,15 +65,15 @@
   </autotools>
 
   <autotools id="librsvg">
-    <branch module="librsvg" rebision="gnoe-2-32"/>
+    <branch module="librsvg" tag="2.36.4"/>
   </autotools>
 
   <autotools id="libcroco">
-    <branch revision="libcroco-0-6-0"/>
+    <branch tag="0.6.8"/>
   </autotools>
 
   <autotools id="libcss" autogenargs="--disable-examples">
-    <branch module="ccss" repo="freedesktop.org"/>
+    <branch module="ccss" repo="freedesktop.org" tag="ccss-0.5.0"/>
     <dependencies>
       <dep package="libcroco"/>
     </dependencies>
@@ -90,8 +90,7 @@
   </autotools>
 
   <autotools id="gtk-quartz-engine">
-    <branch module="jralls/gtk-quartz-engine"
-            repo="github.com" tag="v0.1" />
+    <branch />
     <after>
       <dep package="meta-gtk-osx-core"/>
     </after>

@@ -5,17 +5,14 @@
   <repository type="git" name="git.gnome.org" default="yes"
               href="git://git.gnome.org/"/>
   <repository type="git" name="github" href="git://github.com/"/>
-  <repository type="tarball" name="ftp.gnome.org" 
+  <repository type="tarball" name="ftp.gnome.org"
 	      href="ftp://ftp.gnome.org/pub/gnome/sources/"/>
   <repository type="tarball" name="ftp.gnu.org"
 	      href="ftp://ftp.gnu.org/gnu/"/>
-    <repository type="git" name="git.freedesktop.org"
+  <repository type="git" name="git.freedesktop.org"
               href="git://anongit.freedesktop.org/"/>
   <repository type="tarball" name="dbus.freedesktop.org"
 	      href="http://dbus.freedesktop.org/releases/"/>
-  <repository type="cvs" name="mime.freedesktop.org"
-              cvsroot=":pserver:anoncvs@anoncvs.freedesktop.org:/cvs/mime"
-              password=""/>
   <repository type="tarball" name="sourceforge"
               href="http://downloads.sourceforge.net/sourceforge/"/>
   <repository type="tarball" name="sqlite" href="http://www.sqlite.org/"/>
@@ -77,21 +74,14 @@
     </dependencies>
   </autotools>
 -->
-    <autotools id="vala" autogen-sh="configure">
-    <branch repo="ftp.gnome.org" module="vala/0.14/vala-0.14.0.tar.bz2"
-            version="0.14.0" hash="sha256:4cbca602e2e2a09803ae33fd7324219bc2c611db5a62a52e733e7d8806acb6f5"/>
-    <after>
-      <dep package="meta-gtk-osx-bootstrap"/>
-      <dep package="meta-gtk-osx-core"/>
-    </after>
+
+<!-- Vala-bootstrap is the current stable vala precompiled to C. -->
+  <autotools id="vala">
+    <branch module="vala-bootstrap"/>
   </autotools>
-  <!-- Vala requires an installed vala compiler to build from git. The
-       above release is coordinated with stable, as usual. -->
-  <autotools id="vala-git">
-    <branch/>
-    <dependencies>
-      <dep package="vala" module="vala" tag="0.14"/>
-    </dependencies>
+
+  <autotools id="unique">
+    <branch tag="3.0.2"/>
   </autotools>
 
   <autotools id="devhelp">
@@ -103,11 +93,12 @@
     </after>
     <dependencies>
       <dep package="WebKit"/>
+      <dep package="unique"/>
     </dependencies>
   </autotools>
 
   <autotools id="devhelp-gtk3">
-    <branch tag="gnome-3-2" module="devhelp"/>
+    <branch tag="gnome-3-6" module="devhelp"/>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
       <dep package="meta-gtk-osx-themes"/>
@@ -129,7 +120,7 @@
   </autotools>
 
   <autotools id="glade" autogenargs="--disable-scrollkeeper">
-    <branch revision="glade-3-10"/>
+    <branch revision="glade-3-14"/>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
       <dep package="meta-gtk-osx-themes"/>
@@ -146,7 +137,7 @@
   </autotools>
 
   <autotools id="gtksourceview-gtk3">
-    <branch revision="gnome-3-2" module="gtksourceview"/>
+    <branch revision="gnome-3-6" module="gtksourceview"/>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
       <dep package="meta-gtk-osx-gtk3"/>
@@ -216,8 +207,8 @@
   </autotools>
 
   <autotools id="shared-mime-info" supports-non-srcdir-builds="no" >
-    <branch module="shared-mime-info" tag="RELEASE-0-9"
-            repo="mime.freedesktop.org"/>
+    <branch module="xdg/shared-mime-info" tag="Release-1-0"
+            repo="git.freedesktop.org"/>
     <dependencies>
       <dep package="intltool"/>
       <dep package="glib"/>
@@ -228,7 +219,7 @@
              autogenargs="--disable-python --disable-print --without-x
                           --without-dbus --without-gnomevfs4echo  --without-wmf"
              makeargs='LDFLAGS="-framework Carbon"'>
-    <branch revision="gimp-2-6"/>
+    <branch revision="gimp-2-8"/>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
       <dep package="meta-gtk-osx-core"/>
@@ -241,12 +232,11 @@
   </autotools>
 
    <autotools id="babl">
-<!-- Release 0.1.2; there are newer ones, but this is the latest tarball -->
-     <branch tag="BABL_0_1_2"/>
+     <branch tag="BABL_0_1_10"/>
   </autotools>
 
   <autotools id="gegl">
-    <branch tag="GEGL_0_1_2"/>
+    <branch tag="GEGL_0_2_0"/>
     <dependencies>
       <dep package="babl"/>
     </dependencies>
@@ -255,7 +245,7 @@
  <autotools id="poppler"
            autogenargs="--disable-qt --disable-qt4 --without-x --disable-gtk-test --enable-xpdf-headers">
     <branch repo="git.freedesktop.org" module="poppler/poppler"
-            revision="poppler-0.16"/>
+            revision="poppler-0.20"/>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
       <dep package="meta-gtk-osx-core"/>
@@ -266,7 +256,7 @@
   <autotools id="sqlite" autogenargs="--disable-tcl --enable-threadsafe" >
     <!-- Another package with a non-standard repository structure. Tarballs
     are easier.-->
-    <branch module="sqlite-autoconf-3070800.tar.gz" version='3.7.8'
+    <branch module="sqlite-autoconf-3071401.tar.gz" version='3.7.14'
 	    repo="sqlite"/>
   </autotools>
 
@@ -280,8 +270,8 @@
 
 <!-- Goocanvas 2.0 is for Gtk+-3, and uses the master branch. -->
   <autotools id="goocanvas2">
-    <!-- No tags, so this is release 2.0.0 -->
-    <branch revision="20e61391912cb930924c62a102c5482011d2d411"
+    <!-- No tags, so this is release 2.0.1 -->
+    <branch revision="533e446e584f0da3a21e38f412557986c131e0ad"
 	    module="goocanvas"/>
     <dependencies>
       <dep package="gtk+-3"/>
@@ -318,7 +308,7 @@
   <!-- gmp uses Mercurial, so we stick with the tarball to avoid
        having to install yet another vcs tool. -->
  <autotools id="gmp">
-    <!--branch repo="ftp.gnu.org" module="gmp/gmp-5.0.2.tar.bz2" version="5.0.2"/-->
+    <!--branch repo="ftp.gnu.org" module="gmp/gmp-5.0.5.tar.bz2" version="5.0.2"/-->
     <branch repo="ftp.gnu.org" module="gmp/gmp-4.3.2.tar.bz2" version="4.3.2"/>
   </autotools>
 

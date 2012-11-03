@@ -25,10 +25,34 @@
     <branch repo="faac.sourceforge.net" module="faad2" tag="FAAD2_2_7" />
   </autotools>
 
-  <autotools id="gstreamer" autogenargs="-- --disable-tests"
+  <autotools id="gstreamer-common">
+    <branch module="common" revision="0.10"/>
+  </autotools>
+
+  <autotools id="gstreamer-common-1.0">
+    <branch module="common" revision="1.0"/>
+  </autotools>
+
+  <autotools id="gstreamer" autogenargs="--disable-tests"
              supports-non-srcdir-builds="no"
-    makeargs="ERROR_CFLAGS=" >
-    <branch tag="RELEASE-0.10.35"/>
+	     makeargs="ERROR_CFLAGS=" >
+    <branch revision="0.10"/>
+    <dependencies>
+      <dep package="gstreamer-common"/>
+    </dependencies>
+    <after>
+      <dep package="glib"/>
+      <dep package="libxml2"/>
+    </after>
+  </autotools>
+
+   <autotools id="gstreamer-1.0" autogenargs="--disable-tests"
+             supports-non-srcdir-builds="no"
+	     makeargs="ERROR_CFLAGS=" >
+    <branch module="gstreamer" revision="1.0"/>
+    <dependencies>
+      <dep package="gstreamer-common-1.0"/>
+    </dependencies>
     <after>
       <dep package="glib"/>
       <dep package="libxml2"/>
@@ -36,12 +60,11 @@
   </autotools>
 
   <autotools id="gst-plugins-base" supports-non-srcdir-builds="no"
-             autogenargs="-- --disable-tests --disable-x --disable-xvideo"
+             autogenargs="--disable-tests --disable-x --disable-xvideo"
              makeargs="ERROR_CFLAGS=" >
-    <branch tag="RELEASE-0.10.35"/>
+    <branch revision="0.10"/>
     <dependencies>
       <dep package="gstreamer"/>
-      <!--dep package="gtk+"/-->
       <dep package="liboil"/>
     </dependencies>
     <after>
@@ -49,28 +72,60 @@
     </after>
   </autotools>
 
-  <autotools id="gst-plugins-good" supports-non-srcdir-builds="no"
-             autogenargs="-- --disable-tests --disable-x --disable-xvideo --disable-osx-video"
+  <autotools id="gst-plugins-base-1.0" supports-non-srcdir-builds="no"
+             autogenargs="--disable-tests --disable-x --disable-xvideo"
              makeargs="ERROR_CFLAGS=" >
-    <branch tag="RELEASE-0.10.30"/>
+    <branch module="gst-plugins-base" revision="1.0"/>
+    <dependencies>
+      <dep package="gstreamer-1.0"/>
+      <dep package="liborc"/>
+    </dependencies>
+    <after>
+      <dep package="gnome-vfs"/>
+    </after>
+  </autotools>
+
+  <autotools id="gst-plugins-good" supports-non-srcdir-builds="no"
+             autogenargs="--disable-tests --disable-x --disable-xvideo --disable-osx-video"
+             makeargs="ERROR_CFLAGS=" >
+    <branch revision="0.10"/>
     <dependencies>
       <dep package="gstreamer"/>
       <dep package="gst-plugins-base"/>
     </dependencies>
   </autotools>
 
-  <autotools id="gst-plugins-ugly" autogenargs="-- --disable-tests" supports-non-srcdir-builds="no"
-    makeargs="ERROR_CFLAGS=" >
-    <branch tag="RElEASE-0.10.18"/>
+  <autotools id="gst-plugins-good-1.0" supports-non-srcdir-builds="no"
+	     autogenargs="--disable-tests --disable-x --disable-xvideo --disable-osx-video"
+             makeargs="ERROR_CFLAGS=" >
+    <branch module="gst-plugins-good" revision="1.0"/>
+    <dependencies>
+      <dep package="gstreamer-1.0"/>
+      <dep package="gst-plugins-base-1.0"/>
+    </dependencies>
+  </autotools>
+
+  <autotools id="gst-plugins-ugly" autogenargs="--disable-tests"
+	     supports-non-srcdir-builds="no" makeargs="ERROR_CFLAGS=" >
+    <branch revision="0.10"/>
     <dependencies>
       <dep package="gstreamer"/>
       <dep package="gst-plugins-base"/>
     </dependencies>
   </autotools>
 
-  <autotools id="gst-plugins-bad" autogenargs="-- --disable-tests --disable-x --disable-xvid" supports-non-srcdir-builds="no"
-    makeargs="ERROR_CFLAGS=" >
-    <branch tag="RELEASE-0.10.22"/>
+  <autotools id="gst-plugins-ugly-1.0" autogenargs="--disable-tests"
+	     supports-non-srcdir-builds="no" makeargs="ERROR_CFLAGS=" >
+    <branch module="gst-pugins-ugly" revision="1.0"/>
+    <dependencies>
+      <dep package="gstreamer"/>
+      <dep package="gst-plugins-base"/>
+    </dependencies>
+  </autotools>
+
+  <autotools id="gst-plugins-bad" autogenargs="--disable-tests --disable-x --disable-xvid"
+	     supports-non-srcdir-builds="no" makeargs="ERROR_CFLAGS=" >
+    <branch revision="0.10"/>
     <dependencies>
       <dep package="gstreamer"/>
       <dep package="gst-plugins-base"/>
@@ -78,24 +133,53 @@
     </dependencies>
   </autotools>
 
-  <autotools id="gst-ffmpeg" autogenargs="-- --disable-tests --disable-mmx"
+  <autotools id="gst-plugins-bad-1.0" autogenargs="--disable-tests --disable-x --disable-xvid"
+	     supports-non-srcdir-builds="no" makeargs="ERROR_CFLAGS=" >
+    <branch module="gst-plugins-bad" revision="1.0"/>
+    <dependencies>
+      <dep package="gstreame-1.0r"/>
+      <dep package="gst-plugins-base-1.0"/>
+      <dep package="faad2"/>
+    </dependencies>
+  </autotools>
+
+  <autotools id="gst-ffmpeg" autogenargs="--disable-tests --disable-mmx"
              supports-non-srcdir-builds="no" >
-    <branch tag="RELEASE-0.10.12"/>
+    <branch revision="0.10"/>
     <dependencies>
       <dep package="gstreamer"/>
       <dep package="gst-plugins-base"/>
     </dependencies>
   </autotools>
 
+  <autotools id="gst-ffmpeg-1.0" autogenargs="--disable-tests --disable-mmx"
+             supports-non-srcdir-builds="no" >
+    <branch module="gst-ffmpeg" revision="1.0"/>
+    <dependencies>
+      <dep package="gstreamer-1.0"/>
+      <dep package="gst-plugins-base-1.0"/>
+    </dependencies>
+  </autotools>
+
   <metamodule id="meta-gstreamer">
     <dependencies>
-      <dep package="liboil"/>
       <dep package="gstreamer"/>
       <dep package="gst-plugins-base"/>
       <dep package="gst-plugins-good"/>
       <!--dep package="gst-plugins-ugly"/-->
       <dep package="gst-plugins-bad"/>
       <dep package="gst-ffmpeg"/>
+    </dependencies>
+  </metamodule>
+
+  <metamodule id="meta-gstreamer-1.0">
+    <dependencies>
+      <dep package="gstreamer-1.0"/>
+      <dep package="gst-plugins-base-1.0"/>
+      <dep package="gst-plugins-good-1.0"/>
+      <!--dep package="gst-plugins-ugly-1.0"/-->
+      <dep package="gst-plugins-bad-1.0"/>
+      <dep package="gst-ffmpeg-1.0"/>
     </dependencies>
   </metamodule>
 

@@ -28,6 +28,22 @@
     </dependencies>
   </metamodule>
 
+  <metamodule id="meta-gtk-osx-webkit">
+    <dependencies>
+      <dep package="meta-gtk-osx-core"/>
+      <dep package="libsoup"/>
+      <dep package="WebKit"/>
+    </dependencies>
+  </metamodule>
+
+  <metamodule id="meta-gtk-osx-webkit-gtk3">
+    <dependencies>
+      <dep package="meta-gtk-osx-gtk3"/>
+      <dep package="libsoup-gtk3"/>
+      <dep package="WebKit"/>
+    </dependencies>
+  </metamodule>
+
   <autotools id="gnome-mime-data">
    <branch tag="GNOME_MIME_DATA_2_18_0"/>
     <dependencies>
@@ -37,17 +53,18 @@
   </autotools>
 
   <autotools id="iso-codes" >
-    <branch repo="git.debian.org" tag="iso-codes/3.37"
+    <branch repo="git.debian.org" tag="iso-codes/3.39"
             module="iso-codes/iso-codes"/>
 
   </autotools>
 
   <autotools id="zlib">
-    <branch repo="sourceforge" version="1.2.5"
-	    module="libpng/zlib-1.2.5.tar.gz"/>
+    <branch repo="sourceforge" version="1.2.7"
+	    module="libpng/zlib-1.2.7.tar.gz"/>
   </autotools>
 
-  <autotools id="gnutls" autogen-sh="configure">
+  <autotools id="gnutls" autogen-sh="configure"
+	     autogenargs="--with-libgcrypt --without-p11-kit">
     <branch repo='git.gnu.org' tag='gnutls_2_12_x'/>
     <!--branch repo='ftp.gnu.org' version='2.12.11'
             module="gnutls/gnutls-2.12.11.tar.bz2"/-->
@@ -55,33 +72,19 @@
       <dep package="libgcrypt" />
       <dep package="libtasn1" />
       <dep package="zlib"/>
-   <!--   <dep package="opencdk" /> -->
     </dependencies>
   </autotools>
 
-<!-- Libproxy needs patches to build correctly.
   <cmake id='libproxy' cmakeargs="-DWITH_PYTHON=OFF">
-    <branch version='0.4.7' module='libproxy-0.4.7.tar.gz'
+    <branch revision="libproxy-0.4.10"
             repo='libproxy.google.com'/>
-    <dependencies>
-      <dep package="cmake"/>
-    </dependencies>
-  </cmake>
--->
-
-  <cmake id='libproxy' cmakeargs="-DWITH_PYTHON=OFF">
-    <branch version='0.4.7' module='libproxy-0.4.7.tar.gz'
-            repo='libproxy.google.com'>
-      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/libproxy-Bug-052-POSIX_C_SOURCE.patch" strip="1"/>
-      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0001-Bug-168-libproxy-pc-file.patch" strip="1"/>
-    </branch>
     <dependencies>
       <dep package="cmake"/>
     </dependencies>
   </cmake>
 
   <autotools id="libgnome-keyring">
-    <branch revision="gnome-2-32"/>
+    <branch tag="3.6.0"/>
     <dependencies>
       <dep package="gtk+"/>
       <dep package="libgcrypt"/>
@@ -89,42 +92,26 @@
     </dependencies>
   </autotools>
 
+  <autotools id="glib-networking" autogenargs="--without-ca-certificates">
+    <branch revision="glib-2-34"/>
+    <dependencies>
+      <dep package="glib"/>
+      <dep package="gnutls"/>
+      <dep package='libproxy'/>
+    </dependencies>
+  </autotools>
+
   <autotools id="libsoup">
-    <branch revision="gnome-2-32"/>
+    <branch revision="gnome-3-6"/>
     <dependencies>
       <dep package="glib"/>
-      <dep package="gnutls"/>
-      <dep package='libproxy'/>
-      <dep package='gconf'/>
-      <dep package='sqlite'/>
-      <!-- dep package="libxml2"/ -->
+      <dep package="glib-networking"/>
       <dep package="libgnome-keyring"/>
-    </dependencies>
-  </autotools>
-
-  <autotools id="libgnome-keyring-gtk3">
-    <branch revision="gnome-3-2" module="libgnome-keyring"/>
-    <dependencies>
-      <dep package="gtk+-3.0"/>
-      <dep package="libgcrypt"/>
-      <dep package="libtasn1"/>
-    </dependencies>
-  </autotools>
-
-  <autotools id="libsoup-gtk3">
-    <branch revision="gnome-3-2" module="libsoup"/>
-    <dependencies>
-      <dep package="glib"/>
-      <dep package="gnutls"/>
-      <dep package='libproxy'/>
-      <dep package='gconf'/>
       <dep package='sqlite'/>
-      <!-- dep package="libxml2"/ -->
-      <dep package="libgnome-keyring-gtk3"/>
     </dependencies>
   </autotools>
 
-   <autotools id="enchant" >
+  <autotools id="enchant" >
     <branch repo="abisource/enchant" module="enchant"
 	    tag="enchant-1-6-0"/>
     <dependencies>
@@ -142,8 +129,8 @@
 
 <!-- CVS version requires fig2dev, an X11 utility.
      <branch repo='git.gnupg.org' tag="libgcrypt-1.4.4" module='libgcrypt'/> -->
-    <branch repo='ftp.gnupg.org' version='1.4.6'
-	    module='gcrypt/libgcrypt/libgcrypt-1.4.6.tar.bz2'/>
+    <branch repo='ftp.gnupg.org' version='1.5.0'
+	    module='gcrypt/libgcrypt/libgcrypt-1.5.0.tar.bz2'/>
     <dependencies>
       <dep package="libgpg-error" />
     </dependencies>
@@ -152,8 +139,8 @@
   <autotools id="libtasn1" supports-non-srcdir-builds="no" >
     <!-- Git repository is missing files required to build libtasn1
     <branch repo="git.gnu.org" tag="libtasn1_2_2"  module="libtasn1"/> -->
-    <branch repo="ftp.gnu.org" version='2.9'
-	    module="libtasn1/libtasn1-2.9.tar.gz"/>
+    <branch repo="ftp.gnu.org" version='2.14'
+	    module="libtasn1/libtasn1-2.14.tar.gz"/>
   </autotools>
 
   <autotools id="WebKit"
@@ -163,13 +150,11 @@
     <dependencies>
       <dep package="libsoup"/>
       <dep package="enchant"/>
-      <!--dep package="libgail"/-->
     </dependencies>
     <after>
       <dep package="meta-gtk-osx-core"/>
       <dep package="libcurl"/>
       <dep package="bison"/>
-      <!--dep package="gst-plugins-base"/-->
     </after>
   </autotools>
 

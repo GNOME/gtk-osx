@@ -3,7 +3,7 @@
 <?xml-stylesheet type="text/xsl" href="moduleset.xsl"?>
 <moduleset>
 
-  <repository type="git" name="git.gnome.org" default="yes" 
+  <repository type="git" name="git.gnome.org" default="yes"
               href="git://git.gnome.org/"/>
   <repository type="tarball" name="cairographics"
               href="http://cairographics.org/releases/"/>
@@ -20,6 +20,7 @@
       <dep package="pycairo-python2.6"/>
       <dep package="pygobject"/>
       <dep package="pygtk"/>
+      <dep package="gtk-mac-integration-python"/>
     </dependencies>
   </metamodule>
 
@@ -42,8 +43,15 @@
 
   <autotools id="python" autogenargs="--enable-shared" autogen-sh="configure">
     <branch repo="python"
-	    module="2.7.2/Python-2.7.2.tar.bz2" version="2.7.2">
+	    module="2.7.3/Python-2.7.3.tar.xz" version="2.7.3">
     </branch>
+    <after>
+      <dep package="berkeleydb"/>
+    </after>
+  </autotools>
+
+  <autotools id="python3" autogenargs="--enable-shared" autogen-sh="configure">
+    <branch repo="python" module="3.3.0/Python-3.3.0.tar.xz" version="3.3.0"/>
     <after>
       <dep package="berkeleydb"/>
     </after>
@@ -69,21 +77,34 @@
     </after>
   </autotools>
 
-<!-- Pycairo 1.8.10 (and later, presumably) requires Python3. -->
-  <autotools id="pycairo-python2.6" autogen-sh="configure">
-    <branch module="pycairo-1.8.8.tar.gz" repo="cairographics"
-            version="1.8.8"
-	    hash="md5:054da6c125cb427a003f5fd6c54f853e"/>
+<!-- Cairographics have changed the name to py2cairo for python 2 holdouts. -->
+<!-- They also broke configure (left install-sh out of the tarball) but waf works -->
+  <waf id="pycairo-python2.6">
+    <branch module="py2cairo-1.10.0.tar.bz2" repo="cairographics.org"
+            version="1.10.0"
+	    hash="sha1:2efa8dfafbd6b8e492adaab07231556fec52d6eb"/>
     <dependencies>
       <dep package="cairo"/>
     </dependencies>
     <after>
       <dep package="python"/>
       <dep package="meta-gtk-osx-core"/>
-      <dep package="meta-gtk-osx-gtk3"/>
+    </after>
+  </waf>
+
+<!-- Pycairo-python3 for those who've made the leap. -->
+  <autotools id="pycairo-python3" autogen-sh="configure">
+    <branch module="pycairo-1.10.0.tar.bz2" repo="cairographics.org"
+            version="1.10.0"
+	    hash="sha1:2efa8dfafbd6b8e492adaab07231556fec52d6eb"/>
+    <dependencies>
+      <dep package="cairo"/>
+    </dependencies>
+    <after>
+      <dep package="python"/>
+      <dep package="meta-gtk-osx-core"/>
     </after>
   </autotools>
-
 
   <autotools id="pygobject" autogenargs="--disable-introspection">
     <branch tag="pygobject-2-28"/>
@@ -95,8 +116,8 @@
     </after>
   </autotools>
 
-  <autotools id="pygobject3" autogenargs="--disable-introspection">
-    <branch tag="pygobject-3-0" module="pygobject" checkoutdir="pygobject3"/>
+  <autotools id="pygobject3">
+    <branch tag="pygobject-3-4" module="pygobject" checkoutdir="pygobject3"/>
     <dependencies>
       <dep package="meta-gtk-osx-gtk3"/>
     </dependencies>
@@ -121,7 +142,7 @@
   </autotools>
 
   <autotools id="gtk-mac-integration-python">
-    <branch tag="gtk-mac-integration-2.0.0" module="gtk-mac-integration"
+    <branch tag="gtk-mac-integration-2.0.1" module="gtk-mac-integration"
 	    checkoutdir="gtk-mac-integration"/>
     <dependencies>
      </dependencies>
@@ -132,7 +153,7 @@
   </autotools>
 
   <autotools id="pygtk-extras">
-    <branch module="gnome-python-extras" revision="gnome-2-24"/>
+    <branch module="gnome-python-extras" revision="gnome-2-26"/>
     <dependencies>
       <dep package="pygtk"/>
       <dep package="gtkspell"/>
