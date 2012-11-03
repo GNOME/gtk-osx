@@ -175,7 +175,7 @@
 
   <autotools id="intltool" autogen-sh="configure">
     <branch repo="intltool" module="0.50.2/+download/intltool-0.50.2.tar.gz"
-	    version="0.41.1"
+	    version="0.50.2"
 	    hash="md5:23fbd879118253cb99aeac067da5f591"/>
     <dependencies>
       <dep package="gnome-common"/>

@@ -58,7 +58,8 @@
   </autotools>
 
   <autotools id="iso-codes" autogen-sh="configure">
-    <branch module="iso-codes_3.39.orig.tar.xz" version="3.39" repo="iso-codes" checkoutdir="iso-codes-3.39"/>
+    <branch module="iso-codes_3.39.orig.tar.xz" version="3.39"
+	    repo="iso-codes" checkoutdir="iso-codes-3.39"/>
   </autotools>
 
   <autotools id="zlib" autogen-sh="configure">
@@ -66,14 +67,14 @@
 	    module="libpng/zlib-1.2.7.tar.gz"/>
   </autotools>
 
-  <autotools id="gnutls" autogen-sh="configure" autogenargs="--with-libgcrypt --without-p11-kit">
+  <autotools id="gnutls" autogen-sh="configure"
+	     autogenargs="--with-libgcrypt --without-p11-kit">
     <branch repo='ftp.gnu.org' version='2.12.20'
             module="gnutls/gnutls-2.12.20.tar.bz2"/>
     <dependencies>
       <dep package="libgcrypt" />
       <dep package="libtasn1" />
       <dep package="zlib"/>
-      <!--dep package="opencdk" / -->
     </dependencies>
   </autotools>
 
@@ -109,8 +110,6 @@
     </dependencies>
   </autotools>
 
-<!-- Libsoup's gnome-2-32 branch tags versions on 2.32, gnome-3-0 tags
-     2.34, gnome-3-2 tags 2.36 -->
   <autotools id="libsoup" autogen-sh="configure" autogenargs="">
     <branch module="libsoup/2.40/libsoup-2.40.1.tar.xz"
             version="2.40.1" hash="sha256:77a55d57e7e8055acd2f44e0cc889b9ba48052e8b7f07e829157d57417ac650a" />
