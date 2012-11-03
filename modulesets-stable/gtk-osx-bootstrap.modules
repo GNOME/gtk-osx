@@ -85,7 +85,8 @@
   </autotools>
 
   <autotools id="gnome-common">
-     <branch repo="git.gnome.org"/>
+     <branch module="gnome-common/3.6/gnome-common-3.6.0.tar.xz" version="3.6.0"
+	     hash="sha256:e10f09de06bddcc8f980422e3bfdcd8185eee7f1eae11543a765ec8e764b8d95"/>
   </autotools>
 
   <autotools id="gnome-doc-utils" autogenargs="--disable-scrollkeeper"
