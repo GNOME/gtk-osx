@@ -43,8 +43,8 @@
   </autotools>
 
   <autotools id="gnome-icon-theme" autogen-sh="configure">
-    <branch module="gnome-icon-theme/2.30/gnome-icon-theme-2.30.3.tar.bz2"
-            version="2.30.3" hash="sha256:417e2f9d77843a6dbdcb1f6fa70dd55992aae5621c6ad8a64e5baa3cb893dac7"/>
+    <branch module="gnome-icon-theme/3.6.0/gnome-icon-theme-3.6.0.tar.xz"
+            version="3.6.0" hash="sha256:5fbeef50b1dea1551ec9a008a6ebda0977154ebc4625ee9328695ec2b82cf0eb"/>
     <dependencies>
       <dep package="hicolor-icon-theme"/>
       <dep package="icon-naming-utils"/>
