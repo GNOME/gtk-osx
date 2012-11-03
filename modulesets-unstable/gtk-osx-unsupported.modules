@@ -136,7 +136,7 @@
     </dependencies>
   </autotools>
 
- <autotools id="libsoup">
+ <autotools id="libsoup-gnome">
     <branch />
     <dependencies>
       <dep package='sqlite'/>
@@ -145,7 +145,14 @@
     </dependencies>
   </autotools>
 
-   <autotools id="enchant" >
+ <autotools id="libsoup" autogenargs="--without-gnome --disable-tls-check">
+    <branch />
+    <after>
+      <dep package="glib-networking"/>
+    </after>
+ </autotools>
+
+ <autotools id="enchant" >
      <!-- No version. Doesn't seem to have been touched in a while. -->
     <branch repo="abisource/enchant" module="enchant"/>
     <dependencies>
@@ -174,7 +181,7 @@
     <!--branch repo="svn.webkit.org" module="webkit/trunk" checkoutdir="WebKit"/-->
     <branch repo="git.webkit.org" module="WebKit"/>
     <dependencies>
-      <dep package="libsoup"/>
+      <dep package="libsoup-gnome"/>
       <dep package="enchant"/>
     </dependencies>
     <after>
