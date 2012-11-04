@@ -234,7 +234,7 @@ Libglade itself is deprecated. This is the last release. -->
       <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/GConf-characters.patch" strip="1"/>
      </branch-->
 <!-- GConf-2.32 uses gdbus, which doesn't work for OSX -->
-	   <branch module="GConf/3.2.5/GConf-3.2.5.tar.xz" version="3.2.5"
+	   <branch module="GConf/3.2/GConf-3.2.5.tar.xz" version="3.2.5"
             hash="sha256:4ddea9503a212ee126c5b46a0a958fd5484574c3cb6ef2baf38db02e819e58c6"/>
     <dependencies>
       <dep package="ORBit2"/>
@@ -253,11 +253,8 @@ Libglade itself is deprecated. This is the last release. -->
             repo="hadess"/>
     <dependencies>
       <dep package="intltool"/>
-    </dependencies>
-    <after>
       <dep package="glib"/>
-      <dep package="glib-gtk3"/>
-    </after>
+    </dependencies>
   </autotools>
 
   <autotools id="gimp"  autogen-sh="configure"

@@ -111,10 +111,9 @@
   <autotools id="atk">
     <branch tag="ATK_2_6_0"/>
     <dependencies>
+      <dep package="glib"/>
     </dependencies>
     <after>
-      <dep package="glib"/>
-      <dep package="glib-gtk3"/>
       <dep package="meta-gtk-osx-bootstrap"/>
     </after>
   </autotools>
