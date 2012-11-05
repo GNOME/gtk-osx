@@ -57,7 +57,7 @@
   <autotools id="libxml2" autogen-sh="configure">
    <branch version="2.9.0" module="libxml2-2.9.0.tar.gz"
 	    repo="xmlsoft.org">
-      <patch file="///Users/john/Development/GTK-OSX/gtk-osx-build/patches/libxml2-Bug-686118-pthreads_once_init.patch" strip="1"/>
+      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/libxml2-Bug-686118-pthreads_once_init.patch" strip="1"/>
     </branch>
     <dependencies>
       <dep package="python"/>
