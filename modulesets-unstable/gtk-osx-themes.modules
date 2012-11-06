@@ -4,17 +4,9 @@
 <moduleset>
   <repository type="git" name="git.gnome.org" default="yes" 
               href="git://git.gnome.org/"/>
-  <repository type="cvs" name="tango.freedesktop.org"
-              cvsroot=":pserver:anoncvs@anoncvs.freedesktop.org:/cvs/tango"
-              password=""/>
-  <repository type="cvs" name="icon.freedesktop.org"
-              cvsroot=":pserver:anoncvs@anoncvs.freedesktop.org:/cvs/icon-theme"
-              password=""/>
   <repository type="git" name="freedesktop.org"
               href="git://anongit.freedesktop.org/"/>
   <repository type="git" name="github.com" href="git://github.com/"/>
-  <repository type="tarball" name="tango-rel.freedesktop.org"
-              href="http://tango.freedesktop.org/releases/"/>
 
   <metamodule id="meta-gtk-osx-themes">
     <dependencies>
@@ -25,8 +17,9 @@
     </dependencies>
   </metamodule>
 
-  <autotools id="icon-naming-utils" >
-    <branch repo="icon.freedesktop.org" />
+  <autotools id="icon-naming-utils" autogen-sh="configure" >
+    <branch repo="freedesktop.org" module="gstreamer-sdk/icon-naming-utils" 
+	    revision="sdk-0.8.7"/>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
     </after>
@@ -35,10 +28,10 @@
   <!-- Requires Inkscape to build icons from SVG and for some reason
        the perl is wedged, looking in the wrong place for
        ParserOptions.ini. Use the tarball -->
-  <autotools id="tango-icon-theme" autogenargs="--disable-icon-framing" 
-             autogen-sh="configure">
-    <branch repo="tango-rel.freedesktop.org" version="0.8.90"
-            module="tango-icon-theme-0.8.90.tar.gz"/>
+  <autotools id="tango-icon-theme" autogenargs="--disable-icon-framing"
+	     autogen-sh="configure">
+    <branch repo="freedesktop.org" module="gstreamer-sdk/tango-icon-theme"
+	    revision="sdk-0.8.1"/>
     <dependencies>
       <dep package="icon-naming-utils"/>
       <dep package="hicolor-icon-theme"/>
