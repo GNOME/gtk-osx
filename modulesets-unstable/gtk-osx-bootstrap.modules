@@ -138,7 +138,7 @@
 
   <autotools id="gtk-doc" autogenargs="--disable-scrollkeeper --with-xml-catalog=$JHBUILD_PREFIX/etc/xml/catalog"
 	     makeargs="-k -i" makeinstallargs="-k -i install">
-    <branch/>
+    <branch repo="git.gnome.org"/>
     <dependencies>
       <dep package="gtk-osx-docbook"/>
       <dep package="gnome-doc-utils"/>
