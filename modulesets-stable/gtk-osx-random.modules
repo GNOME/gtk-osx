@@ -205,7 +205,7 @@ Libglade itself is deprecated. This is the last release. -->
   <autotools id="dbus" autogen-sh='configure'
 	   autogenargs="--disable-selinux --without-x --disable-launchd
 	   --with-session-socket-dir=/var/tmp">
-    <branch module="dbus/dbus-1.4.16.tar.gz"  version="1.4.16"
+    <branch module="dbus/dbus-1.6.8.tar.gz"  version="1.6.8"
 	    repo="dbus.freedesktop.org">
     </branch>
     <after>
