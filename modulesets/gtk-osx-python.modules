@@ -84,7 +84,7 @@
 <!-- Cairographics have changed the name to py2cairo for python 2 holdouts. -->
 <!-- They also broke configure (left install-sh out of the tarball) but waf works -->
   <waf id="pycairo-python2.6">
-    <branch module="py2cairo-1.10.0.tar.bz2" repo="cairographics.org"
+    <branch module="py2cairo-1.10.0.tar.bz2" repo="cairographics"
             version="1.10.0"
 	    hash="sha1:2efa8dfafbd6b8e492adaab07231556fec52d6eb"/>
     <dependencies>
@@ -98,7 +98,7 @@
 
 <!-- Pycairo-python3 for those who've made the leap. -->
   <autotools id="pycairo-python3" autogen-sh="configure">
-    <branch module="pycairo-1.10.0.tar.bz2" repo="cairographics.org"
+    <branch module="pycairo-1.10.0.tar.bz2" repo="cairographics"
             version="1.10.0"
 	    hash="sha1:2efa8dfafbd6b8e492adaab07231556fec52d6eb"/>
     <dependencies>
