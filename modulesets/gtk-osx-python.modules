@@ -41,10 +41,14 @@
         repo="oracle" />
   </autotools>
 
-  <autotools id="python" autogenargs="--enable-shared" autogen-sh="configure">
+  <autotools id="python" autogenargs="--enable-shared --with-system-expat"
+	     autogen-sh="configure">
     <branch repo="python"
 	    module="2.7.3/Python-2.7.3.tar.xz" version="2.7.3">
     </branch>
+    <dependencies>
+      <dep package="expat"/>
+    </dependencies>
     <after>
       <dep package="berkeleydb"/>
     </after>

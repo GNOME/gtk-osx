@@ -30,23 +30,6 @@
     </dependencies>
   </metamodule>
 
-  <autotools id="berkeleydb4.7" autogen-sh="dist/configure"
-         autogen-template="cd build_unix; ../%(autogen-sh)s --prefix %(prefix)s --libdir %(libdir)s %(autogenargs)s" makeargs="-C build_unix"
-         makeinstallargs="-C build_unix install">
-
-    <branch module="berkeley-db/db-4.7.25.NC.tar.gz" version="4.7.25"
-        repo="oracle" />
-  </autotools>
-
-  <autotools id="python2.6" autogenargs="--enable-shared" autogen-sh="configure">
-    <branch repo="python"
-	    module="2.6.6/Python-2.6.6.tar.bz2" version="2.6.6">
-    </branch>
-    <after>
-      <dep package="berkeleydb4.7"/>
-    </after>
-  </autotools>
-
    <autotools id="berkeleydb4.8" autogen-sh="dist/configure"
          autogen-template="cd build_unix; ../%(autogen-sh)s --prefix %(prefix)s --libdir %(libdir)s %(autogenargs)s" makeargs="-C build_unix"
          makeinstallargs="-C build_unix install">
@@ -55,10 +38,14 @@
         repo="oracle" />
   </autotools>
 
-  <autotools id="python2.7" autogenargs="--enable-shared" autogen-sh="configure">
+  <autotools id="python2.7" autogenargs="--enable-shared --with-system-expat"
+	     autogen-sh="configure">
     <branch repo="python"
-	    module="2.7.2/Python-2.7.2.tar.bz2" version="2.7.2">
+	    module="2.7.3/Python-2.7.3.tar.xz" version="2.7.3">
     </branch>
+    <dependencies>
+      <dep package="expat"/>
+    </dependencies>
     <after>
       <dep package="berkeleydb4.8"/>
     </after>
@@ -74,7 +61,7 @@
 
   <autotools id="python3.2" autogenargs="--enable-shared" autogen-sh="configure">
     <branch repo="python"
-	    module="3.2/Python-3.2.tar.bz2" version="3.2">
+	    module="3.3/Python-3.3.0.tar.bz2" version="3.3.0">
     </branch>
     <after>
       <dep package="berkeleydb5.0"/>
