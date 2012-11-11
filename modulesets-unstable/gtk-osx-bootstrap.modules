@@ -106,7 +106,7 @@
     <branch repo="freedesktop"/>
   </autotools>
 
-  <autotools id="freetype">
+  <autotools id="freetype" skip-autogen="never">
     <branch module="freetype/freetype2" repo="nongnu"/>
   </autotools>
 

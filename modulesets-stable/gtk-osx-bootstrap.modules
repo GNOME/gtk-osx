@@ -116,8 +116,7 @@
     </dependemcies>
   </autotools>
 
-  <autotools id="freetype"
-	     autogen-template="%(srcdir)s/configure --prefix %(prefix)s %(autogenargs)s">
+  <autotools id="freetype" autogen-sh="configure" skip-autogen="never">
     <branch module="freetype/freetype-2.4.10.tar.gz" version="2.4.10"
             repo="sourceforge">
     </branch>

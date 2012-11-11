@@ -108,7 +108,7 @@
     <branch repo="freedesktop" tag="0.9.5"/>
   </autotools>
 
-  <autotools id="freetype">
+  <autotools id="freetype" skip-sutogen="never">
     <branch module="freetype/freetype2" tag="VER-2-4-10" repo="nongnu"/>
   </autotools>
 
@@ -140,7 +140,7 @@
 
   <autotools id="gtk-doc" autogenargs="--disable-scrollkeeper --with-xml-catalog=$JHBUILD_PREFIX/etc/xml/catalog"
 	     makeargs="-k -i" makeinstallargs="-k -i install">
-    <branch tag="GTK_DOC_1_18"/>
+    <branch tag="GTK_DOC_1_18" repo="git.gnome.org"/>
     <dependencies>
       <dep package="gtk-osx-docbook"/>
       <dep package="gnome-doc-utils"/>
