@@ -58,7 +58,7 @@
     <branch version="2.7.8" module="libxml2-2.7.8.tar.gz"
 	    repo="xmlsoft.org"/>
     <dependencies>
-      <dep package="python"/>
+      <dep package="python2.7"/>
     </dependencies>
   </autotools>
 
