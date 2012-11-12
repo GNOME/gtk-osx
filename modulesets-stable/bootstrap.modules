@@ -53,11 +53,12 @@
 
   <autotools id='readline' autogen-sh="configure">
     <branch repo="ftp.gnu.org" module="readline/readline-6.2.tar.gz"
-	    version="6.2"/>
-    <patch file="http://ftp.gnu.org/gnu/readline/readline-6.2-patches/readline62-001" strip="1"/>
-    <patch file="http://ftp.gnu.org/gnu/readline/readline-6.2-patches/readline62-002" strip="1"/>
-    <patch file="http://ftp.gnu.org/gnu/readline/readline-6.2-patches/readline62-003" strip="1"/>
-    <patch file="http://ftp.gnu.org/gnu/readline/readline-6.2-patches/readline62-004" strip="1"/>
+	    version="6.2">
+      <patch file="http://ftp.gnu.org/gnu/readline/readline-6.2-patches/readline62-001" strip="0"/>
+      <patch file="http://ftp.gnu.org/gnu/readline/readline-6.2-patches/readline62-002" strip="0"/>
+      <patch file="http://ftp.gnu.org/gnu/readline/readline-6.2-patches/readline62-003" strip="0"/>
+      <patch file="http://ftp.gnu.org/gnu/readline/readline-6.2-patches/readline62-004" strip="0"/>
+    </branch>
   </autotools>
 
   <autotools id="m4" autogen-sh="configure">
