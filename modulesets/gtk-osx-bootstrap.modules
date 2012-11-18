@@ -49,7 +49,7 @@
     </dependencies>
   </autotools>
 
- <!-- The python package is in gtk-osx-python.modules. If you're
+<!-- The python package is in gtk-osx-python.modules. If you're
      building "native" you can safely add python to the skip list, but
      otherwise the links in the SDKs are messed up and libxml's python
      module won't link. In case you're wondering, gnome-doc-utils
@@ -57,7 +57,7 @@
   <autotools id="libxml2" autogen-sh="configure">
    <branch version="2.9.0" module="libxml2-2.9.0.tar.gz"
 	    repo="xmlsoft.org">
-      <patch file="///Users/john/Development/GTK-OSX/gtk-osx-build/patches/libxml2-Bug-686118-pthreads_once_init.patch" strip="1"/>
+      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/libxml2-Bug-686118-pthreads_once_init.patch" strip="1"/>
     </branch>
     <dependencies>
       <dep package="python"/>
@@ -132,7 +132,7 @@
   <perl id="perl-xml-simple">
     <branch repo="cpan"
         module="authors/id/G/GR/GRANTM/XML-Simple-2.20.tar.gz" version="2.20"
-        size="71129" md5sum="593aa8001e5c301cdcdb4bb3b63abc33"/>
+        size="75993" md5sum="4d10964e123b76eca36678464daa63cd"/>
     <dependencies>
       <dep package="perl-xml-parser"/>
     </dependencies>
