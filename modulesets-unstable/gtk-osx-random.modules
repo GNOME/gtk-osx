@@ -286,17 +286,6 @@
     </dependencies>
   </autotools>
 
-  <autotools id="libcroco" autogenargs="--disable-Bsymbolic">
-    <branch/>
-  </autotools>
-
-  <autotools id="librsvg" autogenargs="--disable-Bsymbolic">
-    <branch/>
-    <dependencies>
-      <dep package="libcroco"/>
-    </dependencies>
-  </autotools>
-
   <autotools id="hunspell" autogen-sh="configure">
     <branch repo="hunspell-cvs"/>
   </autotools>

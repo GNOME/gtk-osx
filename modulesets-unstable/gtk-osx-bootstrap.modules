@@ -110,6 +110,9 @@
 
   <autotools id="freetype" skip-autogen="never">
     <branch module="freetype/freetype2" repo="nongnu"/>
+    <dependencies>
+      <dep package="zlib"/>
+    </dependencies>
   </autotools>
 
   <autotools id="fontconfig" autogenargs="--disable-docs">
