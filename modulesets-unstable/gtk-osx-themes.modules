@@ -53,6 +53,28 @@
     </after>
   </autotools>
 
+  <autotools id="murrine-engine">
+    <branch module="murrine"/>
+  </autotools>
+
+  <autotools id="librsvg" autogenargs="--disable-Bsymbolic">
+    <branch module="librsvg"/>
+    <dependencies>
+      <dep package="libcroco"/>
+    </dependencies>
+  </autotools>
+
+  <autotools id="libcroco" autogenargs="--disable-Bsymbolic">
+    <branch/>
+  </autotools>
+
+  <autotools id="libcss" autogenargs="--disable-examples">
+    <branch module="ccss" repo="freedesktop.org" tag="ccss-0.5.0"/>
+    <dependencies>
+      <dep package="libcroco"/>
+    </dependencies>
+  </autotools>
+
   <autotools id="gtk-css-engine">
     <branch />
     <after>

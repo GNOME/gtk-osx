@@ -64,11 +64,14 @@
     <branch module="murrine" tag="173b7fc19f15b87ffe1bed4de661007b15719aa5"/>
   </autotools>
 
-  <autotools id="librsvg">
+  <autotools id="librsvg" autogenargs="--disable-Bsymbolic">
     <branch module="librsvg" tag="2.36.4"/>
+    <dependencies>
+      <dep package="libcroco"/>
+    </dependencies>
   </autotools>
 
-  <autotools id="libcroco">
+  <autotools id="libcroco" autogenargs="--disable-Bsymbolic">
     <branch tag="0.6.8"/>
   </autotools>
 
