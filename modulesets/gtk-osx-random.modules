@@ -296,6 +296,15 @@
       <dep package="enchant"/>
     </dependencies>
   </autotools>
+<!-- GtkSpell has switched to Mercurial for VCS, so we'll use the
+     tarball to avoid the dependency. -->
+  <autotools id="gtkspell3" autogen-sh="configure">
+    <branch module="gtkspell/gtkspell3-3.0.0.tar.gz" repo="sourceforge"
+	    version="3.0.0"/>
+    <dependencies>
+      <dep package="enchant"/>
+    </dependencies>
+  </autotools>
 
 <!-- LibGSF develops in master -->
   <autotools id="libgsf" autogenargs="--without-python">

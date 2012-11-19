@@ -258,8 +258,11 @@
     </dependencies>
   </autotools>
 
-  <autotools id="gtkspell3">
-    <branch module="manisandro/gtkspell3" revision="changes" repo="github"/>
+<!-- GtkSpell has switched to Mercurial for VCS, so we'll use the
+     tarball to avoid the dependency. -->
+  <autotools id="gtkspell3" autogen-sh="configure">
+    <branch module="gtkspell/gtkspell3-3.0.0.tar.gz" repo="sourceforge"
+	    version="3.0.0"/>
     <dependencies>
       <dep package="enchant"/>
     </dependencies>

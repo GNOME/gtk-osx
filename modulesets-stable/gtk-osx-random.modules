@@ -350,6 +350,14 @@ Libglade itself is deprecated. This is the last release. -->
     </dependencies>
   </autotools>
 
+  <autotools id="gtkspell3" autogen-sh="configure">
+    <branch module="gtkspell/gtkspell3-3.0.0.tar.gz" repo="sourceforge"
+	    version="3.0.0"/>
+    <dependencies>
+      <dep package="enchant"/>
+    </dependencies>
+  </autotools>
+
   <autotools id="libgsf" autogenargs="--without-python">
     <branch  module="libgsf/1.14/libgsf-1.14.21.tar.bz2" version="1.14.21"
 	     hash="sha256:eef0a9d6eca4e6af6c16b208947e3c958c428b94d22792bdd0b80c08a4b301db"/>
