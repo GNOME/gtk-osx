@@ -109,11 +109,9 @@
     </dependencies>
   </autotools>
 
- <autotools id="pango"  autogen-sh="configure"
-             autogenargs="--without-x"
-             makeargs="-k -C modules; make">
-    <branch version="1.32.1" module="pango/1.32/pango-1.32.1.tar.xz"
-            hash="sha256:484babf7e1ac4bf959a0babe8168f180acb516932d70e2985de5f6e2961fcd82">
+ <autotools id="pango"  autogen-sh="configure">
+    <branch version="1.32.4" module="pango/1.32/pango-1.32.4.tar.xz"
+            hash="sha256:9895b2e6572c3b3e0cc1c174b8bf55791a47de1995af21a1787f6c573b4b58db">
       <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0001-Fix-relative-module-paths.patch" strip="1"/>
     </branch>
     <dependencies>

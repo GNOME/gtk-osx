@@ -84,8 +84,7 @@
     </dependencies>
   </autotools>
 
-  <autotools id="pango"
-             makeargs="-k -C modules; make">
+  <autotools id="pango">
     <branch />
     <dependencies>
       <dep package="cairo"/>

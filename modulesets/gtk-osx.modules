@@ -92,10 +92,8 @@
     </dependencies>
   </autotools>
 
-  <autotools id="pango"
-             autogenargs="--without-x --with-included-modules=basic-atsui"
-             makeargs="-k -C modules; make">
-    <branch tag="1.32.1"/>
+  <autotools id="pango">
+    <branch tag="1.32.4"/>
     <dependencies>
       <dep package="glib"/>
       <dep package="cairo"/>
