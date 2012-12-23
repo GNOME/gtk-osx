@@ -106,8 +106,8 @@
       <dep package="cairo"/>
     </dependencies>
     <after>
-      <dep package="python"/>
-      <dep package="meta-gtk-osx-core"/>
+      <dep package="python3"/>
+      <dep package="meta-gtk-osx-gtk3"/>
     </after>
   </autotools>
 
@@ -135,6 +135,7 @@
     </dependencies>
     <after>
       <dep package="python"/>
+      <dep package="python3"/>
     </after>
   </autotools>
 
