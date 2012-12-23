@@ -108,7 +108,8 @@
     <branch repo="freedesktop"/>
   </autotools>
 
-  <autotools id="freetype" skip-autogen="never">
+  <autotools id="freetype" skip-autogen="never"
+	     autogen-template="%(srcdir)s/%(autogen-sh)s &amp;&amp; %(srcdir)s/configure --prefix %(prefix)s --libdir %(libdir)s %(autogenargs)s">
     <branch module="freetype/freetype2" repo="nongnu"/>
     <dependencies>
       <dep package="zlib"/>
