@@ -208,9 +208,6 @@ Libglade itself is deprecated. This is the last release. -->
     <branch module="dbus/dbus-1.6.8.tar.gz"  version="1.6.8"
 	    repo="dbus.freedesktop.org">
     </branch>
-    <after>
-      <dep package="gtk+"/>
-    </after>
   </autotools>
 <!-- NB: dbus support is now built into glib -->
   <autotools id="dbus-glib" autogenargs="--disable-selinux">

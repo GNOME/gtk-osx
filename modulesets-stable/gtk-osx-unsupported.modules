@@ -43,7 +43,7 @@
   <metamodule id="meta-gtk-osx-webkit-gtk3">
     <dependencies>
       <dep package="meta-gtk-osx-gtk3"/>
-      <dep package="libsoup-gtk3"/>
+      <dep package="libsoup"/>
       <dep package="WebKit"/>
     </dependencies>
   </metamodule>
@@ -179,7 +179,7 @@
 	     autogenargs="--with-target=quartz --disable-video --with-font-backend=pango --with-gtk=3.0">
     <branch repo="svn.webkit.org" module="webkit/trunk" checkoutdir="WebKit"/>
     <dependencies>
-      <dep package="libsoup-gtk3"/>
+      <dep package="libsoup"/>
       <dep package="enchant"/>
       <!--dep package="libgail"/-->
     </dependencies>
