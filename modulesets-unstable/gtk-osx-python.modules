@@ -59,7 +59,7 @@
         repo="oracle" />
   </autotools>
 
-  <autotools id="python3.2" autogenargs="--enable-shared" autogen-sh="configure">
+  <autotools id="python3" autogenargs="--enable-shared" autogen-sh="configure">
     <branch repo="python"
 	    module="3.3/Python-3.3.0.tar.bz2" version="3.3.0">
     </branch>

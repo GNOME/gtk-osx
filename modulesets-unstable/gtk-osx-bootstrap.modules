@@ -59,9 +59,10 @@
 	    repo="xmlsoft.org">
       <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/libxml2-Bug-686118-pthreads_once_init.patch" strip="1"/>
     </branch>
-    <dependencies>
+    <after>
       <dep package="python2.7"/>
-    </dependencies>
+      <dep package="python3"/>
+    </after>
   </autotools>
 
   <autotools id="libxslt" autogen-sh="configure">
