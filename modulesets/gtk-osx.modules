@@ -151,7 +151,7 @@
       <dep package="glib"/>
       <dep package="pango"/>
       <dep package="atk"/>
-      <dep package="gdk-pixbuf"/>
+      <dep package="gdk-pixbuf-gtk3"/>
       <dep package="gobject-introspection"/>
     </dependencies>
     <after>
