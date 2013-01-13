@@ -73,18 +73,13 @@
       <dep package="libglade"/>
     </dependencies>
   </autotools>
-
-   <autotools id="vala">
-    <branch repo="ftp.gnome.org" module="vala/0.12/vala-0.12.1.tar.bz2"
-            version="0.12.1"/>
-    <after>
-      <dep package="meta-gtk-osx-bootstrap"/>
-      <dep package="meta-gtk-osx-core"/>
-    </after>
+<!-- Vala-bootstrap is the current stable vala precompiled to C. -->
+  <autotools id="vala" autogen-sh="configure">
+    <branch module="vala-bootstrap"/>
   </autotools>
-<!-- Vala requires an installed vala compiler to build from git. Note
-     that the tarball above is the latest release at the time this
-     moduleset was last maintained.-->
+<!-- Vala is written in vala, so you need vala to build it. If you
+     want to work on vala itself or need the bleeding edge for some
+     reason, then you need vala-git. Otherwise, stick with vala. -->
   <autotools id="vala-git">
     <branch/>
     <dependencies>
