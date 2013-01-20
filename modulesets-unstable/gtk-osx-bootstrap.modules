@@ -111,6 +111,12 @@
 
   <autotools id="harfbuzz">
     <branch repo="freedesktop"/>
+    <dependencies>
+      <dep package="freetype"/>
+      <dep package="fontconfig"/>
+      <dep package="glib"/>
+    </dependencies>
+
   </autotools>
 
   <autotools id="freetype" skip-autogen="never"

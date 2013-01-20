@@ -110,11 +110,11 @@
 
   <autotools id="harfbuzz" autogen-sh="configure">
     <branch repo="harfbuzz" module="harfbuzz-0.9.9.tar.bz2" version="0.9.9"/>
-    <dependemcies>
+    <dependencies>
       <dep package="freetype"/>
       <dep package="fontconfig"/>
       <dep package="glib"/>
-    </dependemcies>
+    </dependencies>
   </autotools>
 
   <autotools id="freetype" autogen-sh="configure" skip-autogen="never">
