@@ -110,11 +110,8 @@
     <dependencies>
       <dep package="libgcrypt"/>
       <dep package="libtasn1"/>
+      <dep package="glib"/>
     </dependencies>
-    <after>
-      <dep package="meta-gtk-osx-core"/>
-      <dep package="meta-gtk-osx-gtk3"/>
-    </after>
   </autotools>
 
   <autotools id="glib-networking" autogenargs="--without-ca-certificates">

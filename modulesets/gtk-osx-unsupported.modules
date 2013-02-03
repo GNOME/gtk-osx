@@ -86,7 +86,7 @@
   <autotools id="libgnome-keyring">
     <branch tag="3.6.0"/>
     <dependencies>
-      <dep package="gtk+"/>
+      <dep package="glib"/>
       <dep package="libgcrypt"/>
       <dep package="libtasn1"/>
     </dependencies>
