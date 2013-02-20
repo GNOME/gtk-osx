@@ -128,7 +128,7 @@
 
   <autotools id="fontconfig" autogen-sh="configure"
 	     autogenargs="--disable-docs">
-    <branch repo="fontconfig" version="2.10.1" module="fontconfig-2.10.1.tar.gz"/>
+    <branch repo="fontconfig" version="2.10.91" module="fontconfig-2.10.91.tar.gz"/>
     <dependencies>
       <dep package="expat"/>
       <dep package="freetype"/>
