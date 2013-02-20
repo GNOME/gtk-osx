@@ -52,7 +52,10 @@
 Libglade itself is deprecated. This is the last release. -->
   <autotools id="libglade" autogen-sh="configure">
     <branch module="libglade/2.6/libglade-2.6.4.tar.bz2" version="2.6.4"
-            md5sum="d1776b40f4e166b5e9c107f1c8fe4139"/>
+            md5sum="d1776b40f4e166b5e9c107f1c8fe4139"
+	    autogen-template="autoreconf -fis &amp;&amp; %(srcdir)s/%(autogen-sh)s --prefix %(prefix)s --libdir %(libdir)s %(autogenargs)s>
+      <patch file="file="http://git.gnome.org/browse/gtk-osx/plain/patches/libglade-gmodule.patch" skip="1"/>
+    </branch>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
       <dep package="meta-gtk-osx-core"/>
@@ -228,6 +231,17 @@ Libglade itself is deprecated. This is the last release. -->
 	     autogenargs="--disable-defaults-service">
 	   <branch module="GConf/3.2/GConf-3.2.5.tar.xz" version="3.2.5"
             hash="sha256:4ddea9503a212ee126c5b46a0a958fd5484574c3cb6ef2baf38db02e819e58c6"/>
+    <dependencies>
+      <dep package="ORBit2"/>
+      <dep package="dbus-glib"/>
+    </dependencies>
+  </autotools>
+<!-- Still having issues with GConf and gdbus on OSX, this is the last
+     release of GConf that uses glib-dbus. -->
+  <autotools id="gconf2" autogen-sh="configure"
+	     autogenargs="--disable-defaults-service">
+	   <branch module="GConf/2.28/GConf-2.28.1.tar.bz2" version="2.28.1"
+            hash="sha256:53c477f9086057b0c84816a1c979e01537b862fbcacb6af4b62f8cffec4b3000"/>
     <dependencies>
       <dep package="ORBit2"/>
       <dep package="dbus-glib"/>
