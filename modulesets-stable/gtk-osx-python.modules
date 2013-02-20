@@ -47,7 +47,7 @@
         repo="oracle" />
   </autotools>
 
-  <autotools id="python" autogenargs="--enable-shared"
+  <autotools id="python" autogenargs="--enable-shared --with-system-expat"
 	     autogen-sh="configure">
     <branch repo="python"
 	    module="2.7.3/Python-2.7.3.tar.xz" version="2.7.3">
