@@ -27,6 +27,8 @@
               href="git://git.gnome.org/"/>
   <repository type="tarball" name="harfbuzz"
               href="http://www.freedesktop.org/software/harfbuzz/release/"/>
+  <repository type="tarball" name="cups"
+	      href="http://ftp.easysw.com/pub/"/>
 
   <autotools id="libpng" autogenargs="--enable-shared" autogen-sh="configure">
     <branch version="1.5.13" module="libpng/libpng-1.5.13.tar.bz2"
@@ -107,10 +109,20 @@
     <branch module="expat/expat-2.1.0.tar.gz" version="2.1.0"
 	    repo="sourceforge"/>
   </autotools>
+  <!-- Cups is needed *only* for Tiger, and skipped otherwise -->
+  <autotools id='cups' autogen-sh='configure' skip-autogen='never'
+	     autogenargs='DSOFLAGS="$LDFLAGS"'>
+    <branch module="cups/1.2.12/cups-1.2.12-source.tar.bz2"
+	    version="1.2.12" repo="cups"  checkoutdir='cups-1.2.12'/>
+    <dependencies>
+      <dep package="libtiff"/>
+    </dependencies>
+  </autotools>
+	    
 
   <autotools id="harfbuzz" autogen-sh="configure">
-    <branch repo="harfbuzz" module="harfbuzz-0.9.9.tar.bz2" version="0.9.9"/>
-    <dependencies>
+    <branch repo="harfbuzz" module="harfbuzz-0.9.10.tar.bz2" version="0.9.10"/>
+    <dependemcies>
       <dep package="freetype"/>
       <dep package="fontconfig"/>
       <dep package="glib"/>
@@ -193,6 +205,7 @@
 
   <metamodule id="meta-gtk-osx-bootstrap">
     <dependencies>
+      <dep package="cups"/>
       <dep package="libpng"/>
       <dep package="gtk-doc"/>
       <dep package="libjpeg"/>

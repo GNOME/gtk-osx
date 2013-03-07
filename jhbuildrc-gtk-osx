@@ -257,6 +257,7 @@ def setup_sdk(target, sdk_version, architectures=[_default_arch]):
             #
             os.environ["CUPS_CONFIG"] = os.path.join(sdkdir,
                                                      "usr/bin/cups-config")
+            
 
     #Glib and autoconf-2.63 have issues with endianness
     #
@@ -314,6 +315,8 @@ def setup_sdk(target, sdk_version, architectures=[_default_arch]):
     # link libresolv:
     if _osx_version < 5.0 or sdk_version.startswith("10.4"):
         append_autogenargs("glib", 'LIBS="-lresolv"')
+    else:
+        skip.append("cups")
 
     # gettext-fw rebuilds gettext with an in-tree libiconv to get
     # around the Apple-provided one not defining _libiconv_init for
