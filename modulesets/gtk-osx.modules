@@ -93,7 +93,7 @@
   </autotools>
 
   <autotools id="pango">
-    <branch tag="1.32.4"/>
+    <branch tag="1.34.0"/>
     <dependencies>
       <dep package="glib"/>
       <dep package="cairo"/>

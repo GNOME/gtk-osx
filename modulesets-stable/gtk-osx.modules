@@ -110,8 +110,8 @@
   </autotools>
 
  <autotools id="pango"  autogen-sh="configure">
-    <branch version="1.32.6" module="pango/1.32/pango-1.32.6.tar.xz"
-            hash="sha256:8e9a3eadebf30a31640f2b3ae0fb455cf92d10d1cad246d0ffe72ec595905174">
+    <branch version="1.34.0" module="pango/1.34/pango-1.34.0.tar.xz"
+            hash="sha256:105da1efe019018a9de81681d88c9ace83d2111509ab625c4be9d124a1fdce27">
     </branch>
     <dependencies>
       <dep package="cairo"/>
