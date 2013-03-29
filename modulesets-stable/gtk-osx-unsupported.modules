@@ -58,8 +58,8 @@
   </autotools>
 
   <autotools id="iso-codes" autogen-sh="configure">
-    <branch module="iso-codes_3.39.orig.tar.xz" version="3.39"
-	    repo="iso-codes" checkoutdir="iso-codes-3.39"/>
+    <branch module="iso-codes_3.41.orig.tar.xz" version="3.41"
+	    repo="iso-codes" checkoutdir="iso-codes-3.41"/>
   </autotools>
 
   <autotools id="zlib" autogen-sh="configure" skip-autogen="never">
