@@ -54,7 +54,7 @@ Libglade itself is deprecated. This is the last release. -->
     <branch module="libglade/2.6/libglade-2.6.4.tar.bz2" version="2.6.4"
             md5sum="d1776b40f4e166b5e9c107f1c8fe4139"
 	    autogen-template="autoreconf -fis &amp;&amp; %(srcdir)s/%(autogen-sh)s --prefix %(prefix)s --libdir %(libdir)s %(autogenargs)s">
-      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/libglade-gmodule.patch" skip="1"/>
+      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/libglade-gmodule.patch" strip="1"/>
     </branch>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
