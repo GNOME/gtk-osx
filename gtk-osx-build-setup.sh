@@ -35,7 +35,7 @@ do_exit()
 
 get_moduleset_from_git()
 {
-    curl -s "$BASEURL/modulesets-stable/$1" -o $SOURCE/jhbuild/modulesets/$1 || \
+    curl -ks "$BASEURL/modulesets-stable/$1" -o $SOURCE/jhbuild/modulesets/$1 || \
 	do_exit "Unable to download $1"
 }
 
@@ -50,7 +50,7 @@ fi
 mkdir -p $SOURCE 2>/dev/null || do_exit "The directory $SOURCE could not be created. Check permissions and try again."
 
 rm -f tmp-jhbuild-revision
-curl -s $BASEURL/jhbuild-revision -o tmp-jhbuild-revision || \
+curl -ks $BASEURL/jhbuild-revision -o tmp-jhbuild-revision || \
     do_exit "Unable to retrieve stable jhbuild revision"
 JHBUILD_REVISION=`cat tmp-jhbuild-revision 2>/dev/null`
 if test x"$JHBUILD_REVISION" = x; then
@@ -82,13 +82,13 @@ echo "Installing jhbuild..."
 (cd $SOURCE/jhbuild && make -f Makefile.plain DISABLE_GETTEXT=1 install >/dev/null) || do_exit "Jhbuild installation failed"
 
 echo "Installing jhbuild configuration..."
-curl -s $BASEURL/jhbuildrc-gtk-osx -o $HOME/.jhbuildrc || do_exit "Didn't get jhbuildrc"
-curl -s $BASEURL/jhbuildrc-gtk-osx-fw-10.4 -o $HOME/.jhbuildrc-fw-10.4
-curl -s $BASEURL/jhbuildrc-gtk-osx-cfw-10.4 -o $HOME/.jhbuildrc-cfw-10.4
-curl -s $BASEURL/jhbuildrc-gtk-osx-cfw-10.4u -o $HOME/.jhbuildrc-cfw-10.4u
-curl -s $BASEURL/jhbuildrc-gtk-osx-fw-10.4-test -o $HOME/.jhbuildrc-fw-10.4-test
+curl -ks $BASEURL/jhbuildrc-gtk-osx -o $HOME/.jhbuildrc || do_exit "Didn't get jhbuildrc"
+curl -ks $BASEURL/jhbuildrc-gtk-osx-fw-10.4 -o $HOME/.jhbuildrc-fw-10.4
+curl -ks $BASEURL/jhbuildrc-gtk-osx-cfw-10.4 -o $HOME/.jhbuildrc-cfw-10.4
+curl -ks $BASEURL/jhbuildrc-gtk-osx-cfw-10.4u -o $HOME/.jhbuildrc-cfw-10.4u
+curl -ks $BASEURL/jhbuildrc-gtk-osx-fw-10.4-test -o $HOME/.jhbuildrc-fw-10.4-test
 if [ ! -f $HOME/.jhbuildrc-custom ]; then
-    curl -s $BASEURL/jhbuildrc-gtk-osx-custom-example -o $HOME/.jhbuildrc-custom || do_exit "Didn't get jhbuildrc-custom"
+    curl -ks $BASEURL/jhbuildrc-gtk-osx-custom-example -o $HOME/.jhbuildrc-custom || do_exit "Didn't get jhbuildrc-custom"
 fi
 
 echo "Installing gtk-osx moduleset files..."
