@@ -118,11 +118,10 @@
       <dep package="libtiff"/>
     </dependencies>
   </autotools>
-	    
 
   <autotools id="harfbuzz" autogen-sh="configure">
     <branch repo="harfbuzz" module="harfbuzz-0.9.10.tar.bz2" version="0.9.10"/>
-    <dependemcies>
+    <dependencies>
       <dep package="freetype"/>
       <dep package="fontconfig"/>
       <dep package="glib"/>
