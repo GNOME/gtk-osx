@@ -50,10 +50,10 @@
 
 <!-- Libglade's functions are now part of Gtk+ with different names and
 Libglade itself is deprecated. This is the last release. -->
-  <autotools id="libglade" autogen-sh="configure">
+  <autotools id="libglade" autogen-sh='configure'
+	     autogen-template="autoreconf -fis &amp;&amp; %(srcdir)s/%(autogen-sh)s --prefix %(prefix)s --libdir %(libdir)s %(autogenargs)s">
     <branch module="libglade/2.6/libglade-2.6.4.tar.bz2" version="2.6.4"
-            md5sum="d1776b40f4e166b5e9c107f1c8fe4139"
-	    autogen-template="autoreconf -fis &amp;&amp; %(srcdir)s/%(autogen-sh)s --prefix %(prefix)s --libdir %(libdir)s %(autogenargs)s">
+            md5sum="d1776b40f4e166b5e9c107f1c8fe4139" >
       <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/libglade-gmodule.patch" strip="1"/>
     </branch>
     <after>
