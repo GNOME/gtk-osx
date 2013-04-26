@@ -53,7 +53,7 @@
 	    module="2.7.3/Python-2.7.3.tar.xz" version="2.7.3">
     </branch>
     <dependencies>
-      <dep package="expat"/>
+      <dep package="gettext-runtime"/>
     </dependencies>
     <after>
       <dep package="berkeleydb"/>
@@ -62,6 +62,9 @@
 
   <autotools id="python3" autogenargs="--enable-shared" autogen-sh="configure">
     <branch repo="python" module="3.3.0/Python-3.3.0.tar.xz" version="3.3.0"/>
+    <dependencies>
+      <dep package="gettext-runtime"/>
+    </dependencies>
     <after>
       <dep package="berkeleydb"/>
     </after>

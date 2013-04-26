@@ -67,7 +67,6 @@
     </dependencies>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
-      <dep package="gtk-doc"/>
     </after>
   </autotools>
 

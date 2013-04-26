@@ -70,7 +70,6 @@
             hash="sha256:855fcbf87cb93065b488358e351774d8a39177281023bae58c286f41612658a7"/>
     <dependencies>
       <dep package="libffi"/>
-      <dep package="gtk-doc"/>
     </dependencies>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>

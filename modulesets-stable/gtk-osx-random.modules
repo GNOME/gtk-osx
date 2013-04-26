@@ -258,7 +258,6 @@ Libglade itself is deprecated. This is the last release. -->
     <branch module="shared-mime-info-1.0.tar.xz" version="1.0"
             repo="hadess"/>
     <dependencies>
-      <dep package="intltool"/>
       <dep package="glib"/>
     </dependencies>
   </autotools>
@@ -283,12 +282,7 @@ Libglade itself is deprecated. This is the last release. -->
     </dependencies>
   </autotools>
 
-    <autotools id='readline' >
-    <branch repo="ftp.gnu.org" module="readline/readline-6.2.tar.gz"
-	    version="6.2"/>
-  </autotools>
-
-<autotools id="babl" >
+  <autotools id="babl" >
     <branch repo="ftp.gtk.org" version="0.1.10"
             module="babl/0.1/babl-0.1.10.tar.bz2">
       <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/Bug-673403-replace-values_h.patch" strip="1"/>

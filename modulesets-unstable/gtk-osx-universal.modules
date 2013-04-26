@@ -18,7 +18,6 @@
     </dependencies>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
-      <dep package="gtk-doc"/> <!-- FIXME: http://bugs.gnome.org/546640 -->
     </after>
   </metamodule>
 

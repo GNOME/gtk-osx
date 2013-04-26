@@ -207,7 +207,6 @@
     <branch module="xdg/shared-mime-info" tag="Release-1-0"
             repo="git.freedesktop.org"/>
     <dependencies>
-      <dep package="intltool"/>
       <dep package="glib"/>
     </dependencies>
   </autotools>
