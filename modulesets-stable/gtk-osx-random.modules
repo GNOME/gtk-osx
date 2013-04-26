@@ -291,7 +291,7 @@ Libglade itself is deprecated. This is the last release. -->
 <autotools id="babl" >
     <branch repo="ftp.gtk.org" version="0.1.10"
             module="babl/0.1/babl-0.1.10.tar.bz2">
-      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patchesBug-673403-replace-values_h.patch" strip="1"/>
+      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/Bug-673403-replace-values_h.patch" strip="1"/>
     </branch>
   </autotools>
 
