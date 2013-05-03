@@ -143,9 +143,8 @@
     </after>
   </autotools>
 
-  <autotools id="gtk+" autogen-sh="configure"
-             autogenargs="--with-gdktarget=quartz --enable-quartz-relocation --disable-introspection"
-             autogen-template="autoreconf -fis &amp;&amp; %(srcdir)s/%(autogen-sh)s --prefix %(prefix)s --libdir %(libdir)s %(autogenargs)s">
+  <autotools id="gtk+" autogen-sh="autoreconf"
+             autogenargs="--with-gdktarget=quartz --enable-quartz-relocation --disable-introspection">
     <branch module="gtk+/2.24/gtk+-2.24.16.tar.xz" version="2.24.16"
             hash="sha256:93cd69cc2cecf9a3aa31a50caf4a24752a6928a48c527ae967b109df6f9302d3">
       <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0004-Bug-571582-GtkSelection-implementation-for-quartz.patch" strip="1"/>

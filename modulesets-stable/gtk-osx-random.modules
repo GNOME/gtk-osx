@@ -50,8 +50,7 @@
 
 <!-- Libglade's functions are now part of Gtk+ with different names and
 Libglade itself is deprecated. This is the last release. -->
-  <autotools id="libglade" autogen-sh='configure'
-	     autogen-template="autoreconf -fis &amp;&amp; %(srcdir)s/%(autogen-sh)s --prefix %(prefix)s --libdir %(libdir)s %(autogenargs)s">
+  <autotools id="libglade" autogen-sh='autoreconf'>
     <branch module="libglade/2.6/libglade-2.6.4.tar.bz2" version="2.6.4"
             md5sum="d1776b40f4e166b5e9c107f1c8fe4139" >
       <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/libglade-gmodule.patch" strip="1"/>
@@ -262,11 +261,10 @@ Libglade itself is deprecated. This is the last release. -->
     </dependencies>
   </autotools>
 
-  <autotools id="gimp"  autogen-sh="configure"
-             autogenargs="--disable-python --without-x
-                          --without-dbus --without-gnomevfs --without-wmf --enable-binreloc "
-	     autogen-template="autoreconf -fis &amp;&amp; %(srcdir)s/%(autogen-sh)s --prefix %(prefix)s --libdir %(libdir)s %(autogenargs)s"
-             makeargs='LDFLAGS="-framework Carbon"'>
+  <autotools id="gimp"  autogen-sh="autoreconf"
+             autogenargs="--disable-python --without-x --without-dbus
+			  --without-gnomevfs --without-wmf --enable-binreloc "
+	     makeargs='LDFLAGS="-framework Carbon"'>
     <branch module="gimp/v2.8/gimp-2.8.2.tar.bz2" version="2.8.2"
             md5sum="b542138820ca3a41cbd63fc331907955" repo="gimp">
       <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/Bug-555525-plug-ins-twain-tw_mac.c.patch" strip="1" />
