@@ -39,8 +39,16 @@
     </dependencies>
   </metamodule>
 
-  <autotools id="berkeleydb" autogen-sh="dist/configure"
-         autogen-template="cd build_unix; ../%(autogen-sh)s --prefix %(prefix)s --libdir %(libdir)s %(autogenargs)s" makeargs="-C build_unix"
+<!-- Berkeleydb requires out-of-srcdir builds. This setup assumes that you're doing that. Use berkeleydb-insource otherwise. -->
+  <autotools id="berkeleydb" autogen-sh="configure"
+         autogen-template="%(srcdir)s/dist/%(autogen-sh)s --prefix %(prefix)s --libdir %(libdir)s %(autogenargs)s" >
+
+    <branch module="berkeley-db/db-4.8.30.NC.tar.gz" version="4.8.30"
+        repo="oracle" />
+  </autotools>
+
+  <autotools id="berkeleydb-insource" autogen-sh="configure"
+	     autogen-template="cd build_unix; %(srcdir)s/dist/%(autogen-sh)s --prefix %(prefix)s --libdir %(libdir)s %(autogenargs)s" makeargs="-C build_unix"
          makeinstallargs="-C build_unix install">
 
     <branch module="berkeley-db/db-4.8.30.NC.tar.gz" version="4.8.30"
@@ -67,6 +75,7 @@
     </dependencies>
     <after>
       <dep package="berkeleydb"/>
+      <dep package="berkeleydb-insource"/>
     </after>
   </autotools>
 
@@ -119,7 +128,8 @@
      installs as pygobject3. Introspection is disabled here, because
      gir-scanner isn't smart enough to co-install them. -->
   <autotools id="pygobject" autogen-sh="configure"
-	     autogenargs="--disable-introspection">
+	     autogenargs="--disable-introspection"
+	     supports-non-srcdir-builds="no">
     <branch version="2.28.6" module="pygobject/2.28/pygobject-2.28.6.tar.bz2"
             hash="sha256:e4bfe017fa845940184c82a4d8949db3414cb29dfc84815fb763697dc85bdcee"/>
     <dependencies>

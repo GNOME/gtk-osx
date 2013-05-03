@@ -62,7 +62,8 @@
 	    repo="iso-codes" checkoutdir="iso-codes-3.41"/>
   </autotools>
 
-  <autotools id="zlib" autogen-sh="configure" skip-autogen="never">
+  <autotools id="zlib" autogen-sh="configure" skip-autogen="never"
+	     supports-non-srcdir-builds="no">
     <branch repo="sourceforge" version="1.2.7"
 	    module="libpng/zlib-1.2.7.tar.gz"/>
   </autotools>

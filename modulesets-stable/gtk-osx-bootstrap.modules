@@ -88,7 +88,7 @@
      dir. Until a better solution is found, just copy the source into
      the build and try again.-->
   <autotools id="gnome-doc-utils" autogenargs="--disable-scrollkeeper"
-	     autogen-sh="configure" >
+	     autogen-sh="configure" supports-non-srcdir-builds="no">
     <branch module="gnome-doc-utils/0.20/gnome-doc-utils-0.20.10.tar.xz"
 	    version="0.20.10" hash="sha256:cb0639ffa9550b6ddf3b62f3b1add92fb92ab4690d351f2353cffe668be8c4a6"/>
     <dependencies>
@@ -133,7 +133,8 @@
   </autotools>
 
 <!-- Another one that won't build in a separate directory -->
-  <autotools id="hicolor-icon-theme" autogen-sh="configure">
+  <autotools id="hicolor-icon-theme" autogen-sh="configure"
+	     supports-non-srcdir-builds="no">
     <branch module="hicolor-icon-theme-0.11.tar.gz" repo="icon-theme"
 	    version="0.11" />
 
