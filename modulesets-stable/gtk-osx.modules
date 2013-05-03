@@ -167,7 +167,8 @@
              autogenargs="--enable-quartz-backend --enable-quartz-relocation">
     <branch module="gtk+/3.6/gtk+-3.6.4.tar.xz" version="3.6.4"
             hash="sha256:dbda37986f934f986c0bb20f2b0c59f2717a2e5c098370ad69677ff89295f1a1">
-     </branch>
+      <patch file='http://git.gnome.org/browse/gtk-osx/plain/patches/0001-Bug-667759-gtkdnd-quartz.c-is-missing-annotations-fo.patch' strip='1'/>
+    </branch>
     <dependencies>
       <dep package="glib"/>
       <dep package="pango"/>
