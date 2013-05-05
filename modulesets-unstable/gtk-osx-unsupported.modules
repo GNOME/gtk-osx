@@ -39,7 +39,6 @@
   <autotools id="gnome-mime-data">
    <branch />
     <dependencies>
-      <dep package="gnome-common"/>
       <dep package="glib"/>
     </dependencies>
   </autotools>

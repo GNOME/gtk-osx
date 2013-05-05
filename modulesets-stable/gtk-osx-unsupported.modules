@@ -52,7 +52,6 @@
    <branch module="gnome-mime-data/2.18/gnome-mime-data-2.18.0.tar.bz2"
            version="2.18.0" md5sum="541858188f80090d12a33b5a7c34d42c"/>
     <dependencies>
-      <dep package="gnome-common"/>
       <dep package="glib"/>
     </dependencies>
   </autotools>
