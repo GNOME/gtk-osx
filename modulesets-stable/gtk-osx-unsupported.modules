@@ -83,7 +83,6 @@
             repo='libproxy.google.com'>
     </branch>
     <dependencies>
-      <dep package="cmake"/>
     </dependencies>
   </cmake>
 

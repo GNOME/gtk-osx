@@ -179,6 +179,7 @@
       <dep package="make"/>     <!-- Needed for Tiger, skipped otherwise -->
       <dep package="subversion"/>   <!-- Needed for Tiger, skipped otherwise -->
       <dep package="gettext-tools" /> <!-- Needed for 64-bit -->
+      <dep package="cmake"/>
       <dep package="m4"/>	<!-- Can be skipped for Leopard and later -->
       <dep package="autoconf" />
       <dep package="libtool" />

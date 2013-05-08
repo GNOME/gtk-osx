@@ -159,7 +159,6 @@
   <cmake id='libproxy'  cmakeargs="-DWITH_PYTHON=OFF -DWITH_PERL=OFF -DWITH_NM=OF">
     <branch repo='libproxy.google.com' module="trunk" />
     <dependencies>
-      <dep package="cmake"/>
     </dependencies>
   </cmake>
 

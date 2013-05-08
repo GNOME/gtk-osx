@@ -78,7 +78,6 @@
     <branch tag="libproxy-0.4.10"
             repo='libproxy.google.com'/>
     <dependencies>
-      <dep package="cmake"/>
     </dependencies>
   </cmake>
 
