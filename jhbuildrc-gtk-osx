@@ -636,7 +636,7 @@ if not os.path.exists(_pfx_cat_file):
 if 'XML_CATALOG_FILES' in os.environ:
     os.environ['XML_CATALOG_FILES'] += ':' + _pfx_cat_file
 else:
-    os.environ['XML_CATALOG_FILES'] = _pfx_cat_files
+    os.environ['XML_CATALOG_FILES'] = _pfx_cat_file
 
 #Freetype has -ansi added by its configure, but uses c99 code
 #

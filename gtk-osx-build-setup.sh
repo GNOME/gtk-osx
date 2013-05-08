@@ -21,7 +21,7 @@
 # jhbuild build meta-gtk-osx-bootstrap
 # jhbuild build
 #
-# See http://live.gnome.org/GTK%2B/OSX/Build for more information.
+# See http://live.gnome.org/GTK%2B/OSX/Building for more information.
 #
 
 SOURCE=$HOME/Source
