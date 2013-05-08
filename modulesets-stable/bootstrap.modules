@@ -81,31 +81,16 @@
             module="libtool/libtool-2.4.tar.gz" version="2.4"/>
   </autotools>
 
-  <autotools id="automake-1.8" autogen-sh="configure">
-    <branch repo="ftp.gnu.org"
-            module="automake/automake-1.8.5.tar.bz2" version="1.8.5"
-            size="663182" md5sum="0114aa6d7dc32112834b68105fb8d7e2" />
-  </autotools>
-  <autotools id="automake-1.9" autogen-sh="configure">
-    <branch repo="ftp.gnu.org"
-            module="automake/automake-1.9.6.tar.bz2" version="1.9.6"
-            size="765505" md5sum="c11b8100bb311492d8220378fd8bf9e0" />
-  </autotools>
-  <autotools id="automake-1.10" autogen-sh="configure">
-    <branch repo="ftp.gnu.org"
-            module="automake/automake-1.10.3.tar.bz2" version="1.10.3"
-            size="957505" md5sum="b8e67fb458da396bc35555af7ef2b49f" />
-  </autotools>
-  <autotools id="automake-1.11" autogen-sh="configure">
-    <branch repo="ftp.gnu.org"
-	    module="automake/automake-1.11.6.tar.xz" version="1.11.6"/>
-  </autotools>
-
   <autotools id="automake-1.12" autogen-sh="configure">
     <branch repo="ftp.gnu.org"
-	    module="automake/automake-1.12.4.tar.xz" version="1.12.4"/>
-
+	    module="automake/automake-1.12.6.tar.xz" version="1.12.6"/>
   </autotools>
+
+  <autotools id="automake-1.13" autogen-sh="configure">
+    <branch repo="ftp.gnu.org"
+	    module="automake/automake-1.13.1.tar.xz" version="1.13.1"/>
+  </autotools>
+
 <!-- Pkg-config 0.26 and later requires glib, which requires
      pkg-config, which, well, you get the idea. -->
   <autotools id="pkg-config" autogen-sh="configure">
@@ -175,7 +160,6 @@
 	    hash="sha256:a634d2e93d70468237033c06a17c97f29cf71a35ac5cc01c016324c965d42f73"/>
     <dependencies>
       <dep package="gtk-osx-docbook"/>
-      <dep package="gnome-doc-utils"/>
     </dependencies>
   </autotools>
 
@@ -198,11 +182,8 @@
       <dep package="m4"/>	<!-- Can be skipped for Leopard and later -->
       <dep package="autoconf" />
       <dep package="libtool" />
-      <dep package="automake-1.8" />
-      <dep package="automake-1.9" />
-      <dep package="automake-1.10" />
-      <dep package="automake-1.11" />
       <dep package="automake-1.12" />
+      <dep package="automake-1.13" />
       <dep package="pkg-config" />
       <dep package="bison"/>   <!-- included for Tiger, skipped otherwise -->
       <dep package="flex"/>    <!-- included for Tiger, skipped otherwise -->
