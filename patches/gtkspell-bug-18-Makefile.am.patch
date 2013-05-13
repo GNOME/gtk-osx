@@ -1,0 +1,25 @@
+*** a/gtkspell/Makefile.am	Wed Oct 31 15:23:44 2012
+--- b/gtkspell/Makefile.am	Mon May 13 14:51:15 2013
+***************
+*** 6,29 ****
+  
+  if ENABLE_GTK3
+  lib_LTLIBRARIES += libgtkspell3-3.la
+! libgtkspell3_3_la_CPPFLAGS = -DPACKAGE_LOCALE_DIR=\""$(localedir)"\" @GTK_SPELL3_CFLAGS@
+  libgtkspell3_3_la_includedir=$(includedir)/gtkspell-3.0/gtkspell
+  libgtkspell3_3_la_include_HEADERS = gtkspell.h
+  
+  libgtkspell3_3_la_SOURCES = gtkspell.c gtkspell.h
+! libgtkspell3_3_la_LIBADD = @GTK_SPELL3_LIBS@
+  
+  pkgconfig_DATA += gtkspell3-3.0.pc
+  endif
+  
+  if ENABLE_GTK2
+  lib_LTLIBRARIES += libgtkspell3-2.la
+! libgtkspell3_2_la_CPPFLAGS = -DPACKAGE_LOCALE_DIR=\""$(localedir)"\" @GTK_SPELL2_CFLAGS@
+  libgtkspell3_2_la_includedir=$(includedir)/gtkspell-3.0/gtkspell
+  libgtkspell3_2_la_include_HEADERS = gtkspell.h
+  
+  libgtkspell3_2_la_SOURCES = gtkspell.c gtkspell.h
+! libgtkspell3_2_la_LIBADD = @GTK_SPELL2_LIBS@

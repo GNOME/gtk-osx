@@ -634,7 +634,8 @@ if not os.path.exists(_pfx_cat_file):
     os.makedirs(os.path.dirname(_pfx_cat_file))
     open(_pfx_cat_file, "w").close()
 if 'XML_CATALOG_FILES' in os.environ:
-    os.environ['XML_CATALOG_FILES'] += ':' + _pfx_cat_file
+#    os.environ['XML_CATALOG_FILES'] += ':' + _pfx_cat_file
+    pass
 else:
     os.environ['XML_CATALOG_FILES'] = _pfx_cat_file
 
