@@ -87,7 +87,6 @@
     <branch repo="git.gnome.org" tag="0.20.10"/>
     <dependencies>
       <dep package="libxslt"/>
-      <dep package="intltool"/>
     </dependencies>
   </autotools>
 
@@ -120,7 +119,6 @@
   <autotools id="fontconfig" autogenargs="--disable-docs">
     <branch repo="freedesktop" tag="2.10.1"/>
     <dependencies>
-      <dep package="expat"/>
       <dep package="freetype"/>
     </dependencies>
   </autotools>

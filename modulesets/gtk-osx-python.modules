@@ -47,7 +47,6 @@
 	    module="2.7.3/Python-2.7.3.tar.xz" version="2.7.3">
     </branch>
     <dependencies>
-      <dep package="expat"/>
     </dependencies>
     <after>
       <dep package="berkeleydb"/>
