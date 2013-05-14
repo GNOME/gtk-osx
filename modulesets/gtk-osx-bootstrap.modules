@@ -86,7 +86,6 @@
 	     supports-non-srcdir-builds="no">
     <branch repo="git.gnome.org" tag="0.20.10"/>
     <dependencies>
-      <dep package="gtk-osx-docbook"/>
       <dep package="libxslt"/>
       <dep package="intltool"/>
     </dependencies>
