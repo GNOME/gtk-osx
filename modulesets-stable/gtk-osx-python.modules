@@ -39,17 +39,23 @@
     </dependencies>
   </metamodule>
 
-<!-- Berkeleydb requires out-of-srcdir builds. This setup assumes that you're doing that. Use berkeleydb-insource otherwise. -->
   <autotools id="berkeleydb" autogen-sh="configure"
-         autogen-template="%(srcdir)s/dist/%(autogen-sh)s --prefix %(prefix)s --libdir %(libdir)s %(autogenargs)s" >
+	     supports-non-srcdir-builds="no"  makeargs="-C build_unix"
+	     autogen-template="cd build_unix; ../dist/%(autogen-sh)s --prefix %(prefix)s --libdir %(libdir)s %(autogenargs)s"
+	     makeinstallargs="-C build_unix install">
 
     <branch module="berkeley-db/db-4.8.30.NC.tar.gz" version="4.8.30"
         repo="oracle" />
   </autotools>
 
-  <autotools id="berkeleydb-insource" autogen-sh="configure"
-	     autogen-template="cd build_unix; %(srcdir)s/dist/%(autogen-sh)s --prefix %(prefix)s --libdir %(libdir)s %(autogenargs)s" makeargs="-C build_unix"
-         makeinstallargs="-C build_unix install">
+  <!-- For out-of-source-tree builds (i.e., builddir is defined either
+       in .jhbuildrc-custom or passed as an option on the
+       command-line, the normal berkeleydb module will build in its
+       srcdir/build_unix directory. If you want to build it in the
+       build directory with most of the other modules, use this module
+       instead. -->
+  <autotools id="berkeleydb-nonsrctree" autogen-sh="configure"
+         autogen-template="%(srcdir)s/dist/%(autogen-sh)s --prefix %(prefix)s --libdir %(libdir)s %(autogenargs)s" >
 
     <branch module="berkeley-db/db-4.8.30.NC.tar.gz" version="4.8.30"
         repo="oracle" />
