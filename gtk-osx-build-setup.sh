@@ -49,9 +49,9 @@ fi
 
 mkdir -p $SOURCE 2>/dev/null || do_exit "The directory $SOURCE could not be created. Check permissions and try again."
 
-rm -f tmp-jhbuild-revision
-curl -ks $BASEURL/jhbuild-revision -o tmp-jhbuild-revision || \
-    do_exit "Unable to retrieve stable jhbuild revision"
+#rm -f tmp-jhbuild-revision
+#curl -ks $BASEURL/jhbuild-revision -o tmp-jhbuild-revision || \
+ #   do_exit "Unable to retrieve stable jhbuild revision"
 JHBUILD_REVISION=`cat tmp-jhbuild-revision 2>/dev/null`
 if test x"$JHBUILD_REVISION" = x; then
     do_exit "Could not find jhbuild revision to use."
@@ -79,7 +79,7 @@ else
 fi
 
 echo "Installing jhbuild..."
-(cd $SOURCE/jhbuild && make -f Makefile.plain DISABLE_GETTEXT=1 install >/dev/null) || do_exit "Jhbuild installation failed"
+(cd $SOURCE/jhbuild && ./autogen.sh && make -f Makefile.plain DISABLE_GETTEXT=1 install >/dev/null) || do_exit "Jhbuild installation failed"
 
 echo "Installing jhbuild configuration..."
 curl -ks $BASEURL/jhbuildrc-gtk-osx -o $HOME/.jhbuildrc || do_exit "Didn't get jhbuildrc"
