@@ -31,7 +31,7 @@
   </metamodule>
 
    <autotools id="berkeleydb4.8" autogen-sh="dist/configure"
-         autogen-template="cd build_unix; ../%(autogen-sh)s --prefix %(prefix)s --libdir %(libdir)s %(autogenargs)s" makeargs="-C build_unix"
+         autogen-template=";cd build_unix; ../%(autogen-sh)s --prefix %(prefix)s --libdir %(libdir)s %(autogenargs)s" makeargs="-C build_unix"
          makeinstallargs="-C build_unix install">
 
     <branch module="berkeley-db/db-4.8.30.NC.tar.gz" version="4.8.30"
@@ -51,7 +51,7 @@
   </autotools>
 
    <autotools id="berkeleydb5.0" autogen-sh="dist/configure"
-         autogen-template="cd build_unix; ../%(autogen-sh)s --prefix %(prefix)s --libdir %(libdir)s %(autogenargs)s" makeargs="-C build_unix"
+         autogen-template=";cd build_unix; ../%(autogen-sh)s --prefix %(prefix)s --libdir %(libdir)s %(autogenargs)s" makeargs="-C build_unix"
          makeinstallargs="-C build_unix install">
 
     <branch module="berkeley-db/db-5.0.32.NC.tar.gz" version="5.0.32"

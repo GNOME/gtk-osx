@@ -41,7 +41,7 @@
 
   <autotools id="berkeleydb" autogen-sh="configure"
 	     supports-non-srcdir-builds="no"  makeargs="-C build_unix"
-	     autogen-template="cd build_unix; ../dist/%(autogen-sh)s --prefix %(prefix)s --libdir %(libdir)s %(autogenargs)s"
+	     autogen-template="; cd build_unix; ../dist/%(autogen-sh)s --prefix %(prefix)s --libdir %(libdir)s %(autogenargs)s"
 	     makeinstallargs="-C build_unix install">
 
     <branch module="berkeley-db/db-4.8.30.NC.tar.gz" version="4.8.30"
@@ -71,6 +71,7 @@
     </dependencies>
     <after>
       <dep package="berkeleydb"/>
+      <dep package="berkeleydb-nonsrctree"/>
     </after>
   </autotools>
 
@@ -81,7 +82,7 @@
     </dependencies>
     <after>
       <dep package="berkeleydb"/>
-      <dep package="berkeleydb-insource"/>
+      <dep package="berkeleydb-nonsrctree"/>
     </after>
   </autotools>
 
