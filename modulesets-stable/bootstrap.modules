@@ -81,6 +81,17 @@
             module="libtool/libtool-2.4.tar.gz" version="2.4"/>
   </autotools>
 
+  <autotools id="automake-1.10" autogen-sh="configure">
+    <branch repo="ftp.gnu.org"
+            module="automake/automake-1.10.3.tar.bz2" version="1.10.3"
+            size="957505" md5sum="b8e67fb458da396bc35555af7ef2b49f" />
+  </autotools>
+
+  <autotools id="automake-1.11" autogen-sh="configure">
+    <branch repo="ftp.gnu.org"
+	    module="automake/automake-1.11.6.tar.xz" version="1.11.6"/>
+  </autotools>
+
   <autotools id="automake-1.12" autogen-sh="configure">
     <branch repo="ftp.gnu.org"
 	    module="automake/automake-1.12.6.tar.xz" version="1.12.6"/>
@@ -183,6 +194,8 @@
       <dep package="m4"/>	<!-- Can be skipped for Leopard and later -->
       <dep package="autoconf" />
       <dep package="libtool" />
+      <dep package="automake-1.10" />
+      <dep package="automake-1.11" />
       <dep package="automake-1.12" />
       <dep package="automake-1.13" />
       <dep package="pkg-config" />
