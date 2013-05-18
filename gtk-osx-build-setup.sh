@@ -79,8 +79,11 @@ else
 fi
 
 echo "Installing jhbuild..."
-(cd $SOURCE/jhbuild && ./autogen.sh && make -f Makefile.plain DISABLE_GETTEXT=1 install >/dev/null) || do_exit "Jhbuild installation failed"
-
+if [ -e "$SOURCE/jhbuild/autogen.sh" ]; then
+    (cd $SOURCE/jhbuild && ./autogen.sh && make -f Makefile.plain DISABLE_GETTEXT=1 install >/dev/null) || do_exit "Jhbuild installation failed";
+else
+    (cd $SOURCE/jhbuild && make -f Makefile.plain DISABLE_GETTEXT=1 install >/dev/null) || do_exit "Jhbuild installation failed";
+fi
 echo "Installing jhbuild configuration..."
 curl -ks $BASEURL/jhbuildrc-gtk-osx -o $HOME/.jhbuildrc || do_exit "Didn't get jhbuildrc"
 curl -ks $BASEURL/jhbuildrc-gtk-osx-fw-10.4 -o $HOME/.jhbuildrc-fw-10.4
