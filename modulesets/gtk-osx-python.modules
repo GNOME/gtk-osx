@@ -13,6 +13,8 @@
 	      href="http://www.python.org/ftp/python/"/>
   <repository type="tarball" name="oracle"
 	      href="http://download.oracle.com/"/>
+  <repository type="tarball" name="pymodules"
+	      href="http://pypi.python.org/packages/source/"/>
 
 
   <metamodule id="meta-gtk-osx-python">
@@ -108,6 +110,16 @@
       <dep package="meta-gtk-osx-core"/>
     </after>
   </autotools>
+
+  <distutils id="pybsddb">
+    <branch module="b/bsddb3/bsddb3-5.3.0.tar.gz"
+	    hash="md5:d5aa4f293c4ea755e84383537f74be82" repo="pymodules"
+	    version="5.3.0"/>
+    <dependencies>
+      <dep package="python3"/>
+      <dep package="berkeleydb"/>
+    </dependencies>
+  </distutils>
 
   <autotools id="pygobject" autogenargs="--disable-introspection">
     <branch tag="pygobject-2-28"/>

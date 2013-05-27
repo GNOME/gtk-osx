@@ -3,14 +3,16 @@
 <?xml-stylesheet type="text/xsl" href="moduleset.xsl"?>
 <moduleset>
 
-  <repository type="tarball" name="ftp.gnome.org" default="yes" 
+  <repository type="tarball" name="ftp.gnome.org" default="yes"
               href="http://ftp.gnome.org/pub/GNOME/sources/"/>
-  <repository type="tarball" name="cairographics.org" 
+  <repository type="tarball" name="cairographics.org"
               href="http://cairographics.org/releases/"/>
   <repository type="tarball" name="python"
 	      href="http://www.python.org/ftp/python/"/>
   <repository type="tarball" name="oracle"
 	      href="http://download.oracle.com/"/>
+  <repository type="tarball" name="pymodules"
+	      href="http://pypi.python.org/packages/source/"/>
 
   <metamodule id="meta-gtk-osx-python">
     <dependencies>
@@ -85,6 +87,16 @@
       <dep package="berkeleydb-nonsrctree"/>
     </after>
   </autotools>
+
+  <distutils id="pybsddb">
+    <branch module="b/bsddb3/bsddb3-5.3.0.tar.gz"
+	    hash="md5:d5aa4f293c4ea755e84383537f74be82" repo="pymodules"
+	    version="5.3.0"/>
+    <dependencies>
+      <dep package="python3"/>
+      <dep package="berkeleydb"/>
+    </dependencies>
+  </distutils>
 
 <!-- Pycairo 1.8.4+ requires Python 2.6. Leopard comes only with 2.5,
      so pycairo is by default held at 1.8.2. Use pycairo-python2.6 if

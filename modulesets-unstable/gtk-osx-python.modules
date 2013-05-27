@@ -3,15 +3,16 @@
 <?xml-stylesheet type="text/xsl" href="moduleset.xsl"?>
 <moduleset>
 
-  <repository type="git" name="git.gnome.org" default="yes" 
+  <repository type="git" name="git.gnome.org" default="yes"
               href="git://git.gnome.org/"/>
-  <repository type="git" name="cairographics" 
+  <repository type="git" name="cairographics"
               href="git://git.cairographics.org/git/"/>
   <repository type="tarball" name="python"
 	      href="http://www.python.org/ftp/python/"/>
   <repository type="tarball" name="oracle"
 	      href="http://download.oracle.com/"/>
-
+  <repository type="tarball" name="pymodules"
+	      href="http://pypi.python.org/packages/source/"/>
 
   <metamodule id="meta-gtk-osx-python">
     <dependencies>
@@ -67,7 +68,20 @@
     </after>
   </autotools>
 
-
+<!-- Pybsddb replaces Python2's built-in bsd module. Their repo uses
+     hg, so we stick with the tarball. -->
+  <distutils id="pybsddb">
+    <branch module="b/bsddb3/bsddb3-5.3.0.tar.gz"
+	    hash="md5:d5aa4f293c4ea755e84383537f74be82" repo="pymodules"
+	    version="5.3.0"/>
+    <dependencies>
+      <dep package="python3"/>
+    </dependencies>
+    <after>
+      <dep package="berkeleydb4.8"/>
+      <dep package="berkeleydb5.0"/>
+    </after>
+  </distutils>
 
 <!--Py2cairo is for Python2 and pycairo is for Python3 -->
  <autotools id="py2cairo" >
