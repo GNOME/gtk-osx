@@ -351,7 +351,11 @@ def setup_sdk(target, sdk_version, architectures=[_default_arch]):
             {"perl-xml-simple":{"ARCHFLAGS":"-arch i386 -arch x86_64"},
              "perl-xml-parser":{"ARCHFLAGS":"-arch i386 -arch x86_64"}})
 
-
+    # Finally when building normally we need to force CFLAGS_FOR_BUILD
+    # to our current CFLAGS so that everything will link with other
+    # build products. Note that this will generally break
+    # cross-compilation, not that it works anyway.
+    os.environ['CFLAGS_FOR_BUILD'] = os.environ['CFLAGS']
     return sdkdir
 
 # This is a convenience function for older .jhbuildrc-customs.
