@@ -57,7 +57,7 @@ if test x"$JHBUILD_REVISION" = x; then
     do_exit "Could not find jhbuild revision to use."
 fi
 
-JHBUILD_REVISION_OPTION="origin refs/tags/$JHBUILD_REVISION"
+JHBUILD_REVISION_OPTION="origin $JHBUILD_REVISION"
 
 echo "Checking out jhbuild ($JHBUILD_REVISION) from git..."
 if ! test -d $SOURCE/jhbuild; then
@@ -73,10 +73,13 @@ else
 	rm modulesets/bootstrap.modules
 	mv modulesets/bootstrap.modules.dist modulesets/bootstrap.modules;
     fi
-    git pull $JHBUILD_REVISION_OPTION >/dev/null || \
+    git checkout master
+    git branch -D stable
+    git checkout -b stable $JHBUILD_REVISION || \
 	do_exit "Update of jhbuild failed";
     mv modulesets/bootstrap.modules modulesets/bootstrap.modules.dist;
 fi
+git am http://git.gnome.org/browse/gtk-osx/plain/patches/0001-Bug-700557-autoreconf-i-fails-in-cases-of-ltmain.sh-.patch
 
 echo "Installing jhbuild..."
 if [ -e "$SOURCE/jhbuild/autogen.sh" ]; then
