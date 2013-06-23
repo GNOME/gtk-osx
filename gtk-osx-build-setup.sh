@@ -75,6 +75,7 @@ else
     fi
     git checkout master
     git branch -D stable
+    git pull
     git checkout -b stable $JHBUILD_REVISION || \
 	do_exit "Update of jhbuild failed";
     mv modulesets/bootstrap.modules modulesets/bootstrap.modules.dist;
