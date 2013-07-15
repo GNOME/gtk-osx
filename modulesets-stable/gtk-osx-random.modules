@@ -313,7 +313,7 @@ Libglade itself is deprecated. This is the last release. -->
   </autotools>
 
 <!-- Goocanvas-1 is for gtk+-2. -->
-  <autotools id="goocanvas">
+  <autotools id="goocanvas" autogen-sh="configure">
     <branch module="goocanvas/1.0/goocanvas-1.0.0.tar.bz2" version="1.0.0"
 	    hash="sha256:1c072ef88567cad241fb4addee26e9bd96741b1503ff736d1c152fa6d865711e"/>
     <dependencies>
@@ -322,7 +322,7 @@ Libglade itself is deprecated. This is the last release. -->
   </autotools>
 
 <!-- Goocanvas-2 is for gtk+-3. -->
-  <autotools id="goocanvas2">
+  <autotools id="goocanvas2" autogen-sh="configure">
     <branch module="goocanvas/2.0/goocanvas-2.0.1.tar.xz" version="2.0.1"
 	    hash="sha256:0c3a595a6d2a4fe0f1a1a5243637e66aa1bfbaf6492455bfd0b51e0dec9b1553"/>
     <dependencies>
