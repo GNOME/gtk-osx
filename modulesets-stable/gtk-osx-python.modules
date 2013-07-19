@@ -70,6 +70,8 @@
     </branch>
     <dependencies>
       <dep package="gettext-runtime"/>
+      <dep package='readline'/>
+      <dep package='libxml2'/>
     </dependencies>
     <after>
       <dep package="berkeleydb"/>
@@ -81,6 +83,8 @@
     <branch repo="python" module="3.3.0/Python-3.3.0.tar.xz" version="3.3.0"/>
     <dependencies>
       <dep package="gettext-runtime"/>
+      <dep package='readline'/>
+      <dep package='libxml2'/>
     </dependencies>
     <after>
       <dep package="berkeleydb"/>
