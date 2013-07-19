@@ -180,8 +180,8 @@ osx_ver()
 
 #
 # This is the workhorse of the setup. Call this function with the
-# target OSX version (10.4, 10.5, 10.6, or 10.7), the sdk version you want
-# to use (10.4u, 10.5, 10.6 or 10.7), and a list of architectures. As you
+# target OSX version (10.4, 10.5, 10.6, etc.), the sdk version you want
+# to use (10.4u, 10.5, 10.6, etc.), and a list of architectures. As you
 # can see, the architectures defaults to a single build of i386 or
 # ppc, depending on your machine. I386 is chosen for intel
 # architectures as a default to ensure compatibility: 64-bit hasn't
@@ -334,8 +334,7 @@ def setup_sdk(target, sdk_version, architectures=[_default_arch]):
     #Glib wants to use posix_memalign if it's available, but it's only
     #available after 10.6, and there's no weak linking support for it:
     if ((target == "10.4" or target == "10.5")
-        and (sdk_version == "10.6" or sdk_version == "10.7"
-             or sdk_version == "native"
+        and (sdk_version in ("10.6", "10.7", '10.8', '10.9', 'native')
              and (_osx_version >= 6.0))):
         append_autogenargs("glib", "ac_cv_compliant_posix_memalign=no")
 

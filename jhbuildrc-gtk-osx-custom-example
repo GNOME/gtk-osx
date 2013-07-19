@@ -78,7 +78,7 @@ elif _jhb == "FW":
 # Target can be "10.4", "10.5", or "10.6". It sets
 # MACOS_DEPLOYMENT_TARGET and the -macosx-version-min CFLAG.
 #
-# Setup_sdk can be "10.4u", "10.5", "10.6" or "native". "Native" will
+# Setup_sdk can be any version from "10.4u" or later, or "native". "Native" will
 # not set -sysroot in CFLAGS, so headers and dylibs will come from
 # /usr instead of /Developer/SDKs/MacOSX_sdk.10.foo. If you are
 # building for distribution, you probably want to use the lowest SDK
@@ -109,7 +109,11 @@ elif _jhb == "FW":
 #  Set up a particular target and SDK: For default operation, set the
 # architecture and SDK for the native machine:
 _target = None;
-if _osx_version >= 7.0:
+if _osx_version >= 9.0:
+    _target = "10.7"
+elif _osx_version >= 8.0:
+    _target = "10.7"
+elif _osx_version >= 7.0:
     _target = "10.7"
 elif _osx_version >= 6.0:
     _target = "10.6"
