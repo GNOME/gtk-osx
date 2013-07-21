@@ -48,5 +48,10 @@ diff -c /Users/john/Development/gtk-sources/gtkspell3-3.0.0/gtkspell/Makefile.am
  GtkSpell_2_0_gir_LIBS = libgtkspell3-2.la
  GtkSpell_2_0_gir_FILES = $(libgtkspell3_2_la_SOURCES)
  INTROSPECTION_GIRS += GtkSpell-2.0.gir
+diff -Naur gtkspell3-3.0.0.orig/m4/.mkdir gtkspell3-3.0.0/m4/.mkdir
+--- a/m4/.mkdir    1970-01-01 01:00:00.000000000 +0100
++++ b/m4/.mkdir    2013-07-16 22:17:47.000000000 +0100
+@@ -0,0 +1 @@
++ensure-exists
 
 Diff finished.  Mon May 13 15:23:33 2013
