@@ -116,19 +116,12 @@
   </autotools>
 
   <autotools id="gdk-pixbuf">
-    <branch tag="gdk-pixbuf-2-24"/>
+    <branch tag="gdk-pixbuf-2-26"/>
     <after>
       <dep package="pango"/>
     </after>
   </autotools>
 
-
-  <autotools id="gdk-pixbuf-gtk3">
-    <branch tag="2.26.4"/>
-    <after>
-      <dep package="pango"/>
-    </after>
-  </autotools>
 
   <autotools id="gtk+" autogenargs="--with-gdktarget=quartz --enable-introspection=no --enable-quartz-relocation">
     <branch revision="gtk-2-24"/>
@@ -150,7 +143,7 @@
       <dep package="glib"/>
       <dep package="pango"/>
       <dep package="atk"/>
-      <dep package="gdk-pixbuf-gtk3"/>
+      <dep package="gdk-pixbuf"/>
       <dep package="gobject-introspection"/>
     </dependencies>
     <after>
