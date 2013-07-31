@@ -166,7 +166,6 @@
     <dependencies>
       <dep package="enchant"/>
       <dep package="libsoup"/>
-      <dep package='gnome-vfs'/>
       <dep package="meta-gtk-osx-freetype"/>
     </dependencies>
     <after>

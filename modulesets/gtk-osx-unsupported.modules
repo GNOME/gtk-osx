@@ -148,7 +148,6 @@
     <dependencies>
       <dep package="libsoup"/>
       <dep package="enchant"/>
-      <dep package="gnome-vfs"/>
     </dependencies>
     <after>
       <dep package="meta-gtk-osx-core"/>

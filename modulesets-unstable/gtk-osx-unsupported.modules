@@ -177,7 +177,6 @@
     <branch repo="git.webkit.org" module="WebKit"/>
     <dependencies>
       <dep package="libsoup-gnome"/>
-      <dep package='gnome-vfs'/>
       <dep package="enchant"/>
     </dependencies>
     <after>

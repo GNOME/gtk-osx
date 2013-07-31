@@ -45,7 +45,6 @@
       <dep package="liboil"/>
     </dependencies>
     <after>
-      <dep package="gnome-vfs"/>
     </after>
   </autotools>
 
