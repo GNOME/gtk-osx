@@ -133,7 +133,8 @@
   </autotools>
 
 <!-- Another one that won't build in a separate directory -->
-  <autotools id="hicolor-icon-theme" autogen-sh="configure">
+  <autotools id="hicolor-icon-theme" autogen-sh="configure" 
+	     supports-non-srcdir-builds="no">
     <branch module="hicolor-icon-theme-0.11.tar.gz" repo="icon-theme"
 	    version="0.11" />
   </autotools>
