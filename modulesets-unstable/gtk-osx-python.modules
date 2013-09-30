@@ -32,8 +32,9 @@
   </metamodule>
 
    <autotools id="berkeleydb4.8" autogen-sh="dist/configure"
-         autogen-template=";cd build_unix; ../%(autogen-sh)s --prefix %(prefix)s --libdir %(libdir)s %(autogenargs)s" makeargs="-C build_unix"
-         makeinstallargs="-C build_unix install">
+         autogen-template="cd build_unix; ../%(autogen-sh)s --prefix %(prefix)s --libdir %(libdir)s %(autogenargs)s" makeargs="-C build_unix"
+         makeinstallargs="-C build_unix install"
+	 supports-non-srcdir-builds="no">
 
     <branch module="berkeley-db/db-4.8.30.NC.tar.gz" version="4.8.30"
         repo="oracle" />
@@ -43,6 +44,7 @@
 	     autogen-sh="configure">
     <branch repo="python"
 	    module="2.7.4/Python-2.7.4.tar.xz" version="2.7.4">
+      <patch file="https://github.com/narkoleptik/os-x-berkeleydb-patch/raw/master/atomic.patch" strip='1'/>
     </branch>
     <dependencies>
     </dependencies>
@@ -52,11 +54,14 @@
   </autotools>
 
    <autotools id="berkeleydb5.0" autogen-sh="dist/configure"
-         autogen-template=";cd build_unix; ../%(autogen-sh)s --prefix %(prefix)s --libdir %(libdir)s %(autogenargs)s" makeargs="-C build_unix"
-         makeinstallargs="-C build_unix install">
+         autogen-template="cd build_unix; ../%(autogen-sh)s --prefix %(prefix)s --libdir %(libdir)s %(autogenargs)s" makeargs="-C build_unix"
+         makeinstallargs="-C build_unix install"
+	 supports-non-srcdir-builds="no">
 
     <branch module="berkeley-db/db-5.0.32.NC.tar.gz" version="5.0.32"
-        repo="oracle" />
+        repo="oracle">
+      <patch file="https://github.com/narkoleptik/os-x-berkeleydb-patch/raw/master/atomic.patch" strip='1'/>
+    </branch>
   </autotools>
 
   <autotools id="python3" autogenargs="--enable-shared" autogen-sh="configure">
