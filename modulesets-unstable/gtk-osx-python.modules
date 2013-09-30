@@ -38,11 +38,11 @@
     <branch module="berkeley-db/db-4.8.30.NC.tar.gz" version="4.8.30"
         repo="oracle" />
   </autotools>
-
+<!-- Python-2.7.5's hashlib doesn't build correctly with gcc-4.2, though it does fine with Clang (and probably later gccs as well). -->
   <autotools id="python2.7" autogenargs="--enable-shared"
 	     autogen-sh="configure">
     <branch repo="python"
-	    module="2.7.3/Python-2.7.3.tar.xz" version="2.7.3">
+	    module="2.7.4/Python-2.7.4.tar.xz" version="2.7.4">
     </branch>
     <dependencies>
     </dependencies>
@@ -61,7 +61,7 @@
 
   <autotools id="python3" autogenargs="--enable-shared" autogen-sh="configure">
     <branch repo="python"
-	    module="3.3/Python-3.3.0.tar.xz" version="3.3.0">
+	    module="3.3.2/Python-3.3.2.tar.xz" version="3.3.2">
     </branch>
     <after>
       <dep package="berkeleydb5.0"/>

@@ -34,7 +34,7 @@
   </autotools>
 
   <autotools id="glibmm" >
-    <branch tag="glibmm-2-34"/>
+    <branch tag="glibmm-2-36"/>
     <dependencies>
       <dep package="libsigc++2"/>
     </dependencies>
@@ -45,13 +45,13 @@
 
 <!-- Pangomm's last stable branch was 2-24 -->
   <autotools id="pangomm" >
-     <branch tag="2.28.4"/>
+     <branch tag="2.34.0"/>
     <dependencies>
        <dep package="cairomm"/>
     </dependencies>
     <after>
       <dep package="glibmm"/>
-      <dep package="glibmm3"/>
+      <dep package="glibmm"/>
       <dep package="pango"/>
     </after>
   </autotools>
@@ -71,7 +71,7 @@
 
 <!-- atkmm doesn't branch -->
   <autotools id="atkmm">
-    <branch module="atkmm" tag="2.22.6"/>
+    <branch module="atkmm" tag="2.22.7"/>
     <dependencies>
       <dep package="atk"/>
     </dependencies>
@@ -89,9 +89,9 @@
   </autotools>
 
   <autotools id="gtkmm3" >
-    <branch revision="gtkmm-3-6" module="gtkmm"/>
+    <branch revision="gtkmm-3-8" module="gtkmm"/>
     <dependencies>
-      <dep package="glibmm3"/>
+      <dep package="glibmm"/>
       <dep package="cairomm"/>
       <dep package="pangomm"/>
       <dep package="atkmm"/>

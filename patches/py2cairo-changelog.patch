@@ -1,0 +1,5 @@
+--- py2cairo-1.10.0/ChangeLog	1969-12-31 16:00:00.000000000 -0800
++++ py2cairo-1.10.0-A/ChangeLog	2013-09-29 10:17:00.000000000 -0700
+@@ -0,0 +1,2 @@
++Bogus entry to make autoreconf happy
++.
