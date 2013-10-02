@@ -193,9 +193,11 @@ Libglade itself is deprecated. This is the last release. -->
     </after>
   </autotools>
 
-  <autotools id="ORBit2" autogen-sh="configure">
+  <autotools id="ORBit2" autogen-sh="autoreconf">
     <branch module="ORBit2/2.14/ORBit2-2.14.19.tar.bz2" version="2.14.19"
-            hash="sha256:55c900a905482992730f575f3eef34d50bda717c197c97c08fa5a6eafd857550"/>
+            hash="sha256:55c900a905482992730f575f3eef34d50bda717c197c97c08fa5a6eafd857550">
+      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0001-Patch-Orbit-2.14.19-to-master-for-current-GLib.patch" strip="1"/>
+    </branch>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
     </after>
