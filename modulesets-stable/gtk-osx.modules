@@ -65,11 +65,12 @@
     </after>
   </metamodule>
 
-  <autotools id="glib" autogen-sh="configure">
+  <autotools id="glib" autogen-sh="autoreconf">
     <branch module="glib/2.38/glib-2.38.0.tar.xz"  version="2.38.0"
             hash="sha256:7513a7de5e814ccb48206340a8773ea523d6a7bf04dc74565de69b899bc2ff32">
       <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0001-Bug-702516-Make-Werror-format-nonliteral-happy.patch" strip="1"/>
-      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/delete-gnetworking.h.patch" strip="1"/>
+      <patch file="/patches/delete-gnetworking.h.patch" strip="1"/>
+      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0001-Restore-gl_GLIBC21-to-configure-needed-for-libcharse.patch" strip="1"/>
     </branch>
     <dependencies>
       <dep package="libffi"/>
