@@ -256,8 +256,10 @@ Libglade itself is deprecated. This is the last release. -->
 
   <autotools id="shared-mime-info"  autogen-sh="configure"
              supports-non-srcdir-builds="no" >
-    <branch module="shared-mime-info-1.0.tar.xz" version="1.0"
-            repo="hadess"/>
+    <branch module="shared-mime-info-1.2.tar.xz" version="1.2"
+            repo="hadess">
+      <patch file="/Users/john/Development/gtk-sources/shared-mime-info/0001-Bug-70255-Build-fails-with-glib-2.38.patch" strip="1"/>
+    </branch>
     <dependencies>
       <dep package="glib"/>
     </dependencies>
