@@ -179,6 +179,7 @@
       <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0004-Ensure-src-and-dest-are-GdkWindows-in-_gdk_sythesize.patch" strip="1"/>
       <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0003-Fix-double-free-introduced-in-f86dc163.patch" strip="1"/>
       <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0003-quartz-NULL-check-on-default-keymap.patch" strip="1"/>
+      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0001-Bug-709939-quartz-window-pos.patch" strip="1"/>
     </branch>
     <dependencies>
       <dep package="glib"/>
