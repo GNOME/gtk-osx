@@ -24,6 +24,8 @@
 	      href="ftp://ftp.gnu.org/gnu/"/>
   <repository type="tarball" name="gmplib.org"
 	      href="ftp://ftp.gmplib.org/pub/"/>
+  <repository type="git" name="git.gnome.org"
+              href="git://git.gnome.org/"/>
 
   <metamodule id="meta-gtk-osx-random">
     <dependencies>
@@ -326,9 +328,11 @@ Libglade itself is deprecated. This is the last release. -->
   </autotools>
 
 <!-- Goocanvas-2 is for gtk+-3. -->
-  <autotools id="goocanvas2" autogen-sh="configure">
-    <branch module="goocanvas/2.0/goocanvas-2.0.1.tar.xz" version="2.0.1"
-	    hash="sha256:0c3a595a6d2a4fe0f1a1a5243637e66aa1bfbaf6492455bfd0b51e0dec9b1553"/>
+<!-- Unfortunately Goocanvas hasn't had a release for a couple of years and there are some recent changes to get it to work with current versions of Gtk+, Gobject-Introspection, etc. that are available only from git. -->
+  <autotools id="goocanvas2" supports-non-srcdir-builds="no">
+    <!--branch module="goocanvas/2.0/goocanvas-2.0.1.tar.xz" version="2.0.1"
+	    hash="sha256:0c3a595a6d2a4fe0f1a1a5243637e66aa1bfbaf6492455bfd0b51e0dec9b1553"/-->
+    <branch repo="git.gnome.org" module="goocanvas" checkoutdir="goocanvas2"/>
     <dependencies>
       <dep package="gtk+-3.0"/>
     </dependencies>
