@@ -258,7 +258,7 @@ Libglade itself is deprecated. This is the last release. -->
              supports-non-srcdir-builds="no" >
     <branch module="shared-mime-info-1.2.tar.xz" version="1.2"
             repo="hadess">
-      <patch file="/Users/john/Development/gtk-sources/shared-mime-info/0001-Bug-70255-Build-fails-with-glib-2.38.patch" strip="1"/>
+      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0001-Bug-70255-Build-fails-with-glib-2.38.patch" strip="1"/>
     </branch>
     <dependencies>
       <dep package="glib"/>
