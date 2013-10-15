@@ -62,10 +62,12 @@
          autogen-template="%(srcdir)s/dist/%(autogen-sh)s --prefix %(prefix)s --libdir %(libdir)s %(autogenargs)s" >
 
     <branch module="berkeley-db/db-4.8.30.NC.tar.gz" version="4.8.30"
-        repo="oracle" />
+        repo="oracle" >
+      <patch file="https://github.com/narkoleptik/os-x-berkeleydb-patch/raw/master/atomic.patch" strip='1'/>
+    </branch>
   </autotools>
 
-  <autotools id="python" autogenargs="--enable-shared --with-system-expat"
+  <autotools id="python" autogenargs="--enable-shared --with-system-expat --disable-framework"
 	     autogen-sh="configure">
     <branch repo="python"
 	    module="2.7.4/Python-2.7.4.tar.xz" version="2.7.4">
