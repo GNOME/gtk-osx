@@ -90,7 +90,8 @@
     </dependencies>
   </autotools>
 
-  <autotools id="glib-networking" autogenargs="--without-ca-certificates set_more_warnings=no">
+  <autotools id="glib-networking"
+	     autogenargs="--without-ca-certificates set_more_warnings=no">
     <branch revision="glib-2-34"/>
     <dependencies>
       <dep package="glib"/>
@@ -128,7 +129,9 @@
 <!-- CVS version requires fig2dev, an X11 utility.
      <branch repo='git.gnupg.org' tag="libgcrypt-1.4.4" module='libgcrypt'/> -->
     <branch repo='ftp.gnupg.org' version='1.5.3'
-	    module='gcrypt/libgcrypt/libgcrypt-1.5.3.tar.bz2'/>
+	    module='gcrypt/libgcrypt/libgcrypt-1.5.3.tar.bz2'>
+      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/libgcrypt-build-clang.patch" strip="1"/>
+    </branch>
     <dependencies>
       <dep package="libgpg-error" />
     </dependencies>
