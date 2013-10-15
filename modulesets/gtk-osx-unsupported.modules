@@ -90,7 +90,7 @@
     </dependencies>
   </autotools>
 
-  <autotools id="glib-networking" autogenargs="--without-ca-certificates">
+  <autotools id="glib-networking" autogenargs="--without-ca-certificates set_more_warnings=no">
     <branch revision="glib-2-34"/>
     <dependencies>
       <dep package="glib"/>
@@ -99,7 +99,7 @@
     </dependencies>
   </autotools>
 
-  <autotools id="libsoup">
+  <autotools id="libsoup" autogenargs="set_more_warnings=no">
     <branch revision="gnome-3-6"/>
     <dependencies>
       <dep package="glib"/>
@@ -127,8 +127,8 @@
 
 <!-- CVS version requires fig2dev, an X11 utility.
      <branch repo='git.gnupg.org' tag="libgcrypt-1.4.4" module='libgcrypt'/> -->
-    <branch repo='ftp.gnupg.org' version='1.5.0'
-	    module='gcrypt/libgcrypt/libgcrypt-1.5.0.tar.bz2'/>
+    <branch repo='ftp.gnupg.org' version='1.5.3'
+	    module='gcrypt/libgcrypt/libgcrypt-1.5.3.tar.bz2'/>
     <dependencies>
       <dep package="libgpg-error" />
     </dependencies>

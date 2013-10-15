@@ -100,7 +100,7 @@
   </autotools>
 
   <autotools id="glib-networking" autogen-sh="configure"
-	     autogenargs="--without-ca-certificates">
+	     autogenargs="--without-ca-certificates set_more_warnings=no">
     <branch module="glib-networking/2.34/glib-networking-2.34.0.tar.xz"
 	    version="2.34.0" hash="sha256:c56eb4161671bff9568f3a92a88531ca01217eb7ee8514bb6255730400f877f1"/>
     <dependencies>
@@ -109,7 +109,7 @@
     </dependencies>
   </autotools>
 
-  <autotools id="libsoup" autogen-sh="configure" autogenargs="">
+  <autotools id="libsoup" autogen-sh="configure" autogenargs="set_more_warnings=no">
     <branch module="libsoup/2.40/libsoup-2.40.1.tar.xz"
             version="2.40.1" hash="sha256:77a55d57e7e8055acd2f44e0cc889b9ba48052e8b7f07e829157d57417ac650a" />
     <dependencies>
@@ -135,8 +135,8 @@
   </autotools>
 
   <autotools id="libgcrypt" autogen-sh="configure" autogenargs="--disable-asm">
-    <branch repo='ftp.gnupg.org' version='1.5.0'
-	    module='gcrypt/libgcrypt/libgcrypt-1.5.0.tar.bz2'/>
+    <branch repo='ftp.gnupg.org' version='1.5.3'
+	    module='gcrypt/libgcrypt/libgcrypt-1.5.3.tar.bz2'/>
     <dependencies>
       <dep package="libgpg-error" />
     </dependencies>
