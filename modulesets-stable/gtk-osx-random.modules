@@ -382,7 +382,8 @@ Libglade itself is deprecated. This is the last release. -->
   </autotools>
 
 
-  <autotools id="guile" autogen-sh="configure">
+  <autotools id="guile" autogen-sh="configure"
+	     autogenargs="--disable-error-on-warning">
     <branch repo="ftp.gnu.org" module="guile/guile-1.8.8.tar.gz"
 	    version="1.8.8"/>
     <dependencies>
