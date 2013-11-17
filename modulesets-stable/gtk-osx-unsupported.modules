@@ -129,7 +129,8 @@
     </dependencies>
   </autotools>
 
-   <autotools id="libgpg-error" autogen-sh="configure">
+   <autotools id="libgpg-error" autogen-sh="configure"
+	      supports-non-srdir-builds="no">
     <branch repo='ftp.gnupg.org' version='1.10'
 	    module="gcrypt/libgpg-error/libgpg-error-1.10.tar.bz2"/>
   </autotools>
