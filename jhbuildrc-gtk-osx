@@ -28,6 +28,18 @@ import re
 _default_arch = ""
 _osx_version = 0.0
 
+def _popen(cmd_arg):
+    from subprocess import Popen, PIPE
+    devnull = open('/dev/null')
+    cmd = Popen(cmd_arg, stdout=PIPE, stderr=devnull, shell=True)
+    retval = cmd.stdout.read().strip()
+    err = cmd.wait()
+    cmd.stdout.close()
+    devnull.close()
+    if err:
+        raise RuntimeError, "Failed to close %s stream" % cmd_arg
+    return retval
+
 # Register an extra command to get the checkout dir for a module.
 #
 import jhbuild
@@ -76,13 +88,13 @@ jhbuild.commands.register_command(_getenv)
 # Determine the native system:
 def osx_ver():
     global _default_arch, _osx_version
-    vstring = os.popen("uname -r").read().strip()
-    mstring = os.popen("machine").read().strip()
+    vstring = _popen("uname -r")
+    mstring = _popen("machine")
     exp = re.compile(r'(\d+\.\d+)\.\d+')
     vernum = exp.match(vstring)
     _osx_version = float(vernum.group(1)) - 4.0
 
-    x64bit = os.popen("sysctl hw.cpu64bit_capable").read().strip().endswith("1")
+    x64bit = _popen("sysctl hw.cpu64bit_capable").endswith("1")
     if x64bit and _osx_version >= 6.0:
         _default_arch = "x86_64"
     elif mstring.startswith("ppc") :
@@ -92,11 +104,7 @@ def osx_ver():
 
 # Determine the XCode Version:
 def xcode_ver():
-   cmd = os.popen("xcodebuild -version")
-   ver = cmd.read().strip()
-   err = cmd.close()
-   if err:
-       raise RuntimeError, "Failed to close xcodebuild stream"
+   ver = _popen("xcodebuild -version")
    exp = re.compile(r'Xcode (\d+\.\d+)')
    vernum = exp.match(ver)
    if vernum:
@@ -216,10 +224,7 @@ def setup_sdk(target, sdk_version, architectures=[_default_arch]):
 
 #Note: You can use $DEVELOPER_DIR to override the default set with xcode-select.
     if _osx_version >= 5.0:
-        _cmd = os.popen("xcode-select -print-path")
-        xcodepath = _cmd.read().strip()
-        if _cmd.close():
-            raise RuntimeError, "Closing xcode-select stream failed"
+        xcodepath = _popen("xcode-select -print-path")
     elif os.environ.has_key("DEVELOPER_DIR"):
         xcodepath = os.environ["DEVELOPER_DIR"]
 
@@ -238,6 +243,7 @@ def setup_sdk(target, sdk_version, architectures=[_default_arch]):
         environ_prepend("CXXFLAGS", "-I" + sdkdir + "/usr/include")
         environ_prepend("OBJCFLAGS", "-I" + sdkdir + "/usr/include")
         environ_prepend("CPPFLAGS", "-I" + sdkdir + "/usr/include")
+        environ_prepend("CMAKE_PREFIX_PATH", os.path.join(sdkdir, 'usr'))
 
         # It looks like -isysroot is broken when building on 10.4, causing link
         # problems. But we don't really need to set it for 10.4 so just
@@ -286,6 +292,7 @@ def setup_sdk(target, sdk_version, architectures=[_default_arch]):
         os.environ["CC"] = "gcc"
         os.environ["OBJC"] = "gcc"
         os.environ["CXX"] = "g++"
+        module_extra_env["pkg-config"] = {'CFLAGS': os.environ['CFLAGS'] + ' --std=gcc89'}
     elif _osx_version >= 7.0 and xcodeversion > 4.0:
         os.environ["CC"] = os.path.join(_toolpath, "llvm-gcc-4.2")
         os.environ["OBJC"] = os.path.join(_toolpath, "llvm-gcc-4.2")
