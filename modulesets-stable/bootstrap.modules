@@ -50,7 +50,7 @@
   </autotools>
 
   <autotools id="gettext-tools" autogen-sh="configure"
-	     autogenargs="--without-emacs --disable-java --disable-native-java --disable-libasprintf --disable-csharp">
+	     autogenargs="--without-emacs --disable-java --disable-native-java --disable-libasprintf --disable-csharp --with-included-glib">
     <branch repo="ftp.gnu.org" source-subdir="gettext-tools"
 	    module="gettext/gettext-0.18.1.1.tar.gz" version="0.18.1.1"
             size="15139737" md5sum="3dd55b952826d2b32f51308f2f91aa89">
