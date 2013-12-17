@@ -366,12 +366,13 @@ def setup_sdk(target, sdk_version, architectures=[_default_arch]):
             {"perl-xml-simple":{"ARCHFLAGS":"-arch i386 -arch x86_64"},
              "perl-xml-parser":{"ARCHFLAGS":"-arch i386 -arch x86_64"}})
 
+    if xcodeversion >= 5.0:
+        module_extra_env["pkg-config"] = {'CFLAGS': os.environ['CFLAGS'] + ' -std=gnu89'}
+
     # Finally when building normally we need to force CFLAGS_FOR_BUILD
     # to our current CFLAGS so that everything will link with other
     # build products. Note that this will generally break
     # cross-compilation, not that it works anyway.
-    if xcodeversion >= 5.0:
-        module_extra_env["pkg-config"] = {'CFLAGS': os.environ['CFLAGS'] + ' --std=gcc89'}
     os.environ['CFLAGS_FOR_BUILD'] = os.environ['CFLAGS']
     return sdkdir
 
