@@ -302,18 +302,17 @@ def setup_sdk(target, sdk_version, architectures=[_default_arch]):
 
     #SDK 10.4 doesn't support gcc4.2.
     if  xcodeversion == 3.0 or sdk_version == "10.4u":
+        if xcodeversion > 4.0:
+            raise EnvironmentError("Can't build for 10.4 on Xcode 4 or later")
         os.environ["CC"] = os.path.join(_toolpath, "gcc-4.0")
         os.environ["OBJC"] = os.path.join(_toolpath, "gcc-4.0")
         os.environ["CXX"] = os.path.join(_toolpath, "g++-4.0")
-    elif xcodeversion >= 5.0:
-        os.environ["CC"] = "gcc"
-        os.environ["OBJC"] = "gcc"
-        os.environ["CXX"] = "g++"
-
-    elif _osx_version >= 7.0 and xcodeversion > 4.0:
-        os.environ["CC"] = os.path.join(_toolpath, "llvm-gcc-4.2")
-        os.environ["OBJC"] = os.path.join(_toolpath, "llvm-gcc-4.2")
-        os.environ["CXX"] = os.path.join(_toolpath, "llvm-g++-4.2")
+    #Note that the following will use Clang with Xcode 5.0 and
+    #llvm-gcc-4.2 on Xcode 4.x
+    elif _osx_version >= 7.0 or xcodeversion > 4.0:
+        os.environ["CC"] = os.path.join(_toolpath, "gcc")
+        os.environ["OBJC"] = os.path.join(_toolpath, "gcc")
+        os.environ["CXX"] = os.path.join(_toolpath, "g++")
     else:
         os.environ["CC"] = os.path.join(_toolpath, "gcc-4.2")
         os.environ["OBJC"] = os.path.join(_toolpath, "gcc-4.2")
