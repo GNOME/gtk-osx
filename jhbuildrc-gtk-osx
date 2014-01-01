@@ -181,6 +181,18 @@ def get_sdkdir(sdk_name, xcodepath, xcodeversion):
         sdkdir = os.path.join(xcodepath, "SDKs", sdk_name)
     else:
         sdkdir = os.path.join("/Developer", "SDKs", sdk_name)
+
+    if not os.path.exists(sdkdir):
+        sdkdir = ''
+        if 'SDKPATH' in os.environ:
+            try:
+                sdkdir = [os.path.join(path, sdk_name) for path
+                          in os.environ['SDKPATH'].split(':')
+                          if os.path.exists(os.path.join(path, sdk_name))][0]
+            except IndexError:
+                pass
+        if not sdkdir:
+            raise EnvironmentError("%s not found" % sdk_name)
     return sdkdir
 
 #We call osx_ver() here so that we can set up _default_arch for setup_sdk:
