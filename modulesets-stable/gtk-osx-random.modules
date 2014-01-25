@@ -176,8 +176,8 @@ Libglade itself is deprecated. This is the last release. -->
 
   <autotools id="gtksourceview3"
     autogen-template="gnome-autogen.sh --prefix %(prefix)s --libdir %(libdir)s %(autogenargs)s">
-    <branch module="gtksourceview/3.6/gtksourceview-3.6.0.tar.xz"
-            version="3.6.0" hash="sha256:7d268618fbe8c2960300a305d38255294c9f497fcbc0e53a1da1bf9bda0d1c7a">
+    <branch module="gtksourceview/3.10/gtksourceview-3.10.1.tar.xz"
+            version="3.6.0" hash="sha256:38de44f832b4110a3442af2fce58fce0a54f4b22a763c490bcdc1b1db2fb0b01">
     </branch>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
