@@ -138,7 +138,7 @@
   </autotools>
 
 <!-- Pycairo-python3 for those who've made the leap. -->
-  <waf id="pycairo-python3" autogen-sh="configure">
+  <waf id="pycairo-python3" autogen-sh="configure" python-command="python3">
     <branch module="pycairo-1.10.0.tar.bz2" repo="cairographics.org"
             version="1.10.0"
 	    hash="sha1:b4283aa1cc9aafd12fd72ad371303a486da1d014"/>
