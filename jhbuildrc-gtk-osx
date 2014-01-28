@@ -376,9 +376,11 @@ def setup_sdk(target, sdk_version, architectures=[_default_arch]):
         module_extra_env.update(
             {"perl-xml-simple":{"ARCHFLAGS":"-arch i386 -arch x86_64"},
              "perl-xml-parser":{"ARCHFLAGS":"-arch i386 -arch x86_64"}})
-
     if xcodeversion >= 5.0:
         module_extra_env["pkg-config"] = {'CFLAGS': os.environ['CFLAGS'] + ' -std=gnu89'}
+    if xcodeversion >= 4.0 and target in ('10.6', '10.5', '10.4'):
+        environ_append('LDFLAGS',
+                       '-Wl,-no_function_starts -Wl,-no_version_load_command')
 
     # Finally when building normally we need to force CFLAGS_FOR_BUILD
     # to our current CFLAGS so that everything will link with other
