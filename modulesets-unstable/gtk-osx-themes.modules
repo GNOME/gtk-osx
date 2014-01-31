@@ -21,7 +21,7 @@
     <dependencies>
       <dep package="icon-naming-utils"/>
       <dep package="gnome-icon-theme-symbolic"/>
-      <dep packabe="gnome-themes-standard"/>
+      <dep package="gnome-themes-standard"/>
     </dependencies>
   </metamodule>
 
