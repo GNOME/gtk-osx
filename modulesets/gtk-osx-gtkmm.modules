@@ -34,7 +34,7 @@
   </autotools>
 
   <autotools id="glibmm" >
-    <branch tag="glibmm-2-36"/>
+    <branch tag="glibmm-2-38"/>
     <dependencies>
       <dep package="libsigc++2"/>
     </dependencies>
@@ -89,7 +89,7 @@
   </autotools>
 
   <autotools id="gtkmm3" >
-    <branch revision="gtkmm-3-8" module="gtkmm"/>
+    <branch revision="gtkmm-3-10" module="gtkmm"/>
     <dependencies>
       <dep package="glibmm"/>
       <dep package="cairomm"/>
