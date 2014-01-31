@@ -17,6 +17,14 @@
     </dependencies>
   </metamodule>
 
+  <metamodule id="meta-gtk-osx-gtk3-core-themes">
+    <dependencies>
+      <dep package="icon-naming-utils"/>
+      <dep package="gnome-icon-theme-symbolic"/>
+      <dep packabe="gnome-themes-standard"/>
+    </dependencies>
+  </metamodule>
+
   <autotools id="icon-naming-utils" autogen-sh="configure" >
     <branch repo="freedesktop.org" module="gstreamer-sdk/icon-naming-utils" 
 	    revision="sdk-0.8.7"/>
@@ -43,6 +51,27 @@
     <dependencies>
       <dep package="hicolor-icon-theme"/>
       <dep package="icon-naming-utils"/>
+    </dependencies>
+  </autotools>
+
+  <autotools id="gnome-icon-theme-symbolic">
+    <branch />
+    <dependencies>
+      <dep package="gnome-icon-theme"/>
+    </dependencies>
+  </autotools>
+
+  <autotools id="gnome-icon-theme-extra">
+    <branch />
+    <dependencies>
+      <dep package="gnome-icon-theme"/>
+    </dependencies>
+  </autotools>
+
+  <autotools id="gnome-themes-standard">
+    <branch />
+    <dependencies>
+      <dep package="gnome-icon-theme"/>
     </dependencies>
   </autotools>
 
