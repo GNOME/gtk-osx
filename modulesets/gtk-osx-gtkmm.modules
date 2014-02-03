@@ -63,7 +63,7 @@
      documentation in your jhbuildrc-custom. -->
 <!-- libsigc++'s last stable branch was 2-0 -->
   <autotools id="libsigc++2"  autogen-args="--disable-documentation">
-    <branch tag="2.2.11"/>
+    <branch revision="libsigc-2-2"/>
     <dependencies>
       <dep package="mm-common"/>
     </dependencies>

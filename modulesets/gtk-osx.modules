@@ -62,7 +62,7 @@
   </metamodule>
 
   <autotools id="glib">
-    <branch tag="glib-2-34"/>
+    <branch tag="glib-2-38"/>
     <dependencies>
       <dep package="libffi"/>
     </dependencies>
@@ -120,7 +120,8 @@
   </autotools>
 
   <autotools id="gdk-pixbuf">
-    <branch tag="gdk-pixbuf-2-26"/>
+<!--gdk-pixbuf is releasing from master-->
+    <branch />
     <after>
       <dep package="pango"/>
     </after>
@@ -175,7 +176,8 @@
   </autotools>
 
   <autotools id="gtk-mac-integration" autogenargs="--disable-python">
-    <branch tag="gtk-mac-integration-2.0.2" />
+<!--gtk-mac-integration releases from master"-->
+    <branch />
     <dependencies>
     </dependencies>
     <after>

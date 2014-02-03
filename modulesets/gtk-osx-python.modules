@@ -134,7 +134,7 @@
   </autotools>
 
   <autotools id="pygobject3">
-    <branch tag="pygobject-3-4" module="pygobject" checkoutdir="pygobject3"/>
+    <branch tag="pygobject-3-10" module="pygobject" checkoutdir="pygobject3"/>
     <dependencies>
       <dep package="meta-gtk-osx-gtk3"/>
     </dependencies>
@@ -159,7 +159,8 @@
   </autotools>
 
   <autotools id="gtk-mac-integration-python">
-    <branch tag="gtk-mac-integration-2.0.1" module="gtk-mac-integration"
+    <!--gtk-mac-integration releases from master"-->
+    <branch module="gtk-mac-integration"
 	    checkoutdir="gtk-mac-integration"/>
     <dependencies>
      </dependencies>
