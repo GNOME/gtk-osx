@@ -176,7 +176,7 @@
              autogenargs="--enable-quartz-backend --enable-quartz-relocation">
     <branch module="gtk+/3.10/gtk+-3.10.7.tar.xz" version="3.10.7"
             hash="sha256:b7e9de15385031cff43897e7e59f6692eaabf500f36eef80e6b9d6486ad49427">
-      <patch file="http://git.gnome.org/browse/gtk-osx-plain/patches/0001-gtk-gtkselection-return-value.patch" skip="1"/>
+      <patch file="http://git.gnome.org/browse/gtk-osx-plain/patches/0001-gtk3-gtkselection-return-value.patch" skip="1"/>
     </branch>
     <dependencies>
       <dep package="glib"/>
