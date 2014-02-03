@@ -68,9 +68,10 @@
     </dependencies>
   </autotools>
 
-  <autotools id="gnome-themes-standard">
+  <autotools id="gnome-themes-standard" autogenargs="--disable-gtk2-engine">
     <branch revision="gnome-3-10"/>
     <dependencies>
+      <dep package="librsvg"/>
       <dep package="gnome-icon-theme"/>
     </dependencies>
   </autotools>
