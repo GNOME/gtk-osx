@@ -62,7 +62,7 @@
        module won't link. In case you're wondering, gnome-doc-utils
        needs libxml2's python module. -->
 
-  <autotools id="libxml2" autogen-sh="configure">
+  <autotools id="libxml2" autogen-sh="configure" autogenargs="--with-python">
     <branch version="2.9.0" module="libxml2-2.9.0.tar.gz"
 	    repo="xmlsoft.org">
       <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/libxml2-Bug-686118-pthreads_once_init.patch" strip="1"/>

@@ -66,7 +66,7 @@
 	    repo="xmlsoft.org">
       <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/libxml2-Bug-686118-pthreads_once_init.patch" strip="1"/>
     </branch-->
-  <autotools id="libxml2">
+  <autotools id="libxml2" autogenargs="--with-python">
     <branch repo="git.gnome.org"/>
     <after>
       <dep package="python2.7"/>
@@ -89,7 +89,8 @@
 <!-- This has python bits that don't work in a separate build
      dir. Until a better solution is found, just copy the source int
      the build and try again. -->
-  <autotools id="gnome-doc-utils" autogenargs="--disable-scrollkeeper" >
+  <autotools id="gnome-doc-utils" autogenargs="--disable-scrollkeeper"
+	     supports-non-srcdir-builds="no">
     <branch repo="git.gnome.org"/>
     <dependencies>
       <dep package="libxslt"/>

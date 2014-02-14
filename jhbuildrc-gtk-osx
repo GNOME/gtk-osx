@@ -661,6 +661,7 @@ prependpath('PYTHONPATH', os.path.join(prefix , 'lib',  _version, 'site-packages
 prependpath('PYTHONPATH', os.path.join(prefix , 'lib',  _version))
 prependpath('PERL5LIB', prefix + '/lib/perl5/vendor_perl')
 prependpath('PERL5LIB', prefix + '/lib/perl5/site_perl')
+os.environ['PYTHON_SITE_PACKAGES'] = os.path.join(prefix, 'lib', _version, 'site-packages')
 
 # Point gtk-doc and other xsltproc users to our XML catalog.
 #
