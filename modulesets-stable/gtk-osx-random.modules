@@ -26,6 +26,8 @@
 	      href="ftp://ftp.gmplib.org/pub/"/>
   <repository type="git" name="git.gnome.org"
               href="git://git.gnome.org/"/>
+  <repository type="tarball" name="boehm"
+	      href="http://www.hpl.hp.com/personal/Hans_Boehm/"/>
 
   <metamodule id="meta-gtk-osx-random">
     <dependencies>
@@ -380,6 +382,14 @@ Libglade itself is deprecated. This is the last release. -->
     <branch repo="ftp.gnu.org" module="gmp/gmp-4.3.2.tar.bz2" version="4.3.2"/>
   </autotools>
 
+  <autotools id="libunistring" autogen-sh="configure">
+    <branch repo="ftp.gnu.org" module="libunistring/libunistring-0.9.3.tar.gz"
+	    version="0.9.3"/>
+  </autotools>
+
+  <autotools id="bdw-gc" autogen-sh="configure">
+    <branch repo="boehm" module="gc/gc_source/gc-7.2e.tar.gz" version="7.2e"/>
+  </autotools>
 
   <autotools id="guile" autogen-sh="configure"
 	     autogenargs="--disable-error-on-warning">
@@ -391,10 +401,13 @@ Libglade itself is deprecated. This is the last release. -->
   </autotools>
 
   <autotools id="guile2" autogen-sh="configure">
-    <branch repo="ftp.gnu.org" module="guile/guile-2.0.6.tar.gz"
-	    version="2.0.6"/>
+    <branch repo="ftp.gnu.org" module="guile/guile-2.0.9.tar.gz"
+	    version="2.0.9"/>
     <dependencies>
+      <dep package="libunistring"/>
       <dep package="gmp"/>
+      <dep package="libffi"/>
+      <dep package="bdw-gc"/>
     </dependencies>
   </autotools>
 

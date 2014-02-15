@@ -26,8 +26,9 @@
 	      cvsroot=":pserver:anonymous@gtkspell.cvs.sourceforge.net:/cvsroot/gtkspell"
 	      password=""/>
   <repository type="git" name="savannah" href="git://git.sv.gnu/org/"/>
+  <repository type="git" name="github" href="https://github.com"/>
 
-    <metamodule id="meta-gtk-osx-random">
+  <metamodule id="meta-gtk-osx-random">
     <dependencies>
       <dep package="poppler"/>
       <dep package="gimp"/>
@@ -275,10 +276,28 @@
     <branch repo="ftp.gnu.org" module="gmp/gmp-4.3.1.tar.bz2" version="4.3.1"/>
   </autotools>
 
+  <autotools id="libunistring" autogen-sh="configure">
+    <branch repo="savannah" module="libunistring.git" tag="v0.9.3"/>
+  </autotools>
+
+  <autotools id="bdw-gc" autogen-sh="configure">
+    <branch repo="github" module="ivmai/bdwgc" revision="release-7_2"/>
+  </autotools>
+
   <autotools id="guile" autogenargs="--disable-error-on-warning">
     <branch repo="savannah" module="guile.git"/>
     <dependencies>
       <dep package="gmp"/>
+    </dependencies>
+  </autotools>
+
+  <autotools id="guile2" autogen-sh="configure">
+    <branch repo="savannah" module="guile.git" revision="stable-2.0"/>
+    <dependencies>
+      <dep package="libunistring"/>
+      <dep package="gmp"/>
+      <dep package="libffi"/>
+      <dep package="bdw-gc"/>
     </dependencies>
   </autotools>
 
