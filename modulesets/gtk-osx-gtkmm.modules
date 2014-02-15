@@ -73,6 +73,9 @@
   <autotools id="atkmm">
     <branch module="atkmm" tag="2.22.7"/>
     <dependencies>
+      <dep package="glibmm"/>
+      <dep package="cairomm"/>
+      <dep package="pangomm"/>
       <dep package="atk"/>
     </dependencies>
   </autotools>

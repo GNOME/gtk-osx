@@ -52,6 +52,12 @@
   <autotools id="atkmm" autogen-sh="configure">
     <branch module="atkmm/2.22/atkmm-2.22.7.tar.xz" version="2.22.7"
 	    hash="sha256:bfbf846b409b4c5eb3a52fa32a13d86936021969406b3dcafd4dd05abd70f91b"/>
+    <dependencies>
+      <dep package="glibmm"/>
+      <dep package="cairomm"/>
+      <dep package="pangomm"/>
+      <dep package="atk"/>
+    </dependencies>
   </autotools>
 
 <!-- libsigc++ depends on doxygen for documentation, but doxygen
