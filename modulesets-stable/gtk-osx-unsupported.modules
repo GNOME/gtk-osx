@@ -57,7 +57,7 @@
   </autotools>
 
   <autotools id="iso-codes" autogen-sh="configure">
-    <branch module="iso-codes-3.47.tar.xz" version="3.47"
+    <branch module="iso-codes-3.51.tar.xz" version="3.51"
 	    repo="iso-codes"/>
   </autotools>
 
