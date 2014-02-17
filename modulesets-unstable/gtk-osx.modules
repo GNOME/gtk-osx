@@ -92,6 +92,9 @@
       <dep package="gobject-introspection"/>
       <dep package="meta-gtk-osx-bootstrap"/>
     </dependencies>
+    <after>
+      <dep package="meta-gtk-osx-freetype"/>
+    </after>
   </autotools>
 
  <autotools id="atk">
@@ -175,6 +178,7 @@
       <dep package="fontconfig"/>
       <dep package="freetype"/>
       <dep package='glib'/>
+      <dep package="icu"/>
     </after>
   </autotools>
 

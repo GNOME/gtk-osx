@@ -51,7 +51,8 @@
 
   </autotools>
 
-  <autotools id="zlib" autogen-sh="configure" skip-autogen="never">
+  <autotools id="zlib" autogen-sh="configure" skip-autogen="never"
+	     supports-non-srcdir-builds="no">
     <branch repo="sourceforge" version="1.2.7"
 	    module="libpng/zlib-1.2.7.tar.gz"/>
   </autotools>
@@ -84,11 +85,12 @@
   </autotools>
 
   <autotools id="libgpg-error" autogen-sh="autogen.sh"
-             autogen-template="%(srcdir)s/%(autogen-sh)s &amp;&amp; %(srcdir)s/configure --prefix %(prefix)s --libdir %(libdir)s %(autogenargs)s">
+             autogen-template="%(srcdir)s/%(autogen-sh)s &amp;&amp; %(srcdir)s/configure --prefix %(prefix)s --libdir %(libdir)s %(autogenargs)s"
+	     supports-non-srcdir-builds='no'>
     <branch repo='git.gnupg.org' module="libgpg-error" />
   </autotools>
 
-  <autotools id="libgcrypt"     autogen-sh="configure">
+  <autotools id="libgcrypt" autogen-sh="configure" autogenargs="--disable-asm">
 <!-- CVS version requires fig2dev, an X11 utility.
      <branch repo='cvs.gnupg.org'  module='libgcrypt'/> -->
     <branch repo='ftp.gnupg.org' version='1.5.3'
@@ -179,16 +181,18 @@
   </autotools>
 
   <autotools id="WebKit" 
-	     autogenargs="--with-target=quartz --disable-video --with-font-backend=pango --with-gtk=2.0 --disable-geolocation">
+	     autogenargs="--enable-quartz-target --disable-x11-target --disable-video --with-font-backend=pango --with-gtk=2.0 --disable-geolocation --disable-webkit2 --disable-credential-storage --disable-svg-fonts --disable-web-audio --disable-fast-malloc --disable-gtk-doc-html">
     <!--branch repo="svn.webkit.org" module="webkit/trunk" checkoutdir="WebKit"/-->
     <branch repo="git.webkit.org" module="WebKit"/>
     <dependencies>
-      <dep package="libsoup-gnome"/>
+      <dep package="libsoup"/>
       <dep package="enchant"/>
+      <dep package="meta-gtk-osx-core"/>
+      <dep package="meta-gtk-osx-freetype"/>
+      <dep package="zlib"/>
       <dep package="icu"/>
     </dependencies>
     <after>
-      <dep package="meta-gtk-osx-core"/>
       <dep package="libcurl"/>
       <dep package="bison"/>
       <!--dep package="gst-plugins-base"/-->
