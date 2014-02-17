@@ -28,6 +28,8 @@
 	      href="git://anongit.freedesktop.org"/>
   <repository type="git" name="lysator"
 	      href="git://git.lysator.liu.se/"/>
+  <repository type="tarball" name="icu"
+	      href="http://download.icu-project.org/files/"/>
  
   <metamodule id="meta-gtk-osx-unsupported">
     <dependencies>
@@ -171,6 +173,10 @@
     </dependencies>
   </autotools>
 
+  <autotools id="icu" autogen-sh="source/configure">
+    <branch module="icu4c/4.8.1.1/icu4c-4_8_1_1-src.tgz" version="4.8.1.1"
+	    repo="icu" checkoutdir="icu"/>
+  </autotools>
 
   <autotools id="WebKit" 
 	     autogenargs="--with-target=quartz --disable-video --with-font-backend=pango --with-gtk=2.0 --disable-geolocation">
@@ -179,6 +185,7 @@
     <dependencies>
       <dep package="libsoup-gnome"/>
       <dep package="enchant"/>
+      <dep package="icu"/>
     </dependencies>
     <after>
       <dep package="meta-gtk-osx-core"/>
