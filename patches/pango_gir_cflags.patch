@@ -1,5 +1,5 @@
---- pango/Makefile.am	2013-03-04 17:24:38.000000000 -0800
-+++ /Users/john/Development/gtk-sources/pango-1.36.0/pango/Makefile.am	2013-10-30 14:16:44.000000000 -0700
+--- a/pango/Makefile.am	2013-03-04 17:24:38.000000000 -0800
++++ b/pango/Makefile.am	2013-10-30 14:16:44.000000000 -0700
 @@ -159,7 +159,8 @@
  Pango_1_0_gir_EXPORT_PACKAGES = pango
  Pango_1_0_gir_INCLUDES = GObject-2.0 cairo-1.0
