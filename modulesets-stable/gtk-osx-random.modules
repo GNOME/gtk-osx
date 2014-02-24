@@ -384,7 +384,9 @@ Libglade itself is deprecated. This is the last release. -->
 
   <autotools id="libunistring" autogen-sh="configure">
     <branch repo="ftp.gnu.org" module="libunistring/libunistring-0.9.3.tar.gz"
-	    version="0.9.3"/>
+	    version="0.9.3">
+      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/libunistring-clang.patch" strip="1"/>
+    </branch>
   </autotools>
 
   <autotools id="bdw-gc" autogen-sh="configure">

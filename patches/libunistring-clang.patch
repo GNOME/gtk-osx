@@ -1,0 +1,15 @@
+--- a/lib/stdint.mini.h	2009-04-10 13:28:44.000000000 -0700
++++ b/lib/stdint.mini.h	2014-02-14 21:20:10.000000000 -0800
+@@ -119,10 +119,11 @@
+ #define uint32_t unistring_uint32_t
+
+ /* Avoid collision with Solaris 2.5.1 <pthread.h> etc.  */
++#ifndef __clang__
+ #define _UINT8_T
+ #define _UINT32_T
+ #define _UINT64_T
+-
++#endif
+
+ #endif /* _UNISTRING_STDINT_H */
+ #endif /* !defined _UNISTRING_STDINT_H && !defined _GL_JUST_INCLUDE_SYSTEM_STDINT_H */
