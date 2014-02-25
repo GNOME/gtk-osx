@@ -123,7 +123,9 @@
   <autotools id="enchant" autogen-sh="configure"
 	     autogenargs="--with-myspell-dir=/Library/Dictionaries">
     <branch module="1.6.0/enchant-1.6.0.tar.gz" version="1.6.0"
-	    repo="abisource/enchant"/>
+	    repo="abisource/enchant">
+ <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/enchant-gsize.patch" strip="1"/>
+    </branch>
     <dependencies>
       <dep package="glib"/>
     </dependencies>
