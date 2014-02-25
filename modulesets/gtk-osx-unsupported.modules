@@ -144,6 +144,14 @@
 	    module="libtasn1/libtasn1-2.14.tar.gz"/>
   </autotools>
 
+  <autotools id='icu' autogen-sh='source/configure'
+	     makeargs='CFLAGS="$CFLAGS -DU_CHARSET_IS_UTF8=1 -DU_USING_ICU_NAMESPACE=0"'>
+    <branch repo='icu' version='50.1.2' checkoutdir='icu'
+	    module='icu4c/50.1.2/icu4c-50_1_2-src.tgz'>
+      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/icu-clang.patch" strip="1"/>
+    </branch>
+  </autotools>
+
   <autotools id="WebKit"
 	     autogenargs="--with-target=quartz --disable-video">
     <!-- Tags are for Safari versions, not much help to us. -->
