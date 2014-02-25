@@ -272,6 +272,7 @@ def setup_sdk(target, sdk_version, architectures=[_default_arch]):
 #everything seems to be working correctly.
         if not _osx_version < 5.0:
             environ_append("CFLAGS", "-isysroot " + sdkdir)
+            environ_append("CPPFLAGS", "-isysroot " + sdkdir)
             environ_append("CXXFLAGS", "-isysroot " + sdkdir)
             environ_append("OBJCFLAGS", "-isysroot " + sdkdir)
             environ_append("LDFLAGS", "-isysroot " + sdkdir)
