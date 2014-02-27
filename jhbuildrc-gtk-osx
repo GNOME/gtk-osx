@@ -242,7 +242,7 @@ def setup_sdk(target, sdk_version, architectures=[_default_arch]):
 
 #OSX 10.9 doesn't have /usr/include, so we need to set the sdkdir to XCode.app:
     if sdk_version == 'native' and _osx_version >= 9.0:
-        sdk_version = str(10 + _osx_version / 10)
+        sdk_version = '10.' + str(int(_osx_version))
 
     _toolpath = os.path.join("/usr", "bin")
     if xcodepath:
