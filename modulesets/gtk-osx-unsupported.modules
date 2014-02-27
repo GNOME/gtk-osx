@@ -20,6 +20,8 @@
               tags-template="tags/%(tag)s"/>
   <repository type="svn" name="svn.webkit.org"
 	      href="http://svn.webkit.org/repository/"/>
+  <repository type='tarball' name='icu'
+	      href='http://download.icu-project.org/files/'/>
 
   <metamodule id="meta-gtk-osx-unsupported">
     <dependencies>
