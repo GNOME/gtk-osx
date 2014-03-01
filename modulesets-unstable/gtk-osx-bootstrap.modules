@@ -113,6 +113,8 @@
       <patch href="http://git.gnome.org/browse/gtk-osx/plain/patches/0001-Bug-53815-CoreText-backend-doesn-t-link.patch"/>
     </branch>
     <dependencies>
+      <dep package="freetype"/>
+      <dep package="fontconfig"/>
       <dep package="ragel"/>
     </dependencies>
     <after>
@@ -120,17 +122,6 @@
       <dep package="cairo"/>
     </after>
   </autotools>
-
-<!--  <autotools id="harfbuzz">
-    <branch repo="freedesktop"/>
-    <dependencies>
-      <dep package="freetype"/>
-      <dep package="fontconfig"/>
-      <dep package="glib"/>
-    </dependencies>
-  </autotools>
--->
-
 
   <autotools id="freetype" skip-autogen="never" autogenargs="--without-bzip2"
 	     autogen-template="%(srcdir)s/%(autogen-sh)s &amp;&amp; %(srcdir)s/configure --prefix %(prefix)s --libdir %(libdir)s %(autogenargs)s"
