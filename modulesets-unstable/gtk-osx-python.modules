@@ -37,14 +37,15 @@
 	 supports-non-srcdir-builds="no">
 
     <branch module="berkeley-db/db-4.8.30.NC.tar.gz" version="4.8.30"
-        repo="oracle" />
+        repo="oracle">
+      <patch file="https://github.com/narkoleptik/os-x-berkeleydb-patch/raw/master/atomic.patch" strip='1'/>
+    </branch>
   </autotools>
 <!-- Python-2.7.5's hashlib doesn't build correctly with gcc-4.2, though it does fine with Clang (and probably later gccs as well). -->
   <autotools id="python2.7" autogenargs="--enable-shared"
 	     autogen-sh="configure">
     <branch repo="python"
 	    module="2.7.4/Python-2.7.4.tar.xz" version="2.7.4">
-      <patch file="https://github.com/narkoleptik/os-x-berkeleydb-patch/raw/master/atomic.patch" strip='1'/>
     </branch>
     <dependencies>
     </dependencies>
