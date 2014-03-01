@@ -102,8 +102,8 @@
     </dependencies>
   </autotools>
 
-  <autotools id="harfbuzz">
-    <branch repo="freedesktop" tag="0.9.5"/>
+  <autotools id="harfbuzz" autogenargs="--with-coretext">
+    <branch repo="freedesktop" tag="0.9.26"/>
     <dependencies>
       <dep package="freetype"/>
       <dep package="fontconfig"/>
@@ -111,15 +111,15 @@
     </dependencies>
   </autotools>
 
-  <autotools id="freetype" skip-sutogen="never">
-    <branch module="freetype/freetype2" tag="VER-2-4-10" repo="nongnu"/>
+  <autotools id="freetype" skip-sutogen="never" autogenargs="--without-bzip2">
+    <branch module="freetype/freetype2" tag="VER-2-5-2" repo="nongnu"/>
     <dependencies>
       <dep package="zlib"/>
     </dependencies>
  </autotools>
 
   <autotools id="fontconfig" autogenargs="--disable-docs">
-    <branch repo="freedesktop" tag="2.10.1"/>
+    <branch repo="freedesktop" tag="2.11.0"/>
     <dependencies>
       <dep package="freetype"/>
     </dependencies>

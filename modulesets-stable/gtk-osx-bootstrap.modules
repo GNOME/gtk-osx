@@ -106,8 +106,8 @@
     </dependencies>
   </autotools>
 
-  <autotools id="harfbuzz" autogen-sh="configure">
-    <branch repo="harfbuzz" module="harfbuzz-0.9.10.tar.bz2" version="0.9.10"/>
+  <autotools id="harfbuzz" autogen-sh="configure" autogenargs="--with-coretext">
+    <branch repo="harfbuzz" module="harfbuzz-0.9.26.tar.bz2" version="0.9.26"/>
     <dependencies>
       <dep package="freetype"/>
       <dep package="fontconfig"/>
@@ -115,8 +115,9 @@
     </dependencies>
   </autotools>
 
-  <autotools id="freetype" autogen-sh="configure" skip-autogen="never">
-    <branch module="freetype/freetype-2.4.10.tar.gz" version="2.4.10"
+  <autotools id="freetype" autogen-sh="configure" skip-autogen="never"
+	     autogenargs="--without-bzip2">
+    <branch module="freetype/freetype-2.5.2.tar.gz" version="2.5.2"
             repo="sourceforge">
     </branch>
     <dependencies>
@@ -126,7 +127,7 @@
 
   <autotools id="fontconfig" autogen-sh="autoreconf"
 	     autogenargs="--disable-docs">
-    <branch repo="fontconfig" version="2.10.91" module="fontconfig-2.10.91.tar.gz"/>
+    <branch repo="fontconfig" version="2.11.0" module="fontconfig-2.11.0.tar.gz"/>
     <dependencies>
       <dep package="freetype"/>
     </dependencies>

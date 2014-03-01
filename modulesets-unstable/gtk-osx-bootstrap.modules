@@ -108,7 +108,7 @@
   </autotools>
 
 
-  <autotools id="harfbuzz">
+  <autotools id="harfbuzz" autogenargs="--with-coretext">
     <branch repo="freedesktop" module="harfbuzz">
       <patch href="http://git.gnome.org/browse/gtk-osx/plain/patches/0001-Bug-53815-CoreText-backend-doesn-t-link.patch"/>
     </branch>
@@ -132,7 +132,7 @@
 -->
 
 
-  <autotools id="freetype" skip-autogen="never"
+  <autotools id="freetype" skip-autogen="never" autogenargs="--without-bzip2"
 	     autogen-template="%(srcdir)s/%(autogen-sh)s &amp;&amp; %(srcdir)s/configure --prefix %(prefix)s --libdir %(libdir)s %(autogenargs)s"
 	     supports-non-srcdir-builds="no">
     <branch module="freetype/freetype2" repo="nongnu"/>
