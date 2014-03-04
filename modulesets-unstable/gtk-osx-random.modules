@@ -26,7 +26,6 @@
 	      cvsroot=":pserver:anonymous@gtkspell.cvs.sourceforge.net:/cvsroot/gtkspell"
 	      password=""/>
   <repository type="git" name="savannah" href="git://git.sv.gnu/org/"/>
-  <repository type="git" name="github" href="https://github.com"/>
 
   <metamodule id="meta-gtk-osx-random">
     <dependencies>
