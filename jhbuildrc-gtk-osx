@@ -381,7 +381,7 @@ def setup_sdk(target, sdk_version, architectures=[_default_arch]):
         module_extra_env["pkg-config"] = {'CFLAGS': os.environ['CFLAGS'] + ' -std=gnu89'}
         append_autogenargs('libgcrypt', 'CFLAGS="$CFLAGS -fheinous-gnu-extensions"')
         module_extra_env["webkit"] = {'CXXFLAGS':os.environ['CXXFLAGS'] +
-                                  ' -stdlib=listdc++'}
+                                  ' -stdlib=libstdc++'}
     if xcodeversion >= 4.0 and target in ('10.6', '10.5', '10.4'):
         environ_append('LDFLAGS',
                        '-Wl,-no_function_starts -Wl,-no_version_load_command')
