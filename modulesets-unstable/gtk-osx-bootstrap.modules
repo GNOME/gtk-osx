@@ -107,14 +107,22 @@
     </dependencies>
   </autotools>
 
+  <autotools id="freetype-no-harfbuzz" skip-sutogen="never" autogenargs="--without-bzip2 --without-harfbuzz"
+	     autogen-template="%(srcdir)s/%(autogen-sh)s &amp;&amp; %(srcdir)s/configure --prefix %(prefix)s --libdir %(libdir)s %(autogenargs)s"
+	     supports-non-srcdir-builds="no">
+    <branch module="freetype/freetype2" repo="nongnu"/>
+    <dependencies>
+      <dep package="zlib"/>
+    </dependencies>
+  </autotools>
 
+ 
   <autotools id="harfbuzz" autogenargs="--with-coretext">
     <branch repo="freedesktop" module="harfbuzz">
       <patch href="http://git.gnome.org/browse/gtk-osx/plain/patches/0001-Bug-53815-CoreText-backend-doesn-t-link.patch"/>
     </branch>
     <dependencies>
-      <dep package="freetype"/>
-      <dep package="fontconfig"/>
+      <dep package="freetype-no-harfbuzz"/>
       <dep package="ragel"/>
     </dependencies>
     <after>
@@ -124,10 +132,11 @@
   </autotools>
 
   <autotools id="freetype" skip-autogen="never" autogenargs="--without-bzip2"
-	     autogen-template="%(srcdir)s/%(autogen-sh)s &amp;&amp; %(srcdir)s/configure --prefix %(prefix)s --libdir %(libdir)s %(autogenargs)s"
+	     autogen-template="make distclean &amp;&amp; %(srcdir)s/configure --prefix %(prefix)s --libdir %(libdir)s %(autogenargs)s"
 	     supports-non-srcdir-builds="no">
     <branch module="freetype/freetype2" repo="nongnu"/>
     <dependencies>
+      <dep package="harfbuzz"/>
       <dep package="zlib"/>
     </dependencies>
   </autotools>
@@ -170,8 +179,8 @@
 
   <metamodule id="meta-gtk-osx-freetype">
     <dependencies>
-      <dep package="harfbuzz"/>
-      <dep package="freetype"/>
+      <!--dep package="harfbuzz"/>
+      <dep package="freetype"/-->
       <dep package="fontconfig"/>
     </dependencies>
   </metamodule>
