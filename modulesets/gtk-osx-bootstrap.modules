@@ -120,7 +120,7 @@
  </autotools>
 
   <autotools id="freetype" skip-sutogen="never" autogenargs="--without-bzip2"
-	     autogen-template="make distclean &amp;&amp; %(srcdir)s/configure --prefix %(prefix)s --libdir %(libdir)s %(autogenargs)s">
+	     autogen-template="make distclean &amp;&amp; %(srcdir)s/autogen.sh &amp;&amp; %(srcdir)s/configure --prefix %(prefix)s --libdir %(libdir)s %(autogenargs)s">
     <branch module="freetype/freetype2" tag="VER-2-5-2" repo="nongnu"/>
     <dependencies>
       <dep package="harfbuzz"/>
