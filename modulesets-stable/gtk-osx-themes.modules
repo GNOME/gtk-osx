@@ -79,7 +79,7 @@
 
  <autotools id="gnome-themes-standard" autogen-sh="configure"
 	    autogenargs='--disable-gtk2-engine'>
-    <branch module="gnome-icon-theme/3.10/gnome-icon-theme-3.10.0.tar.xz"
+    <branch module="gnome-themes-standard/3.10/gnome-themes-standard-3.10.0.tar.xz"
             version="3.10.0" hash="sha256:812c6cfc534fced921dc327b436e70020d8979529284bb59d72d6f37af1f4b38"/>
     <dependencies>
       <dep package="librsvg"/>
