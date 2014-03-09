@@ -369,6 +369,7 @@ Libglade itself is deprecated. This is the last release. -->
     </branch>
     <dependencies>
       <dep package="enchant"/>
+      <dep package="iso-codes"/>
     </dependencies>
   </autotools>
 

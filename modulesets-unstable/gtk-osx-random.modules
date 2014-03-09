@@ -261,6 +261,7 @@
     </branch>
     <dependencies>
       <dep package="enchant"/>
+      <dep package="iso-codes"/>
     </dependencies>
   </autotools>
 
