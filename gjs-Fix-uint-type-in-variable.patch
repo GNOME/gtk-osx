@@ -1,0 +1,24 @@
+From 5dfbebb9262ff140f194c2da0fd2e11a69ea25bc Mon Sep 17 00:00:00 2001
+From: Juan R. García Blanco <juanrgar@gmail.com>
+Date: Wed, 13 Nov 2013 19:28:22 +0000
+Subject: gi/value: Fix uint type in variable
+
+It's not a standard type; we should use guint instead.
+
+https://bugzilla.gnome.org/show_bug.cgi?id=712242
+---
+diff --git a/gi/value.c b/gi/value.c
+index 2eb9bec..0efc4aa 100644
+--- a/gi/value.c
++++ b/gi/value.c
+@@ -668,7 +668,7 @@ gjs_value_from_g_value_internal(JSContext    *context,
+         v = g_value_get_int(gvalue);
+         return JS_NewNumberValue(context, v, value_p);
+     } else if (gtype == G_TYPE_UINT) {
+-        uint v;
++        guint v;
+         v = g_value_get_uint(gvalue);
+         return JS_NewNumberValue(context, v, value_p);
+     } else if (gtype == G_TYPE_DOUBLE) {
+--
+cgit v0.9.2

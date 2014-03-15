@@ -56,3 +56,5 @@ devhelp:	devhelp-646962-variable-name.patch
 
 dbus:		dbus-install.patch
 		dbus-msg-nosignal.patch
+
+gjs:		gjs-Fix-uint-type-in-variable.patch Bug 712242, fixed in master.
