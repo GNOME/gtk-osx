@@ -47,6 +47,21 @@
     </after>
   </autotools>
 
+  <autotools id="js24" autogen-sh="configure"
+             autogenargs="--with-system-nspr --with-system-zlib --enable-system-ffi --enable-threadsafe">
+    <branch repo="mozilla" module="js/mozjs-24.2.0.tar.bz2" version="24.2.0"
+            checkoutdir="js24-24.2.0" source-subdir="js/src"
+            hash="sha1:ce779081cc11bd0c871c6f303fc4a0091cf4fe66"/>
+    <dependencies>
+      <dep package="libffi"/>
+      <dep package="nspr"/>
+    </dependencies>
+    <after>
+      <dep package="python"/>
+      <dep package="zlib"/>
+    </after>
+  </autotools>
+
   <autotools id="nspr" autogen-sh="mozilla/nsprpub/configure"
              autogenargs="--enable-64bit" check-target="false">
     <branch repo="mozilla" version="4.9.2"

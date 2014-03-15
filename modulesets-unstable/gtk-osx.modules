@@ -34,6 +34,7 @@
   -->
 
   <include href="gtk-osx-bootstrap.modules"/>
+  <include href="gtk-osx-javascript.modules"/>
   <include href="gtk-osx-python.modules"/>
   <include href="gtk-osx-gstreamer.modules"/>
   <include href="gtk-osx-gtkmm.modules"/>
