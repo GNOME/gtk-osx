@@ -72,7 +72,8 @@
     </dependencies>
   </autotools>
 
-  <autotools id="libffi" autogenargs="--disable-builddir">
+  <autotools id="libffi" autogenargs="--disable-builddir"
+	     autogen-template="%(srcdir)s/autogen.sh &amp;&amp; %(srcdir)s/configure  --prefix %(prefix)s --libdir %(libdir)s %(autogenargs)s">
     <branch module="atgreen/libffi" repo="github"/>
   </autotools>
 
