@@ -27,7 +27,7 @@
   <repository type="git" name="git.gnome.org"
               href="git://git.gnome.org/"/>
   <repository type="tarball" name="boehm"
-	      href="http://www.hpl.hp.com/personal/Hans_Boehm/"/>
+	      href="http://www.hboehm.info/"/>
 
   <metamodule id="meta-gtk-osx-random">
     <dependencies>
@@ -44,8 +44,8 @@
        Github. This is the last release from gnome, and is the last
        known to work on Leopard. -->
   <autotools id="loudmouth" autogenargs="--with-ssl=openssl">
-    <branch version="1.4.3" module="loudmouth/1.4/loudmouth-1.4.3.tar.bz2" 
-            md5sum="55339ca42494690c3942ee1465a96937"/>
+    <branch version="1.4.3" module="loudmouth/1.4/loudmouth-1.4.3.tar.bz2"
+	    md5sum="55339ca42494690c3942ee1465a96937"/>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
       <dep package="glib"/>
@@ -391,7 +391,8 @@ Libglade itself is deprecated. This is the last release. -->
   </autotools>
 
   <autotools id="bdw-gc" autogen-sh="configure">
-    <branch repo="boehm" module="gc/gc_source/gc-7.2e.tar.gz" version="7.2e"/>
+    <branch repo="boehm" module="gc/gc_source/gc-7.2e.tar.gz" version="7.2e"
+	    checkoutdir="gc-7.2"/>
   </autotools>
 
   <autotools id="guile" autogen-sh="configure"
@@ -404,8 +405,8 @@ Libglade itself is deprecated. This is the last release. -->
   </autotools>
 
   <autotools id="guile2" autogen-sh="configure">
-    <branch repo="ftp.gnu.org" module="guile/guile-2.0.9.tar.gz"
-	    version="2.0.9"/>
+    <branch repo="ftp.gnu.org" module="guile/guile-2.0.11.tar.gz"
+	    version="2.0.11"/>
     <dependencies>
       <dep package="libunistring"/>
       <dep package="gmp"/>

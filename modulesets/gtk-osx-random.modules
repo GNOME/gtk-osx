@@ -24,6 +24,8 @@
 	      password=""/>
   <repository type="git" name="savannah" href="git://git.sv.gnu/org/"/>
   <repository type="git" name="github" href="https://github.com"/>
+  <repository type="tarball" name="boehm"
+	      href="http://www.hboem.info/"/>
 
   <metamodule id="meta-gtk-osx-random">
     <dependencies>
@@ -348,6 +350,11 @@
 
   <autotools id="hunspell" autogen-sh="configure">
     <branch repo="hunspell-cvs"/>
+  </autotools>
+
+  <autotools id="bdw-gc" autogen-sh="configure">
+    <branch repo="boehm" module="gc/gc_source/gc-7.2e.tar.gz" version="7.2e"
+	    checkoutdir="gc-7.2"/>
   </autotools>
 
 </moduleset>
