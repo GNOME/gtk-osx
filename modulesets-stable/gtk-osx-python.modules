@@ -8,7 +8,7 @@
   <repository type="tarball" name="cairographics.org"
               href="http://cairographics.org/releases/"/>
   <repository type="tarball" name="python"
-	      href="http://www.python.org/ftp/python/"/>
+	      href="https://www.python.org/ftp/python/"/>
   <repository type="tarball" name="oracle"
 	      href="http://download.oracle.com/"/>
   <repository type="tarball" name="pymodules"
@@ -70,7 +70,7 @@
   <autotools id="python" autogenargs="--enable-shared"
 	     autogen-sh="configure">
     <branch repo="python"
-	    module="2.7.3/Python-2.7.3.tar.xz" version="2.7.3">
+	    module="2.7.6/Python-2.7.6.tar.xz" version="2.7.6">
     </branch>
     <dependencies>
       <dep package="gettext-runtime"/>
