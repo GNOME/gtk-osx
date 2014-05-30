@@ -382,6 +382,7 @@ def setup_sdk(target, sdk_version, architectures=[_default_arch]):
     if xcodeversion >= 5.0:
         module_extra_env["pkg-config"] = {'CFLAGS': os.environ['CFLAGS'] + ' -std=gnu89'}
         append_autogenargs('libgcrypt', 'CFLAGS="$CFLAGS -fheinous-gnu-extensions"')
+        module_makeargs['liboil'] = 'CFLAGS="$CFLAGS -DHAVE_SYMBOL_UNDERSCORE -fheinous-gnu-extensions"'
         module_extra_env["WebKit"] = {'CXXFLAGS':os.environ['CXXFLAGS'] +
                                   ' -stdlib=libstdc++'}
         append_autogenargs('babl', '--disable-sse')

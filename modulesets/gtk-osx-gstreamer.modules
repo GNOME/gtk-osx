@@ -17,7 +17,9 @@
        are unversioned and haven't been tested for gtk-osx
        compatibility. -->
   <autotools id="liboil" makeargs=' CFLAGS="$CFLAGS -DHAVE_SYMBOL_UNDERSCORE"'>
-    <branch repo="liboil" tag="liboil-0.3.17" />
+    <branch repo="liboil" tag="liboil-0.3.17">
+      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/liboil-use-ac-config-headers-macro.patch" strip="1"/>
+    </branch>
   </autotools>
 
   <autotools id="faad2" autogen-sh="autoreconf"
