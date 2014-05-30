@@ -31,6 +31,7 @@
     makeargs="ERROR_CFLAGS=" autogen-sh="configure">
     <branch module="gstreamer/0.10/gstreamer-0.10.35.tar.bz2" version="0.10.35"
             hash="sha256:817bfea2cd46e2487b97e2ed9218f0299b32a3de1e5e80b4c7868d17e9089786">
+      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/gstreamer-fix-includes-in-gstdatetime.patch" strip="1"/>
     </branch>
     <after>
       <dep package="glib"/>
@@ -41,6 +42,7 @@
     makeargs="ERROR_CFLAGS=" autogen-sh="configure">
     <branch module="gstreamer/1.0/gstreamer-1.0.2.tar.xz" version="1.0.2"
             hash="sha256:10c59112bb01a274eb33950300da13d25fd23a7494781bf1b2328372fdb6ee06">
+      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/gstreamer-fix-includes-in-gstdatetime.patch" strip="1"/>
     </branch>
     <after>
       <dep package="glib"/>

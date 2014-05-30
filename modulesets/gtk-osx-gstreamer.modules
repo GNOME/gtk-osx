@@ -28,7 +28,9 @@
   <autotools id="gstreamer" autogenargs="--disable-tests"
              supports-non-srcdir-builds="no"
 	     makeargs="ERROR_CFLAGS=" >
-    <branch revision="0.10"/>
+    <branch revision="0.10">
+      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/gstreamer-fix-includes-in-gstdatetime.patch" strip="1"/>
+    </branch>
     <after>
       <dep package="glib"/>
       <dep package="libxml2"/>
@@ -38,7 +40,9 @@
    <autotools id="gstreamer-1.0" autogenargs="--disable-tests"
              supports-non-srcdir-builds="no"
 	     makeargs="ERROR_CFLAGS=" >
-    <branch module="gstreamer" revision="1.0"/>
+    <branch module="gstreamer" revision="1.0">
+      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/gstreamer-fix-includes-in-gstdatetime.patch" strip="1"/>
+    </branch>
     <after>
       <dep package="glib"/>
       <dep package="libxml2"/>
