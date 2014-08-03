@@ -1,0 +1,157 @@
+--- a/gladeui/glade-command.c	Wed Dec 18 07:00:38 2013
++++ b/gladeui/glade-command.c	Sun Aug  3 14:37:06 2014
+@@ -866,7 +866,7 @@
+ 
+   multiple = g_list_length (me->sdata) > 1;
+   if (multiple)
+-    glade_command_push_group (cmd->priv->description);
++    glade_command_push_group ("%s", cmd->priv->description);
+ 
+   glade_command_check_group (GLADE_COMMAND (me));
+ 
+
+--- a/gladeui/glade-command.h	Wed Dec 18 07:00:38 2013
++++ b/gladeui/glade-command.h	Sun Aug  3 14:34:49 2014
+@@ -66,7 +66,7 @@
+ GType                 glade_command_get_type             (void);
+ 
+ void                  glade_command_push_group           (const gchar       *fmt,
+-							  ...);
++							  ...) __attribute__((format(printf, 1, 2)));
+ void                  glade_command_pop_group            (void);
+ gint                  glade_command_get_group_depth      (void);
+ 
+
+--- a/gladeui/glade-editor-property.c	Tue Nov 26 22:38:58 2013
++++ b/gladeui/glade-editor-property.c	Sun Aug  3 14:55:12 2014
+@@ -3029,16 +3029,12 @@
+   return view_widget;
+ }
+ 
+-
+ static gchar *
+-glade_eprop_object_dialog_title (GladeEditorProperty *eprop)
++select_dialog_title_format (GladeEditorProperty *eprop, gchar *format) G_GNUC_FORMAT (2);
++static gchar *
++select_dialog_title_format (GladeEditorProperty *eprop, gchar *format)
+ {
+-  GladeWidgetAdaptor *adaptor;
+-  GParamSpec *pspec;
+-  const gchar *format;
+-
+-  pspec = glade_property_class_get_pspec (eprop->priv->klass);
+-
++  GParamSpec *pspec = glade_property_class_get_pspec (eprop->priv->klass);
+   if (glade_property_class_parentless_widget (eprop->priv->klass))
+     format = GLADE_IS_PARAM_SPEC_OBJECTS (pspec) ?
+         _("Choose parentless %s type objects in this project") :
+@@ -3048,18 +3044,32 @@
+         _("Choose %s type objects in this project") :
+         _("Choose a %s in this project");
+ 
++  return format;
++}
++
++static gchar *
++glade_eprop_object_dialog_title (GladeEditorProperty *eprop)
++{
++  GladeWidgetAdaptor *adaptor;
++  GParamSpec *pspec;
++
++  pspec = glade_property_class_get_pspec (eprop->priv->klass);
++
+   if (GLADE_IS_PARAM_SPEC_OBJECTS (pspec))
+-    return g_strdup_printf (format, g_type_name
++    return g_strdup_printf (select_dialog_title_format (eprop, "%s"),
++			    g_type_name
+                             (glade_param_spec_objects_get_type
+                              (GLADE_PARAM_SPEC_OBJECTS (pspec))));
+   else if ((adaptor =
+             glade_widget_adaptor_get_by_type (pspec->value_type)) != NULL)
+-    return g_strdup_printf (format, glade_widget_adaptor_get_title (adaptor));
++    return g_strdup_printf (select_dialog_title_format (eprop, "%s"),
++			    glade_widget_adaptor_get_title (adaptor));
+ 
+   /* Fallback on type name (which would look like "GtkButton"
+    * instead of "Button" and maybe not translated).
+    */
+-  return g_strdup_printf (format, g_type_name (pspec->value_type));
++  return g_strdup_printf (select_dialog_title_format (eprop, "%s"),
++			  g_type_name (pspec->value_type));
+ }
+ 
+ 
+
+--- a/gladeui/glade-project.c	Wed Dec 18 07:00:38 2013
++++ b/gladeui/glade-project.c	Sun Aug  3 15:26:38 2014
+@@ -1871,7 +1871,7 @@
+ 
+       if (message)
+         {
+-          glade_util_ui_message (glade_app_get_window (), GLADE_UI_ERROR, NULL, message);
++	     glade_util_ui_message (glade_app_get_window (), GLADE_UI_ERROR, NULL, "%s", message);
+           g_free (message);
+         }
+       else
+
+--- a/gladeui/glade-utils.h	Tue Nov 26 22:38:58 2013
++++ b/gladeui/glade-utils.h	Sun Aug  3 15:24:32 2014
+@@ -28,11 +28,13 @@
+ gboolean          glade_util_ui_message           (GtkWidget *parent, 
+ 						   GladeUIMessageType type,
+ 						   GtkWidget *widget,
+-						   const gchar *format, ...);
++						   const gchar *format, ...)
++    __attribute__((format(printf, 4, 5)));
+ 
+ void		  glade_util_flash_message	(GtkWidget *statusbar, 
+ 						 guint context_id,
+-						 gchar *format, ...);
++						 gchar *format, ...)
++    __attribute__((format(printf, 3, 4)));
+ gboolean          glade_util_url_show              (const gchar *url);
+ GtkWidget        *glade_util_file_dialog_new (const gchar *title,
+ 					      GladeProject *project,
+
+--- a/src/glade-window.c	Wed Dec 18 07:00:38 2013
++++ b/src/glade-window.c	Sun Aug  3 16:16:22 2014
+@@ -3244,38 +3244,6 @@
+                     "notify::has-selection",
+                     G_CALLBACK (clipboard_notify_handler_cb), window);
+   
+-#ifdef MAC_INTEGRATION
+-	{
+-	  /* Fix up the menubar for MacOSX Quartz builds */
+-	  GtkWidget *menubar = GET_OBJECT (builder, GTK_WIDGET, "menubar");
+-	  GtkOSXApplication *theApp = g_object_new(GTK_TYPE_OSX_APPLICATION, NULL);
+-          GtkWidget *sep, *widget;
+-
+-	  gtk_widget_hide (menubar);
+-	  gtk_osxapplication_set_menu_bar(theApp, GTK_MENU_SHELL(menubar));
+-	  widget = GET_OBJECT (builder, GTK_WIDGET, "quit_menuitem");
+-	  gtk_widget_hide (widget);
+-	  widget = GET_OBJECT (builder, GTK_WIDGET, "about_menuitem");
+-	  gtk_osxapplication_insert_app_menu_item (theApp, widget, 0);
+-	  sep = gtk_separator_menu_item_new();
+-	  g_object_ref(sep);
+-	  gtk_osxapplication_insert_app_menu_item (theApp, sep, 1);
+-
+-	  widget = GET_OBJECT (builder, GTK_WIDGET, "properties_menuitem");
+-	  gtk_osxapplication_insert_app_menu_item  (theApp, widget, 2);
+-	  sep = gtk_separator_menu_item_new();
+-	  g_object_ref(sep);
+-	  gtk_osxapplication_insert_app_menu_item (theApp, sep, 3);
+-
+-	  widget = GET_OBJECT (builder, GTK_WIDGET, "help_menuitem");
+-	  gtk_osxapplication_set_help_menu(theApp, GTK_MENU_ITEM(widget));
+-
+-	  g_signal_connect(theApp, "NSApplicationWillTerminate",
+-	                   G_CALLBACK(on_quit_action_activate), window);
+-
+-	  gtk_osxapplication_ready(theApp);
+-	}
+-#endif
+ 
+   show_dock_first_time (window, DOCK_PALETTE, priv->dock_palette_action);
+   show_dock_first_time (window, DOCK_INSPECTOR, priv->dock_inspector_action);
+

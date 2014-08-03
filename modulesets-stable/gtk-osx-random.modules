@@ -28,6 +28,8 @@
               href="git://git.gnome.org/"/>
   <repository type="tarball" name="boehm"
 	      href="http://www.hboehm.info/"/>
+  <repository type="tarball" name="itstool"
+	      href="http://files.itstool.org/"/>
 
   <metamodule id="meta-gtk-osx-random">
     <dependencies>
@@ -134,6 +136,11 @@ Libglade itself is deprecated. This is the last release. -->
     </dependencies>
   </autotools>
 
+  <autotools id="itstool" autogen-sh='configure'>
+    <branch module="itstool/itstool-2.0.2.tar.bz2" version="2.0.2"
+	    repo="itstool"/>
+  </autotools>
+
 <!-- Glade 3.8 is the last stable series for Gtk+-2 -->
   <autotools id="glade3" autogen-sh="configure"
 	     autogenargs="--disable-scrollkeeper">
@@ -152,10 +159,13 @@ Libglade itself is deprecated. This is the last release. -->
      change back to just "glade"-->
   <autotools id="glade" autogen-sh="configure"
 	     autogenargs="--disable-scrollkeeper">
-    <branch module="glade/3.14/glade-3.14.1.tar.xz" version="3.14.1"
-            hash="sha256:8484b62c7a4579ea3e5d98200b397a1baf0b621c0b0c70242ee1dbbe449eae20">
-      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/Glade-master-Mac-Integration-Fix-up-menu-accelerators-for-Mac.patch" strip="1"/>
+    <branch module="glade/3.16/glade-3.16.1.tar.xz" version="3.16.1"
+            hash="sha256:994ac258bc100d3907ed40a2880c3144f13997b324477253e812d59f2716523f">
+      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/glade-3_16_1.patch" strip="1"/>
     </branch>
+    <dependencies>
+      <dep package="itstool"/>
+    </dependencies>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
       <dep package="meta-gtk-osx-themes"/>
