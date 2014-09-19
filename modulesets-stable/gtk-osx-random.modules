@@ -270,9 +270,9 @@ Libglade itself is deprecated. This is the last release. -->
 
   <autotools id="shared-mime-info"  autogen-sh="configure"
              supports-non-srcdir-builds="no" >
-    <branch module="shared-mime-info-1.2.tar.xz" version="1.2"
+    <branch module="shared-mime-info-1.3.tar.xz" version="1.3"
             repo="hadess">
-      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0001-Bug-70255-Build-fails-with-glib-2.38.patch" strip="1"/>
+      <!--patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0001-Bug-70255-Build-fails-with-glib-2.38.patch" strip="1"/-->
     </branch>
     <dependencies>
       <dep package="glib"/>
@@ -416,7 +416,9 @@ Libglade itself is deprecated. This is the last release. -->
 
   <autotools id="guile2" autogen-sh="configure">
     <branch repo="ftp.gnu.org" module="guile/guile-2.0.11.tar.gz"
-	    version="2.0.11"/>
+	    version="2.0.11">
+      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/guile20-align-fix.patch" strip="1"/>
+    </branch>
     <dependencies>
       <dep package="libunistring"/>
       <dep package="gmp"/>
