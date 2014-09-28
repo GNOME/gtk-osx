@@ -26,8 +26,6 @@
 	      href="ftp://ftp.gmplib.org/pub/"/>
   <repository type="git" name="git.gnome.org"
               href="git://git.gnome.org/"/>
-  <repository type="tarball" name="boehm"
-	      href="http://www.hboehm.info/"/>
   <repository type="tarball" name="itstool"
 	      href="http://files.itstool.org/"/>
 
@@ -400,9 +398,16 @@ Libglade itself is deprecated. This is the last release. -->
     </branch>
   </autotools>
 
-  <autotools id="bdw-gc" autogen-sh="configure">
-    <branch repo="boehm" module="gc/gc_source/gc-7.2e.tar.gz" version="7.2e"
-	    checkoutdir="gc-7.2"/>
+  <autotools id="libatomic-ops">
+    <branch repo="github.com" module="ivmai/libatomic_ops"
+	    revision="libatomic_ops-7_2f"/>
+  </autotools>
+
+  <autotools id="bdw-gc" autogen-template="./autogen.sh &amp;&amp; ./configure --prefix %(prefix)s --libdir %(libdir)s %(autogenargs)s">
+    <branch repo="github.com" module="ivmai/bdwgc"  revision="gc7_2f" />
+    <dependencies>
+      <dep package="libatomic-ops"/>
+    </dependencies>
   </autotools>
 
   <autotools id="guile" autogen-sh="configure"
