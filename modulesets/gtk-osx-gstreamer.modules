@@ -113,7 +113,7 @@
 
   <autotools id="gst-plugins-ugly-1.0" autogenargs="--disable-tests"
 	     supports-non-srcdir-builds="no" makeargs="ERROR_CFLAGS=" >
-    <branch module="gst-pugins-ugly" revision="1.0"/>
+    <branch module="gst-plugins-ugly" revision="1.0"/>
     <dependencies>
       <dep package="gstreamer-1.0"/>
       <dep package="gst-plugins-base-1.0"/>
