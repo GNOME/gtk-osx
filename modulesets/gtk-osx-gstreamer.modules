@@ -49,7 +49,7 @@
    <autotools id="gstreamer-1.0" autogenargs="--disable-tests"
              supports-non-srcdir-builds="no"
 	     makeargs="ERROR_CFLAGS=" >
-    <branch module="gstreamer" revision="1.0">
+    <branch module="gstreamer" revision="1.0" checkoutdir="gstreamer-1.0">
       <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/gstreamer-fix-includes-in-gstdatetime.patch" strip="1"/>
     </branch>
     <after>
@@ -73,7 +73,8 @@
   <autotools id="gst-plugins-base-1.0" supports-non-srcdir-builds="no"
              autogenargs="--disable-tests --disable-x --disable-xvideo"
              makeargs="ERROR_CFLAGS=" >
-    <branch module="gst-plugins-base" revision="1.0"/>
+    <branch module="gst-plugins-base" revision="1.0"
+            checkoutdir="gst-plugins-base-1.0"/>
     <dependencies>
       <dep package="gstreamer-1.0"/>
       <dep package="liborc"/>
@@ -95,7 +96,8 @@
   <autotools id="gst-plugins-good-1.0" supports-non-srcdir-builds="no"
 	     autogenargs="--disable-tests --disable-x --disable-xvideo --disable-osx-video"
              makeargs="ERROR_CFLAGS=" >
-    <branch module="gst-plugins-good" revision="1.0"/>
+    <branch module="gst-plugins-good" revision="1.0"
+            checkoutdir="gst-plugins-good-1.0"/>
     <dependencies>
       <dep package="gstreamer-1.0"/>
       <dep package="gst-plugins-base-1.0"/>
@@ -113,7 +115,8 @@
 
   <autotools id="gst-plugins-ugly-1.0" autogenargs="--disable-tests"
 	     supports-non-srcdir-builds="no" makeargs="ERROR_CFLAGS=" >
-    <branch module="gst-plugins-ugly" revision="1.0"/>
+    <branch module="gst-plugins-ugly" revision="1.0"
+            checkoutdir="gst-plugins-ugly-1.0"/>
     <dependencies>
       <dep package="gstreamer-1.0"/>
       <dep package="gst-plugins-base-1.0"/>
@@ -132,7 +135,8 @@
 
   <autotools id="gst-plugins-bad-1.0" autogenargs="--disable-tests --disable-x --disable-xvid"
 	     supports-non-srcdir-builds="no" makeargs="ERROR_CFLAGS=" >
-    <branch module="gst-plugins-bad" revision="1.0"/>
+    <branch module="gst-plugins-bad" revision="1.0"
+            checkoutdir="gst-plugins-bad-1.0"/>
     <dependencies>
       <dep package="gstreamer-1.0"/>
       <dep package="gst-plugins-base-1.0"/>
