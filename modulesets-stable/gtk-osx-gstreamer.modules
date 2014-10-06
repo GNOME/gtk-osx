@@ -4,12 +4,12 @@
 <moduleset>
   <repository type="tarball" name="ftp.gnome.org" default="yes"
               href="http://ftp.gnome.org/pub/GNOME/sources/"/>
+  <repository type="tarball" name="gstreamer"
+              href="http://gstreamer.freedesktop.org/src/"/>
   <repository type="tarball" name="liboil"
               href="http://liboil.freedesktop.org/download/"/>
   <repository type="tarball" name="sourceforge"
               href="http://iweb.dl.sf.net/project/"/>
-  <repository type="tarball" name="entropywave"
-	      href="http://code.entropywave.com/download/"/>
 
   <autotools id="liboil" autogen-template="autoreconf -fis &amp;&amp; %(srcdir)s/configure --prefix %(prefix)s --libdir %(libdir)s %(autogenargs)s"
 	     makeargs=' CFLAGS="$CFLAGS -DHAVE_SYMBOL_UNDERSCORE"'>
@@ -19,8 +19,7 @@
   </autotools>
 
   <autotools id="liborc" autogen-sh="configure">
-    <branch module="orc/orc-0.4.16.tar.gz"
-	    repo="entropywave" version="0.4.16"/>
+    <branch repo="gstreamer" module="orc/orc-0.4.22.tar.xz" version="0.4.22"/>
   </autotools>
 
   <autotools id="faad2" autogen-sh="autoreconf"
@@ -33,10 +32,11 @@
 
   <autotools id="gstreamer" autogenargs="--disable-tests" supports-non-srcdir-builds="no"
     makeargs="ERROR_CFLAGS=" autogen-sh="configure">
-    <branch module="gstreamer/0.10/gstreamer-0.10.35.tar.bz2" version="0.10.35"
-            hash="sha256:817bfea2cd46e2487b97e2ed9218f0299b32a3de1e5e80b4c7868d17e9089786">
+    <branch module="gstreamer/0.10/gstreamer-0.10.36.tar.xz" version="0.10.36"
+            hash="sha256:9151aa108c177054387885763fa0e433e76780f7c5655c70a5390f2a6c6871da">
       <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/gstreamer-fix-includes-in-gstdatetime.patch" strip="1"/>
       <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/gstreamer-706462-Make-grammar-y-work-with-Bison-3.patch" strip="1"/>
+      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/gstreamer-680428-Fix-flex-version-check.patch" strip="1"/>
     </branch>
     <after>
       <dep package="glib"/>
@@ -45,20 +45,19 @@
 
   <autotools id="gstreamer-1.0" autogenargs="--disable-tests" supports-non-srcdir-builds="no"
     makeargs="ERROR_CFLAGS=" autogen-sh="configure">
-    <branch module="gstreamer/1.0/gstreamer-1.0.2.tar.xz" version="1.0.2"
-            hash="sha256:10c59112bb01a274eb33950300da13d25fd23a7494781bf1b2328372fdb6ee06">
-      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/gstreamer-fix-includes-in-gstdatetime.patch" strip="1"/>
+    <branch module="gstreamer/1.4/gstreamer-1.4.3.tar.xz" version="1.4.3"
+            hash="sha256:11f155784d28b85a12b50d2fc8f91c6b75d9ca325cc76aaffba1a58d4c9549c9">
     </branch>
     <after>
       <dep package="glib"/>
     </after>
   </autotools>
 
-<!-- This doesn't build: see https://bugzilla.gnome.org/show_bug.cgi?id=660302-->
   <autotools id="gst-plugins-base" autogenargs="--disable-tests --disable-x --disable-xvideo" supports-non-srcdir-builds="no"
     makeargs="ERROR_CFLAGS=" autogen-sh="configure">
-    <branch module="gst-plugins-base/0.10/gst-plugins-base-0.10.35.tar.bz2"
-            version="0.10.15" hash="sha256:cd24f01bb5258a1f400bc4f2c212bb7cee9ee23c9ffb80d537a24ef366d17103"/>
+    <branch module="gst-plugins-base/0.10/gst-plugins-base-0.10.36.tar.xz"
+            version="0.10.36"
+            hash="sha256:1fe45c3894903001d4d008b0713dab089f53726dcb5842d5b40c2595a984e64a"/>
     <dependencies>
       <dep package="gstreamer"/>
       <dep package="liboil"/>
@@ -69,8 +68,9 @@
 
   <autotools id="gst-plugins-base-1.0" autogenargs="--disable-tests --disable-x --disable-xvideo" supports-non-srcdir-builds="no"
     makeargs="ERROR_CFLAGS=" autogen-sh="configure">
-    <branch module="gst-plugins-base/1.0/gst-plugins-base-1.0.2.tar.xz"
-            version="1.0.2" hash="sha256:7ce2c4462ff89f62a82b4503a3788ce2e5077f886e535796fecc223397acf78d"/>
+    <branch module="gst-plugins-base/1.4/gst-plugins-base-1.4.3.tar.xz"
+            version="1.4.3"
+            hash="sha256:f7b4d2b3ba2bcac485896e2c1c36459cb091ebe8b49e91635c27d40f66792d9d"/>
     <dependencies>
       <dep package="gstreamer"/>
       <dep package="liborc"/>
@@ -81,8 +81,9 @@
 
   <autotools id="gst-plugins-good" autogenargs="--disable-tests --disable-x --disable-xvideo --disable-osx-video" supports-non-srcdir-builds="no"
     makeargs="ERROR_CFLAGS=" autogen-sh="configure">
-    <branch module="gst-plugins-good/0.10/gst-plugins-good-0.10.30.tar.bz2"
-            version="0.10.30" hash="sha256:b12cba90b27d8423cd0a808939098d19db3996cfb9bf528507c6321782e095f6"/>
+    <branch module="gst-plugins-good/0.10/gst-plugins-good-0.10.31.tar.xz"
+            version="0.10.31"
+            hash="sha256:77a8436a7c0a15f876bad29616835046890df2bcaf72da02151bd91e3d292b64"/>
     <dependencies>
       <dep package="gstreamer"/>
       <dep package="gst-plugins-base"/>
@@ -91,8 +92,9 @@
 
   <autotools id="gst-plugins-good-1.0" autogenargs="--disable-tests --disable-x --disable-xvideo --disable-osx-video" supports-non-srcdir-builds="no"
     makeargs="ERROR_CFLAGS=" autogen-sh="configure">
-    <branch module="gst-plugins-good/1.0/gst-plugins-good-1.0.2.tar.xz"
-            version="1.0.2" hash="sha256:34762dbd1462dd31b6ca2a01cf6477843c9dc7112e5819cc9d6dd7396b79244c"/>
+    <branch module="gst-plugins-good/1.4/gst-plugins-good-1.4.3.tar.xz"
+            version="1.4.3"
+            hash="sha256:5876a74402f2a24d1d3ae9163c32466bdc7a565696dddeef65e6a9a93efc5537"/>
     <dependencies>
       <dep package="gstreamer-1.0"/>
       <dep package="gst-plugins-base-1.0"/>
