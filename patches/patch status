@@ -62,3 +62,7 @@ gjs:		gjs-Fix-uint-type-in-variable.patch Bug 712242, fixed in master.
 faad2:		faad2-2.7-ac-config-headers.patch
 		Reported at https://sourceforge.net/p/faac/bugs/190/ but there hasn't
 		been much activity in the last few years
+
+gstreamer:      gstreamer-fix-includes-in-gst-datetime.patch
+                gstreamer-706462-Make-grammar-y-work-with-Bison-3.patch
+                All fixed on 0.10 branch, only needed for modulesets-stable.

@@ -647,7 +647,6 @@ if not (os.environ.has_key ("LIBTOOLIZE") and os.environ["LIBTOOLIZE"]):
 if not _host_tiger:
     skip.append('make')
     skip.append('subversion')
-    skip.append('bison')
     skip.append('flex')
 
 # The option "headerpad_max_install_names" is there to leave some room for

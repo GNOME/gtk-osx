@@ -36,6 +36,7 @@
     <branch module="gstreamer/0.10/gstreamer-0.10.35.tar.bz2" version="0.10.35"
             hash="sha256:817bfea2cd46e2487b97e2ed9218f0299b32a3de1e5e80b4c7868d17e9089786">
       <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/gstreamer-fix-includes-in-gstdatetime.patch" strip="1"/>
+      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/gstreamer-706462-Make-grammar-y-work-with-Bison-3.patch" strip="1"/>
     </branch>
     <after>
       <dep package="glib"/>
