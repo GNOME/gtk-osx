@@ -6,15 +6,18 @@
               href="git://anongit.freedesktop.org/gstreamer/"/>
   <repository type="tarball" name="sourceforge"
               href="http://iweb.dl.sf.net/project/"/>
-  <repository type="git" name="liboil"
-              href="git://anongit.freedesktop.org/"/>
+  <repository type="tarball" name="liboil"
+              href="http://liboil.freedesktop.org/download/"/>
 
   <!-- The GStreamer project maintains its own moduleset at
        git://anongit.freedesktop.org/gstreamer/jhbuild/. The modules
        are unversioned and haven't been tested for gtk-osx
        compatibility. -->
-  <autotools id="liboil" makeargs=' CFLAGS="$CFLAGS -DHAVE_SYMBOL_UNDERSCORE"'>
-    <branch repo="liboil" tag="liboil-0.3.17">
+
+  <!-- liboil is in maintenance mode, use tarball. -->
+  <autotools id="liboil" makeargs=' CFLAGS="$CFLAGS -DHAVE_SYMBOL_UNDERSCORE"'
+             autogen-template="autoreconf -fis &amp;&amp; %(srcdir)s/configure --prefix %(prefix)s --libdir %(libdir)s %(autogenargs)s">
+    <branch repo="liboil" module="liboil-0.3.17.tar.gz" version="0.3.17">
       <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/liboil-use-ac-config-headers-macro.patch" strip="1"/>
     </branch>
   </autotools>
