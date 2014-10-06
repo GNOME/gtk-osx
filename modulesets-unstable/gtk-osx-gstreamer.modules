@@ -30,7 +30,7 @@
     </branch>
   </autotools>
 
-  <autotools id="gstreamer" autogenargs="-- --disable-tests" 
+  <autotools id="gstreamer" autogenargs="--disable-tests"
              supports-non-srcdir-builds="no"
     makeargs="ERROR_CFLAGS=" >
     <branch />
@@ -41,7 +41,7 @@
   </autotools>
 
   <autotools id="gst-plugins-base" supports-non-srcdir-builds="no"
-             autogenargs="-- --disable-tests --disable-x --disable-xvideo" 
+             autogenargs="--disable-tests --disable-x --disable-xvideo"
              makeargs="ERROR_CFLAGS=" >
     <branch />
     <dependencies>
@@ -54,7 +54,7 @@
   </autotools>
 
   <autotools id="gst-plugins-good" supports-non-srcdir-builds="no"
-             autogenargs="-- --disable-tests --disable-x --disable-xvideo --disable-osx-video" 
+             autogenargs="--disable-tests --disable-x --disable-xvideo --disable-osx-video"
              makeargs="ERROR_CFLAGS=" >
     <branch />
     <dependencies>
@@ -63,7 +63,8 @@
     </dependencies>
   </autotools>
 
-  <autotools id="gst-plugins-ugly" autogenargs="-- --disable-tests" supports-non-srcdir-builds="no"
+  <autotools id="gst-plugins-ugly" autogenargs="--disable-tests"
+             supports-non-srcdir-builds="no"
     makeargs="ERROR_CFLAGS=" >
     <branch />
     <dependencies>
@@ -72,7 +73,8 @@
     </dependencies>
   </autotools>
 
-  <autotools id="gst-plugins-bad" autogenargs="-- --disable-tests --disable-x --disable-xvid" supports-non-srcdir-builds="no"
+  <autotools id="gst-plugins-bad" supports-non-srcdir-builds="no"
+             autogenargs="--disable-tests --disable-x --disable-xvid"
     makeargs="ERROR_CFLAGS=" >
     <branch />
     <dependencies>
@@ -82,7 +84,7 @@
     </dependencies>
   </autotools>
 
-  <autotools id="gst-ffmpeg" autogenargs="-- --disable-tests --disable-mmx" 
+  <autotools id="gst-ffmpeg" autogenargs="--disable-tests --disable-mmx"
              supports-non-srcdir-builds="no" >
     <branch />
     <dependencies>
