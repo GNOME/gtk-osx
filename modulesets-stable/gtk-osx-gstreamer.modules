@@ -101,16 +101,92 @@
     </dependencies>
   </autotools>
 
- <!-- The gst-ffmpeg, gst-plugins-bad and gst-plugins-ugly packages have been
-      removed from gnome sources. -->
+  <autotools id="gst-plugins-ugly" autogenargs="--disable-tests"
+             supports-non-srcdir-builds="no" makeargs="ERROR_CFLAGS="
+             autogen-sh="configure">
+    <branch repo="gstreamer" version="0.10.19"
+            module="gst-plugins-ugly/gst-plugins-ugly-0.10.19.tar.gz"
+            hash="md5:6382de48e6361fd2fb14af15af94cc8a"/>
+    <dependencies>
+      <dep package="gstreamer"/>
+      <dep package="gst-plugins-base"/>
+    </dependencies>
+  </autotools>
 
+  <autotools id="gst-plugins-ugly-1.0" autogenargs="--disable-tests"
+             supports-non-srcdir-builds="no" makeargs="ERROR_CFLAGS="
+             autogen-sh="configure">
+    <branch repo="gstreamer" version="1.4.3"
+            module="gst-plugins-ugly/gst-plugins-ugly-1.4.3.tar.xz"
+            hash="sha256:d581592a82cf3930361430d38436c30a58d8b6c249cad18f7f213b203e206d46"/>
+    <dependencies>
+      <dep package="gstreamer-1.0"/>
+      <dep package="gst-plugins-base-1.0"/>
+    </dependencies>
+  </autotools>
+
+  <autotools id="gst-plugins-bad" supports-non-srcdir-builds="no"
+             autogenargs="--disable-tests --disable-x --disable-xvid"
+             makeargs="ERROR_CFLAGS=" autogen-sh="configure">
+    <branch repo="gstreamer" version="0.10.23"
+            module="gst-plugins-bad/gst-plugins-bad-0.10.23.tar.xz"
+            hash="md5:e4822fa2cc933768e2998311a1565979"/>
+    <dependencies>
+      <dep package="gstreamer"/>
+      <dep package="gst-plugins-base"/>
+      <dep package="faad2"/>
+    </dependencies>
+  </autotools>
+
+  <autotools id="gst-plugins-bad-1.0" supports-non-srcdir-builds="no"
+             autogenargs="--disable-tests --disable-x --disable-xvid"
+             makeargs="ERROR_CFLAGS=" autogen-sh="configure">
+    <branch repo="gstreamer" version="1.4.3"
+            module="gst-plugins-bad/gst-plugins-bad-1.4.3.tar.xz"
+            hash="sha256:a6840080c469d0db51d6d4d0f7c42c97b3c8c01942f24401c61b1ad36726b97c"/>
+    <dependencies>
+      <dep package="gstreamer-1.0"/>
+      <dep package="gst-plugins-base-1.0"/>
+      <dep package="faad2"/>
+    </dependencies>
+  </autotools>
+
+  <!-- gst-libav was named gst-ffmpeg before 1.0 -->
+  <!-- 0.10.13 has mismatched libtool versions in its dist tarball -->
+  <autotools id="gst-ffmpeg" autogenargs="--disable-tests --disable-mmx"
+             supports-non-srcdir-builds="no" autogen-sh="configure">
+    <branch repo="gstreamer" version="0.10.12"
+            module="gst-ffmpeg/gst-ffmpeg-0.10.12.tar.gz"
+            hash="md5:a2516b4819b47437fb81a35762887a06"/>
+    <dependencies>
+      <dep package="gstreamer"/>
+      <dep package="gst-plugins-base"/>
+    </dependencies>
+  </autotools>
+
+  <!-- disable-yasm: gst-libav's version of libav requires yasm 0.8.0 or nasm
+  2.0.3; OSX 10.9 has nasm 0.98.40 -->
+  <autotools id="gst-libav" supports-non-srcdir-builds="no"
+             autogen-sh="configure"
+             autogenargs="--disable-tests --disable-mmx --with-libav-extra-configure='--disable-yasm'">
+    <branch repo="gstreamer" version="1.4.3"
+            module="gst-libav/gst-libav-1.4.3.tar.xz"
+            hash="sha256:833229d2b1aad6549ad0297435516508cc3ac47b166d6393ecdffc34c31a01d3"/>
+    <dependencies>
+      <dep package="gstreamer-1.0"/>
+      <dep package="gst-plugins-base-1.0"/>
+    </dependencies>
+  </autotools>
 
   <metamodule id="meta-gstreamer">
     <dependencies>
       <dep package="gstreamer"/>
       <dep package="gst-plugins-base"/>
       <dep package="gst-plugins-good"/>
-      </dependencies>
+      <!--dep package="gst-plugins-ugly"/-->
+      <dep package="gst-plugins-bad"/>
+      <dep package="gst-ffmpeg"/>
+    </dependencies>
   </metamodule>
 
   <metamodule id="meta-gstreamer-1.0">
@@ -118,7 +194,10 @@
       <dep package="gstreamer-1.0"/>
       <dep package="gst-plugins-base-1.0"/>
       <dep package="gst-plugins-good-1.0"/>
-      </dependencies>
+      <!--dep package="gst-plugins-ugly-1.0"/-->
+      <dep package="gst-plugins-bad-1.0"/>
+      <dep package="gst-libav"/>
+    </dependencies>
   </metamodule>
 
 </moduleset>
