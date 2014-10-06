@@ -94,8 +94,8 @@
     <branch module="gst-plugins-good/1.0/gst-plugins-good-1.0.2.tar.xz"
             version="1.0.2" hash="sha256:34762dbd1462dd31b6ca2a01cf6477843c9dc7112e5819cc9d6dd7396b79244c"/>
     <dependencies>
-      <dep package="gstreamer"/>
-      <dep package="gst-plugins-base"/>
+      <dep package="gstreamer-1.0"/>
+      <dep package="gst-plugins-base-1.0"/>
     </dependencies>
   </autotools>
 
