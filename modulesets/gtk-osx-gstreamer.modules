@@ -140,6 +140,7 @@
     </dependencies>
   </autotools>
 
+  <!-- gst-libav was named gst-ffmpeg before 1.0 -->
   <autotools id="gst-ffmpeg" autogenargs="--disable-tests --disable-mmx"
              supports-non-srcdir-builds="no" >
     <branch revision="0.10"/>
@@ -149,9 +150,9 @@
     </dependencies>
   </autotools>
 
-  <autotools id="gst-ffmpeg-1.0" autogenargs="--disable-tests --disable-mmx"
-             supports-non-srcdir-builds="no" >
-    <branch module="gst-ffmpeg" revision="1.0"/>
+  <autotools id="gst-libav" supports-non-srcdir-builds="no"
+             autogenargs="--disable-tests --disable-mmx">
+    <branch module="gst-libav" revision="1.0"/>
     <dependencies>
       <dep package="gstreamer-1.0"/>
       <dep package="gst-plugins-base-1.0"/>
@@ -176,7 +177,7 @@
       <dep package="gst-plugins-good-1.0"/>
       <!--dep package="gst-plugins-ugly-1.0"/-->
       <dep package="gst-plugins-bad-1.0"/>
-      <dep package="gst-ffmpeg-1.0"/>
+      <dep package="gst-libav"/>
     </dependencies>
   </metamodule>
 
