@@ -22,6 +22,10 @@
     </branch>
   </autotools>
 
+  <autotools id="liborc">
+    <branch repo="gstreamer" module="orc" tag="orc-0.4.22"/>
+  </autotools>
+
   <autotools id="faad2" autogen-sh="autoreconf"
              autogenargs="-without-bmp --without-xmms --without-drm --without-mpeg4ip">
     <branch repo="sourceforge" version="2.7"
