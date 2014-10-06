@@ -103,20 +103,16 @@
       removed from gnome sources. -->
 
 
-  <metamodule id="meta-gtk-osx-gstreamer">
+  <metamodule id="meta-gstreamer">
     <dependencies>
-      <dep package="meta-gtk-osx-core"/>
-      <dep package="liboil"/>
       <dep package="gstreamer"/>
       <dep package="gst-plugins-base"/>
       <dep package="gst-plugins-good"/>
       </dependencies>
   </metamodule>
 
-  <metamodule id="meta-gtk-osx-gstreamer-1.0">
+  <metamodule id="meta-gstreamer-1.0">
     <dependencies>
-      <dep package="meta-gtk-osx-core"/>
-      <dep package="liborc"/>
       <dep package="gstreamer-1.0"/>
       <dep package="gst-plugins-base-1.0"/>
       <dep package="gst-plugins-good-1.0"/>

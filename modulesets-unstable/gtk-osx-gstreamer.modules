@@ -93,7 +93,6 @@
 
   <metamodule id="meta-gstreamer">
     <dependencies>
-      <dep package="liboil"/>
       <dep package="gstreamer"/>
       <dep package="gst-plugins-base"/>
       <dep package="gst-plugins-good"/>
