@@ -1,15 +1,18 @@
---- a/lib/stdint.mini.h	2009-04-10 13:28:44.000000000 -0700
-+++ b/lib/stdint.mini.h	2014-02-14 21:20:10.000000000 -0800
-@@ -119,1 +119,1 @@
+diff -c /Users/john/Development/Gnucash-Build/Gnucash-master-git-gcc4.8-Leopard/src/libunistring-0.9.3/lib/stdint.mini.h\~ /Users/john/Development/Gnucash-Build/Gnucash-master-git-gcc4.8-Leopard/src/libunistring-0.9.3/lib/stdint.mini.h
+--- a/lib/stdint.mini.h	Fri Apr 10 13:28:44 2009
++++ b/lib/stdint.mini.h	Sun Oct  5 14:05:35 2014
+@@ -119,10 +119,11 @@
  #define uint32_t unistring_uint32_t
-
+ 
  /* Avoid collision with Solaris 2.5.1 <pthread.h> etc.  */
-+#ifndef __APPLE__ 
++#ifndef __APPLE__
  #define _UINT8_T
  #define _UINT32_T
  #define _UINT64_T
 -
 +#endif
-
+ 
  #endif /* _UNISTRING_STDINT_H */
  #endif /* !defined _UNISTRING_STDINT_H && !defined _GL_JUST_INCLUDE_SYSTEM_STDINT_H */
+
+Diff finished.  Sun Oct  5 14:05:51 2014
