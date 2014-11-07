@@ -100,6 +100,11 @@
             module="automake/automake-1.13.4.tar.xz" version="1.13.4"/>
   </autotools>
 
+  <autotools id="automake-1.14" autogen-sh="configure">
+    <branch repo="ftp.gnu.org" version="1.14.1"
+            module="automake/automake-1.14.1.tar.xz"/>
+  </autotools>
+
 <!-- Pkg-config 0.26 and later requires glib, which requires
      pkg-config, which, well, you get the idea. -->
   <autotools id="pkg-config" autogen-sh="configure">
@@ -196,6 +201,7 @@
       <dep package="automake-1.11" />
       <dep package="automake-1.12" />
       <dep package="automake-1.13" />
+      <dep package="automake-1.14"/>
       <dep package="pkg-config" />
       <dep package="bison"/>   <!-- included for Tiger, skipped otherwise -->
       <dep package="flex"/>    <!-- included for Tiger, skipped otherwise -->
