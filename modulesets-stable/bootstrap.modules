@@ -105,11 +105,10 @@
             module="automake/automake-1.14.1.tar.xz"/>
   </autotools>
 
-<!-- Pkg-config 0.26 and later requires glib, which requires
-     pkg-config, which, well, you get the idea. -->
-  <autotools id="pkg-config" autogen-sh="configure">
+  <autotools id="pkg-config" autogen-sh="configure"
+             autogenargs="--with-internal-glib">
     <branch repo="pkgconfig"
-            module="pkg-config-0.25.tar.gz" version="0.25"/>
+            module="pkg-config-0.28.tar.gz" version="0.28"/>
   </autotools>
 
   <!-- 10.5-10.9 have 2.3, gstreamer requires 2.4. -->
