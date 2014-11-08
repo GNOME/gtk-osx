@@ -202,8 +202,8 @@
       <dep package="automake-1.13" />
       <dep package="automake-1.14"/>
       <dep package="pkg-config" />
-      <dep package="bison"/>   <!-- included for Tiger, skipped otherwise -->
-      <dep package="flex"/>    <!-- included for Tiger, skipped otherwise -->
+      <dep package="bison"/>
+      <dep package="flex"/>
       <dep package="expat"/>
       <dep package="perl-xml-parser"/>
       <dep package="perl-xml-simple"/>
