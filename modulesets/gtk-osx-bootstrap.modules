@@ -24,6 +24,7 @@
               href="git://git.gnome.org/"/>
   <repository type="tarball" name="cups"
 	      href="http://ftp.easysw.com/pub/"/>
+  <repository type="git" name="gitorious" href="https://gitorious.org/"/>
 
   <autotools id='readline' autogen-sh="configure">
     <branch repo="ftp.gnu.org" module="readline/readline-6.3.tar.gz"
@@ -54,7 +55,7 @@
   <!-- The python package is in gtk-osx-python.modules. If you're
        building "native" you can safely add python to the skip list, but
        otherwise the links in the SDKs are messed up and libxml's python
-       module won't link. In case you're wondering, gnome-doc-utils
+       module won't link. In case you're wondering, itstool
        needs libxml2's python module. -->
 
   <autotools id="libxml2" autogen-sh="configure" autogenargs="--with-python">
@@ -92,6 +93,13 @@
 	    version="1.2.12" repo="cups"  checkoutdir='cups-1.2.12'/>
     <dependencies>
       <dep package="libtiff"/>
+    </dependencies>
+  </autotools>
+
+  <autotools id="itstool">
+    <branch repo="gitorious" module="itstool/itstool.git" tag="2.0.2"/>
+    <dependencies>
+      <dep package="libxml2"/>
     </dependencies>
   </autotools>
 
