@@ -346,6 +346,10 @@ def setup_sdk(target, sdk_version, architectures=[_default_arch]):
         # Tiger's CUPS version is too old
         skip.append('cups')
 
+    # Leopard and later have m4
+    if _osx_version >= 5.0:
+	skip.append('m4')
+
     # gettext-fw rebuilds gettext with an in-tree libiconv to get
     # around the Apple-provided one not defining _libiconv_init for
     # x86_64
