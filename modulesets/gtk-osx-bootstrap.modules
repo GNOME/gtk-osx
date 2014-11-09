@@ -43,9 +43,8 @@
     </branch>
   </autotools>
 
-  <autotools id="libtiff" autogen-sh="configure"
-	     autogenargs="--without-x --without-apple-opengl-framework">
-    <branch version="3.9.5" module="libtiff/tiff-3.9.5.tar.gz"
+  <autotools id="libtiff" autogen-sh="configure" autogenargs="--without-x">
+    <branch version="4.0.3" module="libtiff/tiff-4.0.3.tar.gz"
 	    repo="libtiff"/>
     <dependencies>
       <dep package="libjpeg"/>
