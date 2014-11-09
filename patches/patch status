@@ -27,9 +27,6 @@ gtk3:		0001-Bug-571582-GtkSelection-implementation-for-quartz.patch
 cairo: 		Cairo-44584-llvm-no-flto.patch Rejected. Cairo maintainer wants
 		optimization suppressed instead.
 
-
-gettext:	gettext-bug33999-stpncpy.patch New release promised
-		RSN - 30Aug2011
 libunique:	libunique-663913-sockaddr-un.patch No Love from maintainer
 
 pygtk:		pygtk-libtool.patch: The PyGtk-2.24.0 tarball uses an argument

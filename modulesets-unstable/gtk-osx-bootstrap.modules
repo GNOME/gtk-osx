@@ -143,10 +143,8 @@
   <autotools id="gettext-runtime" autogen-sh="configure"
 	     autogenargs="--without-emacs --disable-java --disable-native-java --disable-libasprintf --disable-csharp">
     <branch repo="ftp.gnu.org" source-subdir="gettext-runtime"
-	    module="gettext/gettext-0.18.1.1.tar.gz" version="0.18.1.1"
-            size="15139737" md5sum="3dd55b952826d2b32f51308f2f91aa89">
-      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/gettext-bug33999-stpncpy.patch" strip="1"/>
-    </branch>
+            module="gettext/gettext-0.19.3.tar.gz" version="0.19.3"
+            size="17414357" md5sum="c365029ffc866fc4e485d9e5ca60b260"/>
   </autotools>
 
    <metamodule id="meta-gtk-osx-bootstrap">
