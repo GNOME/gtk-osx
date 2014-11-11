@@ -111,14 +111,14 @@
             module="pkg-config-0.28.tar.gz" version="0.28"/>
   </autotools>
 
-  <!-- 10.5-10.9 have 2.3, gstreamer requires 2.4. -->
+  <!-- 10.5-10.10 have 2.3, gstreamer requires 2.4. -->
   <autotools id="bison" autogen-sh="configure">
     <branch repo="ftp.gnu.org" module="bison/bison-3.0.2.tar.xz"
             version="3.0.2"/>
   </autotools>
 
   <!-- 10.4 has 2.5.4, too old for gstreamer (and probably others as well)
-10.6 has 2.5.35, 10.5 2.5.33 -->
+  10.6-10.10 have 2.5.35, 10.5 2.5.33 -->
   <autotools id="flex" autogen-sh="configure">
     <branch repo="sourceforge" module="flex/flex-2.5.37.tar.bz2"
 	    version="2.5.37"/>
