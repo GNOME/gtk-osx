@@ -75,21 +75,6 @@
     </dependencies>
   </autotools>
 
-<!-- Yes, this is a tool and it should be in bootstrap.modules, but it
-     needs libxslt and libxml2, both of which are dependencies for a
-     lot of packages. -->
-<!-- This has python bits that don't work in a separate build
-     dir. Until a better solution is found, just copy the source into
-     the build and try again.-->
-  <autotools id="gnome-doc-utils" autogenargs="--disable-scrollkeeper"
-	     autogen-sh="configure" supports-non-srcdir-builds="no">
-    <branch module="gnome-doc-utils/0.20/gnome-doc-utils-0.20.10.tar.xz"
-	    version="0.20.10" hash="sha256:cb0639ffa9550b6ddf3b62f3b1add92fb92ab4690d351f2353cffe668be8c4a6"/>
-    <dependencies>
-      <dep package="libxslt"/>
-    </dependencies>
-  </autotools>
-
   <!-- Cups is needed *only* for Tiger, and skipped otherwise -->
   <autotools id='cups' autogen-sh='configure' skip-autogen='never'
 	     autogenargs='DSOFLAGS="$LDFLAGS"'>
@@ -105,6 +90,38 @@
             repo="itstool"/>
     <dependencies>
       <dep package="libxml2"/>
+    </dependencies>
+  </autotools>
+
+  <autotools id="yelp-xsl">
+    <branch version="3.14.0" module="yelp-xsl/3.14/yelp-xsl-3.14.0.tar.xz"
+            hash="sha256:8f5b6793cd600f8308e4ac93da68009169fa6d590eb71ed4a8e98bafe541a87e"/>
+    <dependencies>
+      <dep package="libxml2"/>
+      <dep package="libxslt"/>
+      <dep package="itstool"/>
+    </dependencies>
+  </autotools>
+
+  <autotools id="yelp-tools">
+    <branch version="3.14.1" module="yelp-tools/3.14/yelp-tools-3.14.1.tar.xz"
+            hash="sha256:000222baf5d2db394df6025591054976b5cecd0b27872601de7538f36520f60f"/>
+    <dependencies>
+      <dep package="libxml2"/>
+      <dep package="libxslt"/>
+      <dep package="itstool"/>
+      <dep package="yelp-xsl"/>
+    </dependencies>
+  </autotools>
+
+  <autotools id="gtk-doc" autogen-sh="configure"
+             autogenargs="--with-xml-catalog=$JHBUILD_PREFIX/etc/xml/catalog">
+    <branch version="1.21" module="gtk-doc/1.21/gtk-doc-1.21.tar.xz"
+            hash="sha256:5d934d012ee08edd1585544792efa80da271652587ba5b843d2cea8e8b80ee3e"/>
+    <dependencies>
+      <dep package="libxml2"/>
+      <dep package="itstool"/>
+      <dep package="yelp-tools"/>
     </dependencies>
   </autotools>
 
@@ -155,8 +172,8 @@
       <dep package="libjpeg"/>
       <dep package="libtiff"/>
       <dep package="gettext-runtime"/>
-      <dep package="gnome-doc-utils"/>
       <dep package="hicolor-icon-theme"/>
+      <dep package="gtk-doc"/>
     </dependencies>
   </metamodule>
 

@@ -72,19 +72,6 @@
     </dependencies>
   </autotools>
 
-<!-- Yes, this is a tool and it should be in bootstrap.modules, but
-     the dependency on lixslt makes that not possible. -->
-<!-- This has python bits that don't work in a separate build
-     dir. Until a better solution is found, just copy the source int
-     the build and try again. -->
-  <autotools id="gnome-doc-utils" autogenargs="--disable-scrollkeeper"
-	     supports-non-srcdir-builds="no">
-    <branch repo="git.gnome.org"/>
-    <dependencies>
-      <dep package="libxslt"/>
-    </dependencies>
-  </autotools>
-
   <!-- Cups is needed *only* for Tiger, and skipped otherwise -->
   <autotools id='cups' autogen-sh='configure' skip-autogen='never'
 	     autogenargs='DSOFLAGS="$LDFLAGS"'>
@@ -99,6 +86,35 @@
     <branch repo="gitorious" module="itstool/itstool.git"/>
     <dependencies>
       <dep package="libxml2"/>
+    </dependencies>
+  </autotools>
+
+  <autotools id="yelp-xsl">
+    <branch repo="git.gnome.org"/>
+    <dependencies>
+      <dep package="libxml2"/>
+      <dep package="libxslt"/>
+      <dep package="itstool"/>
+    </dependencies>
+  </autotools>
+
+  <autotools id="yelp-tools">
+    <branch repo="git.gnome.org"/>
+    <dependencies>
+      <dep package="libxml2"/>
+      <dep package="libxslt"/>
+      <dep package="itstool"/>
+      <dep package="yelp-xsl"/>
+    </dependencies>
+  </autotools>
+
+  <autotools id="gtk-doc"
+             autogenargs="--with-xml-catalog=$JHBUILD_PREFIX/etc/xml/catalog">
+    <branch repo="git.gnome.org"/>
+    <dependencies>
+      <dep package="libxml2"/>
+      <dep package="itstool"/>
+      <dep package="yelp-tools"/>
     </dependencies>
   </autotools>
 
@@ -163,8 +179,8 @@
       <dep package="libjpeg"/>
       <dep package="libtiff"/>
       <dep package="gettext-runtime"/>
-      <dep package="gnome-doc-utils"/>
       <dep package="hicolor-icon-theme"/>
+      <dep package="gtk-doc"/>
     </dependencies>
   </metamodule>
 

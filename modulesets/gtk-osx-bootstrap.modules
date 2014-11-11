@@ -75,17 +75,6 @@
     </dependencies>
   </autotools>
 
-<!-- Yes, this is a tool and it should be in bootstrap.modules, but it
-     needs libxslt and libxml2, both of which are dependencies for a
-     lot of packages. -->
-  <autotools id="gnome-doc-utils" autogenargs="--disable-scrollkeeper"
-	     supports-non-srcdir-builds="no">
-    <branch repo="git.gnome.org" tag="0.20.10"/>
-    <dependencies>
-      <dep package="libxslt"/>
-    </dependencies>
-  </autotools>
-
   <!-- Cups is needed *only* for Tiger, and skipped otherwise -->
   <autotools id='cups' autogen-sh='configure' skip-autogen='never'
 	     autogenargs='DSOFLAGS="$LDFLAGS"'>
@@ -100,6 +89,35 @@
     <branch repo="gitorious" module="itstool/itstool.git" tag="2.0.2"/>
     <dependencies>
       <dep package="libxml2"/>
+    </dependencies>
+  </autotools>
+
+  <autotools id="yelp-xsl">
+    <branch repo="git.gnome.org" tag="3.14.0"/> <!--no gnome-3-14 branch yet-->
+    <dependencies>
+      <dep package="libxml2"/>
+      <dep package="libxslt"/>
+      <dep package="itstool"/>
+    </dependencies>
+  </autotools>
+
+  <autotools id="yelp-tools">
+    <branch repo="git.gnome.org" tag="3.14.1"/> <!--no gnome-3-14 branch yet-->
+    <dependencies>
+      <dep package="libxml2"/>
+      <dep package="libxslt"/>
+      <dep package="itstool"/>
+      <dep package="yelp-xsl"/>
+    </dependencies>
+  </autotools>
+
+  <autotools id="gtk-doc"
+             autogenargs="--with-xml-catalog=$JHBUILD_PREFIX/etc/xml/catalog">
+    <branch repo="git.gnome.org" version="1.21" tag="GTK_DOC_1_21"/>
+    <dependencies>
+      <dep package="libxml2"/>
+      <dep package="itstool"/>
+      <dep package="yelp-tools"/>
     </dependencies>
   </autotools>
 
@@ -156,8 +174,8 @@
       <dep package="libjpeg"/>
       <dep package="libtiff"/>
       <dep package="gettext-runtime"/>
-      <dep package="gnome-doc-utils"/>
       <dep package="hicolor-icon-theme"/>
+      <dep package="gtk-doc"/>
     </dependencies>
   </metamodule>
 
