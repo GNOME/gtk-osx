@@ -75,7 +75,7 @@
   </autotools>
 
   <autotools id="libffi" autogenargs="--disable-builddir">
-    <branch module="atgreen/libffi" repo="github" tag="v3.0.11"/>
+    <branch module="atgreen/libffi" repo="github" tag="v3.2.1"/>
   </autotools>
 
   <autotools id="gobject-introspection-10">
