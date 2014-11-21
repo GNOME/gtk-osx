@@ -181,7 +181,9 @@
 
   <metamodule id="meta-gtk-osx-freetype">
     <dependencies>
+      <dep package="freetype"/>
       <dep package="fontconfig"/>
+      <dep package="harfbuzz"/>
     </dependencies>
   </metamodule>
 
