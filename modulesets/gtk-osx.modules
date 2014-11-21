@@ -160,7 +160,7 @@
   </autotools>
 
   <autotools id="pixman" autogenargs="--disable-gtk">
-    <branch repo="cairographics" module="pixman" tag="0.30"/>
+    <branch repo="cairographics" module="pixman" tag="0.32"/>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
     </after>

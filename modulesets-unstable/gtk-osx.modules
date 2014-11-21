@@ -163,7 +163,7 @@
     </after>
   </autotools>
 
-  <autotools id="pixman" autogenargs="--disable-gtk --disable-openmp">
+  <autotools id="pixman" autogenargs="--disable-gtk">
     <branch repo="freedesktop" module="pixman" />
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
