@@ -101,8 +101,8 @@
   </autotools>
 
   <autotools id="librsvg" autogenargs="--disable-Bsymbolic">
-    <branch module="librsvg/2.36/librsvg-2.36.4.tar.xz" version="2.36.4"
-	    hash="sha256:1021935204798f4f0ad3004a09b583668ea94a48593461b147fdcff68a18e6c2"/>
+    <branch module="librsvg/2.40/librsvg-2.40.5.tar.xz" version="2.40.5"
+	    hash="sha256:d14d7b3e25023ce34302022fd7c9b3a468629c94dff6c177874629686bfc71a7"/>
     <dependencies>
       <dep package="libcroco"/>
     </dependencies>
