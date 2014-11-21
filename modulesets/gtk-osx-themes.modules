@@ -56,7 +56,7 @@
   </autotools>
 
   <autotools id="gnome-themes-standard" autogenargs="--disable-gtk2-engine">
-    <branch revision="gnome-3-10"/>
+    <branch revision="gnome-3-14"/>
     <dependencies>
       <dep package="librsvg"/>
       <dep package="adwaita-icon-theme"/>
