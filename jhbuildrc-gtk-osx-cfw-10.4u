@@ -91,7 +91,7 @@ append_autogenargs("gtk-i386", _i386_args + " --with-gdktarget=quartz --without-
 #set_branch("libglade", "tags/LIBGLADE_2_6_2")
 #set_branch("gtk-engines", "tags/GTK_ENGINES_2_16_1")
 #set_branch("intltool", "tags/INTLTOOL_0_40_4")
-#set_branch("gnome-icon-theme", "tags/GNOME_ICON_THEME_2_24_0")
+#set_branch("adwaita-icon-theme", "tags/GNOME_ICON_THEME_2_24_0")
 # Try if this is new enough: set_branch("gtk-doc", "tags/GTK_DOC_1_10")
 
 # Python modules.
@@ -118,7 +118,7 @@ skip.append("faad")
 #skip.append("gtk-engines")
 #skip.append("libglade")
 #skip.append("loudmouth")
-#skip.append("gnome-icon-theme")
+#skip.append("adwaita-icon-theme")
 #skip.append("WebKit")
 
 # Not needed.

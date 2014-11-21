@@ -18,7 +18,7 @@
   <metamodule id="meta-gtk-osx-themes">
     <dependencies>
       <dep package="tango-icon-theme"/>
-      <dep package="gnome-icon-theme"/>
+      <dep package="adwaita-icon-theme"/>
       <dep package="icon-naming-utils"/>
       <dep package="gtk-engines"/>
     </dependencies>
@@ -27,7 +27,7 @@
   <metamodule id="meta-gtk-osx-gtk3-core-themes">
     <dependencies>
       <dep package="icon-naming-utils"/>
-      <dep package="gnome-icon-theme-symbolic"/>
+      <dep package="adwaita-icon-theme"/>
       <dep package="gnome-themes-standard"/>
     </dependencies>
   </metamodule>
@@ -52,28 +52,13 @@
     </dependencies>
   </autotools>
 
-  <autotools id="gnome-icon-theme" autogen-sh="configure">
-    <branch module="gnome-icon-theme/3.10/gnome-icon-theme-3.10.0.tar.xz"
-            version="3.10.0" hash="sha256:c65472b5846c67b97fe75200c5180faccd1347a04caa8390fc0ad23de75b36f6"/>
+  <autotools id="adwaita-icon-theme" autogen-sh="configure">
+    <branch module="adwaita-icon-theme/3.14/adwaita-icon-theme-3.14.1.tar.xz"
+            version="3.14.1" hash="sha256:b776a7ad58c97f4c1ede316e44d8d054105429cb4e3a8ec46616a14b11df48ee"/>
     <dependencies>
+      <dep package="librsvg"/>
       <dep package="hicolor-icon-theme"/>
       <dep package="icon-naming-utils"/>
-    </dependencies>
-  </autotools>
-
- <autotools id="gnome-icon-theme-symbolic" autogen-sh="configure">
-    <branch module="gnome-icon-theme-symbolic/3.10/gnome-icon-theme-symbolic-3.10.1.tar.xz"
-            version="3.10.1" hash="sha256:344e88e5f9dac3184bf012d9bac972110df2133b93d76f2ad128d4c9cbf41412"/>
-    <dependencies>
-      <dep package="gnome-icon-theme"/>
-    </dependencies>
-  </autotools>
-
- <autotools id="gnome-icon-theme-extras" autogen-sh="configure">
-    <branch module="gnome-icon-theme-extras/3.6/gnome-icon-theme-extras-3.6.2.tar.xz"
-            version="3.6.2" hash="sha256:93aaaadf40c85ebc42232a4d8e45ca507754b8e1271e797bbcdaded52bd03ec7"/>
-    <dependencies>
-      <dep package="gnome-icon-theme"/>
     </dependencies>
   </autotools>
 
@@ -83,7 +68,7 @@
             version="3.10.0" hash="sha256:812c6cfc534fced921dc327b436e70020d8979529284bb59d72d6f37af1f4b38"/>
     <dependencies>
       <dep package="librsvg"/>
-      <dep package="gnome-icon-theme"/>
+      <dep package="adwaita-icon-theme"/>
     </dependencies>
   </autotools>
 

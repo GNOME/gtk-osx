@@ -11,7 +11,7 @@
   <metamodule id="meta-gtk-osx-themes">
     <dependencies>
       <dep package="tango-icon-theme"/>
-      <dep package="gnome-icon-theme"/>
+      <dep package="adwaita-icon-theme"/>
       <dep package="icon-naming-utils"/>
       <dep package="gtk-engines"/>
     </dependencies>
@@ -20,7 +20,7 @@
   <metamodule id="meta-gtk-osx-gtk3-core-themes">
     <dependencies>
       <dep package="icon-naming-utils"/>
-      <dep package="gnome-icon-theme-symbolic"/>
+      <dep package="adwaita-icon-theme"/>
       <dep package="gnome-themes-standard"/>
     </dependencies>
   </metamodule>
@@ -46,25 +46,12 @@
     </dependencies>
   </autotools>
 
-  <autotools id="gnome-icon-theme">
-    <branch revision="gnome-3-10"/>
+  <autotools id="adwaita-icon-theme">
+    <branch revision="gnome-3-14"/>
     <dependencies>
+      <dep package="librsvg"/>
       <dep package="hicolor-icon-theme"/>
       <dep package="icon-naming-utils"/>
-    </dependencies>
-  </autotools>
-
-  <autotools id="gnome-icon-theme-symbolic">
-    <branch revision="gnome-3-10"/>
-    <dependencies>
-      <dep package="gnome-icon-theme"/>
-    </dependencies>
-  </autotools>
-
-  <autotools id="gnome-icon-theme-extra">
-    <branch revision="3.6.2"/>
-    <dependencies>
-      <dep package="gnome-icon-theme"/>
     </dependencies>
   </autotools>
 
@@ -72,7 +59,7 @@
     <branch revision="gnome-3-10"/>
     <dependencies>
       <dep package="librsvg"/>
-      <dep package="gnome-icon-theme"/>
+      <dep package="adwaita-icon-theme"/>
     </dependencies>
   </autotools>
 
