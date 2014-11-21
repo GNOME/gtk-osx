@@ -134,12 +134,23 @@
     </dependencies>
   </autotools>
 
+  <autotools id="freetype-no-harfbuzz" autogen-sh="configure"
+             skip-autogen="never"
+             autogenargs="--without-bzip2 --without-harfbuzz">
+    <branch module="freetype/freetype-2.5.3.tar.gz" version="2.5.3"
+            repo="sourceforge"/>
+    <dependencies>
+      <dep package="zlib"/>
+    </dependencies>
+  </autotools>
+
   <autotools id="freetype" autogen-sh="configure" skip-autogen="never"
 	     autogenargs="--without-bzip2">
-    <branch module="freetype/freetype-2.5.2.tar.gz" version="2.5.2"
+    <branch module="freetype/freetype-2.5.3.tar.gz" version="2.5.3"
             repo="sourceforge">
     </branch>
     <dependencies>
+      <dep package="harfbuzz"/>
       <dep package="zlib"/>
     </dependencies>
   </autotools>
