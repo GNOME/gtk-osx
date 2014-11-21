@@ -121,8 +121,8 @@
     </dependencies>
   </autotools>
 
-  <autotools id="harfbuzz" autogenargs="--with-coretext">
-    <branch repo="freedesktop" tag="0.9.26"/>
+  <autotools id="harfbuzz" autogenargs="--with-coretext --with-freetype">
+    <branch repo="freedesktop" tag="0.9.35"/>
     <dependencies>
       <dep package="freetype-no-harfbuzz"/>
       <dep package="ragel"/>
@@ -148,7 +148,7 @@
  </autotools>
 
   <autotools id="fontconfig" autogenargs="--disable-docs">
-    <branch repo="freedesktop" tag="2.11.0"/>
+    <branch repo="freedesktop" tag="2.11.1"/>
     <dependencies>
       <dep package="freetype"/>
     </dependencies>

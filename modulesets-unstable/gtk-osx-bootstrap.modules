@@ -129,17 +129,12 @@
 
  
   <autotools id="harfbuzz" autogenargs="--with-coretext">
-    <branch repo="freedesktop" module="harfbuzz">
-      <patch href="http://git.gnome.org/browse/gtk-osx/plain/patches/0001-Bug-53815-CoreText-backend-doesn-t-link.patch"/>
-    </branch>
+    <branch repo="freedesktop" module="harfbuzz"/>
     <dependencies>
       <dep package="freetype-no-harfbuzz"/>
       <dep package="ragel"/>
-    </dependencies>
-    <after>
       <dep package="glib"/>
-      <dep package="cairo"/>
-    </after>
+    </dependencies>
   </autotools>
 
   <autotools id="freetype" skip-autogen="never" autogenargs="--without-bzip2"
