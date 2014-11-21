@@ -77,6 +77,17 @@
     <branch module="atgreen/libffi" repo="github"/>
   </autotools>
 
+  <autotools id="xorg-util-macros">
+    <branch repo="freedesktop" module="xorg/util/macros"/>
+  </autotools>
+
+  <autotools id="libepoxy">
+    <branch repo="github" module="Sonicadvance1/libepoxy" revision="OSX-NoX11Support"/>
+    <dependencies>
+      <dep package="xorg-util-macros"/>
+    </dependencies>
+  </autotools>
+
   <autotools id="gobject-introspection">
     <branch/>
     <dependencies>
@@ -150,13 +161,15 @@
   </autotools>
 
   <autotools id="gtk+-3.0"
-	     autogenargs="--enable-quartz-backend --enable-quartz-relocation --disable-colord --without-atk-bridge">
+             autogenargs="--enable-quartz-backend --enable-quartz-relocation --disable-colord">
     <branch module="gtk+" checkoutdir="gtk+-3.0"/>
     <dependencies>
+      <dep package="glib"/>
       <dep package="gobject-introspection"/>
       <dep package="pango"/>
       <dep package="gdk-pixbuf"/>
       <dep package="atk"/>
+      <dep package="libepoxy"/>
     </dependencies>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>

@@ -172,9 +172,9 @@
 
   <autotools id="gtk+-3.0" autogen-sh="autogen.sh"
              autogenargs="--enable-quartz-backend --enable-quartz-relocation">
-    <branch module="gtk+/3.10/gtk+-3.10.7.tar.xz" version="3.10.7"
-            hash="sha256:b7e9de15385031cff43897e7e59f6692eaabf500f36eef80e6b9d6486ad49427">
-      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0001-gtk3-gtkselection-return-value.patch" strip="1"/>
+    <branch module="gtk+/3.14/gtk+-3.14.5.tar.xz" version="3.14.5"
+            hash="sha256:ba70f5ccde6646c6d8aa5a6398794b7bcf23fc45af22580a215d258f392dbbe2">
+      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/gtk+-Bug-739885-GtkPlug-is-conditionally-supported-on-X11-only.patch" strip="1"/>
     </branch>
     <dependencies>
       <dep package="glib"/>
