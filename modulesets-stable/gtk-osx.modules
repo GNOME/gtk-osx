@@ -116,9 +116,8 @@
   </autotools>
 
  <autotools id="pango"  autogen-sh="autoreconf">
-    <branch version="1.36.0" module="pango/1.36/pango-1.36.0.tar.xz"
-            hash="sha256:bb41d1b26ee7450e5430a7d2765f38c51ebe72db9fce616a9ee52611b55906a0">
-      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/pango_gir_cflags.patch" strip="1"/>
+    <branch version="1.36.8" module="pango/1.36/pango-1.36.8.tar.xz"
+            hash="sha256:18dbb51b8ae12bae0ab7a958e7cf3317c9acfc8a1e1103ec2f147164a0fc2d07">
     </branch>
     <dependencies>
       <dep package="cairo"/>

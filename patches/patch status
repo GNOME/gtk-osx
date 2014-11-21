@@ -7,11 +7,6 @@ libproxy: 	0001-Bug-168-libproxy-pc-file.patch (fixed in r827)
 gtkmm3: 	0001-Gtkmm-won-t-build-for-Quartz.patch
 		(Bug 662975, fixed 11/29/11, not yet released)
 
-pango:       	0001-Make-ATSUI-backend-compile-again.patch (Still needed for
-		1.28, to get it to compile with Tiger)
-	     	pango-CoreText-fix-zero-width-space-bgo-666856.patch (An
-		alternate patch pushed 1/12/12, not released)
-
 gobject-intro:  0001-scanner-split-CC-environment-variable.patch fixed, not
 		released in stable.
 		girscanner-objc.patch: Bug 626995, will likely never be

@@ -99,7 +99,7 @@
   </autotools>
 
   <autotools id="pango">
-    <branch tag="1.36.0"/>
+    <branch tag="pango-1-36"/>
     <dependencies>
       <dep package="glib"/>
       <dep package="cairo"/>
