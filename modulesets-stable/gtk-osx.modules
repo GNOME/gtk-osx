@@ -101,9 +101,9 @@
   </autotools>
 
   <autotools id="gobject-introspection" autogen-sh="configure">
-    <branch module="gobject-introspection/1.38/gobject-introspection-1.38.0.tar.xz"
-            version="1.38.0"
-            hash="sha256:3575e5d353c17a567fdf7ffaaa7aebe9347b5b0eee8e69d612ba56a9def67d73">
+    <branch module="gobject-introspection/1.42/gobject-introspection-1.42.0.tar.xz"
+            version="1.42.0"
+            hash="sha256:3ba2edfad4f71d4f0de16960b5d5f2511335fa646b2c49bbb93ce5942b3f95f7">
       <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/girscanner-objc.patch" strip="1"/>
     </branch>
     <dependencies>
@@ -131,20 +131,19 @@
   </autotools>
 
  <autotools id="atk" autogen-sh="configure">
-    <branch module="atk/2.10/atk-2.10.0.tar.xz" version="2.10.0"
-            hash="sha256:636917a5036bc851d8491194645d284798ec118919a828be5e713b6ecc5b50b0"/>
+    <branch module="atk/2.14/atk-2.14.0.tar.xz" version="2.14.0"
+            hash="sha256:2875cc0b32bfb173c066c22a337f79793e0c99d2cc5e81c4dac0d5a523b8fbad"/>
     <dependencies>
     </dependencies>
     <after>
-      <dep package="glib"/>
       <dep package="glib"/>
       <dep package="meta-gtk-osx-bootstrap"/>
     </after>
   </autotools>
 
   <autotools id="gdk-pixbuf" autogen-sh="configure">
-    <branch module="gdk-pixbuf/2.30/gdk-pixbuf-2.30.0.tar.xz" version="2.30.0"
-            hash="sha256:4a73600525621283a14436c5f873c1126c4feafcb07d24a746f13215e2caa658"/>
+    <branch module="gdk-pixbuf/2.30/gdk-pixbuf-2.30.8.tar.xz" version="2.30.8"
+            hash="sha256:4853830616113db4435837992c0aebd94cbb993c44dc55063cee7f72a7bef8be"/>
     <after>
       <dep package="pango"/>
     </after>

@@ -88,7 +88,7 @@
   </autotools>
 
   <autotools id="gobject-introspection">
-    <branch tag="gnome-3-8" module="gobject-introspection"/>
+    <branch tag="master" module="gobject-introspection"/> <!--No gnome-3-14 branch-->
     <dependencies>
       <dep package="glib"/>
       <dep package="cairo"/>
@@ -113,7 +113,7 @@
   </autotools>
 
   <autotools id="atk">
-    <branch tag="ATK_2_10_0"/>
+    <branch tag="gnome-3-14"/>
     <dependencies>
       <dep package="glib"/>
     </dependencies>
