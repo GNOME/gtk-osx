@@ -170,17 +170,17 @@
     </after>
   </autotools>
 
-  <autotools id="cairo" autogenargs="--enable-pdf --enable-quartz --enable-xlib=no --without-x">
+  <!-- enable-fc and enable-ft required for librsvg's pixbuf loader -->
+  <autotools id="cairo"
+             autogenargs="--enable-pdf --enable-quartz --enable-fc --enable-ft --disable-xlib --without-x">
     <branch repo="freedesktop" module="cairo" />
     <dependencies>
       <dep package="pixman"/>
+      <dep package="fontconfig"/>
+      <dep package="freetype"/>
     </dependencies>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
-      <dep package="fontconfig"/>
-      <dep package="freetype"/>
-      <dep package='glib'/>
-      <dep package="icu"/>
     </after>
   </autotools>
 
