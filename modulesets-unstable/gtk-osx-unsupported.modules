@@ -64,13 +64,13 @@
 <!-- Rudely demands TeX to build documentation -->
   <autotools id="libnettle"
 	     autogenargs="--disable-documentation"
-	     autogen-template="autoreconf -fis &amp;&amp; %(srcdir)s/configure --prefix %(prefix)s --libdir %(libdir)s %(autogenargs)s">
+	     autogen-template="autoreconf -fis &amp;&amp; %(srcdir)s/configure --prefix %(prefix)s  %(autogenargs)s">
     <branch repo="lysator" module="nettle/nettle.git"/>
   </autotools>
 
   <autotools id="gnutls" autogen-sh="autoreconf"
 	     autogenargs="--disable-gtk-doc-html"
-	     autogen-template="autoreconf -fis &amp;&amp; %(srcdir)s/configure --prefix %(prefix)s --libdir %(libdir)s %(autogenargs)s">
+	     autogen-template="autoreconf -fis &amp;&amp; %(srcdir)s/configure --prefix %(prefix)s  %(autogenargs)s">
     <branch repo='git.gnu.org' tag='gnutls_2_12_20' module="gnutls"/>
     <!--<branch repo='ftp.gnu.org' version='2.8.1'
             module="gnutls/gnutls-2.8.1.tar.bz2"/ -->
@@ -85,7 +85,7 @@
   </autotools>
 
   <autotools id="libgpg-error" autogen-sh="autogen.sh"
-             autogen-template="%(srcdir)s/%(autogen-sh)s &amp;&amp; %(srcdir)s/configure --prefix %(prefix)s --libdir %(libdir)s %(autogenargs)s"
+             autogen-template="%(srcdir)s/%(autogen-sh)s &amp;&amp; %(srcdir)s/configure --prefix %(prefix)s  %(autogenargs)s"
 	     supports-non-srcdir-builds='no'>
     <branch repo='git.gnupg.org' module="libgpg-error" />
   </autotools>

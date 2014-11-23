@@ -16,7 +16,7 @@
 
   <!-- liboil is in maintenance mode, use tarball. -->
   <autotools id="liboil" makeargs=' CFLAGS="$CFLAGS -DHAVE_SYMBOL_UNDERSCORE"'
-             autogen-template="autoreconf -fis &amp;&amp; %(srcdir)s/configure --prefix %(prefix)s --libdir %(libdir)s %(autogenargs)s">
+             autogen-template="autoreconf -fis &amp;&amp; %(srcdir)s/configure --prefix %(prefix)s  %(autogenargs)s">
     <branch repo="liboil" module="liboil-0.3.17.tar.gz" version="0.3.17">
       <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/liboil-use-ac-config-headers-macro.patch" strip="1"/>
     </branch>

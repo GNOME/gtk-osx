@@ -44,7 +44,7 @@
 <!--Note the leading ; in autogen-template. It's there on purpose in case the user has set nice_build so that the nice prepended to the command doesn't eat the cd. -->
   <autotools id="berkeleydb" autogen-sh="configure"
 	     supports-non-srcdir-builds="no"  makeargs="-C build_unix"
-	     autogen-template=";cd build_unix; ../dist/%(autogen-sh)s --prefix %(prefix)s --libdir %(libdir)s %(autogenargs)s"
+	     autogen-template=";cd build_unix; ../dist/%(autogen-sh)s --prefix %(prefix)s  %(autogenargs)s"
 	     makeinstallargs="-C build_unix install">
 
     <branch module="berkeley-db/db-4.8.30.NC.tar.gz" version="4.8.30"
@@ -60,7 +60,7 @@
        build directory with most of the other modules, use this module
        instead. -->
   <autotools id="berkeleydb-nonsrctree" autogen-sh="configure"
-         autogen-template="%(srcdir)s/dist/%(autogen-sh)s --prefix %(prefix)s --libdir %(libdir)s %(autogenargs)s" >
+         autogen-template="%(srcdir)s/dist/%(autogen-sh)s --prefix %(prefix)s  %(autogenargs)s" >
 
     <branch module="berkeley-db/db-4.8.30.NC.tar.gz" version="4.8.30"
         repo="oracle" >
