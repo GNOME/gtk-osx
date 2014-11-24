@@ -18,13 +18,10 @@
   </metamodule>
 
   <autotools id="gjs" autogenargs="--enable-installed-tests">
-    <branch tag="gnome-3-10">
-      <patch strip="1"
-             file="http://git.gnome.org/browse/gtk-osx/plain/patches/gjs-Fix-uint-type-in-variable.patch"/>
-    </branch>
+    <branch revision="gnome-3-14"/>
     <dependencies>
       <dep package="gobject-introspection"/>
-      <dep package="js17"/>
+      <dep package="js24"/>
     </dependencies>
   </autotools>
 

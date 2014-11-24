@@ -50,7 +50,10 @@ devhelp:	devhelp-646962-variable-name.patch
 dbus:		dbus-install.patch
 		dbus-msg-nosignal.patch
 
-gjs:		gjs-Fix-uint-type-in-variable.patch Bug 712242, fixed in master.
+gjs:		gjs-Bug-737701-Don-t-error-out-on-missing-cairo-xlib.pc.patch
+		gjs-Bug-737702-Use-R-instead-of-rpath.patch
+		gjs-Bug-740696-Use-m4-directory-for-macros.patch
+		All committed to master and gtk-3-14, only needed for modulesets-stable.
 
 faad2:		faad2-2.7-ac-config-headers.patch
 		Reported at https://sourceforge.net/p/faac/bugs/190/ but there hasn't

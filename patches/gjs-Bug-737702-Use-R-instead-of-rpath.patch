@@ -1,0 +1,28 @@
+From 8c53b7167b77a10c5c45982831eefc5ea022350d Mon Sep 17 00:00:00 2001
+From: Philip Chimento <philip.chimento@gmail.com>
+Date: Wed, 1 Oct 2014 00:38:14 -0700
+Subject: [PATCH 2/2] build: Use -R instead of -rpath
+
+When linking with libtool, you are supposed to use -R, not -rpath. This
+caused a build failure on OSX due to two -rpath options being given in
+one invocation of ld, which libtool fixes when you use -R.
+---
+ Makefile-insttest.am | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/Makefile-insttest.am b/Makefile-insttest.am
+index 59d76e9..e13979a 100644
+--- a/Makefile-insttest.am
++++ b/Makefile-insttest.am
+@@ -40,7 +40,7 @@ endif
+ # This rpath /nowhere thing is the libtool upstream recommended way to
+ # force generation of shared libraries, which we need in order for the
+ # tests to work uninstalled.
+-common_test_ldflags = -avoid-version -rpath /nowhere
++common_test_ldflags = -avoid-version -R /nowhere
+ common_test_libadd = $(GJS_LIBS)
+ 
+ nodist_libregress_la_SOURCES = $(GI_DATADIR)/tests/regress.c $(GI_DATADIR)/tests/regress.h
+-- 
+1.9.3 (Apple Git-50)
+
