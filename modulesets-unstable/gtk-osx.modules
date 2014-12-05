@@ -8,7 +8,7 @@
   <repository type="git" name="freedesktop"
               href="git://anongit.freedesktop.org/git/"/>
   <repository type="tarball" name="ragel"
-              href="http://www.colm.net/wp-content/uploads/2014/10/"/>
+              href="http://www.colm.net/files/ragel/"/>
 
   <!-- This module set works a bit differently than for example the
        GNOME ones do. It's split up in seperate pieces:
