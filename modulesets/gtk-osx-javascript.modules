@@ -18,32 +18,11 @@
   </metamodule>
 
   <autotools id="gjs" autogenargs="--enable-installed-tests">
-    <branch tag="gnome-3-10">
-      <patch strip="1"
-             file="http://git.gnome.org/browse/gtk-osx/plain/patches/gjs-Fix-uint-type-in-variable.patch"/>
-    </branch>
+    <branch revision="gnome-3-14"/>
     <dependencies>
       <dep package="gobject-introspection"/>
-      <dep package="js17"/>
+      <dep package="js24"/>
     </dependencies>
-  </autotools>
-
-  <autotools id="js17" check-target="false" autogen-sh="configure"
-             supports-non-srcdir-builds="no"
-             autogenargs="--enable-threadsafe --with-system-nspr --with-system-zlib --enable-system-ffi">
-    <branch repo="mozilla" module="js/mozjs17.0.0.tar.gz" version="17.0.0"
-            hash="md5:20b6f8f1140ef6e47daa3b16965c9202"
-            checkoutdir="js17-17.0.0">
-      <patch file="js17-build-fixes.patch" strip="1"/>
-    </branch>
-    <dependencies>
-      <dep package="libffi"/>
-      <dep package="nspr"/>
-    </dependencies>
-    <after>
-      <dep package="python"/>
-      <dep package="zlib"/>
-    </after>
   </autotools>
 
   <autotools id="js24" autogen-sh="configure"
