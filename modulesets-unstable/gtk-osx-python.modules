@@ -42,13 +42,17 @@
       <patch file="https://github.com/narkoleptik/os-x-berkeleydb-patch/raw/master/atomic.patch" strip='1'/>
     </branch>
   </autotools>
+
 <!-- Python-2.7.5's hashlib doesn't build correctly with gcc-4.2, though it does fine with Clang (and probably later gccs as well). -->
   <autotools id="python2.7" autogenargs="--enable-shared"
 	     autogen-sh="configure">
     <branch repo="python"
-	    module="2.7.6/Python-2.7.6.tar.xz" version="2.7.6">
+	    module="2.7.8/Python-2.7.8.tar.xz" version="2.7.8">
+      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/python-2.7.8-test_grammar.py-typo.patch" skip="1"/>
     </branch>
     <dependencies>
+      <dep package="gettext-runtime"/>
+      <dep package='readline'/>
     </dependencies>
     <after>
       <dep package="berkeleydb4.8"/>
@@ -71,6 +75,10 @@
     <branch repo="python"
 	    module="3.3.2/Python-3.3.2.tar.xz" version="3.3.2">
     </branch>
+    <dependencies>
+      <dep package="gettext-runtime"/>
+      <dep package='readline'/>
+    </dependencies>
     <after>
       <dep package="berkeleydb5.0"/>
     </after>
