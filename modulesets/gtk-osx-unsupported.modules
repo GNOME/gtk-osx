@@ -20,8 +20,6 @@
               tags-template="tags/%(tag)s"/>
   <repository type="tarball" name="webkit.org"
               href="http://www.webkitgtk.org/releases/"/>
-  <repository type='tarball' name='icu'
-	      href='http://download.icu-project.org/files/'/>
   <repository type="git" name="freedesktop"
               href="git://anongit.freedesktop.org"/>
   <repository type="git" name="lysator"
@@ -170,12 +168,6 @@
     <branch repo="git.gnu.org" tag="libtasn1_4_2"  module="libtasn1"/> -->
     <branch repo="ftp.gnu.org" version="4.2"
             module="libtasn1/libtasn1-4.2.tar.gz"/>
-  </autotools>
-
-  <autotools id='icu' autogen-sh='source/configure'
-	     makeargs='CFLAGS="$CFLAGS -DU_CHARSET_IS_UTF8=1 -DU_USING_ICU_NAMESPACE=0"'>
-    <branch repo='icu' version='54.1' checkoutdir='icu'
-            module='icu4c/54.1/icu4c-54_1-src.tgz'/>
   </autotools>
 
   <!-- This is WebKitGTK 1.x, for GTK 2.x.
