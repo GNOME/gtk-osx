@@ -70,6 +70,7 @@
   <autotools id="glib" autogen-sh="autoreconf">
     <branch module="glib/2.42/glib-2.42.1.tar.xz"  version="2.42.1"
             hash="sha256:8f3f0865280e45b8ce840e176ef83bcfd511148918cc8d39df2ee89b67dcf89a">
+      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0001-Fix-g_get_monotonic_time-on-non-Intel-Darwin.patch" strip="1"/>
       <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0001-Bug-724590-GSlice-slab_stack-corruption.patch" strip="1"/>
     </branch>
     <dependencies>
