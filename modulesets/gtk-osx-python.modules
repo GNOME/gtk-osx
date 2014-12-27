@@ -142,7 +142,7 @@
   </autotools>
 
   <autotools id="pygobject3">
-    <branch tag="pygobject-3-10" module="pygobject" checkoutdir="pygobject3"/>
+    <branch tag="pygobject-3-14" module="pygobject" checkoutdir="pygobject3"/>
     <dependencies>
       <dep package="meta-gtk-osx-gtk3"/>
     </dependencies>

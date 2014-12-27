@@ -21,12 +21,12 @@
 
 <!-- mm-common is C++ glue code needed only to build from git. -->
   <autotools id="mm-common">
-    <branch module="mm-common" tag="0.9.6"/>
+    <branch module="mm-common" tag="0.9.7"/>
   </autotools>
 
   <autotools id="cairomm" >
 <!-- 1.10.0, the latest stable release, was built from the master branch. -->
-    <branch module="cairomm" tag="1.10.0"
+    <branch module="cairomm" tag="v1.11.2"
             repo="cairographics" />
     <dependencies>
       <dep package="cairo"/>
@@ -34,7 +34,7 @@
   </autotools>
 
   <autotools id="glibmm" >
-    <branch tag="glibmm-2-38"/>
+    <branch tag="glibmm-2-42"/>
     <dependencies>
       <dep package="libsigc++2"/>
     </dependencies>
@@ -61,9 +61,9 @@
      of course, and there are OSX binaries available on their
      website. If you want the docs, install it separately and renable
      documentation in your jhbuildrc-custom. -->
-<!-- libsigc++'s last stable branch was 2-0 -->
+<!-- libsigc++2 releaseed 2.4.0 from master -->
   <autotools id="libsigc++2"  autogen-args="--disable-documentation">
-    <branch revision="libsigc-2-2"/>
+    <branch revision="2.4.0"/>
     <dependencies>
       <dep package="mm-common"/>
     </dependencies>
@@ -92,7 +92,7 @@
   </autotools>
 
   <autotools id="gtkmm3" >
-    <branch revision="gtkmm-3-10" module="gtkmm"/>
+    <branch revision="gtkmm-3-14" module="gtkmm"/>
     <dependencies>
       <dep package="glibmm"/>
       <dep package="cairomm"/>
