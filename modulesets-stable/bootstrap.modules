@@ -162,8 +162,8 @@
    -->
   <autotools id="gtk-osx-docbook" autogen-sh="configure"
 	     supports-non-srcdir-builds="no" >
-     <branch repo="sourceforge" module="gtk-osx/gtk-osx-docbook-1.1.tar.gz"
-	     version="1.1"/>
+     <branch repo="sourceforge" module="gtk-osx/gtk-osx-docbook-1.2.tar.gz"
+	     version="1.2"/>
   </autotools>
 
   <autotools id="intltool" autogen-sh="configure">
