@@ -109,7 +109,7 @@
   </autotools>
 
   <autotools id="gtk-doc"
-             autogenargs="--with-xml-catalog=$JHBUILD_PREFIX/etc/xml/catalog">
+             autogenargs="--with-xml-catalog=$JHBUILD_PREFIX/share/xml/catalog">
     <branch repo="git.gnome.org"/>
     <dependencies>
       <dep package="libxml2"/>

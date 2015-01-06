@@ -112,7 +112,7 @@
   </autotools>
 
   <autotools id="gtk-doc"
-             autogenargs="--with-xml-catalog=$JHBUILD_PREFIX/etc/xml/catalog">
+             autogenargs="--with-xml-catalog=$JHBUILD_PREFIX/share/xml/catalog">
     <branch repo="git.gnome.org" version="1.21" tag="GTK_DOC_1_21"/>
     <dependencies>
       <dep package="libxml2"/>
