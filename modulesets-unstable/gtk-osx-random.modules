@@ -283,7 +283,7 @@
        having to install yet another vcs tool. -->
   <autotools id="gmp">
     <!--branch repo="ftp.gnu.org" module="gmp/gmp-5.0.0.tar.bz2" version="5.0.0"/-->
-    <branch repo="ftp.gnu.org" module="gmp/gmp-4.3.1.tar.bz2" version="4.3.1"/>
+    <branch repo="ftp.gnu.org" module="gmp/gmp-4.3.2.tar.bz2" version="4.3.2"/>
   </autotools>
 
   <autotools id="libunistring" autogen-sh="configure">
