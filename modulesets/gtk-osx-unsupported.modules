@@ -18,8 +18,8 @@
   <repository type='svn' name='libproxy.google.com'
               href='http://libproxy.googlecode.com/svn/'
               tags-template="tags/%(tag)s"/>
-  <repository type="svn" name="svn.webkit.org"
-	      href="http://svn.webkit.org/repository/"/>
+  <repository type="tarball" name="webkit.org"
+              href="http://www.webkitgtk.org/releases/"/>
   <repository type='tarball' name='icu'
 	      href='http://download.icu-project.org/files/'/>
 
@@ -60,15 +60,18 @@
   </autotools>
 
   <autotools id="zlib" autogen-sh="configure" skip-autogen="never">
-    <branch repo="sourceforge" version="1.2.7"
-	    module="libpng/zlib-1.2.7.tar.gz"/>
+    <branch repo="sourceforge" version="1.2.8"
+	    module="libpng/zlib-1.2.8.tar.gz"/>
   </autotools>
 
   <autotools id="gnutls" autogen-sh="configure"
 	     autogenargs="--with-libgcrypt --without-p11-kit">
-    <branch repo='git.gnu.org' tag='gnutls_2_12_x'/>
-    <!--branch repo='ftp.gnu.org' version='2.12.11'
-            module="gnutls/gnutls-2.12.11.tar.bz2"/-->
+    <!-- This is the last version of gnutls that will support libgcrypt;
+    subsequent ones require nettle and gmp. Building from git does not work with
+    Autoamke >1.12.-->
+    <!--branch repo='git.gnu.org' revision='gnutls_2_12_20'/-->
+    <branch repo='ftp.gnu.org' version='2.12.20'
+            module="gnutls/gnutls-2.12.20.tar.bz2"/>
     <dependencies>
       <dep package="libgcrypt" />
       <dep package="libtasn1" />
@@ -92,22 +95,20 @@
     </dependencies>
   </autotools>
 
+  <!-- 2.42 requires gnutls 3.0 -->
   <autotools id="glib-networking"
 	     autogenargs="--without-ca-certificates set_more_warnings=no">
-    <branch revision="glib-2-34"/>
+    <branch revision="glib-2-40"/>
     <dependencies>
-      <dep package="glib"/>
       <dep package="gnutls"/>
-      <dep package='libproxy'/>
     </dependencies>
   </autotools>
 
   <autotools id="libsoup" autogenargs="set_more_warnings=no">
-    <branch revision="gnome-3-6"/>
+    <branch revision="gnome-3-14"/>
     <dependencies>
       <dep package="glib"/>
       <dep package="glib-networking"/>
-      <dep package="libgnome-keyring"/>
       <dep package='sqlite'/>
     </dependencies>
   </autotools>
@@ -120,20 +121,19 @@
     </dependencies>
   </autotools>
 
-  <autotools id="libgpg-error"
-             autogen-template="%(srcdir)s/%(autogen-sh)s &amp;&amp; %(srcdir)s/configure --prefix %(prefix)s  %(autogenargs)s">
-    <branch repo='git.gnupg.org' module="libgpg-error"
-            tag="libgpg-error-1.10"/>
+  <!-- libgpg-error releases from master -->
+  <autotools id="libgpg-error" autogenargs="--disable-doc"
+             autogen-template="%(srcdir)s/%(autogen-sh)s &amp;&amp; autoreconf -if &amp;&amp; %(srcdir)s/configure --prefix %(prefix)s %(autogenargs)s">
+    <branch repo="git.gnupg.org" module="libgpg-error"/>
   </autotools>
 
-  <autotools id="libgcrypt"     autogen-sh="configure">
-
-<!-- CVS version requires fig2dev, an X11 utility.
-     <branch repo='git.gnupg.org' tag="libgcrypt-1.4.4" module='libgcrypt'/> -->
-    <branch repo='ftp.gnupg.org' version='1.5.3'
-	    module='gcrypt/libgcrypt/libgcrypt-1.5.3.tar.bz2'>
-      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/libgcrypt-build-clang.patch" strip="1"/>
-    </branch>
+  <autotools id="libgcrypt" autogen-sh="configure" autogenargs="--disable-asm">
+    <!-- Git version requires fig2dev, an X11 utility, until disable-doc option
+    is available, currently only on master. Master does not work with the
+    version of gnutls used, 2.12.20.
+    <branch repo="git.gnupg.org" tag="libgcrypt-1.5.4" module="libgcrypt"/> -->
+    <branch repo="ftp.gnupg.org" version="1.5.4"
+            module="gcrypt/libgcrypt/libgcrypt-1.5.4.tar.bz2"/>
     <dependencies>
       <dep package="libgpg-error" />
     </dependencies>
@@ -141,33 +141,45 @@
 
   <autotools id="libtasn1" supports-non-srcdir-builds="no" >
     <!-- Git repository is missing files required to build libtasn1
-    <branch repo="git.gnu.org" tag="libtasn1_2_2"  module="libtasn1"/> -->
+    <branch repo="git.gnu.org" tag="libtasn1_2_14"  module="libtasn1"/> -->
     <branch repo="ftp.gnu.org" version='2.14'
 	    module="libtasn1/libtasn1-2.14.tar.gz"/>
   </autotools>
 
   <autotools id='icu' autogen-sh='source/configure'
 	     makeargs='CFLAGS="$CFLAGS -DU_CHARSET_IS_UTF8=1 -DU_USING_ICU_NAMESPACE=0"'>
-    <branch repo='icu' version='50.1.2' checkoutdir='icu'
-	    module='icu4c/50.1.2/icu4c-50_1_2-src.tgz'>
-      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/icu-clang.patch" strip="1"/>
-    </branch>
+    <branch repo='icu' version='54.1' checkoutdir='icu'
+            module='icu4c/54.1/icu4c-54_1-src.tgz'/>
   </autotools>
 
-  <autotools id="WebKit"
-	     autogenargs="--with-target=quartz --disable-video">
-    <!-- Tags are for Safari versions, not much help to us. -->
-    <branch repo="svn.webkit.org" module="webkit/trunk" checkoutdir="WebKit"/>
+  <!-- This is WebKitGTK 1.x, for GTK 2.x.
+    disable-geolocation: Requires geoclue. No module for this yet.
+    disable-video: Requires gstreamer. If you want video, add to .jhbuildrc:
+      append_autogenargs('WebKit', '&#45;-enable-video')
+    Wno-c++11-extensions: Suppresses clang warning that makes output
+      inconvenient to read.
+    std=c99: Required for inline keyword in C.
+  -->
+  <autotools id="WebKit" autogen-sh="autoreconf"
+             autogenargs='--with-target=quartz --disable-video --with-font-backend=pango --with-gtk=2.0 --disable-geolocation --disable-webkit2 CXXFLAGS="$CXXFLAGS -Wno-c++11-extensions" CFLAGS="$CFLAGS -std=c99"'>
+    <branch repo="webkit.org" module="webkitgtk-1.10.2.tar.xz" version="1.10.2">
+      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/webkit-1.10-no-x11.patch"
+             strip="1"/>
+      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/webkit-88407-portable-echo-n.patch"
+             strip="1"/>
+      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/webkit-1.10-platform-fixes.patch"
+             strip="1"/>
+      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/webkit-1.10-pango-includes.patch"
+             strip="1"/>
+    </branch>
     <dependencies>
       <dep package="libsoup"/>
       <dep package="enchant"/>
+      <dep package="icu"/>
+      <dep package="meta-gtk-osx-freetype"/>
     </dependencies>
     <after>
       <dep package="meta-gtk-osx-core"/>
-      <dep package="libcurl"/>
-      <dep package="bison"/>
     </after>
   </autotools>
-
-
 </moduleset>

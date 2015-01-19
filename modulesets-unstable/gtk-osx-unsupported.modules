@@ -21,6 +21,8 @@
               tags-template="tags/%(tag)s"/>
   <repository type="svn" name="svn.webkit.org"
 	      href="http://svn.webkit.org/repository/"/>
+  <repository type="tarball" name="webkit.org"
+              href="http://www.webkitgtk.org/releases/"/>
   <repository type="git" name="git.webkit.org"
 	      href="git://git.webkit.org/"/>
   <repository type="git" name="git.debian.org" href="git://git.debian.org/"/>
@@ -51,14 +53,16 @@
 
   </autotools>
 
-  <autotools id="zlib" autogen-sh="configure" skip-autogen="never"
-	     supports-non-srcdir-builds="no">
-    <branch repo="sourceforge" version="1.2.7"
-	    module="libpng/zlib-1.2.7.tar.gz"/>
+  <autotools id="zlib" autogen-sh="configure" skip-autogen="never">
+    <branch repo="sourceforge" version="1.2.8"
+	    module="libpng/zlib-1.2.8.tar.xz"/>
   </autotools>
 
-  <autotools id="p11-kit">
+  <autotools id="p11-kit" autogenargs="--without-trust-paths">
     <branch repo="freedesktop" module="p11-glue/p11-kit"/>
+    <dependencies>
+      <dep package="libtasn1"/>
+    </dependencies>
   </autotools>
 
 <!-- Rudely demands TeX to build documentation -->
@@ -68,35 +72,35 @@
     <branch repo="lysator" module="nettle/nettle.git"/>
   </autotools>
 
-  <autotools id="gnutls" autogen-sh="autoreconf"
-	     autogenargs="--disable-gtk-doc-html"
-	     autogen-template="autoreconf -fis &amp;&amp; %(srcdir)s/configure --prefix %(prefix)s  %(autogenargs)s">
-    <branch repo='git.gnu.org' tag='gnutls_2_12_20' module="gnutls"/>
-    <!--<branch repo='ftp.gnu.org' version='2.8.1'
-            module="gnutls/gnutls-2.8.1.tar.bz2"/ -->
+  <autotools id="gnutls" autogen-sh="configure"
+             autogenargs="--with-libgcrypt --disable-gtk-doc-html">
+    <!-- This is the last version of gnutls that will support libgcrypt;
+    subsequent ones require nettle and gmp. Building from git does not work with
+    Automake >1.12. -->
+    <!--branch repo="git.gnu.org" module="gnutls"/-->
+    <branch repo="ftp.gnu.org" version="2.12.20"
+            module="gnutls/gnutls-2.12.20.tar.bz2"/>
     <dependencies>
       <dep package="p11-kit"/>
       <dep package="libgcrypt" />
       <dep package="libtasn1" />
-      <dep package="libnettle" />
       <dep package="zlib"/>
-      <dep package="gmp"/>
     </dependencies>
   </autotools>
 
   <autotools id="libgpg-error" autogen-sh="autogen.sh"
-             autogen-template="%(srcdir)s/%(autogen-sh)s &amp;&amp; %(srcdir)s/configure --prefix %(prefix)s  %(autogenargs)s"
-	     supports-non-srcdir-builds='no'>
+             autogenargs="--disable-doc"
+             autogen-template="%(srcdir)s/%(autogen-sh)s &amp;&amp; %(srcdir)s/configure --prefix %(prefix)s  %(autogenargs)s">
     <branch repo='git.gnupg.org' module="libgpg-error" />
   </autotools>
 
   <autotools id="libgcrypt" autogen-sh="configure" autogenargs="--disable-asm">
-<!-- CVS version requires fig2dev, an X11 utility.
-     <branch repo='cvs.gnupg.org'  module='libgcrypt'/> -->
-    <branch repo='ftp.gnupg.org' version='1.5.3'
-	    module='gcrypt/libgcrypt/libgcrypt-1.5.3.tar.bz2'>
-      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/libgcrypt-build-clang.patch" strip="1"/>
-    </branch>
+    <!-- Git version requires fig2dev, an X11 utility, until disable-doc option
+    is available, currently only on master. Master does not work with the
+    version of gnutls used, 2.12.20.
+    <branch repo="git.gnupg.org" module="libgcrypt"/> -->
+    <branch repo="ftp.gnupg.org" version="1.5.4"
+            module="gcrypt/libgcrypt/libgcrypt-1.5.4.tar.bz2"/>
     <dependencies>
       <dep package="libgpg-error" />
     </dependencies>
@@ -105,8 +109,8 @@
   <autotools id="libtasn1" supports-non-srcdir-builds="no" >
     <!-- Git repository is missing files required to build libtasn1
     <branch repo="git.gnu.org" /> -->
-    <branch repo="ftp.gnu.org" version='2.9'
-	    module="libtasn1/libtasn1-2.9.tar.gz"/>
+    <branch repo="ftp.gnu.org" version="2.14"
+            module="libtasn1/libtasn1-2.14.tar.gz"/>
   </autotools>
 
   <autotools id="libgnome-keyring" autogenargs="--disable-pam --without-root-certs">
@@ -118,12 +122,11 @@
     </dependencies>
   </autotools>
 
+  <!-- 2.42 requires gnutls 3.0 -->
   <autotools id="glib-networking" autogenargs="--without-ca-certificates set_more_warnings=no">
-    <branch/>
+    <branch revision="glib-2-40"/>
     <dependencies>
-      <dep package="glib"/>
       <dep package="gnutls"/>
-      <dep package='libproxy'/>
     </dependencies>
   </autotools>
 
@@ -137,20 +140,13 @@
     </dependencies>
   </autotools>
 
- <autotools id="libsoup-gnome">
+ <autotools id="libsoup" autogenargs="set_more_warnings=no">
     <branch />
     <dependencies>
       <dep package='sqlite'/>
-      <dep package="libgnome-keyring"/>
+      <dep package="glib"/>
       <dep package="glib-networking"/>
     </dependencies>
-  </autotools>
-
- <autotools id="libsoup" autogenargs="--without-gnome --disable-tls-check set_more_warnings=no">
-    <branch />
-    <after>
-      <dep package="glib-networking"/>
-    </after>
  </autotools>
 
  <autotools id="enchant" >
@@ -167,38 +163,58 @@
     </dependencies>
   </cmake>
 
-<!-- GNET is deprecated in favor of Glib/Gio. Don't build this unless you have to -->
-  <autotools id="gnet" autogenargs="--enable-glib2">
-    <branch />
-    <dependencies>
-      <dep package="glib"/>
-    </dependencies>
-  </autotools>
-
   <autotools id='icu' autogen-sh='source/configure'
 	     makeargs='CFLAGS="$CFLAGS -DU_CHARSET_IS_UTF8=1 -DU_USING_ICU_NAMESPACE=0"'>
-    <branch repo='icu' version='50.1.2' checkoutdir='icu'
-	    module='icu4c/50.1.2/icu4c-50_1_2-src.tgz'>
-      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/icu-clang.patch" strip="1"/>
-    </branch>
+    <branch repo='icu' version='54.1' checkoutdir='icu'
+            module='icu4c/54.1/icu4c-54_1-src.tgz'/>
   </autotools>
 
-  <autotools id="WebKit"
+  <!-- This is WebKitGTK 1.x, for GTK 2.x.
+    disable-geolocation: Requires geoclue. No module for this yet.
+    disable-video: Requires gstreamer. If you want video, add to .jhbuildrc:
+      append_autogenargs('WebKit', '&#45;-enable-video')
+    Wno-c++11-extensions: Suppresses clang warning that makes output
+      inconvenient to read.
+    std=c99: Required for inline keyword in C.
+  -->
+  <autotools id="WebKit" autogen-sh="autoreconf"
+             autogenargs='--with-target=quartz --disable-video --with-font-backend=pango --with-gtk=2.0 --disable-geolocation --disable-webkit2 CXXFLAGS="$CXXFLAGS -Wno-c++11-extensions" CFLAGS="$CFLAGS -std=c99"'>
+    <branch repo="webkit.org" module="webkitgtk-1.10.2.tar.xz" version="1.10.2">
+      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/webkit-1.10-no-x11.patch"
+             strip="1"/>
+      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/webkit-88407-portable-echo-n.patch"
+             strip="1"/>
+      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/webkit-1.10-platform-fixes.patch"
+             strip="1"/>
+      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/webkit-1.10-pango-includes.patch"
+             strip="1"/>
+    </branch>
+    <dependencies>
+      <dep package="enchant"/>
+      <dep package="icu"/>
+      <dep package="libsoup"/>
+      <dep package="meta-gtk-osx-freetype"/>
+    </dependencies>
+    <after>
+      <dep package="meta-gtk-osx-core"/>
+    </after>
+  </autotools>
+
+  <autotools id="WebKit-git"
 	     autogenargs="--enable-quartz-target --disable-x11-target --disable-video --with-font-backend=pango --with-gtk=2.0 --disable-geolocation --disable-webkit2 --disable-credential-storage --disable-svg-fonts --disable-web-audio --disable-fast-malloc --disable-gtk-doc-html">
-    <!--branch repo="svn.webkit.org" module="webkit/trunk" checkoutdir="WebKit"/-->
-    <branch repo="git.webkit.org" module="WebKit"/>
+    <!--branch repo="svn.webkit.org" module="webkit/trunk" checkoutdir="WebKit-svn"/-->
+    <branch repo="git.webkit.org" module="WebKit" checkoutdir="WebKit-git"/>
     <dependencies>
       <dep package="libsoup"/>
       <dep package="enchant"/>
-      <dep package="meta-gtk-osx-core"/>
       <dep package="meta-gtk-osx-freetype"/>
-      <dep package="zlib"/>
       <dep package="icu"/>
     </dependencies>
     <after>
       <dep package="libcurl"/>
       <dep package="bison"/>
       <!--dep package="gst-plugins-base"/-->
+      <dep package="meta-gtk-osx-gtk3"/>
     </after>
   </autotools>
 
