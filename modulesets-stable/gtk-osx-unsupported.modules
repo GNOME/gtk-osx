@@ -23,6 +23,8 @@
               href="http://www.webkitgtk.org/releases/"/>
   <repository type='tarball' name='icu'
 	      href='http://download.icu-project.org/files/'/>
+  <repository type="tarball" name="p11-glue"
+              href="http://p11-glue.freedesktop.org/releases/"/>
 
   <metamodule id="meta-gtk-osx-unsupported">
     <dependencies>
@@ -65,13 +67,22 @@
             module="libpng/zlib-1.2.8.tar.xz"/>
   </autotools>
 
+  <autotools id="p11-kit" autogen-sh="configure"
+             autogenargs="--without-trust-paths">
+    <branch repo="p11-glue" version="0.22.1" module="p11-kit-0.22.1.tar.gz"/>
+    <dependencies>
+      <dep package="libtasn1"/>
+    </dependencies>
+  </autotools>
+
   <!-- This is the last version of gnutls that will support libgcrypt;
   subsequent ones require nettle and gmp -->
   <autotools id="gnutls" autogen-sh="configure"
-	     autogenargs="--with-libgcrypt --without-p11-kit">
+             autogenargs="--with-libgcrypt">
     <branch repo='ftp.gnu.org' version='2.12.20'
             module="gnutls/gnutls-2.12.20.tar.bz2"/>
     <dependencies>
+      <dep package="p11-kit"/>
       <dep package="libgcrypt" />
       <dep package="libtasn1" />
       <dep package="zlib"/>

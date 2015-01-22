@@ -22,6 +22,8 @@
               href="http://www.webkitgtk.org/releases/"/>
   <repository type='tarball' name='icu'
 	      href='http://download.icu-project.org/files/'/>
+  <repository type="git" name="freedesktop"
+              href="git://anongit.freedesktop.org"/>
 
   <metamodule id="meta-gtk-osx-unsupported">
     <dependencies>
@@ -64,8 +66,15 @@
 	    module="libpng/zlib-1.2.8.tar.gz"/>
   </autotools>
 
+  <autotools id="p11-kit" autogenargs="--without-trust-paths">
+    <branch repo="freedesktop" module="p11-glue/p11-kit" revision="stable"/>
+    <dependencies>
+      <dep package="libtasn1"/>
+    </dependencies>
+  </autotools>
+
   <autotools id="gnutls" autogen-sh="configure"
-	     autogenargs="--with-libgcrypt --without-p11-kit">
+             autogenargs="--with-libgcrypt">
     <!-- This is the last version of gnutls that will support libgcrypt;
     subsequent ones require nettle and gmp. Building from git does not work with
     Autoamke >1.12.-->
@@ -73,6 +82,7 @@
     <branch repo='ftp.gnu.org' version='2.12.20'
             module="gnutls/gnutls-2.12.20.tar.bz2"/>
     <dependencies>
+      <dep package="p11-kit"/>
       <dep package="libgcrypt" />
       <dep package="libtasn1" />
       <dep package="zlib"/>
