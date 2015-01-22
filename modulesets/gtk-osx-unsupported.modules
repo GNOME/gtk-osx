@@ -26,6 +26,8 @@
               href="git://anongit.freedesktop.org"/>
   <repository type="git" name="lysator"
               href="https://git.lysator.liu.se/"/>
+  <repository type="git" name="gitorious" href="git://gitorious.org/"/>
+  <repository type="tarball" name="gnutls" href="ftp://ftp.gnutls.org/"/>
 
   <metamodule id="meta-gtk-osx-unsupported">
     <dependencies>
@@ -88,17 +90,16 @@
     </dependencies>
   </autotools>
 
+  <!-- Building from git does not work because they have checked in a bunch of
+  files (build-aux/, po/Makefile.in.in) that they're not supposed to.-->
   <autotools id="gnutls" autogen-sh="configure"
-             autogenargs="--with-libgcrypt">
-    <!-- This is the last version of gnutls that will support libgcrypt;
-    subsequent ones require nettle and gmp. Building from git does not work with
-    Autoamke >1.12.-->
-    <!--branch repo='git.gnu.org' revision='gnutls_2_12_20'/-->
-    <branch repo='ftp.gnu.org' version='2.12.20'
-            module="gnutls/gnutls-2.12.20.tar.bz2"/>
+             autogenargs="--disable-gtk-doc-html">
+    <!--branch repo="gitorious" module="gnutls/gnutls"/-->
+    <branch repo="gnutls" version="3.3.12"
+            module="gcrypt/gnutls/v3.3/gnutls-3.3.12.tar.xz"/>
     <dependencies>
       <dep package="p11-kit"/>
-      <dep package="libgcrypt" />
+      <dep package="libnettle"/>
       <dep package="libtasn1" />
       <dep package="zlib"/>
     </dependencies>

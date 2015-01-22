@@ -25,6 +25,7 @@
 	      href='http://download.icu-project.org/files/'/>
   <repository type="tarball" name="p11-glue"
               href="http://p11-glue.freedesktop.org/releases/"/>
+  <repository type="tarball" name="gnutls" href="ftp://ftp.gnutls.org/"/>
 
   <metamodule id="meta-gtk-osx-unsupported">
     <dependencies>
@@ -87,15 +88,13 @@
     </dependencies>
   </autotools>
 
-  <!-- This is the last version of gnutls that will support libgcrypt;
-  subsequent ones require nettle and gmp -->
   <autotools id="gnutls" autogen-sh="configure"
-             autogenargs="--with-libgcrypt">
-    <branch repo='ftp.gnu.org' version='2.12.20'
-            module="gnutls/gnutls-2.12.20.tar.bz2"/>
+             autogenargs="--disable-gtk-doc-html">
+    <branch repo="gnutls" version="3.3.12"
+            module="gcrypt/gnutls/v3.3/gnutls-3.3.12.tar.xz"/>
     <dependencies>
       <dep package="p11-kit"/>
-      <dep package="libgcrypt" />
+      <dep package="libnettle"/>
       <dep package="libtasn1" />
       <dep package="zlib"/>
     </dependencies>
