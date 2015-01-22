@@ -152,9 +152,9 @@
 
   <autotools id="libtasn1" supports-non-srcdir-builds="no" >
     <!-- Git repository is missing files required to build libtasn1
-    <branch repo="git.gnu.org" tag="libtasn1_2_14"  module="libtasn1"/> -->
-    <branch repo="ftp.gnu.org" version='2.14'
-	    module="libtasn1/libtasn1-2.14.tar.gz"/>
+    <branch repo="git.gnu.org" tag="libtasn1_4_2"  module="libtasn1"/> -->
+    <branch repo="ftp.gnu.org" version="4.2"
+            module="libtasn1/libtasn1-4.2.tar.gz"/>
   </autotools>
 
   <autotools id='icu' autogen-sh='source/configure'

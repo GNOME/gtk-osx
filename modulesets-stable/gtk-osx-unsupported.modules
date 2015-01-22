@@ -158,8 +158,8 @@
 
   <autotools id="libtasn1" supports-non-srcdir-builds="no"
 	     autogen-sh="configure">
-    <branch repo="ftp.gnu.org" version='2.14'
-	    module="libtasn1/libtasn1-2.14.tar.gz"/>
+    <branch repo="ftp.gnu.org" version="4.2"
+	    module="libtasn1/libtasn1-4.2.tar.gz"/>
   </autotools>
 
    <!-- 10.5 has 7.16.3, which is too old for some things. Otherwise can be skipped. -->
