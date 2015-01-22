@@ -24,6 +24,8 @@
 	      href='http://download.icu-project.org/files/'/>
   <repository type="git" name="freedesktop"
               href="git://anongit.freedesktop.org"/>
+  <repository type="git" name="lysator"
+              href="https://git.lysator.liu.se/"/>
 
   <metamodule id="meta-gtk-osx-unsupported">
     <dependencies>
@@ -70,6 +72,19 @@
     <branch repo="freedesktop" module="p11-glue/p11-kit" revision="stable"/>
     <dependencies>
       <dep package="libtasn1"/>
+    </dependencies>
+  </autotools>
+
+  <!-- Rudely demands TeX to build documentation -->
+  <!-- Assembler files are missing md5-compress.asm for x86_64 -->
+  <autotools id="libnettle"
+       autogenargs="--disable-documentation --disable-assembler"
+       autogen-template="autoreconf -fis &amp;&amp; %(srcdir)s/configure --prefix %(prefix)s  %(autogenargs)s">
+    <!-- gnutls 3.3.x does not support nettle 3.0 -->
+    <branch repo="lysator" module="nettle/nettle.git"
+            tag="nettle_2.7_release_20130424"/>
+    <dependencies>
+      <dep package="gmp"/>
     </dependencies>
   </autotools>
 

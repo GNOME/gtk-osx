@@ -75,6 +75,18 @@
     </dependencies>
   </autotools>
 
+  <!-- Rudely demands TeX to build documentation -->
+  <!-- Assembler files are missing md5-compress.asm for x86_64 -->
+  <autotools id="libnettle" autogen-sh="configure"
+       autogenargs="--disable-documentation --disable-assembler">
+    <!-- gnutls 3.3.x does not support nettle 3.0 -->
+    <branch repo="ftp.gnu.org" version="2.7.1"
+            module="nettle/nettle-2.7.1.tar.gz"/>
+    <dependencies>
+      <dep package="gmp"/>
+    </dependencies>
+  </autotools>
+
   <!-- This is the last version of gnutls that will support libgcrypt;
   subsequent ones require nettle and gmp -->
   <autotools id="gnutls" autogen-sh="configure"
