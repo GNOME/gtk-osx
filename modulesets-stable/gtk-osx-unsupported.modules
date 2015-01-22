@@ -121,12 +121,11 @@
     </dependencies>
   </autotools>
 
-  <!-- 2.42 requires gnutls 3.0 -->
   <autotools id="glib-networking" autogen-sh="configure"
 	     autogenargs="--without-ca-certificates set_more_warnings=no">
-    <branch module="glib-networking/2.40/glib-networking-2.40.1.tar.xz"
-            hash="sha256:9fb3e54d049a480afdb814ff7452e7ab67e5d5f607ade230d7713f19922b5a28"
-            version="2.40.1"/>
+    <branch module="glib-networking/2.42/glib-networking-2.42.1.tar.xz"
+            hash="sha256:c06bf76da3353695fcc791b7b02e5d60c01c379e554f7841dc6cbca32f65f3a0"
+            version="2.42.1"/>
     <dependencies>
       <dep package="gnutls"/>
     </dependencies>
