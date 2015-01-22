@@ -7,7 +7,6 @@
   <repository type='git' name='git.gnu.org' 
               href="git://git.savannah.gnu.org/"/>
   <repository type='git' name='git.gnupg.org' href="git://git.gnupg.org/" />
-  <repository type='tarball' name='ftp.gnupg.org' href="ftp://ftp.gnupg.org/" />
   <repository type='tarball' name='ftp.gnu.org' href="ftp://ftp.gnu.org/gnu/"/>
   <repository type="tarball" name="sourceforge" 
               href="http://downloads.sourceforge.net/sourceforge/"/>
@@ -101,13 +100,9 @@
     <branch repo='git.gnupg.org' module="libgpg-error" />
   </autotools>
 
-  <autotools id="libgcrypt" autogen-sh="configure" autogenargs="--disable-asm">
-    <!-- Git version requires fig2dev, an X11 utility, until disable-doc option
-    is available, currently only on master. Master does not work with the
-    version of gnutls used, 2.12.20.
-    <branch repo="git.gnupg.org" module="libgcrypt"/> -->
-    <branch repo="ftp.gnupg.org" version="1.5.4"
-            module="gcrypt/libgcrypt/libgcrypt-1.5.4.tar.bz2"/>
+  <autotools id="libgcrypt" autogen-sh="configure"
+             autogenargs="--disable-asm --disable-doc">
+    <branch repo="git.gnupg.org" module="libgcrypt"/>
     <dependencies>
       <dep package="libgpg-error" />
     </dependencies>

@@ -159,8 +159,8 @@
   </autotools>
 
   <autotools id="libgcrypt" autogen-sh="configure" autogenargs="--disable-asm">
-    <branch repo="ftp.gnupg.org" version="1.5.4"
-            module="gcrypt/libgcrypt/libgcrypt-1.5.4.tar.bz2"/>
+    <branch repo="ftp.gnupg.org" version="1.6.2"
+            module="gcrypt/libgcrypt/libgcrypt-1.6.2.tar.bz2"/>
     <dependencies>
       <dep package="libgpg-error" />
     </dependencies>

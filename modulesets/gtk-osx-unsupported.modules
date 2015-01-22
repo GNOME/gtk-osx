@@ -155,11 +155,11 @@
 
   <autotools id="libgcrypt" autogen-sh="configure" autogenargs="--disable-asm">
     <!-- Git version requires fig2dev, an X11 utility, until disable-doc option
-    is available, currently only on master. Master does not work with the
-    version of gnutls used, 2.12.20.
-    <branch repo="git.gnupg.org" tag="libgcrypt-1.5.4" module="libgcrypt"/> -->
-    <branch repo="ftp.gnupg.org" version="1.5.4"
-            module="gcrypt/libgcrypt/libgcrypt-1.5.4.tar.bz2"/>
+    is available, currently only on master.
+    <branch repo="git.gnupg.org" revision="LIBGCRYPT_1_6_BRANCH"
+            module="libgcrypt"/> -->
+    <branch repo="ftp.gnupg.org" version="1.6.2"
+            module="gcrypt/libgcrypt/libgcrypt-1.6.2.tar.bz2"/>
     <dependencies>
       <dep package="libgpg-error" />
     </dependencies>
