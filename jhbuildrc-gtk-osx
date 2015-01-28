@@ -333,10 +333,12 @@ def setup_sdk(target, sdk_version, architectures=[_default_arch]):
         append_autogenargs("glib", "--build=i486-apple-darwin")
         append_autogenargs("gmp", "ABI=32")
         append_autogenargs("liboil", "--host=i486-apple-darwin")
+        append_autogenargs("gnutls", "--host=i486-apple-darwin")
     elif architectures == ["x86_64"]:
         append_autogenargs("glib", "--build=x86_64-apple-darwin")
         append_autogenargs("gmp", "--host=x86_64-apple-darwin ABI=64")
         append_autogenargs("liboil", "--host=x86_64-apple-darwin")
+        append_autogenargs("gnutls", "--host=x86_64-apple-darwin")
 
     # Tiger has a somewhat messed-up resolv.h, so we need to explicitly
     # link libresolv:

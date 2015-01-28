@@ -23,6 +23,9 @@
               href="http://www.webkitgtk.org/releases/"/>
   <repository type='tarball' name='icu'
 	      href='http://download.icu-project.org/files/'/>
+  <repository type="tarball" name="p11-glue"
+              href="http://p11-glue.freedesktop.org/releases/"/>
+  <repository type="tarball" name="gnutls" href="ftp://ftp.gnutls.org/"/>
 
   <metamodule id="meta-gtk-osx-unsupported">
     <dependencies>
@@ -65,14 +68,33 @@
             module="libpng/zlib-1.2.8.tar.xz"/>
   </autotools>
 
-  <!-- This is the last version of gnutls that will support libgcrypt;
-  subsequent ones require nettle and gmp -->
-  <autotools id="gnutls" autogen-sh="configure"
-	     autogenargs="--with-libgcrypt --without-p11-kit">
-    <branch repo='ftp.gnu.org' version='2.12.20'
-            module="gnutls/gnutls-2.12.20.tar.bz2"/>
+  <autotools id="p11-kit" autogen-sh="configure"
+             autogenargs="--without-trust-paths">
+    <branch repo="p11-glue" version="0.22.1" module="p11-kit-0.22.1.tar.gz"/>
     <dependencies>
-      <dep package="libgcrypt" />
+      <dep package="libtasn1"/>
+    </dependencies>
+  </autotools>
+
+  <!-- Rudely demands TeX to build documentation -->
+  <!-- Assembler files are missing md5-compress.asm for x86_64 -->
+  <autotools id="libnettle" autogen-sh="configure"
+       autogenargs="--disable-documentation --disable-assembler">
+    <!-- gnutls 3.3.x does not support nettle 3.0 -->
+    <branch repo="ftp.gnu.org" version="2.7.1"
+            module="nettle/nettle-2.7.1.tar.gz"/>
+    <dependencies>
+      <dep package="gmp"/>
+    </dependencies>
+  </autotools>
+
+  <autotools id="gnutls" autogen-sh="configure"
+             autogenargs="--disable-gtk-doc-html">
+    <branch repo="gnutls" version="3.3.12"
+            module="gcrypt/gnutls/v3.3/gnutls-3.3.12.tar.xz"/>
+    <dependencies>
+      <dep package="p11-kit"/>
+      <dep package="libnettle"/>
       <dep package="libtasn1" />
       <dep package="zlib"/>
     </dependencies>
@@ -99,12 +121,11 @@
     </dependencies>
   </autotools>
 
-  <!-- 2.42 requires gnutls 3.0 -->
   <autotools id="glib-networking" autogen-sh="configure"
 	     autogenargs="--without-ca-certificates set_more_warnings=no">
-    <branch module="glib-networking/2.40/glib-networking-2.40.1.tar.xz"
-            hash="sha256:9fb3e54d049a480afdb814ff7452e7ab67e5d5f607ade230d7713f19922b5a28"
-            version="2.40.1"/>
+    <branch module="glib-networking/2.42/glib-networking-2.42.1.tar.xz"
+            hash="sha256:c06bf76da3353695fcc791b7b02e5d60c01c379e554f7841dc6cbca32f65f3a0"
+            version="2.42.1"/>
     <dependencies>
       <dep package="gnutls"/>
     </dependencies>
@@ -139,8 +160,8 @@
   </autotools>
 
   <autotools id="libgcrypt" autogen-sh="configure" autogenargs="--disable-asm">
-    <branch repo="ftp.gnupg.org" version="1.5.4"
-            module="gcrypt/libgcrypt/libgcrypt-1.5.4.tar.bz2"/>
+    <branch repo="ftp.gnupg.org" version="1.6.2"
+            module="gcrypt/libgcrypt/libgcrypt-1.6.2.tar.bz2"/>
     <dependencies>
       <dep package="libgpg-error" />
     </dependencies>
@@ -148,8 +169,8 @@
 
   <autotools id="libtasn1" supports-non-srcdir-builds="no"
 	     autogen-sh="configure">
-    <branch repo="ftp.gnu.org" version='2.14'
-	    module="libtasn1/libtasn1-2.14.tar.gz"/>
+    <branch repo="ftp.gnu.org" version="4.2"
+	    module="libtasn1/libtasn1-4.2.tar.gz"/>
   </autotools>
 
    <!-- 10.5 has 7.16.3, which is too old for some things. Otherwise can be skipped. -->

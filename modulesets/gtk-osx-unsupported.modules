@@ -22,6 +22,12 @@
               href="http://www.webkitgtk.org/releases/"/>
   <repository type='tarball' name='icu'
 	      href='http://download.icu-project.org/files/'/>
+  <repository type="git" name="freedesktop"
+              href="git://anongit.freedesktop.org"/>
+  <repository type="git" name="lysator"
+              href="https://git.lysator.liu.se/"/>
+  <repository type="git" name="gitorious" href="git://gitorious.org/"/>
+  <repository type="tarball" name="gnutls" href="ftp://ftp.gnutls.org/"/>
 
   <metamodule id="meta-gtk-osx-unsupported">
     <dependencies>
@@ -64,16 +70,36 @@
 	    module="libpng/zlib-1.2.8.tar.gz"/>
   </autotools>
 
-  <autotools id="gnutls" autogen-sh="configure"
-	     autogenargs="--with-libgcrypt --without-p11-kit">
-    <!-- This is the last version of gnutls that will support libgcrypt;
-    subsequent ones require nettle and gmp. Building from git does not work with
-    Autoamke >1.12.-->
-    <!--branch repo='git.gnu.org' revision='gnutls_2_12_20'/-->
-    <branch repo='ftp.gnu.org' version='2.12.20'
-            module="gnutls/gnutls-2.12.20.tar.bz2"/>
+  <autotools id="p11-kit" autogenargs="--without-trust-paths">
+    <branch repo="freedesktop" module="p11-glue/p11-kit" revision="stable"/>
     <dependencies>
-      <dep package="libgcrypt" />
+      <dep package="libtasn1"/>
+    </dependencies>
+  </autotools>
+
+  <!-- Rudely demands TeX to build documentation -->
+  <!-- Assembler files are missing md5-compress.asm for x86_64 -->
+  <autotools id="libnettle"
+       autogenargs="--disable-documentation --disable-assembler"
+       autogen-template="autoreconf -fis &amp;&amp; %(srcdir)s/configure --prefix %(prefix)s  %(autogenargs)s">
+    <!-- gnutls 3.3.x does not support nettle 3.0 -->
+    <branch repo="lysator" module="nettle/nettle.git"
+            tag="nettle_2.7_release_20130424"/>
+    <dependencies>
+      <dep package="gmp"/>
+    </dependencies>
+  </autotools>
+
+  <!-- Building from git does not work because they have checked in a bunch of
+  files (build-aux/, po/Makefile.in.in) that they're not supposed to.-->
+  <autotools id="gnutls" autogen-sh="configure"
+             autogenargs="--disable-gtk-doc-html">
+    <!--branch repo="gitorious" module="gnutls/gnutls"/-->
+    <branch repo="gnutls" version="3.3.12"
+            module="gcrypt/gnutls/v3.3/gnutls-3.3.12.tar.xz"/>
+    <dependencies>
+      <dep package="p11-kit"/>
+      <dep package="libnettle"/>
       <dep package="libtasn1" />
       <dep package="zlib"/>
     </dependencies>
@@ -96,10 +122,9 @@
     </dependencies>
   </autotools>
 
-  <!-- 2.42 requires gnutls 3.0 -->
   <autotools id="glib-networking"
 	     autogenargs="--without-ca-certificates set_more_warnings=no">
-    <branch revision="glib-2-40"/>
+    <branch revision="glib-2-42"/>
     <dependencies>
       <dep package="gnutls"/>
     </dependencies>
@@ -130,11 +155,11 @@
 
   <autotools id="libgcrypt" autogen-sh="configure" autogenargs="--disable-asm">
     <!-- Git version requires fig2dev, an X11 utility, until disable-doc option
-    is available, currently only on master. Master does not work with the
-    version of gnutls used, 2.12.20.
-    <branch repo="git.gnupg.org" tag="libgcrypt-1.5.4" module="libgcrypt"/> -->
-    <branch repo="ftp.gnupg.org" version="1.5.4"
-            module="gcrypt/libgcrypt/libgcrypt-1.5.4.tar.bz2"/>
+    is available, currently only on master.
+    <branch repo="git.gnupg.org" revision="LIBGCRYPT_1_6_BRANCH"
+            module="libgcrypt"/> -->
+    <branch repo="ftp.gnupg.org" version="1.6.2"
+            module="gcrypt/libgcrypt/libgcrypt-1.6.2.tar.bz2"/>
     <dependencies>
       <dep package="libgpg-error" />
     </dependencies>
@@ -142,9 +167,9 @@
 
   <autotools id="libtasn1" supports-non-srcdir-builds="no" >
     <!-- Git repository is missing files required to build libtasn1
-    <branch repo="git.gnu.org" tag="libtasn1_2_14"  module="libtasn1"/> -->
-    <branch repo="ftp.gnu.org" version='2.14'
-	    module="libtasn1/libtasn1-2.14.tar.gz"/>
+    <branch repo="git.gnu.org" tag="libtasn1_4_2"  module="libtasn1"/> -->
+    <branch repo="ftp.gnu.org" version="4.2"
+            module="libtasn1/libtasn1-4.2.tar.gz"/>
   </autotools>
 
   <autotools id='icu' autogen-sh='source/configure'
