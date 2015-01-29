@@ -324,6 +324,7 @@ def setup_sdk(target, sdk_version, architectures=[_default_arch]):
     for arch in architectures:
         environ_prepend("CFLAGS", "-arch " + arch)
         environ_prepend("CXXFLAGS", "-arch " + arch)
+        environ_prepend("CPPFLAGS", "-arch " + arch)
         environ_prepend("OBJCFLAGS", "-arch " + arch)
         environ_prepend("LDFLAGS", "-arch " + arch)
     # For intel, set glib's build parameter so that it builds the
