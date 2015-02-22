@@ -82,7 +82,9 @@
        autogenargs="--disable-documentation --disable-assembler">
     <!-- gnutls 3.3.x does not support nettle 3.0 -->
     <branch repo="ftp.gnu.org" version="2.7.1"
-            module="nettle/nettle-2.7.1.tar.gz"/>
+            module="nettle/nettle-2.7.1.tar.gz">
+      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/libnettle-cc-for-build-needs-cflags.patch" strip="1"/>
+    </branch>
     <dependencies>
       <dep package="gmp"/>
     </dependencies>
