@@ -372,9 +372,9 @@ Libglade itself is deprecated. This is the last release. -->
     </dependencies>
   </autotools>
 
-  <autotools id="gtkspell3" autogen-sh="autoreconf">
-    <branch module="gtkspell/gtkspell3-3.0.4.tar.gz" repo="sourceforge"
-	    version="3.0.4">
+  <autotools id="gtkspell3" autogen-sh="configure">
+    <branch module="gtkspell/gtkspell3-3.0.7.tar.gz" repo="sourceforge"
+	    version="3.0.7">
     </branch>
     <dependencies>
       <dep package="enchant"/>

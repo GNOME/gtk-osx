@@ -260,7 +260,7 @@ def setup_sdk(target, sdk_version, architectures=[_default_arch]):
         environ_prepend("OBJCFLAGS", "-I" + sdkdir + "/usr/include")
         environ_prepend("CPPFLAGS", "-I" + sdkdir + "/usr/include")
         environ_prepend("CMAKE_PREFIX_PATH", os.path.join(sdkdir, 'usr'))
-
+        environ_prepend("LIBRARY_PATH", sdkdir + "/usr/lib")
         # It looks like -isysroot is broken when building on 10.4, causing link
         # problems. But we don't really need to set it for 10.4 so just
         # skip that.

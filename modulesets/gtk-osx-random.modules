@@ -306,10 +306,9 @@
   </autotools>
 <!-- GtkSpell has switched to Mercurial for VCS, so we'll use the
      tarball to avoid the dependency. -->
-  <autotools id="gtkspell3" autogen-sh="autoreconf">
-    <branch module="gtkspell/gtkspell3-3.0.0.tar.gz" repo="sourceforge"
-	    version="3.0.0">
-      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/gtkspell-bug-18-Makefile.am.patch" strip="1"/>
+  <autotools id="gtkspell3" autogen-sh="configure">
+    <branch module="gtkspell/gtkspell3-3.0.7.tar.gz" repo="sourceforge"
+	    version="3.0.7">
     </branch>
     <dependencies>
       <dep package="enchant"/>
