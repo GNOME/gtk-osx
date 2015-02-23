@@ -28,6 +28,8 @@
   <repository type="git" name="savannah" href="git://git.sv.gnu/org/"/>
   <repository type="tarball" name="boehm"
 	      href="http://www.hboem.info/"/>
+  <repository type="svn" name="exiv2.org"
+	      href="svn://dev.exiv2.org/"/>
 
   <metamodule id="meta-gtk-osx-random">
     <dependencies>
@@ -204,6 +206,20 @@
     </dependencies>
   </autotools>
 
+  <cmake id="exiv2" supports-non-srcdir-builds="no">
+    <branch repo="exiv2.org" module="svn">
+    </branch>
+  </cmake>
+  
+  <autotools id="gexiv2" supports-non-srcdir-builds="no"
+	     autogenargs="--enable-introspection --with-libtool=libtool"
+	     autogen-template="%(srcdir)s/%(autogen-sh)s --prefix=%(prefix)s %(autogenargs)s">
+    <branch/>
+    <dependencies>
+      <dep package="exiv2"/>
+    </dependencies>
+  </autotools>
+  
   <autotools id="gimp" 
              autogenargs="--disable-python --disable-print --without-x
                           --without-dbus --without-gnomevfs --without-wmf"
@@ -217,9 +233,14 @@
       <dep package="lcms"/>
       <dep package="fontconfig"/>
       <dep package="gegl"/>
+      <dep package="gexiv2"/>
     </dependencies>
   </autotools>
 
+  <autotools id="json-glib">
+    <branch/>
+  </autotools>
+  
   <autotools id="babl">
     <branch />
   </autotools>
@@ -228,6 +249,7 @@
     <branch />
     <dependencies>
       <dep package="babl"/>
+      <dep package="json-glib"/>
     </dependencies>
   </autotools>
 

@@ -236,6 +236,10 @@
     </dependencies>
   </autotools>
 
+  <autotools id="json-glib">
+    <branch tag="1.0.2"/>
+  </autotools>
+  
    <autotools id="babl">
      <branch tag="BABL_0_1_10"/>
   </autotools>
@@ -244,6 +248,7 @@
     <branch tag="GEGL_0_2_0"/>
     <dependencies>
       <dep package="babl"/>
+      <dep package="json-glib"/>
     </dependencies>
   </autotools>
 

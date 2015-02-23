@@ -282,8 +282,8 @@ Libglade itself is deprecated. This is the last release. -->
              autogenargs="--disable-python --without-x --without-dbus
 			  --without-gnomevfs --without-wmf --enable-binreloc "
 	     makeargs='LDFLAGS="-framework Carbon"'>
-    <branch module="gimp/v2.8/gimp-2.8.2.tar.bz2" version="2.8.2"
-            md5sum="b542138820ca3a41cbd63fc331907955" repo="gimp">
+    <branch module="gimp/v2.8/gimp-2.8.14.tar.bz2" version="2.8.14"
+            md5sum="233c948203383fa078434cc3f8f925cb" repo="gimp">
       <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/Bug-555525-plug-ins-twain-tw_mac.c.patch" strip="1" />
     </branch>
     <after>
@@ -295,6 +295,11 @@ Libglade itself is deprecated. This is the last release. -->
       <dep package="fontconfig"/>
       <dep package="gegl"/>
     </dependencies>
+  </autotools>
+
+  <autotools id='json-glib' autogen-sh="configure">
+    <branch   module="json-glib/1.0/json-glib-1.0.2.tar.xz" version="1.0.2"
+	      hash="sha256:887bd192da8f5edc53b490ec51bf3ffebd958a671f5963e4f3af32c22e35660a"/>
   </autotools>
 
   <autotools id="babl" >
@@ -309,6 +314,7 @@ Libglade itself is deprecated. This is the last release. -->
             module="gegl/0.2/gegl-0.2.0.tar.bz2"/>
     <dependencies>
       <dep package="babl"/>
+      <dep package="json-glib"/>
     </dependencies>
   </autotools>
 
