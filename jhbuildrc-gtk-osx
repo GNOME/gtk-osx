@@ -266,6 +266,10 @@ def setup_sdk(target, sdk_version, architectures=[_default_arch]):
         # skip that.
         #
 
+        #It's often necessary to look for things in the SDK when
+        #developing, and it takes a lot of typing, so define a
+        #convenience environment variable:
+        environ_append('SDKDIR', sdkdir)
 
 #Apple Documentation says that "-syslibroot" is the arg to pass to the
 #linker, but we are using the compiler to control the linker, and
