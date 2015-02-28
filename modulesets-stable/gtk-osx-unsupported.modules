@@ -26,6 +26,8 @@
   <repository type="tarball" name="gnutls" href="ftp://ftp.gnutls.org/"/>
   <repository type="tarball" name="webm"
               href="http://downloads.webmproject.org/releases/"/>
+  <repository type="tarball" name="openssl"
+	      href="https://www.openssl.org/source/"/>
 
   <metamodule id="meta-gtk-osx-unsupported">
     <dependencies>
@@ -80,6 +82,13 @@
     </dependencies>
   </autotools>
 
+  <autotools id="openssl" autogen-sh="Configure"
+	     autogen-template="%(srcdir)s/Configure --prefix=%(prefix)s  darwin-i386-cc shared"
+	     supports-non-srcdir-builds="no">
+    <branch module="openssl-0.9.8ze.tar.gz" version="0.9.8ze" repo="openssl"/>
+  </autotools>
+
+
   <!-- Rudely demands TeX to build documentation -->
   <!-- Assembler files are missing md5-compress.asm for x86_64 -->
   <autotools id="libnettle" autogen-sh="configure"
@@ -91,6 +100,7 @@
     </branch>
     <dependencies>
       <dep package="gmp"/>
+      <dep package="openssl"/>
     </dependencies>
   </autotools>
 
