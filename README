@@ -4,7 +4,7 @@ for building GTK+ OS X with jhbuild.
 NOTE: If you only want to build GTK+, just download
 gtk-osx-build-setup.sh and follow the instructions at:
 
- http://live.gnome.org/GTK%2B/OSX/Build
+ https://wiki.gnome.org/Projects/GTK%2B/OSX/Building
 
 There are 3 modulesets. You can select the one which most suits you by
 adding the line
