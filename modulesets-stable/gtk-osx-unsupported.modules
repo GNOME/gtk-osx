@@ -164,6 +164,7 @@
 	    repo="abisource/enchant">
  <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/enchant-gsize.patch" strip="1"/>
  <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/enchant-env.patch" strip="1"/>
+ <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/enchant-xdg-pat.patch" strip="1"/>
     </branch>
     <dependencies>
       <dep package="glib"/>
