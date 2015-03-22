@@ -670,14 +670,10 @@ environ_prepend('CPPFLAGS', '-I' + prefix + '/include')
 # Make sure that ltdl can find our libraries
 addpath("LTDL_LIBRARY_PATH", prefix + "/lib")
 
-# Add additional Python/Perl paths so that our modules can be found.
-#
-_version = 'python' + str(sys.version_info[0]) + '.' + str(sys.version_info[1])
-prependpath('PYTHONPATH', os.path.join(prefix , 'lib',  _version, 'site-packages', 'gtk-2.0'))
-prependpath('PYTHONPATH', os.path.join(prefix , 'lib',  _version))
+# Add additional Perl paths so that our modules can be found.
+
 prependpath('PERL5LIB', prefix + '/lib/perl5/vendor_perl')
 prependpath('PERL5LIB', prefix + '/lib/perl5/site_perl')
-os.environ['PYTHON_SITE_PACKAGES'] = os.path.join(prefix, 'lib', _version, 'site-packages')
 
 # Point gtk-doc and other xsltproc users to our XML catalog.
 #
