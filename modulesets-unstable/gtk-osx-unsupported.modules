@@ -20,8 +20,6 @@
               tags-template="tags/%(tag)s"/>
   <repository type="svn" name="svn.webkit.org"
 	      href="http://svn.webkit.org/repository/"/>
-  <repository type="tarball" name="webkit.org"
-              href="http://www.webkitgtk.org/releases/"/>
   <repository type="git" name="git.webkit.org"
 	      href="git://git.webkit.org/"/>
   <repository type="git" name="git.debian.org" href="git://git.debian.org/"/>

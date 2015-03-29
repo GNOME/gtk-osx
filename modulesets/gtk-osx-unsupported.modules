@@ -28,6 +28,8 @@
               href="https://git.lysator.liu.se/"/>
   <repository type="git" name="gitorious" href="git://gitorious.org/"/>
   <repository type="tarball" name="gnutls" href="ftp://ftp.gnutls.org/"/>
+  <repository type='tarball' name='icu'
+	      href='http://download.icu-project.org/files/'/>
 
   <metamodule id="meta-gtk-osx-unsupported">
     <dependencies>
