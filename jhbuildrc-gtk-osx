@@ -288,11 +288,16 @@ def setup_sdk(target, sdk_version, architectures=[_default_arch]):
 
     #Glib and autoconf-2.63 have issues with endianness
     #
-    if architectures == ["i386"] or architectures == ["x86_64"]:
+    if architectures == ["i386"]:
         append_autogenargs("glib", "ac_cv_c_bigendian=no")
+        append_autogenargs("openssl", "darwin-i386-cc")
+    elif architectures == ["x86_64"]:
+        append_autogenargs("glib", "ac_cv_c_bigendian=no")
+        append_autogenargs("openssl", "darwin-x86_64-cc")
     elif architectures == ["ppc"]:
         append_autogenargs("glib", "ac_cv_c_bigendian=yes")
         append_autogenargs("gmp", 'CFLAGS="-force_cpusubtype_ALL $CFLAGS"')
+        append_autogenargs("openssl", "darwin-ppc-cc")
 
     # For unknown reasons, iconv is not picked up correctly without this
     #

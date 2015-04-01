@@ -91,8 +91,7 @@
     </dependencies>
   </autotools>
 
-  <autotools id="openssl" autogen-sh="Configure"
-	     autogen-template="%(srcdir)s/Configure --prefix=%(prefix)s  darwin-i386-cc shared"
+  <autotools id="openssl" autogen-sh="Configure" autogenargs="shared"
 	     supports-non-srcdir-builds="no">
     <branch module="openssl-0.9.8ze.tar.gz" version="0.9.8ze" repo="openssl"/>
   </autotools>
@@ -172,7 +171,7 @@
 	    repo="abisource/enchant">
  <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/enchant-gsize.patch" strip="1"/>
  <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/enchant-env.patch" strip="1"/>
- <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/enchant-xdg-pat.patch" strip="1"/>
+ <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/enchant-xdg-path.patch" strip="1"/>
     </branch>
     <dependencies>
       <dep package="glib"/>
