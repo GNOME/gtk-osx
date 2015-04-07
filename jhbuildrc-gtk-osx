@@ -293,7 +293,7 @@ def setup_sdk(target, sdk_version, architectures=[_default_arch]):
         append_autogenargs("openssl", "darwin-i386-cc")
     elif architectures == ["x86_64"]:
         append_autogenargs("glib", "ac_cv_c_bigendian=no")
-        append_autogenargs("openssl", "darwin-x86_64-cc")
+        append_autogenargs("openssl", "darwin64-x86_64-cc")
     elif architectures == ["ppc"]:
         append_autogenargs("glib", "ac_cv_c_bigendian=yes")
         append_autogenargs("gmp", 'CFLAGS="-force_cpusubtype_ALL $CFLAGS"')
