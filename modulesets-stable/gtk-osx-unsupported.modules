@@ -91,7 +91,10 @@
     </dependencies>
   </autotools>
 
+  <!-- of the many arguments such as prefix and libdir that jhbuild might pass
+  to configure, openssl only understands prefix, and only with =. -->
   <autotools id="openssl" autogen-sh="Configure" autogenargs="shared"
+             autogen-template="%(srcdir)s/%(autogen-sh)s --prefix=%(prefix)s %(autogenargs)s"
 	     supports-non-srcdir-builds="no">
     <branch module="openssl-0.9.8ze.tar.gz" version="0.9.8ze" repo="openssl"/>
   </autotools>
