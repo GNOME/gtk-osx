@@ -146,7 +146,7 @@
   </autotools>
 
   <autotools id="gtksourceview-gtk3">
-    <branch revision="gnome-3-6" module="gtksourceview"/>
+    <branch revision="gnome-3-14" module="gtksourceview"/>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
       <dep package="meta-gtk-osx-gtk3"/>
