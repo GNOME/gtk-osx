@@ -160,8 +160,8 @@
     is available, currently only on master.
     <branch repo="git.gnupg.org" revision="LIBGCRYPT_1_6_BRANCH"
             module="libgcrypt"/> -->
-    <branch repo="ftp.gnupg.org" version="1.6.2"
-            module="gcrypt/libgcrypt/libgcrypt-1.6.2.tar.bz2"/>
+    <branch repo="ftp.gnupg.org" version="1.6.3"
+            module="gcrypt/libgcrypt/libgcrypt-1.6.3.tar.bz2"/>
     <dependencies>
       <dep package="libgpg-error" />
     </dependencies>
@@ -169,13 +169,13 @@
 
   <autotools id="libtasn1" supports-non-srcdir-builds="no" >
     <!-- Git repository is missing files required to build libtasn1
-    <branch repo="git.gnu.org" tag="libtasn1_4_2"  module="libtasn1"/> -->
-    <branch repo="ftp.gnu.org" version="4.2"
-            module="libtasn1/libtasn1-4.2.tar.gz"/>
+    <branch repo="git.gnu.org" tag="libtasn1_4_4"  module="libtasn1"/> -->
+    <branch repo="ftp.gnu.org" version="4.4"
+            module="libtasn1/libtasn1-4.4.tar.gz"/>
   </autotools>
 
   <autotools id="libwebp">
-    <branch repo="chromium" module="webm/libwebp" revision="0.4.2"/>
+    <branch repo="chromium" module="webm/libwebp" revision="0.4.3"/>
   </autotools>
 
   <!-- This is WebKitGTK 1.x, for GTK 2.x.

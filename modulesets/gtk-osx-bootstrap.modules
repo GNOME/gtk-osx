@@ -35,8 +35,8 @@
   </autotools>
 
   <autotools id="libpng" autogenargs="--enable-shared" autogen-sh="configure">
-    <branch version="1.6.14" module="libpng/libpng-1.6.14.tar.xz"
-	    repo="sourceforge"/>
+    <branch version="1.6.17" module="libpng/libpng-1.6.17.tar.xz"
+            repo="sourceforge" md5sum="430a9b76b78533235cd4b9b26ce75c7e"/>
   </autotools>
 
   <autotools id="libjpeg" autogen-sh="configure">
@@ -125,13 +125,13 @@
 
   <autotools id="icu" autogen-sh="source/configure"
              makeargs='CFLAGS="$CFLAGS -DU_CHARSET_IS_UTF8=1 -DU_USING_ICU_NAMESPACE=0"'>
-    <branch repo="icu" version="54.1" checkoutdir="icu"
-            module="icu4c/54.1/icu4c-54_1-src.tgz"/>
+    <branch repo="icu" version="55.1" checkoutdir="icu"
+            module="icu4c/55.1/icu4c-55_1-src.tgz"/>
   </autotools>
 
   <autotools id="harfbuzz"
              autogenargs="--with-coretext --with-freetype --with-icu">
-    <branch repo="freedesktop" tag="0.9.35"/>
+    <branch repo="freedesktop" tag="0.9.40"/>
     <dependencies>
       <dep package="freetype-no-harfbuzz"/>
       <dep package="ragel"/>
