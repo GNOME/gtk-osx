@@ -227,6 +227,8 @@
              strip="1"/>
       <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/webkit-140167-disable-netscape-api.patch"
              strip="1"/>
+      <!-- This patch can be commented out for XCode >= 6.3, but does no harm if
+      it's left in -->
       <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/webkit-133293-cfi-clang-failure.patch"
              strip="1"/>
       <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/webkit-126433-check-platform-gtk.patch"
