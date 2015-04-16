@@ -99,7 +99,10 @@
   <waf id="pycairo-python2.6">
     <branch module="py2cairo-1.10.0.tar.bz2" repo="cairographics"
             version="1.10.0"
-	    hash="sha1:2efa8dfafbd6b8e492adaab07231556fec52d6eb"/>
+            hash="sha1:2efa8dfafbd6b8e492adaab07231556fec52d6eb">
+      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/py2cairo-python2.6-Dont-try-to-guess-arch.patch"
+             strip="1"/>
+    </branch>
     <dependencies>
       <dep package="cairo"/>
     </dependencies>

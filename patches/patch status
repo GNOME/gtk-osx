@@ -73,3 +73,8 @@ gstreamer:      gstreamer-fix-includes-in-gst-datetime.patch
                 gstreamer-680428-Fix-flex-version-check.patch
                 gstreamer-706462-Make-grammar-y-work-with-Bison-3.patch
                 All fixed on 0.10 branch, only needed for modulesets-stable.
+
+py2cairo-python2.6: py2cairo-python2.6-Dont-try-to-guess-arch.patch
+		Needed to work around broken behaviour in waf.
+		Not sure if this will ever be fixed.
+		https://code.google.com/p/waf/issues/detail?id=1505
