@@ -80,9 +80,9 @@ Libglade itself is deprecated. This is the last release. -->
   </autotools>
 
   <autotools id="vala" autogen-sh="configure">
-    <branch repo="ftp.gnome.org" version="0.26.0"
-            module="vala/0.26/vala-0.26.0.tar.xz"
-            hash="sha256:c1d0a6a485d5cbfbe027483adfc5f7c80c2404b692375be80d75193d915dcd2f"/>
+    <branch repo="ftp.gnome.org" version="0.28.0"
+            module="vala/0.28/vala-0.28.0.tar.xz"
+            hash="sha256:0d9e3bd3f82145664875f7c29b2f544ba92d2814f75412948f774c0727fc977f"/>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
       <dep package="meta-gtk-osx-core"/>
