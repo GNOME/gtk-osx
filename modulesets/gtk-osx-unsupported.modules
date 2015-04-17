@@ -126,7 +126,7 @@
 
   <autotools id="glib-networking"
 	     autogenargs="--without-ca-certificates set_more_warnings=no">
-    <branch revision="glib-2-42"/>
+    <branch revision="glib-2-44"/>
     <dependencies>
       <dep package="gnutls"/>
     </dependencies>
