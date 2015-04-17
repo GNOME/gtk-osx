@@ -47,7 +47,7 @@
   </autotools>
 
   <autotools id="adwaita-icon-theme">
-    <branch revision="gnome-3-14"/>
+    <branch revision="gnome-3-16"/>
     <dependencies>
       <dep package="librsvg"/>
       <dep package="hicolor-icon-theme"/>
@@ -56,7 +56,7 @@
   </autotools>
 
   <autotools id="gnome-themes-standard" autogenargs="--disable-gtk2-engine">
-    <branch revision="gnome-3-14"/>
+    <branch revision="master"/> <!-- no gnome-3-16 branch yet -->
     <dependencies>
       <dep package="librsvg"/>
       <dep package="adwaita-icon-theme"/>
