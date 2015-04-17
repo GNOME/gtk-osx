@@ -82,7 +82,7 @@
   </autotools>
 
   <autotools id="libepoxy">
-    <branch repo="github" module="Sonicadvance1/libepoxy" revision="OSX-NoX11Support"/>
+    <branch repo="github" module="anholt/libepoxy"/>
     <dependencies>
       <dep package="xorg-util-macros"/>
     </dependencies>
