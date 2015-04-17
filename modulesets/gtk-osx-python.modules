@@ -121,7 +121,7 @@
       <dep package="cairo"/>
     </dependencies>
     <after>
-      <dep package="python"/>
+      <dep package="python3"/>
       <dep package="meta-gtk-osx-core"/>
     </after>
   </autotools>
