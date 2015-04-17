@@ -171,10 +171,8 @@
   </autotools>
 
    <autotools id="pygobject3" autogen-sh="configure" >
-    <branch version="3.14.0" module="pygobject/3.14/pygobject-3.14.0.tar.xz"
-	    hash="sha256:779effa93f4b59cdb72f4ab0128fb3fd82900bf686193b570fd3a8ce63392d54">
-            <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/pygi-cache-double-typedef.patch" strip="1"/>
-    </branch>
+    <branch version="3.16.1" module="pygobject/3.16/pygobject-3.16.1.tar.xz"
+	    hash="sha256:7d96dad050f15ec1688617b749bb485811842de46a22d31f9396023e8eaa1ec3"/>
     <dependencies>
       <dep package="meta-gtk-osx-gtk3"/>
     </dependencies>
