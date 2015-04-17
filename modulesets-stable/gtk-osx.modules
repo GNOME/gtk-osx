@@ -142,6 +142,7 @@
      </dependencies>
     <after>
       <dep package="gobject-introspection"/>
+      <dep package="gobject-introspection-10"/>
       <dep package="meta-gtk-osx-freetype"/>
       <dep package="glib"/>
       <dep package="meta-gtk-osx-bootstrap"/>
@@ -156,6 +157,8 @@
     <after>
       <dep package="glib"/>
       <dep package="meta-gtk-osx-bootstrap"/>
+      <dep package="gobject-introspection"/>
+      <dep package="gobject-introspection-10"/>
     </after>
   </autotools>
 
@@ -164,6 +167,8 @@
             hash="sha256:4853830616113db4435837992c0aebd94cbb993c44dc55063cee7f72a7bef8be"/>
     <after>
       <dep package="pango"/>
+      <dep package="gobject-introspection"/>
+      <dep package="gobject-introspection-10"/>
     </after>
   </autotools>
 

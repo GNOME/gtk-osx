@@ -132,6 +132,8 @@
     </dependencies>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
+      <dep package="gobject-introspection"/>
+      <dep package="gobject-introspection-10"/>
     </after>
   </autotools>
 
@@ -140,6 +142,8 @@
     <branch />
     <after>
       <dep package="pango"/>
+      <dep package="gobject-introspection"/>
+      <dep package="gobject-introspection-10"/>
     </after>
   </autotools>
 
