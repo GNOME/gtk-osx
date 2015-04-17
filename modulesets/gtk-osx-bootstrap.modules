@@ -95,7 +95,7 @@
   </autotools>
 
   <autotools id="yelp-xsl">
-    <branch repo="git.gnome.org" tag="3.14.0"/> <!--no gnome-3-14 branch yet-->
+    <branch repo="git.gnome.org" revision="gnome-3-16"/>
     <dependencies>
       <dep package="libxml2"/>
       <dep package="libxslt"/>
@@ -103,8 +103,9 @@
     </dependencies>
   </autotools>
 
+  <!-- Has been releasing from master for quite a while now -->
   <autotools id="yelp-tools">
-    <branch repo="git.gnome.org" tag="3.14.1"/> <!--no gnome-3-14 branch yet-->
+    <branch repo="git.gnome.org"/>
     <dependencies>
       <dep package="libxml2"/>
       <dep package="libxslt"/>
