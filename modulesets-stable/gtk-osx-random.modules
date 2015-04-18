@@ -158,8 +158,8 @@ Libglade itself is deprecated. This is the last release. -->
      change back to just "glade"-->
   <autotools id="glade" autogen-sh="configure"
 	     autogenargs="--disable-scrollkeeper">
-    <branch module="glade/3.16/glade-3.16.1.tar.xz" version="3.16.1"
-            hash="sha256:994ac258bc100d3907ed40a2880c3144f13997b324477253e812d59f2716523f">
+    <branch module="glade/3.18/glade-3.18.3.tar.xz" version="3.18.3"
+            hash="sha256:ecdbce46e7fbfecd463be840b94fbf54d83723b3ebe075414cfd225ddab66452">
       <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/glade-3_16_1.patch" strip="1"/>
     </branch>
     <dependencies>

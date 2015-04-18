@@ -129,7 +129,7 @@
   </autotools>
 
   <autotools id="glade" autogenargs="--disable-scrollkeeper">
-    <branch revision="glade-3-14"/>
+    <branch revision="glade-3-18"/>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
       <dep package="meta-gtk-osx-themes"/>
