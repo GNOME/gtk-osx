@@ -97,10 +97,8 @@
     </dependencies>
   </autotools>
 
-  <!-- Devhelp is another Richard Hult/Imendio project. It seems to be
-       actively maintained by others, but no one may get around to
-       doing a formal release, so if you're using this it probably
-       will pay to override the revision. -->
+  <!-- Devhelp 3.8 is the last release to use the WebKit1 API, so you probably
+       need to override the revision. -->
   <autotools id="devhelp">
     <branch />
     <after>
@@ -109,8 +107,10 @@
       <dep package="meta-gtk-osx-core"/>
     </after>
     <dependencies>
-      <dep package="WebKit"/>
-      <dep package="libglade"/>
+      <dep package="webkit1gtk3"/>
+      <dep package="gsettings-desktop-schemas"/>
+      <!-- Without shared-mime-info, HTML documents display as plain text -->
+      <dep package="shared-mime-info"/>
     </dependencies>
   </autotools>
 
@@ -203,6 +203,13 @@
             repo="git.freedesktop.org"/>
     <dependencies>
       <dep package="glib"/>
+    </dependencies>
+  </autotools>
+
+  <autotools id="gsettings-desktop-schemas" autogenargs="--enable-introspection=yes">
+    <branch/>
+    <dependencies>
+      <dep package="gobject-introspection"/>
     </dependencies>
   </autotools>
 

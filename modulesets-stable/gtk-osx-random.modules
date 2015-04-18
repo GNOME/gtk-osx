@@ -118,20 +118,20 @@ Libglade itself is deprecated. This is the last release. -->
     </dependencies>
   </autotools>
 
-<!-- Devhelp-gtk3 depends upon Webkit for Gtk3, something that I
-     haven't gotten to build yet. If you want to give it a try, you'll
-     be using WebKit-svn, which is enormous and difficult. Good
-     Luck. -->
+  <!-- 3.8 is the last version to support WebKit1 -->
   <autotools id="devhelp-gtk3" autogen-sh="configure">
-    <branch module="devhelp/3.6/devhelp-3.6.0.tar.xz" version="3.6.0"
-            hash="sha256:bf0576d5d70496367ccb22be53be620bbfe341bd491c1d725cfb59d566769fe1"/>
+    <branch module="devhelp/3.8/devhelp-3.8.2.tar.xz" version="3.8.2"
+            hash="sha256:a245b53824c6f2ff89245ff807bb2140bde74951ea6f1d759a0fd0c6959ca9f7"/>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
       <dep package="meta-gtk-osx-themes"/>
       <dep package="meta-gtk-osx-gtk3"/>
     </after>
     <dependencies>
-      <dep package="WebKit-svn"/>
+      <dep package="webkit1gtk3"/>
+      <dep package="gsettings-desktop-schemas"/>
+      <!-- Without shared-mime-info, HTML documents display as plain text -->
+      <dep package="shared-mime-info"/>
     </dependencies>
   </autotools>
 
@@ -275,6 +275,16 @@ Libglade itself is deprecated. This is the last release. -->
     </branch>
     <dependencies>
       <dep package="glib"/>
+    </dependencies>
+  </autotools>
+
+  <autotools id="gsettings-desktop-schemas" autogen-sh="configure"
+             autogenargs="--enable-introspection=yes">
+    <branch module="gsettings-desktop-schemas/3.16/gsettings-desktop-schemas-3.16.1.tar.xz"
+            version="3.16.1"
+            hash="sha256:74fe9fdad510c8a6666febeceb7ebafc581ef990b3afcc8c1e8b5d90b24b3461"/>
+    <dependencies>
+      <dep package="gobject-introspection"/>
     </dependencies>
   </autotools>
 
