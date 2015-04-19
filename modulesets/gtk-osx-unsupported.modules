@@ -94,13 +94,13 @@
 
   <!-- Building from git does not work because they have checked in a bunch of
   files (build-aux/, po/Makefile.in.in) that they're not supposed to.-->
+  <!-- Building with p11-kit support breaks g-ir-scanner, for some weird reason. -->
   <autotools id="gnutls" autogen-sh="configure"
-             autogenargs="--disable-gtk-doc-html">
+             autogenargs="--disable-gtk-doc-html --without-p11-kit">
     <!--branch repo="gitorious" module="gnutls/gnutls"/-->
     <branch repo="gnutls" version="3.3.12"
             module="gcrypt/gnutls/v3.3/gnutls-3.3.12.tar.xz"/>
     <dependencies>
-      <dep package="p11-kit"/>
       <dep package="libnettle"/>
       <dep package="libtasn1" />
       <dep package="zlib"/>
