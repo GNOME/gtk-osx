@@ -23,7 +23,7 @@
   <repository type="git" name="git.gnome.org"
               href="git://git.gnome.org/"/>
   <repository type="tarball" name="cups"
-	      href="http://ftp.easysw.com/pub/"/>
+	      href="https://www.cups.org/software/"/>
   <repository type="git" name="gitorious" href="https://gitorious.org/"/>
   <repository type="tarball" name="icu"
               href="http://download.icu-project.org/files/"/>
@@ -81,7 +81,7 @@
   <!-- Cups is needed *only* for Tiger, and skipped otherwise -->
   <autotools id='cups' autogen-sh='configure' skip-autogen='never'
 	     autogenargs='DSOFLAGS="$LDFLAGS"'>
-    <branch module="cups/1.2.12/cups-1.2.12-source.tar.bz2"
+    <branch module="1.2.12/cups-1.2.12-source.tar.bz2"
 	    version="1.2.12" repo="cups"  checkoutdir='cups-1.2.12'/>
     <dependencies>
       <dep package="libtiff"/>
