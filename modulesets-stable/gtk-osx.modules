@@ -159,6 +159,7 @@
       <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0008-Implement-GtkDragSourceOwner-pasteboardChangedOwner.patch" strip="1"/>
       <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0006-Bug-658722-Drag-and-Drop-sometimes-stops-working.patch" strip="1"/>
 <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/gtk+-2-m4-creation.patch" strip="1"/>
+      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0001-Bug-707945-GTK2-Quartz-typeahead-find-in-GtkTreeView.patch" strip="1"/>
    </branch>
     <dependencies>
       <dep package="glib"/>
@@ -177,6 +178,7 @@
     <branch module="gtk+/3.14/gtk+-3.14.5.tar.xz" version="3.14.5"
             hash="sha256:ba70f5ccde6646c6d8aa5a6398794b7bcf23fc45af22580a215d258f392dbbe2">
       <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/gtk+-Bug-739885-GtkPlug-is-conditionally-supported-on-X11-only.patch" strip="1"/>
+      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0001-Bug-707945-GTK2-Quartz-typeahead-find-in-GtkTreeView.patch" strip="1"/>
     </branch>
     <dependencies>
       <dep package="glib"/>
