@@ -18,6 +18,8 @@
   <repository type='svn' name='libproxy.google.com'
               href='http://libproxy.googlecode.com/svn/'
               tags-template="tags/%(tag)s"/>
+  <repository type="tarball" name="webkit.org"
+              href="http://www.webkitgtk.org/releases/"/>
   <repository type="svn" name="svn.webkit.org"
 	      href="http://svn.webkit.org/repository/"/>
   <repository type="git" name="git.webkit.org"
