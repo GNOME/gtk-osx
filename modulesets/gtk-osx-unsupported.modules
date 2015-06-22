@@ -224,16 +224,12 @@
   -->
   <autotools id="webkit1gtk3" autogen-sh="autoreconf" makeargs="-j1"
              autogenargs="--enable-quartz-target --with-gtk=3.0 --disable-webkit2 --disable-credential-storage --disable-geolocation --disable-video --disable-web-audio CXXFLAGS='-std=gnu++11'">
-    <branch repo="webkit.org" module="webkitgtk-2.4.8.tar.xz" version="2.4.8">
-      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/webkit-126324-clang-check.patch"
-             strip="1"/>
+    <branch repo="webkit.org" module="webkitgtk-2.4.9.tar.xz" version="2.4.9">
       <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/webkit-140167-disable-netscape-api.patch"
              strip="1"/>
       <!-- This patch can be commented out for XCode >= 6.3, but does no harm if
       it's left in -->
       <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/webkit-133293-cfi-clang-failure.patch"
-             strip="1"/>
-      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/webkit-126433-check-platform-gtk.patch"
              strip="1"/>
     </branch>
     <dependencies>
