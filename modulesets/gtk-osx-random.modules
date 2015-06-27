@@ -106,21 +106,15 @@
     </dependencies>
   </autotools>
 
-  <!-- 3.8 is the last version to support WebKit1. Building from git is broken
-  on 3.8, due to some libgd macros, so we grab the last tarball release. -->
-  <autotools id="devhelp-gtk3" autogen-sh="configure"
-             autogenargs="--without-webkit2">
-    <!--branch tag="gnome-3-16" module="devhelp"/-->
-    <branch repo="ftp.gnome.org" module="devhelp/3.8/devhelp-3.8.2.tar.xz"
-            version="3.8.2"
-            hash="sha256:a245b53824c6f2ff89245ff807bb2140bde74951ea6f1d759a0fd0c6959ca9f7"/>
+  <autotools id="devhelp-gtk3">
+    <branch module="devhelp" revision="gnome-3-16"/>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
       <dep package="meta-gtk-osx-themes"/>
       <dep package="meta-gtk-osx-gtk3"/>
     </after>
     <dependencies>
-      <dep package="webkit1gtk3"/>
+      <dep package="webkit2gtk3"/>
       <dep package="gsettings-desktop-schemas"/>
       <!-- Without shared-mime-info, HTML documents display as plain text -->
       <dep package="shared-mime-info"/>
