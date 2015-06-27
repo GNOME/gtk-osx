@@ -50,7 +50,7 @@
     <dependencies>
       <dep package="meta-gtk-osx-gtk3"/>
       <dep package="libsoup-gtk3"/>
-      <dep package="WebKit"/>
+      <dep package="webkit2gtk3"/>
     </dependencies>
   </metamodule>
 
@@ -244,4 +244,46 @@
       <dep package="meta-gstreamer-1.0"/>
     </after>
   </autotools>
+
+  <!-- This is the stable release of WebKitGTK, for GTK 3.x. Use it if you need
+      the WebKit2 API (most applications do.)
+    ENABLE_MINIBROWSER: This is enabled because it's an easy test of whether the
+      library is working correctly: run "jhbuild run MiniBrowser".
+    ENABLE_PLUGIN_PROCESS_GTK2: Requires both GTK 2.x and 3.x. Currently not
+      supported.
+    ENABLE_VIDEO, ENABLE_WEB_AUDIO: Requires gstreamer. If you want video and
+      audio, fix this in your .jhbuildrc-custom. You may need some extra
+      patches, this is untested.
+    ENABLE_CREDENTIAL_STORAGE: Requires libsecret. No module for this yet.
+    ENABLE_GEOLOCATION: Requires geoclue. No module for this yet.
+    ENABLE_OPENGL: Untested.
+    USE_LIBNOTIFY: Requires libnotify. No module for this yet.
+    USE_LIBHYPHEN: Requires libhyphen. No module for this yet.
+  -->
+  <cmake id="webkit2gtk3"
+         cmakeargs="-DPORT=GTK -DENABLE_X11_TARGET=OFF -DENABLE_QUARTZ_TARGET=ON -DENABLE_TOOLS=ON -DENABLE_MINIBROWSER=ON -DENABLE_PLUGIN_PROCESS_GTK2=OFF -DENABLE_VIDEO=OFF -DENABLE_WEB_AUDIO=OFF -DENABLE_CREDENTIAL_STORAGE=OFF -DENABLE_GEOLOCATION=OFF -DENABLE_OPENGL=OFF -DUSE_LIBNOTIFY=OFF -DUSE_LIBHYPHEN=OFF -DCMAKE_CXX_FLAGS='-stdlib=libc++'">
+    <branch repo="webkit.org" module="webkitgtk-2.10.2.tar.xz" version="2.10.2">
+      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/webkit-144561-quartz-backend.patch"
+             strip="1"/>
+      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/webkit-144560-platform-fixes.patch"
+             strip="1"/>
+      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/webkit-144785-link-injected-bundle.patch"
+             strip="1"/>
+      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/webkit-148606-build-texture-mapper-gl-separately.patch"
+             strip="1"/>
+      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/webkit-148607-include-stub-for-plugin-permission-request.patch"
+             strip="1"/>
+    </branch>
+    <dependencies>
+      <dep package="libwebp"/>
+      <dep package="enchant"/>
+      <dep package="icu"/>
+      <dep package="libsoup"/>
+      <dep package="meta-gtk-osx-freetype"/>
+    </dependencies>
+    <after>
+      <dep package="meta-gtk-osx-gtk3"/>
+      <dep package="meta-gstreamer-1.0"/>
+    </after>
+  </cmake>
 </moduleset>
