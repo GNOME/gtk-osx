@@ -11,6 +11,9 @@ gobject-intro:  0001-scanner-split-CC-environment-variable.patch fixed, not
 		released in stable.
 		girscanner-objc.patch: Bug 626995, will likely never be
 		committed.
+		gobject-introspection-625195-Fix-non-libtool-linker-flags-on-Darwin.patch:
+		https://bugzilla.gnome.org/show_bug.cgi?id=625195, required only
+		for --no-libtool, i.e. webkit2gtk3.
 
 gtk2:		0004-Bug-571582-GtkSelection-implementation-for-quartz.patch
 		0006-Bug-658722-Drag-and-Drop-sometimes-stops-working.patch
