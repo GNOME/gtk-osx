@@ -24,6 +24,7 @@
               href="git://git.gnome.org/"/>
   <repository type="tarball" name="cups"
 	      href="https://www.cups.org/software/"/>
+  <repository type="tarball" name="itstool" href="http://files.itstool.org/"/>
   <repository type="git" name="gitorious" href="https://gitorious.org/"/>
   <repository type="tarball" name="icu"
               href="http://download.icu-project.org/files/"/>
@@ -85,7 +86,9 @@
   </autotools>
 
   <autotools id="itstool">
-    <branch repo="gitorious" module="itstool/itstool.git"/>
+    <branch module="itstool/itstool-2.0.2.tar.bz2" version="2.0.2"
+            repo="itstool"/>
+    <!--branch repo="gitorious" module="itstool/itstool.git"/-->
     <dependencies>
       <dep package="libxml2"/>
     </dependencies>
