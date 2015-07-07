@@ -28,7 +28,8 @@
   <repository type="git" name="gitorious" href="https://gitorious.org/"/>
   <repository type="tarball" name="icu"
               href="http://download.icu-project.org/files/"/>
-
+  <repository type="tarball" name="pypi"
+              href="https://pypi.python.org/packages/source/"/>
   <autotools id='readline' autogen-sh="configure">
     <branch repo="ftp.gnu.org" module="readline/readline-6.3.tar.gz"
 	    version="6.3">
@@ -158,10 +159,19 @@
     </dependencies>
   </autotools>
 
+  <distutils id="lxml">
+    <branch module="l/lxml/lxml-3.4.4.tar.gz" repo="pypi" version="3.4.4"/>
+    <dependencies>
+      <dep package="libxml2"/>
+      <dep package="libxslt"/>
+    </dependencies>
+  </distutils>
+  
   <autotools id="fontconfig" autogenargs="--disable-docs">
     <branch repo="freedesktop"/>
     <dependencies>
       <dep package="freetype"/>
+      <dep package="lxml"/>
     </dependencies>
   </autotools>
 
