@@ -166,7 +166,8 @@
     </dependencies>
   </autotools>
 
-  <autotools id="hicolor-icon-theme" autogen-sh="configure">
+  <autotools id="hicolor-icon-theme" autogen-sh="configure"
+	     supports-non-srcdir-builds="no">
     <branch module="hicolor-icon-theme-0.15.tar.xz" repo="icon-theme"
             version="0.15"/>
   </autotools>
