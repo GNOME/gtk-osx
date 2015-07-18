@@ -73,7 +73,7 @@
   </autotools>
 
   <autotools id="libffi" autogenargs="--disable-builddir"
-	     autogen-template="%(srcdir)s/autogen.sh &amp;&amp; %(srcdir)s/configure  --prefix %(prefix)s %(autogenargs)s">
+	     supports-non-srcdir-builds="no">
     <branch module="atgreen/libffi" repo="github"/>
   </autotools>
 
@@ -176,7 +176,7 @@
     </after>
   </autotools>
 
-  <autotools id="pixman" autogenargs="--disable-gtk">
+  <autotools id="pixman" autogenargs="--disable-gtk --disable-mmx">
     <branch repo="freedesktop" module="pixman" />
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
