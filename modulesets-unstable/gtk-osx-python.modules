@@ -44,7 +44,7 @@
   </autotools>
 
 <!-- Python-2.7.5's hashlib doesn't build correctly with gcc-4.2, though it does fine with Clang (and probably later gccs as well). -->
-  <autotools id="python2.7" autogenargs="--enable-shared"
+  <autotools id="python2.7" autogenargs="--enable-shared" supports-non-srcdir-builds="no"
 	     autogen-sh="configure">
     <branch repo="python"
 	    module="2.7.8/Python-2.7.8.tar.xz" version="2.7.8">

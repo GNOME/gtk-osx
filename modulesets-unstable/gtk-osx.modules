@@ -110,7 +110,7 @@
     </after>
   </autotools>
 
- <autotools id="atk">
+ <autotools id="atk" supports-non-srcdir-builds="no">
     <branch />
     <dependencies>
       <dep package="libffi"/>
