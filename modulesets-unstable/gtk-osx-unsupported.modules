@@ -41,6 +41,22 @@
     </dependencies>
   </metamodule>
 
+  <metamodule id="meta-gtk-osx-webkit">
+    <dependencies>
+      <dep package="meta-gtk-osx-core"/>
+      <dep package="libsoup"/>
+      <dep package="WebKit"/>
+    </dependencies>
+  </metamodule>
+
+  <metamodule id="meta-gtk-osx-webkit-gtk3">
+    <dependencies>
+      <dep package="meta-gtk-osx-gtk3"/>
+      <dep package="libsoup-gtk3"/>
+      <dep package="webkit2gtk3"/>
+    </dependencies>
+  </metamodule>
+
   <autotools id="gnome-mime-data">
    <branch />
     <dependencies>
