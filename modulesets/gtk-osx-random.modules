@@ -26,6 +26,8 @@
   <repository type="git" name="github" href="https://github.com"/>
   <repository type="tarball" name="boehm"
 	      href="http://www.hboem.info/"/>
+  <repository type="svn" name="abisource/enchant"
+              href="http://svn.abisource.com/"/>
 
   <metamodule id="meta-gtk-osx-random">
     <dependencies>
@@ -309,6 +311,13 @@
   <autotools id="hunspell" >
     <branch module="hunspell" version="1.3.2"
 	    repo="hunspell-cvs"/>
+  </autotools>
+
+  <autotools id="enchant">
+    <branch repo="abisource/enchant" module="enchant" tag="enchant-1-6-0"/>
+    <dependencies>
+      <dep package="glib"/>
+    </dependencies>
   </autotools>
 
   <autotools id="gtkspell">

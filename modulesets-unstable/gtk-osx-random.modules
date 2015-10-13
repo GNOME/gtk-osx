@@ -30,6 +30,8 @@
 	      href="http://www.hboem.info/"/>
   <repository type="svn" name="exiv2.org"
 	      href="svn://dev.exiv2.org/"/>
+  <repository type="svn" name="abisource/enchant"
+              href="http://svn.abisource.com/"/>
 
   <metamodule id="meta-gtk-osx-random">
     <dependencies>
@@ -279,6 +281,14 @@
     <branch/>
     <dependencies>
       <dep package="gtk+"/>
+    </dependencies>
+  </autotools>
+
+  <autotools id="enchant" >
+    <!-- No version. Doesn't seem to have been touched in a while. -->
+    <branch repo="abisource/enchant" module="enchant"/>
+    <dependencies>
+      <dep package="glib"/>
     </dependencies>
   </autotools>
 
