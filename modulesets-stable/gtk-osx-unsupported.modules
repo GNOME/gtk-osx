@@ -228,12 +228,13 @@
              strip="1"/>
       <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/webkit-1.10-pango-includes.patch"
              strip="1"/>
+      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/webkit-1.10-remove-pangoft2-dependency.patch"
+             strip="1"/>
     </branch>
     <dependencies>
       <dep package="enchant"/>
       <dep package="icu"/>
       <dep package="libsoup"/>
-      <dep package="meta-gtk-osx-freetype"/>
     </dependencies>
     <after>
       <dep package="meta-gtk-osx-core"/>
@@ -253,7 +254,8 @@
       <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/webkit-1.6-gnome-3.6-fixup.patch" strip="1"/>
       <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/webkit-1.6-clang-fixup.patch" strip="1"/>
       <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/webkit-1.6-out-of-source-fixup.patch" strip="1"/>
-
+      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/webkit-1.6-remove-pangoft2-dependency.patch"
+             strip="1"/>
     </branch>
     <dependencies>
       <dep package="enchant"/>

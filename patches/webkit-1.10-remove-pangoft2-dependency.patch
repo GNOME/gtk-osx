@@ -1,0 +1,16 @@
+--- a/configure.ac    Apr  6 17:36:15 2015
++++ b/configure.ac	Thu Oct 15 12:28:08 2015
+@@ -452,9 +452,8 @@
+ AC_SUBST(LIBXML_CFLAGS)
+ AC_SUBST(LIBXML_LIBS)
+ 
+-PKG_CHECK_MODULES(PANGO, 
+-                  [pango >= $PANGO_REQUIRED_VERSION
+-                   pangoft2])
++PKG_CHECK_MODULES(PANGO,
++                  [pango >= $PANGO_REQUIRED_VERSION])
+ AC_SUBST(PANGO_CFLAGS)
+ AC_SUBST(PANGO_LIBS)
+ 
+
+Diff finished.  Thu Oct 15 14:27:48 2015

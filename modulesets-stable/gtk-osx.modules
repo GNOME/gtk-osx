@@ -234,8 +234,6 @@
     </branch>
     <dependencies>
       <dep package="pixman"/>
-      <dep package="fontconfig"/>
-      <dep package="freetype"/>
     </dependencies>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
