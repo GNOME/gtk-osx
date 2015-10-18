@@ -58,7 +58,9 @@
   <!-- cmakes ./configure is picky about invalid flags so we manually set it -->
   <autotools id="cmake" autogen-sh="bootstrap"
 	     autogen-template="%(srcdir)s/%(autogen-sh)s --prefix=%(prefix)s">
-    <branch repo="cmake" module="v3.2/cmake-3.2.1.tar.gz" version="3.2.1"/>
+    <branch repo="cmake" module="v3.2/cmake-3.2.1.tar.gz" version="3.2.1">
+      <patch file="cmake-libnetwork.patch" strip="1"/>
+    </branch>
   </autotools>
 
   <autotools id="m4" autogen-sh="configure">

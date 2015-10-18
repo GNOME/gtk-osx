@@ -75,3 +75,7 @@ py2cairo-python2.6: py2cairo-python2.6-Dont-try-to-guess-arch.patch
 		Needed to work around broken behaviour in waf.
 		Not sure if this will ever be fixed.
 		https://code.google.com/p/waf/issues/detail?id=1505
+
+cmake:		cmake-libnetwork.patch
+		Necessary when building on 10.11. Should be fixed in CMake 3.4.
+		https://cmake.org/gitweb?p=cmake.git;a=commit;h=01b6ecdb41ec0a60f8abc70555aca6eb1463fe3f
