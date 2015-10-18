@@ -29,7 +29,7 @@
 	      href="git://anongit.freedesktop.org"/>
   <repository type="git" name="lysator"
 	      href="https://git.lysator.liu.se/"/>
-  <repository type="git" name="gitorious" href="git://gitorious.org/"/>
+  <repository name="gitlab" type="git" href="https://gitlab.com/"/>
   <repository type="tarball" name="gnutls" href="ftp://ftp.gnutls.org/"/>
   <repository type="git" name="chromium"
               href="https://chromium.googlesource.com/"/>
@@ -85,7 +85,7 @@
   <!-- Building with p11-kit support breaks g-ir-scanner, for some weird reason. -->
   <autotools id="gnutls" autogen-sh="configure"
              autogenargs="--disable-gtk-doc-html --without-p11-kit">
-    <!--branch repo="gitorious" module="gnutls/gnutls"/-->
+    <!--branch repo="gitlab" module="gnutls/gnutls"/-->
     <branch repo="gnutls" version="3.3.12"
             module="gcrypt/gnutls/v3.3/gnutls-3.3.12.tar.xz"/>
     <dependencies>
