@@ -113,7 +113,7 @@
   </waf>
 
 <!-- Pycairo-python3 for those who've made the leap. -->
-  <autotools id="pycairo-python3" autogen-sh="configure">
+  <waf id="pycairo-python3" python-command="python3">
     <branch module="pycairo-1.10.0.tar.bz2" repo="cairographics"
             version="1.10.0"
 	    hash="sha1:2efa8dfafbd6b8e492adaab07231556fec52d6eb"/>
@@ -124,7 +124,7 @@
       <dep package="python3"/>
       <dep package="meta-gtk-osx-core"/>
     </after>
-  </autotools>
+  </waf>
 
   <distutils id="pybsddb">
     <branch module="b/bsddb3/bsddb3-5.3.0.tar.gz"
@@ -153,6 +153,7 @@
     </dependencies>
     <after>
       <dep package="python"/>
+      <dep package="python3"/>
     </after>
   </autotools>
 
