@@ -175,7 +175,7 @@
             module="libtasn1/libtasn1-4.4.tar.gz"/>
   </autotools>
 
-  <autotools id="libwebp">
+  <autotools id="libwebp" autogen-sh="autoreconf">
     <branch repo="chromium" module="webm/libwebp" revision="0.4.3"/>
   </autotools>
 

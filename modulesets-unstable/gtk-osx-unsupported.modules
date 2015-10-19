@@ -166,7 +166,7 @@
     </dependencies>
   </cmake>
 
-  <autotools id="libwebp">
+  <autotools id="libwebp" autogen-sh="autoreconf">
     <branch repo="chromium" module="webm/libwebp"/>
   </autotools>
 
