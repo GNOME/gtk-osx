@@ -104,9 +104,8 @@
     </dependencies>
   </autotools>
 
-  <!-- Has been releasing from master for quite a while now -->
   <autotools id="yelp-tools">
-    <branch repo="git.gnome.org"/>
+    <branch repo="git.gnome.org" tag="3.16.1"/>
     <dependencies>
       <dep package="libxml2"/>
       <dep package="libxslt"/>

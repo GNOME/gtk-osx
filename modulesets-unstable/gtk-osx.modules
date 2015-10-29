@@ -73,7 +73,7 @@
   </autotools>
 
   <autotools id="libffi" autogenargs="--disable-builddir"
-	     supports-non-srcdir-builds="no">
+             autogen-sh="autoreconf" supports-non-srcdir-builds="no">
     <branch module="atgreen/libffi" repo="github"/>
   </autotools>
 
