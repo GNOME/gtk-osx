@@ -184,17 +184,19 @@
     </after>
   </autotools>
 
-  <!-- enable-fc and enable-ft required for librsvg's pixbuf loader -->
+    <!-- Cairo will automatically enable freetype and fontconfig if
+       meta-gtk-osx-freetype is built, so packages which require
+       cairoft or cairofc should have meta-gtk-osx-freetype as a
+       dependency. -->
   <autotools id="cairo"
-             autogenargs="--enable-pdf --enable-quartz --enable-fc --enable-ft --disable-xlib --without-x">
+             autogenargs="--enable-pdf --enable-quartz --disable-xlib --without-x">
     <branch repo="freedesktop" module="cairo" revision="1.14"/>
     <dependencies>
       <dep package="pixman"/>
-      <dep package="fontconfig"/>
-      <dep package="freetype"/>
     </dependencies>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
+      <dep package="freetype-no-harfbuzz"/>
     </after>
   </autotools>
 

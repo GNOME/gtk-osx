@@ -78,6 +78,7 @@
     <branch module="librsvg"/>
     <dependencies>
       <dep package="libcroco"/>
+      <dep package="meta-gtk-osx-freetype"/>
     </dependencies>
   </autotools>
 
