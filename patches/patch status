@@ -11,6 +11,9 @@ gobject-intro:  0001-scanner-split-CC-environment-variable.patch fixed, not
 		released in stable.
 		girscanner-objc.patch: Bug 626995, will likely never be
 		committed.
+		gobject-introspection-625195-Fix-non-libtool-linker-flags-on-Darwin.patch:
+		https://bugzilla.gnome.org/show_bug.cgi?id=625195, required only
+		for --no-libtool, i.e. webkit2gtk3.
 
 gtk2:		0004-Bug-571582-GtkSelection-implementation-for-quartz.patch
 		0006-Bug-658722-Drag-and-Drop-sometimes-stops-working.patch
@@ -30,16 +33,27 @@ Webkit:		Webkit-1.6-enable-blob.patch
 		webkit-1.6-no-x11.patch
 		webkit-1.6-pango-includes.patch
 
-webkit1gtk:	webkit-126324-clang-check.patch
-			https://bugs.webkit.org/show_bug.cgi?id=126324
-		webkit-140167-disable-netscape-api.patch
+webkit1gtk:	webkit-140167-disable-netscape-api.patch
 			There's no configure option to disable this. Work around by
 			modifying the variable directly.
 			https://bugs.webkit.org/show_bug.cgi?id=140167
 		webkit-133293-cfi-clang-failure.patch
 			Workaround for https://bugs.webkit.org/show_bug.cgi?id=133293
-		webkit-126433-check-platform-gtk.patch
-			https://bugs.webkit.org/show_bug.cgi?id=126433
+			This patch is a workaround for a clang bug in XCode < 6.3. It can
+			be commented out for XCode 6.3 and later versions.
+
+webkit2gtk3:	webkit-144561-quartz-backend.patch
+			Unlikely to be merged unless WebKit gains a build bot
+			for WebKitGTK on OS X.
+		webkit-144560-platform-fixes.patch
+			Various fixes to disable OS X-specific functionality that
+			works for Safari but shouldn't be enabled for WebKitGTK.
+		webkit-144785-link-injected-bundle.patch
+			Languishing in Bugzilla
+		webkit-148606-build-texture-mapper-gl-separately.patch
+			Languishing in Bugzilla
+		webkit-148607-include-stub-for-plugin-permission-request.patch
+			Languishing in Bugzilla
 
 GConf:		GConf-characters.patch Bug 161209. Unlikely ever to be fixed.
 

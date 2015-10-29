@@ -4,35 +4,13 @@
 <moduleset>
   <repository type="git" name="git.gnome.org" default="yes"
               href="git://git.gnome.org/"/>
-  <repository type='git' name='git.gnu.org' 
-              href="git://git.savannah.gnu.org/"/>
   <repository type='git' name='git.gnupg.org' href="git://git.gnupg.org/" />
-  <repository type='tarball' name='ftp.gnu.org' href="ftp://ftp.gnu.org/gnu/"/>
-  <repository type="tarball" name="sourceforge" 
-              href="http://downloads.sourceforge.net/sourceforge/"/>
-  <repository type="cvs" name="gnutls.gnupg.org"
-              cvsroot=":pserver:anoncvs@cvs.gnupg.org:/cvs/gnutls"
-              password="anoncvs"/>
-  <repository type="svn" name="abisource/enchant" 
-              href="http://svn.abisource.com/" />
   <repository type='svn' name='libproxy.google.com'
               href='http://libproxy.googlecode.com/svn/'
               tags-template="tags/%(tag)s"/>
-  <repository type="tarball" name="webkit.org"
-              href="http://www.webkitgtk.org/releases/"/>
-  <repository type="svn" name="svn.webkit.org"
-	      href="http://svn.webkit.org/repository/"/>
-  <repository type="git" name="git.webkit.org"
-	      href="git://git.webkit.org/"/>
   <repository type="git" name="git.debian.org" href="git://git.debian.org/"/>
   <repository type="git" name="freedesktop"
 	      href="git://anongit.freedesktop.org"/>
-  <repository type="git" name="lysator"
-	      href="https://git.lysator.liu.se/"/>
-  <repository type="git" name="gitorious" href="git://gitorious.org/"/>
-  <repository type="tarball" name="gnutls" href="ftp://ftp.gnutls.org/"/>
-  <repository type="git" name="chromium"
-              href="https://chromium.googlesource.com/"/>
 
   <metamodule id="meta-gtk-osx-unsupported">
     <dependencies>
@@ -54,44 +32,10 @@
 
   </autotools>
 
-  <autotools id="zlib" autogen-sh="configure" skip-autogen="never"
-	     supports-non-srcdir-builds="no">
-    <branch repo="sourceforge" version="1.2.8"
-	    module="libpng/zlib-1.2.8.tar.xz"/>
-  </autotools>
-
   <autotools id="p11-kit" autogenargs="--without-trust-paths">
     <branch repo="freedesktop" module="p11-glue/p11-kit"/>
     <dependencies>
       <dep package="libtasn1"/>
-    </dependencies>
-  </autotools>
-
-<!-- Rudely demands TeX to build documentation -->
-  <!-- Assembler files are missing md5-compress.asm for x86_64 -->
-  <autotools id="libnettle"
-	     autogenargs="--disable-documentation --disable-assembler"
-	     autogen-template="autoreconf -fis &amp;&amp; %(srcdir)s/configure --prefix %(prefix)s  %(autogenargs)s">
-    <!-- gnutls 3.3.x does not support nettle 3.0 -->
-    <branch repo="lysator" module="nettle/nettle.git"
-            tag="nettle_2.7_release_20130424"/>
-    <dependencies>
-      <dep package="gmp"/>
-    </dependencies>
-  </autotools>
-
-  <!-- Building from git does not work because they have checked in a bunch of
-  files (build-aux/, po/Makefile.in.in) that they're not supposed to.-->
-  <!-- Building with p11-kit support breaks g-ir-scanner, for some weird reason. -->
-  <autotools id="gnutls" autogen-sh="configure"
-             autogenargs="--disable-gtk-doc-html --without-p11-kit">
-    <!--branch repo="gitorious" module="gnutls/gnutls"/-->
-    <branch repo="gnutls" version="3.3.12"
-            module="gcrypt/gnutls/v3.3/gnutls-3.3.12.tar.xz"/>
-    <dependencies>
-      <dep package="libnettle"/>
-      <dep package="libtasn1" />
-      <dep package="zlib"/>
     </dependencies>
   </autotools>
 
@@ -109,13 +53,6 @@
     </dependencies>
   </autotools>
 
-  <autotools id="libtasn1" supports-non-srcdir-builds="no" >
-    <!-- Git repository is missing files required to build libtasn1
-    <branch repo="git.gnu.org" /> -->
-    <branch repo="ftp.gnu.org" version="4.4"
-            module="libtasn1/libtasn1-4.4.tar.gz"/>
-  </autotools>
-
   <autotools id="libgnome-keyring" autogenargs="--disable-pam --without-root-certs">
     <branch/>
     <dependencies>
@@ -123,13 +60,6 @@
       <dep package="libtasn1"/>
       <dep package="glib"/>
       <dep package="dbus"/>
-    </dependencies>
-  </autotools>
-
-  <autotools id="glib-networking" autogenargs="--without-ca-certificates set_more_warnings=no">
-    <branch/>
-    <dependencies>
-      <dep package="gnutls"/>
     </dependencies>
   </autotools>
 
@@ -143,120 +73,9 @@
     </dependencies>
   </autotools>
 
- <autotools id="libsoup" autogenargs="set_more_warnings=no">
-    <branch />
-    <dependencies>
-      <dep package='sqlite'/>
-      <dep package="glib"/>
-      <dep package="glib-networking"/>
-    </dependencies>
- </autotools>
-
- <autotools id="enchant" >
-     <!-- No version. Doesn't seem to have been touched in a while. -->
-    <branch repo="abisource/enchant" module="enchant"/>
-    <dependencies>
-      <dep package="glib"/>
-    </dependencies>
-  </autotools>
-
   <cmake id='libproxy'  cmakeargs="-DWITH_PYTHON=OFF -DWITH_PERL=OFF -DWITH_NM=OF">
     <branch repo='libproxy.google.com' module="trunk" />
     <dependencies>
     </dependencies>
   </cmake>
-
-  <autotools id="libwebp">
-    <branch repo="chromium" module="webm/libwebp"/>
-  </autotools>
-
-  <!-- This is WebKitGTK 1.x, for GTK 2.x.
-    disable-geolocation: Requires geoclue. No module for this yet.
-    disable-video: Requires gstreamer. If you want video, add to .jhbuildrc:
-      append_autogenargs('WebKit', '&#45;-enable-video')
-    Wno-c++11-extensions: Suppresses clang warning that makes output
-      inconvenient to read.
-    std=c99: Required for inline keyword in C.
-  -->
-  <autotools id="WebKit" autogen-sh="autoreconf"
-             autogenargs='--with-target=quartz --disable-video --with-font-backend=pango --with-gtk=2.0 --disable-geolocation --disable-webkit2 CXXFLAGS="$CXXFLAGS -Wno-c++11-extensions" CFLAGS="$CFLAGS -std=c99"'>
-    <branch repo="webkit.org" module="webkitgtk-1.10.2.tar.xz" version="1.10.2">
-      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/webkit-1.10-no-x11.patch"
-             strip="1"/>
-      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/webkit-88407-portable-echo-n.patch"
-             strip="1"/>
-      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/webkit-1.10-platform-fixes.patch"
-             strip="1"/>
-      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/webkit-1.10-pango-includes.patch"
-             strip="1"/>
-      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/webkit-1.10-remove-pangoft2-dependency.patch"
-             strip="1"/>
-    </branch>
-    <dependencies>
-      <dep package="enchant"/>
-      <dep package="icu"/>
-      <dep package="libsoup"/>
-    </dependencies>
-    <after>
-      <dep package="meta-gtk-osx-core"/>
-      <dep package="meta-gstreamer-1.0"/>
-    </after>
-  </autotools>
-
-  <!-- This is WebKitGTK 2.4.x, the last version that had the WebKit1 API.
-    disable-webkit2: Requires both GTK2 and 3. Currently not supported.
-    disable-credential-storage: Requires libsecret. No module for this yet.
-    disable-geolocation: Requires geoclue 1 or 2. No module for this yet.
-    disable-video, disable-web-audio: Requires gstreamer. If you want video and
-      audio, add this to your .jhbuildrc:
-      append_autogenargs('WebKit', '&#45;-enable-video')
-      append_autogenargs('WebKit', '&#45;-enable-web-audio')
-    -j1: Workaround for https://bugs.webkit.org/show_bug.cgi?id=140171
-  -->
-  <autotools id="webkit1gtk3" autogen-sh="autoreconf" makeargs="-j1"
-             autogenargs="--enable-quartz-target --with-gtk=3.0 --disable-webkit2 --disable-credential-storage --disable-geolocation --disable-video --disable-web-audio CXXFLAGS='-std=gnu++11'">
-    <branch repo="webkit.org" module="webkitgtk-2.4.8.tar.xz" version="2.4.8">
-      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/webkit-126324-clang-check.patch"
-             strip="1"/>
-      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/webkit-140167-disable-netscape-api.patch"
-             strip="1"/>
-      <!-- This patch can be commented out for XCode >= 6.3, but does no harm if
-      it's left in -->
-      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/webkit-133293-cfi-clang-failure.patch"
-             strip="1"/>
-      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/webkit-126433-check-platform-gtk.patch"
-             strip="1"/>
-    </branch>
-    <dependencies>
-      <dep package="libwebp"/>
-      <dep package="enchant"/>
-      <dep package="icu"/>
-      <dep package="libsoup"/>
-      <dep package="meta-gtk-osx-freetype"/>
-    </dependencies>
-    <after>
-      <dep package="meta-gtk-osx-gtk3"/>
-      <dep package="meta-gstreamer-1.0"/>
-    </after>
-  </autotools>
-
-  <autotools id="WebKit-git"
-	     autogenargs="--enable-quartz-target --disable-x11-target --disable-video --with-font-backend=pango --with-gtk=2.0 --disable-geolocation --disable-webkit2 --disable-credential-storage --disable-svg-fonts --disable-web-audio --disable-fast-malloc --disable-gtk-doc-html">
-    <!--branch repo="svn.webkit.org" module="webkit/trunk" checkoutdir="WebKit-svn"/-->
-    <branch repo="git.webkit.org" module="WebKit" checkoutdir="WebKit-git"/>
-    <dependencies>
-      <dep package="libsoup"/>
-      <dep package="enchant"/>
-      <dep package="meta-gtk-osx-freetype"/>
-      <dep package="icu"/>
-    </dependencies>
-    <after>
-      <dep package="libcurl"/>
-      <dep package="bison"/>
-      <!--dep package="gst-plugins-base"/-->
-      <dep package="meta-gtk-osx-gtk3"/>
-    </after>
-  </autotools>
-
-  
 </moduleset>

@@ -30,6 +30,8 @@
 	      href="http://www.hboem.info/"/>
   <repository type="svn" name="exiv2.org"
 	      href="svn://dev.exiv2.org/"/>
+  <repository type="svn" name="abisource/enchant"
+              href="http://svn.abisource.com/"/>
 
   <metamodule id="meta-gtk-osx-random">
     <dependencies>
@@ -97,8 +99,6 @@
     </dependencies>
   </autotools>
 
-  <!-- Devhelp 3.8 is the last release to use the WebKit1 API, so you probably
-       need to override the revision. -->
   <autotools id="devhelp">
     <branch />
     <after>
@@ -107,7 +107,7 @@
       <dep package="meta-gtk-osx-core"/>
     </after>
     <dependencies>
-      <dep package="webkit1gtk3"/>
+      <dep package="webkit2gtk3"/>
       <dep package="gsettings-desktop-schemas"/>
       <!-- Without shared-mime-info, HTML documents display as plain text -->
       <dep package="shared-mime-info"/>
@@ -281,6 +281,14 @@
     <branch/>
     <dependencies>
       <dep package="gtk+"/>
+    </dependencies>
+  </autotools>
+
+  <autotools id="enchant" >
+    <!-- No version. Doesn't seem to have been touched in a while. -->
+    <branch repo="abisource/enchant" module="enchant"/>
+    <dependencies>
+      <dep package="glib"/>
     </dependencies>
   </autotools>
 

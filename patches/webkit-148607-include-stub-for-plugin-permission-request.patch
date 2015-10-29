@@ -1,0 +1,14 @@
+--- a/Source/WebKit2/UIProcess/gstreamer/InstallMissingMediaPluginsPermissionRequest.h	2015-08-27 23:05:51.000000000 -0700
++++ b/Source/WebKit2/UIProcess/gstreamer/InstallMissingMediaPluginsPermissionRequest.h	2015-08-27 23:05:54.000000000 -0700
+@@ -63,5 +63,11 @@
+ 
+ } // namespace WebKit
+ 
++#else
++
++namespace WebKit {
++class InstallMissingMediaPluginsPermissionRequest;
++} // namespace WebKit
++
+ #endif // ENABLE(VIDEO) && USE(GSTREAMER)
+ #endif // InstallMissingMediaPluginsPermissionRequest_h
