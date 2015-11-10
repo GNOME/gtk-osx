@@ -126,6 +126,14 @@ def environ_prepend(key, value, separator=' '):
         value = value + separator + old_value
     os.environ[key] = value
 
+def environ_remove(key, value, separator=':'):
+    old_value = os.environ.get(key)
+    if old_value is not None:
+        old_value_split = old_value.split(separator)
+        value_split = [x for x in old_value_split if x != value]
+        value = separator.join(value_split)
+    os.environ[key] = value
+
 def parse_custom_argument(key):
     for i, arg in enumerate(sys.argv[:-1]):
         if arg == key:
@@ -405,6 +413,10 @@ def setup_sdk(target, sdk_version, architectures=[_default_arch]):
     # build products. Note that this will generally break
     # cross-compilation, not that it works anyway.
     os.environ['CFLAGS_FOR_BUILD'] = os.environ['CFLAGS']
+
+    # Make sure we don't link against XQuartz whose freetype-config is on PATH
+    # when XQuartz is installed by removing it from PATH    
+    environ_remove('PATH', '/opt/X11/bin')
     return sdkdir
 
 # This is a convenience function for older .jhbuildrc-customs.
