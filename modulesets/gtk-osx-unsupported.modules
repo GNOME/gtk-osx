@@ -70,7 +70,10 @@
     <branch repo="git.gnupg.org" revision="LIBGCRYPT_1_6_BRANCH"
             module="libgcrypt"/> -->
     <branch repo="ftp.gnupg.org" version="1.6.3"
-            module="gcrypt/libgcrypt/libgcrypt-1.6.3.tar.bz2"/>
+            module="gcrypt/libgcrypt/libgcrypt-1.6.3.tar.bz2">
+            <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/libgcrypt-cflags-for-build.patch"
+       strip="1"/>
+    </branch>
     <dependencies>
       <dep package="libgpg-error" />
     </dependencies>

@@ -45,7 +45,7 @@
     <branch repo='git.gnupg.org' module="libgpg-error" />
   </autotools>
 
-  <autotools id="libgcrypt" autogen-sh="configure"
+  <autotools id="libgcrypt" autogen-sh="autogeen.sh"
              autogenargs="--disable-asm --disable-doc">
     <branch repo="git.gnupg.org" module="libgcrypt"/>
     <dependencies>

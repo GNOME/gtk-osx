@@ -38,7 +38,7 @@
              autogenargs="--without-trust-paths">
     <branch repo="p11-glue" version="0.22.1"
 	    module="p11-kit-0.22.1.tar.gz">
-<patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/p11-kit-dirfd.patch"
+      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/p11-kit-dirfd.patch"
        strip="1"/>
     </branch>
     <dependencies>
@@ -67,15 +67,21 @@
     </dependencies>
   </autotools>
 
-   <autotools id="libgpg-error" autogen-sh="configure"
+   <autotools id="libgpg-error" autogen-sh="autogen.sh"
 	      supports-non-srdir-builds="no">
     <branch repo="ftp.gnupg.org" version="1.17"
-            module="gcrypt/libgpg-error/libgpg-error-1.17.tar.bz2"/>
+            module="gcrypt/libgpg-error/libgpg-error-1.17.tar.bz2">
+            <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/libgpg-error-cflags-for-cc-for-build.patch"
+       strip="1"/>
+    </branch>
   </autotools>
 
-  <autotools id="libgcrypt" autogen-sh="configure" autogenargs="--disable-asm">
+  <autotools id="libgcrypt" autogen-sh="autogen.sh" autogenargs="--disable-asm">
     <branch repo="ftp.gnupg.org" version="1.6.3"
-            module="gcrypt/libgcrypt/libgcrypt-1.6.3.tar.bz2"/>
+            module="gcrypt/libgcrypt/libgcrypt-1.6.3.tar.bz2">
+            <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/libgcrypt-cflags-for-build.patch"
+       strip="1"/>
+    </branch>
     <dependencies>
       <dep package="libgpg-error" />
     </dependencies>
