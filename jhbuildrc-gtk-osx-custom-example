@@ -50,6 +50,17 @@ elif _jhb == "FW":
 # if "libglade" in skip:
 #	skip.remove("libglade")
 
+# Uncomment the following if you're running OSX 10.11 and SIP (see https://developer.apple.com/library/prerelease/mac/documentation/Security/Conceptual/System_Integrity_Protection_Guide/RuntimeProtections/RuntimeProtections.html)
+# causes shell-script build failures. You'll also need to edit those
+# shell scripts to change the shebang from /bin/sh to $PREFIX/bin/bash.
+# Note that /usr/bin/env bash won't work, because it will also strip
+# the DYLD_* and LD_* environment variables!
+# Note as well that any installed dependencies must use their full
+# paths for their id (use install_name_tool -id to fix). Boost is a
+# particular violator of this rule.
+# if "bash" in skip:
+#     skip.remove("bash")
+
 # Set this to True/False if you want to force using or not building
 # and using python as part of jhbuild. If not set, the script will use
 # the system python when building on 10.5 or newer only.
