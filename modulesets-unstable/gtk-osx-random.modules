@@ -330,7 +330,7 @@
     <branch repo="savannah" module="libunistring.git" tag="v0.9.3"/>
   </autotools>
 
-  <autotools id="bdw-gc" autogen-sh="configure">
+  <autotools id="bdw-gc" autogen-template="pushd %(srcdir)s &amp;&amp; ./autogen.sh &amp;&amp; automake-1.10 -ac &amp;&amp; popd &amp;&amp; %(srcdir)s/configure --prefix %(prefix)s  %(autogenargs)s">
     <branch repo="github" module="ivmai/bdwgc" revision="release-7_2"/>
   </autotools>
 
