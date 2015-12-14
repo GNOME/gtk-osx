@@ -34,14 +34,6 @@
     </branch>
   </autotools>
 
-  <autotools id='bash' autogen-sh="configure">
-    <branch repo="ftp.gnu.org" module="bash/bash-4.3.30.tar.gz"
-            version="4.3.30"/>
-    <dependencies>
-      <dep package="readline"/>
-    </dependencies>
-  </autotools>
-  
   <autotools id="libpng" autogenargs="--enable-shared" autogen-sh="configure">
     <branch version="1.6.17" module="libpng/libpng-1.6.17.tar.xz"
             repo="sourceforge" md5sum="430a9b76b78533235cd4b9b26ce75c7e"/>
@@ -201,7 +193,6 @@
   <metamodule id="meta-gtk-osx-bootstrap">
     <dependencies>
       <dep package="readline"/>
-      <dep package="bash"/>
       <dep package="cups"/>
       <dep package="libpng"/>
       <dep package="libjpeg"/>

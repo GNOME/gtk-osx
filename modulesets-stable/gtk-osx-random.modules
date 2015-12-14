@@ -461,6 +461,7 @@ Libglade itself is deprecated. This is the last release. -->
     <branch repo="ftp.gnu.org" module="guile/guile-2.0.11.tar.gz"
 	    version="2.0.11">
       <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/guile20-align-fix.patch" strip="1"/>
+      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/guild-shell.patch" strip="1"/>
     </branch>
     <dependencies>
       <dep package="libunistring"/>
