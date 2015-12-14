@@ -1,0 +1,10 @@
+--- a/meta/guild.in	Fri Feb  1 09:19:34 2013
++++ b/meta/guild.in	Mon Dec 14 12:03:44 2015
+@@ -1,4 +1,4 @@
+-#!/bin/sh
++#!@SHELL@
+ # -*- scheme -*-
+ prefix="@prefix@"
+ exec_prefix="@exec_prefix@"
+
+Diff finished.  Mon Dec 14 12:04:17 2015
