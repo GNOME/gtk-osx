@@ -167,6 +167,8 @@
              strip="1"/>
       <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/webkit-1.6-remove-pangoft2-dependency.patch"
              strip="1"/>
+      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/bug-92264-webkit-bison-2.6.patch"
+             strip="1"/>
     </branch>
     <dependencies>
       <dep package="enchant"/>
