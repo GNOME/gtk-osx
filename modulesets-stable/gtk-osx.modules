@@ -181,8 +181,8 @@
 
   <autotools id="gtk+" autogen-sh="autoreconf"
              autogenargs="--with-gdktarget=quartz --enable-quartz-relocation --disable-introspection">
-    <branch module="gtk+/2.24/gtk+-2.24.28.tar.xz" version="2.24.28"
-            hash="sha256:b2c6441e98bc5232e5f9bba6965075dcf580a8726398f7374d39f90b88ed4656">
+    <branch module="gtk+/2.24/gtk+-2.24.29.tar.xz" version="2.24.28"
+            hash="sha256:0741c59600d3d810a223866453dc2bbb18ce4723828681ba24aa6519c37631b8">
       <!--patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0004-Bug-571582-GtkSelection-implementation-for-quartz.patch" strip="1"/-->
       <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0008-Implement-GtkDragSourceOwner-pasteboardChangedOwner.patch" strip="1"/>
       <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0006-Bug-658722-Drag-and-Drop-sometimes-stops-working.patch" strip="1"/>
@@ -203,11 +203,10 @@
 
   <autotools id="gtk+-3.0" autogen-sh="autogen.sh"
              autogenargs="--enable-quartz-backend --enable-quartz-relocation">
-    <branch module="gtk+/3.16/gtk+-3.16.0.tar.xz" version="3.16.0"
-            hash="sha256:ce617318fe18092383cf6ed5d8c688a95a97f2d4c68481317a6a531e288c26ea">
+    <branch module="gtk+/3.16/gtk+-3.16.7.tar.xz" version="3.16.7"
+            hash="sha256:19689d14de54d182fad538153dbff6d41f53841f940aa871585fdea0306c7fba">
       <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0001-Bug-707945-GTK2-Quartz-typeahead-find-in-GtkTreeView.patch" strip="1"/>
 <!-- The following patch is committed and can be removed after release of gtk+-3.16.4. -->
-      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/0001-Fix-DnD-Introspection-on-Quartz-Backend.patch" strip="1"/>
     </branch>
     <dependencies>
       <dep package="glib"/>

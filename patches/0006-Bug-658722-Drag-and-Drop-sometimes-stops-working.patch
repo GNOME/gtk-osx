@@ -1,66 +1,15 @@
-From dcd9ab00c64a1df63fd5fa58c2ca25efd9b3e09e Mon Sep 17 00:00:00 2001
+From 2bf33d856464d33ed1bd5ab787c9279e464f08df Mon Sep 17 00:00:00 2001
 From: John Ralls <jralls@ceridwen.us>
-Date: Sat, 24 Sep 2011 18:14:09 -0700
-Subject: [PATCH 06/15] Bug 658722 - Drag and Drop sometimes stops working
+Date: Thu, 11 Feb 2016 15:53:33 -0800
+Subject: [PATCH] Bug-658722-Drag-and-Drop-sometimes-stops-working
 
-First, rather than assuming that there's already an event queued up if
-_gdk_quartz_drag_source_context isn't NULL, assume that it just didn't get
-cleaned up the last time it ran and abort it.
-
-This naturally requires implementing gdk_quartz_drag_abort(), so remove the
-code from [GdkQuartzNSWindow draggedImage:endedAt:operation:] and move it to
-gdkdnd_quartz.c as static void gdk_quartz_drag_end(). Implement both
-gdk_quartz_drag_drop() and gdk_quartz_drag_abort() by calling
-gdk_quartz_drag_end().
-
-Next, try to get rid of the memory cycle between gtk_drag_source_info.context
-and _gdk_quartz_drag_source_context (which carries the GtkQuartzDragSourceInfo
-struct as qdata). Replace gtk_drag_source_clear_info() by using a
-g_object_set_qdata_full() for context in gtk_drag_get_source_context, calling
-gtk_drag_source_info_destroy() as the destructor. This eliminates the need to
-queue a cleanup idle event. I use g_object_run_dispose() on
-_gtk_quartz_drag_source_context to force the deletion of the info stored as
-qdata, which in turn unrefs the info->context pointer. Ordinarily this gets
-fired off from draggedImage:endedAt:operation:, meaning that the special
-dragging CFRunLoop is complete and NSEvents are again flowing, so queuing a
-cleanup event isn't necessary. The advantage is that it can also be run from
-gdk_drag_abort, so if Gdk thinks there's a drag but CF doesn't all of the
-memory still gets cleaned up.
 ---
- gdk/quartz/GdkQuartzWindow.c |   16 +-------
- gdk/quartz/gdkdnd-quartz.c   |   35 +++++++++++++--
- gtk/gtkdnd-quartz.c          |   96 ++++++++++++++++-------------------------
- 3 files changed, 69 insertions(+), 78 deletions(-)
+ gdk/quartz/gdkdnd-quartz.c |  35 ++++-
+ gtk/gtkdnd-quartz.c        | 321 +++++++++++++++++++++------------------------
+ 2 files changed, 179 insertions(+), 177 deletions(-)
 
-diff --git a/gdk/quartz/GdkQuartzWindow.c b/gdk/quartz/GdkQuartzWindow.c
-index dcd7250..20ed80e 100644
---- a/gdk/quartz/GdkQuartzWindow.c
-+++ b/gdk/quartz/GdkQuartzWindow.c
-@@ -560,21 +560,7 @@ update_context_from_dragging_info (id <NSDraggingInfo> sender)
- 
- - (void)draggedImage:(NSImage *)anImage endedAt:(NSPoint)aPoint operation:(NSDragOperation)operation
- {
--  GdkEvent event;
--
--  g_assert (_gdk_quartz_drag_source_context != NULL);
--
--  event.dnd.type = GDK_DROP_FINISHED;
--  event.dnd.window = g_object_ref ([[self contentView] gdkWindow]);
--  event.dnd.send_event = FALSE;
--  event.dnd.context = _gdk_quartz_drag_source_context;
--
--  (*_gdk_event_func) (&event, _gdk_event_data);
--
--  g_object_unref (event.dnd.window);
--
--  g_object_unref (_gdk_quartz_drag_source_context);
--  _gdk_quartz_drag_source_context = NULL;
-+  gdk_drag_drop (_gdk_quartz_drag_source_context, (guint32)g_get_real_time());
- }
- 
- @end
 diff --git a/gdk/quartz/gdkdnd-quartz.c b/gdk/quartz/gdkdnd-quartz.c
-index bb70b71..143a8ed 100644
+index ec89ad2..7a70415 100644
 --- a/gdk/quartz/gdkdnd-quartz.c
 +++ b/gdk/quartz/gdkdnd-quartz.c
 @@ -111,11 +111,20 @@ GdkDragContext *
@@ -127,10 +76,10 @@ index bb70b71..143a8ed 100644
  
  void             
 diff --git a/gtk/gtkdnd-quartz.c b/gtk/gtkdnd-quartz.c
-index 5688568..be92a22 100644
+index 62b8570..483525d 100644
 --- a/gtk/gtkdnd-quartz.c
 +++ b/gtk/gtkdnd-quartz.c
-@@ -269,6 +269,39 @@ gtk_drag_dest_info_destroy (gpointer data)
+@@ -270,6 +270,39 @@ gtk_drag_dest_info_destroy (gpointer data)
    g_free (info);
  }
  
@@ -143,7 +92,7 @@ index 5688568..be92a22 100644
 +  if (info->icon_pixbuf)
 +    g_object_unref (info->icon_pixbuf);
 +
-+  g_signal_emit_by_name (info->widget, "drag-end", 
++  g_signal_emit_by_name (info->widget, "drag-end",
 +			 info->context);
 +
 +  if (info->source_widget)
@@ -170,7 +119,7 @@ index 5688568..be92a22 100644
  static GtkDragDestInfo *
  gtk_drag_get_dest_info (GdkDragContext *context,
  			gboolean        create)
-@@ -308,18 +341,14 @@ gtk_drag_get_source_info (GdkDragContext *context,
+@@ -303,18 +336,14 @@ gtk_drag_get_source_info (GdkDragContext *context,
      {
        info = g_new0 (GtkDragSourceInfo, 1);
        info->context = context;
@@ -192,28 +141,11 @@ index 5688568..be92a22 100644
  GtkWidget *
  gtk_drag_get_source_widget (GdkDragContext *context)
  {
-@@ -1089,7 +1118,8 @@ gtk_drag_begin_idle (gpointer arg)
-   [owner release];
-   [types release];
- 
--  if ((nswindow = get_toplevel_nswindow (info->source_widget)) == NULL)
-+  if (info->source_widget == NULL
-+      || (nswindow = get_toplevel_nswindow (info->source_widget)) == NULL)
-      return FALSE;
-   
-   /* Ref the context. It's unreffed when the drag has been aborted */
-@@ -1108,7 +1138,6 @@ gtk_drag_begin_idle (gpointer arg)
-                source:nswindow
-             slideBack:YES];
- 
--  [info->nsevent release];
-   [drag_image release];
- 
-   [pool release];
-@@ -1833,61 +1862,12 @@ gtk_drag_set_default_icon (GdkColormap   *colormap,
+@@ -1888,53 +1917,6 @@ gtk_drag_set_default_icon (GdkColormap   *colormap,
+   g_warning ("gtk_drag_set_default_icon is not supported on Mac OS X.");
  }
  
- static void
+-static void
 -gtk_drag_source_info_destroy (GtkDragSourceInfo *info)
 -{
 -  NSPasteboard *pasteboard;
@@ -253,14 +185,17 @@ index 5688568..be92a22 100644
 -static gboolean
 -drag_drop_finished_idle_cb (gpointer data)
 -{
--  gtk_drag_source_info_destroy (data);
+-  GtkDragSourceInfo* info = (GtkDragSourceInfo*) data;
+-
+-  if (info->success)
+-    gtk_drag_source_info_destroy (data);
+-
 -  return FALSE;
 -}
--
--static void
- gtk_drag_drop_finished (GtkDragSourceInfo *info)
- {
-   if (info->success && info->delete)
+ 
+ static void
+ gtk_drag_drop_finished (GtkDragSourceInfo *info,
+@@ -1950,11 +1932,6 @@ gtk_drag_drop_finished (GtkDragSourceInfo *info,
      g_signal_emit_by_name (info->source_widget, "drag-data-delete",
                             info->context);
  
