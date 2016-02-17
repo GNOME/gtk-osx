@@ -138,7 +138,7 @@
       append_autogenargs('WebKit', '&#45;-enable-web-audio')
     -j1: Workaround for https://bugs.webkit.org/show_bug.cgi?id=140171
   -->
-  <autotools id="webkit1gtk3" autogen-sh="autoreconf" makeargs="-j1"
+  <autotools id="webkit1gtk3" autogen-sh="autoreconf"
              autogenargs="--enable-quartz-target --with-gtk=3.0 --disable-webkit2 --disable-credential-storage --disable-geolocation --disable-video --disable-web-audio CXXFLAGS='-std=gnu++11'">
     <branch repo="webkit.org" module="webkitgtk-2.4.9.tar.xz" version="2.4.9">
       <patch file="https://git.gnome.org/browse/gtk-osx/plain/patches/webkit-140167-disable-netscape-api.patch"
