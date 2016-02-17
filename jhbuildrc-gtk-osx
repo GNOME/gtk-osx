@@ -291,15 +291,17 @@ def setup_sdk(target, sdk_version, architectures=[_default_arch]):
     #
     if architectures == ["i386"]:
         append_autogenargs("glib", "ac_cv_c_bigendian=no")
-        append_autogenargs("openssl", "darwin-i386-cc")
+        # The '#' on openssl is to stop jhbuild from appending any more autogen
+        # arguments such as --disable-Werror; they cause openssl to error out
+        append_autogenargs("openssl", "darwin-i386-cc #")
     elif architectures == ["x86_64"]:
         conditions.add('64-bit')
         append_autogenargs("glib", "ac_cv_c_bigendian=no")
-        append_autogenargs("openssl", "darwin64-x86_64-cc")
+        append_autogenargs("openssl", "darwin64-x86_64-cc #")
     elif architectures == ["ppc"]:
         append_autogenargs("glib", "ac_cv_c_bigendian=yes")
         append_autogenargs("gmp", 'CFLAGS="-force_cpusubtype_ALL $CFLAGS"')
-        append_autogenargs("openssl", "darwin-ppc-cc")
+        append_autogenargs("openssl", "darwin-ppc-cc #")
 
     # For unknown reasons, iconv is not picked up correctly without this
     #
