@@ -372,6 +372,7 @@ def setup_sdk(target, sdk_version, architectures=[_default_arch]):
     config_shell = os.path.join(prefix, 'bin', 'bash')
     if _osx_version < 11.0:
         skip.append('bash')
+        skip.append('openssl')  # openssl removed in El Capitan
     elif os.path.exists(config_shell):
         os.environ['CONFIG_SHELL'] = config_shell
 
@@ -415,6 +416,9 @@ def setup_sdk(target, sdk_version, architectures=[_default_arch]):
         module_extra_env["WebKit"] = {'CXXFLAGS':os.environ['CXXFLAGS'] +
                                   ' -stdlib=libstdc++'}
         append_autogenargs('babl', '--disable-sse')
+
+    # openssl doesn't understand DESTDIR, but luckily it has its own mechanism.
+    module_extra_env['openssl'] = {'INSTALL_PREFIX': os.path.join(prefix, '_jhbuild', 'root-openssl')}
 
     if xcodeversion >= 4.0 and target in ('10.6', '10.5', '10.4'):
         environ_append('LDFLAGS',

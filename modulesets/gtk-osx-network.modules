@@ -4,6 +4,8 @@
 <moduleset>
   <repository name="git.gnome.org" type="git" default="yes"
               href="git://git.gnome.org/"/>
+  <repository name="openssl" type="tarball"
+              href="https://www.openssl.org/source/"/>
   <repository name="lysator" type="git" href="https://git.lysator.liu.se/"/>
   <!--repository name="git.gnu.org" type="git"
               href="git://git.savannah.gnu.org/"/-->
@@ -33,6 +35,15 @@
     </dependencies>
   </metamodule>
 
+  <!-- of the many arguments such as prefix and libdir that jhbuild might pass
+  to configure, openssl only understands prefix, and only with =. -->
+  <autotools id="openssl" autogen-sh="Configure" autogenargs="shared"
+             autogen-template="%(srcdir)s/%(autogen-sh)s --prefix=%(prefix)s --openssldir=%(prefix)s/etc/ssl %(autogenargs)s"
+             makeinstallargs="install_sw" supports-non-srcdir-builds="no">
+    <branch module="openssl-1.0.2f.tar.gz" version="1.0.2f" repo="openssl"
+            hash="sha256:932b4ee4def2b434f85435d9e3e19ca8ba99ce9a065a61524b429a9d5e9b2e9c"/>
+  </autotools>
+
   <!-- Rudely demands TeX to build documentation -->
   <!-- Assembler files are missing md5-compress.asm for x86_64 -->
   <autotools id="libnettle"
@@ -43,6 +54,7 @@
             tag="nettle_2.7_release_20130424"/>
     <dependencies>
       <dep package="gmp"/>
+      <dep package="openssl"/>
     </dependencies>
   </autotools>
 
