@@ -25,7 +25,13 @@
     <branch repo="ftp.gnu.org" module="make/make-3.82.tar.gz" version="3.82"/>
   </autotools>
 
-  <autotools id='bash' autogen-sh="configure">
+  <autotools id='readline' autogen-sh="configure">
+    <branch repo="ftp.gnu.org" module="readline/readline-6.3.tar.gz"
+      version="6.3">
+    </branch>
+  </autotools>
+
+  <autotools id='bash' autogen-sh="configure"  autogenargs="--with-installed-readline">
     <branch repo="ftp.gnu.org" module="bash/bash-4.3.30.tar.gz"
             version="4.3.30"/>
     <dependencies>
