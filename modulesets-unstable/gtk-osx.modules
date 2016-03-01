@@ -97,7 +97,7 @@
       <dep package="cairo"/>
     </dependencies>
     <after>
-      <dep package='python2.7'/>
+      <dep package='python'/>
     </after>
   </autotools>
 

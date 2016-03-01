@@ -16,6 +16,7 @@
 
   <metamodule id="meta-gtk-osx-python">
     <dependencies>
+      <dep package="meta-gtk-osx-core"/>
       <dep package="py2cairo"/>
       <dep package="pygobject"/>
       <dep package="pygtk"/>
@@ -26,12 +27,22 @@
   <metamodule id="meta-gtk-osx-python-gtk3">
     <dependencies>
       <dep package="meta-gtk-osx-gtk3"/>
+      <dep package="py2cairo"/>
       <dep package="pygobject3"/>
       <dep package="gtk-mac-integration-python"/>
     </dependencies>
   </metamodule>
 
-<!--Note the leading ; in autogen-template. It's there on purpose in case the user has set nice_build so that the nice prepended to the command doesn't eat the cd. -->
+  <metamodule id="meta-gtk-osx-python3-gtk3">
+    <dependencies>
+      <dep package="meta-gtk-osx-gtk3"/>
+      <dep package="pycairo"/>
+      <dep package="pygobject3"/>
+      <dep package="gtk-mac-integration-python"/>
+    </dependencies>
+  </metamodule>
+
+  <!--Note the leading ; in autogen-template. It's there on purpose in case the user has set nice_build so that the nice prepended to the command doesn't eat the cd. -->
    <autotools id="berkeleydb4.8" autogen-sh="dist/configure"
          autogen-template="cd .;cd build_unix; ../%(autogen-sh)s --prefix %(prefix)s  %(autogenargs)s" makeargs="-C build_unix"
          makeinstallargs="-C build_unix install"
@@ -44,7 +55,7 @@
   </autotools>
 
 <!-- Python-2.7.5's hashlib doesn't build correctly with gcc-4.2, though it does fine with Clang (and probably later gccs as well). -->
-  <autotools id="python2.7" autogenargs="--enable-shared" supports-non-srcdir-builds="no"
+  <autotools id="python" autogenargs="--enable-shared" supports-non-srcdir-builds="no"
 	     autogen-sh="configure">
     <branch repo="python"
 	    module="2.7.11/Python-2.7.11.tar.xz" version="2.7.11">
@@ -109,7 +120,7 @@
       <dep package="cairo"/>
     </dependencies>
     <after>
-      <dep package="python2.7"/>
+      <dep package="python"/>
       <dep package="meta-gtk-osx-core"/>
       <dep package="meta-gtk-osx-gtk3"/>
     </after>
@@ -121,7 +132,7 @@
       <dep package="cairo"/>
     </dependencies>
     <after>
-      <dep package="python2.7"/>
+      <dep package="python3"/>
       <dep package="meta-gtk-osx-core"/>
       <dep package="meta-gtk-osx-gtk3"/>
     </after>
@@ -131,7 +142,7 @@
 	     supports-non-srcdir-builds="no">
     <branch revision="pygobject-2-28"/>
     <dependencies>
-      <dep package="python2.7"/>
+      <dep package="python"/>
       <dep package="meta-gtk-osx-core"/>
    </dependencies>
   </autotools>
@@ -139,9 +150,9 @@
   <autotools id="pygobject3" >
     <branch module="pygobject" checkoutdir="pygobject3"/>
     <dependencies>
-      <dep package="py2cairo"/>
-      <dep package="python2.7"/>
+      <dep package="pycairo"/>
       <dep package="meta-gtk-osx-gtk3"/>
+      <dep package="python3"/>
    </dependencies>
   </autotools>
 
@@ -172,6 +183,7 @@
       <dep package="gtk+"/>
       <dep package="gtk+-3.0"/>
       <dep package="pygobject"/>
+      <dep package="pygobject3"/>
     </after>
   </autotools>
 

@@ -166,7 +166,7 @@
 	    repo="dbus.freedesktop.org">
     </branch>
     <dependencies>
-      <dep package="python2.7"/>
+      <dep package="python"/>
     </dependencies>
   </autotools>
 

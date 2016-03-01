@@ -67,7 +67,7 @@
   <autotools id="libxml2" autogenargs='--libdir="$JHBUILD_LIBDIR" --with-python'>
     <branch repo="git.gnome.org"/>
     <after>
-      <dep package="python2.7"/>
+      <dep package="python"/>
       <dep package="python3"/>
     </after>
   </autotools>
