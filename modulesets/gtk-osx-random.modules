@@ -23,7 +23,6 @@
 	      cvsroot=":pserver:anonymous@gtkspell.cvs.sourceforge.net:/cvsroot/gtkspell"
 	      password=""/>
   <repository type="git" name="savannah" href="git://git.sv.gnu/org/"/>
-  <repository type="git" name="github" href="https://github.com"/>
   <repository type="tarball" name="boehm"
 	      href="http://www.hboem.info/"/>
   <repository type="svn" name="abisource/enchant"
