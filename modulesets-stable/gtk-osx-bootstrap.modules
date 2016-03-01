@@ -193,9 +193,14 @@
             module="gettext/gettext-0.19.4.tar.xz" version="0.19.4"/>
   </autotools>
 
+  <autotools id='readline' autogen-sh="configure">
+    <branch repo="ftp.gnu.org" module="readline/readline-6.3.tar.gz"
+      version="6.3">
+    </branch>
+  </autotools>
+  
   <metamodule id="meta-gtk-osx-bootstrap">
     <dependencies>
-      <dep package="readline"/>
       <dep package="cups"/>
       <dep package="libpng"/>
       <dep package="libjpeg"/>
