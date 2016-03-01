@@ -131,12 +131,12 @@
             hash="sha256:1320569f6c6d75d6b66172b2d28e59c56ee864ee9df202b76799c4506a214eb7">
     </branch>
     <dependencies>
+      <dep package="glib"/>
       <dep package="cairo"/>
      </dependencies>
     <after>
       <dep package="gobject-introspection"/>
       <dep package="meta-gtk-osx-freetype"/>
-      <dep package="glib"/>
       <dep package="meta-gtk-osx-bootstrap"/>
     </after>
   </autotools>
@@ -215,7 +215,6 @@
       <dep package="glib"/>
       <dep package="pango"/>
       <dep package="atk"/>
-      <dep package="cairo"/>
       <dep package="gdk-pixbuf"/>
       <dep package="gobject-introspection"/>
       <dep package="libepoxy"/>

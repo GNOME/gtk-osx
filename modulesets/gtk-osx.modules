@@ -124,9 +124,9 @@
   <autotools id="atk">
     <branch tag="gnome-3-16"/>
     <dependencies>
-      <dep package="glib"/>
     </dependencies>
     <after>
+      <dep package="glib"/>
       <dep package="meta-gtk-osx-bootstrap"/>
       <dep package="gobject-introspection"/>
     </after>

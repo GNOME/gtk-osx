@@ -71,7 +71,6 @@
   <autotools id="glib" autogenargs="--disable-dtrace --with-pcre=insternal">
     <branch />
     <dependencies>
-      <dep package="meta-gtk-osx-bootstrap"/>
       <dep package="libffi"/>
     </dependencies>
   </autotools>
@@ -97,8 +96,10 @@
     <dependencies>
       <dep package="glib"/>
       <dep package="cairo"/>
-     <dep package="libffi"/>
     </dependencies>
+    <after>
+      <dep package='python2.7'/>
+    </after>
   </autotools>
 
   <autotools id="pango">
@@ -106,10 +107,10 @@
     <dependencies>
       <dep package="cairo"/>
       <dep package="glib"/>
-      <dep package="gobject-introspection"/>
-      <dep package="meta-gtk-osx-bootstrap"/>
     </dependencies>
     <after>
+      <dep package="gobject-introspection"/>
+      <dep package="meta-gtk-osx-bootstrap"/>
       <dep package="meta-gtk-osx-freetype"/>
     </after>
   </autotools>
@@ -117,11 +118,10 @@
  <autotools id="atk" supports-non-srcdir-builds="no">
     <branch />
     <dependencies>
-      <dep package="libffi"/>
-      <dep package="glib"/>
-      <dep package="gobject-introspection"/>
     </dependencies>
     <after>
+      <dep package="glib"/>
+      <dep package="gobject-introspection"/>
       <dep package="meta-gtk-osx-bootstrap"/>
     </after>
   </autotools>
@@ -155,10 +155,11 @@
 	     autogenargs="--with-gdktarget=quartz --enable-introspection=no --enable-quartz-relocation">
     <branch revision="gtk-2-24" checkoutdir="gtk+-2.0"/>
     <dependencies>
-      <dep package="gobject-introspection"/>
+      <dep package="glib"/>
       <dep package="pango"/>
-      <dep package="gdk-pixbuf"/>
       <dep package="atk"/>
+      <dep package="gdk-pixbuf"/>
+      <dep package="gobject-introspection"/>
     </dependencies>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
@@ -170,10 +171,10 @@
     <branch module="gtk+" checkoutdir="gtk+-3.0"/>
     <dependencies>
       <dep package="glib"/>
-      <dep package="gobject-introspection"/>
       <dep package="pango"/>
       <dep package="gdk-pixbuf"/>
       <dep package="atk"/>
+      <dep package="gobject-introspection"/>
       <dep package="libepoxy"/>
     </dependencies>
     <after>
