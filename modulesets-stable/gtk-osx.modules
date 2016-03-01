@@ -109,20 +109,6 @@
     </dependencies>
   </autotools>
 
-<!-- This is the latest 0.10 version. Later versions are 1.29 and intended to work with glib 2.29; the minor version of gobject-introspection will track the minor version of glib that it's intended to work with. Note that in the unlikely event you need to introspect Gtk+-2.0, you need to build Glib 1.28 and use this gobject-introspection. The default is to *not* introspect Gtk+-2.0 and to use the latest GLib and Gobject-Introspection with Gtk3 -->
-  <autotools id="gobject-introspection-10" autogen-sh="configure">
-    <branch module="gobject-introspection/0.10/gobject-introspection-0.10.8.tar.bz2"
-            version="0.10.8"
-            hash="sha256:5b1387ff37f03db880a2b1cbd6c6b6dfb923a29468d4d8367c458abf7704c61e">
-      <patch file="http://git.gnome.org/browse/gtk-osx/plain/patches/girscanner-objc.patch" strip="1"/>
-    </branch>
-    <dependencies>
-      <dep package="glib"/>
-      <dep package="cairo"/>
-     <dep package="libffi"/>
-    </dependencies>
-  </autotools>
-
   <autotools id="gobject-introspection" autogen-sh="configure">
     <branch module="gobject-introspection/1.44/gobject-introspection-1.44.0.tar.xz"
             version="1.44.0"
@@ -149,7 +135,6 @@
      </dependencies>
     <after>
       <dep package="gobject-introspection"/>
-      <dep package="gobject-introspection-10"/>
       <dep package="meta-gtk-osx-freetype"/>
       <dep package="glib"/>
       <dep package="meta-gtk-osx-bootstrap"/>
@@ -165,7 +150,6 @@
       <dep package="glib"/>
       <dep package="meta-gtk-osx-bootstrap"/>
       <dep package="gobject-introspection"/>
-      <dep package="gobject-introspection-10"/>
     </after>
   </autotools>
 
@@ -175,7 +159,6 @@
     <after>
       <dep package="pango"/>
       <dep package="gobject-introspection"/>
-      <dep package="gobject-introspection-10"/>
     </after>
   </autotools>
 

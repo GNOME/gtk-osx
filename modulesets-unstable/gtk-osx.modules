@@ -155,6 +155,7 @@
 	     autogenargs="--with-gdktarget=quartz --enable-introspection=no --enable-quartz-relocation">
     <branch revision="gtk-2-24" checkoutdir="gtk+-2.0"/>
     <dependencies>
+      <dep package="gobject-introspection"/>
       <dep package="pango"/>
       <dep package="gdk-pixbuf"/>
       <dep package="atk"/>

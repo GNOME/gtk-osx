@@ -97,15 +97,6 @@
     </dependencies>
   </autotools>
 
-  <autotools id="gobject-introspection-10">
-    <branch tag="GOBJECT_INTROSPECTION_0_10_1"/>
-    <dependencies>
-      <dep package="glib"/>
-      <dep package="cairo"/>
-      <dep package="libffi"/>
-    </dependencies>
-  </autotools>
-
   <autotools id="gobject-introspection">
     <branch tag="gnome-3-16" module="gobject-introspection"/>
     <dependencies>
@@ -126,7 +117,6 @@
     <after>
       <dep package="gobject-introspection"/>
       <dep package="meta-gtk-osx-freetype"/>
-      <dep package="gobject-introspection-10"/>
       <dep package="meta-gtk-osx-bootstrap"/>
     </after>
   </autotools>
@@ -139,7 +129,6 @@
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
       <dep package="gobject-introspection"/>
-      <dep package="gobject-introspection-10"/>
     </after>
   </autotools>
 
@@ -149,21 +138,20 @@
     <after>
       <dep package="pango"/>
       <dep package="gobject-introspection"/>
-      <dep package="gobject-introspection-10"/>
     </after>
   </autotools>
-
 
   <autotools id="gtk+" autogenargs="--with-gdktarget=quartz --enable-introspection=no --enable-quartz-relocation">
     <branch revision="gtk-2-24"/>
     <dependencies>
+      <dep package="glib"/>
       <dep package="pango"/>
       <dep package="atk"/>
       <dep package="gdk-pixbuf"/>
+      <dep package="gobject-introspection"/>
     </dependencies>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
-      <dep package="gobject-introspection-10"/>
     </after>
   </autotools>
 
