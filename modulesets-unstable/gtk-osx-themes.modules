@@ -63,8 +63,14 @@
     </dependencies>
   </autotools>
 
+  <!-- Master on gtk-engines got adjusted in the Gtk+-2.90 cycle to
+       require Gtk+-3. Shortly thereafter engine based theming was
+       dropped from Gtk+-3 in favor of CSS theming, so it doesn't
+       actually work with Gtk+-3 either. The gtk-engines-2-22 branch
+       is the last one before that change and has actually gotten a
+       maintenance change. -->
   <autotools id="gtk-engines">
-    <branch />
+    <branch module="gtk-engines-2-22"/>
     <after>
       <dep package="meta-gtk-osx-core"/>
     </after>
