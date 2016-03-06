@@ -64,7 +64,7 @@
   </autotools>
 
   <autotools id="gtk-engines">
-    <branch module="gtk-engines-2-22"/>
+    <branch revision="gtk-engines-2-22"/>
     <after>
       <dep package="meta-gtk-osx-core"/>
     </after>
