@@ -47,6 +47,10 @@ if test x`which git` == x; then
     do_exit "Git is not available, please install it and try again."
 fi
 
+if test ! -f $HOME/.local/bin/python2; then
+    ln -s /System/Library/Frameworks/Python.framework/Versions/Current/bin/python2 ~/.local/bin/python2
+fi
+
 mkdir -p $SOURCE 2>/dev/null || do_exit "The directory $SOURCE could not be created. Check permissions and try again."
 
 rm -f tmp-jhbuild-revision
@@ -87,6 +91,7 @@ if [ -e "$SOURCE/jhbuild/autogen.sh" ]; then
 else
     (cd $SOURCE/jhbuild && make -f Makefile.plain DISABLE_GETTEXT=1 install >/dev/null) || do_exit "Jhbuild installation failed";
 fi
+
 #If ~/.jhbuildrc is a link, assume that it's to a gtk-osx repository
 #and don't touch it.
 if [ ! -L $HOME/.jhbuildrc ]; then
@@ -107,9 +112,7 @@ MODULES="bootstrap.modules gtk-osx-bootstrap.modules gtk-osx.modules gtk-osx-gst
 for m in $MODULES; do
     get_moduleset_from_git $m
 done
-if test ! -f $HOME/.local/bin/python2; then
-    ln -s /System/Library/Frameworks/Python.framework/Versions/Current/bin/python2 ~/.local/bin/python2
-fi
+
 if test "x`echo $PATH | grep $HOME/.local/bin`" == x; then
     echo "PATH does not contain $HOME/.local/bin, it is recommended that you add that."
     echo
