@@ -107,10 +107,13 @@ MODULES="bootstrap.modules gtk-osx-bootstrap.modules gtk-osx.modules gtk-osx-gst
 for m in $MODULES; do
     get_moduleset_from_git $m
 done
-
+if test ! -f $HOME/.local/bin/python2; then
+    ln -s /System/Library/Frameworks/Python.framework/Versions/Current/bin/python2 ~/.local/bin/python2
+fi
 if test "x`echo $PATH | grep $HOME/.local/bin`" == x; then
     echo "PATH does not contain $HOME/.local/bin, it is recommended that you add that."
     echo
 fi
+
 
 echo "Done."
