@@ -47,10 +47,6 @@ if test x`which git` == x; then
     do_exit "Git is not available, please install it and try again."
 fi
 
-if test ! -f $HOME/.local/bin/python2; then
-    ln -s /System/Library/Frameworks/Python.framework/Versions/Current/bin/python2 ~/.local/bin/python2
-fi
-
 mkdir -p $SOURCE 2>/dev/null || do_exit "The directory $SOURCE could not be created. Check permissions and try again."
 
 rm -f tmp-jhbuild-revision
@@ -112,7 +108,10 @@ MODULES="bootstrap.modules gtk-osx-bootstrap.modules gtk-osx.modules gtk-osx-gst
 for m in $MODULES; do
     get_moduleset_from_git $m
 done
-
+if test -f $HOME/.local/bin/python2 -a x`readlink $HOME/.local/bin/python2` = x"/usr/bin/python"; then rm $HOME/.local/bin/python2; fi
+if test ! -f $HOME/.local/bin/python2; then
+    ln -s /System/Library/Frameworks/Python.framework/Versions/Current/bin/python2 ~/.local/bin/python2
+fi
 if test "x`echo $PATH | grep $HOME/.local/bin`" == x; then
     echo "PATH does not contain $HOME/.local/bin, it is recommended that you add that."
     echo
