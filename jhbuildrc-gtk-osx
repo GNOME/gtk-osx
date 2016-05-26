@@ -659,6 +659,19 @@ else:
 if not _ran_recursively and _gtk_osx_prompt_prefix:
     os.environ["JHBUILD_PROMPT"] = "[" + _gtk_osx_prompt_prefix + "] "
 
+#Bug 766738: Apple's python tries to install extensions in
+#/Library/Python, which requires sudo. Change that to the right place
+#inside prefix. Note that we need the installed python's version to
+#get the right directory name.
+
+if (not "python" in modules and
+    not os.path.exists(os.path.join(prefix, 'bin', 'python2'))):
+    _python_ver = 'python' + '.'.join([str(_x) for _x in sys.version_info[0:2]])
+    _python_install_path = os.path.join(prefix, 'lib',
+                                       _python_ver, 'site-packages')
+    append_autogenargs('libxml2',
+                       '--with-python-install-dir=' + _python_install_path)
+
 # Unset this so we don't mess with the check for not starting
 # recursively.
 os.unsetenv("JHB")
