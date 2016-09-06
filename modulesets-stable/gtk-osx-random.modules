@@ -458,9 +458,8 @@ Libglade itself is deprecated. This is the last release. -->
   </autotools>
 
   <autotools id="guile2" autogen-sh="configure">
-    <branch repo="ftp.gnu.org" module="guile/guile-2.0.11.tar.gz"
-	    version="2.0.11">
-      <patch file="https://git.gnome.org/browse/gtk-osx/plain/patches/guile20-align-fix.patch" strip="1"/>
+    <branch repo="ftp.gnu.org" module="guile/guile-2.0.12.tar.gz"
+	    version="2.0.12">
       <patch file="https://git.gnome.org/browse/gtk-osx/plain/patches/guild-shell.patch" strip="1"/>
     </branch>
     <dependencies>
