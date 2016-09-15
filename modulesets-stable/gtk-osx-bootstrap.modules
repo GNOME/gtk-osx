@@ -58,7 +58,7 @@
 
   <autotools id="libxml2" autogen-sh="configure"
              autogenargs='--libdir="$JHBUILD_LIBDIR" --with-python'>
-    <branch version="2.9.2" module="libxml2-2.9.2.tar.gz"
+    <branch version="2.9.4" module="libxml2-2.9.4.tar.gz"
 	    repo="xmlsoft.org"/>
     <after>
       <dep package="python"/>
