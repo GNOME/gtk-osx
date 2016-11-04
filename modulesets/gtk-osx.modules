@@ -87,9 +87,11 @@
             tag="util-macros-1.19.0"/>
   </autotools>
 
-  <!-- There is no stable release yet that works here, so use master -->
+  <!-- There is no stable release yet that works here, but commit
+       06fd4a27 breaks the build for gtk-osx, tag v1.3.1 builds
+       fine. -->
   <autotools id="libepoxy">
-    <branch repo="github" module="anholt/libepoxy"/>
+    <branch repo="github" module="anholt/libepoxy" tag="v1.3.1"/>
     <dependencies>
       <dep package="xorg-util-macros"/>
     </dependencies>

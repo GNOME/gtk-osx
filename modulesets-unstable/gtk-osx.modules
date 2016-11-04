@@ -83,8 +83,10 @@
     <branch repo="freedesktop" module="xorg/util/macros"/>
   </autotools>
 
+  
+  <!-- Commit 06fd4a27 breaks the build for gtk-osx, tag v1.3.1 builds fine. -->
   <autotools id="libepoxy">
-    <branch repo="github" module="anholt/libepoxy"/>
+    <branch repo="github" module="anholt/libepoxy" tag="v1.3"/>
     <dependencies>
       <dep package="xorg-util-macros"/>
     </dependencies>
