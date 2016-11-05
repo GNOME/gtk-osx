@@ -91,6 +91,12 @@
     </dependencies>
   </autotools>
 
+  <autotools id="autoconf-archive" autogen-sh="configure">
+    <branch repo="ftp.gnu.org"
+            module="autoconf-archive/autoconf-archive-2016.09.16.tar.xz"
+            version="2016-09.16"/>
+  </autotools>
+
   <autotools id="libtool" autogen-sh="configure" bootstrap="true">
     <branch repo="ftp.gnu.org"
             module="libtool/libtool-2.4.6.tar.gz" version="2.4.6"/>
@@ -233,6 +239,7 @@
       <dep package="cmake"/>
       <dep package="m4"/>	<!-- Can be skipped for Leopard and later -->
       <dep package="autoconf" />
+      <dep package="autoconf-archive" />
       <dep package="libtool" />
       <dep package="automake-1.10" />
       <dep package="automake-1.11" />
