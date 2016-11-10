@@ -6,5 +6,15 @@
  # -*- scheme -*-
  prefix="@prefix@"
  exec_prefix="@exec_prefix@"
-
-Diff finished.  Mon Dec 14 12:04:17 2015
+--- a/meta/Makefile.in
++++ b/meta/Makefile.in
+@@ -1586,7 +1586,8 @@ substitute = \
+ 	 -e "s|[@]sitedir[@]|$(sitedir)|g"					\
+ 	 -e "s|[@]guile[@]|$$guile|g"						\
+ 	 -e "s|[@]guild[@]|$$guild|g"						\
+-	 -e "s|[@]installed_guile[@]|$$installed_guile|g"
++	 -e "s|[@]installed_guile[@]|$$installed_guile|g"			\
++	 -e "s|[@]SHELL[@]|$$CONFIG_SHELL|g"
+ 
+ 
+ # Substitutions for dependencies that appear in 'guile-2.0.pc'.
