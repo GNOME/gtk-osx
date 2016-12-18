@@ -178,7 +178,23 @@
 
   <autotools id="gtk+-3.0"
              autogenargs="--enable-quartz-backend --enable-quartz-relocation --disable-colord">
-    <branch module="gtk+" checkoutdir="gtk+-3.0"/>
+    <branch module="gtk+" checkoutdir="gtk+-3.0" revision="gtk-3-22"/>
+    <dependencies>
+      <dep package="glib"/>
+      <dep package="pango"/>
+      <dep package="gdk-pixbuf"/>
+      <dep package="atk"/>
+      <dep package="gobject-introspection"/>
+      <dep package="libepoxy"/>
+    </dependencies>
+    <after>
+      <dep package="meta-gtk-osx-bootstrap"/>
+    </after>
+  </autotools>
+
+  <autotools id="gtk+-4.0"
+             autogenargs="--enable-quartz-backend --enable-quartz-relocation --disable-colord">
+    <branch module="gtk+" checkoutdir="gtk+-4.0"/>
     <dependencies>
       <dep package="glib"/>
       <dep package="pango"/>
