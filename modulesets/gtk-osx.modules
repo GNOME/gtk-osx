@@ -157,7 +157,7 @@
 
   <autotools id="gtk+-3.0"
 	     autogenargs="--enable-quartz-backend --disable-colord  --enable-quartz-relocation">
-    <branch module="gtk+" checkoutdir="gtk+-3.0" revision="gtk-3-16"/>
+    <branch module="gtk+" checkoutdir="gtk+-3.0" revision="gtk-3-20"/>
     <dependencies>
       <dep package="glib"/>
       <dep package="pango"/>
