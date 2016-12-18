@@ -80,16 +80,16 @@ index da7c167..fec84ba 100644
  #endif
  
 -#ifdef HAVE_COCOA
-+#ifdef AVAILABLE_MAC_OS_X_VERSION_10_9_AND_LATER
++#if MAC_OS_X_VERSION_MIN_REQUIRED < 1090
  extern GType g_cocoa_notification_backend_get_type (void);
  #endif
  
-@@ -1111,7 +1115,7 @@ _g_io_modules_ensure_loaded (void)
+@@ -1111,8 +1115,7 @@ _g_io_modules_ensure_loaded (void)
        g_type_ensure (g_fdo_notification_backend_get_type ());
        g_type_ensure (g_gtk_notification_backend_get_type ());
  #endif
 -#ifdef HAVE_COCOA
-+#ifdef AVAILABLE_MAC_OS_X_VERSION_10_9_AND_LATER
++#if MAC_OS_X_VERSION_MIN_REQUIRED < 1090
        g_type_ensure (g_cocoa_notification_backend_get_type ());
  #endif
  #ifdef G_OS_WIN32

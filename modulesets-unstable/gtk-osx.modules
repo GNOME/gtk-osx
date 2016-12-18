@@ -152,6 +152,14 @@
     </after>
   </autotools>
 
+  <autotools id="graphene">
+    <branch module="ebassi/graphene" repo="github" checkoutdir="graphene"/>
+    <dependencies>
+      <dep package="glib"/>
+      <dep package="gobject-introspection"/>
+    </dependencies>
+  </autotools>
+ 
   <autotools id="gtk+"
 	     autogenargs="--with-gdktarget=quartz --enable-introspection=no --enable-quartz-relocation">
     <branch revision="gtk-2-24" checkoutdir="gtk+-2.0"/>
@@ -166,6 +174,7 @@
       <dep package="meta-gtk-osx-bootstrap"/>
     </after>
   </autotools>
+  
 
   <autotools id="gtk+-3.0"
              autogenargs="--enable-quartz-backend --enable-quartz-relocation --disable-colord">
@@ -177,6 +186,7 @@
       <dep package="atk"/>
       <dep package="gobject-introspection"/>
       <dep package="libepoxy"/>
+      <dep package="graphene"/>
     </dependencies>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
