@@ -165,6 +165,8 @@
     <after>
       <dep package="python"/>
       <dep package="python3"/>
+      <dep package="pycairo"/>
+      <dep package="py2cairo"/>
     </after>
   </autotools>
 
