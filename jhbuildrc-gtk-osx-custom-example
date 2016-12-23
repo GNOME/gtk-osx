@@ -86,37 +86,66 @@ elif _jhb == "FW":
 # call it or one of the functions (setup_sdk_10_4(),
 # setup_ppc_build(), or setup_universal_build()) in jhbuildrc-custom.
 #
-# Target can be "10.4", "10.5", or "10.6". It sets
+# Target is the earliest version of MacOS on which the result binary
+# can run, in the form "10.X" or "native" (the default). It sets
 # MACOS_DEPLOYMENT_TARGET and the -macosx-version-min CFLAG.
 #
-# Setup_sdk can be any version from "10.4u" or later, or "native". "Native" will
-# not set -sysroot in CFLAGS, so headers and dylibs will come from
-# /usr instead of /Developer/SDKs/MacOSX_sdk.10.foo. If you are
-# building for distribution, you probably want to use the lowest SDK
-# which will successfully build you modules. The exception is if you
-# are building under Tiger, because
-# a) You're already using the lowest compatible SDK
-# b) Cups 1.2.12, which you must install to build Gtk+, installs new
-# headers and libraries into /usr but not into
-# /Developer/SDKs/MacOSX_sdk_10.4u.
+# Setup_sdk can be any version from "10.4u" or later, or "native". On
+# MacOS X 10.8 and earlier, 'native' won't set -sysroot so the build
+# will use the headers in libraries in /usr. Apple removed the headers
+# in MacOS X 10.9 so on those systems -sysroot is set to the SDK
+# directory.
+
+# If you are building for distribution with Xcode 6.x or older, you
+# probably want to use the lowest SDK which will successfully build
+# your modules. The exception is if you are building under Tiger,
+# because a) You're already using the lowest compatible SDK b) Cups
+# 1.2.12, which you must install to build Gtk+, installs new headers
+# and libraries into /usr but not into
+# /Developer/SDKs/MacOSX_sdk_10.4u. From Xcode 7/MacOSX10.10.sdk on
+# Apple provided a new format dylib stub that links with dylibs from
+# earlier versions of MacOS. If you're using Xcode 7 or later you
+# should use the native SDK and pass the target of the earliest
+# version you intend to support.
 #
 # Architectures is a list (pass the arguments in brackets) which can
-# include the values "ppc", "i386", "x86_64", and _default_arch. That
-# last one is a variable and doesn't get quotes. Don't pass multiple
-# arguments directly to setup_sdk, though, because that would build
-# universal and several packages need special handling to build
-# universal. Use setup_universal_build instead. Do note, though, that
-# while setup_universal_build will build successfully, the result will
-# usually crash because of endianness problems with icon caches. Help
-# is welcome to fix this. The special argument _default_arch is a
-# variable set by jhbuildrc depending on what platform you're on. It
-# doesn't set the -arch CFLAG at all, so your architecture will be
-# whatever you get that way. Note that on Snow Leopard, if you are
-# building on a 64-bit processor (Xeon, Core2duo, or one of the Core
-# iFoo procesors), the architecure is x86_64 by default; otherwise
-# it's i386, which is 32-bit. Be sure to read
-# http://sourceforge.net/apps/trac/gtk-osx/wiki/SnowLeopard.
+# include the values "ppc", "ppc64", "i386", "x86_64", and
+# _default_arch. That last one is a variable and doesn't get
+# quotes.
 #
+# Setup_universal_build: Don't pass multiple arguments directly to
+# setup_sdk, though, because that would build universal and several
+# packages need special handling to build universal. Use
+# setup_universal_build instead. Do note, though, that while
+# setup_universal_build will build across PowerPC and Intel
+# architectures successfully, the result will usually crash because of
+# endianness problems with icon caches. Help is welcome to fix
+# this. The special argument _default_arch is a variable set by
+# jhbuildrc depending on what platform you're on. It doesn't set the
+# -arch CFLAG at all, so your architecture will be whatever you get
+# that way. Note that on Snow Leopard and later, if you are building
+# on a 64-bit processor (Xeon, Core2duo, or one of the Core iFoo
+# procesors), the architecure is x86_64 by default; otherwise it's
+# i386, which is 32-bit. Note as well that for most purposes 32-bit
+# code runs well on 64-bit Macs so there's no real benefit to
+# i386+x86_64 or ppc+ppc64.
+
+# There are also some utility functions which you may find useful:
+#
+# environ_append(key, value, separator=' '), environ_prepend(key,
+# value, separator=' '), and environ_remove(key, value, separator=':')
+# append, prepend, or remove value to/from the environment variable key
+# with separator between the value and the existing text of the
+# variable. This is primarily intended for manipulating search paths.
+#
+# append_autogenargs(module, args) and remove_autogenargs(module,
+# args) add or remove args from the list of arguments passed to the
+# module's autogen-sh attribute during the configure phase of the
+# module's build.
+#
+# setup_debug() and setup_release() add either "-O0 -ggdb3" or
+# "-O2" respectively to CFLAGS, CXXFLAGS, and OBJCFLAGS.
+
 #  Set up a particular target and SDK: For default operation, set the
 # architecture and SDK for the native machine:
 _target = "10.%d" % _osx_version;
