@@ -42,7 +42,7 @@
 
   <!-- of the many arguments such as prefix and libdir that jhbuild might pass
   to configure, openssl only understands prefix, and only with =. -->
-  <autotools id="openssl" autogen-sh="Configure" autogenargs="shared"
+  <autotools id="openssl" autogen-sh="Configure" autogenargs="shared "
              autogen-template="%(srcdir)s/%(autogen-sh)s --prefix=%(prefix)s --openssldir=%(prefix)s/etc/ssl %(autogenargs)s"
              makeinstallargs="install_sw" supports-non-srcdir-builds="no">
     <branch module="openssl-1.0.2f.tar.gz" version="1.0.2f" repo="openssl"
@@ -233,7 +233,7 @@
     USE_LIBHYPHEN: Requires libhyphen. No module for this yet.
   -->
   <cmake id="webkit2gtk3"
-         cmakeargs="-DPORT=GTK -DENABLE_X11_TARGET=OFF -DENABLE_QUARTZ_TARGET=ON -DENABLE_TOOLS=ON -DENABLE_MINIBROWSER=ON -DENABLE_PLUGIN_PROCESS_GTK2=OFF -DENABLE_VIDEO=OFF -DENABLE_WEB_AUDIO=OFF -DENABLE_CREDENTIAL_STORAGE=OFF -DENABLE_GEOLOCATION=OFF -DENABLE_OPENGL=OFF -DUSE_LIBNOTIFY=OFF -DUSE_LIBHYPHEN=OFF -DCMAKE_CXX_FLAGS='-stdlib=libc++'">
+         cmakeargs='-DPORT=GTK -DENABLE_X11_TARGET=OFF -DENABLE_QUARTZ_TARGET=ON -DENABLE_TOOLS=ON -DENABLE_MINIBROWSER=ON -DENABLE_PLUGIN_PROCESS_GTK2=OFF -DENABLE_VIDEO=OFF -DENABLE_WEB_AUDIO=OFF -DENABLE_CREDENTIAL_STORAGE=OFF -DENABLE_GEOLOCATION=OFF -DENABLE_OPENGL=OFF -DUSE_LIBNOTIFY=OFF -DUSE_LIBHYPHEN=OFF -DCMAKE_CXX_FLAGS="$CXX_FLAGS -stdlib=libc++"'>
     <branch repo="webkit.org" module="webkitgtk-2.10.2.tar.xz" version="2.10.2">
       <patch file="https://git.gnome.org/browse/gtk-osx/plain/patches/webkit-144561-quartz-backend.patch"
              strip="1"/>
