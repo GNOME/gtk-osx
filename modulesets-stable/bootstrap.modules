@@ -21,10 +21,6 @@
   <repository type="tarball" name="intltool"
               href="http://launchpad.net/intltool/trunk/"/>
 
-  <autotools id="make" bootstrap="true">
-    <branch repo="ftp.gnu.org" module="make/make-3.82.tar.gz" version="3.82"/>
-  </autotools>
-
   <autotools id='readline' autogen-sh="configure">
     <branch repo="ftp.gnu.org" module="readline/readline-6.3.tar.gz"
       version="6.3">
@@ -55,14 +51,6 @@
     </dependencies>
   </autotools>
 
-  <autotools id="subversion">
-    <branch repo="apache.org" module="subversion/subversion-1.5.9.tar.bz2"
-            version="1.5.9"/>
-    <dependencies>
-      <dep package="apr-util"/>
-    </dependencies>
-  </autotools>
-
   <autotools id="gettext-tools" autogen-sh="configure"
              autogenargs="--without-emacs --disable-java --disable-native-java --disable-libasprintf --disable-csharp --with-included-glib">
     <branch repo="ftp.gnu.org" source-subdir="gettext-tools"
@@ -77,17 +65,11 @@
     </branch>
   </autotools>
 
-  <autotools id="m4" autogen-sh="configure" bootstrap="true">
-    <branch repo="ftp.gnu.org"
-            module="m4/m4-1.4.17.tar.xz" version="1.4.17"/>
-  </autotools>
-
   <autotools id="autoconf" autogen-sh="configure" bootstrap="true">
     <branch repo="ftp.gnu.org"
             module="autoconf/autoconf-2.69.tar.xz" version="2.69"/>
     <dependencies>
       <dep package="xz"/>
-      <dep package="m4"/>
     </dependencies>
   </autotools>
 
@@ -231,13 +213,10 @@
   <metamodule id="meta-bootstrap">
     <dependencies>
       <dep package="xz"/>
-      <dep package="make"/>     <!-- Needed for Tiger, skipped otherwise -->
-      <dep package="subversion"/>   <!-- Needed for Tiger, skipped otherwise -->
       <dep package="gettext-tools" /> <!-- Needed for 64-bit -->
       <dep package="readline" />
       <dep package="bash" />  <!-- Needed for El Cap and later to work around SIP. -->
       <dep package="cmake"/>
-      <dep package="m4"/>	<!-- Can be skipped for Leopard and later -->
       <dep package="autoconf" />
       <dep package="autoconf-archive" />
       <dep package="libtool" />

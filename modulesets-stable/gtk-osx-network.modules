@@ -147,43 +147,6 @@
     </after>
   </autotools>
 
-  <!--WebKit 1.10 doesn't build with the 10.5 SDK, so use this older version for
-  old builds.-->
-  <autotools id="WebKit1.6" autogen-sh="configure"
-             autogenargs="--with-target=quartz --disable-video --with-font-backend=pango --with-gtk=2.0">
-    <branch repo="webkit.org" module="webkit-1.6.1.tar.gz" version="1.6.1">
-      <patch file="https://git.gnome.org/browse/gtk-osx/plain/patches/webkit-1.6-no-x11.patch"
-             strip="1"/>
-      <patch file="https://git.gnome.org/browse/gtk-osx/plain/patches/webkit-1.6-pango-includes.patch"
-             strip="1"/>
-      <patch file="https://git.gnome.org/browse/gtk-osx/plain/patches/webkit-1.6-missing-utf8-include.patch"
-             strip="1"/>
-      <patch file="https://git.gnome.org/browse/gtk-osx/plain/patches/webkit-1.6-enable-blob.patch"
-             strip="1"/>
-      <patch file="https://git.gnome.org/browse/gtk-osx/plain/patches/webkit-1.6-gnome-3.6-fixup.patch"
-             strip="1"/>
-      <patch file="https://git.gnome.org/browse/gtk-osx/plain/patches/webkit-1.6-clang-fixup.patch"
-             strip="1"/>
-      <patch file="https://git.gnome.org/browse/gtk-osx/plain/patches/webkit-1.6-out-of-source-fixup.patch"
-             strip="1"/>
-      <patch file="https://git.gnome.org/browse/gtk-osx/plain/patches/webkit-1.6-remove-pangoft2-dependency.patch"
-             strip="1"/>
-      <patch file="https://git.gnome.org/browse/gtk-osx/plain/patches/bug-92264-webkit-bison-2.6.patch"
-             strip="1"/>
-    </branch>
-    <dependencies>
-      <dep package="enchant"/>
-      <dep package="icu"/>
-      <dep package="libsoup"/>
-      <dep package="meta-gtk-osx-freetype"/>
-    </dependencies>
-    <after>
-      <dep package="meta-gtk-osx-core"/>
-      <dep package="meta-gstreamer-1.0"/>
-      <dep package="meta-gtk-osx-gtk3"/>
-    </after>
-  </autotools>
-
   <!-- This is WebKitGTK 2.4.x, the last version that had the WebKit1 API.
     disable-webkit2: Requires both GTK2 and 3. Currently not supported.
     disable-credential-storage: Requires libsecret. No module for this yet.

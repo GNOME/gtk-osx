@@ -97,8 +97,6 @@ def osx_ver():
     x64bit = _popen("sysctl hw.cpu64bit_capable").endswith("1")
     if x64bit and _osx_version >= 6.0:
         _default_arch = "x86_64"
-    elif mstring.startswith("ppc") :
-        _default_arch = "ppc"
     else:
         _default_arch = "i386"
 
@@ -108,9 +106,12 @@ def xcode_ver():
    exp = re.compile(r'Xcode (\d+\.\d+)')
    vernum = exp.match(ver)
    if vernum:
-       return float(vernum.group(1))
+       _xcode_ver = float(vernum.group(1))
+       if _xcode_ver < 5.0:
+           raise EnvironmentError("Xcode Version %f is not supported; if you want to build with Xcode versions earlier than 5.0 checkout tag Last-Lion." % _xcode_ver)
+       return _xcode_ver
    else:
-       return 3.0
+       raise EnvironmentError("No suitable Xcode found. Xcode 5.0 or later is required.")
 
 # Some utitily functions used here and in custom files:
 #
@@ -163,9 +164,9 @@ def setup_debug():
 # orderFront:] if gcc is passed -O0 for 64-bit compilation. The old
 # stabs+ debug format also doesn't work. See Snow Leopard in the Wiki
 # for more information about debugging.
-    environ_prepend('CFLAGS', "-O0 -ggdb3")
-    environ_prepend('CXXFLAGS', "-O0 -ggdb3")
-    environ_prepend('OBJCFLAGS', "-O0 -ggdb3")
+    environ_prepend('CFLAGS', "-O0 -g")
+    environ_prepend('CXXFLAGS', "-O0 -g")
+    environ_prepend('OBJCFLAGS', "-O0 -g")
 
 def setup_release():
     environ_prepend('CFLAGS', "-O2")
@@ -175,122 +176,58 @@ def setup_release():
 # Set up the environment for building against particular SDK.
 #
 
-# These first two are just utility functions.
-def make_sdk_name(sdk_version):
-    return "MacOSX" + sdk_version + ".sdk"
-
-def get_sdkdir(sdk_name, xcodepath, xcodeversion):
-    platformpath = None
-    if xcodeversion >= 4.3:
-        platformpath = os.path.join("Platforms", "MacOSX.platform", "Developer")
-    if xcodepath and platformpath:
-        sdkdir = os.path.join(xcodepath, platformpath, "SDKs", sdk_name)
-    elif xcodepath:
-        sdkdir = os.path.join(xcodepath, "SDKs", sdk_name)
-    else:
-        sdkdir = os.path.join("/Developer", "SDKs", sdk_name)
-
-    if not os.path.exists(sdkdir):
-        sdkdir = ''
-        if 'SDKPATH' in os.environ:
-            try:
-                sdkdir = [os.path.join(path, sdk_name) for path
-                          in os.environ['SDKPATH'].split(':')
-                          if os.path.exists(os.path.join(path, sdk_name))][0]
-            except IndexError:
-                pass
-        if not sdkdir:
-            raise EnvironmentError("%s not found" % sdk_name)
-    return sdkdir
-
 #We call osx_ver() here so that we can set up _default_arch for setup_sdk:
 osx_ver()
 
 #
-# This is the workhorse of the setup. Call this function with the
-# target OSX version (10.4, 10.5, 10.6, etc.), the sdk version you want
-# to use (10.4u, 10.5, 10.6, etc.), and a list of architectures. As you
-# can see, the architectures defaults to a single build of i386 or
-# ppc, depending on your machine. I386 is chosen for intel
-# architectures as a default to ensure compatibility: 64-bit hasn't
-# been tested much on 10.5 and not all dependent packages are ready
-# for it (including ige-mac-integration).
+# This is the workhorse of the setup. Call this function from
+# .jhbuildrc-custom to configure compile and link flags. Optionally
+# specify a minimum MacOS version (10.6, 10.7, 10.8, etc.) and a list
+# of architectures.
 #
-# Notes on 64-bit compilation: This function does what's required for
-# the packages that can be built for 64-bit; unfortunately, there are
-# still some issues in the underlying code that the gtk+ devs are
-# working on.
+# The sdk_version does nothing, as since Xcode 5 it is preferred to
+# build with the SDK that goes with the selected Xcode or command-line
+# tools, which we retrieve via xcrun. sdk_version remains in the
+# setup_sdk signature to prevent breaking existing jhbuildrc-customs.
 #
-def setup_sdk(target, sdk_version, architectures=[_default_arch]):
+# For most users accepting the defaults is the right course.
+
+def setup_sdk(target=_osx_version, sdk_version=None, architectures=[_default_arch]):
 
     os.environ["MACOSX_DEPLOYMENT_TARGET"] = target
     sdkdir = None
     xcodepath = None
     xcodeversion = None
 
-    try:
-        xcodeversion = xcode_ver()
-    except:
-        print "Failed to find xcode. Make sure that it's installed and that xcode-select is set properly."
+    sdkdir = _popen("xcrun --show-sdk-path")
 
+    environ_prepend("LDFLAGS", "-L" + sdkdir + "/usr/lib")
+    environ_prepend("CFLAGS", "-I" + sdkdir + "/usr/include")
+    environ_prepend("CXXFLAGS", "-I" + sdkdir + "/usr/include")
+    environ_prepend("OBJCFLAGS", "-I" + sdkdir + "/usr/include")
+    environ_prepend("CPPFLAGS", "-I" + sdkdir + "/usr/include")
+    environ_prepend("CMAKE_PREFIX_PATH", os.path.join(sdkdir, 'usr'), ':')
+    environ_prepend("LIBRARY_PATH", sdkdir + "/usr/lib", ':')
 
-#Note: You can use $DEVELOPER_DIR to override the default set with xcode-select.
-    if _osx_version >= 5.0:
-        xcodepath = _popen("xcode-select -print-path")
-    elif os.environ.has_key("DEVELOPER_DIR"):
-        xcodepath = os.environ["DEVELOPER_DIR"]
+    # It's often necessary to look for things in the SDK when
+    # developing, and it takes a lot of typing, so define a
+    # convenience environment variable:
+    environ_append('SDKDIR', sdkdir)
+    environ_append('SDKROOT', sdkdir)
 
-#OSX 10.9 doesn't have /usr/include, so we need to set the sdkdir to XCode.app:
-    if sdk_version == 'native' and _osx_version >= 9.0:
-        sdk_version = '10.' + str(int(_osx_version))
+    # Apple Documentation says that "-syslibroot" is the arg to pass to the
+    # linker, but we are using the compiler to control the linker, and
+    # everything seems to be working correctly.
+    environ_append("CFLAGS", "-isysroot " + sdkdir)
+    environ_append("CPPFLAGS", "-isysroot " + sdkdir)
+    environ_append("CXXFLAGS", "-isysroot " + sdkdir)
+    environ_append("OBJCFLAGS", "-isysroot " + sdkdir)
+    environ_append("LDFLAGS", "-isysroot " + sdkdir)
 
-    _toolpath = os.path.join("/usr", "bin")
-    if xcodepath:
-        _toolpath = os.path.join(xcodepath, "usr", "bin")
-#For XCode4 we need to disable ppc when building perl:
-    if sdk_version != "native":
-        sdkdir = get_sdkdir(make_sdk_name(sdk_version), xcodepath, xcodeversion)
-        # Seems like we need this since many libraries otherwise only look for
-        # various dependencies (e.g. libiconv) in /usr/lib, hence pulling in
-        # the wrong -L that doesn't have fat binaries on pre-10.5.
-        #
-        environ_prepend("LDFLAGS", "-L" + sdkdir + "/usr/lib")
-        environ_prepend("CFLAGS", "-I" + sdkdir + "/usr/include")
-        environ_prepend("CXXFLAGS", "-I" + sdkdir + "/usr/include")
-        environ_prepend("OBJCFLAGS", "-I" + sdkdir + "/usr/include")
-        environ_prepend("CPPFLAGS", "-I" + sdkdir + "/usr/include")
-        environ_prepend("CMAKE_PREFIX_PATH", os.path.join(sdkdir, 'usr'), ':')
-        environ_prepend("LIBRARY_PATH", sdkdir + "/usr/lib", ':')
-        # It looks like -isysroot is broken when building on 10.4, causing link
-        # problems. But we don't really need to set it for 10.4 so just
-        # skip that.
-        #
+    # To pick up cups-config from the right place.
+    os.environ["CUPS_CONFIG"] = os.path.join(sdkdir, "usr/bin/cups-config")
 
-        #It's often necessary to look for things in the SDK when
-        #developing, and it takes a lot of typing, so define a
-        #convenience environment variable:
-        environ_append('SDKDIR', sdkdir)
-        environ_append('SDKROOT', sdkdir)
-
-#Apple Documentation says that "-syslibroot" is the arg to pass to the
-#linker, but we are using the compiler to control the linker, and
-#everything seems to be working correctly.
-        if not _osx_version < 5.0:
-            environ_append("CFLAGS", "-isysroot " + sdkdir)
-            environ_append("CPPFLAGS", "-isysroot " + sdkdir)
-            environ_append("CXXFLAGS", "-isysroot " + sdkdir)
-            environ_append("OBJCFLAGS", "-isysroot " + sdkdir)
-            environ_append("LDFLAGS", "-isysroot " + sdkdir)
-
-            # To pick up cups-config from the right place.
-            #
-            os.environ["CUPS_CONFIG"] = os.path.join(sdkdir,
-                                                     "usr/bin/cups-config")
-
-    #Glib and autoconf-2.63 have issues with endianness
-    #
     if architectures == ["i386"]:
-        append_autogenargs("glib", "ac_cv_c_bigendian=no")
         # The '#' on openssl is to stop jhbuild from appending any more autogen
         # arguments such as --disable-Werror; they cause openssl to error out
         append_autogenargs("openssl", "darwin-i386-cc #")
@@ -298,41 +235,20 @@ def setup_sdk(target, sdk_version, architectures=[_default_arch]):
         conditions.add('64-bit')
         append_autogenargs("glib", "ac_cv_c_bigendian=no")
         append_autogenargs("openssl", "darwin64-x86_64-cc #")
-    elif architectures == ["ppc"]:
-        append_autogenargs("glib", "ac_cv_c_bigendian=yes")
-        append_autogenargs("gmp", 'CFLAGS="-force_cpusubtype_ALL $CFLAGS"')
-        append_autogenargs("openssl", "darwin-ppc-cc #")
-
+    elif len(set(architectures) - set(["i386",  "x86_64"])) > 0:
+        raise EnvironmentError("Only architectures i386 and x86_64 are supported.")
+    else:
+        print "WARNING: Universal builds are neither prohibited nor supported. It might work, but if it doesn't you're on your own."
     # For unknown reasons, iconv is not picked up correctly without this
     #
-        append_autogenargs('glib', ' --with-libiconv=gnu')
-
-    # If we're building on Snow Leopard for 32-bit, we need to make
-    # sure that Perl and Python are working in 32-bit mode.
-    #
-    if  _osx_version >= 6.0 and architectures == ["i386"]:
-        os.environ["VERSIONER_PERL_PREFER_32_BIT"] = "yes"
-        os.environ["VERSIONER_PYTHON_PREFER_32_BIT"] = "yes"
-
-    #SDK 10.4 doesn't support gcc4.2.
-    if  xcodeversion == 3.0 or sdk_version == "10.4u":
-        if xcodeversion > 4.0:
-            raise EnvironmentError("Can't build for 10.4 on Xcode 4 or later")
-        os.environ["CC"] = os.path.join(_toolpath, "gcc-4.0")
-        os.environ["OBJC"] = os.path.join(_toolpath, "gcc-4.0")
-        os.environ["CXX"] = os.path.join(_toolpath, "g++-4.0")
-    #Note that the following will use Clang with Xcode 5.0 and
-    #llvm-gcc-4.2 on Xcode 4.x
-    elif _osx_version >= 7.0 or xcodeversion > 4.0:
-        os.environ["CC"] = os.path.join(_toolpath, "gcc")
-        os.environ["OBJC"] = os.path.join(_toolpath, "gcc")
-        os.environ["CXX"] = os.path.join(_toolpath, "g++")
-    else:
-        os.environ["CC"] = os.path.join(_toolpath, "gcc-4.2")
-        os.environ["OBJC"] = os.path.join(_toolpath, "gcc-4.2")
-        os.environ["CXX"] = os.path.join(_toolpath, "g++-4.2")
-
-    os.environ['LD'] = os.path.join(_toolpath, "ld")
+    append_autogenargs('glib', ' --with-libiconv=gnu')
+    gcc = _popen("xcrun -f gcc")
+    gpp = _popen("xcrun -f g++")
+    ld = _popen("xcrun -f ld")
+    os.environ["CC"] = gcc
+    os.environ["OBJC"] = gcc
+    os.environ["CXX"] = gpp
+    os.environ['LD'] = ld
 
     # Set the -arch flags for everything we're building.
     #
@@ -356,27 +272,17 @@ def setup_sdk(target, sdk_version, architectures=[_default_arch]):
         append_autogenargs("liboil", "--host=x86_64-apple-darwin")
         append_autogenargs("gnutls", "--host=x86_64-apple-darwin")
 
-    # Tiger has a somewhat messed-up resolv.h, so we need to explicitly
-    # link libresolv:
-    if _osx_version < 5.0 or sdk_version.startswith("10.4"):
-        append_autogenargs("glib", 'LIBS="-lresolv"')
-    else:
-        # Tiger's CUPS version is too old
-        skip.append('cups')
-
-    # Leopard and later have m4
-    if _osx_version >= 5.0:
-	skip.append('m4')
-
     # El Capitan needs bash to work around SIP. If you're using a
     # common bootstrap directory (e.g. $HOME/.local) then override
     # CONFIG_SHELL in .jhbuildrc-custom after calling setup_sdk().
     config_shell = os.path.join(prefix, 'bin', 'bash')
     if _osx_version < 11.0:
         skip.append('bash')
-        skip.append('openssl')  # openssl removed in El Capitan
     elif os.path.exists(config_shell):
         os.environ['CONFIG_SHELL'] = config_shell
+
+    if os.path.exists(os.path.join(sdkdir, "usr", "include", "openssl")):
+        skip.append('openssl')  # openssl removed in El Capitan
 
     # gettext-fw rebuilds gettext with an in-tree libiconv to get
     # around the Apple-provided one not defining _libiconv_init for
@@ -391,40 +297,24 @@ def setup_sdk(target, sdk_version, architectures=[_default_arch]):
     #Overcome Python's obnoxious misconfiguration of portable builds
     if len(architectures) == 1:
         os.environ["BUILDCFLAGS"] = os.environ["CFLAGS"]
-    #Glib wants to use posix_memalign if it's available, but it's only
-    #available after 10.6, and there's no weak linking support for it:
-    if ((target == "10.4" or target == "10.5")
-        and (sdk_version in ("10.6", "10.7", '10.8', '10.9', 'native')
-             and (_osx_version >= 6.0))):
-        append_autogenargs("glib", "ac_cv_compliant_posix_memalign=no")
-
     append_autogenargs("gnutls", "--disable-guile")
-
-    #Guile doesn't handle optimization well with llvm-gcc
-    if _osx_version >= 7.0 and xcodeversion > 4.0:
-        append_autogenargs("guile", 'CFLAGS="$CFLAGS -O1"')
+    append_autogenargs("guile", 'CFLAGS="$CFLAGS -O1"')
     #Defining ARCHFLAGS globally messes up waf, so we need to define
     #it here for our two perl modules:
-    if architectures != ['ppc']:
-        module_extra_env.update(
+    module_extra_env.update(
             {"perl-xml-simple":{"ARCHFLAGS":"-arch i386 -arch x86_64"},
              "perl-xml-parser":{"ARCHFLAGS":"-arch i386 -arch x86_64"}})
-    #Xcode 5 uses clang; there's no gcc-llvm anymore. Some packages
-    #require special arguments or flags to compile:
-    if xcodeversion >= 5.0:
-        module_extra_env["pkg-config"] = {'CFLAGS': os.environ['CFLAGS'] + ' -std=gnu89'}
-        append_autogenargs('libgcrypt', 'CFLAGS="$CFLAGS -fheinous-gnu-extensions"')
-        module_makeargs['liboil'] = 'CFLAGS="$CFLAGS -DHAVE_SYMBOL_UNDERSCORE -fheinous-gnu-extensions"'
-        module_extra_env["WebKit"] = {'CXXFLAGS':os.environ['CXXFLAGS'] +
+    #Some packages require special arguments or flags to compile with Clang:
+    module_extra_env["pkg-config"] = {'CFLAGS': os.environ['CFLAGS'] + ' -std=gnu89'}
+    append_autogenargs('libgcrypt', 'CFLAGS="$CFLAGS -fheinous-gnu-extensions"')
+    module_makeargs['liboil'] = 'CFLAGS="$CFLAGS -DHAVE_SYMBOL_UNDERSCORE -fheinous-gnu-extensions"'
+    module_extra_env["WebKit"] = {'CXXFLAGS':os.environ['CXXFLAGS'] +
                                   ' -stdlib=libstdc++'}
-        append_autogenargs('babl', '--disable-sse')
+    module_extra_env["expat"] = {'CFLAGS':os.environ['CFLAGS'] + ' -arch i386 -arch x86_64'}
+    append_autogenargs('babl', '--disable-sse')
 
     # openssl doesn't understand DESTDIR, but luckily it has its own mechanism.
-    module_extra_env['openssl'] = {'INSTALL_PREFIX': os.path.join(prefix, '_jhbuild', 'root-openssl')}
-
-    if xcodeversion >= 4.0 and target in ('10.6', '10.5', '10.4'):
-        environ_append('LDFLAGS',
-                       '-Wl,-no_function_starts -Wl,-no_version_load_command')
+#    module_extra_env['openssl'] = {'INSTALL_PREFIX': os.path.join(prefix, '_jhbuild', 'root-openssl')}
 
     # Finally when building normally we need to force CFLAGS_FOR_BUILD
     # to our current CFLAGS so that everything will link with other
@@ -437,56 +327,6 @@ def setup_sdk(target, sdk_version, architectures=[_default_arch]):
     environ_remove('PATH', '/opt/X11/bin')
     return sdkdir
 
-# This is a convenience function for older .jhbuildrc-customs.
-def setup_sdk_10_4():
-    print "*** Using setup_sdk_10_4() is deprecated. Use setup_sdk instead. ***"
-    if _default_arch == "x86_64":
-            return setup_sdk("10.4", "10.4u", ["i386"])
-    return setup_sdk("10.4", "10.4u")
-
-# For cross-compiling on an intel system. The need to build tool
-# packages universal for cross-compilation means that it will take
-# longer than necessary on a ppc machine, so just call
-# setup_sdk("10.4", "10.4", ["ppc"]) and all will be well (or with "10.5"
-# instead of "10.4" if you're building Tiger-incompatable versions).
-def setup_ppc_build():
-    print "Setup PPC"
-    _sdkdir = setup_sdk(target="10.4", sdk_version="10.5", architectures=["ppc"])
-
-    if _sdkdir == None:
-        raise Exception("Cross-compiling without specifying an SDK is not supported")
-
-    _cflags = '-isysroot ' + _sdkdir + ' -mmacosx-version-min=10.4'
-    _cxxflags = _cflags
-    _cppflags = '-I' + prefix + '/include -isysroot ' + _sdkdir
-    _ldflags = '-L' + prefix + '/lib -Wl,-syslibroot,' + _sdkdir +' -mmacosx-version-min=10.4'
-
-    environ_append('CFLAGS', '-arch ppc')
-    environ_append('CXXFLAGS', '-arch ppc')
-    environ_append('OBJCFLAGS', '-arch ppc')
-    environ_append('LDFLAGS', '-arch ppc')
-
-    _ppc_args = "CFLAGS='" + _cflags + " -arch ppc' CXXFLAGS='" + _cxxflags + " -arch ppc' LDFLAGS='" + _ldflags + " -arch ppc' --build=powerpc-apple-darwin NM=nm"
-
-    _univ_args = "CFLAGS='" + _cflags + " -arch ppc -arch i386' CXXFLAGS='" + _cxxflags + " -arch ppc -arch i386' LDFLAGS='" + _ldflags + " -arch ppc -arch i386'"
-
-# Some packages need to be build universal so that they'll work in a
-# cross-compiled environment:
-    append_autogenargs("gettext", _univ_args)
-    append_autogenargs("intltool", _univ_args)
-    append_autogenargs("expat", _univ_args)
-    append_autogenargs("gtk-doc", _univ_args)
-# Others need to be told explicitly that they're being cross-compiled:
-    append_autogenargs("glib", _ppc_args + " glib_cv_uscore=no ac_cv_func_posix_getgrgid_r=yes glib_cv_stack_grows=no ac_cv_func_posix_getpwuid_r=yes ac_cv_c_bigendian=yes" )
-
-    append_autogenargs("gtk", _ppc_args + " --with-gdktarget=quartz --without-libjasper --disable-glibtest gio_can_sniff='yes'")
-
-    append_autogenargs("libgcrypt", _ppc_args )
-    append_autogenargs("gnome-keyring", _ppc_args )
-    append_autogenargs("WebKit", _ppc_args)
-    append_autogenargs("OpenSP", _ppc_args)
-    append_autogenargs("libdbi", _ppc_args)
-    append_autogenargs("libdbi-drivers", _ppc_args)
 
 ###### End Function Definitions  #######
 
@@ -530,15 +370,9 @@ _gtk_osx_default_build = ""
 
 #print "Default Architecture %s\n" % _default_arch
 
-if _osx_version < 4.0:
-    print "Error: Mac OS X 10.4 or newer is required, exiting."
+if _osx_version < 8.0:
+    print "Error: Mac OS X 10.8 or newer is required, exiting."
     raise SystemExit
-elif _osx_version < 5.0:
-    # Tiger, we want to use the python version from jhbuild.
-    _host_tiger = True
-else:
-    # Leopard or newer.
-    _host_tiger = False
 
 ###### Import Customizations ######
 
@@ -610,10 +444,6 @@ os.environ['JHBUILD_SOURCE'] = checkoutroot
 if not (os.environ.has_key ("LIBTOOLIZE") and os.environ["LIBTOOLIZE"]):
     environ_append('LIBTOOLIZE', os.path.join(prefix, "bin", "libtoolize"))
 
-
-if not _host_tiger:
-    skip.append('make')
-    skip.append('subversion')
 
 # The option "headerpad_max_install_names" is there to leave some room for
 # changing the library locations with install_name_tool. Note that GNU

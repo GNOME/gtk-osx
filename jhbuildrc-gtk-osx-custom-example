@@ -1,9 +1,7 @@
 # -*- mode: python -*-
 
 # All of jhbuild is Python, so there are all sorts of interesting
-# things you can do to customize your build with python commands. This
-# file is treated like a python __init__ file, so you can do all sorts
-# of interesting things in it.
+# things you can do to customize your build with python commands.
 
 # The URL for repositories can be overridden. This is how you'd set
 # your developer access to an SVN repo. It doesn't work, of course,
@@ -22,11 +20,6 @@ if _jhb is None:
     # The default setup...
     # checkoutroot = os.path.expanduser("~/Source/gtk")
     # prefix = "/opt/gtk"
-    pass
-elif _jhb == "FW":
-    # The framework build...
-    # checkoutroot = os.path.expanduser("~/Source/gtk-fw")
-    # prefix = "/opt/gtk-fw"
     pass
 # Do note, though, that jhbuildrc-gtk-osx also uses $JHB to find
 # another customization file that is loaded after this one. You can,
@@ -50,7 +43,7 @@ elif _jhb == "FW":
 # if "libglade" in skip:
 #	skip.remove("libglade")
 
-# Uncomment the following if you're running OSX 10.11 and SIP (see https://developer.apple.com/library/prerelease/mac/documentation/Security/Conceptual/System_Integrity_Protection_Guide/RuntimeProtections/RuntimeProtections.html)
+# Uncomment the following if you're running OSX 10.11 or later and SIP (see https://developer.apple.com/library/prerelease/mac/documentation/Security/Conceptual/System_Integrity_Protection_Guide/RuntimeProtections/RuntimeProtections.html)
 # causes shell-script build failures. You'll also need to edit those
 # shell scripts to change the shebang from /bin/sh to $PREFIX/bin/bash.
 # Note that /usr/bin/env bash won't work, because it will also strip
@@ -60,13 +53,6 @@ elif _jhb == "FW":
 # particular violator of this rule.
 # if "bash" in skip:
 #     skip.remove("bash")
-
-# Set this to True/False if you want to force using or not building
-# and using python as part of jhbuild. If not set, the script will use
-# the system python when building on 10.5 or newer only.
-#
-# _gtk_osx_use_jhbuild_python = True
-
 
 # In addition, you can override _exec_prefix (used to set $M4 and
 # $LIBTOOLIZE); by default it's set to prefix. You might want to reset
@@ -81,54 +67,29 @@ elif _jhb == "FW":
 # _exec_prefix = os.path.join(os.path.expanduser("~"), "Source", "bootstrap")
 # tarballdir = os.path.join(os.path.expanduser("~"), "Source", "Download")
 
-# .jhbuildrc has a master function, setup_sdk(target, sdk_version,
-# [architectures]) which sets up the build environment. You *must*
-# call it or one of the functions (setup_sdk_10_4(),
-# setup_ppc_build(), or setup_universal_build()) in jhbuildrc-custom.
-#
+# .jhbuildrc has a master function, setup_sdk(target, architecture)
+# which sets up the build environment. You *must* call it in jhbuildrc-custom.
+
 # Target is the earliest version of MacOS on which the result binary
 # can run, in the form "10.X" or "native" (the default). It sets
 # MACOS_DEPLOYMENT_TARGET and the -macosx-version-min CFLAG.
-#
-# Setup_sdk can be any version from "10.4u" or later, or "native". On
-# MacOS X 10.8 and earlier, 'native' won't set -sysroot so the build
-# will use the headers in libraries in /usr. Apple removed the headers
-# in MacOS X 10.9 so on those systems -sysroot is set to the SDK
-# directory.
 
-# If you are building for distribution with Xcode 6.x or older, you
-# probably want to use the lowest SDK which will successfully build
-# your modules. The exception is if you are building under Tiger,
-# because a) You're already using the lowest compatible SDK b) Cups
-# 1.2.12, which you must install to build Gtk+, installs new headers
-# and libraries into /usr but not into
-# /Developer/SDKs/MacOSX_sdk_10.4u. From Xcode 7/MacOSX10.10.sdk on
-# Apple provided a new format dylib stub that links with dylibs from
-# earlier versions of MacOS. If you're using Xcode 7 or later you
-# should use the native SDK and pass the target of the earliest
-# version you intend to support.
-#
-# Architectures is a list (pass the arguments in brackets) which can
-# include the values "ppc", "ppc64", "i386", "x86_64", and
-# _default_arch. That last one is a variable and doesn't get
-# quotes.
-#
-# Setup_universal_build: Don't pass multiple arguments directly to
-# setup_sdk, though, because that would build universal and several
-# packages need special handling to build universal. Use
-# setup_universal_build instead. Do note, though, that while
-# setup_universal_build will build across PowerPC and Intel
-# architectures successfully, the result will usually crash because of
-# endianness problems with icon caches. Help is welcome to fix
-# this. The special argument _default_arch is a variable set by
-# jhbuildrc depending on what platform you're on. It doesn't set the
-# -arch CFLAG at all, so your architecture will be whatever you get
-# that way. Note that on Snow Leopard and later, if you are building
-# on a 64-bit processor (Xeon, Core2duo, or one of the Core iFoo
-# procesors), the architecure is x86_64 by default; otherwise it's
-# i386, which is 32-bit. Note as well that for most purposes 32-bit
-# code runs well on 64-bit Macs so there's no real benefit to
-# i386+x86_64 or ppc+ppc64.
+# From Xcode 7/MacOSX10.11.sdk on Apple has provided a new format
+# dylib stub that links with dylibs from earlier versions of MacOS and
+# has been tested to work back to 10.6 if MACOS_X_VERSION_MIN is set
+# appropriately. Earlier SDKs lack this feature and may or may not
+# actually work on MacOS X versions earlier than the SDK's; whether
+# they do depends on whether the SDK contains a newer "compatibility
+# version" library than the system on which you're attempting to run
+# and which is required by your application.
+
+# Architecture is a list for backwards compatibility; it can contain
+# "i386" and/or "x86_64" and defaults to the machine's architecture if
+# left out. Passing both architectures will in theory build a
+# universal binary but this is untested. Since MacOS X 10.7 and later
+# run only on x86_64 systems it doesn't make sense to change this
+# unless you're targeting 10.6. 32-bit ("i386") programs run fine on
+# 64-bit systems.
 
 # There are also some utility functions which you may find useful:
 #
@@ -148,21 +109,11 @@ elif _jhb == "FW":
 
 #  Set up a particular target and SDK: For default operation, set the
 # architecture and SDK for the native machine:
-_target = "10.%d" % _osx_version;
+setup_sdk()
 
-setup_sdk(target=_target, sdk_version="native", architectures=[_default_arch])
-#
-# setup_sdk(target="10.4", sdk_version="10.4u", architectures=["i386"])
-#
-# or set up to cross-compile a ppc build from an intel machine:
-#
-# setup_ppc_build()
-#
-# or a universal build:
-#
-# setup_universal_build(target="10.5", sdk_version="10.5", 
-#                        architectures=["ppc", "i386"])
-
+# Comment out the previous and uncomment this one to build for all
+# systems running SnowLeopard and later:
+# setup_sdk(target="10.6")
 
 # Modify the arguments passed to configure:
 #
