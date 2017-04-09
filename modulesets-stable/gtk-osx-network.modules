@@ -113,40 +113,6 @@
     <branch repo="webm" module="webp/libwebp-0.4.3.tar.gz" version="0.4.3"/>
   </autotools>
 
-  <!-- This is WebKitGTK 1.x, for GTK 2.x.
-    disable-geolocation: Requires geoclue. No module for this yet.
-    disable-video: Requires gstreamer. If you want video, add to .jhbuildrc:
-      append_autogenargs('WebKit', '&#45;-enable-video')
-    Wno-c++11-extensions: Suppresses clang warning that makes output
-      inconvenient to read.
-    std=c99: Required for inline keyword in C.
-  -->
-  <autotools id="WebKit" autogen-sh="autoreconf"
-             autogenargs='--with-target=quartz --disable-video --with-font-backend=pango --with-gtk=2.0 --disable-geolocation --disable-webkit2 CXXFLAGS="$CXXFLAGS -Wno-c++11-extensions" CFLAGS="$CFLAGS -std=c99"'>
-    <branch repo="webkit.org" module="webkitgtk-1.10.2.tar.xz" version="1.10.2">
-      <patch file="https://git.gnome.org/browse/gtk-osx/plain/patches/webkit-1.10-no-x11.patch"
-             strip="1"/>
-      <patch file="https://git.gnome.org/browse/gtk-osx/plain/patches/webkit-88407-portable-echo-n.patch"
-             strip="1"/>
-      <patch file="https://git.gnome.org/browse/gtk-osx/plain/patches/webkit-1.10-platform-fixes.patch"
-             strip="1"/>
-      <patch file="https://git.gnome.org/browse/gtk-osx/plain/patches/webkit-1.10-pango-includes.patch"
-             strip="1"/>
-      <patch file="https://git.gnome.org/browse/gtk-osx/plain/patches/webkit-1.10-remove-pangoft2-dependency.patch"
-             strip="1"/>
-    </branch>
-    <dependencies>
-      <dep package="enchant"/>
-      <dep package="icu"/>
-      <dep package="libsoup"/>
-    </dependencies>
-    <after>
-      <dep package="meta-gtk-osx-core"/>
-      <dep package="meta-gstreamer-1.0"/>
-      <dep package="meta-gtk-osx-gtk3"/>
-    </after>
-  </autotools>
-
   <!-- This is WebKitGTK 2.4.x, the last version that had the WebKit1 API.
     disable-webkit2: Requires both GTK2 and 3. Currently not supported.
     disable-credential-storage: Requires libsecret. No module for this yet.
@@ -157,6 +123,30 @@
       append_autogenargs('WebKit', '&#45;-enable-web-audio')
     -j1: Workaround for https://bugs.webkit.org/show_bug.cgi?id=140171
   -->
+  <autotools id="webkit" autogen-sh="autoreconf"
+             autogenargs="--enable-quartz-target --with-gtk=2.0 --disable-webkit2 --disable-credential-storage --disable-geolocation --disable-video --disable-web-audio CXXFLAGS='-std=gnu++11'">
+    <branch repo="webkit.org" module="webkitgtk-2.4.11.tar.xz" version="2.4.11">
+      <patch file="https://git.gnome.org/browse/gtk-osx/plain/patches/webkit-140167-disable-netscape-api.patch"
+             strip="1"/>
+      <!-- This patch can be commented out for XCode >= 6.3, but does no harm if
+      it's left in -->
+      <patch file="https://git.gnome.org/browse/gtk-osx/plain/patches/webkit-133293-cfi-clang-failure.patch"
+             strip="1"/>
+    </branch>
+    <dependencies>
+      <dep package="libwebp"/>
+      <dep package="enchant"/>
+      <dep package="icu"/>
+      <dep package="libsoup"/>
+      <dep package="meta-gtk-osx-freetype"/>
+    </dependencies>
+    <after>
+      <dep package="meta-gtk-osx-gtk"/>
+      <dep package="meta-gstreamer-1.0"/>
+    </after>
+  </autotools>
+
+  <!-- This is WebKitGTK 2.4.x as above, but for gtk3.  -->
   <autotools id="webkit1gtk3" autogen-sh="autoreconf"
              autogenargs="--enable-quartz-target --with-gtk=3.0 --disable-webkit2 --disable-credential-storage --disable-geolocation --disable-video --disable-web-audio CXXFLAGS='-std=gnu++11'">
     <branch repo="webkit.org" module="webkitgtk-2.4.9.tar.xz" version="2.4.9">

@@ -308,13 +308,11 @@ def setup_sdk(target=_osx_version, sdk_version=None, architectures=[_default_arc
     module_extra_env["pkg-config"] = {'CFLAGS': os.environ['CFLAGS'] + ' -std=gnu89'}
     append_autogenargs('libgcrypt', 'CFLAGS="$CFLAGS -fheinous-gnu-extensions"')
     module_makeargs['liboil'] = 'CFLAGS="$CFLAGS -DHAVE_SYMBOL_UNDERSCORE -fheinous-gnu-extensions"'
-    module_extra_env["WebKit"] = {'CXXFLAGS':os.environ['CXXFLAGS'] +
-                                  ' -stdlib=libstdc++'}
     module_extra_env["expat"] = {'CFLAGS':os.environ['CFLAGS'] + ' -arch i386 -arch x86_64'}
     append_autogenargs('babl', '--disable-sse')
 
     # openssl doesn't understand DESTDIR, but luckily it has its own mechanism.
-#    module_extra_env['openssl'] = {'INSTALL_PREFIX': os.path.join(prefix, '_jhbuild', 'root-openssl')}
+    module_extra_env['openssl'] = {'INSTALL_PREFIX': os.path.join(prefix, '_jhbuild', 'root-openssl')}
 
     # Finally when building normally we need to force CFLAGS_FOR_BUILD
     # to our current CFLAGS so that everything will link with other
