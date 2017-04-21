@@ -1,0 +1,43 @@
+From 9b5a92f5cc968193ae938c51df72c7beeca121d8 Mon Sep 17 00:00:00 2001
+From: John Ralls <jralls@ceridwen.us>
+Date: Mon, 10 Apr 2017 16:38:26 -0700
+Subject: [PATCH] Save Changes Bug 781118 - gtk 3.22.12 quartz backend segfault
+
+Calling 'width' on an NSValue won't work, must call sizeValue on it.
+---
+ gdk/quartz/gdkscreen-quartz.c | 11 ++++++-----
+ 1 file changed, 6 insertions(+), 5 deletions(-)
+
+diff --git a/gdk/quartz/gdkscreen-quartz.c b/gdk/quartz/gdkscreen-quartz.c
+index e9bf684..586f7af 100644
+--- a/gdk/quartz/gdkscreen-quartz.c
++++ b/gdk/quartz/gdkscreen-quartz.c
+@@ -76,11 +76,10 @@ static void
+ gdk_quartz_screen_init (GdkQuartzScreen *quartz_screen)
+ {
+   GdkScreen *screen = GDK_SCREEN (quartz_screen);
+-  NSScreen *nsscreen;
++  NSDictionary *dd = [[[NSScreen screens] objectAtIndex:0] deviceDescription];
++  NSSize size = [[dd valueForKey:NSDeviceResolution] sizeValue];
+ 
+-  nsscreen = [[NSScreen screens] objectAtIndex:0];
+-  _gdk_screen_set_resolution (screen,
+-                              [[nsscreen deviceDescription][NSDeviceResolution] width]);
++  _gdk_screen_set_resolution (screen, size.width);
+ 
+   gdk_quartz_screen_calculate_layout (quartz_screen);
+ 
+@@ -336,7 +335,9 @@ static gint
+ get_mm_from_pixels (NSScreen *screen, int pixels)
+ {
+   const float mm_per_inch = 25.4;
+-  float dpi = [[screen deviceDescription][NSDeviceResolution] width];
++  NSDictionary *dd = [[[NSScreen screens] objectAtIndex:0] deviceDescription];
++  NSSize size = [[dd valueForKey:NSDeviceResolution] sizeValue];
++  float dpi = size.width;
+   return (pixels / dpi) * mm_per_inch;
+ }
+ 
+-- 
+2.2.2
+

@@ -71,7 +71,7 @@
   <autotools id="python" autogenargs="--enable-shared"
 	     autogen-sh="configure" supports-non-srcdir-builds="no">
     <branch repo="python"
-	    module="2.7.12/Python-2.7.12.tar.xz" version="2.7.12">
+	    module="2.7.13/Python-2.7.13.tar.xz" version="2.7.13">
       <patch file="https://git.gnome.org/browse/gtk-osx/plain/patches/python2-linkflags.patch" strip="1"/>"/>
       <patch file="https://git.gnome.org/browse/gtk-osx/plain/patches/python-issue27806_v3.patch" strip="1"/>
     </branch>
@@ -86,7 +86,7 @@
   </autotools>
 
   <autotools id="python3" autogenargs="--enable-shared" autogen-sh="configure">
-    <branch repo="python" module="3.4.3/Python-3.4.3.tar.xz" version="3.4.3">
+    <branch repo="python" module="3.6.1/Python-3.6.1.tar.xz" version="3.6.1">
       <patch file="https://git.gnome.org/browse/gtk-osx/plain/patches/Python3.4-stack_size-flag.patch" strip="1"/>
     </branch>
     <dependencies>
@@ -96,9 +96,9 @@
   </autotools>
 
   <distutils id="pybsddb">
-    <branch module="b/bsddb3/bsddb3-5.3.0.tar.gz"
-	    hash="md5:d5aa4f293c4ea755e84383537f74be82" repo="pymodules"
-	    version="5.3.0"/>
+    <branch module="b/bsddb3/bsddb3-6.2.4.tar.gz"
+	    hash="md5:eec77d104c5981366701c6b0de585504" repo="pymodules"
+	    version="6.2.4"/>
     <dependencies>
       <dep package="python3"/>
     </dependencies>
@@ -157,8 +157,8 @@
   </autotools>
 
    <autotools id="pygobject3" autogen-sh="configure" >
-    <branch version="3.16.1" module="pygobject/3.16/pygobject-3.16.1.tar.xz"
-	    hash="sha256:7d96dad050f15ec1688617b749bb485811842de46a22d31f9396023e8eaa1ec3"/>
+    <branch version="3.24.1" module="pygobject/3.24/pygobject-3.23.1.tar.xz"
+	    hash="sha256:a628a95aa0909e13fb08230b1b98fc48adef10b220932f76d62f6821b3fdbffd"/>
     <dependencies>
       <dep package="meta-gtk-osx-gtk3"/>
     </dependencies>

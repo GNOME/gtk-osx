@@ -241,7 +241,6 @@ def setup_sdk(target=_osx_version, sdk_version=None, architectures=[_default_arc
         print "WARNING: Universal builds are neither prohibited nor supported. It might work, but if it doesn't you're on your own."
     # For unknown reasons, iconv is not picked up correctly without this
     #
-    append_autogenargs('glib', ' --with-libiconv=gnu')
     gcc = _popen("xcrun -f gcc")
     gpp = _popen("xcrun -f g++")
     ld = _popen("xcrun -f ld")
@@ -313,6 +312,9 @@ def setup_sdk(target=_osx_version, sdk_version=None, architectures=[_default_arc
 
     # openssl doesn't understand DESTDIR, but luckily it has its own mechanism.
     module_extra_env['openssl'] = {'INSTALL_PREFIX': os.path.join(prefix, '_jhbuild', 'root-openssl')}
+    # GMP deliberately attempts to use CC_FOR_BUILD with no separate
+    # cflags so we need to force it:
+    module_extra_env['gmp'] = {'CC_FOR_BUILD':os.environ['CC'] + ' ' + os.environ['CFLAGS']}
 
     # Finally when building normally we need to force CFLAGS_FOR_BUILD
     # to our current CFLAGS so that everything will link with other

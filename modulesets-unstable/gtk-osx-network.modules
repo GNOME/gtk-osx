@@ -18,6 +18,8 @@
               href="https://chromium.googlesource.com/"/>
   <repository name="webkit.org" type="tarball"
               href="http://www.webkitgtk.org/releases/"/>
+  <repository name="webkit-git" type="git"
+              href="git://git.webkit.org"/>
 
   <!-- Builds last version of WebKitGTK that supported GTK 2.x -->
   <metamodule id="meta-gtk-osx-webkit">
@@ -40,8 +42,8 @@
   <autotools id="openssl" autogen-sh="Configure" autogenargs="shared"
              autogen-template="%(srcdir)s/%(autogen-sh)s --prefix=%(prefix)s --openssldir=%(prefix)s/etc/ssl %(autogenargs)s"
              makeinstallargs="install_sw" supports-non-srcdir-builds="no">
-    <branch module="openssl-1.0.2f.tar.gz" version="1.0.2f" repo="openssl"
-            hash="sha256:932b4ee4def2b434f85435d9e3e19ca8ba99ce9a065a61524b429a9d5e9b2e9c"/>
+    <branch module="openssl-1.0.2k.tar.gz" version="1.0.2k" repo="openssl"
+            hash="sha256:6b3977c61f2aedf0f96367dcfb5c6e578cf37e7b8d913b4ecb6643c3cb88d8c0"/>
   </autotools>
 
   <!-- Rudely demands TeX to build documentation -->
@@ -49,9 +51,7 @@
   <autotools id="libnettle"
              autogenargs="--disable-documentation --disable-assembler"
              autogen-template="autoreconf -fis &amp;&amp; %(srcdir)s/configure --prefix %(prefix)s  %(autogenargs)s">
-    <!-- gnutls 3.3.x does not support nettle 3.0 -->
-    <branch repo="lysator" module="nettle/nettle.git"
-            tag="nettle_2.7_release_20130424"/>
+    <branch repo="lysator" module="nettle/nettle.git" />
     <dependencies>
       <dep package="gmp"/>
       <dep package="openssl"/>
@@ -61,14 +61,14 @@
   <autotools id="libtasn1" supports-non-srcdir-builds="no">
     <!-- Git repository is missing files required to build libtasn1
     <branch repo="git.gnu.org" /> -->
-    <branch repo="ftp.gnu.org" version="4.4"
-            module="libtasn1/libtasn1-4.4.tar.gz"/>
+    <branch repo="ftp.gnu.org" version="4.10"
+            module="libtasn1/libtasn1-4.10.tar.gz"/>
   </autotools>
 
   <autotools id="zlib" autogen-sh="configure" skip-autogen="never"
              supports-non-srcdir-builds="no">
-    <branch repo="sourceforge" version="1.2.8"
-            module="libpng/zlib-1.2.8.tar.xz"/>
+    <branch repo="sourceforge" version="1.2.11"
+            module="libpng/zlib-1.2.11.tar.xz"/>
   </autotools>
 
   <!-- Building from git does not work because they have checked in a bunch of
@@ -77,13 +77,19 @@
   <autotools id="gnutls" autogen-sh="configure"
              autogenargs="--disable-gtk-doc-html --without-p11-kit">
     <!--branch repo="gitlab" module="gnutls/gnutls"/-->
-    <branch repo="gnutls" version="3.3.12"
-            module="gcrypt/gnutls/v3.3/gnutls-3.3.12.tar.xz"/>
+    <branch repo="gnutls" version="3.5.9"
+            module="gcrypt/gnutls/v3.5/gnutls-3.5.9.tar.xz"/>
     <dependencies>
+      <dep package="libunistring"/>
       <dep package="libnettle"/>
       <dep package="libtasn1"/>
       <dep package="zlib"/>
     </dependencies>
+  </autotools>
+
+  <autotools id="libgcrypt" autogen-sh="configure">
+    <branch repo="gnutls" version="1.7.6"
+            module="gcrypt/libgcrypt/libgcrypt-1.7.6.tar.gz"/>
   </autotools>
 
   <autotools id="glib-networking"
@@ -97,6 +103,7 @@
   <autotools id="libsoup" autogenargs="set_more_warnings=no">
     <branch/>
     <dependencies>
+      <dep package="vala"/>
       <dep package="sqlite"/>
       <dep package="glib"/>
       <dep package="glib-networking"/>
@@ -179,9 +186,9 @@
     USE_LIBNOTIFY: Requires libnotify. No module for this yet.
     USE_LIBHYPHEN: Requires libhyphen. No module for this yet.
   -->
-  <cmake id="webkit2gtk3"
-         cmakeargs="-DPORT=GTK -DENABLE_X11_TARGET=OFF -DENABLE_QUARTZ_TARGET=ON -DENABLE_TOOLS=ON -DENABLE_MINIBROWSER=ON -DENABLE_PLUGIN_PROCESS_GTK2=OFF -DENABLE_VIDEO=OFF -DENABLE_WEB_AUDIO=OFF -DENABLE_CREDENTIAL_STORAGE=OFF -DENABLE_GEOLOCATION=OFF -DENABLE_OPENGL=OFF -DUSE_LIBNOTIFY=OFF -DUSE_LIBHYPHEN=OFF -DCMAKE_CXX_FLAGS='-stdlib=libc++'">
-    <branch repo="webkit.org" module="webkitgtk-2.10.2.tar.xz" version="2.10.2">
+  <!--cmake id="webkit2gtk3"
+         cmakeargs="-DPORT=GTK -DENABLE_X11_TARGET=OFF -DENABLE_QUARTZ_TARGET=ON -DENABLE_TOOLS=ON -DENABLE_MINIBROWSER=ON -DENABLE_PLUGIN_PROCESS_GTK2=OFF -DENABLE_VIDEO=OFF -DENABLE_WEB_AUDIO=OFF -DENABLE_CREDENTIAL_STORAGE=OFF -DENABLE_GEOLOCATION=OFF -DENABLE_OPENGL=OFF -DUSE_LIBNOTIFY=OFF -DUSE_LIBHYPHEN=OFF -DCMAKE_CXX_FLAGS='-stdlib=libc++'"-->
+  <!--branch repo="webkit.org" module="webkitgtk-2.10.2.tar.xz" version="2.10.2">
       <patch file="https://git.gnome.org/browse/gtk-osx/plain/patches/webkit-144561-quartz-backend.patch"
              strip="1"/>
       <patch file="https://git.gnome.org/browse/gtk-osx/plain/patches/webkit-144560-platform-fixes.patch"
@@ -192,12 +199,16 @@
              strip="1"/>
       <patch file="https://git.gnome.org/browse/gtk-osx/plain/patches/webkit-148607-include-stub-for-plugin-permission-request.patch"
              strip="1"/>
-    </branch>
+             </branch-->
+  <cmake id="webkit2gtk3"
+         cmakeargs='-DPORT=GTK -DENABLE_X11_TARGET=OFF -DENABLE_QUARTZ_TARGET=ON -DENABLE_INTROSPECTION=OFF  -DENABLE_OPENGL=OFF -DENABLE_PLUGIN_PROCESS_GTK2=OFF -DENABLE_VIDEO=OFF -DENABLE_WEB_AUDIO=OFF -DENABLE_GEOLOCATION=OFF -DUSE_LIBNOTIFY=OFF -DUSE_LIBHYPHEN=OFF -DUSE_LIBSECRET=OFF -DENABLE_TOUCH_EVENTS=OFF -DCMAKE_CXX_FLAGS="$CXX_FLAGS -stdlib=libc++"'>
+    <branch repo="webkit-git" module= "WebKit.git" />
     <dependencies>
       <dep package="libwebp"/>
       <dep package="enchant"/>
       <dep package="icu"/>
       <dep package="libsoup"/>
+      <dep package="libgcrypt"/>
       <dep package="meta-gtk-osx-freetype"/>
     </dependencies>
     <after>

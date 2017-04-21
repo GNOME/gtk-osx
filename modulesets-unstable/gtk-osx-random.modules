@@ -25,7 +25,7 @@
   <repository type="cvs" name="gtkspell"
 	      cvsroot=":pserver:anonymous@gtkspell.cvs.sourceforge.net:/cvsroot/gtkspell"
 	      password=""/>
-  <repository type="git" name="savannah" href="git://git.sv.gnu/org/"/>
+  <repository type="git" name="savannah" href="git://git.sv.gnu.org/"/>
   <repository type="tarball" name="boehm"
 	      href="http://www.hboem.info/"/>
   <repository type="svn" name="exiv2.org"
@@ -85,10 +85,15 @@
   </autotools>-->
   <!-- vala-bootstrap is stuck at 0.16, so use a tarball for the time being.-->
   <autotools id="vala" autogen-sh="configure">
-    <branch repo="ftp.gnome.org" version="0.28.0"
-            module="vala/0.28/vala-0.28.0.tar.xz"
-            hash="sha256:0d9e3bd3f82145664875f7c29b2f544ba92d2814f75412948f774c0727fc977f"/>
+    <branch repo="ftp.gnome.org" version="0.36.1"
+            module="vala/0.36/vala-0.36.1.tar.xz"
+            hash="sha256:13f4a3f99d983bf76e8d9dd736021ecc95f53ec1f9582423aa4b4be87455aa07"/>
+    <after>
+      <dep package="meta-gtk-osx-bootstrap"/>
+      <dep package="meta-gtk-osx-core"/>
+    </after>
   </autotools>
+
 <!-- Vala is written in vala, so you need vala to build it. If you
      want to work on vala itself or need the bleeding edge for some
      reason, then you need vala-git. Otherwise, stick with vala. -->
@@ -318,16 +323,15 @@
   <!-- gmp uses Mercurial, so we stick with the tarball to avoid
        having to install yet another vcs tool. -->
   <autotools id="gmp">
-    <!--branch repo="ftp.gnu.org" module="gmp/gmp-5.0.0.tar.bz2" version="5.0.0"/-->
-    <branch repo="ftp.gnu.org" module="gmp/gmp-4.3.2.tar.bz2" version="4.3.2">
-      <patch file="https://git.gnome.org/browse/gtk-osx/plain/patches/gmp-cc-for-build-needs-cflags.patch" strip="1"/>
-      <patch file="https://git.gnome.org/browse/gtk-osx/plain/patches/gmp-4.3.2-stddef.patch" strip="1"/>
-
+    <branch repo="ftp.gnu.org" module="gmp/gmp-6.1.2.tar.bz2" version="6.1.2">
     </branch>
   </autotools>
 
+<!-- libunistring's autogen.sh is borked so use the tarball. -->
   <autotools id="libunistring" autogen-sh="configure">
-    <branch repo="savannah" module="libunistring.git" tag="v0.9.3"/>
+    <branch repo="ftp.gnu.org" module="libunistring/libunistring-0.9.7.tar.gz"
+	    version="0.9.7">
+    </branch>
   </autotools>
 
   <autotools id="bdw-gc" autogen-template="pushd %(srcdir)s &amp;&amp; ./autogen.sh &amp;&amp; automake-1.10 -ac &amp;&amp; popd &amp;&amp; %(srcdir)s/configure --prefix %(prefix)s  %(autogenargs)s">
