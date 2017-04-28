@@ -21,12 +21,11 @@
 
 <!-- mm-common is C++ glue code needed only to build from git. -->
   <autotools id="mm-common">
-    <branch module="mm-common" tag="0.9.7"/>
+    <branch module="mm-common" tag="0.9.10"/>
   </autotools>
 
   <autotools id="cairomm" >
-<!-- 1.10.0, the latest stable release, was built from the master branch. -->
-    <branch module="cairomm" tag="v1.11.2"
+    <branch module="cairomm" revision="cairomm-1-14"
             repo="cairographics" />
     <dependencies>
       <dep package="cairo"/>
@@ -34,7 +33,7 @@
   </autotools>
 
   <autotools id="glibmm" >
-    <branch tag="glibmm-2-42"/>
+    <branch revision="glibmm-2-50"/>
     <dependencies>
       <dep package="libsigc++2"/>
     </dependencies>
@@ -43,9 +42,8 @@
     </after>
   </autotools>
 
-<!-- Pangomm's last stable branch was 2-24 -->
   <autotools id="pangomm" >
-     <branch tag="2.34.0"/>
+     <branch revision="pangomm-2-40"/>
     <dependencies>
        <dep package="cairomm"/>
     </dependencies>
@@ -56,6 +54,16 @@
     </after>
   </autotools>
 
+  <autotools id="atkmm">
+    <branch module="atkmm" revision="atkmm-2-24"/>
+    <dependencies>
+      <dep package="glibmm"/>
+      <dep package="cairomm"/>
+      <dep package="pangomm"/>
+      <dep package="atk"/>
+    </dependencies>
+  </autotools>
+
 <!-- libsigc++ depends on doxygen for documentation, but doxygen
      doesn't build correctly under gtk-osx. It builds fine on its own,
      of course, and there are OSX binaries available on their
@@ -63,20 +71,9 @@
      documentation in your jhbuildrc-custom. -->
 <!-- libsigc++2 releaseed 2.4.0 from master -->
   <autotools id="libsigc++2"  autogen-args="--disable-documentation">
-    <branch revision="2.4.0"/>
+    <branch module="libsigcplusplus" revision="libsigc++-2-10"/>
     <dependencies>
       <dep package="mm-common"/>
-    </dependencies>
-  </autotools>
-
-<!-- atkmm doesn't branch -->
-  <autotools id="atkmm">
-    <branch module="atkmm" tag="2.22.7"/>
-    <dependencies>
-      <dep package="glibmm"/>
-      <dep package="cairomm"/>
-      <dep package="pangomm"/>
-      <dep package="atk"/>
     </dependencies>
   </autotools>
 
@@ -92,7 +89,7 @@
   </autotools>
 
   <autotools id="gtkmm3" >
-    <branch revision="gtkmm-3-14" module="gtkmm"/>
+    <branch module="gtkmm" revision="gtkmm-3-22"/>
     <dependencies>
       <dep package="glibmm"/>
       <dep package="cairomm"/>

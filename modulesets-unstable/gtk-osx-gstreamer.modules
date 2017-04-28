@@ -14,14 +14,6 @@
        are unversioned and haven't been tested for gtk-osx
        compatibility, but there are more of them. -->
 
-  <!-- liboil is in maintenance mode, use tarball. -->
-  <autotools id="liboil" makeargs=' CFLAGS="$CFLAGS -DHAVE_SYMBOL_UNDERSCORE"'
-             autogen-template="autoreconf -fis &amp;&amp; %(srcdir)s/configure --prefix %(prefix)s  %(autogenargs)s">
-    <branch repo="liboil" module="liboil-0.3.17.tar.gz" version="0.3.17">
-      <patch file="https://git.gnome.org/browse/gtk-osx/plain/patches/liboil-use-ac-config-headers-macro.patch" strip="1"/>
-    </branch>
-  </autotools>
-
   <autotools id="liborc">
     <branch repo="gstreamer" module="orc"/>
   </autotools>
@@ -37,17 +29,7 @@
   <autotools id="gstreamer" autogenargs="--disable-tests"
              supports-non-srcdir-builds="no"
     makeargs="ERROR_CFLAGS=" >
-    <branch revision="0.10"/>
-    <after>
-      <dep package="glib"/>
-      <dep package="libxml2"/>
-    </after>
-  </autotools>
-
-   <autotools id="gstreamer-1.0" autogenargs="--disable-tests"
-             supports-non-srcdir-builds="no"
-             makeargs="ERROR_CFLAGS=">
-    <branch module="gstreamer" checkoutdir="gstreamer-1.0"/>
+    <branch/>
     <after>
       <dep package="glib"/>
       <dep package="libxml2"/>
@@ -57,95 +39,42 @@
   <autotools id="gst-plugins-base" supports-non-srcdir-builds="no"
              autogenargs="--disable-tests --disable-x --disable-xvideo"
              makeargs="ERROR_CFLAGS=" >
-    <branch revision="0.10"/>
+    <branch />
     <dependencies>
       <dep package="gstreamer"/>
-      <dep package="liboil"/>
-    </dependencies>
-    <after>
-    </after>
-  </autotools>
-
-  <autotools id="gst-plugins-base-1.0" supports-non-srcdir-builds="no"
-             autogenargs="--disable-tests --disable-x --disable-xvideo"
-             makeargs="ERROR_CFLAGS=">
-    <branch module="gst-plugins-base" checkoutdir="gst-plugins-base-1.0"/>
-    <dependencies>
-      <dep package="gstreamer-1.0"/>
       <dep package="liborc"/>
     </dependencies>
-    <after>
-    </after>
   </autotools>
 
   <autotools id="gst-plugins-good" supports-non-srcdir-builds="no"
              autogenargs="--disable-tests --disable-x --disable-xvideo --disable-osx-video"
              makeargs="ERROR_CFLAGS=" >
-    <branch revision="0.10"/>
+    <branch />
     <dependencies>
       <dep package="gstreamer"/>
       <dep package="gst-plugins-base"/>
-    </dependencies>
-  </autotools>
-
-  <autotools id="gst-plugins-good-1.0" supports-non-srcdir-builds="no"
-             autogenargs="--disable-tests --disable-x --disable-xvideo --disable-osx-video"
-             makeargs="ERROR_CFLAGS=">
-    <branch module="gst-plugins-good" checkoutdir="gst-plugins-good-1.0"/>
-    <dependencies>
-      <dep package="gstreamer-1.0"/>
-      <dep package="gst-plugins-base-1.0"/>
     </dependencies>
   </autotools>
 
   <autotools id="gst-plugins-ugly" autogenargs="--disable-tests"
              supports-non-srcdir-builds="no"
     makeargs="ERROR_CFLAGS=" >
-    <branch revision="0.10"/>
+    <branch/>
     <dependencies>
       <dep package="gstreamer"/>
       <dep package="gst-plugins-base"/>
-    </dependencies>
-  </autotools>
-
-  <autotools id="gst-plugins-ugly-1.0" autogenargs="--disable-tests"
-             supports-non-srcdir-builds="no" makeargs="ERROR_CFLAGS=">
-    <branch module="gst-plugins-ugly" checkoutdir="gst-plugins-ugly-1.0"/>
-    <dependencies>
-      <dep package="gstreamer-1.0"/>
-      <dep package="gst-plugins-base-1.0"/>
     </dependencies>
   </autotools>
 
   <autotools id="gst-plugins-bad" supports-non-srcdir-builds="no"
              autogenargs="--disable-tests --disable-x --disable-xvid"
     makeargs="ERROR_CFLAGS=" >
-    <branch revision="0.10"/>
+    <branch/>
     <dependencies>
       <dep package="gstreamer"/>
       <dep package="gst-plugins-base"/>
       <dep package="faad2"/>
-    </dependencies>
-  </autotools>
-
-  <autotools id="gst-plugins-bad-1.0" supports-non-srcdir-builds="no"
-             autogenargs="--disable-tests --disable-x --disable-xvid"
-             makeargs="ERROR_CFLAGS=">
-    <branch module="gst-plugins-bad" checkoutdir="gst-plugins-bad-1.0"/>
-    <dependencies>
-      <dep package="gstreamer-1.0"/>
-      <dep package="gst-plugins-base-1.0"/>
-      <dep package="faad2"/>
-    </dependencies>
-  </autotools>
-
-  <!-- gst-libav was named gst-ffmpeg before 1.0 -->
-  <autotools id="gst-ffmpeg" autogenargs="--disable-tests --disable-mmx"
-             supports-non-srcdir-builds="no" >
-    <branch revision="0.10"/>
-    <dependencies>
-      <dep package="gstreamer"/>
-      <dep package="gst-plugins-base"/>
+      <dep package='openssl'/>
     </dependencies>
   </autotools>
 
@@ -168,17 +97,6 @@
       <!--dep package="gst-plugins-ugly"/-->
       <dep package="gst-plugins-bad"/>
       <dep package="gst-ffmpeg"/>
-    </dependencies>
-  </metamodule>
-
-  <metamodule id="meta-gstreamer-1.0">
-    <dependencies>
-      <dep package="gstreamer-1.0"/>
-      <dep package="gst-plugins-base-1.0"/>
-      <dep package="gst-plugins-good-1.0"/>
-      <!--dep package="gst-plugins-ugly-1.0"/-->
-      <dep package="gst-plugins-bad-1.0"/>
-      <dep package="gst-libav"/>
     </dependencies>
   </metamodule>
 

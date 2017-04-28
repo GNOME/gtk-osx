@@ -13,6 +13,7 @@
 	      href="git://anongit.freedesktop.org"/>
   <repository type="tarball" name="curl.haxx.se"
               href="http://curl.haxx.se/download/"/>
+  <repository type="git" name="github" href="git://github.com"/>
 
   <metamodule id="meta-gtk-osx-unsupported">
     <dependencies>
@@ -28,9 +29,10 @@
     </dependencies>
   </autotools>
 
+  <!-- Iso-codes >= 3.68 requires Python3, a dependency too far. -->
   <autotools id="iso-codes" >
     <branch repo="git.debian.org" 
-            module="iso-codes/iso-codes"/>
+            module="pkg-isocodes/iso-codes" tag="iso-codes-3.67"/>
 
   </autotools>
 
@@ -38,6 +40,24 @@
     <branch repo="freedesktop" module="p11-glue/p11-kit"/>
     <dependencies>
       <dep package="libtasn1"/>
+    </dependencies>
+  </autotools>
+
+  <cmake id='libproxy'
+         cmakeargs="-DWITH_PYTHON=OFF -DWITH_PERL=OFF -DWITH_NM=OF">
+    <branch repo='github' module="master" />
+    <dependencies>
+    </dependencies>
+  </cmake>
+
+  <autotools id="libgnome-keyring"
+             autogenargs="--disable-pam --without-root-certs">
+    <branch/>
+    <dependencies>
+      <dep package="libgcrypt"/>
+      <dep package="libtasn1"/>
+      <dep package="glib"/>
+      <dep package="dbus"/>
     </dependencies>
   </autotools>
 
@@ -55,15 +75,6 @@
     </dependencies>
   </autotools>
 
-  <autotools id="libgnome-keyring" autogenargs="--disable-pam --without-root-certs">
-    <branch/>
-    <dependencies>
-      <dep package="libgcrypt"/>
-      <dep package="libtasn1"/>
-      <dep package="glib"/>
-      <dep package="dbus"/>
-    </dependencies>
-  </autotools>
 
    <autotools id="gnome-keyring"
 	      autogenargs="--disable-pam --without-root-certs">
@@ -75,15 +86,4 @@
     </dependencies>
   </autotools>
 
-  <cmake id='libproxy'  cmakeargs="-DWITH_PYTHON=OFF -DWITH_PERL=OFF -DWITH_NM=OF">
-    <branch repo='libproxy.google.com' module="trunk" />
-    <dependencies>
-    </dependencies>
-  </cmake>
-
-  <!-- 10.5 has 7.16.3, which is too old for some things, and also doesn't
-  provide a pkgconfig file. Otherwise can be skipped. -->
-  <autotools id="libcurl" autogen-sh="configure">
-    <branch repo="curl.haxx.se" module="curl-7.47.1.tar.bz2" version="7.47.1"/>
-  </autotools>
 </moduleset>

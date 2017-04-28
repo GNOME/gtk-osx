@@ -4,7 +4,7 @@
 <moduleset>
 
   <repository type="tarball" name="ftp.gnome.org" default="yes"
-	      href="ftp://ftp.gnome.org/pub/gnome/sources/"/>
+              href="ftp://ftp.gnome.org/pub/gnome/sources/"/>
   <repository type="tarball" name="ftp.gnu.org" href="ftp://ftp.gnu.org/gnu/"/>
   <repository type="tarball" name="sourceforge"
 	      href="http://downloads.sourceforge.net/sourceforge/"/>
@@ -17,7 +17,7 @@
   <repository type="git" name="freedesktop"
 	      href="git://anongit.freedesktop.org/"/>
   <repository type="tarball" name="icon-theme"
-	      href="http://icon-theme.freedesktop.org/releases/"/>
+              href="http://icon-theme.freedesktop.org/releases/"/>
   <repository type="tarball" name="xmlsoft.org"
 	      href="ftp://xmlsoft.org/libxml2/"/>
   <repository type="git" name="git.gnome.org"
@@ -32,25 +32,25 @@
               href="http://www.colm.net/files/ragel/"/>
 
   <autotools id='readline' autogen-sh="configure">
-    <branch repo="ftp.gnu.org" module="readline/readline-6.3.tar.gz"
-	    version="6.3">
+    <branch repo="ftp.gnu.org" module="readline/readline-7.0.tar.gz"
+	    version="7.0">
     </branch>
   </autotools>
 
   <autotools id="libpng" autogenargs="--enable-shared" autogen-sh="configure">
-    <branch version="1.6.17" module="libpng/libpng-1.6.17.tar.xz"
-            repo="sourceforge" md5sum="430a9b76b78533235cd4b9b26ce75c7e"/>
+    <branch version="1.6.29" module="libpng/libpng-1.6.29.tar.xz"
+            repo="sourceforge"/>
   </autotools>
 
   <autotools id="libjpeg">
-    <branch module="jpegsrc.v9a.tar.gz" version="9a"
+    <branch module="jpegsrc.v9b.tar.gz" version="9b"
             repo="jpeg"
             checkoutdir="jpeg-9a">
     </branch>
   </autotools>
 
   <autotools id="libtiff" autogen-sh="configure" autogenargs="--without-x">
-    <branch version="4.0.3" module="libtiff/tiff-4.0.3.tar.gz"
+    <branch version="4.0.7" module="libtiff/tiff-4.0.7.tar.gz"
 	    repo="libtiff"/>
     <dependencies>
       <dep package="libjpeg"/>
@@ -115,24 +115,24 @@
     </dependencies>
   </autotools>
 
+  <autotools id="icu" autogen-sh="source/configure" autogenargs="--enable-rpath"
+             makeargs='CFLAGS="$CFLAGS -DU_CHARSET_IS_UTF8=1 -DU_USING_ICU_NAMESPACE=0"'>
+    <branch repo="icu" version="58.2" checkoutdir="icu"
+            module="icu4c/58.2/icu4c-58_2-src.tgz"/>
+  </autotools>
+
   <autotools id="freetype-no-harfbuzz" skip-autogen="never" autogenargs="--without-bzip2 --without-harfbuzz"
 	     autogen-template="%(srcdir)s/%(autogen-sh)s &amp;&amp; %(srcdir)s/configure --prefix %(prefix)s  %(autogenargs)s"
-	     supports-non-srcdir-builds="no">
+             supports-non-srcdir-builds="no">
     <branch module="freetype/freetype2" repo="nongnu"/>
     <dependencies>
       <dep package="zlib"/>
     </dependencies>
   </autotools>
 
-  <autotools id="icu" autogen-sh="source/configure" autogenargs="--enable-rpath"
-             makeargs='CFLAGS="$CFLAGS -DU_CHARSET_IS_UTF8=1 -DU_USING_ICU_NAMESPACE=0"'>
-    <branch repo="icu" version="55.1" checkoutdir="icu"
-            module="icu4c/55.1/icu4c-55_1-src.tgz"/>
-  </autotools>
-
   <!-- Ragel, like Vala, isn't bootstrappable from git, so we might as well just use the tarball. -->
   <autotools id="ragel" autogen-sh='autoreconf'>
-    <branch repo="ragel" module="ragel-6.9.tar.gz" version="6.9">
+    <branch repo="ragel" module="ragel-6.10.tar.gz" version="6.10">
       <patch file="https://git.gnome.org/browse/gtk-osx/plain/patches/ragel-6.9-setiosflags.patch" strip="1"/>
     </branch>
   </autotools>
@@ -144,6 +144,15 @@
       <dep package="ragel"/>
       <dep package="glib"/>
       <dep package="icu"/>
+    </dependencies>
+  </autotools>
+
+  <autotools id="freetype-no-harfbuzz" skip-autogen="never" autogenargs="--without-bzip2 --without-harfbuzz"
+	     autogen-template="%(srcdir)s/%(autogen-sh)s &amp;&amp; %(srcdir)s/configure --prefix %(prefix)s  %(autogenargs)s"
+             supports-non-srcdir-builds="no">
+    <branch module="freetype/freetype2" repo="nongnu"/>
+    <dependencies>
+      <dep package="zlib"/>
     </dependencies>
   </autotools>
 
@@ -164,7 +173,7 @@
       <dep package="libxslt"/>
     </dependencies>
   </distutils>
-  
+
   <distutils id="python-six">
     <branch module="s/six/six-1.10.0.tar.gz" repo="pypi" version="1.10.0"
             checkoutdir="six"/>

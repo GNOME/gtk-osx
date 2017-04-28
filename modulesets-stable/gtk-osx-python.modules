@@ -8,11 +8,13 @@
   <repository type="tarball" name="cairographics.org"
               href="http://cairographics.org/releases/"/>
   <repository type="tarball" name="python"
-	      href="https://www.python.org/ftp/python/"/>
+              href="https://www.python.org/ftp/python/"/>
   <repository type="tarball" name="oracle"
 	      href="http://download.oracle.com/"/>
   <repository type="tarball" name="pymodules"
-	      href="http://pypi.python.org/packages/source/"/>
+              href="http://pypi.python.org/packages/source/"/>
+  <repository type="tarball" name="github-tarball"
+              href="https://github.com"/>
 
   <metamodule id="meta-gtk-osx-python">
     <dependencies>
@@ -78,6 +80,7 @@
     <dependencies>
       <dep package="gettext-runtime"/>
       <dep package='readline'/>
+      <dep package="openssl"/> <!-- For hashlib -->
     </dependencies>
     <after>
       <dep package="berkeleydb"/>
@@ -108,36 +111,20 @@
     </after>
   </distutils>
 
-<!-- Cairographics have changed the name to py2cairo for python 2 holdouts. -->
-  <waf id="py2cairo">
-    <branch module="py2cairo-1.10.0.tar.bz2" repo="cairographics.org"
-            version="1.10.0"
-	    hash="sha1:2efa8dfafbd6b8e492adaab07231556fec52d6eb">
-      <patch file="https://git.gnome.org/browse/gtk-osx/plain/patches/py2cairo-python2.6-Dont-try-to-guess-arch.patch"
-             strip="1"/>
-    </branch>
-    <dependencies>
-      <dep package="cairo"/>
-    </dependencies>
-    <after>
-      <dep package="python"/>
-      <dep package="meta-gtk-osx-core"/>
-    </after>
-  </waf>
-
-<!-- Pycairo is for those who've made the leap. -->
-  <waf id="pycairo" autogen-sh="configure" python-command="python3">
-    <branch module="pycairo-1.10.0.tar.bz2" repo="cairographics.org"
-            version="1.10.0"
-	    hash="sha1:b4283aa1cc9aafd12fd72ad371303a486da1d014"/>
+  <distutils id="pycairo" autogen-sh="configure" python-command="python3">
+    <branch module="/pygobject/pycairo/releases/download/v1.12.0/pycairo-1.12.0.tar.gz" repo="github-tarball"
+            version="1.12.0"
+	    hash="sha256:243c351d7abcef41ac1fa984d2c753f3d065336a0fcf4c20fafb191b23423095"/>
     <dependencies>
       <dep package="cairo"/>
     </dependencies>
     <after>
       <dep package="python3"/>
+      <dep package="python"/>
       <dep package="meta-gtk-osx-gtk3"/>
+      <dep package="meta-gtk-osx"/>
     </after>
-  </waf>
+  </distutils>
 
 <!-- PyGObject 2.28 is the last series for Gtk+-2; for co-installation
      with later versions it installs as pygobject2 and PyGObject 3
@@ -161,12 +148,11 @@
 	    hash="sha256:a628a95aa0909e13fb08230b1b98fc48adef10b220932f76d62f6821b3fdbffd"/>
     <dependencies>
       <dep package="meta-gtk-osx-gtk3"/>
+      <dep package="pycairo"/>
     </dependencies>
     <after>
       <dep package="python"/>
       <dep package="python3"/>
-      <dep package="pycairo"/>
-      <dep package="py2cairo"/>
     </after>
   </autotools>
 
@@ -180,7 +166,7 @@
     <dependencies>
       <dep package="pygobject"/>
       <dep package="meta-gtk-osx-core"/>
-      <dep package="py2cairo"/>
+      <dep package="pycairo"/>
     </dependencies>
     <after>
       <dep package="libglade"/>

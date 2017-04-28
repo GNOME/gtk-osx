@@ -20,6 +20,8 @@
               href="http://www.webkitgtk.org/releases/"/>
   <repository name="webkit-git" type="git"
               href="git://git.webkit.org"/>
+  <repository type="tarball" name="icu"
+              href="http://download.icu-project.org/files/"/>
 
   <!-- Builds last version of WebKitGTK that supported GTK 2.x -->
   <metamodule id="meta-gtk-osx-webkit">
@@ -38,7 +40,9 @@
   </metamodule>
 
   <!-- of the many arguments such as prefix and libdir that jhbuild might pass
-  to configure, openssl only understands prefix, and only with =. -->
+       to configure, openssl only understands prefix, and only with =. -->
+  <!-- Unfortunately Python2 hasn't been fixed up to use the 1.1 API
+       so we're stuck at 1.0. -->
   <autotools id="openssl" autogen-sh="Configure" autogenargs="shared"
              autogen-template="%(srcdir)s/%(autogen-sh)s --prefix=%(prefix)s --openssldir=%(prefix)s/etc/ssl %(autogenargs)s"
              makeinstallargs="install_sw" supports-non-srcdir-builds="no">
@@ -114,6 +118,13 @@
     <branch repo="chromium" module="webm/libwebp"/>
   </autotools>
 
+  <autotools id="icu55" autogen-sh="source/configure"
+             autogenargs="--enable-rpath"
+             makeargs='CFLAGS="$CFLAGS -DU_CHARSET_IS_UTF8=1 -DU_USING_ICU_NAMESPACE=0"'>
+    <branch repo="icu" version="55.1" checkoutdir="icu"
+            module="icu4c/55.1/icu4c-55_1-src.tgz"/>
+  </autotools>
+
   <!-- This is WebKitGTK 2.4.x, the last version that had the WebKit1 API.
     disable-webkit2: Requires both GTK2 and 3. Currently not supported.
     disable-credential-storage: Requires libsecret. No module for this yet.
@@ -123,21 +134,24 @@
       append_autogenargs('WebKit', '&#45;-enable-video')
       append_autogenargs('WebKit', '&#45;-enable-web-audio')
     -j1: Workaround for https://bugs.webkit.org/show_bug.cgi?id=140171
+
+   It has some issues with ICU 58 so we keep it on ICU55. Note that
+   you can't install both, so if you need to build this webkit add icu
+   to your skip-list.
   -->
   <autotools id="webkit" autogen-sh="autoreconf"
              autogenargs="--enable-quartz-target --with-gtk=2.0 --disable-webkit2 --disable-credential-storage --disable-geolocation --disable-video --disable-web-audio CXXFLAGS='-std=gnu++11'">
     <branch repo="webkit.org" module="webkitgtk-2.4.9.tar.xz" version="2.4.9">
-      <patch file="https://git.gnome.org/browse/gtk-osx/plain/patches/webkit-140167-disable-netscape-api.patch"
-             strip="1"/>
+      <patch file="https://git.gnome.org/browse/gtk-osx/plain/patches/webkit-140167-disable-netscape-api.patch" strip="1"/>
       <!-- This patch can be commented out for XCode >= 6.3, but does no harm if
       it's left in -->
-      <patch file="https://git.gnome.org/browse/gtk-osx/plain/patches/webkit-133293-cfi-clang-failure.patch"
-             strip="1"/>
+      <patch file="https://git.gnome.org/browse/gtk-osx/plain/patches/webkit-133293-cfi-clang-failure.patch" strip="1"/>
+      <patch file="https://git.gnome.org/browse/gtk-osx/plain/patches/WebKit-2.4.11-fixups.patch" strip="1"/>
     </branch>
     <dependencies>
       <dep package="libwebp"/>
       <dep package="enchant"/>
-      <dep package="icu"/>
+      <dep package="icu55"/>
       <dep package="libsoup"/>
       <dep package="meta-gtk-osx-freetype"/>
     </dependencies>
@@ -151,12 +165,11 @@
   <autotools id="webkit1gtk3" autogen-sh="autoreconf"
              autogenargs="--enable-quartz-target --with-gtk=3.0 --disable-webkit2 --disable-credential-storage --disable-geolocation --disable-video --disable-web-audio CXXFLAGS='-std=gnu++11'">
     <branch repo="webkit.org" module="webkitgtk-2.4.9.tar.xz" version="2.4.9">
-      <patch file="https://git.gnome.org/browse/gtk-osx/plain/patches/webkit-140167-disable-netscape-api.patch"
-             strip="1"/>
+      <patch file="https://git.gnome.org/browse/gtk-osx/plain/patches/webkit-140167-disable-netscape-api.patch" strip="1"/>
       <!-- This patch can be commented out for XCode >= 6.3, but does no harm if
       it's left in -->
-      <patch file="https://git.gnome.org/browse/gtk-osx/plain/patches/webkit-133293-cfi-clang-failure.patch"
-             strip="1"/>
+      <patch file="https://git.gnome.org/browse/gtk-osx/plain/patches/webkit-133293-cfi-clang-failure.patch" strip="1"/>
+      <patch file="https://git.gnome.org/browse/gtk-osx/plain/patches/WebKit-2.4.11-fixups.patch" strip="1"/>
     </branch>
     <dependencies>
       <dep package="libwebp"/>

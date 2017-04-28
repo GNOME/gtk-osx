@@ -78,19 +78,6 @@
     <branch module="atgreen/libffi" repo="github"/>
   </autotools>
 
-  <autotools id="xorg-util-macros">
-    <branch repo="freedesktop" module="xorg/util/macros"/>
-  </autotools>
-
-  
-  <!-- Commit 06fd4a27 breaks the build for gtk-osx, tag v1.3.1 builds fine. -->
-  <autotools id="libepoxy">
-    <branch repo="github" module="anholt/libepoxy" revision="v1.3.1"/>
-    <dependencies>
-      <dep package="xorg-util-macros"/>
-    </dependencies>
-  </autotools>
-
   <autotools id="gobject-introspection">
     <branch/>
     <dependencies>
@@ -124,23 +111,6 @@
       <dep package="gobject-introspection"/>
       <dep package="meta-gtk-osx-bootstrap"/>
     </after>
-  </autotools>
-
-  <autotools id="at-spi2-atk">
-    <branch/>
-    <dependencies>
-      <dep package="dbus"/>
-      <dep package="atk"/>
-      <dep package="at-spi2-core"/>
-    </dependencies>
-  </autotools>
-
-  <autotools id="at-spi2-core">
-    <branch/>
-    <dependencies>
-      <dep package="glib"/>
-      <dep package="dbus"/>
-    </dependencies>
   </autotools>
 
   <autotools id="gdk-pixbuf">
@@ -184,7 +154,6 @@
       <dep package="gdk-pixbuf"/>
       <dep package="atk"/>
       <dep package="gobject-introspection"/>
-      <dep package="libepoxy"/>
     </dependencies>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
@@ -200,7 +169,6 @@
       <dep package="gdk-pixbuf"/>
       <dep package="atk"/>
       <dep package="gobject-introspection"/>
-      <dep package="libepoxy"/>
       <dep package="graphene"/>
     </dependencies>
     <after>

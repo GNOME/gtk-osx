@@ -85,13 +85,20 @@
 	    hash="sha256:e6a2af72674403d06c03e067d915004e8d9cdeec206f3350c7f3ee595b139912"/>
   </autotools>
 
+  <!-- librsvg is converting to the Rust language. This requires
+       substantial infrastructure that's resistant to installing with
+       jhbuild, so we'll freeze at the 2.40 branch. -->
   <autotools id="librsvg" autogenargs="--disable-Bsymbolic">
-    <branch module="librsvg/2.41/librsvg-2.41.0.tar.xz" version="2.41.0"
-	    hash="sha256:a13573cb4efe3678eaf8709ae3533d79b17d33d29ca78a1e03e81b6235577140"/>
+    <branch module="librsvg/2.40/librsvg-2.40.17.tar.xz" version="2.40.17"
+	    hash="sha256:e6f6c5cbecc405bb945c7cd15061276035ae3173bbb3bb25e8a916779c7f69cc"/>
     <dependencies>
       <dep package="libcroco"/>
       <dep package="meta-gtk-osx-freetype"/>
     </dependencies>
+    <after>
+      <dep package="meta-gtk-osx-core"/>
+      <dep package="meta-gtk-osx-gtk3"/>
+    </after>
   </autotools>
 
   <autotools id="libcroco" autogenargs="--disable-Bsymbolic"

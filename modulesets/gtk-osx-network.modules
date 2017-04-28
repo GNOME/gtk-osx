@@ -18,6 +18,8 @@
               href="https://chromium.googlesource.com/"/>
   <repository name="webkit.org" type="tarball"
               href="http://www.webkitgtk.org/releases/"/>
+  <repository type="tarball" name="icu"
+              href="http://download.icu-project.org/files/"/>
 
   <!-- Builds last version of WebKitGTK that supported GTK 2.x -->
   <metamodule id="meta-gtk-osx-webkit">
@@ -40,8 +42,8 @@
   <autotools id="openssl" autogen-sh="Configure" autogenargs="shared"
              autogen-template="%(srcdir)s/%(autogen-sh)s --prefix=%(prefix)s --openssldir=%(prefix)s/etc/ssl %(autogenargs)s"
              makeinstallargs="install_sw" supports-non-srcdir-builds="no">
-    <branch module="openssl-1.0.2f.tar.gz" version="1.0.2f" repo="openssl"
-            hash="sha256:932b4ee4def2b434f85435d9e3e19ca8ba99ce9a065a61524b429a9d5e9b2e9c"/>
+    <branch module="openssl-1.0.2k.tar.gz" version="1.0.2k" repo="openssl"
+            hash="sha256:6b3977c61f2aedf0f96367dcfb5c6e578cf37e7b8d913b4ecb6643c3cb88d8c0"/>
   </autotools>
 
   <!-- Rudely demands TeX to build documentation -->
@@ -49,9 +51,8 @@
   <autotools id="libnettle"
              autogenargs="--disable-documentation --disable-assembler"
              autogen-template="autoreconf -fis &amp;&amp; %(srcdir)s/configure --prefix %(prefix)s  %(autogenargs)s">
-    <!-- gnutls 3.3.x does not support nettle 3.0 -->
     <branch repo="lysator" module="nettle/nettle.git"
-            tag="nettle_2.7_release_20130424"/>
+            tag="nettle_3.3_release_20161001"/>
     <dependencies>
       <dep package="gmp"/>
       <dep package="openssl"/>
@@ -61,14 +62,14 @@
   <autotools id="libtasn1" supports-non-srcdir-builds="no">
     <!-- Git repository is missing files required to build libtasn1
     <branch repo="git.gnu.org" tag="libtasn1_4_4"  module="libtasn1"/> -->
-    <branch repo="ftp.gnu.org" version="4.4"
-            module="libtasn1/libtasn1-4.4.tar.gz"/>
+    <branch repo="ftp.gnu.org" version="4.10"
+            module="libtasn1/libtasn1-4.10.tar.gz"/>
   </autotools>
 
   <autotools id="zlib" autogen-sh="configure" skip-autogen="never"
              supports-non-srcdir-builds="no">
-    <branch repo="sourceforge" version="1.2.8"
-            module="libpng/zlib-1.2.8.tar.gz"/>
+    <branch repo="sourceforge" version="1.2.11"
+            module="libpng/zlib-1.2.11.tar.gz"/>
   </autotools>
 
   <!-- Building from git does not work because they have checked in a bunch of
@@ -77,8 +78,8 @@
   <autotools id="gnutls" autogen-sh="configure"
              autogenargs="--disable-gtk-doc-html --without-p11-kit">
     <!--branch repo="gitlab" module="gnutls/gnutls"/-->
-    <branch repo="gnutls" version="3.3.12"
-            module="gcrypt/gnutls/v3.3/gnutls-3.3.12.tar.xz"/>
+    <branch repo="gnutls" version="3.5.9"
+            module="gcrypt/gnutls/v3.5/gnutls-3.5.9.tar.xz"/>
     <dependencies>
       <dep package="libnettle"/>
       <dep package="libtasn1" />
@@ -86,16 +87,21 @@
     </dependencies>
   </autotools>
 
+  <autotools id="libgcrypt" autogen-sh="configure">
+    <branch repo="gnutls" version="1.7.6"
+            module="gcrypt/libgcrypt/libgcrypt-1.7.6.tar.gz"/>
+  </autotools>
+
   <autotools id="glib-networking"
              autogenargs="--without-ca-certificates set_more_warnings=no">
-    <branch revision="glib-2-44"/>
+    <branch revision="glib-2-50"/>
     <dependencies>
       <dep package="gnutls"/>
     </dependencies>
   </autotools>
 
   <autotools id="libsoup" autogenargs="set_more_warnings=no">
-    <branch revision="gnome-3-14"/>
+    <branch revision="gnome-3-24"/>
     <dependencies>
       <dep package="glib"/>
       <dep package="glib-networking"/>
@@ -104,7 +110,14 @@
   </autotools>
 
   <autotools id="libwebp" autogen-sh="autoreconf">
-    <branch repo="chromium" module="webm/libwebp" revision="0.4.3"/>
+    <branch repo="chromium" module="webm/libwebp" revision="0.6.0"/>
+  </autotools>
+
+  <autotools id="icu55" autogen-sh="source/configure"
+             autogenargs="--enable-rpath"
+             makeargs='CFLAGS="$CFLAGS -DU_CHARSET_IS_UTF8=1 -DU_USING_ICU_NAMESPACE=0"'>
+    <branch repo="icu" version="55.1" checkoutdir="icu"
+            module="icu4c/55.1/icu4c-55_1-src.tgz"/>
   </autotools>
 
   <!-- This is WebKitGTK 2.4.x, the last version that had the WebKit1 API.
@@ -116,21 +129,24 @@
       append_autogenargs('WebKit', '&#45;-enable-video')
       append_autogenargs('WebKit', '&#45;-enable-web-audio')
     -j1: Workaround for https://bugs.webkit.org/show_bug.cgi?id=140171
+
+   It has some issues with ICU 58 so we keep it on ICU55. Note that
+   you can't install both, so if you need to build this webkit add icu
+   to your skip-list.
   -->
   <autotools id="webkit" autogen-sh="autoreconf"
-             autogenargs="--enable-quartz-target --with-gtk=2.0 --disable-webkit2 --disable-credential-storage --disable-geolocation --disable-video --disable-web-audio CXXFLAGS='-std=gnu++11'">
-    <branch repo="webkit.org" module="webkitgtk-2.4.9.tar.xz" version="2.4.9">
-      <patch file="https://git.gnome.org/browse/gtk-osx/plain/patches/webkit-140167-disable-netscape-api.patch"
-             strip="1"/>
+             autogenargs="--enable-quartz-target --with-gtk=2.0 --disable-webkit2 --disable-credential-storage --disable-geolocation --disable-video --disable-web-audio CXXFLAGS='-stdlib=libc++'">
+    <branch repo="webkit.org" module="webkitgtk-2.4.11.tar.xz" version="2.4.11">
+      <patch file="https://git.gnome.org/browse/gtk-osx/plain/patches/webkit-140167-disable-netscape-api.patch" strip="1"/>
       <!-- This patch can be commented out for XCode >= 6.3, but does no harm if
       it's left in -->
-      <patch file="https://git.gnome.org/browse/gtk-osx/plain/patches/webkit-133293-cfi-clang-failure.patch"
-             strip="1"/>
+      <patch file="https://git.gnome.org/browse/gtk-osx/plain/patches/webkit-133293-cfi-clang-failure.patch" strip="1"/>
+      <patch file="https://git.gnome.org/browse/gtk-osx/plain/patches/WebKit-2.4.11-fixups.patch" strip="1"/>
     </branch>
     <dependencies>
       <dep package="libwebp"/>
       <dep package="enchant"/>
-      <dep package="icu"/>
+      <dep package="icu"55/>
       <dep package="libsoup"/>
       <dep package="meta-gtk-osx-freetype"/>
     </dependencies>
@@ -142,19 +158,18 @@
 
   <!-- This is WebKitGTK 2.4.x as above, but for gtk3.  -->
   <autotools id="webkit1gtk3" autogen-sh="autoreconf"
-             autogenargs="--enable-quartz-target --with-gtk=3.0 --disable-webkit2 --disable-credential-storage --disable-geolocation --disable-video --disable-web-audio CXXFLAGS='-std=gnu++11'">
+             autogenargs="--enable-quartz-target --with-gtk=3.0 --disable-webkit2 --disable-credential-storage --disable-geolocation --disable-video --disable-web-audio CXXFLAGS='-stdllib=libc++'">
     <branch repo="webkit.org" module="webkitgtk-2.4.9.tar.xz" version="2.4.9">
-      <patch file="https://git.gnome.org/browse/gtk-osx/plain/patches/webkit-140167-disable-netscape-api.patch"
-             strip="1"/>
+      <patch file="https://git.gnome.org/browse/gtk-osx/plain/patches/webkit-140167-disable-netscape-api.patch" strip="1"/>
       <!-- This patch can be commented out for XCode >= 6.3, but does no harm if
       it's left in -->
-      <patch file="https://git.gnome.org/browse/gtk-osx/plain/patches/webkit-133293-cfi-clang-failure.patch"
-             strip="1"/>
+      <patch file="https://git.gnome.org/browse/gtk-osx/plain/patches/webkit-133293-cfi-clang-failure.patch" strip="1"/>
+      <patch file="https://git.gnome.org/browse/gtk-osx/plain/patches/WebKit-2.4.11-fixups.patch" strip="1"/>
     </branch>
     <dependencies>
       <dep package="libwebp"/>
       <dep package="enchant"/>
-      <dep package="icu"/>
+      <dep package="icu55"/>
       <dep package="libsoup"/>
       <dep package="meta-gtk-osx-freetype"/>
     </dependencies>
@@ -181,17 +196,11 @@
   -->
   <cmake id="webkit2gtk3"
          cmakeargs="-DPORT=GTK -DENABLE_X11_TARGET=OFF -DENABLE_QUARTZ_TARGET=ON -DENABLE_TOOLS=ON -DENABLE_MINIBROWSER=ON -DENABLE_PLUGIN_PROCESS_GTK2=OFF -DENABLE_VIDEO=OFF -DENABLE_WEB_AUDIO=OFF -DENABLE_CREDENTIAL_STORAGE=OFF -DENABLE_GEOLOCATION=OFF -DENABLE_OPENGL=OFF -DUSE_LIBNOTIFY=OFF -DUSE_LIBHYPHEN=OFF -DCMAKE_CXX_FLAGS='-stdlib=libc++'">
-    <branch repo="webkit.org" module="webkitgtk-2.10.2.tar.xz" version="2.10.2">
-      <patch file="https://git.gnome.org/browse/gtk-osx/plain/patches/webkit-144561-quartz-backend.patch"
-             strip="1"/>
-      <patch file="https://git.gnome.org/browse/gtk-osx/plain/patches/webkit-144560-platform-fixes.patch"
-             strip="1"/>
-      <patch file="https://git.gnome.org/browse/gtk-osx/plain/patches/webkit-144785-link-injected-bundle.patch"
-             strip="1"/>
-      <patch file="https://git.gnome.org/browse/gtk-osx/plain/patches/webkit-148606-build-texture-mapper-gl-separately.patch"
-             strip="1"/>
-      <patch file="https://git.gnome.org/browse/gtk-osx/plain/patches/webkit-148607-include-stub-for-plugin-permission-request.patch"
-             strip="1"/>
+    <branch repo="webkit.org" module="webkitgtk-2.16.1.tar.xz" version="2.16.1">
+    <branch repo="webkit.org" module="webkitgtk-2.16.1.tar.xz" version="2.16.1">
+      <patch file="https://git.gnome.org/browse/gtk-osx/plain/patches/WebKit-2.16.1-Bug-167343-wtf-unicode-UTF8.h.patch" strip="1"/>
+      <patch file="https://git.gnome.org/browse/gtk-osx/plain/patches/Webkit-2.16-build-without-OpenGL.patch" strip="1"/>
+<patch file="https://git.gnome.org/browse/gtk-osx/plain/patches/Webkit-2.16-Fix-some-includes.patch" strip="1"/>
     </branch>
     <dependencies>
       <dep package="libwebp"/>

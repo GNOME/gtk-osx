@@ -22,8 +22,8 @@
   </metamodule>
 
   <autotools id="cairomm" autogen-sh="configure">
-    <branch module="cairomm-1.15.3.tar.gz" version="1.15.3"
-	    hash="sha1:e87ccdae0800615beab29a0328e88f4597ecb805"
+    <branch module="cairomm-1.12.2.tar.gz" version="1.12.2"
+	    hash="sha1:621546f32221a2ddc079167a13ce5b5409bed704"
             repo="cairographics" />
     <dependencies>
       <dep package="cairo"/>
@@ -31,8 +31,10 @@
   </autotools>
 
   <autotools id="glibmm" autogen-sh="configure">
-    <branch module="glibmm/2.53/glibmm-2.53.1.tar.xz" version="2.53.1"
-            hash="sha256:ccd3f4ae8522cf7e0220f60141c91b547c9cf698d48ee8f86c92128dfc556863"/>
+    <branch module="glibmm/2.50/glibmm-2.50.1.tar.xz" version="2.50.1"
+            hash="sha256:1fd85051da9cb402cc8348cec72dfe4d79f9345df4a1dbf68703a4ded45846a4">
+            <patch file="https://git.gnome.org/browse/gtk-osx/plain/patches/glibmm-Bug-781947-Build-fails-on-MacOS-because-glib-doesn-t.patch" strip="1"/>
+    </branch>
     <dependencies>
       <dep package="glib"/>
       <dep package="libsigc++2"/>
@@ -40,8 +42,8 @@
   </autotools>
 
   <autotools id="pangomm" autogen-sh="configure">
-    <branch module="pangomm/2.41/pangomm-2.41.2.tar.xz" version="2.41.2"
-            hash="sha256:3bd99f5793e08f2d728af4306757559c66bcfce07eabe7a7a03cbe335e4b61fb"/>
+    <branch module="pangomm/2.40/pangomm-2.40.1.tar.xz" version="2.40.1"
+            hash="sha256:9762ee2a2d5781be6797448d4dd2383ce14907159b30bc12bf6b08e7227be3af"/>
     <dependencies>
       <dep package="glibmm"/>
       <dep package="cairomm"/>
@@ -50,8 +52,8 @@
   </autotools>
 
   <autotools id="atkmm" autogen-sh="configure">
-    <branch module="atkmm/2.25/atkmm-2.25.2.tar.xz" version="2.25.2"
-	    hash="sha256:b20d1e8368097c34115b687b703f908ea1a1120b21ef92d54954de92f5277a67"/>
+    <branch module="atkmm/2.24/atkmm-2.24.2.tar.xz" version="2.24.2"
+	    hash="sha256:ff95385759e2af23828d4056356f25376cfabc41e690ac1df055371537e458bd"/>
     <dependencies>
       <dep package="glibmm"/>
       <dep package="cairomm"/>

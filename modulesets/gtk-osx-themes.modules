@@ -47,7 +47,7 @@
   </autotools>
 
   <autotools id="adwaita-icon-theme">
-    <branch revision="gnome-3-16"/>
+    <branch revision="gnome-3-24"/>
     <dependencies>
       <dep package="librsvg"/>
       <dep package="hicolor-icon-theme"/>
@@ -56,7 +56,7 @@
   </autotools>
 
   <autotools id="gnome-themes-standard" autogenargs="--disable-gtk2-engine">
-    <branch revision="master"/> <!-- no gnome-3-16 branch yet -->
+    <branch revision="gnome-3-22"/> 
     <dependencies>
       <dep package="librsvg"/>
       <dep package="adwaita-icon-theme"/>
@@ -74,12 +74,19 @@
     <branch module="murrine"/>
   </autotools>
 
+  <!-- librsvg is converting to the Rust language. This requires
+       substantial infrastructure that's resistant to installing with
+       jhbuild, so we'll freeze at the 2.40 branch. -->
   <autotools id="librsvg" autogenargs="--disable-Bsymbolic">
-    <branch module="librsvg"/>
+    <branch module="librsvg" tag="librsvg-2-40"/>
     <dependencies>
       <dep package="libcroco"/>
       <dep package="meta-gtk-osx-freetype"/>
     </dependencies>
+    <after>
+      <dep package="meta-gtk-osx-core"/>
+      <dep package="meta-gtk-osx-gtk3"/>
+    </after>
   </autotools>
 
   <autotools id="libcroco" autogenargs="--disable-Bsymbolic">
@@ -100,11 +107,4 @@
     </after>
   </autotools>
 
-  <autotools id="gtk-quartz-engine">
-    <branch module="jralls/gtk-quartz-engine"
-            repo="github.com"  />
-    <after>
-      <dep package="meta-gtk-osx-core"/>
-    </after>
-  </autotools>
 </moduleset>

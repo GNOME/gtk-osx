@@ -6,7 +6,7 @@
               href="git://git.gnome.org/"/>
   <repository type="git" name="github" href="git://github.com/"/>
   <repository type="tarball" name="ftp.gnome.org" 
-	      href="ftp://ftp.gnome.org/pub/gnome/sources/"/>
+              href="ftp://ftp.gnome.org/pub/gnome/sources/"/>
   <repository type="tarball" name="ftp.gnu.org"
 	      href="ftp://ftp.gnu.org/gnu/"/>
   <repository type="git" name="git.freedesktop.org"
@@ -19,9 +19,6 @@
   <repository type="tarball" name="sourceforge"
               href="http://downloads.sourceforge.net/sourceforge/"/>
   <repository type="tarball" name="sqlite" href="http://www.sqlite.org/"/>
-  <repository type="cvs" name="hunspell-cvs"
-	      cvsroot=":pserver:anonymous@hunspell.cvs.sourceforge.net:/cvsroot/hunspell"
-	      password=""/>
   <repository type="cvs" name="gtkspell"
 	      cvsroot=":pserver:anonymous@gtkspell.cvs.sourceforge.net:/cvsroot/gtkspell"
 	      password=""/>
@@ -45,20 +42,8 @@
     </dependencies>
   </metamodule>
 
-  <!-- Loudmouth seems to be a bit of a football. This is pointed at
-       the dev on github who's done the most recent work, though the
-       release in question is from the original author. The project
-       website is at http://www.loudmouth-project.org/, but it's a bit
-       out of date. -->
-  <autotools id="loudmouth" autogenargs="--with-ssl=openssl">
-<!-- loudmouth > 1.4.3 requires openssl-0.9.8f; Leopard provides only 0.9.7. -->
-    <branch module="engineyard/loudmouth" />
-    <after>
-      <dep package="meta-gtk-osx-bootstrap"/>
-      <dep package="glib"/>
-    </after>
-  </autotools>
-
+  <!-- Libglade's functions are now part of Gtk+ with different names and
+     Libglade itself is deprecated.-->
   <autotools id="libglade">
     <branch />
     <after>
@@ -67,19 +52,7 @@
     </after>
   </autotools>
 
-  <autotools id="gossip">
-    <branch />
-    <after>
-      <dep package="meta-gtk-osx-bootstrap"/>
-      <dep package="meta-gtk-osx-themes"/>
-      <dep package="meta-gtk-osx-core"/>
-    </after>
-    <dependencies>
-      <dep package="loudmouth"/>
-      <dep package="libglade"/>
-    </dependencies>
-  </autotools>
-<!-- Vala-bootstrap is the current stable vala precompiled to C. -->
+  <!-- Vala-bootstrap is the current stable vala precompiled to C. -->
   <!--<autotools id="vala" autogen-sh="configure">
     <branch module="vala-bootstrap"/>
   </autotools>-->
@@ -119,6 +92,7 @@
     </dependencies>
   </autotools>
 
+<!-- Glade 3.8 is the last stable series for Gtk+-2 -->
   <autotools id="glade3" autogenargs="--disable-scrollkeeper">
     <branch module="glade" tag="glade-3-8"/>
     <after>
@@ -130,6 +104,9 @@
 
   <autotools id="glade" autogenargs="--disable-scrollkeeper">
     <branch />
+    <dependencies>
+      <dep package="itstool"/>
+    </dependencies>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
       <dep package="meta-gtk-osx-themes"/>
@@ -143,58 +120,6 @@
       <dep package="meta-gtk-osx-bootstrap"/>
       <dep package="meta-gtk-osx-core"/>
     </after>
-  </autotools>
-
-  <autotools id="libIDL">
-    <branch />
-    <after>
-      <dep package="meta-gtk-osx-bootstrap"/>
-      <dep package="meta-gtk-osx-core"/>
-    </after>
-  </autotools>
-
-  <autotools id="ORBit2">
-    <branch />
-    <after>
-      <dep package="meta-gtk-osx-bootstrap"/>
-    </after>
-    <dependencies>
-      <dep package="libIDL"/>
-    </dependencies>
-  </autotools>
-
-  <!-- This stays as a tarball so that the patches can be applied -->
-  <autotools id="dbus" autogen-sh='configure'
-	   autogenargs="--disable-selinux --without-x --disable-launchd
-	   --with-session-socket-dir=/var/tmp">
-    <branch module="dbus/dbus-1.6.8.tar.gz"  version="1.6.8"
-	    repo="dbus.freedesktop.org">
-    </branch>
-    <dependencies>
-      <dep package="python"/>
-    </dependencies>
-  </autotools>
-
-  <autotools id="dbus-glib" autogenargs="--disable-selinux">
-    <branch repo="git.freedesktop.org" module="dbus/dbus-glib" />
-    <dependencies>
-      <dep package="dbus"/>
-    </dependencies>
-    <after>
-      <dep package="meta-gtk-osx-bootstrap"/>
-      <dep package="meta-gtk-osx-core"/>
-    </after>
-  </autotools>
-
-  <!-- Note: -disable-defaults-service removes dependency on "PolicyKit"
-       which is available only through svn or from Linux distros -->
-<!-- Pegged at gnome-2-28 until gdbus is fixed for OSX -->
-  <autotools id="gconf" autogenargs="--disable-defaults-service">
-    <branch revision="gnome-2-28"/>
-    <dependencies>
-      <dep package="ORBit2"/>
-      <dep package="dbus-glib"/>
-    </dependencies>
   </autotools>
 
   <!-- These folks don't make their repository available.-->
@@ -218,20 +143,6 @@
     </dependencies>
   </autotools>
 
-  <cmake id="exiv2" supports-non-srcdir-builds="no">
-    <branch repo="exiv2.org" module="svn">
-    </branch>
-  </cmake>
-  
-  <autotools id="gexiv2" supports-non-srcdir-builds="no"
-	     autogenargs="--enable-introspection --with-libtool=libtool"
-	     autogen-template="%(srcdir)s/%(autogen-sh)s --prefix=%(prefix)s %(autogenargs)s">
-    <branch/>
-    <dependencies>
-      <dep package="exiv2"/>
-    </dependencies>
-  </autotools>
-  
   <autotools id="gimp" 
              autogenargs="--disable-python --disable-print --without-x
                           --without-dbus --without-gnomevfs --without-wmf"
@@ -252,7 +163,7 @@
   <autotools id="json-glib">
     <branch/>
   </autotools>
-  
+ 
   <autotools id="babl">
     <branch />
   </autotools>
@@ -278,7 +189,7 @@
   <autotools id="sqlite" autogenargs="--disable-tcl --enable-threadsafe" >
     <!-- Another package with a non-standard repository structure. Tarballs
     are easier.-->
-    <branch module="sqlite-autoconf-3071401.tar.gz" version="3.7.14"
+    <branch module="2017/sqlite-autoconf-3180000.tar.gz" version='3.18.0'
             repo="sqlite"/>
   </autotools>
 
@@ -289,6 +200,10 @@
     </dependencies>
   </autotools>
 
+  <autotools id="hunspell" autogen-sh="configure">
+    <branch module="hunspell/hunspell" repo="github"/>
+  </autotools>
+
   <autotools id="enchant" >
     <!-- No version. Doesn't seem to have been touched in a while. -->
     <branch repo="abisource/enchant" module="enchant"/>
@@ -297,18 +212,20 @@
     </dependencies>
   </autotools>
 
-  <autotools id="gtkspell">
-    <branch module="gtkspell2" repo="gtkspell"/>
+  <!-- GtkSpell has switched to Mercurial for VCS, so we'll use the
+       tarballs to avoid the dependency. -->
+  <autotools id="gtkspell" autogen-sh="configure">
+    <branch module="gtkspell/gtkspell-2.0.16.tar.gz" repo="sourceforge"
+	    version="2.0.16"/>
     <dependencies>
       <dep package="enchant"/>
     </dependencies>
   </autotools>
 
-<!-- GtkSpell has switched to Mercurial for VCS, so we'll use the
-     tarball to avoid the dependency. -->
   <autotools id="gtkspell3" autogen-sh="configure">
-    <branch module="gtkspell/gtkspell3-3.0.7.tar.gz" repo="sourceforge"
-	    version="3.0.7">
+    <branch module="gtkspell/gtkspell3-3.0.9.tar.gz" repo="sourceforge"
+	    version="3.0.9">
+      <patch file="https://git.gnome.org/browse/gtk-osx/plain/patches/0001-Enable-use-of-XDG_DATA_DIRS-for-locating-iso-code-fi.patch" strip="1"/>
     </branch>
     <dependencies>
       <dep package="enchant"/>
@@ -334,12 +251,17 @@
     </branch>
   </autotools>
 
-  <autotools id="bdw-gc" autogen-template="pushd %(srcdir)s &amp;&amp; ./autogen.sh &amp;&amp; automake-1.10 -ac &amp;&amp; popd &amp;&amp; %(srcdir)s/configure --prefix %(prefix)s  %(autogenargs)s">
-    <branch repo="github" module="ivmai/bdwgc" revision="release-7_2"/>
+  <autotools id="libatomic-ops"
+             autogen-template="%(autogen-sh)s &amp;&amp; ./configure --prefix=%(prefix)s> %(autogen-args)s">
+    <branch repo="github" module="ivmai/libatomic_ops" />
+  </autotools>
+
+  <autotools id="bdw-gc" autogen-template="pushd %(srcdir)s &amp;&amp; ./autogen.sh &amp;&amp; automake-1.14 -ac &amp;&amp; popd &amp;&amp; %(srcdir)s/configure --prefix %(prefix)s  %(autogenargs)s">
+    <branch repo="github" module="ivmai/bdwgc" />
   </autotools>
 
   <autotools id="guile" autogenargs="--disable-error-on-warning">
-    <branch repo="savannah" module="guile.git"/>
+    <branch repo="savannah" module="guile.git" revision="branch_release-1-8"/>
     <dependencies>
       <dep package="gmp"/>
     </dependencies>
@@ -353,15 +275,6 @@
       <dep package="libffi"/>
       <dep package="bdw-gc"/>
     </dependencies>
-  </autotools>
-
-  <autotools id="hunspell" autogen-sh="configure">
-    <branch repo="hunspell-cvs"/>
-  </autotools>
-
-  <autotools id="bdw-gc" autogen-sh="configure">
-    <branch repo="boehm" module="gc/gc_source/gc-7.2e.tar.gz" version="7.2e"
-	    checkoutdir="gc-7.2"/>
   </autotools>
 
 </moduleset>

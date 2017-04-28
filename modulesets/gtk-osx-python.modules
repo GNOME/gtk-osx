@@ -15,7 +15,7 @@
 	      href="http://download.oracle.com/"/>
   <repository type="tarball" name="pymodules"
 	      href="http://pypi.python.org/packages/source/"/>
-
+  <repository type="git" name="github" href="git://github.com/"/>
 
   <metamodule id="meta-gtk-osx-python">
     <dependencies>
@@ -59,13 +59,14 @@
   <autotools id="python" autogenargs="--enable-shared"
 	     autogen-sh="configure">
     <branch repo="python"
-	    module="2.7.12/Python-2.7.12.tar.xz" version="2.7.12">
+	    module="2.7.13/Python-2.7.13.tar.xz" version="2.7.13">
       <patch file="https://git.gnome.org/browse/gtk-osx/plain/patches/python2-linkflags.patch" strip="1"/>
       <patch file="https://git.gnome.org/browse/gtk-osx/plain/patches/python-issue27806_v3.patch" strip="1"/>
     </branch>
     <dependencies>
       <dep package="gettext-runtime"/>
       <dep package='readline'/>
+      <dep package="openssl"/> <!-- For hashlib -->
     </dependencies>
     <after>
       <dep package="berkeleydb"/>
@@ -73,7 +74,7 @@
   </autotools>
 
   <autotools id="python3" autogenargs="--enable-shared" autogen-sh="configure">
-    <branch repo="python" module="3.4.3/Python-3.4.3.tar.xz" version="3.4.3">
+    <branch repo="python" module="3.6.1/Python-3.6.1.tar.xz" version="3.6.1">
       <patch file="https://git.gnome.org/browse/gtk-osx/plain/patches/Python3.4-stack_size-flag.patch" strip="1"/>
     </branch>
     <dependencies>
@@ -85,45 +86,40 @@
     </after>
   </autotools>
 
-<!-- Cairographics have changed the name to py2cairo for python 2 holdouts. -->
-  <waf id="py2cairo">
-    <branch module="py2cairo-1.10.0.tar.bz2" repo="cairographics"
-            version="1.10.0"
-            hash="sha1:2efa8dfafbd6b8e492adaab07231556fec52d6eb">
-      <patch file="https://git.gnome.org/browse/gtk-osx/plain/patches/py2cairo-python2.6-Dont-try-to-guess-arch.patch"
-             strip="1"/>
-    </branch>
+  <distutils id="pybsddb">
+    <branch module="b/bsddb3/bsddb3-6.2.4.tar.gz"
+	    hash="md5:eec77d104c5981366701c6b0de585504" repo="pymodules"
+	    version="6.2.4"/>
     <dependencies>
-      <dep package="cairo"/>
-    </dependencies>
-    <after>
-      <dep package="python"/>
-      <dep package="meta-gtk-osx-core"/>
-    </after>
-  </waf>
-
-<!-- Pycairo-python3 for those who've made the leap. -->
-  <waf id="pycairo" python-command="python3">
-    <branch module="pycairo-1.10.0.tar.bz2" repo="cairographics"
-            version="1.10.0"
-	    hash="sha1:2efa8dfafbd6b8e492adaab07231556fec52d6eb"/>
-    <dependencies>
-      <dep package="cairo"/>
-    </dependencies>
-    <after>
       <dep package="python3"/>
-      <dep package="meta-gtk-osx-core"/>
+    </dependencies>
+    <after>
+      <dep package="berkeleydb"/>
+      <dep package="berkeleydb-nonsrctree"/>
     </after>
-  </waf>
+  </distutils>
 
   <distutils id="pybsddb">
-    <branch module="b/bsddb3/bsddb3-5.3.0.tar.gz"
-	    hash="md5:d5aa4f293c4ea755e84383537f74be82" repo="pymodules"
-	    version="5.3.0"/>
+    <branch module="b/bsddb3/bsddb3-6.2.4.tar.gz"
+	    hash="md5:eec77d104c5981366701c6b0de585504" repo="pymodules"
+	    version="6.2.4"/>
     <dependencies>
       <dep package="python3"/>
       <dep package="berkeleydb"/>
     </dependencies>
+  </distutils>
+
+  <distutils id="pycairo" autogen-sh="configure" python-command="python3">
+    <branch module="pygobject/pycairo" repo="github"/>
+    <dependencies>
+      <dep package="cairo"/>
+    </dependencies>
+    <after>
+      <dep package="python3"/>
+      <dep package="python"/>
+      <dep package="meta-gtk-osx-gtk3"/>
+      <dep package="meta-gtk-osx"/>
+    </after>
   </distutils>
 
   <autotools id="pygobject" autogenargs="--disable-introspection">
@@ -137,7 +133,7 @@
   </autotools>
 
   <autotools id="pygobject3">
-    <branch tag="pygobject-3-16" module="pygobject" checkoutdir="pygobject3"/>
+    <branch tag="pygobject-3-24" module="pygobject" checkoutdir="pygobject3"/>
     <dependencies>
       <dep package="meta-gtk-osx-gtk3"/>
     </dependencies>
@@ -147,9 +143,7 @@
     </after>
   </autotools>
 
-<!-- PyGtk is maintenance-only, since it's unecessary for Gtk3. There
-     is no pygtk-2-24 branch; all maintenance is occuring on
-     master. -->
+<!-- PyGtk is discontinued. -->
   <autotools id="pygtk" autogenargs="--disable-introspection">
     <branch tag="master"/>
     <dependencies>

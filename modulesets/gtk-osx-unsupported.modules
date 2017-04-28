@@ -8,8 +8,8 @@
 	      href="git://git.debian.org/git/"/>
   <repository type='git' name='git.gnupg.org' href="git://git.gnupg.org/" />
   <repository type='tarball' name='ftp.gnupg.org' href="ftp://ftp.gnupg.org/" />
-  <repository type='svn' name='libproxy.google.com'
-              href='http://libproxy.googlecode.com/svn/'
+  <repository type='git' name='github'
+              href='git://github.com/'
               tags-template="tags/%(tag)s"/>
   <repository type="git" name="freedesktop"
               href="git://anongit.freedesktop.org"/>
@@ -31,7 +31,7 @@
   </autotools>
 
   <autotools id="iso-codes" >
-    <branch repo="git.debian.org" tag="iso-codes/3.57"
+    <branch repo="git.debian.org" tag="iso-codes/3.67"
             module="iso-codes/iso-codes"/>
 
   </autotools>
@@ -44,14 +44,15 @@
   </autotools>
 
   <cmake id='libproxy' cmakeargs="-DWITH_PYTHON=OFF">
-    <branch tag="libproxy-0.4.10"
-            repo='libproxy.google.com'/>
+    <branch module="libproxy/libproxy" tag="0.4.14"
+            repo='github'/>
     <dependencies>
     </dependencies>
   </cmake>
 
+  <!-- libgnome-keyring releases from master. -->
   <autotools id="libgnome-keyring">
-    <branch tag="3.6.0"/>
+    <branch />
     <dependencies>
       <dep package="glib"/>
       <dep package="libgcrypt"/>
@@ -71,8 +72,8 @@
     is available, currently only on master.
     <branch repo="git.gnupg.org" revision="LIBGCRYPT_1_6_BRANCH"
             module="libgcrypt"/> -->
-    <branch repo="ftp.gnupg.org" version="1.6.3"
-            module="gcrypt/libgcrypt/libgcrypt-1.6.3.tar.bz2">
+    <branch repo="ftp.gnupg.org" version="1.7.6"
+            module="gcrypt/libgcrypt/libgcrypt-1.7.6.tar.bz2">
             <patch file="https://git.gnome.org/browse/gtk-osx/plain/patches/libgcrypt-cflags-for-build.patch"
        strip="1"/>
     </branch>
@@ -81,9 +82,13 @@
     </dependencies>
   </autotools>
 
-  <!-- 10.5 has 7.16.3, which is too old for some things, and also doesn't
-  provide a pkgconfig file. Otherwise can be skipped. -->
-  <autotools id="libcurl" autogen-sh="configure">
-    <branch repo="curl.haxx.se" module="curl-7.47.1.tar.bz2" version="7.47.1"/>
+  <autotools id="gnome-keyring" autogenargs="--disable-pam --without-root-certs">
+    <branch revision="gnome-3-20"/>
+    <dependencies>
+      <dep package="gtk+"/>
+      <dep package="libgcrypt"/>
+      <dep package="libtasn1"/>
+    </dependencies>
   </autotools>
+
 </moduleset>

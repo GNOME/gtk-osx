@@ -5,7 +5,7 @@
   <repository type="tarball" name="ftp.gnome.org" default="yes"
               href="http://ftp.gnome.org/pub/GNOME/sources/"/>
   <repository type="tarball" name="ftp.gtk.org"
-	      href="ftp://ftp.gtk.org/pub/"/>
+              href="ftp://ftp.gtk.org/pub/"/>
   <repository type="tarball" name="hadess"
               href="http://freedesktop.org/~hadess/"/>
   <repository type="tarball" name="gimp"
@@ -15,8 +15,9 @@
   <repository type="tarball" name="sourceforge"
               href="http://downloads.sourceforge.net/sourceforge/"/>
   <repository type="git" name="github.com" href="git://github.com/"/>
+  <repository type="tarball" name="github-tarball" href="https://github.com/"/>
   <repository type="tarball" name="dbus.freedesktop.org"
-	      href="http://dbus.freedesktop.org/releases/"/>
+              href="http://dbus.freedesktop.org/releases/"/>
   <repository type="tarball" name="sqlite" href="http://www.sqlite.org/"/>
   <repository type="tarball" name="oracle"
 	      href="http://download.oracle.com/"/>
@@ -66,15 +67,16 @@ Libglade itself is deprecated. This is the last release. -->
     </after>
   </autotools>
 
+
   <autotools id="libunique" autogen-sh="configure"
              autogenargs="--without-x --disable-dbus">
-    <branch module="libunique/1.1/libunique-1.1.6.tar.bz2" version="1.1.6"
-            hash="sha256:e5c8041cef8e33c55732f06a292381cb345db946cf792a4ae18aa5c66cdd4fbb">
+    <branch module="libunique/3.0/libunique-3.0.2.tar.bz2" version="3.0.2"
+            hash="sha256:a8f02ce073e2b920cca8ac45d418e7cb64438ad0814780c5912c6d63f8a4e038">
       <patch file="https://git.gnome.org/browse/gtk-osx/plain/patches/libunique-663913-sockaddr-un.patch" strip="1"/>
     </branch>
     <dependencies>
-       <dep package="gtk+"/>
-	</dependencies>
+      <dep package="gtk+"/>
+    </dependencies>
   </autotools>
 
 <!-- This is, I think, the last Gtk+2 version -->
@@ -167,8 +169,7 @@ Libglade itself is deprecated. This is the last release. -->
     </after>
   </autotools>
   <autotools id="lcms" autogen-sh="configure">
-    <branch module="lcms/lcms2-2.8.tar.gz" version="2.8" repo="sourceforge"
-            />
+    <branch module="lcms/lcms2-2.8.tar.gz" version="2.8" repo="sourceforge" />
   </autotools>
 
   <autotools id="shared-mime-info"  autogen-sh="configure"
@@ -257,7 +258,7 @@ Libglade itself is deprecated. This is the last release. -->
     </dependencies>
   </autotools>
 
-<!-- Goocanvas-2 is for gtk+-3. -->
+<!-- Goocanvas2 is for gtk+-3. -->
 
   <autotools id="goocanvas2" supports-non-srcdir-builds="no">
     <branch module="goocanvas/2.0/goocanvas-2.0.2.tar.xz" version="2.0.2"
@@ -279,8 +280,8 @@ Libglade itself is deprecated. This is the last release. -->
   </autotools>
 
   <autotools id="hunspell" autogen-sh="configure">
-    <branch module="hunspell/hunspell-1.3.3.tar.gz" version="1.3.3"
-	    repo="sourceforge"/>
+    <branch module="hunspell/hunspell/archive/v1.6.1.tar.gz" version="1.3.3"
+	    repo="github-tarball"/>
   </autotools>
 
   <autotools id="enchant" autogen-sh="configure"
@@ -335,12 +336,13 @@ Libglade itself is deprecated. This is the last release. -->
     </branch>
   </autotools>
 
-  <autotools id="libatomic-ops">
+  <autotools id="libatomic-ops"
+             autogen-template="%(autogen-sh)s && ./configure --prefix=%(prefix)s> %(autogen-args)s"
     <branch repo="github.com" module="ivmai/libatomic_ops"
 	    revision="libatomic_ops-7_4_4"/>
   </autotools>
 
-  <autotools id="bdw-gc" autogen-template="pushd %(srcdir)s &amp;&amp; ./autogen.sh &amp;&amp; automake-1.10 -ac &amp;&amp; popd &amp;&amp; %(srcdir)s/configure --prefix %(prefix)s  %(autogenargs)s">
+  <autotools id="bdw-gc" autogen-template="pushd %(srcdir)s &amp;&amp; ./autogen.sh &amp;&amp; automake-1.14 -ac &amp;&amp; popd &amp;&amp; %(srcdir)s/configure --prefix %(prefix)s  %(autogenargs)s">
     <branch repo="github.com" module="ivmai/bdwgc"  revision="gc7_6_0" />
     <dependencies>
       <dep package="libatomic-ops"/>
@@ -356,9 +358,10 @@ Libglade itself is deprecated. This is the last release. -->
     </dependencies>
   </autotools>
 
+  <!-- Guile 2.0.14 crashes during build. Stay at 2.0.12 while this is investigated. -->
   <autotools id="guile2" autogen-sh="configure">
-    <branch repo="ftp.gnu.org" module="guile/guile-2.0.14.tar.gz"
-	    version="2.0.14">
+    <branch repo="ftp.gnu.org" module="guile/guile-2.0.12.tar.gz"
+	    version="2.0.12">
       <patch file="https://git.gnome.org/browse/gtk-osx/plain/patches/guild-shell.patch" strip="1"/>
       <patch file="https://git.gnome.org/browse/gtk-osx/plain/patches/guile-clocktime.patch" strip="1"/>
     </branch>

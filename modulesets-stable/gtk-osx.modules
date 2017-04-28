@@ -100,22 +100,6 @@
             version="3.2.1"/>
   </autotools>
 
-  <autotools id="xorg-util-macros">
-    <branch repo="freedesktop" version="1.19.1"
-            module="xorg/individual/util/util-macros-1.19.1.tar.bz2"/>
-  </autotools>
-
-  <!-- There is no stable release yet that works here, but commit
-       06fd4a27 breaks the build for gtk-osx, tag v1.3.1 builds
-       fine. -->
-anholt/libepoxy/releases/download/1.4.1/libepoxy-1.4.1.tar.xz
-  <autotools id="libepoxy" autogen-sh="configure">
-    <branch repo="github-tarball" version="v1.4.1"
-            module="anholt/libepoxy/releases/download/1.4.1/libepoxy-1.4.1.tar.xz" />
-    <dependencies>
-      <dep package="xorg-util-macros"/>
-    </dependencies>
-  </autotools>
 
   <autotools id="gobject-introspection" autogen-sh="configure">
     <branch module="gobject-introspection/1.52/gobject-introspection-1.52.1.tar.xz"
@@ -199,8 +183,7 @@ anholt/libepoxy/releases/download/1.4.1/libepoxy-1.4.1.tar.xz
              autogenargs="--enable-quartz-backend --enable-quartz-relocation">
     <branch module="gtk+/3.22/gtk+-3.22.12.tar.xz" version="3.22.12"
             hash="sha256:84fae0cefb6a11ee2b4e86b8ac42fe46a3d30b4ad16661d5fc51e8ae03e2a98c">
-      <!--patch href="https://git.gnome.org/browse/gtk-osx/plain/patches/0001-Bug-781118-gtk-3.22.12-quartz-backend-s.patch" strip="1"/-->
-      <patch file="file:///Users/john/Development/GTK-OSX/gtk-osx-build/patches/0001-Bug-781118-gtk-3.22.12-quartz-backend-s.patch" strip="1"/>
+      <patch href="https://git.gnome.org/browse/gtk-osx/plain/patches/0001-Bug-781118-gtk-3.22.12-quartz-backend-s.patch" strip="1"/>
     </branch>
     <dependencies>
       <dep package="glib"/>
@@ -208,7 +191,6 @@ anholt/libepoxy/releases/download/1.4.1/libepoxy-1.4.1.tar.xz
       <dep package="atk"/>
       <dep package="gdk-pixbuf"/>
       <dep package="gobject-introspection"/>
-      <dep package="libepoxy"/>
     </dependencies>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>

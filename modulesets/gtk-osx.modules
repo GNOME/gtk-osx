@@ -67,7 +67,7 @@
   </metamodule>
 
   <autotools id="glib">
-    <branch tag="glib-2-44"/>
+    <branch tag="glib-2-52"/>
     <dependencies>
       <dep package="libffi"/>
     </dependencies>
@@ -81,23 +81,8 @@
     <branch module="atgreen/libffi" repo="github" tag="v3.2.1"/>
   </autotools>
 
-  <autotools id="xorg-util-macros">
-    <branch repo="freedesktop" module="xorg/util/macros"
-            tag="util-macros-1.19.0"/>
-  </autotools>
-
-  <!-- There is no stable release yet that works here, but commit
-       06fd4a27 breaks the build for gtk-osx, tag v1.3.1 builds
-       fine. -->
-  <autotools id="libepoxy">
-    <branch repo="github" module="anholt/libepoxy" revision="v1.3.1"/>
-    <dependencies>
-      <dep package="xorg-util-macros"/>
-    </dependencies>
-  </autotools>
-
   <autotools id="gobject-introspection">
-    <branch tag="gnome-3-16" module="gobject-introspection"/>
+    <branch tag="gnome-3-24" module="gobject-introspection"/>
     <dependencies>
       <dep package="glib"/>
       <dep package="cairo"/>
@@ -108,7 +93,7 @@
   </autotools>
 
   <autotools id="pango">
-    <branch tag="pango-1-38"/>
+    <branch tag="pango-1-40"/>
     <dependencies>
       <dep package="glib"/>
       <dep package="cairo"/>
@@ -121,7 +106,7 @@
   </autotools>
 
   <autotools id="atk">
-    <branch tag="gnome-3-16"/>
+    <branch tag="gnome-3-24"/>
     <dependencies>
     </dependencies>
     <after>
@@ -156,14 +141,13 @@
 
   <autotools id="gtk+-3.0"
 	     autogenargs="--enable-quartz-backend --disable-colord  --enable-quartz-relocation">
-    <branch module="gtk+" checkoutdir="gtk+-3.0" revision="gtk-3-20"/>
+    <branch module="gtk+" checkoutdir="gtk+-3.0" revision="gtk-3-22"/>
     <dependencies>
       <dep package="glib"/>
       <dep package="pango"/>
       <dep package="atk"/>
       <dep package="gdk-pixbuf"/>
       <dep package="gobject-introspection"/>
-      <dep package="libepoxy"/>
     </dependencies>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
@@ -171,7 +155,7 @@
   </autotools>
 
   <autotools id="pixman" autogenargs="--disable-gtk --disable-mmx">
-    <branch repo="freedesktop" module="pixman" tag="0.32"/>
+    <branch repo="freedesktop" module="pixman" revision="0.34"/>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
     </after>
