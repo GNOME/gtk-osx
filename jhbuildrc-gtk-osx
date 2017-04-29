@@ -102,16 +102,28 @@ def osx_ver():
 
 # Determine the XCode Version:
 def xcode_ver():
-   ver = _popen("xcodebuild -version")
-   exp = re.compile(r'Xcode (\d+\.\d+)')
-   vernum = exp.match(ver)
-   if vernum:
-       _xcode_ver = float(vernum.group(1))
-       if _xcode_ver < 5.0:
-           raise EnvironmentError("Xcode Version %f is not supported; if you want to build with Xcode versions earlier than 5.0 checkout tag Last-Lion." % _xcode_ver)
-       return _xcode_ver
-   else:
-       raise EnvironmentError("No suitable Xcode found. Xcode 5.0 or later is required.")
+   devdir = _popen("xcode-select -p")
+   if devdir != "/Library/Developer/CommandLineTools":
+       ver = _popen("xcodebuild -version")
+       exp = re.compile(r'Xcode (\d+\.\d+)')
+       vernum = exp.match(ver)
+       if vernum:
+           _xcode_ver = float(vernum.group(1))
+           if _xcode_ver < 5.0:
+               raise EnvironmentError("Xcode Version %f is not supported; if you want to build with Xcode versions earlier than 5.0 checkout tag Last-Lion." % _xcode_ver)
+           return _xcode_ver
+       else:
+           raise EnvironmentError("No suitable Xcode found. Xcode 5.0 or later is required.")
+   else: #Command-Line Tools instead of Xcode
+       ver_str = _popen("pkgutil --pkg-info=com.apple.pkg.CLTools_Executables | grep version*")
+       print "Found Command Line Tools '%s'" % ver_str
+       exp = re.compile(r'version: (\d+\.\d+)')
+       vernum = exp.match(ver_str)
+       if vernum:
+           print "Command Line Tools version %f" % float(vernum.group(1))
+           return float(vernum.group(1))
+       else:
+           return 8.0
 
 # Some utitily functions used here and in custom files:
 #
@@ -199,33 +211,35 @@ def setup_sdk(target=_osx_version, sdk_version=None, architectures=[_default_arc
     xcodepath = None
     xcodeversion = None
 
+
     sdkdir = _popen("xcrun --show-sdk-path")
 
-    environ_prepend("LDFLAGS", "-L" + sdkdir + "/usr/lib")
-    environ_prepend("CFLAGS", "-I" + sdkdir + "/usr/include")
-    environ_prepend("CXXFLAGS", "-I" + sdkdir + "/usr/include")
-    environ_prepend("OBJCFLAGS", "-I" + sdkdir + "/usr/include")
-    environ_prepend("CPPFLAGS", "-I" + sdkdir + "/usr/include")
-    environ_prepend("CMAKE_PREFIX_PATH", os.path.join(sdkdir, 'usr'), ':')
-    environ_prepend("LIBRARY_PATH", sdkdir + "/usr/lib", ':')
+    if sdkdir:
+        environ_prepend("LDFLAGS", "-L" + sdkdir + "/usr/lib")
+        environ_prepend("CFLAGS", "-I" + sdkdir + "/usr/include")
+        environ_prepend("CXXFLAGS", "-I" + sdkdir + "/usr/include")
+        environ_prepend("OBJCFLAGS", "-I" + sdkdir + "/usr/include")
+        environ_prepend("CPPFLAGS", "-I" + sdkdir + "/usr/include")
+        environ_prepend("CMAKE_PREFIX_PATH", os.path.join(sdkdir, 'usr'), ':')
+        environ_prepend("LIBRARY_PATH", sdkdir + "/usr/lib", ':')
 
-    # It's often necessary to look for things in the SDK when
-    # developing, and it takes a lot of typing, so define a
-    # convenience environment variable:
-    environ_append('SDKDIR', sdkdir)
-    environ_append('SDKROOT', sdkdir)
+        # It's often necessary to look for things in the SDK when
+        # developing, and it takes a lot of typing, so define a
+        # convenience environment variable:
+        environ_append('SDKDIR', sdkdir)
+        environ_append('SDKROOT', sdkdir)
 
-    # Apple Documentation says that "-syslibroot" is the arg to pass to the
-    # linker, but we are using the compiler to control the linker, and
-    # everything seems to be working correctly.
-    environ_append("CFLAGS", "-isysroot " + sdkdir)
-    environ_append("CPPFLAGS", "-isysroot " + sdkdir)
-    environ_append("CXXFLAGS", "-isysroot " + sdkdir)
-    environ_append("OBJCFLAGS", "-isysroot " + sdkdir)
-    environ_append("LDFLAGS", "-isysroot " + sdkdir)
+        # Apple Documentation says that "-syslibroot" is the arg to pass to the
+        # linker, but we are using the compiler to control the linker, and
+        # everything seems to be working correctly.
+        environ_append("CFLAGS", "-isysroot " + sdkdir)
+        environ_append("CPPFLAGS", "-isysroot " + sdkdir)
+        environ_append("CXXFLAGS", "-isysroot " + sdkdir)
+        environ_append("OBJCFLAGS", "-isysroot " + sdkdir)
+        environ_append("LDFLAGS", "-isysroot " + sdkdir)
 
-    # To pick up cups-config from the right place.
-    os.environ["CUPS_CONFIG"] = os.path.join(sdkdir, "usr/bin/cups-config")
+        # To pick up cups-config from the right place.
+        os.environ["CUPS_CONFIG"] = os.path.join(sdkdir, "usr/bin/cups-config")
 
     if architectures == ["i386"]:
         # The '#' on openssl is to stop jhbuild from appending any more autogen
@@ -280,6 +294,8 @@ def setup_sdk(target=_osx_version, sdk_version=None, architectures=[_default_arc
     elif os.path.exists(config_shell):
         os.environ['CONFIG_SHELL'] = config_shell
 
+    if not sdkdir:
+        sdkdir = '/'
     if os.path.exists(os.path.join(sdkdir, "usr", "include", "openssl")):
         skip.append('openssl')  # openssl removed in El Capitan
 
@@ -450,6 +466,7 @@ if not (os.environ.has_key ("LIBTOOLIZE") and os.environ["LIBTOOLIZE"]):
 # libtool seems to drop the option if we don't use -W here.
 #
 environ_append('LDFLAGS', '-Wl,-headerpad_max_install_names')
+#environ_append('LDFLAGS', '-Wl,-no_weak_imports')
 
 # Make sure we find our installed modules, and before other versions.
 environ_prepend('LDFLAGS', '-L' + prefix + '/lib')
