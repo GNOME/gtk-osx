@@ -337,7 +337,7 @@ Libglade itself is deprecated. This is the last release. -->
   </autotools>
 
   <autotools id="libatomic-ops"
-             autogen-template="%(autogen-sh)s && ./configure --prefix=%(prefix)s> %(autogen-args)s"
+             autogen-template="%(autogen-sh)s &amp;&amp; ./configure --prefix=%(prefix)s> %(autogen-args)s">
     <branch repo="github.com" module="ivmai/libatomic_ops"
 	    revision="libatomic_ops-7_4_4"/>
   </autotools>
