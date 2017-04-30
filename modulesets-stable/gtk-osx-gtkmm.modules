@@ -21,16 +21,22 @@
     </dependencies>
   </metamodule>
 
+  <autotools id="mm-common" autogen-sh="configure">
+    <branch module="mm-common/0.9/mm-common-0.9.10.tar.xz" version="0.9.10"/>
+  </autotools>
+
   <autotools id="cairomm" autogen-sh="configure">
     <branch module="cairomm-1.12.2.tar.gz" version="1.12.2"
 	    hash="sha1:621546f32221a2ddc079167a13ce5b5409bed704"
-            repo="cairographics" />
+            repo="cairographics">
+      <patch file="https://git.gnome.org/browse/gtk-osx/plain/patches/cairomm-Bug-100894-Cairomm-compile-failure-if-no-cairo-ft.patch" strip="1"/>
+    </branch>
     <dependencies>
       <dep package="cairo"/>
     </dependencies>
   </autotools>
 
-  <autotools id="glibmm" autogen-sh="configure">
+  <autotools id="glibmm" autogen-sh="autoreconf">
     <branch module="glibmm/2.50/glibmm-2.50.1.tar.xz" version="2.50.1"
             hash="sha256:1fd85051da9cb402cc8348cec72dfe4d79f9345df4a1dbf68703a4ded45846a4">
             <patch file="https://git.gnome.org/browse/gtk-osx/plain/patches/glibmm-Bug-781947-Build-fails-on-MacOS-because-glib-doesn-t.patch" strip="1"/>
@@ -38,6 +44,7 @@
     <dependencies>
       <dep package="glib"/>
       <dep package="libsigc++2"/>
+      <dep package="mm-common"/>
     </dependencies>
   </autotools>
 
