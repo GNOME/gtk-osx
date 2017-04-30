@@ -125,6 +125,17 @@
     </after>
   </autotools>
 
+  <autotools id="xorg-util-macros">
+    <branch repo="freedesktop" module="xorg/util/macros"/>
+  </autotools>
+
+  <autotools id="libepoxy">
+    <branch repo="github" module="anholt/libepoxy" revision="v1.4.1"/>
+    <dependencies>
+      <dep package="xorg-util-macros"/>
+    </dependencies>
+  </autotools>
+
   <autotools id="gtk+" autogenargs="--with-gdktarget=quartz --enable-introspection=no --enable-quartz-relocation">
     <branch revision="gtk-2-24"/>
     <dependencies>
@@ -148,6 +159,7 @@
       <dep package="atk"/>
       <dep package="gdk-pixbuf"/>
       <dep package="gobject-introspection"/>
+      <dep package="libepoxy"/>
     </dependencies>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>

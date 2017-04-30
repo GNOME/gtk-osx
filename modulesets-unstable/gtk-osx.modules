@@ -121,6 +121,17 @@
     </after>
   </autotools>
 
+  <autotools id="xorg-util-macros">
+    <branch repo="freedesktop" module="xorg/util/macros"/>
+  </autotools>
+
+  <autotools id="libepoxy">
+    <branch repo="github" module="anholt/libepoxy"/>
+    <dependencies>
+      <dep package="xorg-util-macros"/>
+    </dependencies>
+  </autotools>
+
   <autotools id="graphene">
     <branch module="ebassi/graphene" repo="github" checkoutdir="graphene"/>
     <dependencies>
@@ -154,6 +165,7 @@
       <dep package="gdk-pixbuf"/>
       <dep package="atk"/>
       <dep package="gobject-introspection"/>
+      <dep package="libepoxy"/>
     </dependencies>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>

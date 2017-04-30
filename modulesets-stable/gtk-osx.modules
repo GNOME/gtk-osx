@@ -165,7 +165,7 @@
       <!--patch file="https://git.gnome.org/browse/gtk-osx/plain/patches/0004-Bug-571582-GtkSelection-implementation-for-quartz.patch" strip="1"/-->
       <patch file="https://git.gnome.org/browse/gtk-osx/plain/patches/0008-Implement-GtkDragSourceOwner-pasteboardChangedOwner.patch" strip="1"/>
       <patch file="https://git.gnome.org/browse/gtk-osx/plain/patches/0006-Bug-658722-Drag-and-Drop-sometimes-stops-working.patch" strip="1"/>
-<patch file="https://git.gnome.org/browse/gtk-osx/plain/patches/gtk+-2-m4-creation.patch" strip="1"/>
+      <patch file="https://git.gnome.org/browse/gtk-osx/plain/patches/gtk+-2-m4-creation.patch" strip="1"/>
    </branch>
     <dependencies>
       <dep package="glib"/>
@@ -179,11 +179,24 @@
     </after>
   </autotools>
 
+  <autotools id="xorg-util-macros">
+    <branch repo="freedesktop" version="1.19.1"
+            module="xorg/individual/util/util-macros-1.19.1.tar.bz2"/>
+  </autotools>
+  
+  <autotools id="libepoxy" autogen-sh="configure">
+    <branch repo="github-tarball" version="1.4.1"
+            module="anholt/libepoxy/releases/download/1.4.2/libepoxy-1.4.2.tar.xz"/>
+    <dependencies>
+      <dep package="xorg-util-macros"/>
+    </dependencies>
+  </autotools>
+
   <autotools id="gtk+-3.0" autogen-sh="autogen.sh"
              autogenargs="--enable-quartz-backend --enable-quartz-relocation">
     <branch module="gtk+/3.22/gtk+-3.22.12.tar.xz" version="3.22.12"
             hash="sha256:84fae0cefb6a11ee2b4e86b8ac42fe46a3d30b4ad16661d5fc51e8ae03e2a98c">
-      <patch href="https://git.gnome.org/browse/gtk-osx/plain/patches/0001-Bug-781118-gtk-3.22.12-quartz-backend-s.patch" strip="1"/>
+      <patch file="https://git.gnome.org/browse/gtk-osx/plain/patches/0001-Bug-781118-gtk-3.22.12-quartz-backend-s.patch" strip="1"/>
     </branch>
     <dependencies>
       <dep package="glib"/>
@@ -191,6 +204,7 @@
       <dep package="atk"/>
       <dep package="gdk-pixbuf"/>
       <dep package="gobject-introspection"/>
+      <dep package="libepoxy"/>
     </dependencies>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
