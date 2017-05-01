@@ -27,6 +27,7 @@ import re
 #some variables we'll need defined later
 _default_arch = ""
 _osx_version = 0.0
+_target = '10.8'
 
 def _popen(cmd_arg):
     from subprocess import Popen, PIPE
@@ -87,13 +88,14 @@ jhbuild.commands.register_command(_getenv)
 
 # Determine the native system:
 def osx_ver():
-    global _default_arch, _osx_version
+    global _default_arch, _osx_version, _target
     vstring = _popen("uname -r")
     mstring = _popen("machine")
     exp = re.compile(r'(\d+\.\d+)\.\d+')
     vernum = exp.match(vstring)
     _osx_version = float(vernum.group(1)) - 4.0
-
+    _target = '10.%d' % int(_osx_version)
+    
     x64bit = _popen("sysctl hw.cpu64bit_capable").endswith("1")
     if x64bit and _osx_version >= 6.0:
         _default_arch = "x86_64"
@@ -204,7 +206,7 @@ osx_ver()
 #
 # For most users accepting the defaults is the right course.
 
-def setup_sdk(target=_osx_version, sdk_version=None, architectures=[_default_arch]):
+def setup_sdk(target=_target, sdk_version=None, architectures=[_default_arch]):
 
     os.environ["MACOSX_DEPLOYMENT_TARGET"] = target
     sdkdir = None
