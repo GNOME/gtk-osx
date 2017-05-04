@@ -84,8 +84,9 @@
       <dep package="meta-gtk-osx-freetype"/>
     </dependencies>
     <after>
-      <dep package="meta-gtk-osx-core"/>
-      <dep package="meta-gtk-osx-gtk3"/>
+<!-- Circular dependency if we depend on meta-gtk-osx or meta-gtk-osx-gtk3 -->
+      <dep package="gtk+"/>
+      <dep package="gtk+-3.0"/>
     </after>
   </autotools>
 

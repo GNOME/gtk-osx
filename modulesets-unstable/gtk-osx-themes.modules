@@ -89,8 +89,8 @@ cgit    <after>
       <dep package="libcroco"/>
     </dependencies>
     <after>
-      <dep package="meta-gtk-osx-core"/>
-      <dep package="meta-gtk-osx-gtk3"/>
+      <dep package="gtk+"/>
+      <dep package="gtk+-3.0"/>
     </after>
   </autotools>
 
