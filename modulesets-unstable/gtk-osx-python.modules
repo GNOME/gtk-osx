@@ -12,7 +12,7 @@
   <repository type="tarball" name="oracle"
 	      href="http://download.oracle.com/"/>
   <repository type="tarball" name="pymodules"
-	      href="http://pypi.python.org/packages/source/"/>
+	      href="http://pypi.python.org/packages/"/>
 
   <metamodule id="meta-gtk-osx-python">
     <dependencies>
@@ -88,7 +88,7 @@
 <!-- Pybsddb replaces Python2's built-in bsd module. Their repo uses
      hg, so we stick with the tarball. -->
   <distutils id="pybsddb">
-    <branch module="b/bsddb3/bsddb3-6.2.4.tar.gz"
+    <branch module="8d/9b/c3b01ff14e19254b2e031d8ae5ebe472e5523a47acc6f7d49300960d406d/bsddb3-6.2.4.tar.gz"
 	    hash="md5:eec77d104c5981366701c6b0de585504" repo="pymodules"
 	    version="6.2.4"/>
     <dependencies>

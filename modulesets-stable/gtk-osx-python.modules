@@ -12,7 +12,7 @@
   <repository type="tarball" name="oracle"
 	      href="http://download.oracle.com/"/>
   <repository type="tarball" name="pymodules"
-              href="http://pypi.python.org/packages/source/"/>
+              href="http://pypi.python.org/packages/"/>
   <repository type="tarball" name="github-tarball"
               href="https://github.com"/>
 
@@ -98,7 +98,7 @@
   </autotools>
 
   <distutils id="pybsddb">
-    <branch module="b/bsddb3/bsddb3-6.2.4.tar.gz"
+    <branch module="8d/9b/c3b01ff14e19254b2e031d8ae5ebe472e5523a47acc6f7d49300960d406d/bsddb3-6.2.4.tar.gz"
 	    hash="md5:eec77d104c5981366701c6b0de585504" repo="pymodules"
 	    version="6.2.4"/>
     <dependencies>
@@ -143,7 +143,7 @@
   </autotools>
 
    <autotools id="pygobject3" autogen-sh="configure" >
-    <branch version="3.24.1" module="pygobject/3.24/pygobject-3.23.1.tar.xz"
+    <branch version="3.24.1" module="pygobject/3.24/pygobject-3.24.1.tar.xz"
 	    hash="sha256:a628a95aa0909e13fb08230b1b98fc48adef10b220932f76d62f6821b3fdbffd"/>
     <dependencies>
       <dep package="meta-gtk-osx-gtk3"/>
