@@ -337,12 +337,12 @@ Libglade itself is deprecated. This is the last release. -->
   </autotools>
 
   <autotools id="libatomic-ops"
-             autogen-template="%(autogen-sh)s &amp;&amp; ./configure --prefix=%(prefix)s> %(autogen-args)s">
+             autogen-template="pushd %(srcdir)s &amp;&amp; ./%(autogen-sh)s &amp;&amp; popd &amp;&amp; %(srcdir)s/configure --prefix=%(prefix)s %(autogenargs)s">
     <branch repo="github.com" module="ivmai/libatomic_ops"
 	    revision="libatomic_ops-7_4_4"/>
   </autotools>
 
-  <autotools id="bdw-gc" autogen-template="pushd %(srcdir)s &amp;&amp; ./autogen.sh &amp;&amp; automake-1.14 -ac &amp;&amp; popd &amp;&amp; %(srcdir)s/configure --prefix %(prefix)s  %(autogenargs)s">
+  <autotools id="bdw-gc" autogen-template="pushd %(srcdir)s &amp;&amp; ./autogen.sh &amp;&amp; automake-1.10 -ac &amp;&amp; popd &amp;&amp; %(srcdir)s/configure --prefix %(prefix)s  %(autogenargs)s">
     <branch repo="github.com" module="ivmai/bdwgc"  revision="gc7_6_0" />
     <dependencies>
       <dep package="libatomic-ops"/>

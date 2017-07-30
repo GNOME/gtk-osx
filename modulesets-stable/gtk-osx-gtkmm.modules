@@ -75,7 +75,7 @@
      website. If you want the docs, install it separately and renable
      documentation in your jhbuildrc-custom. -->
   <autotools id="libsigc++2" autogen-sh="configure"
-	     autogen-args="--disable-documentation">
+	     autogenargs="--disable-documentation">
     <branch module="libsigc++/2.10/libsigc++-2.10.0.tar.xz" version="2.10.0"
             hash="sha256:f843d6346260bfcb4426259e314512b99e296e8ca241d771d21ac64f28298d81"/>
   </autotools>

@@ -121,7 +121,7 @@
       <dep package="python3"/>
       <dep package="python"/>
       <dep package="meta-gtk-osx-gtk3"/>
-      <dep package="meta-gtk-osx"/>
+      <dep package="meta-gtk-osx-core"/>
     </after>
   </distutils>
 
@@ -146,7 +146,6 @@
     <branch version="3.24.1" module="pygobject/3.24/pygobject-3.24.1.tar.xz"
 	    hash="sha256:a628a95aa0909e13fb08230b1b98fc48adef10b220932f76d62f6821b3fdbffd"/>
     <dependencies>
-      <dep package="meta-gtk-osx-gtk3"/>
       <dep package="pycairo"/>
     </dependencies>
     <after>

@@ -120,7 +120,7 @@
  <autotools id="pango"  autogen-sh="autoreconf">
     <branch version="1.40.6" module="pango/1.40/pango-1.40.6.tar.xz"
             hash="sha256:ca152b7383a1e9f7fd74ae96023dc6770dc5043414793bfe768ff06b6759e573">
-      <patch file="patch file="https://git.gnome.org/browse/gtk-osx/plain/patches/pango-coretext-size-and-scaling.patch" strip="1"/>
+      <patch file="https://git.gnome.org/browse/gtk-osx/plain/patches/pango-coretext-size-and-scaling.patch" strip="1"/>
     </branch>
     <dependencies>
       <dep package="glib"/>
