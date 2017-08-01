@@ -144,6 +144,9 @@
   <autotools id="bison" autogen-sh="configure">
     <branch repo="ftp.gnu.org" module="bison/bison-3.0.4.tar.xz"
             version="3.0.4"/>
+    <dependencies>
+      <dep package='flex'/>
+    </dependencies>
   </autotools>
   
   <!-- MacOS hasn't updated flex since 2012. Since it's BSD-licensed
