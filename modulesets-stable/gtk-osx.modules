@@ -193,6 +193,7 @@
     <branch module="gtk+/3.22/gtk+-3.22.12.tar.xz" version="3.22.12"
             hash="sha256:84fae0cefb6a11ee2b4e86b8ac42fe46a3d30b4ad16661d5fc51e8ae03e2a98c">
       <patch file="https://git.gnome.org/browse/gtk-osx/plain/patches/0001-Bug-781118-gtk-3.22.12-quartz-backend-s.patch" strip="1"/>
+      <patch file="https://git.gnome.org/browse/gtk-osx/plain/patches/gtk+-3-imquartz-dissapearing-input.patch" strip="1"/>
     </branch>
     <dependencies>
       <dep package="glib"/>
