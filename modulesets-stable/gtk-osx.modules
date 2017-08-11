@@ -106,13 +106,10 @@
     <dependencies>
       <dep package="glib"/>
       <dep package="cairo"/>
-      <if condition-set='64-bit'>
-        <dep package='python'/>
-      </if>
     </dependencies>
-    <if condition-unset='64-bit'>
       <after>
         <dep package='python'/>
+        <dep package='python3'/>
       </after>
     </if>
   </autotools>
