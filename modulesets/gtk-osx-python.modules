@@ -99,13 +99,23 @@
     </after>
   </distutils>
 
-  <distutils id="pybsddb">
-    <branch module="b/bsddb3/bsddb3-6.2.4.tar.gz"
-	    hash="md5:eec77d104c5981366701c6b0de585504" repo="pymodules"
-	    version="6.2.4"/>
+  <distutils id="pylxml">
+    <branch module="20/b3/9f245de14b7696e2d2a386c0b09032a2ff6625270761d6543827e667d8de/lxml-3.8.0.tar.gz"
+	    hash="md5:e54e2fae44d684d6b9c636fe189e93ff" repo="pymodules"
+	    version="3.8.0" />
     <dependencies>
       <dep package="python3"/>
-      <dep package="berkeleydb"/>
+      <dep package="libxml2"/>
+      <dep package="libxslt"/>
+    </dependencies>
+  </distutils>
+
+  <distutils id="pysix">
+    <branch module="b3/b2/238e2590826bfdd113244a40d9d3eb26918bd798fc187e2360a8367068db/six-1.10.0.tar.gz"
+	    hash="md5:34eed507548117b2ab523ab14b2f8b55" repo="pymodules"
+	    version="1.1.0"/>
+    <dependencies>
+      <dep package="python3"/>
     </dependencies>
   </distutils>
 

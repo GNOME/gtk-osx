@@ -66,7 +66,7 @@
     </after>
   </metamodule>
 
-  <autotools id="glib">
+  <autotools id="glib" autogenargs="--with-pcre=internal">
     <branch tag="glib-2-52"/>
     <dependencies>
       <dep package="libffi"/>
@@ -92,8 +92,9 @@
     </after>
   </autotools>
 
+  <!-- Pango seems to be releasing from master these days. -->
   <autotools id="pango">
-    <branch tag="pango-1-40"/>
+    <branch tag="1.40.7"/>
     <dependencies>
       <dep package="glib"/>
       <dep package="cairo"/>
@@ -117,12 +118,13 @@
   </autotools>
 
   <autotools id="gdk-pixbuf">
-<!--gdk-pixbuf is releasing from master-->
-    <branch />
-    <after>
+    <!--gdk-pixbuf is releasing from master-->
+    <branch/>
+    <dependencies>
       <dep package="pango"/>
       <dep package="gobject-introspection"/>
-    </after>
+      <dep package="shared-mime-info"/>
+    </dependencies>
   </autotools>
 
   <autotools id="xorg-util-macros">
@@ -130,7 +132,7 @@
   </autotools>
 
   <autotools id="libepoxy">
-    <branch repo="github" module="anholt/libepoxy" revision="v1.4.1"/>
+    <branch repo="github" module="anholt/libepoxy" revision="1.4.3"/>
     <dependencies>
       <dep package="xorg-util-macros"/>
     </dependencies>
@@ -185,7 +187,7 @@
     </dependencies>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
-      <dep package="freetype-no-harfbuzz"/>
+      <dep package="meta-gtk-osx-freetype"/>
     </after>
   </autotools>
 

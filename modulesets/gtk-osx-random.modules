@@ -16,7 +16,6 @@
   <repository type="tarball" name="sourceforge"
               href="http://downloads.sourceforge.net/sourceforge/"/>
   <repository type="tarball" name="sqlite" href="http://www.sqlite.org/"/>
-  <repository type="git" name="github" href="git://github.com/"/>
   <repository type="git" name="savannah" href="git://git.sv.gnu/org/"/>
   <repository type="tarball" name="boehm"
 	      href="http://www.hboem.info/"/>
@@ -271,8 +270,8 @@
   </autotools>
 
   <autotools id="libatomic-ops"
-             autogen-template="%(autogen-sh)s && ./configure --prefix=%(prefix)s> %(autogen-args)s"
-    <branch repo="github.com" module="ivmai/libatomic_ops"
+             autogen-template="%(autogen-sh)s &amp;&amp; ./configure --prefix=%(prefix)s> %(autogen-args)s">
+    <branch repo="github" module="ivmai/libatomic_ops"
 	    revision="libatomic_ops-7_4_4"/>
   </autotools>
 

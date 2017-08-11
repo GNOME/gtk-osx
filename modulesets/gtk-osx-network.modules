@@ -146,7 +146,7 @@
     <dependencies>
       <dep package="libwebp"/>
       <dep package="enchant"/>
-      <dep package="icu"55/>
+      <dep package="icu"/>
       <dep package="libsoup"/>
       <dep package="meta-gtk-osx-freetype"/>
     </dependencies>
@@ -196,7 +196,6 @@
   -->
   <cmake id="webkit2gtk3"
          cmakeargs="-DPORT=GTK -DENABLE_X11_TARGET=OFF -DENABLE_QUARTZ_TARGET=ON -DENABLE_TOOLS=ON -DENABLE_MINIBROWSER=ON -DENABLE_PLUGIN_PROCESS_GTK2=OFF -DENABLE_VIDEO=OFF -DENABLE_WEB_AUDIO=OFF -DENABLE_CREDENTIAL_STORAGE=OFF -DENABLE_GEOLOCATION=OFF -DENABLE_OPENGL=OFF -DUSE_LIBNOTIFY=OFF -DUSE_LIBHYPHEN=OFF -DCMAKE_CXX_FLAGS='-stdlib=libc++'">
-    <branch repo="webkit.org" module="webkitgtk-2.16.1.tar.xz" version="2.16.1">
     <branch repo="webkit.org" module="webkitgtk-2.16.1.tar.xz" version="2.16.1">
       <patch file="https://git.gnome.org/browse/gtk-osx/plain/patches/WebKit-2.16.1-Bug-167343-wtf-unicode-UTF8.h.patch" strip="1"/>
       <patch file="https://git.gnome.org/browse/gtk-osx/plain/patches/Webkit-2.16-build-without-OpenGL.patch" strip="1"/>
