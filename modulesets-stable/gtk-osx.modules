@@ -111,7 +111,6 @@
         <dep package='python'/>
         <dep package='python3'/>
       </after>
-    </if>
   </autotools>
 
  <autotools id="pango"  autogen-sh="autoreconf">
