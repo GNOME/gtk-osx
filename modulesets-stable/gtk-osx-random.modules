@@ -320,8 +320,6 @@ Libglade itself is deprecated. This is the last release. -->
   <autotools id="libgsf" autogenargs="--without-python">
     <branch  module="libgsf/1.14/libgsf-1.14.41.tar.xz" version="1.14.41"
 	     hash="sha256:150b98586a1021d5c49b3d4d065d0aa3e3674ae31db131af5372499d2d3f08d3">
-     <patch file="https://git.gnome.org/browse/gtk-osx/plain/patches/gsf-memmove.patch" strip="1"/>
-
     </branch>
   </autotools>
 
