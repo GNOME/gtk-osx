@@ -128,7 +128,9 @@
             checkoutdir="lcms-1.18"/>
   </autotools>
 
-  <autotools id="shared-mime-info" supports-non-srcdir-builds="no" >
+  <autotools id="shared-mime-info"
+             autogenargs="--disable-default-make-check"
+             supports-non-srcdir-builds="no" >
     <branch module="xdg/shared-mime-info" 
             repo="git.freedesktop.org"/>
     <dependencies>
