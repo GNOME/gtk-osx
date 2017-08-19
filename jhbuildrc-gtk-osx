@@ -410,6 +410,9 @@ _build = os.environ.get('JHB', _gtk_osx_default_build)
 disable_Werror = False
 
 ###### Everything Below Uses (and Overrides) customizations! #######
+# jhbuild turns on 'nice' by default ut that messes up some of the
+# custom autogen-templates Gtk-OSX needs to use:"
+nice_build = False
 
 # Check and warn if jhbuild is started from within jhbuild, since that
 # will mess up environment variables, especially if different build
