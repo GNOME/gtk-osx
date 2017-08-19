@@ -142,6 +142,9 @@
       <dep package="glib"/>
       <dep package="icu"/>
     </dependencies>
+    <after>
+      <dep package="icu55"/>
+    </after>
   </autotools>
 
   <autotools id="freetype-no-harfbuzz" autogen-sh="configure"

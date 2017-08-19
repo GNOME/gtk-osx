@@ -138,6 +138,9 @@
       <dep package="glib"/>
       <dep package="icu"/>
     </dependencies>
+    <after>
+      <dep package="icu55"/>
+    </after>
   </autotools>
 
   <autotools id="freetype-no-harfbuzz" skip-autogen="never" autogenargs="--without-bzip2 --without-harfbuzz"
