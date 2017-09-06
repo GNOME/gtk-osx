@@ -18,7 +18,7 @@
 
   <metamodule id="meta-gtk-osx-python">
     <dependencies>
-      <dep package="py2cairo"/>
+      <dep package="pycairo"/>
       <dep package="pygobject"/>
       <dep package="pygtk"/>
       <dep package="gtk-mac-integration-python"/>
@@ -28,7 +28,7 @@
   <metamodule id="meta-gtk-osx-python-gtk3">
     <dependencies>
       <dep package="meta-gtk-osx-gtk3"/>
-      <dep package="py2cairo"/>
+      <dep package="pycairo"/>
       <dep package="pygobject3"/>
       <dep package="gtk-mac-integration-python"/>
     </dependencies>
