@@ -133,7 +133,6 @@ Libglade itself is deprecated. This is the last release. -->
 	     autogenargs='--disable-scrollkeeper --disable-introspection CPPFLAGS="$CPPFLAGS -xobjective-c"'>
     <branch module="glade/3.20/glade-3.20.0.tar.xz" version="3.20.0"
             hash="sha256:82d96dca5dec40ee34e2f41d49c13b4ea50da8f32a3a49ca2da802ff14dc18fe">
-      <patch file="https://git.gnome.org/browse/gtk-osx/plain/patches/glade-1-18.patch" strip="1"/>
     </branch>
     <dependencies>
       <dep package="itstool"/>
@@ -161,7 +160,7 @@ Libglade itself is deprecated. This is the last release. -->
   <autotools id="gtksourceview3"
     autogen-template="gnome-autogen.sh --prefix %(prefix)s  %(autogenargs)s">
     <branch module="gtksourceview/3.24/gtksourceview-3.24.1.tar.xz"
-            version="3.24.1" hash="sha256:7bbe8b603ed7346669911fa074fe69388a4c89c1b15317befc3aa212b3d01a7b">
+            version="3.24.1" hash="sha256:717b6fe884ff9f25158bdc36f463790c608ada9f5e2e6f4dc7f1467c83711c25">
     </branch>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
