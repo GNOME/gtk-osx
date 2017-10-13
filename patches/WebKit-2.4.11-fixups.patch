@@ -35,3 +35,15 @@
  #include "TextDirection.h"
  #include "UserAgentStyleSheets.h"
  #include "WidgetRenderingContext.h"
+--- a/Source/JavaScriptCore/assembler/MacroAssembler.h~
++++ b/Source/JavaScriptCore/assembler/MacroAssembler.h
+@@ -986,2 +986,2 @@ public:
+         if (bitwise_cast<uint64_t>(value * 1.0) != bitwise_cast<uint64_t>(value))
+             return shouldConsiderBlinding();
+
+-        value = abs(value);
++        value = std::abs(value);
+         // Only allow a limited set of fractional components
+         double scaledValue = value * 8;
+         if (scaledValue / 8 != value)
+         
