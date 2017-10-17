@@ -333,6 +333,9 @@ def setup_sdk(target=_target, sdk_version=None, architectures=[_default_arch]):
     # GMP deliberately attempts to use CC_FOR_BUILD with no separate
     # cflags so we need to force it:
     module_extra_env['gmp'] = {'CC_FOR_BUILD':os.environ['CC'] + ' ' + os.environ['CFLAGS']}
+    # Kill a couple of noisy warnings for webkit1:
+    module_extra_env["webkit"] = {'CPPFLAGS':os.environ['CPPFLAGS'] + " -Wno-unused-local-typedef -Wno-missing-field-initializsers"}
+    module_extra_env["webkit1gtk3"] = {'CPPFLAGS':os.environ['CPPFLAGS'] + " -Wno-unused-local-typedef -Wno-missing-field-initializsers -Wno-undefined-bool-conversion"}
 
     # Finally when building normally we need to force CFLAGS_FOR_BUILD
     # to our current CFLAGS so that everything will link with other
