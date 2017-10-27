@@ -46,4 +46,14 @@
          // Only allow a limited set of fractional components
          double scaledValue = value * 8;
          if (scaledValue / 8 != value)
-         
+--- a/Source/autotools/FindDependencies.m4~
++++ b/Source/autotools/FindDependencies.m4
+@@ -104,0 +104,0 @@ GLIB_GSETTINGS
+
+ # TODO: use pkg-config (after CFLAGS in their .pc files are cleaned up).
+ case "$host" in
+-    *-*-darwin*)
++    *-*-foo*)
+         UNICODE_CFLAGS="-I$srcdir/Source/JavaScriptCore/icu -I$srcdir/Source/WebCore/icu"
+         UNICODE_LIBS="-licucore"
+         ;;

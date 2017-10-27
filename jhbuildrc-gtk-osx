@@ -336,6 +336,8 @@ def setup_sdk(target=_target, sdk_version=None, architectures=[_default_arch]):
     # Kill a couple of noisy warnings for webkit1:
     module_extra_env["webkit"] = {'CPPFLAGS':os.environ['CPPFLAGS'] + " -Wno-unused-local-typedef -Wno-missing-field-initializsers"}
     module_extra_env["webkit1gtk3"] = {'CPPFLAGS':os.environ['CPPFLAGS'] + " -Wno-unused-local-typedef -Wno-missing-field-initializsers -Wno-undefined-bool-conversion"}
+    module_extra_env["webkit"] = {'CXXFLAGS':os.environ['CXXFLAGS'] + ' -Wno-inconsistent-missing-override'}
+    module_extra_env["webkit1gtk3"] = {'CXXFLAGS':os.environ['CXXFLAGS'] + ' -Wno-inconsistent-missing-override'}
 
     # Finally when building normally we need to force CFLAGS_FOR_BUILD
     # to our current CFLAGS so that everything will link with other
