@@ -1,116 +1,142 @@
-From d5a9ce69c46a907af8ed3af0020d2a409faa3751 Mon Sep 17 00:00:00 2001
-From: John Ralls <jralls@ceridwen.us>
-Date: Fri, 13 Oct 2017 13:45:01 -0700
-Subject: [PATCH] [MacOS] Fallback to CFStringGetCSTring if
- CFStringGetCStringPtr fails.
+From 45bf1f765705ad9ab119d2e9c75e1e4d07cf5736 Mon Sep 17 00:00:00 2001
+From: Friedrich Beckmann <friedrich.beckmann@gmx.de>
+Date: Sun, 15 Oct 2017 13:16:44 +0200
+Subject: [PATCH] MacOS: create_cstr_from_cfstring uses safe conversion - use
+ CFStringGetCString
 
+During testing with gdk-pixbuf I noticed failures during content type
+to mime conversion. The root reason was the unsafe conversion used
+in create_cstr_from_cfstring. The problem was addressed in commit
+c60226e0a1cae40a96 but that was reverted. I noticed the commit only
+when I had fixed the problem. In addition I added a test to check
+the content type to mime conversion on MacOS. This problem is
+discussed in Bug #788936.
+
+See: https://bugzilla.gnome.org/show_bug.cgi?id=788936
 ---
- gio/gosxappinfo.c     | 34 ++++++++++++++++++++++++++++++++--
- gio/gosxcontenttype.c | 34 ++++++++++++++++++++++++++++++++--
- 2 files changed, 64 insertions(+), 4 deletions(-)
+ gio/gosxappinfo.c       | 23 +++++++++++++++--------
+ gio/gosxcontenttype.c   | 20 +++++++++++++-------
+ gio/tests/contenttype.c | 28 ++++++++++++++++++++++++++++
+ 3 files changed, 56 insertions(+), 15 deletions(-)
 
 diff --git a/gio/gosxappinfo.c b/gio/gosxappinfo.c
-index b24b6ff..7c2b402 100644
+index b24b6ff..50c1ec3 100644
 --- a/gio/gosxappinfo.c
 +++ b/gio/gosxappinfo.c
-@@ -175,14 +175,44 @@ static gchar *
- create_cstr_from_cfstring (CFStringRef str)
- {
-   const gchar *cstr;
-+  CFIndex length = CFStringGetLength (str);
-+  char *buffer = NULL;
- 
-   if (str == NULL)
-     return NULL;
- 
-   cstr = CFStringGetCStringPtr (str, kCFStringEncodingUTF8);
-+  /* CFStringGetCStringPtr returns "NULL if the internal storage of
-+   * theString does not allow [a pointer] to be returned efficiently".
-+   * (Apple's docs don't say what that means). In that case we must
-+   * use CFStringGetCString as a fallback.
-+   */
-+  if (cstr != NULL)
-+    {
-+        CFRelease (str);
-+        return g_strdup (cstr);
-+    }
-+  
-+  buffer = g_malloc0 (length + 1);
-+  /* Start off with a buffer size sufficient for the most likely case
-+   * that the CFString is ASCII so the UTF8 representation will be 1
-+   * byte per code point. Keep trying up to 4 bytes per code point,
-+   * the max allowed by RFC3629.
-+   */
-+  for (int i = 1; i <= 4; ++i)
-+    {
-+      if (CFStringGetCString (str, buffer, length, kCFStringEncodingUTF8))
-+      {
-+        CFRelease (str);
-+        return buffer;
-+      }
-+      length += length;
-+      buffer = g_realloc (buffer, length + 1);
-+    }
-+  
-+  g_free (buffer);
-   CFRelease (str);
--
--  return g_strdup (cstr);
-+  return NULL;
+@@ -171,19 +171,26 @@ create_cfstring_from_cstr (const gchar *cstr)
+   return CFStringCreateWithCString (NULL, cstr, kCFStringEncodingUTF8);
  }
  
- static char *
-diff --git a/gio/gosxcontenttype.c b/gio/gosxcontenttype.c
-index 485f5bf..c046d9e 100644
---- a/gio/gosxcontenttype.c
-+++ b/gio/gosxcontenttype.c
-@@ -53,14 +53,44 @@ static gchar *
++#ifdef G_ENABLE_DEBUG
+ static gchar *
  create_cstr_from_cfstring (CFStringRef str)
  {
-   const gchar *cstr;
+-  const gchar *cstr;
++  g_return_val_if_fail (str != NULL, NULL);
+ 
+-  if (str == NULL)
+-    return NULL;
+-
+-  cstr = CFStringGetCStringPtr (str, kCFStringEncodingUTF8);
+-  CFRelease (str);
+-
+-  return g_strdup (cstr);
 +  CFIndex length = CFStringGetLength (str);
-+  char *buffer = NULL;
- 
-   if (str == NULL)
-     return NULL;
- 
-   cstr = CFStringGetCStringPtr (str, kCFStringEncodingUTF8);
-+  /* CFStringGetCStringPtr returns "NULL if the internal storage of
-+   * theString does not allow [a pointer] to be returned efficiently".
-+   * (Apple's docs don't say what that means). In that case we must
-+   * use CFStringGetCString as a fallback.
-+   */
-+  if (cstr != NULL)
++  CFIndex maxlen = CFStringGetMaximumSizeForEncoding (length, kCFStringEncodingUTF8);
++  gchar *buffer = g_malloc (maxlen + 1);
++  Boolean success = CFStringGetCString (str, (char *) buffer, maxlen,
++                                        kCFStringEncodingUTF8);
++  if (success)
++    return buffer;
++  else
 +    {
-+        CFRelease (str);
-+        return g_strdup (cstr);
++      g_free (buffer);
++      return NULL;
 +    }
-+  
-+  buffer = g_malloc0 (length + 1);
-+  /* Start off with a buffer size sufficient for the most likely case
-+   * that the CFString is ASCII so the UTF8 representation will be 1
-+   * byte per code point. Keep trying up to 4 bytes per code point,
-+   * the max allowed by RFC3629.
-+   */
-+  for (int i = 1; i <= 4; ++i)
-+    {
-+      if (CFStringGetCString (str, buffer, length, kCFStringEncodingUTF8))
-+        {
-+          CFRelease (str);
-+          return buffer;
-+        }
-+      length += length;
-+      buffer = g_realloc (buffer, length + 1);
-+    }
-+  
-+  g_free (buffer);
+ }
++#endif
+ 
+ static char *
+ url_escape_hostname (const char *url)
+diff --git a/gio/gosxcontenttype.c b/gio/gosxcontenttype.c
+index 89245d1..604a1ed 100644
+--- a/gio/gosxcontenttype.c
++++ b/gio/gosxcontenttype.c
+@@ -58,15 +58,21 @@ create_cfstring_from_cstr (const gchar *cstr)
+ static gchar *
+ create_cstr_from_cfstring (CFStringRef str)
+ {
+-  const gchar *cstr;
++  g_return_val_if_fail (str != NULL, NULL);
+ 
+-  if (str == NULL)
+-    return NULL;
+-
+-  cstr = CFStringGetCStringPtr (str, kCFStringEncodingUTF8);
++  CFIndex length = CFStringGetLength (str);
++  CFIndex maxlen = CFStringGetMaximumSizeForEncoding (length, kCFStringEncodingUTF8);
++  gchar *buffer = g_malloc (maxlen + 1);
++  Boolean success = CFStringGetCString (str, (char *) buffer, maxlen,
++                                        kCFStringEncodingUTF8);
    CFRelease (str);
 -
 -  return g_strdup (cstr);
-+  return NULL;
++  if (success)
++    return buffer;
++  else
++    {
++      g_free (buffer);
++      return NULL;
++    }
  }
  
  /*< internal >
+diff --git a/gio/tests/contenttype.c b/gio/tests/contenttype.c
+index 3589b12..a0da5f6 100644
+--- a/gio/tests/contenttype.c
++++ b/gio/tests/contenttype.c
+@@ -361,6 +361,33 @@ test_guess_svg_from_data (void)
+   g_free (res);
+ }
+ 
++static void
++test_mime_from_content (void)
++{
++#ifdef __APPLE__
++  gchar *mime_type;
++  mime_type = g_content_type_get_mime_type ("com.microsoft.bmp");
++  g_assert_cmpstr (mime_type, ==, "image/bmp");
++  g_free (mime_type);
++  mime_type = g_content_type_get_mime_type ("com.compuserve.gif");
++  g_assert_cmpstr (mime_type, ==, "image/gif");
++  g_free (mime_type);
++  mime_type = g_content_type_get_mime_type ("public.png");
++  g_assert_cmpstr (mime_type, ==, "image/png");
++  g_free (mime_type);
++  mime_type = g_content_type_get_mime_type ("public.text");
++  g_assert_cmpstr (mime_type, ==, "text/*");
++  g_free (mime_type);
++  mime_type = g_content_type_get_mime_type ("public.svg-image");
++  g_assert_cmpstr (mime_type, ==, "image/svg+xml");
++  g_free (mime_type);
++#elif defined(G_OS_WIN32)
++  g_test_skip ("mime from content type test not implemented on WIN32");
++#else
++  g_test_skip ("mime from content type test not implemented on UNIX");
++#endif
++}
++
+ int
+ main (int argc, char *argv[])
+ {
+@@ -370,6 +397,7 @@ main (int argc, char *argv[])
+ 
+   g_test_add_func ("/contenttype/guess", test_guess);
+   g_test_add_func ("/contenttype/guess_svg_from_data", test_guess_svg_from_data);
++  g_test_add_func ("/contenttype/mime_from_content", test_mime_from_content);
+   g_test_add_func ("/contenttype/unknown", test_unknown);
+   g_test_add_func ("/contenttype/subtype", test_subtype);
+   g_test_add_func ("/contenttype/list", test_list);
 -- 
-2.2.2
+2.6.4 (Apple Git-63)
 
