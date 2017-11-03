@@ -37,10 +37,10 @@
  #include "WidgetRenderingContext.h"
 --- a/Source/JavaScriptCore/assembler/MacroAssembler.h~
 +++ b/Source/JavaScriptCore/assembler/MacroAssembler.h
-@@ -986,2 +986,2 @@ public:
+@@ -986,7 +986,7 @@ public:
          if (bitwise_cast<uint64_t>(value * 1.0) != bitwise_cast<uint64_t>(value))
              return shouldConsiderBlinding();
-
+ 
 -        value = abs(value);
 +        value = std::abs(value);
          // Only allow a limited set of fractional components
@@ -48,8 +48,8 @@
          if (scaledValue / 8 != value)
 --- a/Source/autotools/FindDependencies.m4~
 +++ b/Source/autotools/FindDependencies.m4
-@@ -104,0 +104,0 @@ GLIB_GSETTINGS
-
+@@ -104,7 +104,7 @@ GLIB_GSETTINGS
+ 
  # TODO: use pkg-config (after CFLAGS in their .pc files are cleaned up).
  case "$host" in
 -    *-*-darwin*)
