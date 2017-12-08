@@ -60,8 +60,7 @@
   <!-- cmakes ./configure is picky about invalid flags so we manually set it -->
   <autotools id="cmake" autogen-sh="bootstrap"
              autogen-template="%(srcdir)s/%(autogen-sh)s --prefix=%(prefix)s">
-    <branch repo="cmake" module="v3.9/cmake-3.9.4.tar.gz" version="3.9.patch">
-      <!--4 file="https://git.gnome.org/browse/gtk-osx/plain/patches/cmake-libnetwork.patch" strip="1"/-->
+    <branch repo="cmake" module="v3.10/cmake-3.10.0.tar.gz" version="3.10.0">
     </branch>
   </autotools>
 
