@@ -35,8 +35,12 @@
   </autotools>
   
   <autotools id="libpng" autogenargs="--enable-shared" autogen-sh="configure">
-    <branch version="1.6.29" module="libpng/libpng-1.6.29.tar.xz"
+    <branch version="1.6.34" module="libpng/libpng-1.6.34.tar.xz"
+            hash="sha256:2f1e960d92ce3b3abd03d06dfec9637dfbd22febf107a536b44f7a47c60659f6"
             repo="sourceforge"/>
+    <dependencies>
+      <dep package="zlib"/>
+    </dependencies>
   </autotools>
 
   <autotools id="libjpeg" autogen-sh="configure">
