@@ -130,9 +130,9 @@ index 3589b12..a0da5f6 100644
  main (int argc, char *argv[])
  {
 @@ -370,6 +397,7 @@ main (int argc, char *argv[])
+   g_test_init (&argc, &argv, NULL);
  
    g_test_add_func ("/contenttype/guess", test_guess);
-   g_test_add_func ("/contenttype/guess_svg_from_data", test_guess_svg_from_data);
 +  g_test_add_func ("/contenttype/mime_from_content", test_mime_from_content);
    g_test_add_func ("/contenttype/unknown", test_unknown);
    g_test_add_func ("/contenttype/subtype", test_subtype);
