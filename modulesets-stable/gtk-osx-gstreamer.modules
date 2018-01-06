@@ -24,8 +24,8 @@
 
   <autotools id="gstreamer" autogenargs="--disable-tests" supports-non-srcdir-builds="no"
     makeargs="ERROR_CFLAGS=" autogen-sh="configure">
-    <branch module="gstreamer/1.10/gstreamer-1.10.4.tar.xz" version="1.10.4"
-            hash="sha256:50c2f5af50a6cc6c0a3f3ed43bdd8b5e2bff00bacfb766d4be139ec06d8b5218">
+    <branch module="gstreamer/gstreamer-1.10.5.tar.xz" version="1.10.5"
+            hash="sha256:bc06243600817f637029da29d089d5908d1d266542f68bf6626a10c5f05f1f1d">
     </branch>
     <after>
       <dep package="glib"/>
@@ -34,9 +34,9 @@
 
   <autotools id="gst-plugins-base" autogenargs="--disable-tests --disable-x --disable-xvideo" supports-non-srcdir-builds="no"
     makeargs="ERROR_CFLAGS=" autogen-sh="configure">
-    <branch module="gst-plugins-base/1.10/gst-plugins-base-1.10.4.tar.xz"
-            version="1.10.4"
-            hash="sha256:f6d245b6b3d4cb733f81ebb021074c525ece83db0c10e932794b339b8d935eb7"/>
+    <branch module="gst-plugins-base/gst-plugins-base-1.10.5.tar.xz"
+            version="1.10.5"
+            hash="sha256:1c401a79bd1e4521c6ef1b66579bddedd9136e164e54792aab4bfcf3485bf9a7"/>
     <dependencies>
       <dep package="gstreamer"/>
       <dep package="liborc"/>
@@ -47,9 +47,10 @@
 
   <autotools id="gst-plugins-good" autogenargs="--disable-tests --disable-x --disable-xvideo --disable-osx-video" supports-non-srcdir-builds="no"
     makeargs="ERROR_CFLAGS=" autogen-sh="configure">
-    <branch module="gst-plugins-good/1.10/gst-plugins-good-1.10.4.tar.xz"
-            version="1.10.4"
-            hash="sha256:8a86c61434a8c44665365bd0b3557a040937d1f44bf69caee4e9ea816ce74d7e"/>
+    <branch module="gst-plugins-good/gst-plugins-good-1.10.5.tar.xz"
+            version="1.10.5"
+            hash="sha256:be053f6ed716eeb517cec148cec637cdce571c6e04d5c21409e2876fb76c7639">
+    </branch>
     <dependencies>
       <dep package="gstreamer"/>
       <dep package="gst-plugins-base"/>
@@ -59,9 +60,9 @@
   <autotools id="gst-plugins-ugly" autogenargs="--disable-tests"
              supports-non-srcdir-builds="no" makeargs="ERROR_CFLAGS="
              autogen-sh="configure">
-    <branch repo="gstreamer" version="1.10.4"
-            module="gst-plugins-ugly/gst-plugins-ugly-1.10.4.tar.xz"
-            hash="sha256:6386c77ca8459cba431ed0b63da780c7062c7cc48055d222024d8eaf198ffa59"/>
+    <branch repo="gstreamer" version="1.10.5"
+            module="gst-plugins-ugly/gst-plugins-ugly-1.10.5.tar.xz"
+            hash="sha256:d6edc046350809c967f5b058c5c2e534d99d1d69fe1b26acd849e87781a7d7fc"/>
     <dependencies>
       <dep package="gstreamer"/>
       <dep package="gst-plugins-base"/>
@@ -71,9 +72,9 @@
   <autotools id="gst-plugins-bad" supports-non-srcdir-builds="no"
              autogenargs="--disable-tests --disable-x --disable-xvid"
              makeargs="ERROR_CFLAGS=" autogen-sh="configure">
-    <branch repo="gstreamer" version="1.10.4"
-            module="gst-plugins-bad/gst-plugins-bad-1.10.4.tar.xz"
-            hash="sha256:23ddae506b3a223b94869a0d3eea3e9a12e847f94d2d0e0b97102ce13ecd6966"/>
+    <branch repo="gstreamer" version="1.10.5"
+            module="gst-plugins-bad/gst-plugins-bad-1.10.5.tar.xz"
+            hash="sha256:c5806040bb83b43be86ce592e6a19c5d83d7776f7d9f434eb4b911c4efff3573"/>
     <dependencies>
       <dep package="gstreamer"/>
       <dep package="gst-plugins-base"/>
@@ -87,9 +88,9 @@
   <autotools id="gst-libav" supports-non-srcdir-builds="no"
              autogen-sh="configure"
              autogenargs="--disable-tests --disable-mmx --with-libav-extra-configure='--disable-yasm'">
-    <branch repo="gstreamer" version="1.10.4"
-            module="gst-libav/gst-libav-1.10.4.tar.xz"
-            hash="sha256:6ca0feca75e3d48315e07f20ec37cf6260ed1e9dde58df355febd5016246268b"/>
+     <branch repo="gstreamer" version="1.10.5"
+            module="gst-libav/gst-libav-1.10.5.tar.xz"
+            hash="sha256:e4d2f315f478d47281fbfdfbd590a63d23704ca37911d7142d5992616f4b28d3"/>
     <dependencies>
       <dep package="gstreamer"/>
       <dep package="gst-plugins-base"/>
