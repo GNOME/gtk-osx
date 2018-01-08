@@ -57,9 +57,9 @@
   <autotools id="python" autogenargs="--enable-shared" supports-non-srcdir-builds="no"
 	     autogen-sh="configure">
     <branch repo="python"
-	    module="2.7.13/Python-2.7.13.tar.xz" version="2.7.13">
-      <patch file="https://git.gnome.org/browse/gtk-osx/plain/patches/python2-linkflags.patch" strip="1"/>
-      <patch file="https://git.gnome.org/browse/gtk-osx/plain/patches/python-issue27806_v3.patch" strip="1"/>
+           module="2.7.14/Python-2.7.14.tar.xz" version="2.7.14"
+           hash="sha256:71ffb26e09e78650e424929b2b457b9c912ac216576e6bd9e7d204ed03296a66">
+      <patch file="https://git.gnome.org/browse/gtk-osx/plain/patches/python2-linkflags.patch" strip="1"/>"/>
     </branch>
     <dependencies>
       <dep package="gettext-runtime"/>
@@ -73,7 +73,7 @@
 
   <autotools id="python3" autogenargs="--enable-shared" autogen-sh="configure">
     <branch repo="python"
-	    module="3.6.1/Python-3.6.1.tar.xz" version="3.6.1">
+	    module="3.6.4/Python-3.6.4.tar.xz" version="3.6.4">
       <patch file="https://git.gnome.org/browse/gtk-osx/plain/patches/Python3.4-stack_size-flag.patch" strip="1"/>
     </branch>
     <dependencies>
