@@ -24,7 +24,7 @@
 
   <autotools id="gstreamer" autogenargs="--disable-tests" supports-non-srcdir-builds="no"
     makeargs="ERROR_CFLAGS=" autogen-sh="configure">
-    <branch module="gstreamer/gstreamer-1.10.5.tar.xz" version="1.10.5"
+    <branch module="gstreamer/1.10/gstreamer-1.10.5.tar.xz" version="1.10.5"
             hash="sha256:bc06243600817f637029da29d089d5908d1d266542f68bf6626a10c5f05f1f1d">
     </branch>
     <after>
@@ -34,7 +34,7 @@
 
   <autotools id="gst-plugins-base" autogenargs="--disable-tests --disable-x --disable-xvideo" supports-non-srcdir-builds="no"
     makeargs="ERROR_CFLAGS=" autogen-sh="configure">
-    <branch module="gst-plugins-base/gst-plugins-base-1.10.5.tar.xz"
+    <branch module="gst-plugins-base/1.10/gst-plugins-base-1.10.5.tar.xz"
             version="1.10.5"
             hash="sha256:1c401a79bd1e4521c6ef1b66579bddedd9136e164e54792aab4bfcf3485bf9a7"/>
     <dependencies>
@@ -47,7 +47,7 @@
 
   <autotools id="gst-plugins-good" autogenargs="--disable-tests --disable-x --disable-xvideo --disable-osx-video" supports-non-srcdir-builds="no"
     makeargs="ERROR_CFLAGS=" autogen-sh="configure">
-    <branch module="gst-plugins-good/gst-plugins-good-1.10.5.tar.xz"
+    <branch module="gst-plugins-good/1.10/gst-plugins-good-1.10.5.tar.xz"
             version="1.10.5"
             hash="sha256:be053f6ed716eeb517cec148cec637cdce571c6e04d5c21409e2876fb76c7639">
     </branch>
