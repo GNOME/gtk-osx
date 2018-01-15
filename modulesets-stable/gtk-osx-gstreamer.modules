@@ -2,7 +2,7 @@
 <!DOCTYPE moduleset SYSTEM "moduleset.dtd">
 <?xml-stylesheet type="text/xsl" href="moduleset.xsl"?>
 <moduleset>
-  <repository type="tarball" name="gstreamer"
+  <repository type="tarball" name="gstreamer" default="yes"
               href="http://gstreamer.freedesktop.org/src/"/>
   <repository type="tarball" name="sourceforge"
               href="http://iweb.dl.sf.net/project/"/>
