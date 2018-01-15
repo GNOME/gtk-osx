@@ -95,7 +95,8 @@
     <dependencies>
       <dep package="gettext-runtime"/>
       <dep package='readline'/>
-    </dependencies>
+      <dep package="openssl"/> <!-- For hashlib -->
+    </hashlib>
   </autotools>
 
   <distutils id="pybsddb">

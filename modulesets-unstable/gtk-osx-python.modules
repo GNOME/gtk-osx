@@ -79,6 +79,7 @@
     <dependencies>
       <dep package="gettext-runtime"/>
       <dep package='readline'/>
+      <dep package="openssl" /> <!-- For hashlib -->
     </dependencies>
     <after>
       <dep package="berkeleydb"/>
