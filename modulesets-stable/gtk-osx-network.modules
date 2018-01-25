@@ -9,7 +9,7 @@
   <repository name="ftp.gnu.org" type="tarball" href="ftp://ftp.gnu.org/gnu/"/>
   <repository name="sourceforge" type="tarball"
               href="http://downloads.sourceforge.net/sourceforge/"/>
-  <repository name="gnutls" type="tarball" href="ftp://ftp.gnutls.org/"/>
+  <repository name="gnutls" type="tarball" href="https://www.gnupg.org/ftp/"/>
   <repository name="webm" type="tarball"
               href="http://downloads.webmproject.org/releases/"/>
   <repository name="webkit.org" type="tarball"
