@@ -178,6 +178,7 @@
     </dependencies>
     <after>
       <dep package="meta-gtk-osx-gtk3"/>
+      <dep package="meta-gtk-osx-gtk3.14"/>
       <dep package="meta-gstreamer"/>
     </after>
   </autotools>
@@ -216,6 +217,7 @@
     </dependencies>
     <after>
       <dep package="meta-gtk-osx-gtk3"/>
+      <dep package="meta-gtk-osx-gtk3.14"/>
       <dep package="meta-gstreamer"/>
     </after>
   </cmake>

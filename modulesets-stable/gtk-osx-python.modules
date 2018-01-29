@@ -27,20 +27,26 @@
 
   <metamodule id="meta-gtk-osx-python-gtk3">
     <dependencies>
-      <dep package="meta-gtk-osx-gtk3"/>
       <dep package="pycairo"/>
       <dep package="pygobject3"/>
       <dep package="gtk-mac-integration-python"/>
     </dependencies>
+    <after>
+      <dep package="meta-gtk-osx-gtk3"/>
+      <dep package="meta-gtk-osx-gtk3.14"/>
+    </after>
   </metamodule>
 
   <metamodule id="meta-gtk-osx-python3-gtk3">
     <dependencies>
-      <dep package="meta-gtk-osx-gtk3"/>
       <dep package="pycairo"/>
       <dep package="pygobject3"/>
       <dep package="gtk-mac-integration-python"/>
     </dependencies>
+    <after>
+      <dep package="meta-gtk-osx-gtk3"/>
+      <dep package="meta-gtk-osx-gtk3.14"/>
+    </after>
   </metamodule>
 
 <!--Note the leading ; in autogen-template. It's there on purpose in case the user has set nice_build so that the nice prepended to the command doesn't eat the cd. -->
@@ -123,6 +129,7 @@
       <dep package="python3"/>
       <dep package="python"/>
       <dep package="meta-gtk-osx-gtk3"/>
+      <dep package="meta-gtk-osx-gtk3.14"/>
       <dep package="meta-gtk-osx-core"/>
     </after>
   </distutils>

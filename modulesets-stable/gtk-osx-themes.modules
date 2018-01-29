@@ -99,6 +99,7 @@
 <!-- Circular dependency if we depend on meta-gtk-osx or meta-gtk-osx-gtk3 -->
       <dep package="gtk+"/>
       <dep package="gtk+-3.0"/>
+      <dep package="gtk+-3.14"/>
     </after>
   </autotools>
 
