@@ -115,8 +115,8 @@
 
   <autotools id="gtk-doc" autogen-sh="configure"
              autogenargs="--with-xml-catalog=$JHBUILD_PREFIX/share/xml/catalog">
-    <branch version="1.25" module="gtk-doc/1.25/gtk-doc-1.25.tar.xz"
-            hash="sha256:1ea46ed400e6501f975acaafea31479cea8f32f911dca4dff036f59e6464fd42"/>
+    <branch version="1.27" module="gtk-doc/1.27/gtk-doc-1.27.tar.xz"
+            hash="sha256:e26bd3f7080c749b1cb66c46c6bf8239e2f320a949964fb9c6d56e1b0c6d9a6f"/>
     <dependencies>
       <dep package="libxml2"/>
       <dep package="itstool"/>
