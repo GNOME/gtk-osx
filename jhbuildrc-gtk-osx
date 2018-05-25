@@ -528,7 +528,7 @@ if not _ran_recursively and _gtk_osx_prompt_prefix:
 #inside prefix. Note that we need the installed python's version to
 #get the right directory name.
 
-if (not "python" in modules and
+if (not "python" in modules and not 'python3' in modules and
     not os.path.exists(os.path.join(prefix, 'bin', 'python2'))):
     _python_ver = 'python' + '.'.join([str(_x) for _x in sys.version_info[0:2]])
     _python_install_path = os.path.join(prefix, 'lib',
