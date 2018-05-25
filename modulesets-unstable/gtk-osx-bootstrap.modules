@@ -78,8 +78,11 @@
   </autotools>
 
   <autotools id="itstool">
-    <branch module="itstool/itstool-2.0.2.tar.bz2" version="2.0.2"
-            repo="itstool"/>
+    <branch module="itstool/itstool-2.0.4.tar.bz2" version="2.0.4"
+            repo="itstool">
+<!-- This patch can come out when itstool releases 2.0.5. -->
+      <patch file="https://git.gnome.org/browse/gtk-osx/plain/patches/itstool-memory-management.patch" strip="1"/>
+    </branch>
     <!--branch repo="github" module="itstool/itstool"/-->
     <dependencies>
       <dep package="libxml2"/>

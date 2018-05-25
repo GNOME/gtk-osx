@@ -63,7 +63,7 @@
 
   <autotools id="libxml2" autogen-sh="configure"
              autogenargs='--libdir="$JHBUILD_LIBDIR" --with-python'>
-    <branch version="2.9.4" module="libxml2-2.9.4.tar.gz"
+    <branch version="2.9.8" module="libxml2-2.9.8.tar.gz"
 	    repo="xmlsoft.org"/>
     <after>
       <dep package="python"/>
@@ -80,7 +80,12 @@
   </autotools>
 
   <autotools id="itstool">
-    <branch repo="github" module="itstool/itstool" tag="2.0.2"/>
+    <branch module="itstool/itstool-2.0.4.tar.bz2" version="2.0.4"
+            repo="itstool">
+<!-- This patch can come out when itstool releases 2.0.5. -->
+      <patch file="https://git.gnome.org/browse/gtk-osx/plain/patches/itstool-memory-management.patch" strip="1"/>
+    </branch>
+    <!--branch repo="github" module="itstool/itstool" tag="2.0.5"/-->
     <dependencies>
       <dep package="libxml2"/>
     </dependencies>
