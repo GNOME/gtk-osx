@@ -74,7 +74,7 @@
             module="libgcrypt"/> -->
     <branch repo="ftp.gnupg.org" version="1.7.6"
             module="gcrypt/libgcrypt/libgcrypt-1.7.6.tar.bz2">
-            <patch file="https://git.gnome.org/browse/gtk-osx/plain/patches/libgcrypt-cflags-for-build.patch"
+            <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/libgcrypt-cflags-for-build.patch"
        strip="1"/>
     </branch>
     <dependencies>

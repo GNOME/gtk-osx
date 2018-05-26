@@ -29,7 +29,7 @@
     <branch module="cairomm-1.12.2.tar.gz" version="1.12.2"
 	    hash="sha1:621546f32221a2ddc079167a13ce5b5409bed704"
             repo="cairographics">
-      <patch file="https://git.gnome.org/browse/gtk-osx/plain/patches/cairomm-Bug-100894-Cairomm-compile-failure-if-no-cairo-ft.patch" strip="1"/>
+      <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/cairomm-Bug-100894-Cairomm-compile-failure-if-no-cairo-ft.patch" strip="1"/>
     </branch>
     <dependencies>
       <dep package="cairo"/>

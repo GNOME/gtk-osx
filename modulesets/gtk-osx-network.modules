@@ -138,11 +138,11 @@
   <autotools id="webkit" autogen-sh="autoreconf"
              autogenargs="--enable-quartz-target --with-gtk=2.0 --disable-webkit2 --disable-credential-storage --disable-geolocation --disable-video --disable-web-audio CXXFLAGS='-stdlib=libc++'">
     <branch repo="webkit.org" module="webkitgtk-2.4.11.tar.xz" version="2.4.11">
-      <patch file="https://git.gnome.org/browse/gtk-osx/plain/patches/webkit-140167-disable-netscape-api.patch" strip="1"/>
+      <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/webkit-140167-disable-netscape-api.patch" strip="1"/>
       <!-- This patch can be commented out for XCode >= 6.3, but does no harm if
       it's left in -->
-      <patch file="https://git.gnome.org/browse/gtk-osx/plain/patches/webkit-133293-cfi-clang-failure.patch" strip="1"/>
-      <patch file="https://git.gnome.org/browse/gtk-osx/plain/patches/WebKit-2.4.11-fixups.patch" strip="1"/>
+      <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/webkit-133293-cfi-clang-failure.patch" strip="1"/>
+      <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/WebKit-2.4.11-fixups.patch" strip="1"/>
     </branch>
     <dependencies>
       <dep package="libwebp"/>
@@ -161,11 +161,11 @@
   <autotools id="webkit1gtk3" autogen-sh="autoreconf"
              autogenargs="--enable-quartz-target --with-gtk=3.0 --disable-webkit2 --disable-credential-storage --disable-geolocation --disable-video --disable-web-audio CXXFLAGS='-stdllib=libc++'">
     <branch repo="webkit.org" module="webkitgtk-2.4.9.tar.xz" version="2.4.9">
-      <patch file="https://git.gnome.org/browse/gtk-osx/plain/patches/webkit-140167-disable-netscape-api.patch" strip="1"/>
+      <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/webkit-140167-disable-netscape-api.patch" strip="1"/>
       <!-- This patch can be commented out for XCode >= 6.3, but does no harm if
       it's left in -->
-      <patch file="https://git.gnome.org/browse/gtk-osx/plain/patches/webkit-133293-cfi-clang-failure.patch" strip="1"/>
-      <patch file="https://git.gnome.org/browse/gtk-osx/plain/patches/WebKit-2.4.11-fixups.patch" strip="1"/>
+      <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/webkit-133293-cfi-clang-failure.patch" strip="1"/>
+      <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/WebKit-2.4.11-fixups.patch" strip="1"/>
     </branch>
     <dependencies>
       <dep package="libwebp"/>
@@ -198,9 +198,9 @@
   <cmake id="webkit2gtk3"
          cmakeargs="-DPORT=GTK -DENABLE_X11_TARGET=OFF -DENABLE_QUARTZ_TARGET=ON -DENABLE_TOOLS=ON -DENABLE_MINIBROWSER=ON -DENABLE_PLUGIN_PROCESS_GTK2=OFF -DENABLE_VIDEO=OFF -DENABLE_WEB_AUDIO=OFF -DENABLE_CREDENTIAL_STORAGE=OFF -DENABLE_GEOLOCATION=OFF -DENABLE_OPENGL=OFF -DUSE_LIBNOTIFY=OFF -DUSE_LIBHYPHEN=OFF -DCMAKE_CXX_FLAGS='-stdlib=libc++'">
     <branch repo="webkit.org" module="webkitgtk-2.16.1.tar.xz" version="2.16.1">
-      <patch file="https://git.gnome.org/browse/gtk-osx/plain/patches/WebKit-2.16.1-Bug-167343-wtf-unicode-UTF8.h.patch" strip="1"/>
-      <patch file="https://git.gnome.org/browse/gtk-osx/plain/patches/Webkit-2.16-build-without-OpenGL.patch" strip="1"/>
-<patch file="https://git.gnome.org/browse/gtk-osx/plain/patches/Webkit-2.16-Fix-some-includes.patch" strip="1"/>
+      <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/WebKit-2.16.1-Bug-167343-wtf-unicode-UTF8.h.patch" strip="1"/>
+      <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/Webkit-2.16-build-without-OpenGL.patch" strip="1"/>
+<patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/Webkit-2.16-Fix-some-includes.patch" strip="1"/>
     </branch>
     <dependencies>
       <dep package="libwebp"/>
