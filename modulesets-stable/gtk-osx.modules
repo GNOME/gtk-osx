@@ -204,8 +204,8 @@
       <!-- https://bugzilla.gnome.org/show_bug.cgi?id=763779 -->
       <patch file="https://git.gnome.org/browse/gtk-osx/plain/patches/gtk-quartz-fix-pixelated-image-surfaces-in-retina-hidpi-.patch" strip="1"/>
       <patch file="https://git.gnome.org/browse/gtk-osx/plain/patches/gtk3-14-get-scale-factor.patch" strip="1"/>
-      <patch file="https://git.gnome.org/browse/gtk-osx/plain/patches/gtk3-14-gtkdesktop.patch" strip="1"/>      
-    </branch>
+      <patch file="https://git.gnome.org/browse/gtk-osx/plain/patches/gtk-3.14-stylecontext-unnecessary-assert.patch" strip="1"/>       
+   </branch>
     <dependencies>
       <dep package="glib"/>
       <dep package="pango"/>
@@ -221,8 +221,8 @@
 
   <autotools id="gtk+-3.0" autogen-sh="autogen.sh"
              autogenargs="--enable-quartz-backend --enable-quartz-relocation">
-    <branch module="gtk+/3.22/gtk+-3.22.20.tar.xz" version="3.22.20"
-            hash="sha256:70c90998a7809f60dc0a7439a68c34e59077dadb631657a6f9cab6a5539c02d9">
+    <branch module="gtk+/3.22/gtk+-3.22.30.tar.xz" version="3.22.20"
+            hash="sha256:a1a4a5c12703d4e1ccda28333b87ff462741dc365131fbc94c218ae81d9a6567">
     </branch>
     <dependencies>
       <dep package="glib"/>
