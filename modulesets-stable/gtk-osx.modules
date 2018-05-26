@@ -205,6 +205,7 @@
       <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/gtk-quartz-fix-pixelated-image-surfaces-in-retina-hidpi-.patch" strip="1"/>
       <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/gtk3-14-get-scale-factor.patch" strip="1"/>
       <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/gtk-3.14-stylecontext-unnecessary-assert.patch" strip="1"/>
+      <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/gtk-3.14-GDesktopAppInfo-not-implemented-on-Mac.patch" strip="1"/>
    </branch>
     <dependencies>
       <dep package="glib"/>
