@@ -89,11 +89,16 @@
     </after>
   </autotools>
 
+  <autotools id="fribidi">
+    <branch module="fribidi/fribidi" repo="github"/>
+  </autotools>
+
   <autotools id="pango">
     <branch />
     <dependencies>
       <dep package="cairo"/>
       <dep package="glib"/>
+      <dep package="fribidi"/>
     </dependencies>
     <after>
       <dep package="gobject-introspection"/>
