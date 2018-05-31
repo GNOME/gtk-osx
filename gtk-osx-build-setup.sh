@@ -25,7 +25,7 @@
 #
 
 SOURCE=$HOME/Source
-BASEURL="https://git.gnome.org/browse/gtk-osx/plain/"
+BASEURL="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master"
 
 do_exit()
 {
@@ -62,7 +62,7 @@ JHBUILD_REVISION_OPTION="origin $JHBUILD_REVISION"
 echo "Checking out jhbuild ($JHBUILD_REVISION) from git..."
 if ! test -d $SOURCE/jhbuild; then
     cd $SOURCE 
-    git clone git://git.gnome.org/jhbuild || do_exit "Failed to clone jhbuild."
+    git clone https://gitlab.gnome.org/GNOME/jhbuild || do_exit "Failed to clone jhbuild."
     cd jhbuild
     git checkout -b stable $JHBUILD_REVISION || \
 	do_exit "Checkout of stable branch failed";

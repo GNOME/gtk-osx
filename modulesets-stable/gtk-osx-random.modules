@@ -26,7 +26,7 @@
   <repository type="tarball" name="gmplib.org"
 	      href="ftp://ftp.gmplib.org/pub/"/>
   <repository type="git" name="git.gnome.org"
-              href="git://git.gnome.org/"/>
+              href="https://gitlab.gnome.org/GNOME"/>
   <repository type="tarball" name="itstool"
 	      href="http://files.itstool.org/"/>
   <repository type="tarball" name="abisource/enchant"

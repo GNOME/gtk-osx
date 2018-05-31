@@ -33,7 +33,7 @@ fi
 #
 echo "Checking out jhbuild ($JHBUILD_REVISION) from git..."
 if ! test -d $SOURCE/jhbuild; then
-    (cd $SOURCE ; git clone git://git.gnome.org/jhbuild )
+    (cd $SOURCE ; git clone https://gitlab.gnome.org/GNOME/jhbuild )
 else
     (cd $SOURCE/jhbuild && git pull >/dev/null)
 fi

@@ -3,7 +3,7 @@
 <?xml-stylesheet type="text/xsl" href="moduleset.xsl"?>
 <moduleset>
   <repository name="git.gnome.org" type="git" default="yes"
-              href="git://git.gnome.org/"/>
+              href="https://gitlab.gnome.org/GNOME"/>
   <repository name="openssl" type="tarball"
               href="https://www.openssl.org/source/"/>
   <repository name="lysator" type="git" href="https://git.lysator.liu.se/"/>

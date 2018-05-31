@@ -27,8 +27,8 @@
 
   <repository>
     <GitRepository>
-        <browse rdf:resource="https://git.gnome.org/browse/gtk-osx/"/>
-      <location rdf:resource="git://git.gnome.org/gtk-osx"/>
+        <browse rdf:resource="https://gitlab.gnome.org/GNOME/gtk-osx/"/>
+      <location rdf:resource="https://gitlab.gnome.org/GNOMEgtk-osx"/>
     </GitRepository>
   </repository>
 
