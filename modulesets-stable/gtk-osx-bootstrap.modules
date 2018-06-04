@@ -182,7 +182,9 @@
   <autotools id="fontconfig" autogen-sh="autoreconf"
              autogenargs="--disable-docs">
     <branch repo="fontconfig" version="2.13.0"
-            module="fontconfig-2.13.0.tar.bz2"/>
+            module="fontconfig-2.13.0.tar.bz2">
+            <patch file="https://bugs.freedesktop.org/attachment.cgi?id=137886" strip="1" />
+          </branch>
     <dependencies>
       <dep package="freetype"/>
     </dependencies>
