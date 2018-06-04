@@ -124,8 +124,8 @@
   </autotools>
 
  <autotools id="pango"  autogen-sh="autoreconf">
-    <branch version="1.40.12" module="pango/1.40/pango-1.40.12.tar.xz"
-            hash="sha256:75f1a9a8e4e2b28cbc078b50c1fa927ee4ded994d1ade97c5603e2d1f3161cfc">
+    <branch version="1.42.1" module="pango/1.42/pango-1.42.1.tar.xz"
+            hash="sha256:915a6756b298578ff27c7a6393f8c2e62e6e382f9411f2504d7af1a13c7bce32">
     </branch>
     <dependencies>
       <dep package="glib"/>
@@ -184,7 +184,7 @@
     <branch repo="freedesktop" version="1.19.1"
             module="xorg/individual/util/util-macros-1.19.1.tar.bz2"/>
   </autotools>
-  
+
   <autotools id="libepoxy" autogen-sh="configure">
     <branch repo="github-tarball" version="1.4.1"
             module="anholt/libepoxy/releases/download/1.4.2/libepoxy-1.4.2.tar.xz"/>
