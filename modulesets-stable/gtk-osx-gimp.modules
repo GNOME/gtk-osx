@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE moduleset SYSTEM "moduleset.dtd">
+<?xml-stylesheet type="text/xsl" href="moduleset.xsl"?>
+<moduleset>
+  <repository type="tarball" name="gimp"
+              href="https://download.gimp.org/pub/"/>
+  <repository type="git" name="git.gnome.org"
+              href="https://gitlab.gnome.org/GNOME"/>
+  <repository type="tarball" name="ftp.gtk.org"
+              href="https://ftp.gtk.org/pub/"/>
+  <repository type="tarball" name="poppler.freedesktop.org"
+              href="https://poppler.freedesktop.org/"/>
+  <repository type="tarball" name="bitbucket-tarball"
+              href="https://bitbucket.org/"/>
+  <repository type="tarball" name="github-tarball"
+              href="https://github.com/"/>
+  <repository type="tarball" name="sourceforge"
+              href="http://downloads.sourceforge.net/sourceforge/"/>
+  <repository type="tarball" name="savannah"
+              href="http://download.savannah.nongnu.org/releases/"/>
+
+  <autotools id="gimp-help-git" autogenargs="--without-gimp"              makeinstallargs="ALL_LINGUAS=en XML_CATALOG_FILES=$JHBUILD_PREFIX/share/xml/catalog install" makeargs="ALL_LINGUAS=en XML_CATALOG_FILES=$JHBUILD_PREFIX/share/xml/catalog" autogen-sh="autogen.sh">
+    <branch module="gimp-help" reversion="master" repo="git.gnome.org" />
+    <dependencies>
+      <dep package="pngcrush" />
+    </dependencies>
+  </autotools>
+
+  <autotools id="gimp"  autogen-sh="autoreconf"
+             autogenargs="--without-x --enable-binreloc">
+    <branch module="gimp/v2.10/gimp-2.10.6.tar.bz2" version="2.10.6"
+            hash="sha256:4ec8071f828e918384cf7bc7d1219210467c84655123f802bc55a8bf2415101f" repo="gimp">
+	    <!-- osx focus issue -->
+	 <patch file="https://raw.githubusercontent.com/samm-git/gimp-osx-package/master/patches/gimpui.c.patch"
+strip="0"/>
+    </branch>
+    <after>
+      <dep package="meta-gtk-osx-bootstrap"/>
+      <dep package="meta-gtk-osx-core"/>
+    </after>
+    <dependencies>
+      <dep package="lcms"/>
+        <dep package="glib-networking"/>
+      <dep package="poppler"/>
+      <dep package="poppler-data"/>
+
+      <dep package="fontconfig"/>
+      <dep package="gegl"/>
+      <dep package="libmypaint"/>
+      <dep package="mypaint-brushes"/>
+      <dep package="libheif"/>
+      <dep package="aalib"/>
+      <dep package="libwebp"/>
+      <dep package="shared-mime-info"/>
+      <dep package="iso-codes"/>
+      <dep package="librsvg"/>
+      <dep package="gexiv2"/>
+      <dep package="libwmf"/>
+      <dep package="openexr"/>
+      <dep package="libmng"/>
+      <dep package="ghostscript"/>
+      <dep package="meta-gtk-osx-python"/> <!-- use embedded python instead of system one -->
+    </dependencies>
+  </autotools>
+  <autotools id="gegl" autogen-sh="configure" autogenargs="--disable-docs">
+    <branch repo="ftp.gtk.org" version="0.4.10"
+            hash="sha256:1c419659bde1aa8bb7845231a7132bd7dcdaa4ed724adf676b07478b41f0c5d3"
+            module="gegl/0.4/gegl-0.4.10.tar.bz2"/>
+    <dependencies>
+      <dep package="babl"/>
+      <dep package="json-glib"/>
+    </dependencies>
+  </autotools>
+
+  <autotools id="babl" >
+    <branch repo="ftp.gtk.org" version="0.1.58"
+            module="babl/0.1/babl-0.1.58.tar.bz2" hash="sha256:79c9ae576019b8459896014c8822471bb383414c9f99a1b2055e25b4538ced55">
+    </branch>
+  </autotools>
+
+  <cmake id="poppler"
+         cmakeargs='-DENABLE_QT5:BOOL=OFF -DWITH_NSS3:BOOL=OFF'>
+
+  <branch module="poppler-0.66.0.tar.xz" version="0.66.0"
+            repo="poppler.freedesktop.org"
+            hash="sha256:2c096431adfb74bc2f53be466889b7646e1b599f28fa036094f3f7235cc9eae7"/>
+    <after>
+      <dep package="meta-gtk-osx-bootstrap"/>
+      <dep package="meta-gtk-osx-core"/>
+    </after>
+  <dependencies>
+    <dep package="openjpeg"/>
+  </dependencies>
+  </cmake>
+  <cmake id="poppler-data">
+
+  <branch module="poppler-data-0.4.9.tar.gz" version="0.4.9"
+            repo="poppler.freedesktop.org"/>
+    <after>
+      <dep package="poppler"/>
+    </after>
+  </cmake>
+
+  <cmake id="x265">
+    <branch checkoutdir="x265_2.8" module="multicoreware/x265/downloads/x265_2.8.tar.gz" version="2.8"
+      hash="sha256:6e59f9afc0c2b87a46f98e33b5159d56ffb3558a49d8e3d79cb7fdc6b7aaa863"
+      repo="bitbucket-tarball">
+      <!-- no cmake files in the root folder -->
+    <patch file="https://raw.githubusercontent.com/samm-git/gimp-osx-package/master/patches/x265-cmake.patch"
+             strip="0"/>
+    </branch>
+  </cmake>
+
+  <autotools id="libde265"
+	     autogen-sh="configure">
+    <branch module="strukturag/libde265/releases/download/v1.0.3/libde265-1.0.3.tar.gz" version="1.2.0"
+      hash="sha256:e4206185a7c67d3b797d6537df8dcaa6e5fd5a5f93bd14e65a755c33cd645f7a"
+      repo="github-tarball"/>
+  </autotools>
+
+  <autotools id="libheif"
+	     autogen-sh="configure">
+    <branch module="strukturag/libheif/releases/download/v1.2.0/libheif-1.2.0.tar.gz" version="1.2.0"
+      hash="sha256:2e7d40f81d1bbe6089b1e0f27800b97cf6a195e093ef86199edfb6e59e2fa8fa"
+      repo="github-tarball"/>
+    <dependencies>
+      <dep package="libde265"/>
+      <dep package="x265"/>
+    </dependencies>
+  </autotools>
+
+  <autotools id="aalib"
+	     autogen-sh="configure" autogenargs="--without-x --with-curses-driver=no">
+    <branch module="aa-project/aalib-1.4rc5.tar.gz" version="1.4.0"
+      hash="sha256:fbddda9230cf6ee2a4f5706b4b11e2190ae45f5eda1f0409dc4f99b35e0a70ee"
+      repo="sourceforge" checkoutdir="aalib-1.4.0">
+      <!--
+      # Fix malloc/stdlib issue on macOS
+      # Fix underquoted definition of AM_PATH_AALIB in aalib.m4
+      -->
+      <patch file="https://raw.githubusercontent.com/Homebrew/formula-patches/6e23dfb/aalib/1.4rc5.patch"
+             strip="1"/>
+    </branch>
+  </autotools>
+
+  <autotools id="libwmf"
+	     autogen-sh="configure" autogenargs="--with-freetype=$JHBUILD_PREFIX">
+    <branch module="wvware/libwmf/0.2.8.4/libwmf-0.2.8.4.tar.gz" version="0.2.8.4"
+      hash="sha256:5b345c69220545d003ad52bfd035d5d6f4f075e65204114a9e875e84895a7cf8"
+      repo="sourceforge">
+    </branch>
+    <dependencies>
+      <dep package="libpng"/>
+    </dependencies>
+    <after>
+      <dep package="gdk-pixbuf"/>
+    </after>
+  </autotools>
+
+  <autotools id="openexr"
+       autogen-sh="configure">
+    <branch module="openexr/openexr/releases/download/v2.2.1/openexr-2.2.1.tar.gz" version="2.2.1"
+      hash="sha256:8f9a5af6131583404261931d9a5c83de0a425cb4b8b25ddab2b169fbf113aecd"
+      repo="github-tarball">
+    </branch>
+    <dependencies>
+      <dep package="ilmbase"/>
+    </dependencies>
+  </autotools>
+
+  <autotools id="ilmbase"
+       autogen-sh="configure">
+    <branch module="openexr/ilmbase-2.2.1.tar.gz" version="2.2.1"
+      hash="sha256:cac206e63be68136ef556c2b555df659f45098c159ce24804e9d5e9e0286609e"
+      repo="savannah">
+    </branch>
+  </autotools>
+
+  <!-- this is fork from https://sourceforge.net/projects/libmng/ with lcms2 support -->
+  <cmake id="libmng"
+    cmakeargs="-DMNG_INSTALL_LIB_DIR=$JHBUILD_PREFIX/lib -DCMAKE_BUILD_WITH_INSTALL_NAME_DIR=true -DCMAKE_MACOSX_RPATH=true . -DCMAKE_INSTALL_NAME_DIR=$JHBUILD_PREFIX/lib"
+    hash="sha256:4a462fdd48d4bc82c1d7a21106c8a18b62f8cc0042454323058e6da0dbb57dd3">
+    <branch module="project/libmng/libmng-devel/2.0.3/libmng-2.0.3.tar.xz" version="2.0.3"
+	    repo="sourceforge"/>
+  <dependencies>
+        <dep package="libjpeg"/>
+        <dep package="lcms"/>
+  </dependencies>
+  </cmake>
+
+  <cmake id="openjpeg">
+    <branch module="uclouvain/openjpeg/archive/v2.3.0.tar.gz" version="2.3.0"
+	    repo="github-tarball" checkoutdir="openjpeg-2.3.0"/>
+  </cmake>
+
+  <autotools id='libmypaint' autogen-sh="configure">
+
+  <dependencies>
+  <dep package="gegl"/>
+  <dep package="json-c"/>
+  </dependencies>
+  <branch hash="sha256:6a07d9d57fea60f68d218a953ce91b168975a003db24de6ac01ad69dcc94a671" module="mypaint/libmypaint/releases/download/v1.3.0/libmypaint-1.3.0.tar.xz" version="1.3.0"
+    repo="github-tarball" checkoutdir="libmypaint-1.3.0"/>
+  </autotools>
+
+  <autotools id='mypaint-brushes'
+    autogen-template="pushd %(srcdir)s &amp;&amp; ./%(autogen-sh)s &amp;&amp; popd &amp;&amp; %(srcdir)s/configure --prefix=%(prefix)s %(autogenargs)s">
+  <dependencies>
+  <dep package="libmypaint"/>
+  </dependencies>
+
+  <branch module="Jehan/mypaint-brushes/archive/v1.3.0.tar.gz" version="1.3.0"
+    repo="github-tarball" checkoutdir="mypaint-brushes-1.3.0"/>
+  </autotools>
+
+    <autotools id='json-c' autogen-sh="configure">
+  <branch module="json-c/json-c/archive/json-c-0.13.1-20180305.tar.gz" version="0.13.1"
+    repo="github-tarball" checkoutdir="json-c"/>
+  </autotools>
+
+</moduleset>

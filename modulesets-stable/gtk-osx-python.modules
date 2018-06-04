@@ -12,7 +12,7 @@
   <repository type="tarball" name="oracle"
 	      href="http://download.oracle.com/"/>
   <repository type="tarball" name="pymodules"
-              href="http://pypi.python.org/packages/"/>
+              href="https://pypi.python.org/packages/"/>
   <repository type="tarball" name="github-tarball"
               href="https://github.com"/>
 
@@ -77,16 +77,17 @@
   </autotools>
 
   <autotools id="python" autogenargs="--enable-shared"
-	     autogen-sh="configure" supports-non-srcdir-builds="no">
+	     supports-non-srcdir-builds="no">
     <branch repo="python"
-           module="2.7.14/Python-2.7.14.tar.xz" version="2.7.14"
-           hash="sha256:71ffb26e09e78650e424929b2b457b9c912ac216576e6bd9e7d204ed03296a66">
-      <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/python2-linkflags.patch" strip="1"/>"/>
+           module="2.7.15/Python-2.7.15.tar.xz" version="2.7.15"
+           hash="sha256:22d9b1ac5b26135ad2b8c2901a9413537e08749a753356ee913c84dbd2df5574">
+  <!-- related to https://bugs.python.org/issue11445 -->
+  <patch file="https://raw.githubusercontent.com/samm-git/gimp-osx-package/master/patches/python-ldflags.patch" strip="1"/>
+   <!-- <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/python2-linkflags.patch" strip="1"/>"/> -->
     </branch>
     <dependencies>
       <dep package="gettext-runtime"/>
       <dep package='readline'/>
-      <dep package="openssl"/> <!-- For hashlib -->
     </dependencies>
     <after>
       <dep package="berkeleydb"/>
@@ -141,8 +142,11 @@
   <autotools id="pygobject" autogen-sh="configure"
 	     autogenargs="--disable-introspection"
 	     supports-non-srcdir-builds="no">
-    <branch version="2.28.6" module="pygobject/2.28/pygobject-2.28.6.tar.bz2"
-            hash="sha256:e4bfe017fa845940184c82a4d8949db3414cb29dfc84815fb763697dc85bdcee"/>
+    <branch version="2.28.7" module="pygobject/2.28/pygobject-2.28.7.tar.xz"
+            hash="sha256:bb9d25a3442ca7511385a7c01b057492095c263784ef31231ffe589d83a96a5a">
+      <patch file="https://raw.githubusercontent.com/samm-git/gimp-osx-package/master/patches/pygobject-gdestktopappinfo-missing-header.patch"
+                     strip="0"/>
+    </branch>
     <dependencies>
       <dep package="meta-gtk-osx-core"/>
     </dependencies>
@@ -202,5 +206,14 @@
       <dep package="gtkspell"/>
     </dependencies>
   </autotools>
+
+  <distutils id="python-six">
+    <branch module="/packages/16/d8/bc6316cf98419719bd59c91742194c111b6f2e85abac88e496adefaf7afe/six-1.11.0.tar.gz" repo="pymodules" version="1.11.0"
+            checkoutdir="six"/>
+    <dependencies>
+      <dep package="libxml2"/>
+      <dep package="libxslt"/>
+    </dependencies>
+  </distutils>
 
 </moduleset>
