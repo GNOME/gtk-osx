@@ -206,6 +206,7 @@ Libglade itself is deprecated. This is the last release. -->
     </after>
     <dependencies>
       <dep package="lcms"/>
+      <dep package="poppler"/>
       <dep package="fontconfig"/>
       <dep package="gegl"/>
     </dependencies>
