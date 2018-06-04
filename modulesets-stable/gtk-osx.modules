@@ -123,6 +123,18 @@
       </after>
   </autotools>
 
+
+<autotools id="fribidi">
+   <branch version="1.0.3" module="releases/download/v1.0.3/fribidi-1.0.3.tar.bz2"
+           hash="sha256:8d214b17b6eedcb416e53142c196c2896b9a685fca2a5bddc098a73d2b02ce12">
+   </branch>
+   <after>
+     <dep package="gobject-introspection"/>
+     <dep package="meta-gtk-osx-freetype"/>
+     <dep package="meta-gtk-osx-bootstrap"/>
+   </after>
+ </autotools>
+
  <autotools id="pango"  autogen-sh="autoreconf">
     <branch version="1.42.1" module="pango/1.42/pango-1.42.1.tar.xz"
             hash="sha256:915a6756b298578ff27c7a6393f8c2e62e6e382f9411f2504d7af1a13c7bce32">
@@ -130,6 +142,7 @@
     <dependencies>
       <dep package="glib"/>
       <dep package="cairo"/>
+      <dep package="fribidi"/>
      </dependencies>
     <after>
       <dep package="gobject-introspection"/>
