@@ -216,6 +216,7 @@ Libglade itself is deprecated. This is the last release. -->
       <dep package="fontconfig"/>
       <dep package="gegl"/>
       <dep package="libmypaint"/>
+      <dep package="mypaint-brushes"/>
 
     </dependencies>
   </autotools>
@@ -231,7 +232,7 @@ Libglade itself is deprecated. This is the last release. -->
   repo="github-tarball" checkoutdir="libmypaint-1.3.0"/>
 </autotools>
 
-<autotools id='mypaint-brushes' autogen-sh="configure">
+<autotools id='mypaint-brushes'>
 
 <dependencies>
 <dep package="libmypaint"/>
