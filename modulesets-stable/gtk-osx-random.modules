@@ -195,8 +195,8 @@ Libglade itself is deprecated. This is the last release. -->
              autogenargs="--disable-python --without-x --without-dbus
 			  --without-gnomevfs --without-wmf --enable-binreloc "
 	     makeargs='LDFLAGS="-framework Carbon"'>
-    <branch module="gimp/v2.8/gimp-2.8.20.tar.bz2" version="2.8.20"
-            md5sum="d405640c426b234d6efc36fb4f5bae57" repo="gimp">
+    <branch module="gimp/v2.10/gimp-2.10.2.tar.bz2" version="2.10.2"
+            hash="sha256:1cb0baaecdefe44d371a15f2739a1bcbce4682336b4ccf8eb7b587ce52c333eb" repo="gimp">
       <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/Bug-555525-plug-ins-twain-tw_mac.c.patch" strip="1" />
     </branch>
     <after>
