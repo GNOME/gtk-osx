@@ -2,11 +2,11 @@
 <!DOCTYPE moduleset SYSTEM "moduleset.dtd">
 <?xml-stylesheet type="text/xsl" href="moduleset.xsl"?>
 <moduleset>
-  <repository type="tarball" name="ftp.gnome.org" default="yes" 
+  <repository type="tarball" name="ftp.gnome.org" default="yes"
               href="http://ftp.gnome.org/pub/GNOME/sources/"/>
   <repository type="git" name="git.gnome.org"
               href="https://gitlab.gnome.org/GNOME"/>
-  <repository type="tarball" name="sourceforge" 
+  <repository type="tarball" name="sourceforge"
 	      href="http://downloads.sourceforge.net/sourceforge/"/>
   <repository type="tarball" name="tango.freedesktop.org"
               href="http://tango.freedesktop.org/releases/"/>
@@ -89,8 +89,8 @@
        substantial infrastructure that's resistant to installing with
        jhbuild, so we'll freeze at the 2.40 branch. -->
   <autotools id="librsvg" autogenargs="--disable-Bsymbolic">
-    <branch module="librsvg/2.40/librsvg-2.40.17.tar.xz" version="2.40.17"
-	    hash="sha256:e6f6c5cbecc405bb945c7cd15061276035ae3173bbb3bb25e8a916779c7f69cc"/>
+    <branch module="librsvg/2.42/librsvg-2.42.2.tar.xz" version="2.42.2"
+	    hash="sha256:0c550a0bffef768a436286116c03d9f6cd3f97f5021c13e7f093b550fac12562"/>
     <dependencies>
       <dep package="libcroco"/>
       <dep package="meta-gtk-osx-freetype"/>

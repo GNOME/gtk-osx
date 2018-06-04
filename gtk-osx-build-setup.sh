@@ -25,8 +25,10 @@
 #
 
 SOURCE=$HOME/Source
-BASEURL="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master"
+# BASEURL="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master"
+## Point to the fork instead of the main repo
 
+BASEURL="https://raw.githubusercontent.com/samm-git/gtk-osx/gimp-2.10"
 do_exit()
 {
     echo $1

@@ -33,7 +33,7 @@
       version="7.0">
     </branch>
   </autotools>
-  
+
   <autotools id="libpng" autogenargs="--enable-shared" autogen-sh="configure">
     <branch version="1.6.34" module="libpng/libpng-1.6.34.tar.xz"
             hash="sha256:2f1e960d92ce3b3abd03d06dfec9637dfbd22febf107a536b44f7a47c60659f6"
@@ -158,7 +158,7 @@
   <autotools id="freetype-no-harfbuzz" autogen-sh="configure"
              skip-autogen="never"
              autogenargs="--without-bzip2 --without-harfbuzz">
-    <branch module="freetype/freetype-2.7.1.tar.gz" version="2.7.1"
+    <branch module="freetype/freetype-2.9.1.tar.gz" version="2.9.1"
             repo="sourceforge">
       <!--patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/freetype-2.5.3-ccexe_cflags.patch" strip="1"/-->
     </branch>
@@ -169,7 +169,7 @@
 
   <autotools id="freetype" autogen-sh="configure" skip-autogen="never"
 	     autogenargs="--without-bzip2">
-    <branch module="freetype/freetype-2.7.1.tar.gz" version="2.7.1"
+    <branch module="freetype/freetype-2.9.1.tar.gz" version="2.9.1"
             repo="sourceforge">
     </branch>
     <dependencies>
@@ -179,9 +179,10 @@
   </autotools>
 
   <autotools id="fontconfig" autogen-sh="autoreconf"
-             autogenargs="--disable-docs">
-    <branch repo="fontconfig" version="2.12.1"
-            module="fontconfig-2.12.1.tar.bz2"/>
+             autogenargs="--disable-docs '--with-add-fonts=/System/Library/Fonts,/Library/Fonts,~/Library/Fonts'">
+    <branch repo="fontconfig" version="2.13.0" module="fontconfig-2.13.0.tar.bz2">
+      <patch file="https://bugs.freedesktop.org/attachment.cgi?id=137886" strip="1" />
+    </branch>
     <dependencies>
       <dep package="freetype"/>
     </dependencies>
