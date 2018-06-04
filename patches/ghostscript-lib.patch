@@ -1,0 +1,15 @@
+--- configure.ac	2018-03-21 09:48:06.000000000 +0100
++++ configure.ac	2018-06-19 18:27:24.000000000 +0200
+@@ -2363,9 +2363,9 @@
+       SO_LIB_EXT=".so"
+     ;;
+     Darwin*)
+-      GS_DYNAMIC_LDFLAGS="-dynamiclib -install_name \$(GS_SONAME_MAJOR_MINOR)"
+-      PCL_DYNAMIC_LDFLAGS="-dynamiclib -install_name \$(PCL_SONAME_MAJOR_MINOR)"
+-      XPS_DYNAMIC_LDFLAGS="-dynamiclib -install_name \$(XPS_SONAME_MAJOR_MINOR)"
++      GS_DYNAMIC_LDFLAGS="-dynamiclib -install_name \$(prefix)/lib/\$(GS_SONAME_MAJOR_MINOR)"
++      PCL_DYNAMIC_LDFLAGS="-dynamiclib -install_name \$(prefix)/lib/\$(PCL_SONAME_MAJOR_MINOR)"
++      XPS_DYNAMIC_LDFLAGS="-dynamiclib -install_name \$(prefix)/lib/\$(XPS_SONAME_MAJOR_MINOR)"
+       DYNAMIC_LIBS=""
+       SO_LIB_EXT=".dylib"
+     ;;
