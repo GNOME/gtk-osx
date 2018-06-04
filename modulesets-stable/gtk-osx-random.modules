@@ -220,19 +220,26 @@ Libglade itself is deprecated. This is the last release. -->
     </dependencies>
   </autotools>
 
-  <autotools id='libmypaint' autogen-sh="configure">
+<autotools id='libmypaint' autogen-sh="configure">
 
 <dependencies>
 <dep package="gegl"/>
 <dep package="json-c"/>
-
 </dependencies>
 
 <branch module="mypaint/libmypaint/archive/v1.3.0.tar.gz" version="1.3.0"
   repo="github-tarball" checkoutdir="libmypaint-1.3.0"/>
 </autotools>
 
+<autotools id='mypaint-brushes' autogen-sh="configure">
 
+<dependencies>
+<dep package="libmypaint"/>
+</dependencies>
+
+<branch module="Jehan/mypaint-brushes/archive/v1.3.0.tar.gz" version="1.3.0"
+  repo="github-tarball" checkoutdir="mypaint-brushes-1.3.0"/>
+</autotools>
 
   <autotools id='json-c' autogen-sh="configure">
 <branch module="json-c/json-c/archive/json-c-0.13.1-20180305.tar.gz" version="0.13.1"
