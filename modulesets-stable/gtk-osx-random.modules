@@ -233,11 +233,13 @@ Libglade itself is deprecated. This is the last release. -->
   </autotools>
 
   <cmake id="poppler"
-         cmakeargs='-DENABLE_QT5:BOOL=OFF -DWITH_NSS3:BOOL=OFF -DENABLE_DCTDECODER:STING=unmaintained -DENABLE_LIBOPENJPEG:STRING=unmaintained'>
+         cmakeargs='-DENABLE_QT5:BOOL=OFF -DWITH_NSS3:BOOL=OFF'>
 
     <branch module="poppler-0.65.0.tar.xz" version="0.65.0"
             repo="poppler.freedesktop.org"/>
     <after>
+      <dep package="openjpeg"/>
+
       <dep package="meta-gtk-osx-bootstrap"/>
       <dep package="meta-gtk-osx-core"/>
     </after>
@@ -286,10 +288,10 @@ Libglade itself is deprecated. This is the last release. -->
 	    repo="github-tarball" checkoutdir="hunspell-1.6.1"/>
   </autotools>
 
-  <autotools id="openjpeg" autogen-sh="autoreconf">
+  <cmake id="openjpeg">
     <branch module="uclouvain/openjpeg/archive/v2.3.0.tar.gz" version="2.3.0"
 	    repo="github-tarball" checkoutdir="openjpeg-2.3.0"/>
-  </autotools>
+  </cmake>
 
   <autotools id="enchant" autogen-sh="configure"
              autogenargs="--with-myspell-dir=/Library/Dictionaries">
