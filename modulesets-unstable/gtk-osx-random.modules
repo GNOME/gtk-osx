@@ -5,7 +5,7 @@
   <repository type="git" name="git.gnome.org" default="yes"
               href="https://gitlab.gnome.org/GNOME"/>
   <repository type="git" name="github" href="git://github.com/"/>
-  <repository type="tarball" name="ftp.gnome.org" 
+  <repository type="tarball" name="ftp.gnome.org"
               href="ftp://ftp.gnome.org/pub/gnome/sources/"/>
   <repository type="tarball" name="ftp.gnu.org"
 	      href="ftp://ftp.gnu.org/gnu/"/>
@@ -131,7 +131,7 @@
   <autotools id="shared-mime-info"
              autogenargs="--disable-default-make-check"
              supports-non-srcdir-builds="no" >
-    <branch module="xdg/shared-mime-info" 
+    <branch module="xdg/shared-mime-info"
             repo="git.freedesktop.org"/>
     <dependencies>
       <dep package="glib"/>
@@ -145,7 +145,7 @@
     </dependencies>
   </autotools>
 
-  <autotools id="gimp" 
+  <autotools id="gimp"
              autogenargs="--disable-python --disable-print --without-x
                           --without-dbus --without-gnomevfs --without-wmf"
              makeargs='LDFLAGS="-framework Carbon"'>
@@ -158,6 +158,7 @@
       <dep package="lcms"/>
       <dep package="fontconfig"/>
       <dep package="gegl"/>
+      <dep package="pango"/>
       <dep package="gexiv2"/>
     </dependencies>
   </autotools>
@@ -165,7 +166,7 @@
   <autotools id="json-glib">
     <branch/>
   </autotools>
- 
+
   <autotools id="babl">
     <branch />
   </autotools>
