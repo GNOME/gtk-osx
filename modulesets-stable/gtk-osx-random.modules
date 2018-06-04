@@ -5,7 +5,7 @@
   <repository type="tarball" name="ftp.gnome.org" default="yes"
               href="http://ftp.gnome.org/pub/GNOME/sources/"/>
   <repository type="tarball" name="ftp.gtk.org"
-              href="ftp://ftp.gtk.org/pub/"/>
+              href="https://ftp.gtk.org/pub/"/>
   <repository type="tarball" name="hadess"
               href="http://freedesktop.org/~hadess/"/>
   <repository type="tarball" name="gimp"
