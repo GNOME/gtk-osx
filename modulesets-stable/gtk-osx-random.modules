@@ -232,8 +232,8 @@ Libglade itself is deprecated. This is the last release. -->
   repo="github-tarball" checkoutdir="libmypaint-1.3.0"/>
 </autotools>
 
-<autotools id='mypaint-brushes'>
-
+<autotools id='mypaint-brushes'
+  autogen-template="pushd %(srcdir)s &amp;&amp; ./%(autogen-sh)s &amp;&amp; popd &amp;&amp; %(srcdir)s/configure --prefix=%(prefix)s %(autogenargs)s">
 <dependencies>
 <dep package="libmypaint"/>
 </dependencies>
