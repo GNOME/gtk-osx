@@ -159,7 +159,7 @@
   <autotools id="freetype-no-harfbuzz" autogen-sh="configure"
              skip-autogen="never"
              autogenargs="--without-bzip2 --without-harfbuzz">
-    <branch module="freetype/freetype-2.7.1.tar.gz" version="2.7.1"
+    <branch module="freetype/freetype-2.9.1.tar.gz" version="2.9.1"
             repo="sourceforge">
       <!--patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/freetype-2.5.3-ccexe_cflags.patch" strip="1"/-->
     </branch>
@@ -170,7 +170,7 @@
 
   <autotools id="freetype" autogen-sh="configure" skip-autogen="never"
 	     autogenargs="--without-bzip2">
-    <branch module="freetype/freetype-2.7.1.tar.gz" version="2.7.1"
+    <branch module="freetype/freetype-2.9.1.tar.gz" version="2.9.1"
             repo="sourceforge">
     </branch>
     <dependencies>
