@@ -41,6 +41,8 @@
       <dep package="gossip"/>
       <dep package="vala"/>
       <dep package="glade3"/>
+      <dep package="librsvg"/>
+
     </dependencies>
   </metamodule>
 
