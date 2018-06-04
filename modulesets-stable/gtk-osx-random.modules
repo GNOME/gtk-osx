@@ -286,6 +286,11 @@ Libglade itself is deprecated. This is the last release. -->
 	    repo="github-tarball" checkoutdir="hunspell-1.6.1"/>
   </autotools>
 
+  <autotools id="openjpeg" autogen-sh="autoreconf">
+    <branch module="uclouvain/openjpeg/archive/v2.3.0.tar.gz" version="2.3.0"
+	    repo="github-tarball" checkoutdir="openjpeg-2.3.0"/>
+  </autotools>
+
   <autotools id="enchant" autogen-sh="configure"
              autogenargs="--with-myspell-dir=/Library/Dictionaries">
     <branch module="1.6.0/enchant-1.6.0.tar.gz" version="1.6.0"
