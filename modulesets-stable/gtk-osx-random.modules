@@ -229,7 +229,7 @@ Libglade itself is deprecated. This is the last release. -->
   </autotools>
 
   <autotools id="gexiv2" >
-    <branch repo="ftp.gnome.org" version="0.10.8"
+    <branch repo="ftp.gnome.org" version="0.10.8" checkoutdir="exiv2-trunk"
             module="gexiv2/0.10/gexiv2-0.10.8.tar.xz" hash="sha256:81c528fd1e5e03577acd80fb77798223945f043fd1d4e06920c71202eea90801">
     </branch>
     <dependencies>
@@ -237,10 +237,11 @@ Libglade itself is deprecated. This is the last release. -->
       <dep package="exiv2"/>
     </dependencies>
   </autotools>
-<cmake id="exiv2">
-  <branch repo="www.exiv2.org" module="builds/exiv2-0.26-trunk.tar.gz" hash="sha256:c75e3c4a0811bf700d92c82319373b7a825a2331c12b8b37d41eb58e4f18eafb">
-  </branch>
-</cmake>
+
+  <autotools id="exiv2">
+    <branch repo="www.exiv2.org" version="0.26" module="exiv2-0.26-trunk.tar.gz" hash="sha256:c75e3c4a0811bf700d92c82319373b7a825a2331c12b8b37d41eb58e4f18eafb"/>
+  </autotools>
+
   <autotools id="gegl" autogen-sh="configure" autogenargs="--disable-docs">
     <branch repo="ftp.gtk.org" version="0.3.14"
             module="gegl/0.4/gegl-0.4.2.tar.bz2"/>
