@@ -232,7 +232,7 @@ Libglade itself is deprecated. This is the last release. -->
 
   <autotools id="poppler"  autogen-sh="configure"
            autogenargs="--disable-qt --disable-qt4 --without-x --disable-gtk-test --enable-xpdf-headers">
-    <branch module="poppler-0.53.0.tar.gz" version="0.53.0"
+    <branch module="poppler-0.65.0.tar.gz" version="0.65.0"
             repo="poppler.freedesktop.org"/>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
