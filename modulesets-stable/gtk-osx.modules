@@ -251,9 +251,9 @@
        dependency. -->
   <autotools id="cairo"  autogen-sh="configure"
              autogenargs="--enable-pdf --enable-quartz --disable-xlib --without-x">
-    <branch module="cairo-1.14.8.tar.xz"  version="1.14.8"
+    <branch module="cairo-1.14.12.tar.xz"  version="1.14.12"
             repo="cairographics"
-            hash="sha1:c6f7b99986f93c9df78653c3e6a3b5043f65145e">
+            hash="sha1:8c90f00c500b2299c0a323dd9beead2a00353752b2092ead558139bd67f7bf16">
     </branch>
     <dependencies>
       <dep package="pixman"/>
