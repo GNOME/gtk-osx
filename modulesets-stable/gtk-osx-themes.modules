@@ -2,11 +2,11 @@
 <!DOCTYPE moduleset SYSTEM "moduleset.dtd">
 <?xml-stylesheet type="text/xsl" href="moduleset.xsl"?>
 <moduleset>
-  <repository type="tarball" name="ftp.gnome.org" default="yes" 
+  <repository type="tarball" name="ftp.gnome.org" default="yes"
               href="http://ftp.gnome.org/pub/GNOME/sources/"/>
   <repository type="git" name="git.gnome.org"
               href="https://gitlab.gnome.org/GNOME"/>
-  <repository type="tarball" name="sourceforge" 
+  <repository type="tarball" name="sourceforge"
 	      href="http://downloads.sourceforge.net/sourceforge/"/>
   <repository type="tarball" name="tango.freedesktop.org"
               href="http://tango.freedesktop.org/releases/"/>
@@ -85,12 +85,11 @@
 	    hash="sha256:e6a2af72674403d06c03e067d915004e8d9cdeec206f3350c7f3ee595b139912"/>
   </autotools>
 
-  <!-- librsvg is converting to the Rust language. This requires
-       substantial infrastructure that's resistant to installing with
-       jhbuild, so we'll freeze at the 2.40 branch. -->
+  <!-- librsvg build requires rust compiler to be installed,
+   see https://rustup.rs -->
   <autotools id="librsvg" autogenargs="--disable-Bsymbolic">
-    <branch module="librsvg/2.40/librsvg-2.40.17.tar.xz" version="2.40.17"
-	    hash="sha256:e6f6c5cbecc405bb945c7cd15061276035ae3173bbb3bb25e8a916779c7f69cc"/>
+    <branch module="librsvg/2.44/librsvg-2.44.7.tar.xz" version="2.44.7"
+	    hash="sha256:aafd1c651b293bc09305ec9ae558e4fbcd4b9be6e7e27a003d48324af993b23e"/>
     <dependencies>
       <dep package="libcroco"/>
       <dep package="meta-gtk-osx-freetype"/>
