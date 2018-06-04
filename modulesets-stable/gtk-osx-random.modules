@@ -197,8 +197,7 @@ Libglade itself is deprecated. This is the last release. -->
   </autotools>
 
   <autotools id="gimp"  autogen-sh="autoreconf"
-             autogenargs=" --without-dbus
-			  --without-wmf --enable-binreloc "
+             autogenargs=" --without-dbus --without-wmf --enable-binreloc "
 	     makeargs='LDFLAGS="-framework Carbon -lobjc"'>
     <branch module="gimp/v2.10/gimp-2.10.2.tar.bz2" version="2.10.2"
             hash="sha256:1cb0baaecdefe44d371a15f2739a1bcbce4682336b4ccf8eb7b587ce52c333eb" repo="gimp">
