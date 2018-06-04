@@ -9,7 +9,7 @@
   <repository type="tarball" name="hadess"
               href="http://freedesktop.org/~hadess/"/>
   <repository type="tarball" name="gimp"
-              href="ftp://ftp.gimp.org/pub/"/>
+              href="https://download.gimp.org/pub/"/>
   <repository type="tarball" name="poppler.freedesktop.org"
               href="http://poppler.freedesktop.org/"/>
   <repository type="tarball" name="sourceforge"
