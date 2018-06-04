@@ -228,7 +228,7 @@ Libglade itself is deprecated. This is the last release. -->
     </branch>
   </autotools>
 
-  <autotools id="gexiv2" autogen-sh='autoreconf --force'>
+  <autotools id="gexiv2" autogen-sh='autoreconf'>
     <branch repo="ftp.gnome.org" version="0.10.8" checkoutdir="exiv2-trunk"
             module="gexiv2/0.10/gexiv2-0.10.8.tar.xz" hash="sha256:81c528fd1e5e03577acd80fb77798223945f043fd1d4e06920c71202eea90801">
             <patch file="https://bug791941.bugzilla-attachments.gnome.org/attachment.cgi?id=367961"
@@ -241,7 +241,7 @@ Libglade itself is deprecated. This is the last release. -->
   </autotools>
 
   <autotools id="exiv2">
-    <branch repo="www.exiv2.org" version="0.26" module="exiv2-0.26-trunk.tar.gz" hash="sha256:c75e3c4a0811bf700d92c82319373b7a825a2331c12b8b37d41eb58e4f18eafb"/>
+    <branch repo="www.exiv2.org" checkoutdir="exiv2-trunk" version="0.26" module="exiv2-0.26-trunk.tar.gz" hash="sha256:c75e3c4a0811bf700d92c82319373b7a825a2331c12b8b37d41eb58e4f18eafb"/>
   </autotools>
 
   <autotools id="gegl" autogen-sh="configure" autogenargs="--disable-docs">
