@@ -229,7 +229,7 @@ def setup_sdk(target=_target, sdk_version=None, architectures=[_default_arch]):
         # developing, and it takes a lot of typing, so define a
         # convenience environment variable:
         environ_append('SDKDIR', sdkdir)
-        environ_append('SDKROOT', sdkdir)
+        os.environ["SDKROOT"] = sdkdir
 
         # Apple Documentation says that "-syslibroot" is the arg to pass to the
         # linker, but we are using the compiler to control the linker, and
@@ -327,7 +327,6 @@ def setup_sdk(target=_target, sdk_version=None, architectures=[_default_arch]):
     module_extra_env["pkg-config"] = {'CFLAGS': os.environ['CFLAGS'] + ' -std=gnu89'}
     append_autogenargs('libgcrypt', 'CFLAGS="$CFLAGS -fheinous-gnu-extensions"')
     module_makeargs['liboil'] = 'CFLAGS="$CFLAGS -DHAVE_SYMBOL_UNDERSCORE -fheinous-gnu-extensions"'
-    append_autogenargs('babl', '--disable-sse')
 
     # openssl doesn't understand DESTDIR, but luckily it has its own mechanism.
     module_extra_env['openssl'] = {'INSTALL_PREFIX': os.path.join(prefix, '_jhbuild', 'root-openssl')}
