@@ -227,7 +227,7 @@ Libglade itself is deprecated. This is the last release. -->
 <dep package="gegl"/>
 <dep package="json-c"/>
 </dependencies>
-<branch module="mypaint/libmypaint/releases/download/v1.3.0/libmypaint-1.3.0.tar.xz" version="1.3.0"
+<branch hash="sha256:6a07d9d57fea60f68d218a953ce91b168975a003db24de6ac01ad69dcc94a671" module="mypaint/libmypaint/releases/download/v1.3.0/libmypaint-1.3.0.tar.xz" version="1.3.0"
   repo="github-tarball" checkoutdir="libmypaint-1.3.0"/>
 </autotools>
 
