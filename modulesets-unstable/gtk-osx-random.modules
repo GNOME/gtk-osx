@@ -159,6 +159,7 @@
       <dep package="fontconfig"/>
       <dep package="gegl"/>
       <dep package="pango"/>
+      <dep package="librsvg"/>
       <dep package="gexiv2"/>
     </dependencies>
   </autotools>
