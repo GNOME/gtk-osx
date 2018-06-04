@@ -244,6 +244,14 @@ Libglade itself is deprecated. This is the last release. -->
       <dep package="meta-gtk-osx-core"/>
     </after>
   </cmake>
+  <cmake id="poppler-data">
+
+    <branch module="poppler-data-0.4.9.tar.gz" version="0.4.9"
+            repo="poppler.freedesktop.org"/>
+    <after>
+      <dep package="poppler"/>
+    </after>
+  </cmake>
 
 <!-- SQLite3 is provided by MacOSX in /usr/lib/libsqlite.3.dylib -->
   <autotools id="sqlite" autogenargs="--disable-tcl --enable-threadsafe"
