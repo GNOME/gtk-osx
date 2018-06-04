@@ -233,10 +233,8 @@ Libglade itself is deprecated. This is the last release. -->
   </autotools>
 
   <cmake id="poppler"
-         cmakeargs='-DPORT=GTK -DENABLE_X11_TARGET=OFF -DENABLE_QUARTZ_TARGET=ON -DENABLE_INTROSPECTION=OFF  -DENABLE_OPENGL=OFF -DENABLE_PLUGIN_PROCESS_GTK2=OFF -DENABLE_VIDEO=OFF -DENABLE_WEB_AUDIO=OFF -DENABLE_GEOLOCATION=OFF -DUSE_LIBNOTIFY=OFF -DUSE_LIBHYPHEN=OFF -DUSE_LIBSECRET=OFF -DENABLE_TOUCH_EVENTS=OFF -DCMAKE_CXX_FLAGS="-stdlib=libc++"'>
+         cmakeargs='-DENABLE_QT5:BOOL=OFF -DWITH_JPEG:BOOL=OFF -DWITH_NSS3:BOOL=OFF  -DENABLE_LIBOPENJPEG:STRING=unmaintained'>
 
-<!--  <autotools id="poppler"  autogen-sh="configure"
-           autogenargs="--disable-qt --disable-qt4 --without-x --disable-gtk-test --enable-xpdf-headers"> -->
     <branch module="poppler-0.65.0.tar.xz" version="0.65.0"
             repo="poppler.freedesktop.org"/>
     <after>
