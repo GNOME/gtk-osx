@@ -7,7 +7,7 @@
   <repository type="tarball" name="sourceforge"
               href="http://downloads.sourceforge.net/sourceforge/"/>
   <repository type="tarball" name="cairographics"
-              href="http://cairographics.org/releases/"/>
+              href="https://www.cairographics.org/releases/"/>
   <repository type="tarball" name="ftp.gnu.org"
               href="http://ftp.gnu.org/gnu/"/>
   <repository type="tarball" name="sourceware.org"
@@ -88,11 +88,8 @@
 
   <autotools id="glib" autogen-sh="autoreconf"
              autogenargs="--with-pcre=internal">
-    <branch module="glib/2.52/glib-2.52.2.tar.xz"  version="2.52.2"
-            hash="sha256:f00e5d9e2a2948b1da25fcba734a6b7a40f556de8bc9f528a53f6569969ac5d0">
-      <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/glib-gint64-long-long.patch" strip="1"/>
-      <!-- Fix should be in glib-2.54.2 -->
-      <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/glib-2.52-Fallback-to-CFStringGetCSTring-if-CFStringGetC.patch" strip="1"/>
+    <branch module="glib/2.57/glib-2.57.1.tar.xz"  version="2.57.1"
+            hash="sha256:d029e7c4536835f1f103472f7510332c28d58b9b7d6cd0e9f45c2653e670d9b4">
     </branch>
     <dependencies>
         <dep package="libffi"/>
@@ -126,13 +123,26 @@
       </after>
   </autotools>
 
+
+<autotools id="fribidi">
+   <branch repo="github-tarball" version="1.0.3" module="fribidi/fribidi/releases/download/v1.0.3/fribidi-1.0.3.tar.bz2"
+           hash="sha256:8d214b17b6eedcb416e53142c196c2896b9a685fca2a5bddc098a73d2b02ce12">
+   </branch>
+   <after>
+     <dep package="gobject-introspection"/>
+     <dep package="meta-gtk-osx-freetype"/>
+     <dep package="meta-gtk-osx-bootstrap"/>
+   </after>
+ </autotools>
+
  <autotools id="pango"  autogen-sh="autoreconf">
-    <branch version="1.40.12" module="pango/1.40/pango-1.40.12.tar.xz"
-            hash="sha256:75f1a9a8e4e2b28cbc078b50c1fa927ee4ded994d1ade97c5603e2d1f3161cfc">
+    <branch version="1.42.1" module="pango/1.42/pango-1.42.1.tar.xz"
+            hash="sha256:915a6756b298578ff27c7a6393f8c2e62e6e382f9411f2504d7af1a13c7bce32">
     </branch>
     <dependencies>
       <dep package="glib"/>
       <dep package="cairo"/>
+      <dep package="fribidi"/>
      </dependencies>
     <after>
       <dep package="gobject-introspection"/>
@@ -187,7 +197,7 @@
     <branch repo="freedesktop" version="1.19.1"
             module="xorg/individual/util/util-macros-1.19.1.tar.bz2"/>
   </autotools>
-  
+
   <autotools id="libepoxy" autogen-sh="configure">
     <branch repo="github-tarball" version="1.4.1"
             module="anholt/libepoxy/releases/download/1.4.2/libepoxy-1.4.2.tar.xz"/>
@@ -254,9 +264,9 @@
        dependency. -->
   <autotools id="cairo"  autogen-sh="configure"
              autogenargs="--enable-pdf --enable-quartz --disable-xlib --without-x">
-    <branch module="cairo-1.14.8.tar.xz"  version="1.14.8"
+    <branch module="cairo-1.14.12.tar.xz"  version="1.14.12"
             repo="cairographics"
-            hash="sha1:c6f7b99986f93c9df78653c3e6a3b5043f65145e">
+            hash="sha1:490025a0ba0622a853010f49fb6343f29fb70b9b">
     </branch>
     <dependencies>
       <dep package="pixman"/>
