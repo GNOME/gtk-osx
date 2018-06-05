@@ -156,6 +156,7 @@
       <dep package="meta-gtk-osx-core"/>
     </after>
     <dependencies>
+      <dep package="meta-gtk-osx-python">
       <dep package="lcms"/>
       <dep package="fontconfig"/>
       <dep package="gegl"/>
@@ -165,7 +166,7 @@
   <autotools id="json-glib">
     <branch revision="json-glib-1-2"/>
   </autotools>
-  
+
    <autotools id="babl">
      <branch tag="BABL_0_1_24"/>
   </autotools>
