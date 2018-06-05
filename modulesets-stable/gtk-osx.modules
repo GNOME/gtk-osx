@@ -89,7 +89,7 @@
   <autotools id="glib" autogen-sh="autoreconf"
              autogenargs="--with-pcre=internal">
     <branch module="glib/2.57/glib-2.57.1.tar.xz"  version="2.57.1"
-            hash="sha256:40ef3f44f2c651c7a31aedee44259809b6f03d3d20be44545cd7d177221c0b8d">
+            hash="sha256:d029e7c4536835f1f103472f7510332c28d58b9b7d6cd0e9f45c2653e670d9b4">
     </branch>
     <dependencies>
         <dep package="libffi"/>
