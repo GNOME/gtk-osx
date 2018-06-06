@@ -314,8 +314,8 @@ Libglade itself is deprecated. This is the last release. -->
 	    repo="sqlite"/>
   </autotools>
 
-  <cmake cmakeargs="source" id="x265">
-    <branch module="multicoreware/x265/downloads/x265_2.8.tar.gz" version="2.8"
+  <cmake id="x265">
+    <branch checkoutdir="x265_2.8/source" module="multicoreware/x265/downloads/x265_2.8.tar.gz" version="2.8"
       hash="sha256:6e59f9afc0c2b87a46f98e33b5159d56ffb3558a49d8e3d79cb7fdc6b7aaa863"
       repo="bitbucket-tarball"/>
   </cmake>
