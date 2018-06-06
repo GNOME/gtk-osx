@@ -315,6 +315,7 @@ Libglade itself is deprecated. This is the last release. -->
   <autotools id="libheif"
 	     autogen-sh="configure">
     <branch module="strukturag/libheif/releases/download/v1.2.0/libheif-1.2.0.tar.gz" version="1.2.0"
+      hash="sha256:2e7d40f81d1bbe6089b1e0f27800b97cf6a195e093ef86199edfb6e59e2fa8fa"
       repo="github-tarball"/>
   </autotools>
 
