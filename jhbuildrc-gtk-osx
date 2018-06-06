@@ -318,14 +318,15 @@ def setup_sdk(target=_target, sdk_version=None, architectures=[_default_arch]):
     append_autogenargs("guile", 'CFLAGS="$CFLAGS -O1"')
     #Defining ARCHFLAGS globally messes up waf, so we need to define
     #it here for our two perl modules:
-    module_extra_env.update(
+    if (_osx_version < 14):
+        module_extra_env["expat"] = {'CFLAGS':os.environ['CFLAGS'] + ' -arch i386 -arch x86_64'}
+        module_extra_env.update(
             {"perl-xml-simple":{"ARCHFLAGS":"-arch i386 -arch x86_64"},
              "perl-xml-parser":{"ARCHFLAGS":"-arch i386 -arch x86_64"}})
     #Some packages require special arguments or flags to compile with Clang:
     module_extra_env["pkg-config"] = {'CFLAGS': os.environ['CFLAGS'] + ' -std=gnu89'}
     append_autogenargs('libgcrypt', 'CFLAGS="$CFLAGS -fheinous-gnu-extensions"')
     module_makeargs['liboil'] = 'CFLAGS="$CFLAGS -DHAVE_SYMBOL_UNDERSCORE -fheinous-gnu-extensions"'
-    module_extra_env["expat"] = {'CFLAGS':os.environ['CFLAGS'] + ' -arch i386 -arch x86_64'}
     append_autogenargs('babl', '--disable-sse')
 
     # openssl doesn't understand DESTDIR, but luckily it has its own mechanism.
