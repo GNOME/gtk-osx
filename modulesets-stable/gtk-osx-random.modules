@@ -312,11 +312,21 @@ Libglade itself is deprecated. This is the last release. -->
 	    repo="sqlite"/>
   </autotools>
 
+  <autotools id="libde265"
+	     autogen-sh="configure">
+    <branch module="strukturag/libde265/releases/download/v1.0.3/libde265-1.0.3.tar.gz" version="1.2.0"
+      hash="sha256:e4206185a7c67d3b797d6537df8dcaa6e5fd5a5f93bd14e65a755c33cd645f7a"
+      repo="github-tarball"/>
+  </autotools>
+
   <autotools id="libheif"
 	     autogen-sh="configure">
     <branch module="strukturag/libheif/releases/download/v1.2.0/libheif-1.2.0.tar.gz" version="1.2.0"
       hash="sha256:2e7d40f81d1bbe6089b1e0f27800b97cf6a195e093ef86199edfb6e59e2fa8fa"
       repo="github-tarball"/>
+    <dependencies>
+      <dep package="libde265"/>
+    </dependencies>
   </autotools>
 
 <!-- Goocanvas-1 is for gtk+-2. -->
