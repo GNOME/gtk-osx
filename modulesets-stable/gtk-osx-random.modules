@@ -19,6 +19,7 @@
               href="http://downloads.sourceforge.net/sourceforge/"/>
   <repository type="git" name="github.com" href="git://github.com/"/>
   <repository type="tarball" name="github-tarball" href="https://github.com/"/>
+  <repository type="tarball" name="bitbucket-tarball" href="https://bitbucket.org/"/>
   <repository type="tarball" name="dbus.freedesktop.org"
               href="http://dbus.freedesktop.org/releases/"/>
   <repository type="tarball" name="sqlite" href="http://www.sqlite.org/"/>
@@ -313,6 +314,12 @@ Libglade itself is deprecated. This is the last release. -->
 	    repo="sqlite"/>
   </autotools>
 
+  <cmake id="x265">
+    <branch module="multicoreware/x265/downloads/x265_2.8.tar.gz" version="2.8"
+      hash="sha256:6e59f9afc0c2b87a46f98e33b5159d56ffb3558a49d8e3d79cb7fdc6b7aaa863"
+      repo="bitbucket-tarball"/>
+  </cmake>
+
   <autotools id="libde265"
 	     autogen-sh="configure">
     <branch module="strukturag/libde265/releases/download/v1.0.3/libde265-1.0.3.tar.gz" version="1.2.0"
@@ -327,6 +334,7 @@ Libglade itself is deprecated. This is the last release. -->
       repo="github-tarball"/>
     <dependencies>
       <dep package="libde265"/>
+      <dep package="x265"/>
     </dependencies>
   </autotools>
 
