@@ -338,6 +338,13 @@ Libglade itself is deprecated. This is the last release. -->
     </dependencies>
   </autotools>
 
+  <autotools id="aalib"
+	     autogen-sh="configure">
+    <branch module="aa-project/aalib-1.4rc5.tar.gz" version="1.4.0"
+      hash="sha256:fbddda9230cf6ee2a4f5706b4b11e2190ae45f5eda1f0409dc4f99b35e0a70ee"
+      repo="sourceforge"/>
+  </autotools>
+
 <!-- Goocanvas-1 is for gtk+-2. -->
   <autotools id="goocanvas" autogen-sh="configure">
     <branch module="goocanvas/1.0/goocanvas-1.0.0.tar.bz2" version="1.0.0"
