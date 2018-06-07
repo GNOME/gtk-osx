@@ -179,7 +179,7 @@ Libglade itself is deprecated. This is the last release. -->
   <autotools id="shared-mime-info"  autogen-sh="configure"
              autogenargs="--disable-default-make-check"
              supports-non-srcdir-builds="no" >
-    <branch module="shared-mime-info-1.7.tar.xz" version="1.7"
+    <branch module="shared-mime-info-1.9.tar.xz" version="1.9"
             repo="hadess">
     </branch>
     <dependencies>
@@ -220,6 +220,7 @@ Libglade itself is deprecated. This is the last release. -->
       <dep package="mypaint-brushes"/>
       <dep package="libheif"/>
       <dep package="aalib"/>
+      <dep package="shared-mime-info"/>
 
     </dependencies>
   </autotools>
