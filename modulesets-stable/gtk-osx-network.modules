@@ -99,8 +99,8 @@
 
   <autotools id="libsoup" autogen-sh="configure"
              autogenargs="set_more_warnings=no">
-    <branch module="libsoup/2.57/libsoup-2.57.1.tar.xz" version="2.57.1"
-            hash="sha256:ca1ca037e89e8bc7b782559f3ec5d89c9d0b836f505b2f95e008ed517fd6658f"/>
+    <branch module="libsoup/2.62/libsoup-2.62.2.tar.xz" version="2.62.2"
+            hash="sha256:9e536fe3da60b25d2c63addb84a9d5072d00b0d8b8cbeabc629a6bcd63f879b6"/>
     <dependencies>
       <dep package="glib"/>
       <dep package="glib-networking"/>
