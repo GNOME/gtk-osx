@@ -220,6 +220,7 @@ Libglade itself is deprecated. This is the last release. -->
       <dep package="mypaint-brushes"/>
       <dep package="libheif"/>
       <dep package="aalib"/>
+      <dep package="libwebp"/>
       <dep package="shared-mime-info"/>
 
     </dependencies>
