@@ -109,9 +109,9 @@
     </dependencies>
   </autotools>
 
-  <autotools id="libwebp" autogen-sh="configure">
-    <branch repo="webm" module="webp/libwebp-0.6.0.tar.gz" version="0.6.0"/>
-  </autotools>
+  <cmake id="libwebp">
+    <branch repo="webm" module="webp/libwebp-1.0.0.tar.gz" version="1.0.0"/>
+  </cmake>
 
   <autotools id="icu55" autogen-sh="source/configure"
              autogenargs="--enable-rpath"
