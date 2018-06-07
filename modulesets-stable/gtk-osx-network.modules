@@ -109,7 +109,7 @@
     </dependencies>
   </autotools>
 
-  <autotools id="libwebp">
+  <autotools id="libwebp" autogen-sh="configure">
     <branch repo="webm" module="webp/libwebp-1.0.0.tar.gz" version="1.0.0"/>
   </autotools>
 
