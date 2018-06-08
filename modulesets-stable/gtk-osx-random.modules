@@ -55,6 +55,7 @@ Libglade itself is deprecated. This is the last release. -->
   <autotools id="libglade" autogen-sh='autoreconf'>
     <branch module="libglade/2.6/libglade-2.6.4.tar.bz2" version="2.6.4"
             md5sum="d1776b40f4e166b5e9c107f1c8fe4139" >
+      <!-- patch adds appkit framework as debug tool dependency -->
       <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/libglade-gmodule.patch" strip="1"/>
     </branch>
     <after>
