@@ -198,11 +198,12 @@ Libglade itself is deprecated. This is the last release. -->
   </autotools>
 
   <autotools id="gimp"  autogen-sh="autoreconf"
-             autogenargs="--without-x
-			   --without-wmf --enable-binreloc"
-	     makeargs='LDFLAGS="-framework Carbon -framework AppKit"'>
+             autogenargs="--disable-python --without-x
+			   --without-wmf --enable-binreloc">
     <branch module="gimp/v2.10/gimp-2.10.2.tar.bz2" version="2.10.2"
             hash="sha256:1cb0baaecdefe44d371a15f2739a1bcbce4682336b4ccf8eb7b587ce52c333eb" repo="gimp">
+            <patch file="https://gitlab.gnome.org/GNOME/gimp/merge_requests/8.diff"
+                   strip="1"/>
     </branch>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
@@ -222,7 +223,6 @@ Libglade itself is deprecated. This is the last release. -->
       <dep package="aalib"/>
       <dep package="libwebp"/>
       <dep package="shared-mime-info"/>
-
     </dependencies>
   </autotools>
 
