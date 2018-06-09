@@ -94,6 +94,7 @@
             version="2.50.0"/>
     <dependencies>
       <dep package="gnutls"/>
+      <dep package="glib"/>
     </dependencies>
   </autotools>
 
