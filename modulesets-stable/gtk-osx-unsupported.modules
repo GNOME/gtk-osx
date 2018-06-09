@@ -6,7 +6,7 @@
               href="http://ftp.gnome.org/pub/GNOME/sources/"/>
   <repository type='tarball' name='gnupg.org' href="https://gnupg.org/ftp/" />
   <repository type="tarball" name="iso-codes"
-	      href="http://pkg-isocodes.alioth.debian.org/downloads/"/>
+	      href="https://ftp.osuosl.org/pub/blfs/conglomeration/iso-codes/"/>
   <repository type='tarball' name='github-tarball'
               href='https://github.com/'/>
   <repository type="tarball" name="curl.haxx.se"
