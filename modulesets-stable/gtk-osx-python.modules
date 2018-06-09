@@ -203,4 +203,13 @@
     </dependencies>
   </autotools>
 
+  <distutils id="python-six">
+    <branch module="s/six/six-1.10.0.tar.gz" repo="pypi" version="1.10.0"
+            checkoutdir="six"/>
+    <dependencies>
+      <dep package="libxml2"/>
+      <dep package="libxslt"/>
+    </dependencies>
+  </distutils>
+
 </moduleset>
