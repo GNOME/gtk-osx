@@ -204,7 +204,7 @@
   </autotools>
 
   <distutils id="python-six">
-    <branch module="s/six/six-1.10.0.tar.gz" repo="pypi" version="1.10.0"
+    <branch module="s/six/six-1.10.0.tar.gz" repo="pymodules" version="1.10.0"
             checkoutdir="six"/>
     <dependencies>
       <dep package="libxml2"/>
