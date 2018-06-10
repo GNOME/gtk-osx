@@ -298,11 +298,12 @@ Libglade itself is deprecated. This is the last release. -->
     <branch module="poppler-0.65.0.tar.xz" version="0.65.0"
             repo="poppler.freedesktop.org"/>
     <after>
-      <dep package="openjpeg"/>
-
       <dep package="meta-gtk-osx-bootstrap"/>
       <dep package="meta-gtk-osx-core"/>
     </after>
+  <dependencies>
+    <dep package="openjpeg"/>
+  </dependencies>
   </cmake>
   <cmake id="poppler-data">
 
