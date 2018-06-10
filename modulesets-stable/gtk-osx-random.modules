@@ -366,6 +366,14 @@ Libglade itself is deprecated. This is the last release. -->
     </branch>
   </autotools>
 
+  <autotools id="libwmf"
+	     autogen-sh="configure">
+    <branch module="wvware/libwmf/0.2.8.4/libwmf-0.2.8.4.tar.gz" version="0.2.8.4"
+      hash="sha256:5b345c69220545d003ad52bfd035d5d6f4f075e65204114a9e875e84895a7cf8"
+      repo="sourceforge">
+    </branch>
+  </autotools>
+
 <!-- Goocanvas-1 is for gtk+-2. -->
   <autotools id="goocanvas" autogen-sh="configure">
     <branch module="goocanvas/1.0/goocanvas-1.0.0.tar.bz2" version="1.0.0"
