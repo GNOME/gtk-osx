@@ -88,11 +88,9 @@
 
   <autotools id="glib" autogen-sh="autoreconf"
              autogenargs="--with-pcre=internal">
-    <branch module="glib/2.52/glib-2.52.2.tar.xz"  version="2.52.2"
-            hash="sha256:f00e5d9e2a2948b1da25fcba734a6b7a40f556de8bc9f528a53f6569969ac5d0">
+    <branch module="glib/2.56/glib-2.56.1.tar.xz"  version="2.56.1"
+            hash="sha256:40ef3f44f2c651c7a31aedee44259809b6f03d3d20be44545cd7d177221c0b8d">
       <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/glib-gint64-long-long.patch" strip="1"/>
-      <!-- Fix should be in glib-2.54.2 -->
-      <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/glib-2.52-Fallback-to-CFStringGetCSTring-if-CFStringGetC.patch" strip="1"/>
     </branch>
     <dependencies>
         <dep package="libffi"/>
