@@ -35,6 +35,8 @@
 	      href="http://files.itstool.org/"/>
   <repository type="tarball" name="abisource/enchant"
               href="http://www.abisource.com/downloads/enchant/"/>
+  <repository type="tarball" name="savannah"
+              href="http://download.savannah.nongnu.org/releases/"/>
 
   <metamodule id="meta-gtk-osx-random">
     <dependencies>
@@ -386,6 +388,17 @@ Libglade itself is deprecated. This is the last release. -->
     <branch module="openexr/openexr/releases/download/v2.2.1/openexr-2.2.1.tar.gz" version="2.2.1"
       hash="sha256:8f9a5af6131583404261931d9a5c83de0a425cb4b8b25ddab2b169fbf113aecd"
       repo="github-tarball">
+    </branch>
+    <dependencies>
+      <dep package="ilmbase"/>
+    </dependencies>
+  </autotools>
+
+  <autotools id="ilmbase"
+       autogen-sh="configure">
+    <branch module="openexr/ilmbase-2.2.1.tar.gz" version="2.2.1"
+      hash="sha256:cac206e63be68136ef556c2b555df659f45098c159ce24804e9d5e9e0286609e"
+      repo="savannah">
     </branch>
   </autotools>
 
