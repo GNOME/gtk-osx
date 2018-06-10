@@ -199,8 +199,7 @@ Libglade itself is deprecated. This is the last release. -->
   </autotools>
 
   <autotools id="gimp"  autogen-sh="autoreconf"
-             autogenargs="--without-x
-			   --without-wmf --enable-binreloc">
+             autogenargs="--without-x --enable-binreloc">
     <branch module="gimp/v2.10/gimp-2.10.2.tar.bz2" version="2.10.2"
             hash="sha256:1cb0baaecdefe44d371a15f2739a1bcbce4682336b4ccf8eb7b587ce52c333eb" repo="gimp">
             <patch file="https://gitlab.gnome.org/GNOME/gimp/merge_requests/8.diff"
@@ -227,6 +226,7 @@ Libglade itself is deprecated. This is the last release. -->
       <dep package="iso-codes"/>
       <dep package="librsvg"/>
       <dep package="gexiv2"/>
+      <dep package="libwmf"/>
 
       <dep package="meta-gtk-osx-python"/> <!-- use embedded python instead of system one -->
     </dependencies>
