@@ -446,7 +446,7 @@ Libglade itself is deprecated. This is the last release. -->
   </cmake>
   <!-- this is fork from https://sourceforge.net/projects/libmng/ with lcms2 support -->
   <cmake id="libmng"
-    cmakeargs="-DMNG_INSTALL_LIB_DIR=$JHBUILD_PREFIX/lib -DCMAKE_INSTALL_NAME_TOOL=/bin/true -DCMAKE_SHARED_LINKER_FLAGS=-Wl,-install_name,$JHBUILD_PREFIX/lib/libmng.2.dylib"
+    cmakeargs="-DMNG_INSTALL_LIB_DIR=$JHBUILD_PREFIX/lib -DCMAKE_BUILD_WITH_INSTALL_NAME_DIR=true -DCMAKE_MACOSX_RPATH=true . -DCMAKE_INSTALL_NAME_DIR=$JHBUILD_PREFIX/lib"
     hash="sha256:4a462fdd48d4bc82c1d7a21106c8a18b62f8cc0042454323058e6da0dbb57dd3">
     <branch module="project/libmng/libmng-devel/2.0.3/libmng-2.0.3.tar.xz" version="2.0.3"
 	    repo="sourceforge"/>
