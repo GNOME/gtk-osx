@@ -138,6 +138,7 @@
      with later versions it installs as pygobject2 and PyGObject 3
      installs as pygobject3. Introspection is disabled here, because
      gir-scanner isn't smart enough to co-install them. -->
+     <!-- FIXME - hard depencency on gio/gdesktopappinfo.h >
   <autotools id="pygobject" autogen-sh="configure"
 	     autogenargs="--disable-introspection"
 	     supports-non-srcdir-builds="no">
