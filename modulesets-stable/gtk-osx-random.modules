@@ -225,7 +225,7 @@ Libglade itself is deprecated. This is the last release. -->
       <dep package="libwebp"/>
       <dep package="shared-mime-info"/>
       <dep package="iso-codes"/>
-      <dep package="meta-gtk-osx-python"> <!-- use embedded python instead of system one -->
+      <dep package="meta-gtk-osx-python"/> <!-- use embedded python instead of system one -->
     </dependencies>
   </autotools>
 
