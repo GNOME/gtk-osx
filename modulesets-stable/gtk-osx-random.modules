@@ -229,7 +229,7 @@ Libglade itself is deprecated. This is the last release. -->
       <dep package="librsvg"/>
       <dep package="gexiv2"/>
       <dep package="libwmf"/>
-
+      <dep package="openexr"/>
       <dep package="meta-gtk-osx-python"/> <!-- use embedded python instead of system one -->
     </dependencies>
   </autotools>
