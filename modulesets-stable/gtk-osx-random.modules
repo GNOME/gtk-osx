@@ -331,7 +331,7 @@ Libglade itself is deprecated. This is the last release. -->
       <!-- no cmake files in the root folder -->
     <patch file="https://raw.githubusercontent.com/samm-git/gimp-osx-package/master/patches/x265-cmake.patch"
              strip="1"/>
-    </brach>
+    </branch>
   </cmake>
 
   <autotools id="libde265"
