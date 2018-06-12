@@ -206,6 +206,9 @@ Libglade itself is deprecated. This is the last release. -->
             hash="sha256:1cb0baaecdefe44d371a15f2739a1bcbce4682336b4ccf8eb7b587ce52c333eb" repo="gimp">
             <patch file="https://gitlab.gnome.org/GNOME/gimp/merge_requests/8.diff"
                    strip="1"/>
+            <patch file="https://raw.githubusercontent.com/samm-git/gimp-osx-package/master/patches/wmf-fontdir-path.patch"
+                   strip="0"/>
+
     </branch>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
