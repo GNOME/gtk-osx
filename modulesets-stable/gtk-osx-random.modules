@@ -234,7 +234,7 @@ Libglade itself is deprecated. This is the last release. -->
       <dep package="libwmf"/>
       <dep package="openexr"/>
       <dep package="libmng"/>
-
+      <dep package="ghostscript"/>
       <dep package="meta-gtk-osx-python"/> <!-- use embedded python instead of system one -->
     </dependencies>
   </autotools>
@@ -296,7 +296,10 @@ Libglade itself is deprecated. This is the last release. -->
   <autotools id="ghostscript">
     <branch repo="github-tarball"
       version="9.23" module="ArtifexSoftware/ghostpdl-downloads/releases/download/gs923/ghostscript-9.23.tar.xz"
-      hash="sha256:1fcedc27d4d6081105cdf35606cb3f809523423a6cf9e3c23cead3525d6ae8d9"/>
+      hash="sha256:1fcedc27d4d6081105cdf35606cb3f809523423a6cf9e3c23cead3525d6ae8d9">
+      <patch file="https://raw.githubusercontent.com/samm-git/gimp-osx-package/master/patches/ghostscript-lib.patch"
+             strip="0"/>
+    </branch>
     <dependencies>
           <dep package="lcms"/>
     </dependencies>
