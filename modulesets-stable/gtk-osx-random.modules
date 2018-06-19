@@ -299,7 +299,7 @@ Libglade itself is deprecated. This is the last release. -->
       version="9.23" module="ArtifexSoftware/ghostpdl-downloads/releases/download/gs923/ghostscript-9.23.tar.xz"
       hash="sha256:1fcedc27d4d6081105cdf35606cb3f809523423a6cf9e3c23cead3525d6ae8d9">
       <patch file="https://raw.githubusercontent.com/samm-git/gimp-osx-package/master/patches/ghostscript-lib.patch"
-             strip="1"/>
+             strip="0"/>
     </branch>
     <dependencies>
           <dep package="lcms"/>
