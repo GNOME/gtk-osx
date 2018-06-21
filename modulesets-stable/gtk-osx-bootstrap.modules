@@ -118,8 +118,8 @@
 
   <autotools id="gtk-doc" autogen-sh="configure"
              autogenargs="--with-xml-catalog=$JHBUILD_PREFIX/share/xml/catalog">
-    <branch version="1.27" module="gtk-doc/1.27/gtk-doc-1.27.tar.xz"
-            hash="sha256:e26bd3f7080c749b1cb66c46c6bf8239e2f320a949964fb9c6d56e1b0c6d9a6f"/>
+    <branch version="1.28" module="gtk-doc/1.28/gtk-doc-1.28.tar.xz"
+            hash="sha256:911e29e302252c96128965ee1f4067d5431a88e00ad1023a8bc1d6b922af5715"/>
     <dependencies>
       <dep package="libxml2"/>
       <dep package="itstool"/>
@@ -159,7 +159,7 @@
   <autotools id="freetype-no-harfbuzz" autogen-sh="configure"
              skip-autogen="never"
              autogenargs="--without-bzip2 --without-harfbuzz">
-    <branch module="freetype/freetype-2.7.1.tar.gz" version="2.7.1"
+    <branch module="freetype/freetype-2.9.1.tar.gz" version="2.9.1"
             repo="sourceforge">
       <!--patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/freetype-2.5.3-ccexe_cflags.patch" strip="1"/-->
     </branch>
@@ -170,7 +170,7 @@
 
   <autotools id="freetype" autogen-sh="configure" skip-autogen="never"
 	     autogenargs="--without-bzip2">
-    <branch module="freetype/freetype-2.7.1.tar.gz" version="2.7.1"
+    <branch module="freetype/freetype-2.9.1.tar.gz" version="2.9.1"
             repo="sourceforge">
     </branch>
     <dependencies>
@@ -180,9 +180,10 @@
   </autotools>
 
   <autotools id="fontconfig" autogen-sh="autoreconf"
-             autogenargs="--disable-docs">
-    <branch repo="fontconfig" version="2.12.1"
-            module="fontconfig-2.12.1.tar.bz2"/>
+             autogenargs="--disable-docs '--with-add-fonts=/System/Library/Fonts,/Library/Fonts,~/Library/Fonts'">
+    <branch repo="fontconfig" version="2.13.0" module="fontconfig-2.13.0.tar.bz2">
+      <patch file="https://bugs.freedesktop.org/attachment.cgi?id=137886" strip="1" />
+    </branch>
     <dependencies>
       <dep package="freetype"/>
     </dependencies>

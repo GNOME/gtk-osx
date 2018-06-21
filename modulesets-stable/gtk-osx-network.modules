@@ -72,8 +72,8 @@
   <!-- Building with p11-kit support breaks g-ir-scanner, for some weird reason. -->
   <autotools id="gnutls" autogen-sh="configure"
              autogenargs="--disable-gtk-doc-html --without-p11-kit">
-    <branch repo="gnutls" version="3.5.9"
-            module="gcrypt/gnutls/v3.5/gnutls-3.5.9.tar.xz"/>
+    <branch repo="gnutls" version="3.5.18"
+            module="gcrypt/gnutls/v3.5/gnutls-3.5.18.tar.xz"/>
     <dependencies>
       <dep package="libunistring"/>
       <dep package="libnettle"/>
@@ -94,13 +94,14 @@
             version="2.50.0"/>
     <dependencies>
       <dep package="gnutls"/>
+      <dep package="glib"/>
     </dependencies>
   </autotools>
 
   <autotools id="libsoup" autogen-sh="configure"
              autogenargs="set_more_warnings=no">
-    <branch module="libsoup/2.57/libsoup-2.57.1.tar.xz" version="2.57.1"
-            hash="sha256:ca1ca037e89e8bc7b782559f3ec5d89c9d0b836f505b2f95e008ed517fd6658f"/>
+    <branch module="libsoup/2.62/libsoup-2.62.2.tar.xz" version="2.62.2"
+            hash="sha256:9e536fe3da60b25d2c63addb84a9d5072d00b0d8b8cbeabc629a6bcd63f879b6"/>
     <dependencies>
       <dep package="glib"/>
       <dep package="glib-networking"/>
@@ -109,8 +110,8 @@
     </dependencies>
   </autotools>
 
-  <autotools id="libwebp" autogen-sh="configure">
-    <branch repo="webm" module="webp/libwebp-0.6.0.tar.gz" version="0.6.0"/>
+  <autotools id="libwebp" autogen-sh="configure"  autogenargs="--enable-libwebpmux --enable-libwebpdecoder">
+    <branch repo="webm" module="webp/libwebp-1.0.0.tar.gz" version="1.0.0"/>
   </autotools>
 
   <autotools id="icu55" autogen-sh="source/configure"
