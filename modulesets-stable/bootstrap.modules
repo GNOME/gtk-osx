@@ -54,7 +54,10 @@
   <autotools id="gettext-tools" autogen-sh="configure"
              autogenargs="--without-emacs --disable-java --disable-native-java --disable-libasprintf --disable-csharp --with-included-glib">
     <branch repo="ftp.gnu.org" source-subdir="gettext-tools"
-            module="gettext/gettext-0.19.8.tar.xz" version="0.19.8"/>
+            module="gettext/gettext-0.19.8.tar.xz" version="0.19.8">
+      <!-- upstream bug: https://savannah.gnu.org/bugs/index.php?49560 -->
+      <patch file="https://savannah.gnu.org/bugs/download.php?file_id=38908" strip="1"/>
+    </branch>
   </autotools>
 
   <!-- cmakes ./configure is picky about invalid flags so we manually set it -->
