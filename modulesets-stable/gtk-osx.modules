@@ -7,7 +7,7 @@
   <repository type="tarball" name="sourceforge"
               href="http://downloads.sourceforge.net/sourceforge/"/>
   <repository type="tarball" name="cairographics"
-              href="http://cairographics.org/releases/"/>
+              href="https://www.cairographics.org/releases/"/>
   <repository type="tarball" name="ftp.gnu.org"
               href="http://ftp.gnu.org/gnu/"/>
   <repository type="tarball" name="sourceware.org"
@@ -108,9 +108,9 @@
 
 
   <autotools id="gobject-introspection" autogen-sh="configure">
-    <branch module="gobject-introspection/1.52/gobject-introspection-1.52.1.tar.xz"
-            version="1.52.1"
-            hash="sha256:2ed0c38d52fe1aa6fc4def0c868fe481cb87b532fc694756b26d6cfab29faff4">
+    <branch module="gobject-introspection/1.56/gobject-introspection-1.56.1.tar.xz"
+            version="1.56.1"
+            hash="sha256:5b2875ccff99ff7baab63a34b67f8c920def240e178ff50add809e267d9ea24b">
       <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/girscanner-objc.patch" strip="1"/>
             <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/gi_cairo_library_path.patch" strip="1"/>
     </branch>
@@ -124,13 +124,15 @@
       </after>
   </autotools>
 
- <autotools id="pango"  autogen-sh="autoreconf">
-    <branch version="1.40.12" module="pango/1.40/pango-1.40.12.tar.xz"
-            hash="sha256:75f1a9a8e4e2b28cbc078b50c1fa927ee4ded994d1ade97c5603e2d1f3161cfc">
+ <autotools id="pango"  autogen-sh="autoreconf"
+   autogenargs="--without-xft --disable-silent-rules --disable-dependency-tracking">
+    <branch version="1.42.1" module="pango/1.42/pango-1.42.1.tar.xz"
+            hash="sha256:915a6756b298578ff27c7a6393f8c2e62e6e382f9411f2504d7af1a13c7bce32">
     </branch>
     <dependencies>
       <dep package="glib"/>
       <dep package="cairo"/>
+      <dep package="fribidi"/>
      </dependencies>
     <after>
       <dep package="gobject-introspection"/>
@@ -138,6 +140,18 @@
       <dep package="meta-gtk-osx-bootstrap"/>
     </after>
   </autotools>
+
+  <autotools id="fribidi">
+     <branch repo="github-tarball" version="1.0.3"
+       module="fribidi/fribidi/releases/download/v1.0.3/fribidi-1.0.3.tar.bz2"
+             hash="sha256:8d214b17b6eedcb416e53142c196c2896b9a685fca2a5bddc098a73d2b02ce12">
+     </branch>
+     <after>
+       <dep package="gobject-introspection"/>
+       <dep package="meta-gtk-osx-freetype"/>
+       <dep package="meta-gtk-osx-bootstrap"/>
+     </after>
+   </autotools>
 
  <autotools id="atk" autogen-sh="configure">
     <branch module="atk/2.24/atk-2.24.0.tar.xz" version="2.24.0"
@@ -162,8 +176,8 @@
 
   <autotools id="gtk+" autogen-sh="autoreconf"
              autogenargs="--with-gdktarget=quartz --enable-quartz-relocation --disable-introspection">
-    <branch module="gtk+/2.24/gtk+-2.24.31.tar.xz" version="2.24.31"
-            hash="sha256:68c1922732c7efc08df4656a5366dcc3afdc8791513400dac276009b40954658">
+    <branch module="gtk+/2.24/gtk+-2.24.32.tar.xz" version="2.24.32"
+            hash="sha256:b6c8a93ddda5eabe3bfee1eb39636c9a03d2a56c7b62828b359bf197943c582e">
       <!--patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/0004-Bug-571582-GtkSelection-implementation-for-quartz.patch" strip="1"/-->
       <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/0008-Implement-GtkDragSourceOwner-pasteboardChangedOwner.patch" strip="1"/>
       <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/0006-Bug-658722-Drag-and-Drop-sometimes-stops-working.patch" strip="1"/>
@@ -255,9 +269,9 @@
        dependency. -->
   <autotools id="cairo"  autogen-sh="configure"
              autogenargs="--enable-pdf --enable-quartz --disable-xlib --without-x">
-    <branch module="cairo-1.14.8.tar.xz"  version="1.14.8"
+    <branch module="cairo-1.14.12.tar.xz"  version="1.14.12"
             repo="cairographics"
-            hash="sha1:c6f7b99986f93c9df78653c3e6a3b5043f65145e">
+            hash="sha1:490025a0ba0622a853010f49fb6343f29fb70b9b">
     </branch>
     <dependencies>
       <dep package="pixman"/>
