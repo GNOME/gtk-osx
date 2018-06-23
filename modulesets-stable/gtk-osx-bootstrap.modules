@@ -77,7 +77,8 @@
   </autotools>
 
   <autotools id="libxslt" autogen-sh="configure">
-    <branch version="1.1.29" module="libxslt-1.1.29.tar.gz"
+    <branch version="1.1.32" module="libxslt-1.1.32.tar.gz"
+      hash="sha256:526ecd0abaf4a7789041622c3950c0e7f2c4c8835471515fd77eec684a355460"
 	    repo="xmlsoft.org"/>
     <dependencies>
       <dep package="libxml2"/>
