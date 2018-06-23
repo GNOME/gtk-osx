@@ -101,7 +101,9 @@
   <autotools id="libsoup" autogen-sh="configure"
              autogenargs="set_more_warnings=no">
     <branch module="libsoup/2.62/libsoup-2.62.2.tar.xz" version="2.62.2"
-            hash="sha256:9e536fe3da60b25d2c63addb84a9d5072d00b0d8b8cbeabc629a6bcd63f879b6"/>
+            hash="sha256:9e536fe3da60b25d2c63addb84a9d5072d00b0d8b8cbeabc629a6bcd63f879b6">
+      <patch file="https://raw.githubusercontent.com/samm-git/gimp-osx-package/master/patches/libsoup-python.patch" strip="0"/>
+    </branch>
     <dependencies>
       <dep package="glib"/>
       <dep package="glib-networking"/>
