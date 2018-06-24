@@ -200,6 +200,21 @@ Libglade itself is deprecated. This is the last release. -->
     </dependencies>
   </autotools>
 
+  <autotools id="pngcrush" makeargs="-f Makefile"
+		makeinstallargs="-f Makefile" skip-autogen="skip-autogen">
+		<branch module="pmt/pngcrush-1.8.13.tar.xz" version="1.8.13"
+      hash="sha256:8fc18bcbcc65146769241e20f9e21e443b0f4538d581250dce89b1e969a30705"
+			repo="sourceforge" />
+	</autotools>
+
+  <autotools id="gimp-help-git" autogenargs="--without-gimp"
+    makeargs="ALL_LINGUAS=en" autogen-sh="autogen.sh">
+    <branch module="gimp-help" reversion="master" repo="git.gnome.org" />
+    <dependencies>
+      <dep package="pngcrush" />
+    </dependencies>
+  </autotools>
+
   <autotools id="gimp"  autogen-sh="autoreconf"
              autogenargs="--without-x --enable-binreloc">
     <branch module="gimp/v2.10/gimp-2.10.2.tar.bz2" version="2.10.2"
