@@ -232,8 +232,8 @@ Libglade itself is deprecated. This is the last release. -->
             <patch file="https://raw.githubusercontent.com/samm-git/gimp-osx-package/master/patches/wmf-fontdir-path.patch"
                    strip="0"/>
             <!-- fix screen dpi detection on osx -->
-            <patch file="https://gitlab.gnome.org/GNOME/gimp/merge_requests/14.diff"
-                   strip="1"/>
+            <patch file="https://raw.githubusercontent.com/samm-git/gimp-osx-package/master/patches/gimp-dpi-detect.patch"
+                   strip="0"/>
 
     </branch>
     <after>
