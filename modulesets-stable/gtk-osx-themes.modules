@@ -89,8 +89,8 @@
        substantial infrastructure that's resistant to installing with
        jhbuild, so we'll freeze at the 2.40 branch. -->
   <autotools id="librsvg" autogenargs="--disable-Bsymbolic">
-    <branch module="librsvg/2.42/librsvg-2.42.2.tar.xz" version="2.42.2"
-	    hash="sha256:0c550a0bffef768a436286116c03d9f6cd3f97f5021c13e7f093b550fac12562"/>
+    <branch module="librsvg/2.42/librsvg-2.42.5.tar.xz" version="2.42.5"
+	    hash="sha256:d4dd51a492a2022c07dec385e22947190fe70410928c471934ff3399f20935ec"/>
     <dependencies>
       <dep package="libcroco"/>
       <dep package="meta-gtk-osx-freetype"/>
