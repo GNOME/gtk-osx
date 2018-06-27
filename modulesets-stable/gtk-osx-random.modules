@@ -4,7 +4,7 @@
 <moduleset>
   <repository type="tarball" name="ftp.gnome.org" default="yes"
               href="http://ftp.gnome.org/pub/GNOME/sources/"/>
-  <repository type="tarball" name="www.exiv2.org" default="yes"
+  <repository type="tarball" name="www.exiv2.org"
                           href="http://www.exiv2.org/builds/"/>
 
   <repository type="tarball" name="ftp.gtk.org"
@@ -290,7 +290,7 @@ Libglade itself is deprecated. This is the last release. -->
   repo="github-tarball" checkoutdir="json-c"/>
 </autotools>
 
-  <autotools id='json-glib' autogen-sh="configure">
+  <autotools id='json-glib' repo="ftp.gnome.org" autogen-sh="configure">
     <branch   module="json-glib/1.2/json-glib-1.2.8.tar.xz" version="1.2.8"
 	      hash="sha256:fd55a9037d39e7a10f0db64309f5f0265fa32ec962bf85066087b83a2807f40a"/>
   </autotools>
