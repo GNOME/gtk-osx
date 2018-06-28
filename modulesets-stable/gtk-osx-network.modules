@@ -138,8 +138,7 @@
    to your skip-list.
   -->
   <autotools id="webkit" autogen-sh="autoreconf"
-             autogenargs="--enable-quartz-target --with-gtk=2.0 --disable-webkit2 --disable-credential-storage --disable-geolocation --disable-video --disable-web-audio CXXFLAGS='-stdlib=libc++'"
-             makeargs="-j1">
+             autogenargs="--enable-quartz-target --with-gtk=2.0 --disable-webkit2 --disable-credential-storage --disable-geolocation --disable-video --disable-web-audio CXXFLAGS='-stdlib=libc++'">
 
     <branch repo="webkit.org" module="webkitgtk-2.4.11.tar.xz" version="2.4.11">
       <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/webkit-140167-disable-netscape-api.patch" strip="1"/>
