@@ -199,9 +199,8 @@
        days.
 
   -->
-  <autotools id="gtk-osx-docbook" autogen-sh="configure"
-             supports-non-srcdir-builds="no" >
-    <branch repo="sourceforge" module="samm-git/gimp-osx-package/raw/master/files/gtk-osx-docbook-1.3.tar.bz2"
+  <autotools id="gtk-osx-docbook" autogen-sh="configure">
+    <branch repo="github-tarball" module="samm-git/gimp-osx-package/raw/master/files/gtk-osx-docbook-1.3.tar.bz2"
             version="1.3"/>
   </autotools>
 

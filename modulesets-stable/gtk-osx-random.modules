@@ -211,7 +211,7 @@ Libglade itself is deprecated. This is the last release. -->
 	</autotools>
 
   <autotools id="gimp-help-git" autogenargs="--without-gimp"
-    makeargs="ALL_LINGUAS=en" autogen-sh="autogen.sh">
+    makeargs="ALL_LINGUAS=en XML_CATALOG_FILES=$JHBUILD_PREFIX/share/xml/catalog" autogen-sh="autogen.sh">
     <branch module="gimp-help" reversion="master" repo="git.gnome.org" />
     <dependencies>
       <dep package="pngcrush" />
