@@ -220,8 +220,8 @@ Libglade itself is deprecated. This is the last release. -->
 
   <autotools id="gimp"  autogen-sh="autoreconf"
              autogenargs="--without-x --enable-binreloc">
-    <branch module="gimp/v2.10/gimp-2.10.2.tar.bz2" version="2.10.2"
-            hash="sha256:1cb0baaecdefe44d371a15f2739a1bcbce4682336b4ccf8eb7b587ce52c333eb" repo="gimp">
+    <branch module="gimp/v2.10/gimp-2.10.4.tar.bz2" version="2.10.4"
+            hash="sha256:ffb0768de14a2631b3d7ed71f283731441a1b48461766c23f0574dce0706f192" repo="gimp">
             <!-- fix build error -->
             <patch file="https://gitlab.gnome.org/GNOME/gimp/merge_requests/8.diff"
                    strip="1"/>
@@ -333,8 +333,9 @@ Libglade itself is deprecated. This is the last release. -->
   </autotools>
 
   <autotools id="gegl" autogen-sh="configure" autogenargs="--disable-docs">
-    <branch repo="ftp.gtk.org" version="0.3.14"
-            module="gegl/0.4/gegl-0.4.2.tar.bz2"/>
+    <branch repo="ftp.gtk.org" version="0.4.4"
+            hash="sha256:f8cb45da736131fe29582b74cf6851102ae013bf99c77413a8bcb02e92e57890"
+            module="gegl/0.4/gegl-0.4.4.tar.bz2"/>
     <dependencies>
       <dep package="babl"/>
       <dep package="json-glib"/>
