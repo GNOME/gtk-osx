@@ -222,19 +222,6 @@ Libglade itself is deprecated. This is the last release. -->
              autogenargs="--without-x --enable-binreloc">
     <branch module="gimp/v2.10/gimp-2.10.4.tar.bz2" version="2.10.4"
             hash="sha256:ffb0768de14a2631b3d7ed71f283731441a1b48461766c23f0574dce0706f192" repo="gimp">
-            <!-- fix build error -->
-            <patch file="https://gitlab.gnome.org/GNOME/gimp/merge_requests/8.diff"
-                   strip="1"/>
-            <!-- fix lldb debugging -->
-            <patch file="https://gitlab.gnome.org/GNOME/gimp/merge_requests/13.diff"
-                   strip="1"/>
-            <!-- add variable for the libwmf resources -->
-            <patch file="https://raw.githubusercontent.com/samm-git/gimp-osx-package/master/patches/wmf-fontdir-path.patch"
-                   strip="0"/>
-            <!-- fix screen dpi detection on osx -->
-            <patch file="https://raw.githubusercontent.com/samm-git/gimp-osx-package/master/patches/gimp-dpi-detect.patch"
-                   strip="0"/>
-
     </branch>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
