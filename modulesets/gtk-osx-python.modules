@@ -140,8 +140,8 @@
     </after>
   </autotools>
 
-  <autotools id="pygobject3">
-    <branch tag="pygobject-3-24" module="pygobject" checkoutdir="pygobject3"/>
+  <distutils id="pygobject3">
+    <branch tag="pygobject-3-28" module="pygobject" checkoutdir="pygobject3"/>
     <dependencies>
       <dep package="meta-gtk-osx-gtk3"/>
     </dependencies>
@@ -149,7 +149,7 @@
       <dep package="python"/>
       <dep package="python3"/>
     </after>
-  </autotools>
+  </distutils>
 
 <!-- PyGtk is discontinued. -->
   <autotools id="pygtk" autogenargs="--disable-introspection">
