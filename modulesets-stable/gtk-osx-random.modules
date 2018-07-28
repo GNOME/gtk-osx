@@ -22,7 +22,7 @@
   <repository type="tarball" name="oracle"
 	      href="http://download.oracle.com/"/>
   <repository type="tarball" name="ftp.gnu.org"
-	      href="ftp://ftp.gnu.org/gnu/"/>
+	      href="https://ftp.gnu.org/gnu/"/>
   <repository type="tarball" name="gmplib.org"
 	      href="ftp://ftp.gmplib.org/pub/"/>
   <repository type="git" name="git.gnome.org"

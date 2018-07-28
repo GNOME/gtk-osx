@@ -9,7 +9,7 @@
   <repository name="lysator" type="git" href="https://git.lysator.liu.se/"/>
   <!--repository name="git.gnu.org" type="git"
               href="git://git.savannah.gnu.org/"/-->
-  <repository name="ftp.gnu.org" type="tarball" href="ftp://ftp.gnu.org/gnu/"/>
+  <repository name="ftp.gnu.org" type="tarball" href="https://ftp.gnu.org/gnu/"/>
   <repository name="sourceforge" type="tarball"
               href="http://downloads.sourceforge.net/sourceforge/"/>
   <!--repository name="gitlab" type="git" href="https://gitlab.com/"/-->
