@@ -131,8 +131,8 @@ Libglade itself is deprecated. This is the last release. -->
      change back to just "glade"-->
   <autotools id="glade" autogen-sh="configure"
 	     autogenargs='--disable-scrollkeeper --disable-introspection CPPFLAGS="$CPPFLAGS -xobjective-c"'>
-    <branch module="glade/3.20/glade-3.20.0.tar.xz" version="3.20.0"
-            hash="sha256:82d96dca5dec40ee34e2f41d49c13b4ea50da8f32a3a49ca2da802ff14dc18fe">
+    <branch module="glade/3.22/glade-3.22.1.tar.xz" version="3.22.1"
+            hash="sha256:dff89a2ef2eaf000ff2a46979978d03cb9202cb04668e01d0ea5c5bb5547e39a">
     </branch>
     <dependencies>
       <dep package="itstool"/>
