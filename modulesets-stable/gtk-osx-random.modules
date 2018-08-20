@@ -220,8 +220,8 @@ Libglade itself is deprecated. This is the last release. -->
 
   <autotools id="gimp"  autogen-sh="autoreconf"
              autogenargs="--without-x --enable-binreloc">
-    <branch module="gimp/v2.10/gimp-2.10.4.tar.bz2" version="2.10.4"
-            hash="sha256:ffb0768de14a2631b3d7ed71f283731441a1b48461766c23f0574dce0706f192" repo="gimp">
+    <branch module="gimp/v2.10/gimp-2.10.6.tar.bz2" version="2.10.6"
+            hash="sha256:4ec8071f828e918384cf7bc7d1219210467c84655123f802bc55a8bf2415101f" repo="gimp">
     </branch>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
