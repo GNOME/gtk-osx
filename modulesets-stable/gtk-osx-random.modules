@@ -283,8 +283,8 @@ Libglade itself is deprecated. This is the last release. -->
   </autotools>
 
   <autotools id="babl" >
-    <branch repo="ftp.gtk.org" version="0.1.52"
-            module="babl/0.1/babl-0.1.52.tar.bz2" hash="sha256:40f714a0fc043e16ac05c670f39e4db0d0d923480d21952fb0569686479ef76c">
+    <branch repo="ftp.gtk.org" version="0.1.56"
+            module="babl/0.1/babl-0.1.56.tar.bz2" hash="sha256:8ad26ca717ec3c74e261f454dd6bb316333a39fd1f87db4ac44706a860dc4d28">
     </branch>
   </autotools>
 
@@ -320,9 +320,9 @@ Libglade itself is deprecated. This is the last release. -->
   </autotools>
 
   <autotools id="gegl" autogen-sh="configure" autogenargs="--disable-docs">
-    <branch repo="ftp.gtk.org" version="0.4.4"
-            hash="sha256:f8cb45da736131fe29582b74cf6851102ae013bf99c77413a8bcb02e92e57890"
-            module="gegl/0.4/gegl-0.4.4.tar.bz2"/>
+    <branch repo="ftp.gtk.org" version="0.4.8"
+            hash="sha256:719468eec56ac5b191626a0cb6238f3abe9117e80594890c246acdc89183ae49"
+            module="gegl/0.4/gegl-0.4.8.tar.bz2"/>
     <dependencies>
       <dep package="babl"/>
       <dep package="json-glib"/>
