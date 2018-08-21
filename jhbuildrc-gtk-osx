@@ -493,7 +493,7 @@ prependpath('PERL5LIB', prefix + '/lib/perl5/site_perl')
 
 # Point gtk-doc and other xsltproc users to our XML catalog.
 #
-_pfx_cat_file = os.path.join(prefix, 'etc', 'xml', 'catalog')
+_pfx_cat_file = os.path.join(prefix, 'share', 'xml', 'catalog')
 if not os.path.exists(_pfx_cat_file):
     os.makedirs(os.path.dirname(_pfx_cat_file))
     open(_pfx_cat_file, "w").close()
