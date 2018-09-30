@@ -86,11 +86,9 @@
     </after>
   </metamodule>
 
-  <autotools id="glib" autogen-sh="autoreconf"
-             autogenargs="--with-pcre=internal">
-    <branch module="glib/2.56/glib-2.56.1.tar.xz"  version="2.56.1"
-            hash="sha256:40ef3f44f2c651c7a31aedee44259809b6f03d3d20be44545cd7d177221c0b8d">
-      <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/glib-gint64-long-long.patch" strip="1"/>
+  <autotools id="glib" autogenargs="--with-pcre=internal">
+    <branch module="glib/2.58/glib-2.58.1.tar.xz"  version="2.58.1"
+            hash="sha256:97d6a9d926b6aa3dfaadad3077cfb43eec74432ab455dff14250c769d526d7d6">
     </branch>
     <dependencies>
         <dep package="libffi"/>
@@ -108,9 +106,9 @@
 
 
   <autotools id="gobject-introspection" autogen-sh="configure">
-    <branch module="gobject-introspection/1.52/gobject-introspection-1.52.1.tar.xz"
-            version="1.52.1"
-            hash="sha256:2ed0c38d52fe1aa6fc4def0c868fe481cb87b532fc694756b26d6cfab29faff4">
+    <branch module="gobject-introspection/1.58/gobject-introspection-1.58.0.tar.xz"
+            version="1.58.0"
+            hash="sha256:27c1590a32749de0a5481ce897772547043e94bccba4bc0a7edb3d8513e401ec">
       <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/girscanner-objc.patch" strip="1"/>
             <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/gi_cairo_library_path.patch" strip="1"/>
     </branch>
@@ -124,13 +122,22 @@
       </after>
   </autotools>
 
- <autotools id="pango"  autogen-sh="autoreconf">
-    <branch version="1.40.12" module="pango/1.40/pango-1.40.12.tar.xz"
-            hash="sha256:75f1a9a8e4e2b28cbc078b50c1fa927ee4ded994d1ade97c5603e2d1f3161cfc">
+  <autotools id="fribidi" autogenargs="--disable-docs">
+    <branch module="fribidi/fribidi/releases/download/v1.0.5/fribidi-1.0.5.tar.bz2"
+            repo="github-tarball" version="1.0.5"/>
+    <dependencies>
+      <!--dep package="c2man"/ -->
+    </dependencies>
+  </autotools>
+
+  <autotools id="pango"  autogen-sh="autoreconf">
+    <branch version="1.42.4" module="pango/1.42/pango-1.42.4.tar.xz"
+            hash="sha256:1d2b74cd63e8bd41961f2f8d952355aa0f9be6002b52c8aa7699d9f5da597c9d">
     </branch>
     <dependencies>
       <dep package="glib"/>
       <dep package="cairo"/>
+      <dep package="fribidi"/>
      </dependencies>
     <after>
       <dep package="gobject-introspection"/>
@@ -138,10 +145,10 @@
       <dep package="meta-gtk-osx-bootstrap"/>
     </after>
   </autotools>
-
+<!-- atk-2-30 is meson-only, so it has to wait until pipenv is merged. -->
  <autotools id="atk" autogen-sh="configure">
-    <branch module="atk/2.24/atk-2.24.0.tar.xz" version="2.24.0"
-            hash="sha256:bb2daa9a808c73a7a79d2983f333e0ba74be42fc51e3ba1faf2551a636487a49"/>
+    <branch module="atk/2.28/atk-2.28.1.tar.xz" version="2.28.1"
+            hash="sha256:cd3a1ea6ecc268a2497f0cd018e970860de24a6d42086919d6bf6c8e8d53f4fc"/>
     <dependencies>
     </dependencies>
     <after>
@@ -151,9 +158,10 @@
     </after>
   </autotools>
 
+  <!-- 2.38.0 requires meson -->
   <autotools id="gdk-pixbuf" autogen-sh="configure">
-    <branch module="gdk-pixbuf/2.36/gdk-pixbuf-2.36.6.tar.xz" version="2.36.6"
-            hash="sha256:455eb90c09ed1b71f95f3ebfe1c904c206727e0eeb34fc94e5aaf944663a820c"/>
+    <branch module="gdk-pixbuf/2.36/gdk-pixbuf-2.36.12.tar.xz" version="2.36.12"
+            hash="sha256:fff85cf48223ab60e3c3c8318e2087131b590fd6f1737e42cb3759a3b427a334"/>
     <after>
       <dep package="pango"/>
       <dep package="gobject-introspection"/>
@@ -220,8 +228,8 @@
 
   <autotools id="gtk+-3.0" autogen-sh="autogen.sh"
              autogenargs="--enable-quartz-backend --enable-quartz-relocation">
-    <branch module="gtk+/3.22/gtk+-3.22.29.tar.xz" version="3.22.29"
-            hash="sha256:a07d64b939fcc034a066b7723fdf9b24e92c9cfb6a8497593f3471fe56fbbbf8">
+    <branch module="gtk+/3.24/gtk+-3.24.1.tar.xz" version="3.24.1"
+            hash="sha256:68387be307b99aadcdc653561d7a2a7f0113b93561fb18ded7075ec9ced5b02f">
     </branch>
     <dependencies>
       <dep package="glib"/>
@@ -255,9 +263,9 @@
        dependency. -->
   <autotools id="cairo"  autogen-sh="configure"
              autogenargs="--enable-pdf --enable-quartz --disable-xlib --without-x">
-    <branch module="cairo-1.14.8.tar.xz"  version="1.14.8"
+    <branch module="cairo-1.14.12.tar.xz"  version="1.14.12"
             repo="cairographics"
-            hash="sha1:c6f7b99986f93c9df78653c3e6a3b5043f65145e">
+            hash="sha1:490025a0ba0622a853010f49fb6343f29fb70b9b">
     </branch>
     <dependencies>
       <dep package="pixman"/>
@@ -270,9 +278,9 @@
 
   <autotools id="gtk-mac-integration" autogen-sh="configure"
              autogenargs="--disable-python">
-    <branch module="gtk-mac-integration/2.1/gtk-mac-integration-2.1.2.tar.xz"
-            version="2.1.2"
-            hash="sha256:68e682a3ba952e7d4b1cfa2c7147c5fcd76f8bd9792a567e175a619af5954af1">
+    <branch module="gtk-mac-integration/2.1/gtk-mac-integration-2.1.3.tar.xz"
+            version="2.1.3"
+            hash="sha256:d5f72302daad1f517932194d72967a32e72ed8177cfa38aaf64f0a80564ce454">
     </branch>
     <dependencies>
     </dependencies>
