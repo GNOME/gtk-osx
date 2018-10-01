@@ -222,6 +222,9 @@ Libglade itself is deprecated. This is the last release. -->
              autogenargs="--without-x --enable-binreloc">
     <branch module="gimp/v2.10/gimp-2.10.6.tar.bz2" version="2.10.6"
             hash="sha256:4ec8071f828e918384cf7bc7d1219210467c84655123f802bc55a8bf2415101f" repo="gimp">
+	    <!-- osx focus issue -->
+	 <patch file="https://raw.githubusercontent.com/samm-git/gimp-osx-package/master/patches/gimpui.c.patch"
+strip="0"/>
     </branch>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
