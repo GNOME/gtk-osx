@@ -323,9 +323,9 @@ strip="0"/>
   </autotools>
 
   <autotools id="gegl" autogen-sh="configure" autogenargs="--disable-docs">
-    <branch repo="ftp.gtk.org" version="0.4.8"
-            hash="sha256:719468eec56ac5b191626a0cb6238f3abe9117e80594890c246acdc89183ae49"
-            module="gegl/0.4/gegl-0.4.8.tar.bz2"/>
+    <branch repo="ftp.gtk.org" version="0.4.10"
+            hash="sha256:1c419659bde1aa8bb7845231a7132bd7dcdaa4ed724adf676b07478b41f0c5d3"
+            module="gegl/0.4/gegl-0.4.10.tar.bz2"/>
     <dependencies>
       <dep package="babl"/>
       <dep package="json-glib"/>
