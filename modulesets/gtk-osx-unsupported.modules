@@ -5,7 +5,7 @@
   <repository type="git" name="git.gnome.org" default="yes"
               href="https://gitlab.gnome.org/GNOME"/>
   <repository type='git' name='git.debian.org'
-	      href="git://git.debian.org/git/"/>
+	      href="git://salsa.debian.org/"/>
   <repository type='git' name='git.gnupg.org' href="git://git.gnupg.org/" />
   <repository type='tarball' name='ftp.gnupg.org' href="ftp://ftp.gnupg.org/" />
   <repository type='git' name='github'
@@ -31,8 +31,8 @@
   </autotools>
 
   <autotools id="iso-codes" >
-    <branch repo="git.debian.org" tag="iso-codes/3.67"
-            module="iso-codes/iso-codes"/>
+    <branch repo="git.debian.org" tag="iso-codes-3.67"
+            module="iso-codes-team/iso-codes.git"/>
 
   </autotools>
 

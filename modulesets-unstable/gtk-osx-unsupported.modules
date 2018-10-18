@@ -8,7 +8,7 @@
   <repository type='svn' name='libproxy.google.com'
               href='http://libproxy.googlecode.com/svn/'
               tags-template="tags/%(tag)s"/>
-  <repository type="git" name="git.debian.org" href="git://git.debian.org/"/>
+  <repository type="git" name="git.debian.org" href="https://salsa.debian.org/"/>
   <repository type="git" name="freedesktop"
 	      href="git://anongit.freedesktop.org"/>
   <repository type="tarball" name="curl.haxx.se"
@@ -32,7 +32,7 @@
   <!-- Iso-codes >= 3.68 requires Python3, a dependency too far. -->
   <autotools id="iso-codes" >
     <branch repo="git.debian.org" 
-            module="pkg-isocodes/iso-codes" tag="iso-codes-3.67"/>
+            module="iso-codes-team/iso-codes.git" tag="iso-codes-3.67"/>
 
   </autotools>
 
