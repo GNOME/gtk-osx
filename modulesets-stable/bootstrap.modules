@@ -21,7 +21,7 @@
   <repository type="tarball" name="intltool"
               href="http://launchpad.net/intltool/trunk/"/>
   <repository type="tarball" name="github-tarball"
-                          href="https://github.com//"/>
+                          href="https://github.com/"/>
 
   <autotools id='readline' autogen-sh="configure">
     <branch repo="ftp.gnu.org" module="readline/readline-7.0.tar.gz"
