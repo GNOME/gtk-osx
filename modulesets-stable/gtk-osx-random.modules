@@ -195,8 +195,8 @@ Libglade itself is deprecated. This is the last release. -->
 		<branch module="pmt/pngcrush-1.8.13.tar.xz" version="1.8.13"
       hash="sha256:8fc18bcbcc65146769241e20f9e21e443b0f4538d581250dce89b1e969a30705"
 			repo="sourceforge">
-      <!-- implement "make install" command to make jhbuild happy -->
-     <patch file="https://raw.githubusercontent.com/samm-git/gimp-osx-package/master/patches/pngcrush-install.patch"
+     <!-- implement "make install" command to make jhbuild happy -->
+     <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/pngcrush-install.patch"
              strip="0"/>
     </branch>
 	</autotools>
@@ -229,7 +229,7 @@ Libglade itself is deprecated. This is the last release. -->
     <branch repo="github-tarball"
       version="9.23" module="ArtifexSoftware/ghostpdl-downloads/releases/download/gs923/ghostscript-9.23.tar.xz"
       hash="sha256:1fcedc27d4d6081105cdf35606cb3f809523423a6cf9e3c23cead3525d6ae8d9">
-      <patch file="https://raw.githubusercontent.com/samm-git/gimp-osx-package/master/patches/ghostscript-lib.patch"
+      <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/ghostscript-lib.patch"
              strip="0"/>
     </branch>
     <dependencies>

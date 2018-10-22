@@ -31,8 +31,7 @@
     <branch module="gimp/v2.10/gimp-2.10.6.tar.bz2" version="2.10.6"
             hash="sha256:4ec8071f828e918384cf7bc7d1219210467c84655123f802bc55a8bf2415101f" repo="gimp">
 	    <!-- osx focus issue -->
-	 <patch file="https://raw.githubusercontent.com/samm-git/gimp-osx-package/master/patches/gimpui.c.patch"
-strip="0"/>
+	 <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/gimp-gimpui.c.patch" strip="0"/>
     </branch>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
@@ -106,7 +105,7 @@ strip="0"/>
       hash="sha256:6e59f9afc0c2b87a46f98e33b5159d56ffb3558a49d8e3d79cb7fdc6b7aaa863"
       repo="bitbucket-tarball">
       <!-- no cmake files in the root folder -->
-    <patch file="https://raw.githubusercontent.com/samm-git/gimp-osx-package/master/patches/x265-cmake.patch"
+    <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/x265-cmake.patch"
              strip="0"/>
     </branch>
   </cmake>
