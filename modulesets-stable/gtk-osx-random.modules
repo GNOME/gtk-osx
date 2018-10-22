@@ -191,16 +191,6 @@ Libglade itself is deprecated. This is the last release. -->
     </dependencies>
   </autotools>
 
-  <autotools id="pngcrush" autogen-sh="true" autogen-template="%(autogen-sh)s">
-		<branch module="pmt/pngcrush-1.8.13.tar.xz" version="1.8.13"
-      hash="sha256:8fc18bcbcc65146769241e20f9e21e443b0f4538d581250dce89b1e969a30705"
-			repo="sourceforge">
-     <!-- implement "make install" command to make jhbuild happy -->
-     <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/pngcrush-install.patch"
-             strip="0"/>
-    </branch>
-	</autotools>
-
   <autotools id='json-glib' repo="ftp.gnome.org" autogen-sh="configure">
     <branch   module="json-glib/1.2/json-glib-1.2.8.tar.xz" version="1.2.8"
 	      hash="sha256:fd55a9037d39e7a10f0db64309f5f0265fa32ec962bf85066087b83a2807f40a"/>
