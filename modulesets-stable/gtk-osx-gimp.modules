@@ -19,11 +19,22 @@
   <repository type="tarball" name="savannah"
               href="http://download.savannah.nongnu.org/releases/"/>
 
+
   <autotools id="gimp-help-git" autogenargs="--without-gimp"              makeinstallargs="ALL_LINGUAS=en XML_CATALOG_FILES=$JHBUILD_PREFIX/share/xml/catalog install" makeargs="ALL_LINGUAS=en XML_CATALOG_FILES=$JHBUILD_PREFIX/share/xml/catalog" autogen-sh="autogen.sh">
     <branch module="gimp-help" reversion="master" repo="git.gnome.org" />
     <dependencies>
       <dep package="pngcrush" />
     </dependencies>
+  </autotools>
+
+  <autotools id="pngcrush" autogen-sh="true" autogen-template="%(autogen-sh)s">
+    <branch module="pmt/pngcrush-1.8.13.tar.xz" version="1.8.13"
+      hash="sha256:8fc18bcbcc65146769241e20f9e21e443b0f4538d581250dce89b1e969a30705"
+      repo="sourceforge">
+     <!-- implement "make install" command to make jhbuild happy -->
+     <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/pngcrush-install.patch"
+             strip="0"/>
+    </branch>
   </autotools>
 
   <autotools id="gimp"  autogen-sh="autoreconf"
