@@ -41,6 +41,14 @@
     <branch repo="tukaani.org" module="xz/xz-5.2.3.tar.bz2" version="5.2.3"/>
   </autotools>
 
+  <!-- gnu make 4.xx, needed to unbreak parallel builds for the webkit -->
+  <autotools id="gnumake" autogen-sh="configure"
+             autogenargs="--disable-dependency-tracking">
+    <branch repo="ftp.gnu.org"
+            module="make/make-4.2.1.tar.bz2" version="4.2.1" hash="sha256:d6e262bf3601b42d2b1e4ef8310029e1dcf20083c5446b4b7aa67081fdffc589">
+    </branch>
+  </autotools>
+
   <autotools id="apr">
     <branch repo="apache.org" module="apr/apr-1.5.2.tar.bz2" version="1.5.2"/>
   </autotools>
@@ -239,6 +247,7 @@
       <dep package="gtk-osx-docbook"/>
       <dep package="gnome-common"/>
       <dep package="intltool"/>
+      <dep package="gnumake"/>
     </dependencies>
   </metamodule>
 
