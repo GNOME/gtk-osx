@@ -20,8 +20,6 @@
   <repository type="tarball" name="cpan" href="http://search.cpan.org/CPAN/" />
   <repository type="tarball" name="intltool"
               href="http://launchpad.net/intltool/trunk/"/>
-  <repository type="tarball" name="github-tarball"
-                          href="https://github.com/"/>
 
   <autotools id='readline' autogen-sh="configure">
     <branch repo="ftp.gnu.org" module="readline/readline-7.0.tar.gz"
@@ -162,7 +160,7 @@
       <dep package='flex'/>
     </dependencies>
   </autotools>
-
+  
   <!-- MacOS hasn't updated flex since 2012. Since it's BSD-licensed
        it must be just because Apple doesn't use it and doesn't
        care. We'll provide something more up-to-date. -->
@@ -170,7 +168,7 @@
     <branch module="flex/flex-2.6.0.tar.xz" version="2.6.0"
             repo="sourceforge" />
   </autotools>
-
+  
   <autotools id="expat" autogen-sh="configure">
     <branch module="expat/expat-2.2.0.tar.bz2" version="2.2.0"
             repo="sourceforge"/>
@@ -207,9 +205,10 @@
        days.
 
   -->
-  <autotools id="gtk-osx-docbook" autogen-sh="configure">
-    <branch repo="github-tarball" module="samm-git/gimp-osx-package/raw/master/files/gtk-osx-docbook-1.3.tar.bz2"
-            version="1.3"/>
+  <autotools id="gtk-osx-docbook" autogen-sh="configure"
+             supports-non-srcdir-builds="no" >
+    <branch repo="sourceforge" module="gtk-osx/gtk-osx-docbook-1.2.tar.bz2"
+            version="1.2"/>
   </autotools>
 
   <autotools id="intltool" autogen-sh="configure">
