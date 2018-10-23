@@ -69,7 +69,7 @@
       <dep package="openexr"/>
       <dep package="libmng"/>
       <dep package="ghostscript"/>
-      <dep package="meta-gtk-osx-python"/> <!-- use embedded python instead of system one -->
+      <dep package="python"/>
     </dependencies>
   </autotools>
   <autotools id="gegl" autogen-sh="configure" autogenargs="--disable-docs">
