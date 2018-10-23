@@ -188,11 +188,6 @@ Libglade itself is deprecated. This is the last release. -->
     </dependencies>
   </autotools>
 
-  <autotools id='json-glib' autogen-sh="configure">
-    <branch   module="json-glib/1.2/json-glib-1.2.8.tar.xz" version="1.2.8"
-	      hash="sha256:fd55a9037d39e7a10f0db64309f5f0265fa32ec962bf85066087b83a2807f40a"/>
-  </autotools>
-
 <!-- SQLite3 is provided by MacOSX in /usr/lib/libsqlite.3.dylib -->
   <autotools id="sqlite" autogenargs="--disable-tcl --enable-threadsafe"
 	     autogen-sh="configure">
