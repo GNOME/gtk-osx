@@ -53,6 +53,7 @@
   <include href="gtk-osx-random.modules"/>
   <include href="gtk-osx-themes.modules"/>
   <include href="gtk-osx-unsupported.modules"/>
+  <include href="gtk-osx-gimp.modules"/>
 
   <metamodule id="meta-gtk-osx-core">
     <dependencies>
@@ -181,7 +182,7 @@
       <!-- upstream bug: https://bugzilla.gnome.org/show_bug.cgi?id=743717 -->
       <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/gtk-clipboard-crash-bug743717.patch" strip="1"/>
       <!-- upstream bug: https://bugzilla.gnome.org/show_bug.cgi?id=757187 -->
-      <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/gtk-add-1bpp-support-bug757187.patch" strip="1"/>      
+      <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/gtk-add-1bpp-support-bug757187.patch" strip="1"/>
    </branch>
     <dependencies>
       <dep package="glib"/>
