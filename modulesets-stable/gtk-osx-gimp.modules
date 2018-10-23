@@ -2,6 +2,8 @@
 <!DOCTYPE moduleset SYSTEM "moduleset.dtd">
 <?xml-stylesheet type="text/xsl" href="moduleset.xsl"?>
 <moduleset>
+  <repository type="tarball" name="ftp.gnome.org" default="yes"
+              href="http://ftp.gnome.org/pub/GNOME/sources/"/>
   <repository type="tarball" name="gimp"
               href="https://download.gimp.org/pub/"/>
   <repository type="git" name="git.gnome.org"
@@ -33,7 +35,7 @@
   <!-- librsvg build requires rust compiler to be installed,
    see https://rustup.rs -->
   <autotools id="librsvg-244" autogenargs="--disable-Bsymbolic">
-    <branch module="librsvg/2.44/librsvg-2.44.7.tar.xz" version="2.44.7"
+    <branch repo="ftp.gnome.org" module="librsvg/2.44/librsvg-2.44.7.tar.xz" version="2.44.7"
 	    hash="sha256:aafd1c651b293bc09305ec9ae558e4fbcd4b9be6e7e27a003d48324af993b23e"/>
     <dependencies>
       <dep package="libcroco"/>
