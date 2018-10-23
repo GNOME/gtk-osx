@@ -196,7 +196,7 @@
         <dep package="lcms"/>
   </dependencies>
   </cmake>
-
+  <!-- open-source library to encode and decode JPEG 2000 -->
   <cmake id="openjpeg">
     <branch module="uclouvain/openjpeg/archive/v2.3.0.tar.gz" version="2.3.0"
 	    repo="github-tarball" checkoutdir="openjpeg-2.3.0"/>
