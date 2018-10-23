@@ -170,7 +170,7 @@
       # Fix malloc/stdlib issue on macOS
       # Fix underquoted definition of AM_PATH_AALIB in aalib.m4
       -->
-      <patch file="https://raw.githubusercontent.com/Homebrew/formula-patches/6e23dfb/aalib/1.4rc5.patch"
+      <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/aalib-osx.patch"
              strip="1"/>
     </branch>
   </autotools>
