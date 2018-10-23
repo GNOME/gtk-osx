@@ -179,10 +179,10 @@
       <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/gtk+-2-m4-creation.patch" strip="1"/>
       <!-- upstream bug https://bugzilla.gnome.org/show_bug.cgi?id=767091 -->
       <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/gtk-gimp-dnd-bug767091.patch" strip="1"/>
-      <!-- upstream bug: https://bugzilla.gnome.org/show_bug.cgi?id=743717 -->
-      <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/gtk-clipboard-crash-bug743717.patch" strip="1"/>
-      <!-- upstream bug: https://bugzilla.gnome.org/show_bug.cgi?id=757187 -->
-      <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/gtk-add-1bpp-support-bug757187.patch" strip="1"/>
+      <!-- upstream bug: https://gitlab.gnome.org/GNOME/gtk/issues/529 -->
+      <patch file="https://gitlab.gnome.org/GNOME/gtk/uploads/f0c19446b9cd1df467c4cc9050516d4b/0001-Bug-743717-Crashes-on-clipboard-operation-influence-.patch" strip="1"/>
+      <!-- upstream bug: https://gitlab.gnome.org/GNOME/gtk/issues/580 -->
+      <patch file="https://gitlab.gnome.org/GNOME/gtk/uploads/2a194d81de8e8346a81816870264b3bf/gdkimage.patch" strip="1"/>
    </branch>
     <dependencies>
       <dep package="glib"/>
