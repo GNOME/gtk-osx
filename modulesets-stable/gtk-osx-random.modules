@@ -4,8 +4,6 @@
 <moduleset>
   <repository type="tarball" name="ftp.gnome.org" default="yes"
               href="http://ftp.gnome.org/pub/GNOME/sources/"/>
-  <repository type="tarball" name="www.exiv2.org"
-                          href="http://www.exiv2.org/builds/"/>
 
   <repository type="tarball" name="ftp.gtk.org"
               href="https://ftp.gtk.org/pub/"/>
@@ -194,37 +192,6 @@ Libglade itself is deprecated. This is the last release. -->
   <autotools id='json-glib' repo="ftp.gnome.org" autogen-sh="configure">
     <branch   module="json-glib/1.2/json-glib-1.2.8.tar.xz" version="1.2.8"
 	      hash="sha256:fd55a9037d39e7a10f0db64309f5f0265fa32ec962bf85066087b83a2807f40a"/>
-  </autotools>
-
-  <autotools id="gexiv2">
-    <branch repo="ftp.gnome.org" version="0.10.8"
-            module="gexiv2/0.10/gexiv2-0.10.8.tar.xz" hash="sha256:81c528fd1e5e03577acd80fb77798223945f043fd1d4e06920c71202eea90801">
-            <patch file="https://bug791941.bugzilla-attachments.gnome.org/attachment.cgi?id=367961"
-                   strip="1"/>
-    </branch>
-    <dependencies>
-      <dep package="glib"/>
-      <dep package="exiv2"/>
-    </dependencies>
-  </autotools>
-
-  <autotools id="exiv2">
-    <branch repo="www.exiv2.org" checkoutdir="exiv2-trunk"
-      version="0.26" module="exiv2-0.26-trunk.tar.gz"
-      hash="sha256:c75e3c4a0811bf700d92c82319373b7a825a2331c12b8b37d41eb58e4f18eafb"/>
-  </autotools>
-
-  <autotools id="ghostscript" makeargs="all so"
-  makeinstallargs="install install-so">
-    <branch repo="github-tarball"
-      version="9.23" module="ArtifexSoftware/ghostpdl-downloads/releases/download/gs923/ghostscript-9.23.tar.xz"
-      hash="sha256:1fcedc27d4d6081105cdf35606cb3f809523423a6cf9e3c23cead3525d6ae8d9">
-      <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/ghostscript-lib.patch"
-             strip="0"/>
-    </branch>
-    <dependencies>
-          <dep package="lcms"/>
-    </dependencies>
   </autotools>
 
 <!-- SQLite3 is provided by MacOSX in /usr/lib/libsqlite.3.dylib -->
