@@ -22,7 +22,8 @@
               href="http://www.exiv2.org/builds/"/>
 
 
-  <autotools id="gimp-help-git" autogenargs="--without-gimp"              makeinstallargs="ALL_LINGUAS=en XML_CATALOG_FILES=$JHBUILD_PREFIX/share/xml/catalog install" makeargs="ALL_LINGUAS=en XML_CATALOG_FILES=$JHBUILD_PREFIX/share/xml/catalog" autogen-sh="autogen.sh">
+  <autotools id="gimp-help-git" autogenargs="--without-gimp"
+    autogen-sh="autogen.sh">
     <branch module="gimp-help" reversion="master" repo="git.gnome.org" />
     <dependencies>
       <dep package="pngcrush" />
