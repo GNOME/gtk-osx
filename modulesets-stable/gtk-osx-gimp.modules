@@ -24,7 +24,7 @@
 
   <autotools id="gimp-help-git" autogenargs="--without-gimp"
     autogen-sh="autogen.sh">
-    <branch module="gimp-help" reversion="master" repo="git.gnome.org" />
+    <branch module="gimp-help" revision="master" repo="git.gnome.org" />
     <dependencies>
       <dep package="pngcrush" />
     </dependencies>
