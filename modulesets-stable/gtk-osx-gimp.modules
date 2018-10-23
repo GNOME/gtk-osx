@@ -104,6 +104,11 @@
     </dependencies>
   </autotools>
 
+  <autotools id='json-glib' autogen-sh="configure">
+    <branch   module="json-glib/1.2/json-glib-1.2.8.tar.xz" version="1.2.8"
+  	      hash="sha256:fd55a9037d39e7a10f0db64309f5f0265fa32ec962bf85066087b83a2807f40a"/>
+  </autotools>
+
   <autotools id="babl" >
     <branch repo="ftp.gtk.org" version="0.1.58"
             module="babl/0.1/babl-0.1.58.tar.bz2" hash="sha256:79c9ae576019b8459896014c8822471bb383414c9f99a1b2055e25b4538ced55">
