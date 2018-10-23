@@ -30,6 +30,23 @@
     </dependencies>
   </autotools>
 
+  <!-- librsvg build requires rust compiler to be installed,
+   see https://rustup.rs -->
+  <autotools id="librsvg-244" autogenargs="--disable-Bsymbolic">
+    <branch module="librsvg/2.44/librsvg-2.44.7.tar.xz" version="2.44.7"
+	    hash="sha256:aafd1c651b293bc09305ec9ae558e4fbcd4b9be6e7e27a003d48324af993b23e"/>
+    <dependencies>
+      <dep package="libcroco"/>
+      <dep package="meta-gtk-osx-freetype"/>
+    </dependencies>
+    <after>
+<!-- Circular dependency if we depend on meta-gtk-osx or meta-gtk-osx-gtk3 -->
+      <dep package="gtk+"/>
+      <dep package="gtk+-3.0"/>
+      <dep package="gtk+-3.14"/>
+    </after>
+  </autotools>
+
   <autotools id="pngcrush" autogen-sh="true" autogen-template="%(autogen-sh)s">
     <branch module="pmt/pngcrush-1.8.13.tar.xz" version="1.8.13"
       hash="sha256:8fc18bcbcc65146769241e20f9e21e443b0f4538d581250dce89b1e969a30705"
@@ -66,7 +83,7 @@
       <dep package="libwebp"/>
       <dep package="shared-mime-info"/>
       <dep package="iso-codes"/>
-      <dep package="librsvg"/>
+      <dep package="librsvg-244"/>
       <dep package="gexiv2"/>
       <dep package="libwmf"/>
       <dep package="openexr"/>
