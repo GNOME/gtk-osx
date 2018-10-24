@@ -69,6 +69,7 @@
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
       <dep package="meta-gtk-osx-core"/>
+      <deb package="webkit">
     </after>
     <dependencies>
       <dep package="lcms"/>
