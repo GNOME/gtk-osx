@@ -92,6 +92,7 @@
       <dep package="libmng"/>
       <dep package="ghostscript"/>
       <dep package="python"/>
+      <dep package="meta-gtk-osx-python"/>
     </dependencies>
   </autotools>
   <autotools id="gegl" autogen-sh="configure" autogenargs="--disable-docs">
