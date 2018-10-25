@@ -31,7 +31,7 @@
 
   <!-- Iso-codes >= 3.68 requires Python3, a dependency too far. -->
   <autotools id="iso-codes" autogen-sh="configure">
-    <branch module="iso-codes-3.67/iso-codes-3.67.tar.bz2" version="3.67"
+    <branch checkoutdir="iso-codes-iso-codes-3.67-080f941e075fef791b22feae659e8a510f57fe2c" module="iso-codes-3.67/iso-codes-3.67.tar.bz2" version="3.67"
 	    repo="iso-codes"/>
   </autotools>
 
