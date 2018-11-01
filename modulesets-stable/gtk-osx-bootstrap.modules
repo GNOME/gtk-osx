@@ -96,7 +96,28 @@
     </dependencies>
   </autotools>
 
-  <autotools id="gtk-doc" autogen-sh="configure">
+  <autotools id="yelp-xsl">
+    <branch version="3.20.1" module="yelp-xsl/3.20/yelp-xsl-3.20.1.tar.xz"
+            hash="sha256:dc61849e5dca473573d32e28c6c4e3cf9c1b6afe241f8c26e29539c415f97ba0"/>
+    <dependencies>
+      <dep package="libxml2"/>
+      <dep package="libxslt"/>
+      <dep package="itstool"/>
+    </dependencies>
+  </autotools>
+
+  <autotools id="yelp-tools">
+    <branch version="3.18.0" module="yelp-tools/3.18/yelp-tools-3.18.0.tar.xz"
+            hash="sha256:c6c1d65f802397267cdc47aafd5398c4b60766e0a7ad2190426af6c0d0716932"/>
+    <dependencies>
+      <dep package="libxml2"/>
+      <dep package="libxslt"/>
+      <dep package="itstool"/>
+      <dep package="yelp-xsl"/>
+    </dependencies>
+  </autotools>
+
+  <meson id="gtk-doc">
     <branch version="1.29" module="gtk-doc/1.29/gtk-doc-1.29.tar.xz"
             hash="sha256:14578e002496567276d310a62c9ffd6c56ee8806ce5079ffb0b81c4111f586b1"/>
     <dependencies>
@@ -104,7 +125,7 @@
       <dep package="itstool"/>
       <dep package="python3"/>
     </dependencies>
-  </autotools>
+  </meson>
 
   <autotools id="icu" autogen-sh="source/configure" autogenargs="--enable-rpath"
              makeargs='CFLAGS="$CFLAGS -DU_CHARSET_IS_UTF8=1 -DU_USING_ICU_NAMESPACE=0"'>

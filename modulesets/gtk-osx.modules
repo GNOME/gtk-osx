@@ -80,8 +80,8 @@
     <branch module="atgreen/libffi" repo="github" tag="v3.2.1"/>
   </autotools>
 
-  <autotools id="gobject-introspection">
-    <branch tag="1.60.0" module="gobject-introspection"/>
+  <meson id="gobject-introspection">
+    <branch tag="gnome-3-30" module="gobject-introspection"/>
     <dependencies>
       <dep package="glib"/>
       <dep package="cairo"/>
@@ -89,8 +89,15 @@
     </dependencies>
   </autotools>
 
-  <!-- Last autotools release -->
-  <autotools id="pango.">
+  <meson id="fribidi" mesonargs="-Ddocs=false">
+    <branch module="fribidi/fribidi" repo="github" tag="v1.0.5"/>
+    <dependencies>
+      <!--dep package="c2man"/ -->
+    </dependencies>
+  </meson>
+
+  <!-- Pango seems to be releasing from master these days. -->
+  <meson id="pango">
     <branch tag="1.42.4"/>
     <dependencies>
       <dep package="glib"/>
@@ -101,10 +108,10 @@
       <dep package="meta-gtk-osx-freetype"/>
       <dep package="meta-gtk-osx-bootstrap"/>
     </after>
-  </autotools>
+  </meson>
 
-  <autotools id="atk">
-    <branch tag="gnome-3-28"/>
+  <meson id="atk">
+    <branch tag="gnome-3-30"/>
     <dependencies>
     </dependencies>
     <after>
@@ -112,16 +119,17 @@
       <dep package="meta-gtk-osx-bootstrap"/>
       <dep package="gobject-introspection"/>
     </after>
-  </autotools>
+  </meson>
 
-  <autotools id="gdk-pixbuf">
-    <branch revision="gdk-pixbuf-2-36"/>
+  <meson id="gdk-pixbuf">
+    <!--gdk-pixbuf is releasing from master-->
+    <branch/>
     <dependencies>
       <dep package="pango"/>
       <dep package="gobject-introspection"/>
       <dep package="shared-mime-info"/>
     </dependencies>
-  </autotools>
+  </meson>
 
   <autotools id="xorg-util-macros">
     <branch repo="freedesktop" module="xorg/util/macros"/>
@@ -135,7 +143,7 @@
   </autotools>
 
   <autotools id="gtk+" autogenargs="--with-gdktarget=quartz --enable-introspection=no --enable-quartz-relocation">
-    <branch revision="gtk-2-24"/>
+    <branch module="gtk" revision="gtk-2-24"/>
     <dependencies>
       <dep package="glib"/>
       <dep package="pango"/>
@@ -149,8 +157,8 @@
   </autotools>
 
   <autotools id="gtk+-3.0"
-	     autogenargs="--enable-quartz-backend --disable-colord  --enable-quartz-relocation">
-    <branch module="gtk+" checkoutdir="gtk+-3.0" revision="gtk-3-24"/>
+         autogenargs="--enable-quartz-backend --enable-quartz-relocation --disable-colord">
+    <branch module="gtk" checkoutdir="gtk+-3.0" revision="gtk-3-24"/>
     <dependencies>
       <dep package="glib"/>
       <dep package="pango"/>

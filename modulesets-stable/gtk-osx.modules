@@ -103,11 +103,10 @@
             version="3.2.1"/>
   </autotools>
 
-
-  <autotools id="gobject-introspection" autogen-sh="configure">
-    <branch module="gobject-introspection/1.60/gobject-introspection-1.60.0.tar.xz"
-            version="1.60.0"
-            hash="sha256:9efe4090cb59717126701e97062e784773f800b8d47af14c4d278ebf194df35d">
+  <meson id="gobject-introspection">
+    <branch module="gobject-introspection/1.60/gobject-introspection-1.60.1.tar.xz"
+            version="1.60.1"
+            hash="sha256:d844d1499ecd36f3ec8a3573616186d36626ec0c9a7981939e99aa02e9c824b3">
       <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/girscanner-objc.patch" strip="1"/>
             <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/gi_cairo_library_path.patch" strip="1"/>
     </branch>
@@ -116,17 +115,17 @@
       <dep package="cairo"/>
       <dep package='python3'/>
     </dependencies>
-  </autotools>
+  </meson>
 
-  <autotools id="fribidi" autogenargs="--disable-docs">
+  <meson id="fribidi" mesonargs="-Ddocs=false">
     <branch module="fribidi/fribidi/releases/download/v1.0.5/fribidi-1.0.5.tar.bz2"
             repo="github-tarball" version="1.0.5"/>
     <dependencies>
       <!--dep package="c2man"/ -->
     </dependencies>
-  </autotools>
+  </meson>
 
-  <autotools id="pango"  autogen-sh="autoreconf">
+  <meson id="pango">
     <branch version="1.42.4" module="pango/1.42/pango-1.42.4.tar.xz"
             hash="sha256:1d2b74cd63e8bd41961f2f8d952355aa0f9be6002b52c8aa7699d9f5da597c9d">
     </branch>
@@ -140,11 +139,11 @@
       <dep package="meta-gtk-osx-freetype"/>
       <dep package="meta-gtk-osx-bootstrap"/>
     </after>
-  </autotools>
-<!-- atk-2-30 is meson-only, so it has to wait until pipenv is merged. -->
- <autotools id="atk" autogen-sh="configure">
-    <branch module="atk/2.28/atk-2.28.1.tar.xz" version="2.28.1"
-            hash="sha256:cd3a1ea6ecc268a2497f0cd018e970860de24a6d42086919d6bf6c8e8d53f4fc"/>
+  </meson>
+  
+ <meson id="atk">
+    <branch module="atk/2.30/atk-2.30.0.tar.xz" version="2.30.0"
+            hash="sha256:dd4d90d4217f2a0c1fee708a555596c2c19d26fef0952e1ead1938ab632c027b"/>
     <dependencies>
     </dependencies>
     <after>
@@ -152,17 +151,16 @@
       <dep package="meta-gtk-osx-bootstrap"/>
       <dep package="gobject-introspection"/>
     </after>
-  </autotools>
+  </meson>
 
-  <!-- 2.38.0 requires meson -->
-  <autotools id="gdk-pixbuf" autogen-sh="configure">
-    <branch module="gdk-pixbuf/2.36/gdk-pixbuf-2.36.12.tar.xz" version="2.36.12"
-            hash="sha256:fff85cf48223ab60e3c3c8318e2087131b590fd6f1737e42cb3759a3b427a334"/>
+  <meson id="gdk-pixbuf">
+    <branch module="gdk-pixbuf/2.38/gdk-pixbuf-2.38.0.tar.xz" version="2.38.0"
+            hash="sha256:dd50973c7757bcde15de6bcd3a6d462a445efd552604ae6435a0532fbbadae47"/>
     <after>
       <dep package="pango"/>
       <dep package="gobject-introspection"/>
     </after>
-  </autotools>
+  </meson>
 
   <autotools id="gtk+" autogen-sh="autoreconf"
              autogenargs="--with-gdktarget=quartz --enable-quartz-relocation --disable-introspection">
@@ -230,9 +228,8 @@
 
   <autotools id="gtk+-3.0" autogen-sh="autogen.sh"
              autogenargs="--enable-quartz-backend --enable-quartz-relocation">
-    <branch module="gtk+/3.24/gtk+-3.24.7.tar.xz" version="3.24.7"
-            hash="sha256:52121144a2df4babed75eb5f34de130a46420101fde3ae216d3142df8a481520">
-      <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master//patches/gtk3-quartz-3-24-7-fixes.patch" strip="1"/>
+    <branch module="gtk+/3.24/gtk+-3.24.8.tar.xz" version="3.24.8"
+            hash="sha256:666962de9b9768fe9ca785b0e2f42c8b9db3868a12fa9b356b167238d70ac799">
     </branch>
     <dependencies>
       <dep package="glib"/>
