@@ -17,7 +17,7 @@
   by closed-source developers.</description>
   <homepage rdf:resource="http://www.gtk+.org/" />
   <license rdf:resource="http://usefulinc.com/doap/licenses/gpl" />
-  <bug-database rdf:resource="http://bugzilla.gnome.org/enter_bug.cgi?product=gtk-mac-integration"/>
+  <bug-database rdf:resource="https://gitlab.gnome.org/GNOME/gtk-osx/issues/" />
   <download-page rdf:resource="https://sourceforge.net/projects/gtk-osx/files/" />
   <mailing-list rdf:resource="http://mail.gnome.org/mailman/listinfo/gtk-osx-users-list" />
   <mailing-list rdf:resource="http://mail.gnome.org/mailman/listinfo/gtk-osx-devel-list" />
