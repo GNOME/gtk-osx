@@ -26,8 +26,8 @@
   </autotools>
 
   <autotools id="cairomm" autogen-sh="configure">
-    <branch module="cairomm-1.15.5.tar.gz" version="1.15.5"
-	    hash="sha1:f95ae92551ea4d0a9214e45834ae9806dfee9e3d"
+    <branch module="cairomm-1.13.1.tar.gz" version="1.13.1"
+	    hash="sha1:63cd9eab40686f368a8edd3e6912ac18b3048ecf"
             repo="cairographics">
       <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/cairomm-Bug-100894-Cairomm-compile-failure-if-no-cairo-ft.patch" strip="1"/>
     </branch>
