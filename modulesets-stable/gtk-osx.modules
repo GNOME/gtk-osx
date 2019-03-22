@@ -230,10 +230,9 @@
 
   <autotools id="gtk+-3.0" autogen-sh="autogen.sh"
              autogenargs="--enable-quartz-backend --enable-quartz-relocation">
-    <branch module="gtk+/3.24/gtk+-3.24.7.tar.xz" version="3.24.2"
-            hash="sha256:5b3b05e427cc928d103561ed2e91b2b2881fe88b1f167b0b1c9990da6aac8892">
-      <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master//patches/gtk3-quartz-3-24-2-fixes.patch" strip="1"/>
-      <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/IMQuartz-GdkWindow.patch" strip="1"/>
+    <branch module="gtk+/3.24/gtk+-3.24.7.tar.xz" version="3.24.7"
+            hash="sha256:52121144a2df4babed75eb5f34de130a46420101fde3ae216d3142df8a481520">
+      <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master//patches/gtk3-quartz-3-24-7-fixes.patch" strip="1"/>
     </branch>
     <dependencies>
       <dep package="glib"/>
