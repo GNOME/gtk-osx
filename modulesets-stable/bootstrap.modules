@@ -60,7 +60,7 @@
   </autotools>
 
   <autotools id="gettext-tools" autogen-sh="configure"
-             autogenargs="--without-emacs --disable-java --disable-native-java --disable-libasprintf --disable-csharp --with-included-glib">
+             autogenargs="--without-emacs --disable-java --disable-native-java --disable-libasprintf --disable-csharp --with-included-glib --with-included-libcroco">
     <branch repo="ftp.gnu.org" source-subdir="gettext-tools"
             module="gettext/gettext-0.19.8.tar.xz" version="0.19.8">
       <!-- upstream bug: https://savannah.gnu.org/bugs/index.php?49560 -->
