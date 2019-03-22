@@ -82,10 +82,8 @@
     <dependencies>
       <dep package="glib"/>
       <dep package="cairo"/>
+      <dep package='python3'/>
     </dependencies>
-    <after>
-      <dep package='python'/>
-    </after>
   </autotools>
 
       <!-- c2man is required only for documentation. There used to be a -\-disable-docs flag but it was removed. This will of course fail, so shell in and do 'git revert 095d885' and then rerun configuration. -->

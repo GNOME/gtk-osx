@@ -89,31 +89,12 @@
     </dependencies>
   </autotools>
 
-  <autotools id="yelp-xsl">
-    <branch repo="git.gnome.org"/>
-    <dependencies>
-      <dep package="libxml2"/>
-      <dep package="libxslt"/>
-      <dep package="itstool"/>
-    </dependencies>
-  </autotools>
-
-  <autotools id="yelp-tools">
-    <branch repo="git.gnome.org"/>
-    <dependencies>
-      <dep package="libxml2"/>
-      <dep package="libxslt"/>
-      <dep package="itstool"/>
-      <dep package="yelp-xsl"/>
-    </dependencies>
-  </autotools>
-
-  <autotools id="gtk-doc">
-    <branch repo="git.gnome.org"/>
+  <autotools id="gtkdoc" autogen-sh="configure">
+    <branch repo="git.gnome.org" module="gtk-doc-stub"/>
     <dependencies>
       <dep package="libxml2"/>
       <dep package="itstool"/>
-      <dep package="yelp-tools"/>
+      <dep package="python3"/>
     </dependencies>
   </autotools>
 

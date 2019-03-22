@@ -91,32 +91,12 @@
     </dependencies>
   </autotools>
 
-  <autotools id="yelp-xsl">
-    <branch repo="git.gnome.org" revision="gnome-3-20"/>
-    <dependencies>
-      <dep package="libxml2"/>
-      <dep package="libxslt"/>
-      <dep package="itstool"/>
-    </dependencies>
-  </autotools>
-
-  <!-- Yelp tools is releasing from the master branch. -->
-  <autotools id="yelp-tools">
-    <branch repo="git.gnome.org"/>
-    <dependencies>
-      <dep package="libxml2"/>
-      <dep package="libxslt"/>
-      <dep package="itstool"/>
-      <dep package="yelp-xsl"/>
-    </dependencies>
-  </autotools>
-
   <autotools id="gtk-doc">
-    <branch repo="git.gnome.org" version="1.25" tag="GTK_DOC_1_25"/>
+    <branch repo="git.gnome.org" version="1.29" tag="GTK_DOC_1_29"/>
     <dependencies>
       <dep package="libxml2"/>
       <dep package="itstool"/>
-      <dep package="yelp-tools"/>
+      <dep package="python3"/>
     </dependencies>
   </autotools>
 
