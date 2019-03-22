@@ -59,7 +59,6 @@
     <dependencies>
       <dep package="gtk+-3.0"/>
       <dep package="gtk-mac-integration"/>
-      <dep package="meta-gtk-osx-gtk3-core-themes"/>
     </dependencies>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>

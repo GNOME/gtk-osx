@@ -11,17 +11,9 @@
   <metamodule id="meta-gtk-osx-themes">
     <dependencies>
       <dep package="tango-icon-theme"/>
-      <dep package="adwaita-icon-theme"/>
+      <dep package="gnome-themes-extra"/>
       <dep package="icon-naming-utils"/>
       <dep package="gtk-engines"/>
-    </dependencies>
-  </metamodule>
-
-  <metamodule id="meta-gtk-osx-gtk3-core-themes">
-    <dependencies>
-      <dep package="icon-naming-utils"/>
-      <dep package="adwaita-icon-theme"/>
-      <dep package="gnome-themes-standard"/>
     </dependencies>
   </metamodule>
 
@@ -55,11 +47,10 @@ cgit    <after>
     </dependencies>
   </autotools>
 
-  <autotools id="gnome-themes-standard" autogenargs='--disable-gtk2-engine'>
+  <autotools id="gnome-themes-extra">
     <branch />
     <dependencies>
       <dep package="librsvg"/>
-      <dep package="adwaita-icon-theme"/>
     </dependencies>
   </autotools>
 
