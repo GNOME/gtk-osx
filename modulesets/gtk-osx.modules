@@ -66,7 +66,7 @@
   </metamodule>
 
   <autotools id="glib" autogenargs="--with-pcre=internal">
-    <branch tag="glib-2-52"/>
+    <branch tag="glib-2-58"/>
     <dependencies>
       <dep package="libffi"/>
     </dependencies>
@@ -81,19 +81,17 @@
   </autotools>
 
   <autotools id="gobject-introspection">
-    <branch tag="gnome-3-24" module="gobject-introspection"/>
+    <branch tag="1.60.0" module="gobject-introspection"/>
     <dependencies>
       <dep package="glib"/>
       <dep package="cairo"/>
+      <dep package='python3'/>
     </dependencies>
-    <after>
-      <dep package='python'/>
-    </after>
   </autotools>
 
-  <!-- Pango seems to be releasing from master these days. -->
-  <autotools id="pango">
-    <branch tag="1.40.7"/>
+  <!-- Last autotools release -->
+  <autotools id="pango.">
+    <branch tag="1.42.4"/>
     <dependencies>
       <dep package="glib"/>
       <dep package="cairo"/>
@@ -106,7 +104,7 @@
   </autotools>
 
   <autotools id="atk">
-    <branch tag="gnome-3-24"/>
+    <branch tag="gnome-3-28"/>
     <dependencies>
     </dependencies>
     <after>
@@ -117,8 +115,7 @@
   </autotools>
 
   <autotools id="gdk-pixbuf">
-    <!--gdk-pixbuf is releasing from master-->
-    <branch/>
+    <branch revision="gdk-pixbuf-2-36"/>
     <dependencies>
       <dep package="pango"/>
       <dep package="gobject-introspection"/>
@@ -153,7 +150,7 @@
 
   <autotools id="gtk+-3.0"
 	     autogenargs="--enable-quartz-backend --disable-colord  --enable-quartz-relocation">
-    <branch module="gtk+" checkoutdir="gtk+-3.0" revision="gtk-3-22"/>
+    <branch module="gtk+" checkoutdir="gtk+-3.0" revision="gtk-3-24"/>
     <dependencies>
       <dep package="glib"/>
       <dep package="pango"/>

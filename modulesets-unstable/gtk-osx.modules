@@ -66,7 +66,7 @@
   </metamodule>
 
   <autotools id="glib" autogenargs="--disable-dtrace --with-pcre=insternal">
-    <branch />
+    <branch revision="glib-2-58"/>
     <dependencies>
       <dep package="libffi"/>
     </dependencies>
@@ -78,7 +78,7 @@
   </autotools>
 
   <autotools id="gobject-introspection">
-    <branch/>
+    <branch revision='72c670ce' /> <!-- Next one drops autotools -->
     <dependencies>
       <dep package="glib"/>
       <dep package="cairo"/>
@@ -95,7 +95,7 @@
   </autotools>
 
   <autotools id="pango">
-    <branch />
+    <branch tag="1.42.4"/>
     <dependencies>
       <dep package="cairo"/>
       <dep package="glib"/>
@@ -109,7 +109,7 @@
   </autotools>
 
  <autotools id="atk" supports-non-srcdir-builds="no">
-    <branch />
+    <branch revision="gnome-3-28"/>
     <dependencies>
     </dependencies>
     <after>
@@ -120,7 +120,7 @@
   </autotools>
 
   <autotools id="gdk-pixbuf">
-    <branch />
+    <branch revision="gdk-pixbuf-2-36"/>
     <after>
       <dep package="pango"/>
       <dep package="gobject-introspection"/>
@@ -164,7 +164,7 @@
 
   <autotools id="gtk+-3.0"
              autogenargs="--enable-quartz-backend --enable-quartz-relocation --disable-colord">
-    <branch module="gtk+" checkoutdir="gtk+-3.0" revision="gtk-3-22"/>
+    <branch module="gtk" checkoutdir="gtk+-3.0" revision="gtk-3-24"/>
     <dependencies>
       <dep package="glib"/>
       <dep package="pango"/>
