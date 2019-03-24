@@ -100,7 +100,7 @@ index 75699cc..c01a9cd 100644
   */
  gchar **
  gtk_clipboard_wait_for_uris (GtkClipboard *clipboard)
-@@ -1276,6 +1293,8 @@ _gtk_clipboard_store_all (void)
+@@ -1276,7 +1293,9 @@ _gtk_clipboard_store_all (void)
   * gtk_clipboard_get_selection:
   * @clipboard:
   *
@@ -109,6 +109,27 @@ index 75699cc..c01a9cd 100644
   * Since: 3.22
   */
  GdkAtom
+diff --git a/gtk/gtkmenu.c b/gtk/gtkmenu.c
+index f12deb5..01b31ef 100644
+--- a/gtk/gtkmenu.c
++++ b/gtk/gtkmenu.c
+@@ -5271,8 +5271,5 @@ gtk_menu_position (GtkMenu  *menu,
+   /* Realize so we have the proper width and height to figure out
+    * the right place to popup the menu.
+    */
+-  gtk_widget_realize (priv->toplevel);
+-  gtk_window_move_resize (GTK_WINDOW (priv->toplevel));
+-
+   if (!gtk_widget_get_visible (priv->toplevel))
+     gtk_window_set_type_hint (GTK_WINDOW (priv->toplevel), priv->menu_type_hint);
+
++  gtk_widget_realize (priv->toplevel);
++  gtk_window_move_resize (GTK_WINDOW (priv->toplevel));
++
+   if (text_direction == GTK_TEXT_DIR_NONE)
+     text_direction = gtk_widget_get_direction (GTK_WIDGET (menu));
+
+  
 diff --git a/gdk/quartz/GdkQuartzView.c b/gdk/quartz/GdkQuartzView.c
 index 72e305c..193fcc1 100644
 --- a/gdk/quartz/GdkQuartzView.c
