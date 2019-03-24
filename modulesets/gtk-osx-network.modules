@@ -20,6 +20,7 @@
               href="http://www.webkitgtk.org/releases/"/>
   <repository type="tarball" name="icu"
               href="http://download.icu-project.org/files/"/>
+  <repository type="git" name="github" href="https://github.com/"/>
 
   <!-- Builds last version of WebKitGTK that supported GTK 2.x -->
   <metamodule id="meta-gtk-osx-webkit">
@@ -101,9 +102,17 @@
     </dependencies>
   </autotools>
 
-  <autotools id="libsoup" autogenargs="set_more_warnings=no">
-    <branch revision="gnome-3-24"/>
+  <autotools id="libpsl" autogen-sh='configure'>
+    <branch repo="github" tag="libpsl-0.20.2" module="rockdaboot/libpsl"/>
+  </autotools>
+  
+  <autotools id="libsoup"
+             autogenargs="set_more_warnings=no --enable-introspection=no">
+    <branch revision="gnome-3-30"/>
     <dependencies>
+      <dep package="libpsl"/>
+      <dep package="python3"/>
+      <dep package="vala"/>
       <dep package="glib"/>
       <dep package="glib-networking"/>
       <dep package="sqlite"/>
