@@ -128,8 +128,7 @@ index f12deb5..01b31ef 100644
 +
    if (text_direction == GTK_TEXT_DIR_NONE)
      text_direction = gtk_widget_get_direction (GTK_WIDGET (menu));
-
-  
+ 
 diff --git a/gdk/quartz/GdkQuartzView.c b/gdk/quartz/GdkQuartzView.c
 index 72e305c..193fcc1 100644
 --- a/gdk/quartz/GdkQuartzView.c
