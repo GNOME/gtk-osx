@@ -39,17 +39,17 @@ envvar ()
 }
 # Environment variable defaults:
 #
-envvar DEVROOT $HOME
-envvar DEVPREFIX $DEVROOT/.new_local
-envvar PYTHONUSERBASE $DEVROOT/.new_local
-envvar DEV_SRC_ROOT $DEVROOT/Source
-envvar PYENV_ROOT $DEV_SRC_ROOT/pyenv
-envvar PIP_CONFIG_DIR $HOME/.config/pip
+envvar DEVROOT "$HOME"
+envvar DEVPREFIX "$DEVROOT/.new_local"
+envvar PYTHONUSERBASE "$DEVROOT/.new_local"
+envvar DEV_SRC_ROOT "$DEVROOT/Source"
+envvar PYENV_ROOT "$DEV_SRC_ROOT/pyenv"
+envvar PIP_CONFIG_DIR "$HOME/.config/pip"
 
-export PYTHONPATH=$PYTHONUSERBASE/lib/python/site-packages:$PYTHONPATH
+export PYTHONPATH="$PYTHONUSERBASE/lib/python/site-packages":"$PYTHONPATH"
 
-if test ! -d $DEVPREFIX/bin ; then
-    mkdir -p $DEVPREFIX/bin
+if test ! -d "$DEVPREFIX/bin" ; then
+    mkdir -p "$DEVPREFIX/bin"
 fi
 
 GITLAB="https://gitlab.gnome.org/GNOME"
@@ -61,15 +61,15 @@ if test ! -x $DEVPREFIX/bin/bash; then
 fi
 
 # Setup pyenv
-if test ! -x $PYENV_ROOT/libexec/pyenv; then
-  if test -d $PYENV_ROOT; then
-     rm -rf $PYENV_ROOT;
+if test ! -x "$PYENV_ROOT/libexec/pyenv"; then
+  if test -d "$PYENV_ROOT"; then
+     rm -rf "$PYENV_ROOT";
   fi
-    git clone $GITHUB/pyenv/pyenv.git $PYENV_ROOT
+    git clone $GITHUB/pyenv/pyenv.git "$PYENV_ROOT"
 fi
 
-if test ! -x $DEVPREFIX/bin/pyenv ; then
-    ln -s $PYENV_ROOT/bin/pyenv $DEVPREFIX/bin
+if test ! -x "$DEVPREFIX/bin/pyenv" ; then
+    ln -s "$PYENV_ROOT/bin/pyenv" "$DEVPREFIX/bin"
 fi
 
 # Setup PIP; note that we're assuming that python is the system python
@@ -85,9 +85,9 @@ PIP=`which pip`
 if test ! -x "`eval echo $PIP`" ; then
     mv=`python --version 2>&1 | cut -b 12-13`
     if test $mv -lt 9 ; then
-        curl https://bootstrap.pypa.io/get-pip.py -o $DEVPREFIX/get-pip.py
-        python $DEVPREFIX/get-pip.py --user
-        rm $DEVPREFIX/get-pip.py
+        curl https://bootstrap.pypa.io/get-pip.py -o "$DEVPREFIX/get-pip.py"
+        python "$DEVPREFIX/get-pip.py" --user
+        rm "$DEVPREFIX/get-pip.py"
     else
         python -m ensurepip --user
     fi
@@ -98,27 +98,27 @@ fi
 pip install --upgrade --user pipenv
 
 # Install jhbuild
-if test ! -d $DEV_SRC_ROOT/jhbuild/.git ; then
-    git clone $GITLAB/jhbuild.git $DEV_SRC_ROOT/jhbuild
-    cd $DEV_SRC_ROOT/jhbuild
+if test ! -d "$DEV_SRC_ROOT/jhbuild/.git" ; then
+    git clone $GITLAB/jhbuild.git "$DEV_SRC_ROOT/jhbuild"
+    cd "$DEV_SRC_ROOT/jhbuild"
 else #Get the latest if it's already installed
-    cd $DEV_SRC_ROOT/jhbuild
+    cd "$DEV_SRC_ROOT/jhbuild"
     git pull
 fi
 
 # Install Ninja
 NINJA=`which ninja`
 if test ! -x "`eval echo $NINJA`"; then
-    curl -kLs https://github.com/ninja-build/ninja/releases/download/v1.8.2/ninja-mac.zip -o $DEVPREFIX/ninja-mac.zip
-    unzip -d $DEVPREFIX/bin $DEVPREFIX/ninja-mac.zip
-    rm $DEVPREFIX/ninja-mac.zip
+    curl -kLs https://github.com/ninja-build/ninja/releases/download/v1.8.2/ninja-mac.zip -o "$DEVPREFIX/ninja-mac.zip"
+    unzip -d "$DEVPREFIX/bin" "$DEVPREFIX/ninja-mac.zip"
+    rm "$DEVPREFIX/ninja-mac.zip"
 fi
 
-if test ! -d $DEVPREFIX/etc ; then
-    mkdir -p $DEVPREFIX/etc
+if test ! -d "$DEVPREFIX/etc" ; then
+    mkdir -p "$DEVPREFIX/etc"
 fi
-if test ! -f $DEVPREFIX/etc/Pipfile ; then
-    cat  <<EOF > $DEVPREFIX/etc/Pipfile
+if test ! -f "$DEVPREFIX/etc/Pipfile" ; then
+    cat  <<EOF > "$DEVPREFIX/etc/Pipfile"
 [[source]]
 url = "https://pypi.python.org/simple"
 verify_ssl = true
@@ -133,33 +133,33 @@ jhbuild = "$DEVPREFIX/libexec/run_jhbuild.py"
 [requires]
 python_version = "3.6"
 EOF
-    cat <<EOF > $DEVPREFIX/etc/pipenv-env
-export DEVROOT=$HOME
-export DEVPREFIX=$DEVPREFIX
-export PYTHONUSERBASE=$PYTHONUSERBASE
-export DEV_SRC_ROOT=$DEV_SRC_ROOT
-export PYENV_ROOT=$PYENV_ROOT
-export PIP_CONFIG_DIR=$PIP_CONFIG_DIR
-export PATH=$PYENV_ROOT/shims:$PATH
+    cat <<EOF > "$DEVPREFIX/etc/pipenv-env"
+export DEVROOT="$DEVROOT"
+export DEVPREFIX="$DEVPREFIX"
+export PYTHONUSERBASE="$PYTHONUSERBASE"
+export DEV_SRC_ROOT="$DEV_SRC_ROOT"
+export PYENV_ROOT="$PYENV_ROOT"
+export PIP_CONFIG_DIR="$PIP_CONFIG_DIR"
+export PATH="$PYENV_ROOT/shims:$DEVPREFIX/bin:$PATH"
 export LANG=C
 EOF
 fi
-if test ! -f $DEVPREFIX/bin/jhbuild ; then
-    cat <<EOF > $DEVPREFIX/bin/jhbuild
+if test ! -f "$DEVPREFIX/bin/jhbuild" ; then
+    cat <<EOF > "$DEVPREFIX/bin/jhbuild"
 #!$DEVPREFIX/bin/bash
-export PYTHONPATH=$PYTHONPATH
-export PIPENV_DOTENV_LOCATION=$DEVPREFIX/etc/pipenv-env
-export PIPENV_PIPFILE=$DEVPREFIX/etc/Pipfile
-export PYENV_ROOT=$PYENV_ROOT
+export PYTHONPATH="$PYTHONPATH"
+export PIPENV_DOTENV_LOCATION="$DEVPREFIX/etc/pipenv-env"
+export PIPENV_PIPFILE="$DEVPREFIX/etc/Pipfile-
+export PYENV_ROOT="$PYENV_ROOT"
 
 exec pipenv run jhbuild \$@
 EOF
 fi
-if test ! -d $DEVPREFIX/libexec ; then
-    mkdir -p $DEVPREFIX/libexec
+if test ! -d "$DEVPREFIX/libexec" ; then
+    mkdir -p "$DEVPREFIX/libexec"
 fi
-if test ! -f $DEVPREFIX/libexec/run_jhbuild.py ; then
-    cat <<EOF > $DEVPREFIX/libexec/run_jhbuild.py
+if test ! -f "$DEVPREFIX/libexec/run_jhbuild.py" ; then
+    cat <<EOF > "$DEVPREFIX/libexec/run_jhbuild.py"
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
@@ -180,13 +180,13 @@ jhbuild.main.main(sys.argv[1:])
 
 EOF
 fi
-if test ! -x $DEVPREFIX/bin/jhbuild ; then
-    chmod +x $DEVPREFIX/bin/jhbuild
+if test ! -x "$DEVPREFIX/bin/jhbuild" ; then
+    chmod +x "$DEVPREFIX/bin/jhbuild"
 fi
-if test ! -x $DEVPREFIX/libexec/run_jhbuild.py ; then
-    chmod +x $DEVPREFIX/libexec/run_jhbuild.py
+if test ! -x "$DEVPREFIX/libexec/run_jhbuild.py" ; then
+    chmod +x "$DEVPREFIX/libexec/run_jhbuild.py"
 fi
-if test "x`echo $PATH | grep $DEVPREFIX/bin`" == x ; then
+if test "x`echo $PATH | grep "$DEVPREFIX/bin"`" == x ; then
     echo "PATH does not contain $DEVPREFIX/bin. You probably want to fix that."
 fi
 # pipenv wants enum34 because it's installed with Py2 but that conflicts
@@ -195,9 +195,9 @@ pip uninstall --yes enum34
 
 SDKROOT=`xcrun --show-sdk-path`
 
-export PIPENV_DOTENV_LOCATION=$DEVPREFIX/etc/pipenv-env
-export PIPENV_PIPFILE=$DEVPREFIX/etc/Pipfile
-export PATH=$PYENV_ROOT/shims:$PATH
+export PIPENV_DOTENV_LOCATION="$DEVPREFIX/etc/pipenv-env"
+export PIPENV_PIPFILE="$DEVPREFIX/etc/Pipfile"
+export PATH="$PYENV_ROOT/shims:$PATH"
 export CFLAGS="-isysroot $SDKROOT -I$SDKROOT/usr/include"
 export PYTHON_CONFIGURE_OPTS="--enable-shared"
 
