@@ -105,7 +105,7 @@ if test ! -d "$DEV_SRC_ROOT/jhbuild/.git" ; then
     cd "$DEV_SRC_ROOT/jhbuild"
 else #Get the latest if it's already installed
     cd "$DEV_SRC_ROOT/jhbuild"
-    git pull
+    git pull origin master
 fi
 
 # Install Ninja
