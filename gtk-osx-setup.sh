@@ -91,11 +91,13 @@ if test ! -x "`eval echo $PIP`" ; then
     else
         python -m ensurepip --user
     fi
-    pip install --upgrade --user pip
+    PIP="$PYTHONUSERBASE/bin/pip"
+    $PIP install --upgrade --user pip
 fi
 
 # Install pipenv
-pip install --upgrade --user pipenv
+$PIP install --upgrade --user pipenv
+PIPENV="$PYTHONUSERBASE/bin/pipenv"
 
 # Install jhbuild
 if test ! -d "$DEV_SRC_ROOT/jhbuild/.git" ; then
@@ -191,7 +193,7 @@ if test "x`echo $PATH | grep "$DEVPREFIX/bin"`" == x ; then
 fi
 # pipenv wants enum34 because it's installed with Py2 but that conflicts
 # with Py3 so remove it.
-pip uninstall --yes enum34
+$PIP uninstall --yes enum34
 
 SDKROOT=`xcrun --show-sdk-path`
 
@@ -201,7 +203,7 @@ export PATH="$PYENV_ROOT/shims:$PATH"
 export CFLAGS="-isysroot $SDKROOT -I$SDKROOT/usr/include"
 export PYTHON_CONFIGURE_OPTS="--enable-shared"
 
-pipenv install
+$PIPENV install
 
 BASEURL="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master"
 
