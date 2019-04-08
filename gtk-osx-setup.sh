@@ -110,7 +110,7 @@ fi
 
 # Install Ninja
 NINJA=`which ninja`
-if test ! -x "`eval echo $NINJA`"; then
+if test ! -x "$NINJA" -a ! -x "$DEVPREFIX/bin/ninja"; then
     curl -kLs https://github.com/ninja-build/ninja/releases/download/v1.8.2/ninja-mac.zip -o "$DEVPREFIX/ninja-mac.zip"
     unzip -d "$DEVPREFIX/bin" "$DEVPREFIX/ninja-mac.zip"
     rm "$DEVPREFIX/ninja-mac.zip"
