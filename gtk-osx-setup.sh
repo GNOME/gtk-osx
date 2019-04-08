@@ -28,11 +28,13 @@
 envvar ()
 {
     local _varname=$1
-    if test -z "`eval echo '"$'"$_varname"'"'`"; then
-        eval "export $_varname"'="'"$2"'"'
+    eval local _var=\$$_varname
+    if test -z "$_var"; then
+        eval export $_varname="$2"
+        _var=$2
     fi
-    if test ! -d "`eval echo '"$'"$_varname"'"'`"; then
-        eval "mkdir -p $_varname"
+    if test ! -d "$_var"; then
+        mkdir -p "$_var"
     fi
 }
 # Environment variable defaults:
