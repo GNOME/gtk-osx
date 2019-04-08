@@ -190,6 +190,7 @@ if test ! -x "$DEVPREFIX/libexec/run_jhbuild.py" ; then
 fi
 if test "x`echo $PATH | grep "$DEVPREFIX/bin"`" == x ; then
     echo "PATH does not contain $DEVPREFIX/bin. You probably want to fix that."
+    export PATH="$DEVPREFIX/bin:$PATH"
 fi
 # pipenv wants enum34 because it's installed with Py2 but that conflicts
 # with Py3 so remove it.
