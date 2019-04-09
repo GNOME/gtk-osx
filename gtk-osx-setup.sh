@@ -43,7 +43,8 @@ envvar DEVROOT "$HOME"
 envvar DEVPREFIX "$DEVROOT/.new_local"
 envvar PYTHONUSERBASE "$DEVROOT/.new_local"
 envvar DEV_SRC_ROOT "$DEVROOT/Source"
-envvar PYENV_ROOT "$DEV_SRC_ROOT/pyenv"
+envvar PYENV_INSTALL_ROOT "$DEV_SRC_ROOT/pyenv"
+envvar PYENV_ROOT "$DEVPREFIX/share/pyenv"
 envvar PIP_CONFIG_DIR "$HOME/.config/pip"
 
 export PYTHONPATH="$PYTHONUSERBASE/lib/python/site-packages":"$PYTHONPATH"
@@ -61,15 +62,15 @@ if test ! -x $DEVPREFIX/bin/bash; then
 fi
 
 # Setup pyenv
-if test ! -x "$PYENV_ROOT/libexec/pyenv"; then
-  if test -d "$PYENV_ROOT"; then
-     rm -rf "$PYENV_ROOT";
+if test ! -x "$PYENV_INSTALL_ROOT/libexec/pyenv"; then
+  if test -d "$PYENV_INSTALL_ROOT"; then
+     rm -rf "$PYENV_INSTALL_ROOT";
   fi
-    git clone $GITHUB/pyenv/pyenv.git "$PYENV_ROOT"
+    git clone $GITHUB/pyenv/pyenv.git "$PYENV_INSTALL_ROOT"
 fi
 
 if test ! -x "$DEVPREFIX/bin/pyenv" ; then
-    ln -s "$PYENV_ROOT/bin/pyenv" "$DEVPREFIX/bin"
+    ln -s "$PYENV_INSTALL_ROOT/bin/pyenv" "$DEVPREFIX/bin"
 fi
 
 # Setup PIP; note that we're assuming that python is the system python
@@ -136,22 +137,23 @@ jhbuild = "$DEVPREFIX/libexec/run_jhbuild.py"
 python_version = "3.6"
 EOF
     cat <<EOF > "$DEVPREFIX/etc/pipenv-env"
-export DEVROOT="$DEVROOT"
-export DEVPREFIX="$DEVPREFIX"
 export PYTHONUSERBASE="$PYTHONUSERBASE"
 export DEV_SRC_ROOT="$DEV_SRC_ROOT"
 export PYENV_ROOT="$PYENV_ROOT"
 export PIP_CONFIG_DIR="$PIP_CONFIG_DIR"
-export PATH="$PYENV_ROOT/shims:$DEVPREFIX/bin:$PATH"
 export LANG=C
 EOF
 fi
 if test ! -f "$DEVPREFIX/bin/jhbuild" ; then
     cat <<EOF > "$DEVPREFIX/bin/jhbuild"
 #!$DEVPREFIX/bin/bash
+export DEVROOT="$DEVROOT"
+export DEVPREFIX="$DEVPREFIX"
+export WORKON_HOME="$DEVPREFIX/share"
 export PYTHONPATH="$PYTHONPATH"
 export PIPENV_DOTENV_LOCATION="$DEVPREFIX/etc/pipenv-env"
-export PIPENV_PIPFILE="$DEVPREFIX/etc/Pipfile-
+export PIPENV_PIPFILE="$DEVPREFIX/etc/Pipfile"
+export PATH="$PYENV_ROOT/shims:$DEVPREFIX/bin:$PATH"
 export PYENV_ROOT="$PYENV_ROOT"
 
 exec pipenv run jhbuild \$@
@@ -200,7 +202,8 @@ SDKROOT=`xcrun --show-sdk-path`
 
 export PIPENV_DOTENV_LOCATION="$DEVPREFIX/etc/pipenv-env"
 export PIPENV_PIPFILE="$DEVPREFIX/etc/Pipfile"
-export PATH="$PYENV_ROOT/shims:$PATH"
+export PATH="$PYENV_ROOT/shims:$DEVPREFIX/bin:$PYENV_INSTALL_ROOT/plugins/python-build/bin:$PATH"
+export PYENV_ROOT
 export CFLAGS="-isysroot $SDKROOT -I$SDKROOT/usr/include"
 export PYTHON_CONFIGURE_OPTS="--enable-shared"
 
