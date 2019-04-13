@@ -150,7 +150,7 @@ if test ! -f "$DEVPREFIX/bin/jhbuild" ; then
 #!$DEVPREFIX/bin/bash
 export DEVROOT="$DEVROOT"
 export DEVPREFIX="$DEVPREFIX"
-export WORKON_HOME="$DEVPREFIX/share"
+export WORKON_HOME="$DEVPREFIX/share/venv"
 export PYTHONPATH="$PYTHONPATH"
 export PIPENV_DOTENV_LOCATION="$DEVPREFIX/etc/pipenv-env"
 export PIPENV_PIPFILE="$DEVPREFIX/etc/Pipfile"
