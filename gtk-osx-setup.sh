@@ -207,16 +207,32 @@ export PATH="$PYENV_ROOT/shims:$DEVPREFIX/bin:$PYENV_INSTALL_ROOT/plugins/python
 export PYENV_ROOT
 export CFLAGS="-isysroot $SDKROOT -I$SDKROOT/usr/include"
 export PYTHON_CONFIGURE_OPTS="--enable-shared"
+export WORKON_HOME=$DEVPREFIX/share/venv
 
 $PIPENV install
 
 BASEURL="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master"
 
-if test -L $HOME/.jhbuildrc ; then
-    echo "Installing jhbuild configuration..."
-    curl -ks $BASEURL/jhbuildrc-gtk-osx -o $HOME/.jhbuildrc
+config_dir=""
+if test -d "$XDG_CONFIG_HOME" ; then
+    config_dir="$XDG_CONFIG_HOME"
+elif test -d "$HOME/.config" ; then
+    config_dir = "$HOME/.config"
 fi
 
-if test ! -e $HOME/.jhbuildrc-custom ; then
+jhbuildrc_file=""
+if test -e "$config_dir/jhbuildrc" ; then
+    jhbuildrc_file="$config_dir/jhbuildrc"
+elif test -e "$HOME/.jhbuildrc" ; then
+    jhbuildrc_file="$HOME/.jhbuildrc"
+fi
+
+if -z "$jhbuildrc_file" ; then
+    echo "Installing jhbuild configuration..."
+    curl -ks $BASEURL/jhbuildrc-gtk-osx -o "$config_dir/jhbuildrc"
+fi
+
+envvar JHBUILDRC_CUSTOM "$config_dir/jhbuildrc-custom"
+if test ! -e "$JHBUILDRC_CUSTOM" -a ! -e $HOME/.jhbuildrc-custom; then
    curl -ks $BASEURL/jhbuildrc-gtk-osx-custom-example -o $HOME/.jhbuildrc-custom
 fi

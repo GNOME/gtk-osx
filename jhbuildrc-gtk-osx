@@ -403,9 +403,28 @@ if _osx_version < 8.0:
 # the prefix or default build setup for example, or CFLAGS or
 # module_autogenargs, etc.
 #
-_userrc = os.path.join(os.environ['HOME'], '.jhbuildrc-custom')
-if os.path.exists(_userrc):
-    execfile(_userrc)
+_this_dir = os.path.dirname(__file__);
+_home = os.path.expanduser('~')
+_user_config_dir = os.environ.get('XDG_CONFIG_HOME',
+                                  os.path.join(home, '.config'))
+if ('JHBUILDRC_CUSTOM' in os.environ and
+    os.environ['JHBUILDRC_CUSTOM']):
+    _user_rc = os.environ['JHBUILDRC_CUSTOM']
+if not os.path.exists(_user_rc):
+    _user_rc = os.path.join(_this_dir, 'jhbuildrc-custom');
+if not os.path.exists(_user_rc):
+    _user_rc = os.path.join(_this_dir, '.jhbuildrc-custom')
+if not os.path.exists(_user_rc):
+    _user_rc = os.path.join(_user_config_dir, 'jhbuildrc-custom')
+if not os.path.exists(_user_rc):
+    _user_rc = os.path.join(_user_config_dir, '.jhbuildrc-custom')
+if not os.path.exists(_user_rc):
+    _user_rc = os.path.join(_home, 'jhbuildrc-custom')
+if not os.path.exists(_user_rc):
+    _user_rc = os.path.join(_home, '.jhbuildrc-custom')
+
+if os.path.exists(_user_rc):
+    execfile(_user_rc)
 
 # Allow including different variants depending on the environment
 # variable JHB. This can be used to have different setups for SDK
