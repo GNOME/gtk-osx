@@ -234,7 +234,8 @@ if test -z "$jhbuildrc_file" ; then
     curl -ks $BASEURL/jhbuildrc-gtk-osx -o "$config_dir/jhbuildrc"
 fi
 
-envvar JHBUILDRC_CUSTOM "$config_dir/jhbuildrc-custom"
+if test -z "$JHBUILDRC_CUSTOM"; then
+   JHBUILDRC_CUSTOM="$config_dir/jhbuildrc-custom"
 if test ! -e "$JHBUILDRC_CUSTOM" -a ! -e $HOME/.jhbuildrc-custom; then
    curl -ks $BASEURL/jhbuildrc-gtk-osx-custom-example -o $JHBUILDRC_CUSTOM
 fi
