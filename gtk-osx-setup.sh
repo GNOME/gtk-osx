@@ -205,7 +205,9 @@ export PIPENV_DOTENV_LOCATION="$DEVPREFIX/etc/pipenv-env"
 export PIPENV_PIPFILE="$DEVPREFIX/etc/Pipfile"
 export PATH="$PYENV_ROOT/shims:$DEVPREFIX/bin:$PYENV_INSTALL_ROOT/plugins/python-build/bin:$PATH"
 export PYENV_ROOT
-export CFLAGS="-isysroot $SDKROOT -I$SDKROOT/usr/include"
+if -d "$SDKROOT"; then
+    export CFLAGS="-isysroot $SDKROOT -I$SDKROOT/usr/include"
+fi
 export PYTHON_CONFIGURE_OPTS="--enable-shared"
 export WORKON_HOME=$DEVPREFIX/share/venv
 
