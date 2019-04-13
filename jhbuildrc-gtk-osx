@@ -406,7 +406,9 @@ if _osx_version < 8.0:
 _this_dir = os.path.dirname(__file__);
 _home = os.path.expanduser('~')
 _user_config_dir = os.environ.get('XDG_CONFIG_HOME',
-                                  os.path.join(home, '.config'))
+                                  os.path.join(_home, '.config'))
+
+_user_rc = ''
 if ('JHBUILDRC_CUSTOM' in os.environ and
     os.environ['JHBUILDRC_CUSTOM']):
     _user_rc = os.environ['JHBUILDRC_CUSTOM']
