@@ -97,7 +97,8 @@ if test ! -x "`eval echo $PIP`" ; then
 fi
 
 # Install pipenv
-$PIP install --upgrade --user pipenv
+$PIP install --upgrade --user pipenv==2018.10.09
+
 PIPENV="$PYTHONUSERBASE/bin/pipenv"
 
 # Install jhbuild
@@ -128,7 +129,7 @@ verify_ssl = true
 
 [packages]
 six = "*"
-meson = "*"
+meson = {version="==0.49.2"}
 
 [scripts]
 jhbuild = "$DEVPREFIX/libexec/run_jhbuild.py"
