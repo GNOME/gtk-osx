@@ -16,6 +16,7 @@
               href="ftp://ftp.freedesktop.org/pub/"/>
   <repository type="git" name="github" href="git://github.com/"/>
   <repository type="tarball" name="github-tarball" href="https://github.com/"/>
+  <repository type="system" name="system"/>
 
   <!-- This module set works a bit differently than for example the
        GNOME ones do. It's split up in seperate pieces:
@@ -84,6 +85,13 @@
       <dep package="meta-gtk-osx-bootstrap"/>
     </after>
   </metamodule>
+
+  <systemmodule id="meson">
+    <branch repo="system" version="0.49.2"/>
+    <systemdependencies>
+      <dep type="path" name="meson"/>
+    </systemdependencies>
+  </systemmodule>
 
   <autotools id="glib" autogenargs="--with-pcre=internal">
     <branch module="glib/2.58/glib-2.58.3.tar.xz"  version="2.58.3"
