@@ -137,18 +137,18 @@ that file with your programming editor and find and change it to
 ## Bootstrapping ##
 
 Unlike previous versions of gtk-osx-build-setup.sh, gtk-osx-setup.sh
-does *not* copy the Gtk-OSX boostrap moduleset over the jhbuild one. I
-intend to phase out the Gtk-OSX one and just use the jhbuild one. Feel
-free to try that yourself, you'll need to add some skips: python,
-libxml2, libxslt, dbus, pixman, libtasn1,sqlite, and xorg-menus.
+does *not* copy the Gtk-OSX boostrap moduleset over the jhbuild one.
+Instead, jhbuildrc provides a new command
 
-You can copy the bootstrap module over yourself, though that will mess
-with pulling new versions of jhbuild.
+```
+jhbuild bootstrap-gtk-osx
+```
 
-Instead of running `jhbuild bootstrap` you can clone gtk-osx and run
-```
-jhbuild -m /path/to/gtk-osx/modulesets-stable/bootstrap.modules build meta-bootstrap
-```
+that looks for the gtk-osx bootstrap.modules, first in the configured
+modulesets_dir (you can set it in jhbuildrc-custom), then in the same
+directory as the target moduleset (set either in jhbuildrc-custom or
+with the -m command line option), and finally by retrieving it from
+gitlab.gnome.org.
 
 ## Build Problems ##
 
