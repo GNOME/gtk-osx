@@ -124,16 +124,13 @@ customize your setup after running it. The files are:
 
 gtk-osx-setup.sh will also copy /usr/bin/bash to $DEVPREFIX/bin and jhbuildrc-gtk-osx will set $SHELL to that path to work around SIP.
 
-After running gtk-osx-setup.sh you should initialize everything by running `jhbuild shell`. The first time you do so it will offer to build
-Python 3.6.6 and setup a virtual environment with pyenv. Accept the
-offer (you can just het <enter>). After it's done you'll be in your
-jhbuild shell.
+The pipenv control file sets Python3.6 as its required version, and gtk-osx-setup.sh will create a pyenv virtual environment for that. If you don't already have Python3.6 in your $PATH it will offer to install the latest Python3.6 release for you.
 
 Before you build there's one manual step needed: Python3 insists on
 setting `LINKFORSHARED: -Wl,stack_size,1000000 -framework
 CoreFoundation` even though stack_size is allowed only when compiling
 executables. It's in
-`$PYENV_ROOT/versions/3.x.x/lib/python3.x/_sysconfigdata_m-darwin.py`. Open
+`$PYENV_ROOT/versions/3.6.x/lib/python3.6/_sysconfigdata_m-darwin.py`. Open
 that file with your programming editor and find and change it to
 `LINKFORSHARED: -framework CoreFoundation`.
 
