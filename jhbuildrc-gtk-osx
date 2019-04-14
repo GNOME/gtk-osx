@@ -52,7 +52,7 @@ class _cmd_get_srcdir(jhbuild.commands.Command):
     name = 'gtk-osx-get-srcdir'
     usage_args = 'module'
 
-    def run(self, config, options, args):
+    def run(self, config, options, args, help=None):
         module_set = jhbuild.moduleset.load(config)
 
         if args:
@@ -60,12 +60,39 @@ class _cmd_get_srcdir(jhbuild.commands.Command):
             try:
                 module = module_set.get_module(modname, ignore_case = True)
             except KeyError:
-                raise FatalError(_('unknown module %s') % modname)
+                raise RuntimeError(_('unknown module %s') % modname)
             print module.get_srcdir(None)
         else:
             raise FatalError('no module specified')
 
 jhbuild.commands.register_command(_cmd_get_srcdir)
+
+class _cmd_bootstrap_gtk_osx(jhbuild.commands.base.cmd_build):
+    doc = N_('Build buildsystem tools not provided by MacOS.')
+
+    name = 'bootstrap-gtk-osx'
+
+    def run(self, config, options, args, help=None):
+        moduleset="bootstrap"
+        modulesets_dir = os.path.dirname(config.moduleset)
+        if os.path.exists(os.path.join(modulesets_dir, moduleset + '.modules')):
+            config.modulesets_dir = modulesets_dir
+            config.moduleset = moduleset
+        elif os.path.exists(os.path.join(config.modulesets_dir, moduleset + '.modules')):
+            config.moduleset = moduleset
+        else:
+            config.moduleset = 'https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/modulesets-stable/bootstrap.modules'
+
+        args = ['meta-bootstrap']
+
+        for item in options.skip:
+            config.skip += item.split(',')
+        options.skip = []
+
+        rc = jhbuild.commands.base.cmd_build.run(self, config, options, args)
+        return rc
+
+jhbuild.commands.register_command(_cmd_bootstrap_gtk_osx)
 
 class _getenv(jhbuild.commands.Command):
     doc = "Retrieve an environment variable set within jhbuild"
