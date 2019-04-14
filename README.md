@@ -2,7 +2,7 @@
 
 This project along with
 [gtk-mac-bundler](https://gitlab.gnome.org/GNOME/gtk-mac-bundler) and
-[gtk-mac-intgration](https://gitlab.gnome.org/GNOME/gtk-mac-integration)
+[gtk-mac-integration](https://gitlab.gnome.org/GNOME/gtk-mac-integration)
 aims to simplify building MacOS application bundles for Gtk+-based
 applications. Gtk-OSX provides modulesets, patches, and jhbuild
 enhancements for building Gtk+ applications on your Mac. Unlike
@@ -66,7 +66,7 @@ versions of MacOS.
 The current policy is that we'll support whatever version of MacOS was
 released 5 years previously. In practice older systems will continue
 to work as long as Apple didn't break anything between that older
-system and the 5-year-old release, byt we'll periodically *and without
+system and the 5-year-old release, but we'll periodically *and without
 notice* clean up ifdefs and such supporting older systems. If you
 insist on using an old system, check out the last version of Gtk-OSX
 that supports it and never pull again. Make sure that your
@@ -85,14 +85,14 @@ and has dropped support for autotools builds in several of its core
 packages.
 
 Apple provided Python3 in Mac OS X 10.6 and dropped it in 10.7, so we
-need to arrange for Python 3 to ba available for jhbuild to build
+need to arrange for Python 3 to be available for jhbuild to build
 meson files with as well as meson itself. Gtk-OSX takes care of that
 at installation. It relies on two Python standard packages,
 [Pipenv](https://docs.pipenv.org/) and
 [pyenv](https://github.com/pyenv/pyenv). In combination they create a
 Python3 [virtual
 environment](https://docs.python.org/3/tutorial/venv.html) and
-populate it with to required depenedcies, the afore-mentioned meson
+populate it with to required dependencies, the afore-mentioned meson
 and [six](https://pypi.org/project/six/), a python 2/3 compatibility
 library used by gtk-doc.
 
@@ -124,7 +124,7 @@ customize your setup after running it. The files are:
 
 gtk-osx-setup.sh will also copy /usr/bin/bash to $DEVPREFIX/bin and jhbuildrc-gtk-osx will set $SHELL to that path to work around SIP.
 
-After running new-setup.sh you should initialize everything by running `jhbuild shell`. The first time you do so it will offer to build
+After running gtk-osx-setup.sh you should initialize everything by running `jhbuild shell`. The first time you do so it will offer to build
 Python 3.6.6 and setup a virtual environment with pyenv. Accept the
 offer (you can just het <enter>). After it's done you'll be in your
 jhbuild shell.
@@ -133,7 +133,7 @@ Before you build there's one manual step needed: Python3 insists on
 setting `LINKFORSHARED: -Wl,stack_size,1000000 -framework
 CoreFoundation` even though stack_size is allowed only when compiling
 executables. It's in
-`$PYENVPREFIX/versions/3.x.x/lib/python3.x/_sysconfigdata_m-darwin.py`. Open
+`$PYENV_ROOT/versions/3.x.x/lib/python3.x/_sysconfigdata_m-darwin.py`. Open
 that file with your programming editor and find and change it to
 `LINKFORSHARED: -framework CoreFoundation`.
 
