@@ -205,7 +205,7 @@ export PIPENV_DOTENV_LOCATION="$DEVPREFIX/etc/pipenv-env"
 export PIPENV_PIPFILE="$DEVPREFIX/etc/Pipfile"
 export PATH="$PYENV_ROOT/shims:$DEVPREFIX/bin:$PYENV_INSTALL_ROOT/plugins/python-build/bin:$PATH"
 export PYENV_ROOT
-if -d "$SDKROOT"; then
+if test -d "$SDKROOT"; then
     export CFLAGS="-isysroot $SDKROOT -I$SDKROOT/usr/include"
 fi
 export PYTHON_CONFIGURE_OPTS="--enable-shared"
@@ -235,7 +235,9 @@ if test -z "$jhbuildrc_file" ; then
 fi
 
 if test -z "$JHBUILDRC_CUSTOM"; then
-   JHBUILDRC_CUSTOM="$config_dir/jhbuildrc-custom"
+    JHBUILDRC_CUSTOM="$config_dir/jhbuildrc-custom"
+fi
+
 if test ! -e "$JHBUILDRC_CUSTOM" -a ! -e $HOME/.jhbuildrc-custom; then
    curl -ks $BASEURL/jhbuildrc-gtk-osx-custom-example -o $JHBUILDRC_CUSTOM
 fi
