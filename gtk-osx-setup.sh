@@ -213,7 +213,7 @@ export WORKON_HOME=$DEVPREFIX/share/venv
 
 $PIPENV install
 
-BASEURL="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master"
+BASEURL="https://raw.githubusercontent.com/jralls/gtk-osx-build/pipenv"
 
 config_dir=""
 if test -d "$XDG_CONFIG_HOME" ; then
