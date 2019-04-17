@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
  ####################################################################
- # new-setup.sh gtk-osx setup with python virtual environments.     #
+ # gtk-osx-setup.sh: gtk-osx setup with python virtual environments.#
  #                                                                  #
  # Copyright 2018 John Ralls <jralls@ceridwen.us>                   #
  #                                                                  #
@@ -85,7 +85,7 @@ fi
 PIP=`which pip`
 if test ! -x "`eval echo $PIP`" ; then
     mv=`python --version 2>&1 | cut -b 12-13`
-    if test $mv -lt 9 ; then
+    if test $mv -lt 11 ; then
         curl https://bootstrap.pypa.io/get-pip.py -o "$DEVPREFIX/get-pip.py"
         python "$DEVPREFIX/get-pip.py" --user
         rm "$DEVPREFIX/get-pip.py"
@@ -238,6 +238,6 @@ if test -z "$JHBUILDRC_CUSTOM"; then
     JHBUILDRC_CUSTOM="$config_dir/jhbuildrc-custom"
 fi
 
-if test ! -e "$JHBUILDRC_CUSTOM" -a ! -e $HOME/.jhbuildrc-custom; then
+if test ! -e "$JHBUILDRC_CUSTOM" -a ! -e "$HOME/.jhbuildrc-custom"; then
    curl -ks $BASEURL/jhbuildrc-gtk-osx-custom-example -o $JHBUILDRC_CUSTOM
 fi
