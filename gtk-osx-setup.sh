@@ -231,6 +231,9 @@ fi
 
 if test -z "$jhbuildrc_file" ; then
     echo "Installing jhbuild configuration..."
+    if test ! -d $configdir; then
+        mkdir -p $configdir
+    fi
     curl -ks $BASEURL/jhbuildrc-gtk-osx -o "$config_dir/jhbuildrc"
 fi
 
@@ -239,5 +242,9 @@ if test -z "$JHBUILDRC_CUSTOM"; then
 fi
 
 if test ! -e "$JHBUILDRC_CUSTOM" -a ! -e "$HOME/.jhbuildrc-custom"; then
-   curl -ks $BASEURL/jhbuildrc-gtk-osx-custom-example -o $JHBUILDRC_CUSTOM
+    $JHBUILDRC_CUSTOM_DIR = `dirname $JHBUILDRC_CUSTOM`
+    if test ! -d $JHBUILDRC_CUSTOM_DIR; then
+        mkdir -p $JHBUILDRC_CUSTOM_DIR
+    fi
+    curl -ks $BASEURL/jhbuildrc-gtk-osx-custom-example -o $JHBUILDRC_CUSTOM
 fi
