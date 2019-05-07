@@ -27,7 +27,7 @@ import re
 #some variables we'll need defined later
 _default_arch = ""
 _osx_version = 0.0
-_target = '10.8'
+_target = '10.9'
 
 def _popen(cmd_arg):
     from subprocess import Popen, PIPE
@@ -228,7 +228,7 @@ osx_ver()
 #
 # This is the workhorse of the setup. Call this function from
 # .jhbuildrc-custom to configure compile and link flags. Optionally
-# specify a minimum MacOS version (10.6, 10.7, 10.8, etc.) and a list
+# specify a minimum MacOS version (10.9, 10.10, 10.10, etc.) and a list
 # of architectures.
 #
 # The sdk_version does nothing, as since Xcode 5 it is preferred to
@@ -419,8 +419,8 @@ _gtk_osx_default_build = ""
 
 #print "Default Architecture %s\n" % _default_arch
 
-if _osx_version < 8.0:
-    print "Error: Mac OS X 10.8 or newer is required, exiting."
+if _osx_version < 9.0:
+    print "Error: Mac OS X 10.9 or newer is required, exiting."
     raise SystemExit
 
 ###### Import Customizations ######
