@@ -27,7 +27,7 @@ import re
 #some variables we'll need defined later
 _default_arch = ""
 _osx_version = 0.0
-_target = '10.8'
+_target = '10.9'
 
 def _popen(cmd_arg):
     from subprocess import Popen, PIPE
@@ -52,7 +52,7 @@ class _cmd_get_srcdir(jhbuild.commands.Command):
     name = 'gtk-osx-get-srcdir'
     usage_args = 'module'
 
-    def run(self, config, options, args):
+    def run(self, config, options, args, help=None):
         module_set = jhbuild.moduleset.load(config)
 
         if args:
@@ -60,12 +60,44 @@ class _cmd_get_srcdir(jhbuild.commands.Command):
             try:
                 module = module_set.get_module(modname, ignore_case = True)
             except KeyError:
-                raise FatalError(_('unknown module %s') % modname)
+                raise RuntimeError(_('unknown module %s') % modname)
             print module.get_srcdir(None)
         else:
             raise FatalError('no module specified')
 
 jhbuild.commands.register_command(_cmd_get_srcdir)
+
+class _cmd_bootstrap_gtk_osx(jhbuild.commands.base.cmd_build):
+    doc = N_('Build buildsystem tools not provided by MacOS.')
+
+    name = 'bootstrap-gtk-osx'
+
+    def run(self, config, options, args, help=None):
+        global use_local_modulesets
+        moduleset="bootstrap"
+        modulesets_dir = os.path.dirname(config.moduleset)
+        if (use_local_modulesets and
+            os.path.exists(os.path.join(modulesets_dir,
+                                        moduleset + '.modules'))):
+            config.modulesets_dir = modulesets_dir
+            config.moduleset = moduleset
+        elif (use_local_modulesets and config.modulesets_dir and
+              os.path.exists(os.path.join(config.modulesets_dir,
+                                          moduleset + '.modules'))):
+            config.moduleset = moduleset
+        else:
+            config.moduleset = 'https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/modulesets-stable/bootstrap.modules'
+
+        args = ['meta-bootstrap']
+
+        for item in options.skip:
+            config.skip += item.split(',')
+        options.skip = []
+
+        rc = jhbuild.commands.base.cmd_build.run(self, config, options, args)
+        return rc
+
+jhbuild.commands.register_command(_cmd_bootstrap_gtk_osx)
 
 class _getenv(jhbuild.commands.Command):
     doc = "Retrieve an environment variable set within jhbuild"
@@ -196,7 +228,7 @@ osx_ver()
 #
 # This is the workhorse of the setup. Call this function from
 # .jhbuildrc-custom to configure compile and link flags. Optionally
-# specify a minimum MacOS version (10.6, 10.7, 10.8, etc.) and a list
+# specify a minimum MacOS version (10.9, 10.10, 10.10, etc.) and a list
 # of architectures.
 #
 # The sdk_version does nothing, as since Xcode 5 it is preferred to
@@ -316,13 +348,6 @@ def setup_sdk(target=_target, sdk_version=None, architectures=[_default_arch]):
         os.environ["BUILDCFLAGS"] = os.environ["CFLAGS"]
     append_autogenargs("gnutls", "--disable-guile")
     append_autogenargs("guile", 'CFLAGS="$CFLAGS -O1"')
-    #Defining ARCHFLAGS globally messes up waf, so we need to define
-    #it here for our two perl modules:
-    if (_osx_version < 14):
-        module_extra_env["expat"] = {'CFLAGS':os.environ['CFLAGS'] + ' -arch i386 -arch x86_64'}
-        module_extra_env.update(
-            {"perl-xml-simple":{"ARCHFLAGS":"-arch i386 -arch x86_64"},
-             "perl-xml-parser":{"ARCHFLAGS":"-arch i386 -arch x86_64"}})
     #Some packages require special arguments or flags to compile with Clang:
     module_extra_env["pkg-config"] = {'CFLAGS': os.environ['CFLAGS'] + ' -std=gnu89'}
     append_autogenargs('libgcrypt', 'CFLAGS="$CFLAGS -fheinous-gnu-extensions"')
@@ -360,7 +385,8 @@ def setup_sdk(target=_target, sdk_version=None, architectures=[_default_arch]):
 # the command line.
 #
 moduleset = 'http://gitlab.gnome.org/GNOME/gtk-osx/raw/master/modulesets-stable/gtk-osx.modules'
-use_local_modulesets = True
+use_local_modulesets = False
+modulesets_dir = ""
 
 # A list of the modules to build. You can override this in
 # .jhbuildrc-custom or on the command line.
@@ -393,8 +419,8 @@ _gtk_osx_default_build = ""
 
 #print "Default Architecture %s\n" % _default_arch
 
-if _osx_version < 8.0:
-    print "Error: Mac OS X 10.8 or newer is required, exiting."
+if _osx_version < 9.0:
+    print "Error: Mac OS X 10.9 or newer is required, exiting."
     raise SystemExit
 
 ###### Import Customizations ######
@@ -403,9 +429,30 @@ if _osx_version < 8.0:
 # the prefix or default build setup for example, or CFLAGS or
 # module_autogenargs, etc.
 #
-_userrc = os.path.join(os.environ['HOME'], '.jhbuildrc-custom')
-if os.path.exists(_userrc):
-    execfile(_userrc)
+_this_dir = os.path.dirname(__file__);
+_home = os.path.expanduser('~')
+_user_config_dir = os.environ.get('XDG_CONFIG_HOME',
+                                  os.path.join(_home, '.config'))
+
+_user_rc = ''
+if ('JHBUILDRC_CUSTOM' in os.environ and
+    os.environ['JHBUILDRC_CUSTOM']):
+    _user_rc = os.environ['JHBUILDRC_CUSTOM']
+if not os.path.exists(_user_rc):
+    _user_rc = os.path.join(_this_dir, 'jhbuildrc-custom');
+if not os.path.exists(_user_rc):
+    _user_rc = os.path.join(_this_dir, '.jhbuildrc-custom')
+if not os.path.exists(_user_rc):
+    _user_rc = os.path.join(_user_config_dir, 'jhbuildrc-custom')
+if not os.path.exists(_user_rc):
+    _user_rc = os.path.join(_user_config_dir, '.jhbuildrc-custom')
+if not os.path.exists(_user_rc):
+    _user_rc = os.path.join(_home, 'jhbuildrc-custom')
+if not os.path.exists(_user_rc):
+    _user_rc = os.path.join(_home, '.jhbuildrc-custom')
+
+if os.path.exists(_user_rc):
+    execfile(_user_rc)
 
 # Allow including different variants depending on the environment
 # variable JHB. This can be used to have different setups for SDK
@@ -530,11 +577,13 @@ if not _ran_recursively and _gtk_osx_prompt_prefix:
 
 if (not "python" in modules and not 'python3' in modules and
     not os.path.exists(os.path.join(prefix, 'bin', 'python2'))):
-    _python_ver = 'python' + '.'.join([str(_x) for _x in sys.version_info[0:2]])
-    _python_install_path = os.path.join(prefix, 'lib',
-                                       _python_ver, 'site-packages')
-    append_autogenargs('libxml2',
-                       '--with-python-install-dir=' + _python_install_path)
+    _python_ver = _popen('bash -c "python -V"')
+    if _python_ver:
+        _python_ver = 'python' + _python_ver.split(" ")[1][0:3]
+        _python_install_path = os.path.join(prefix, 'lib',
+                                            _python_ver, 'site-packages')
+        append_autogenargs('libxml2',
+                           '--with-python-install-dir=' + _python_install_path)
 
 # Unset this so we don't mess with the check for not starting
 # recursively.
