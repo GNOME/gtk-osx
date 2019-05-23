@@ -15,11 +15,6 @@ created by Gtk-OSX is suitable for development of Gnome libraries and
 Gtk+-based applications on MacOS; indeed the author has been using it
 for just that purpose for almost 10 years.
 
-## Procedure ##
-
-To get started building GTK+, just download gtk-osx-setup.sh and
-follow the [instructions](https://wiki.gnome.org/Projects/GTK%2B/OSX/Building)
-
 ## Modulesets ##
 
 There are 3 modulesets. You can select the one which most suits you by

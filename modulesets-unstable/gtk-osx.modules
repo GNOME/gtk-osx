@@ -155,13 +155,13 @@
     </dependencies>
   </meson>
 
-  <autotools id="graphene">
+  <meson id="graphene">
     <branch module="ebassi/graphene" repo="github" checkoutdir="graphene"/>
     <dependencies>
       <dep package="glib"/>
       <dep package="gobject-introspection"/>
     </dependencies>
-  </autotools>
+  </meson>
  
   <autotools id="gtk+"
 	     autogenargs="--with-gdktarget=quartz --enable-introspection=no --enable-quartz-relocation">
