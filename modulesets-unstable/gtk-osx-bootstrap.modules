@@ -78,10 +78,8 @@
   </autotools>
 
   <autotools id="itstool">
-    <branch module="itstool/itstool-2.0.4.tar.bz2" version="2.0.4"
+    <branch module="itstool/itstool-2.0.6.tar.bz2" version="2.0.6"
             repo="itstool">
-<!-- This patch can come out when itstool releases 2.0.5. -->
-      <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/itstool-memory-management.patch" strip="1"/>
     </branch>
     <!--branch repo="github" module="itstool/itstool"/-->
     <dependencies>
