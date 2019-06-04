@@ -74,7 +74,7 @@
   <autotools id="python3" autogenargs="--enable-shared" autogen-sh="autoreconf">
     <branch repo="python"
 	    module="3.6.8/Python-3.6.8.tar.xz" version="3.6.8">
-      <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/Python3.6-stack_size-flag.patch" strip="1"/>
+      <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/Python3.6-stack-size-flag.patch" strip="1"/>
     </branch>
     <dependencies>
       <dep package="gettext-runtime"/>
