@@ -269,11 +269,12 @@
        meta-gtk-osx-freetype is built, so packages which require
        cairoft or cairofc should have meta-gtk-osx-freetype as a
        dependency. -->
-  <autotools id="cairo"  autogen-sh="configure"
+  <autotools id="cairo"  autogen-sh="autoreconf"
              autogenargs="--enable-pdf --enable-quartz --disable-xlib --without-x">
     <branch module="cairo-1.16.0.tar.xz"  version="1.16.0"
             repo="cairographics"
             hash="sha1:00e81842ae5e81bb0343108884eb5205be0eac14">
+      <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/cairo-freetype-font-variations.patch" strip="1"/>
     </branch>
     <dependencies>
       <dep package="pixman"/>
