@@ -73,7 +73,7 @@
     </systemdependencies>
   </systemmodule>
   
-  <autotools id="glib" autogenargs="--disable-dtrace --with-pcre=insternal">
+  <autotools id="glib" autogenargs="--disable-dtrace --with-pcre=internal">
     <branch revision="glib-2-58"/>
     <dependencies>
       <dep package="libffi"/>
