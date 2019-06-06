@@ -73,12 +73,21 @@
     </systemdependencies>
   </systemmodule>
   
-  <autotools id="glib" autogenargs="--disable-dtrace --with-pcre=internal">
-    <branch revision="glib-2-58"/>
+
+  <meson id="glib" mesonargs="-Dlibmount=false -Dinternal_pcre=true">
+    <branch/>
     <dependencies>
+      <dep package="gettext"/>
+      <dep package="gtk-doc"/>
       <dep package="libffi"/>
+      <dep package="zlib"/>
     </dependencies>
-  </autotools>
+    <after>
+      <if condition-unset="macos">
+        <dep package="shared-mime-info"/>
+      </if>
+    </after>
+  </meson>
 
   <autotools id="libffi" autogenargs="--disable-builddir"
              autogen-sh="autoreconf" supports-non-srcdir-builds="no">
