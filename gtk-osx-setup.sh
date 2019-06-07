@@ -98,6 +98,7 @@ fi
 
 # Install pipenv
 $PIP install --upgrade --user pipenv==2018.10.09
+$PIP uninstall -y typing
 
 PIPENV="$PYTHONUSERBASE/bin/pipenv"
 
@@ -129,7 +130,7 @@ verify_ssl = true
 
 [packages]
 six = "*"
-meson = {version="==0.49.2"}
+meson = "*"
 
 [scripts]
 jhbuild = "$DEVPREFIX/libexec/run_jhbuild.py"
