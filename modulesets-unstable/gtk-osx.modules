@@ -143,13 +143,16 @@
     </after>
   </meson>
 
-  <meson id="gtk-doc">
-    <branch repo="git.gnome.org"/>
+  <meson id="gtk-doc" mesonargs="-Dtests=false">
+    <branch/>
     <dependencies>
-      <dep package="libxml2"/>
-      <dep package="itstool"/>
+      <dep package="libxslt"/>
       <dep package="yelp-tools"/>
-      <dep package="glib"/>
+      <dep package="libtool"/>
+      <dep package="gettext"/>
+      <dep package="docbook-xml"/>
+      <dep package="docbook-xsl"/>
+      <dep package="cc"/>
     </dependencies>
   </meson>
 
