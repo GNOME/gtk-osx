@@ -73,12 +73,12 @@
     </systemdependencies>
   </systemmodule>
   
-  <autotools id="glib" autogenargs="--disable-dtrace --with-pcre=internal">
-    <branch revision="glib-2-58"/>
+  <meson id="glib" mesonargs="-Dinternal_pcre=true -Dlibmount=false">
+    <branch/>
     <dependencies>
       <dep package="libffi"/>
     </dependencies>
-  </autotools>
+  </meson>
 
   <autotools id="libffi" autogenargs="--disable-builddir"
              autogen-sh="autoreconf" supports-non-srcdir-builds="no">
