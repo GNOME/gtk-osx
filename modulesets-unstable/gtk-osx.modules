@@ -126,7 +126,7 @@
     </after>
  </meson>
 
-  <meson id="gdk-pixbuf" mesonargs="-Dx11=false">
+  <meson id="gdk-pixbuf" mesonargs="-Dx11=false -Dman=false">
     <branch />
     <after>
       <dep package="pango"/>
