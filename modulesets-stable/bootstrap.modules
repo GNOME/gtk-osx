@@ -26,7 +26,7 @@
   </autotools>
 
   <autotools id="xz" autogen-sh="configure" bootstrap="true">
-    <branch repo="tukaani.org" module="xz/xz-5.2.3.tar.bz2" version="5.2.3"/>
+    <branch repo="tukaani.org" module="xz/xz-5.2.4.tar.bz2" version="5.2.4"/>
   </autotools>
 
 
@@ -49,7 +49,7 @@
   <!-- cmakes ./configure is picky about invalid flags so we manually set it -->
   <autotools id="cmake" autogen-sh="bootstrap"
              autogen-template="%(srcdir)s/%(autogen-sh)s --prefix=%(prefix)s">
-    <branch repo="cmake" module="v3.12/cmake-3.12.4.tar.gz" version="3.12.4">
+    <branch repo="cmake" module="v3.14/cmake-3.14.5.tar.gz" version="3.14.5">
     </branch>
   </autotools>
 
