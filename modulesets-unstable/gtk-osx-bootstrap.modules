@@ -113,15 +113,6 @@
             module="icu4c/58.2/icu4c-58_2-src.tgz"/>
   </autotools>
 
-  <autotools id="freetype-no-harfbuzz" skip-autogen="never" autogenargs="--without-bzip2 --without-harfbuzz"
-	     autogen-template="%(srcdir)s/%(autogen-sh)s &amp;&amp; %(srcdir)s/configure --prefix %(prefix)s  %(autogenargs)s"
-             supports-non-srcdir-builds="no">
-    <branch module="freetype/freetype2" repo="nongnu"/>
-    <dependencies>
-      <dep package="zlib"/>
-    </dependencies>
-  </autotools>
-
   <!-- Ragel, like Vala, isn't bootstrappable from git, so we might as well just use the tarball. -->
   <autotools id="ragel" autogen-sh='autoreconf'>
     <branch repo="ragel" module="ragel-6.10.tar.gz" version="6.10">
