@@ -157,6 +157,7 @@ export PIPENV_DOTENV_LOCATION="$DEVPREFIX/etc/pipenv-env"
 export PIPENV_PIPFILE="$DEVPREFIX/etc/Pipfile"
 export PATH="$PYENV_ROOT/shims:$DEVPREFIX/bin:$PATH"
 export PYENV_ROOT="$PYENV_ROOT"
+export PYTHON="$HOME/gtk/inst/bin/python3"
 
 exec pipenv run jhbuild \$@
 EOF
