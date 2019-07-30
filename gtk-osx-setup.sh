@@ -37,6 +37,17 @@ envvar ()
         mkdir -p "$_var"
     fi
 }
+
+pip_remove()
+{
+    local _package=$1
+    local _local_package=`$PIP show $_package | grep Location | grep $PYTHONUSERBASE`
+    if test -n "$_local_package"; then
+        echo $_local_package
+        $PIP uninstall -y $_package
+    fi
+}
+
 # Environment variable defaults:
 #
 envvar DEVROOT "$HOME"
@@ -99,8 +110,7 @@ fi
 
 # Install pipenv
 $PIP install --upgrade --user pipenv==2018.10.09
-$PIP uninstall -y typing
-
+pip_remove typing
 PIPENV="$PYTHONUSERBASE/bin/pipenv"
 
 # Install jhbuild
@@ -199,7 +209,7 @@ if test "x`echo $PATH | grep "$DEVPREFIX/bin"`" == x ; then
 fi
 # pipenv wants enum34 because it's installed with Py2 but that conflicts
 # with Py3 so remove it.
-$PIP uninstall --yes enum34
+pip_remove enum34
 
 SDKROOT=`xcrun --show-sdk-path`
 
