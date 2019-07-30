@@ -47,6 +47,7 @@ envvar PYENV_INSTALL_ROOT "$DEV_SRC_ROOT/pyenv"
 envvar PYENV_ROOT "$DEVPREFIX/share/pyenv"
 envvar PIP_CONFIG_DIR "$HOME/.config/pip"
 
+export PYTHONWARNINGS=ignore:DEPRECATION::pip._internal.cli.base_command
 export PYTHONPATH="$PYTHONUSERBASE/lib/python/site-packages":"$PYTHONPATH"
 
 if test ! -d "$DEVPREFIX/bin" ; then
