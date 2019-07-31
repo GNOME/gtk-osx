@@ -88,6 +88,7 @@
   <autotools id="itstool" autogen-sh="configure">
     <branch module="itstool/itstool-2.0.6.tar.bz2" version="2.0.6n"
             repo="itstool">
+      <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/itstool-config-python.patch" strip="1"/>
     </branch>
     <dependencies>
       <dep package="libxml2"/>
