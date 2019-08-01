@@ -116,14 +116,17 @@
     </dependencies>
   </autotools>
 
-  <autotools id="gtk-doc">
-    <branch version="1.29" module="gtk-doc/1.29/gtk-doc-1.29.tar.xz"
-            hash="sha256:14578e002496567276d310a62c9ffd6c56ee8806ce5079ffb0b81c4111f586b1"/>
+  <autotools id="gtk-doc" autogen-sh="configure">
+    <branch version="1.30" module="gtk-doc/1.30/gtk-doc-1.30.tar.xz"
+            hash="sha256:a4f6448eb838ccd30d76a33b1fd095f81aea361f03b12c7b23df181d21b7069e"/>
     <dependencies>
       <dep package="libxml2"/>
+      <dep package="libxslt"/>
       <dep package="itstool"/>
-      <dep package="python3"/>
     </dependencies>
+    <after>
+      <dep package="python3"/>
+    </after>
   </autotools>
 
   <autotools id="icu" autogen-sh="source/configure" autogenargs="--enable-rpath"
