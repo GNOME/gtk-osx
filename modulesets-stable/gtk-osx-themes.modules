@@ -28,7 +28,6 @@
     <dependencies>
       <dep package="icon-naming-utils"/>
       <dep package="adwaita-icon-theme"/>
-      <dep package="gnome-themes-standard"/>
     </dependencies>
   </metamodule>
 
@@ -59,16 +58,6 @@
       <dep package="librsvg"/>
       <dep package="hicolor-icon-theme"/>
       <dep package="icon-naming-utils"/>
-    </dependencies>
-  </autotools>
-
- <autotools id="gnome-themes-extra" autogen-sh="configure"
-	    autogenargs='--disable-gtk2-engine'>
-    <branch module="gnome-themes-standard/3.28/gnome-themes-standard-3.28.tar.xz"
-            version="3.28" hash="sha256:7c4ba0bff001f06d8983cfc105adaac42df1d1267a2591798a780bac557a5819"/>
-    <dependencies>
-      <dep package="librsvg"/>
-      <dep package="adwaita-icon-theme"/>
     </dependencies>
   </autotools>
 
