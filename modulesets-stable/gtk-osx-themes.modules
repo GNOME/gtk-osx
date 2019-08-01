@@ -52,8 +52,8 @@
   </autotools>
 
   <autotools id="adwaita-icon-theme" autogen-sh="configure">
-    <branch module="adwaita-icon-theme/3.30/adwaita-icon-theme-3.30.0.tar.xz"
-            version="3.30.0" hash="sha256:9106729174a3e6cc183d14f74454987f5378b46f213e698a6ab2702f70e4e64b"/>
+    <branch module="adwaita-icon-theme/3.32/adwaita-icon-theme-3.32.0.tar.xz"
+            version="3.32.0" hash="sha256:698db6e407bb987baec736c6a30216dfc0317e3ca2403c7adf3a5aa46c193286"/>
     <dependencies>
       <dep package="librsvg"/>
       <dep package="hicolor-icon-theme"/>
@@ -94,8 +94,8 @@
 
   <autotools id="libcroco" autogenargs="--disable-Bsymbolic"
 	     autogen-sh="configure">
-    <branch module="libcroco/0.6/libcroco-0.6.12.tar.xz" version="0.6.12"
-	    hash="sha256:ddc4b5546c9fb4280a5017e2707fbd4839034ed1aba5b7d4372212f34f84f860"/>
+    <branch module="libcroco/0.6/libcroco-0.6.13.tar.xz" version="0.6.13"
+	    hash="sha256:767ec234ae7aa684695b3a735548224888132e063f92db585759b422570621d4"/>
   </autotools>
  
 </moduleset>

@@ -119,9 +119,9 @@
   </distutils>
 
   <distutils id="pycairo" autogen-sh="configure" python-command="python3">
-    <branch module="/pygobject/pycairo/releases/download/v1.12.0/pycairo-1.12.0.tar.gz" repo="github-tarball"
-            version="1.12.0"
-	    hash="sha256:243c351d7abcef41ac1fa984d2c753f3d065336a0fcf4c20fafb191b23423095"/>
+    <branch module="/pygobject/pycairo/releases/download/v1.18.1/pycairo-1.18.1.tar.gz" repo="github-tarball"
+            version="1.18.1"
+	    hash="sha256:70172e58b6bad7572a3518c26729b074acdde15e6fee6cbab6d3528ad552b786"/>
     <dependencies>
       <dep package="cairo"/>
     </dependencies>
@@ -156,8 +156,8 @@
   </autotools>
 
    <distutils id="pygobject3" >
-    <branch version="3.28.3" module="pygobject/3.28/pygobject-3.28.3.tar.xz"
-	    hash="sha256:3dd3e21015d06e00482ea665fc1733b77e754a6ab656a5db5d7f7bfaf31ad0b0"/>
+    <branch version="3.32.2" module="pygobject/3.32/pygobject-3.32.2.tar.xz"
+	    hash="sha256:c39ca2a28364b57fa00549c6e836346031e6b886c3ceabfd8ab4b4fed0a83611"/>
     <dependencies>
       <dep package="pycairo"/>
     </dependencies>
@@ -206,14 +206,5 @@
       <dep package="gtkspell"/>
     </dependencies>
   </autotools>
-
-  <distutils id="python-six">
-    <branch module="/packages/16/d8/bc6316cf98419719bd59c91742194c111b6f2e85abac88e496adefaf7afe/six-1.11.0.tar.gz" repo="pymodules" version="1.11.0"
-            checkoutdir="six"/>
-    <dependencies>
-      <dep package="libxml2"/>
-      <dep package="libxslt"/>
-    </dependencies>
-  </distutils>
 
 </moduleset>
