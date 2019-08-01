@@ -570,20 +570,24 @@ else:
 if not _ran_recursively and _gtk_osx_prompt_prefix:
     os.environ["JHBUILD_PROMPT"] = "[" + _gtk_osx_prompt_prefix + "] "
 
-#Bug 766738: Apple's python tries to install extensions in
-#/Library/Python, which requires sudo. Change that to the right place
-#inside prefix. Note that we need the installed python's version to
-#get the right directory name.
+# We want libxml2 to install its python module in $PREFIX even if
+# we're not building python because if it tries to install in the
+# virtenv site-packages jhbuild will refuse to install it. Ideally
+# we'd do this only if not building python because if we do then it
+# finds the right place and does the right thing. Unfortunately
+# there's no way to get the config object from the project to find out
+# if we're building python.
 
-if (not "python" in modules and not 'python3' in modules and
-    not os.path.exists(os.path.join(prefix, 'bin', 'python2'))):
-    _python_ver = _popen('bash -c "python -V"')
-    if _python_ver:
-        _python_ver = 'python' + _python_ver.split(" ")[1][0:3]
-        _python_install_path = os.path.join(prefix, 'lib',
-                                            _python_ver, 'site-packages')
-        append_autogenargs('libxml2',
-                           '--with-python-install-dir=' + _python_install_path)
+# Note that this will break if the built python is a different major + minor
+# version from the virtenv one.
+_python_ver = _popen('bash -c "python -V"')
+if _python_ver:
+    _python_ver = 'python' + _python_ver.split(" ")[1][0:3]
+    _python_install_path = os.path.join(prefix, 'lib',
+                                        _python_ver, 'site-packages')
+    append_autogenargs('libxml2',
+                       '--with-python-install-dir=' + _python_install_path)
+    environ_append('PYTHONPATH', _python_install_path, ':')
 
 # Unset this so we don't mess with the check for not starting
 # recursively.

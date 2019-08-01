@@ -22,9 +22,14 @@
   </metamodule>
 
   <autotools id="mm-common" autogen-sh="configure">
-    <branch module="mm-common/0.9/mm-common-0.9.10.tar.xz" version="0.9.10"/>
+    <branch module="mm-common/0.9/mm-common-0.9.12.tar.xz" version="0.9.12"
+            hash="sha256:ceffdcce1e5b52742884c233ec604bf6fded12eea9da077ce7a62c02c87e7c0b"/>
   </autotools>
 
+  <!-- Cairomm 1.15 has been around since the end of 2016 but they
+       renamed their pc files because of an ABI change and neither
+       pangomm nor gtkmm have adopted the new pc files, so stay with
+       cairomm-1.13. -->
   <autotools id="cairomm" autogen-sh="configure">
     <branch module="cairomm-1.13.1.tar.gz" version="1.13.1"
 	    hash="sha1:63cd9eab40686f368a8edd3e6912ac18b3048ecf"
@@ -37,8 +42,8 @@
   </autotools>
 
   <autotools id="glibmm" autogen-sh="autoreconf">
-    <branch module="glibmm/2.52/glibmm-2.52.1.tar.xz" version="2.52.1"
-            hash="sha256:dc19d20fb6b24d6b6da7cbe1b2190b38ae6ad64e6b93fecdcce71b995f43c975">
+    <branch module="glibmm/2.60/glibmm-2.60.0.tar.xz" version="2.60.0"
+            hash="sha256:a3a1b1c9805479a16c0018acd84b3bfff23a122aee9e3c5013bb81231aeef2bc">
     </branch>
     <dependencies>
       <dep package="glib"/>
@@ -48,8 +53,8 @@
   </autotools>
 
   <autotools id="pangomm" autogen-sh="configure">
-    <branch module="pangomm/2.40/pangomm-2.40.1.tar.xz" version="2.40.1"
-            hash="sha256:9762ee2a2d5781be6797448d4dd2383ce14907159b30bc12bf6b08e7227be3af"/>
+    <branch module="pangomm/2.42/pangomm-2.42.0.tar.xz" version="2.42.0"
+            hash="sha256:ca6da067ff93a6445780c0b4b226eb84f484ab104b8391fb744a45cbc7edbf56"/>
     <dependencies>
       <dep package="glibmm"/>
       <dep package="cairomm"/>
@@ -58,8 +63,8 @@
   </autotools>
 
   <autotools id="atkmm" autogen-sh="configure">
-    <branch module="atkmm/2.24/atkmm-2.24.2.tar.xz" version="2.24.2"
-	    hash="sha256:ff95385759e2af23828d4056356f25376cfabc41e690ac1df055371537e458bd"/>
+    <branch module="atkmm/2.28/atkmm-2.28.0.tar.xz" version="2.28.0"
+	    hash="sha256:4c4cfc917fd42d3879ce997b463428d6982affa0fb660cafcc0bc2d9afcedd3a"/>
     <dependencies>
       <dep package="glibmm"/>
       <dep package="cairomm"/>
@@ -75,13 +80,13 @@
      documentation in your jhbuildrc-custom. -->
   <autotools id="libsigc++2" autogen-sh="configure"
 	     autogenargs="--disable-documentation">
-    <branch module="libsigc++/2.10/libsigc++-2.10.0.tar.xz" version="2.10.0"
-            hash="sha256:f843d6346260bfcb4426259e314512b99e296e8ca241d771d21ac64f28298d81"/>
+    <branch module="libsigc++/2.10/libsigc++-2.10.2.tar.xz" version="2.10.2"
+            hash="sha256:b1ca0253379596f9c19f070c83d362b12dfd39c0a3ea1dd813e8e21c1a097a98"/>
   </autotools>
 
   <autotools id="gtkmm3" autogen-sh="configure">
-    <branch module="gtkmm/3.22/gtkmm-3.22.0.tar.xz" version="3.22.0"
-            hash="sha256:05da4d4b628fb20c8384630ddf478a3b5562952b2d6181fe28d58f6cbc0514f5">
+    <branch module="gtkmm/3.24/gtkmm-3.24.1.tar.xz" version="3.24.1"
+            hash="sha256:ddfe42ed2458a20a34de252854bcf4b52d3f0c671c045f56b42aa27c7542d2fd">
     </branch>
     <dependencies>
       <dep package="glibmm"/>
