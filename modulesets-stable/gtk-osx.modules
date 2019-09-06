@@ -136,8 +136,8 @@
   </meson>
 
   <meson id="pango">
-    <branch version="1.44.1" module="pango/1.44/pango-1.44.1.tar.xz"
-            hash="sha256:07fab549d383cae6d4715eaf853903433328d6e3618e7307bdedb4995f3bfe5f">
+    <branch version="1.44.6" module="pango/1.44/pango-1.44.6.tar.xz"
+            hash="sha256:3e1e41ba838737e200611ff001e3b304c2ca4cdbba63d200a20db0b0ddc0f86c">
     </branch>
     <dependencies>
       <dep package="glib"/>
