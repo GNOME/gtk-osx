@@ -147,8 +147,8 @@ told jhbuild to use (set with ```moduleset = ``` in jhbuildrc-custom
 or the ```-m``` option to jhbuild) it will build that. This allows you
 to have a custom bootstrap.modules for your project.
 
-If you set ```use_local_modules``` to true and set ```modulesets_dir =
-``` to a valid path containing a file named bootstrap.modules then
+If you set ```use_local_modules``` to true and set ```modulesets_dir =```
+to a valid path containing a file named bootstrap.modules then
 bootstrap-gtk-osx will build that moduleset instead.
 
 Note that in order to actually work the bootstrap.modules moduleset
