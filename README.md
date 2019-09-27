@@ -71,13 +71,10 @@ on obsolete versions of MacOS.
 
 ## Python ##
 
-Jhbuild itself still (as of this writing in mid-2018) requires
-Python2.7, which is fine because that's what Apple provides in
-MacOS. However, Gnome is transitioning to requiring Python3.2+ for
-just about everything else. In particular they have adopted a new
-build system, [meson](https://mesonbuild.com/), that requires Python3
-and has dropped support for autotools builds in several of its core
-packages.
+Gnome is transitioning to requiring Python3.2+ for just about
+everything else. In particular they have adopted a new build system,
+[meson](https://mesonbuild.com/), that requires Python3 and has
+dropped support for autotools builds in several of its core packages.
 
 Apple provided Python3 in Mac OS X 10.6 and dropped it in 10.7, so we
 need to arrange for Python 3 to be available for jhbuild to build
