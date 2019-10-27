@@ -68,7 +68,7 @@ class _cmd_get_srcdir(jhbuild.commands.Command):
 jhbuild.commands.register_command(_cmd_get_srcdir)
 
 class _cmd_bootstrap_gtk_osx(jhbuild.commands.base.cmd_build):
-    doc = N_('Build buildsystem tools not provided by MacOS.')
+    doc = 'Build buildsystem tools not provided by MacOS.'
 
     name = 'bootstrap-gtk-osx'
 
