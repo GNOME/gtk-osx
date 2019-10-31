@@ -44,9 +44,9 @@
   </autotools>
 
   <autotools id="libjpeg" autogen-sh="configure">
-    <branch module="jpegsrc.v9b.tar.gz" version="9b"
+    <branch module="jpegsrc.v9c.tar.gz" version="9c"
             repo="jpeg"
-            checkoutdir="jpeg-9b">
+            checkoutdir="jpeg-9c">
     </branch>
   </autotools>
 
