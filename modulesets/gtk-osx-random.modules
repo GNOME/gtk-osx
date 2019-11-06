@@ -126,7 +126,7 @@
 
   <!-- These folks don't make their repository available.-->
   <autotools id="lcms" autogen-sh="configure">
-    <branch module="lcms/lcms2-2.8.tar.gz" version="2.8" repo="sourceforge"/>
+    <branch module="lcms/lcms2-2.9.tar.gz" version="2.9" repo="sourceforge"/>
   </autotools>
 
   <autotools id="shared-mime-info"
@@ -165,7 +165,7 @@
   <autotools id="json-glib">
     <branch revision="json-glib-1-2"/>
   </autotools>
-  
+
    <autotools id="babl">
      <branch tag="BABL_0_1_24"/>
   </autotools>
