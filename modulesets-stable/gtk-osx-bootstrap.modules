@@ -51,7 +51,7 @@
   </autotools>
 
   <autotools id="libtiff" autogen-sh="configure" autogenargs="--without-x">
-    <branch version="4.0.8" module="libtiff/tiff-4.0.8.tar.gz"
+    <branch version="4.1.0" module="libtiff/tiff-4.1.0.tar.gz"
 	    repo="libtiff">
 	<patch file="https://raw.githubusercontent.com/totaam/gtk-osx-build/master/patches/tiff-nohtml.patch" strip="1" />
     </branch>
