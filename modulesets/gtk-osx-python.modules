@@ -57,12 +57,13 @@
   </autotools>
 
   <autotools id="python" autogenargs="--enable-shared"
-	     autogen-sh="autoreconf">
-    <branch repo="python"
-	    module="2.7.14/Python-2.7.14.tar.xz" version="2.7.14"
-            hash="sha256:71ffb26e09e78650e424929b2b457b9c912ac216576e6bd9e7d204ed03296a66">
-      <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/python2-linkflags.patch" strip="1"/>"/>
-    </branch>
+	     supports-non-srcdir-builds="no" autogen-sh="autoreconf">
+       <branch repo="python"
+              module="2.7.16/Python-2.7.16.tar.xz" version="2.7.16"
+              hash="sha256:f222ef602647eecb6853681156d32de4450a2c39f4de93bd5b20235f2e660ed7">
+          <!-- related to https://bugs.python.org/issue11445 -->
+          <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/python-ldflags.patch" strip="1"/>
+       </branch>
     <dependencies>
       <dep package="gettext-runtime"/>
       <dep package='readline'/>
