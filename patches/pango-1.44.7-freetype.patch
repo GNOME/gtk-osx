@@ -1,0 +1,13 @@
+--- Development/gtk-build/gtk-stable-10.13-x86_64/src/pango-1.44.7/meson.build~	2019-10-24 20:45:11.000000000 -0700
++++ Development/gtk-build/gtk-stable-10.13-x86_64/src/pango-1.44.7/meson.build	2019-11-07 14:16:07.000000000 -0800
+@@ -308,8 +308,8 @@
+ 
+ # The first version of freetype with a pkg-config file is 2.1.5
+ # We require both fontconfig and freetype if we are to have either.
+-freetype_dep = dependency('freetype2', required: false,
+-                          fallback: ['freetype2', 'freetype_dep'])
++freetype_dep = dependency('freetype2', required: false)
++#                          fallback: ['freetype2', 'freetype_dep'])
+ 
+ if freetype_dep.found()
+   freetype2_pc = 'freetype2'

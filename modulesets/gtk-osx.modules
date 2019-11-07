@@ -104,9 +104,8 @@
     </dependencies>
   </meson>
 
-  <!-- Pango seems to be releasing from master these days. -->
   <meson id="pango">
-    <branch tag="1.44.6"/>
+    <branch tag="pango-1-44"/>
     <dependencies>
       <dep package="glib"/>
       <dep package="cairo"/>

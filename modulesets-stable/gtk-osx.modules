@@ -136,8 +136,9 @@
   </meson>
 
   <meson id="pango">
-    <branch version="1.44.6" module="pango/1.44/pango-1.44.6.tar.xz"
-            hash="sha256:3e1e41ba838737e200611ff001e3b304c2ca4cdbba63d200a20db0b0ddc0f86c">
+    <branch version="1.44.7" module="pango/1.44/pango-1.44.7.tar.xz"
+            hash="sha256:66a5b6cc13db73efed67b8e933584509f8ddb7b10a8a40c3850ca4a985ea1b1f">
+      <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/pango-1.44.7-freetype.patch" strip="1"/>
     </branch>
     <dependencies>
       <dep package="glib"/>
