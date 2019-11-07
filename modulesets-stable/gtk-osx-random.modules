@@ -130,6 +130,7 @@ Libglade itself is deprecated. This is the last release. -->
 	     autogenargs='--disable-scrollkeeper --disable-introspection CPPFLAGS="$CPPFLAGS -xobjective-c"'>
     <branch module="glade/3.22/glade-3.22.1.tar.xz" version="3.22.1"
             hash="sha256:dff89a2ef2eaf000ff2a46979978d03cb9202cb04668e01d0ea5c5bb5547e39a">
+      <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/glade-3.22.1-xslproc.patch" strip="1"/>
     </branch>
     <dependencies>
       <dep package="itstool"/>
