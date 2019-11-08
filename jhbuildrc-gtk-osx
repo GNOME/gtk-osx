@@ -406,6 +406,13 @@ tarballdir = None
 #
 autogenargs=''
 
+# Extra meson args. --wrapmode=nofallback prevents meson projects from
+# building dependencies on their own. We generally want failed
+# dependencies to error out so that we know to add them to the
+# appropriate modules.
+
+mesonargs='--wrap-mode=nofallback'
+
 # Use the included install-check program if available. It won't update
 # timestamps if the header hasn't changed, which speeds up builds.
 #
