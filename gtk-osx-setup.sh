@@ -141,7 +141,7 @@ verify_ssl = true
 
 [packages]
 six = "*"
-meson = "*"
+meson = {version="==0.51.1"}
 
 [scripts]
 jhbuild = "$DEVPREFIX/libexec/run_jhbuild.py"
