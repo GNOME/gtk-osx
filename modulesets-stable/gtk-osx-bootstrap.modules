@@ -159,7 +159,7 @@
   <autotools id="freetype" autogen-sh="configure"
              skip-autogen="never"
              autogenargs="--without-bzip2 --without-harfbuzz">
-    <branch module="freetype/freetype-2.10.1.tar.gz" version="2.10.1"
+    <branch module="freetype/freetype-2.9.1.tar.gz" version="2.9.1"
             repo="sourceforge">
     </branch>
     <dependencies>
