@@ -95,7 +95,7 @@
       <dep package="cairo"/>
       <dep package='python3'/>
     </dependencies>
-  </autotools>
+  </meson>
 
   <meson id="fribidi" mesonargs="-Ddocs=false">
     <branch module="fribidi/fribidi" repo="github" tag="v1.0.5"/>
