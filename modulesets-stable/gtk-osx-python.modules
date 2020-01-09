@@ -173,6 +173,7 @@
     <branch version="2.24.0" module="pygtk/2.24/pygtk-2.24.0.tar.bz2"
             hash="sha256:cd1c1ea265bd63ff669e92a2d3c2a88eb26bcd9e5363e0f82c896e649f206912">
       <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/pygtk-libtool.patch" strip="1"/>
+      <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/pygtk-pango1.4x.patch" strip="1"/>
     </branch>
     <dependencies>
       <dep package="pygobject"/>

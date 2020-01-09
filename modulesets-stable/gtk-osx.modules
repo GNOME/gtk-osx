@@ -94,8 +94,8 @@
   </systemmodule>
 
   <meson id="glib" mesonargs="-Dinternal_pcre=true -Dlibmount=false">
-    <branch module="glib/2.60/glib-2.60.6.tar.xz"  version="2.60.6"
-            hash="sha256:ff8fab8d8deaa4fd0536c90f90d9769a09071779c7e6183907f6855645bffb6c">
+    <branch module="glib/2.62/glib-2.62.4.tar.xz"  version="2.62.4"
+            hash="sha256:4c84030d77fa9712135dfa8036ad663925655ae95b1d19399b6200e869925bbc">
     </branch>
     <dependencies>
         <dep package="libffi"/>
@@ -165,8 +165,8 @@
   </meson>
 
   <meson id="gdk-pixbuf" mesonargs="-Dx11=false -Dman=false">
-    <branch module="gdk-pixbuf/2.38/gdk-pixbuf-2.38.1.tar.xz" version="2.38.1"
-            hash="sha256:f19ff836ba991031610dcc53774e8ca436160f7d981867c8c3a37acfe493ab3a">
+    <branch module="gdk-pixbuf/2.40/gdk-pixbuf-2.40.0.tar.xz" version="2.40.0"
+            hash="sha256:1582595099537ca8ff3b99c6804350b4c058bb8ad67411bbaae024ee7cead4e6">
       <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/gdk-pixbuf-loader-name.patch" strip="1"/>
     </branch>
     <after>
