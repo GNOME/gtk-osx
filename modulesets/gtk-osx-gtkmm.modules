@@ -4,6 +4,7 @@
 <moduleset>
   <repository type="git" name="git.gnome.org" default="yes"
               href="https://gitlab.gnome.org/GNOME"/>
+<!-- As of January 2020 cairographics was still on anongit. -->
   <repository type="git" name="cairographics"
               href="git://anongit.freedesktop.org/git/"/>
 
@@ -21,11 +22,11 @@
 
 <!-- mm-common is C++ glue code needed only to build from git. -->
   <autotools id="mm-common">
-    <branch module="mm-common" tag="0.9.10"/>
+    <branch module="mm-common" tag="0.9.12"/>
   </autotools>
 
   <autotools id="cairomm" >
-    <branch module="cairomm" revision="cairomm-1-14"
+    <branch module="cairomm" revision="v1.15.5"
             repo="cairographics" />
     <dependencies>
       <dep package="cairo"/>
@@ -33,7 +34,7 @@
   </autotools>
 
   <autotools id="glibmm" >
-    <branch revision="glibmm-2-50"/>
+    <branch revision="glibmm-2-60"/>
     <dependencies>
       <dep package="libsigc++2"/>
     </dependencies>
@@ -43,7 +44,7 @@
   </autotools>
 
   <autotools id="pangomm" >
-     <branch revision="pangomm-2-40"/>
+     <branch revision="pangomm-2-42"/>
     <dependencies>
        <dep package="cairomm"/>
     </dependencies>
@@ -55,7 +56,7 @@
   </autotools>
 
   <autotools id="atkmm">
-    <branch module="atkmm" revision="atkmm-2-24"/>
+    <branch module="atkmm" revision="atkmm-2-28"/>
     <dependencies>
       <dep package="glibmm"/>
       <dep package="cairomm"/>
@@ -89,7 +90,7 @@
   </autotools>
 
   <autotools id="gtkmm3" >
-    <branch module="gtkmm" revision="gtkmm-3-22"/>
+    <branch module="gtkmm" revision="gtkmm-3-24"/>
     <dependencies>
       <dep package="glibmm"/>
       <dep package="cairomm"/>

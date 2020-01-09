@@ -74,7 +74,7 @@
   </systemmodule>
 
   <autotools id="glib" autogenargs="--with-pcre=internal">
-    <branch tag="glib-2-58"/>
+    <branch tag="glib-2-62"/>
     <dependencies>
       <dep package="libffi"/>
     </dependencies>
@@ -89,7 +89,7 @@
   </autotools>
 
   <meson id="gobject-introspection">
-    <branch tag="gnome-3-30" module="gobject-introspection"/>
+    <branch tag="gnome-3-34" module="gobject-introspection"/>
     <dependencies>
       <dep package="glib"/>
       <dep package="cairo"/>
@@ -118,7 +118,7 @@
   </meson>
 
   <meson id="atk">
-    <branch tag="gnome-3-30"/>
+    <branch tag="gnome-3-34"/>
     <dependencies>
     </dependencies>
     <after>
@@ -180,7 +180,7 @@
   </autotools>
 
   <autotools id="pixman" autogenargs="--disable-gtk --disable-mmx">
-    <branch repo="freedesktop" module="pixman" revision="0.34"/>
+    <branch repo="freedesktop" module="pixman" revision="0.38"/>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
     </after>
@@ -192,7 +192,7 @@
        dependency. -->
   <autotools id="cairo"
              autogenargs="--enable-pdf --enable-quartz --disable-xlib --without-x">
-    <branch repo="freedesktop" module="cairo" revision="1.14"/>
+    <branch repo="freedesktop" module="cairo" revision="1.16"/>
     <dependencies>
       <dep package="pixman"/>
     </dependencies>
