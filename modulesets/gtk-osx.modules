@@ -149,7 +149,7 @@
     </dependencies>
   </autotools>
 
-  <autotools id="gtk+" autogenargs="--with-gdktarget=quartz --enable-introspection=no --enable-quartz-relocation">
+  <autotools id="gtk+" autogenargs="--with-gdktarget=quartz --enable-introspection=no --enable-quartz-relocation --disable-visibility">
     <branch module="gtk" revision="gtk-2-24"/>
     <dependencies>
       <dep package="glib"/>

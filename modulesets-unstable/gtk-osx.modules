@@ -107,6 +107,7 @@
       <dep package="cairo"/>
       <dep package="glib"/>
       <dep package="fribidi"/>
+      <dep package="harfbuzz"/>
     </dependencies>
     <after>
       <dep package="gobject-introspection"/>
@@ -164,8 +165,8 @@
   </meson>
  
   <autotools id="gtk+"
-	     autogenargs="--with-gdktarget=quartz --enable-introspection=no --enable-quartz-relocation">
-    <branch revision="gtk-2-24" checkoutdir="gtk+-2.0"/>
+	     autogenargs="--with-gdktarget=quartz --enable-introspection=no --enable-quartz-relocation --disable-visibility">
+    <branch module="gtk" revision="gtk-2-24" checkoutdir="gtk+-2.0"/>
     <dependencies>
       <dep package="glib"/>
       <dep package="pango"/>
