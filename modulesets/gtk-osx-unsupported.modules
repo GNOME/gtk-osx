@@ -63,7 +63,7 @@
 
   <!-- libgpg-error releases from master -->
   <autotools id="libgpg-error" autogenargs="--disable-doc"
-             autogen-template="%(srcdir)s/%(autogen-sh)s &amp;&amp; autoreconf -if &amp;&amp; %(srcdir)s/configure --prefix %(prefix)s %(autogenargs)s">
+             autogen-sh="autoreconf">
     <branch repo="git.gnupg.org" module="libgpg-error"/>
   </autotools>
 

@@ -61,9 +61,8 @@
     </dependencies>
   </autotools>
 
-  <autotools id="libgpg-error" autogen-sh="autogen.sh"
-             autogenargs="--disable-doc"
-             autogen-template="%(srcdir)s/%(autogen-sh)s &amp;&amp; %(srcdir)s/configure --prefix %(prefix)s  %(autogenargs)s">
+  <autotools id="libgpg-error" autogen-sh="autoreconf"
+             autogenargs="--disable-doc">
     <branch repo='git.gnupg.org' module="libgpg-error" />
   </autotools>
 
