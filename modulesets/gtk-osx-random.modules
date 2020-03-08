@@ -130,7 +130,7 @@
   </autotools>
 
   <autotools id="shared-mime-info"
-             autogenargs="--disable-default-make-check"
+             autogenargs="--disable-default-make-check  ac_cv_func_fdatasync=no"
              supports-non-srcdir-builds="no" >
     <branch module="xdg/shared-mime-info" tag="Release-1-7"
             repo="git.freedesktop.org"/>
