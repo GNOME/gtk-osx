@@ -595,7 +595,7 @@ if _python_ver:
     append_autogenargs('libxml2',
                        '--with-python-install-dir=' + _python_install_path)
     environ_append('PYTHONPATH', _python_install_path, ':')
-
+os.environ['PYTHON'] = '/usr/bin/env python3'
 # Unset this so we don't mess with the check for not starting
 # recursively.
 os.unsetenv("JHB")
