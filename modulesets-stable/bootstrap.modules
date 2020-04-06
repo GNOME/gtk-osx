@@ -20,8 +20,9 @@
               href="http://launchpad.net/intltool/trunk/"/>
 
   <autotools id='readline' autogen-sh="configure">
-    <branch repo="ftp.gnu.org" module="readline/readline-7.0.tar.gz"
-      version="7.0">
+    <branch repo="ftp.gnu.org" module="readline/readline-8.0.tar.gz"
+            hash="sha256:e339f51971478d369f8a053a330a190781acb9864cf4c541060f12078948e461"
+            version="8.0">
     </branch>
   </autotools>
 

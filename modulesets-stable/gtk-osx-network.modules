@@ -39,8 +39,8 @@
   <autotools id="openssl" autogen-sh="Configure" autogenargs="shared "
              autogen-template="%(srcdir)s/%(autogen-sh)s --prefix=%(prefix)s --openssldir=%(prefix)s/etc/ssl %(autogenargs)s"
              makeinstallargs="install_sw" supports-non-srcdir-builds="no">
-    <branch module="openssl-1.1.1c.tar.gz" version="1.1.1c" repo="openssl"
-            hash="sha256:f6fb3079ad15076154eda9413fed42877d668e7069d9b87396d0804fdb3f4c90"/>
+    <branch module="openssl-1.1.1f.tar.gz" version="1.1.1f" repo="openssl"
+            hash="sha256:186c6bfe6ecfba7a5b48c47f8a1673d0f3b0e5ba2e25602dd23b629975da3f35"/>
   </autotools>
 
   <!-- Rudely demands TeX to build documentation -->
@@ -59,9 +59,9 @@
 
   <autotools id="libtasn1" supports-non-srcdir-builds="no"
              autogen-sh="configure">
-    <branch repo="ftp.gnu.org" version="4.12"
-            module="libtasn1/libtasn1-4.12.tar.gz"
-            hash="sha256:6753da2e621257f33f5b051cc114d417e5206a0818fe0b1ecfd6153f70934753" />
+    <branch repo="ftp.gnu.org" version="4.15"
+            module="libtasn1/libtasn1-4.15.tar.gz"
+            hash="sha256:dd77509fe8f5304deafbca654dc7f0ea57f5841f41ba530cff9a5bf71382739e" />
   </autotools>
 
   <autotools id="zlib" autogen-sh="configure" skip-autogen="never"
@@ -73,8 +73,9 @@
   <!-- Building with p11-kit support breaks g-ir-scanner, for some weird reason. -->
   <autotools id="gnutls" autogen-sh="configure"
              autogenargs="--disable-gtk-doc-html --without-p11-kit">
-    <branch repo="gnutls" version="3.5.18"
-            module="gcrypt/gnutls/v3.5/gnutls-3.5.18.tar.xz"/>
+    <branch repo="gnutls" version="3.6.12"
+            hash="sha256:bfacf16e342949ffd977a9232556092c47164bd26e166736cf3459a870506c4b"
+            module="gcrypt/gnutls/v3.6/gnutls-3.6.12.tar.xz"/>
     <dependencies>
       <dep package="libunistring"/>
       <dep package="libnettle"/>
@@ -84,8 +85,9 @@
   </autotools>
 
   <autotools id="libgcrypt" autogen-sh="configure">
-    <branch repo="gnutls" version="1.7.6"
-            module="gcrypt/libgcrypt/libgcrypt-1.7.6.tar.gz"/>
+    <branch repo="gnutls" version="1.8.5"
+            hash="sha256:3b4a2a94cb637eff5bdebbcaf46f4d95c4f25206f459809339cdada0eb577ac3"
+            module="gcrypt/libgcrypt/libgcrypt-1.8.5.tar.bz2"/>
   </autotools>
 
   <autotools id="glib-networking" autogen-sh="configure"
@@ -100,14 +102,15 @@
   </autotools>
 
   <autotools id="libpsl" autogen-sh='configure'>
-    <branch repo="github-tarball" version="0.20.2"
-            module="rockdaboot/libpsl/releases/download/libpsl-0.20.2/libpsl-0.20.2.tar.gz" />
+    <branch repo="github-tarball" version="0.21.0"
+            hash="sha256:055aa87ec166c7afb985d0816c07ff440e1eb899881a318c51c69a0aeea8e279"
+            module="rockdaboot/libpsl/archive/libpsl-0.21.0.tar.gz" />
   </autotools>
 
   <autotools id="libsoup" autogen-sh="configure"
              autogenargs="set_more_warnings=no --enable-introspection=no">
-    <branch module="libsoup/2.64/libsoup-2.64.2.tar.xz" version="2.64.2"
-            hash="sha256:75ddc194a5b1d6f25033bb9d355f04bfe5c03e0e1c71ed0774104457b3a786c6">
+    <branch module="libsoup/2.68/libsoup-2.68.4.tar.xz" version="2.68.4"
+            hash="sha256:2d50b12922cc516ab6a7c35844d42f9c8a331668bbdf139232743d82582b3294">
     </branch>
     <dependencies>
       <dep package="libpsl"/>
