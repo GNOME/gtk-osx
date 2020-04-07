@@ -101,7 +101,7 @@
     </after>
   </distutils>
 
- <distutils id="pycairo" >
+ <meson id="pycairo" >
     <branch module="pygobject/pycairo" repo="github" />
     <dependencies>
       <dep package="cairo"/>
@@ -112,7 +112,7 @@
       <dep package="meta-gtk-osx-core"/>
       <dep package="meta-gtk-osx-gtk3"/>
     </after>
- </distutils>
+ </meson>
 
   <autotools id="pygobject" autogenargs="--disable-introspection"
 	     supports-non-srcdir-builds="no">
@@ -123,7 +123,7 @@
    </dependencies>
   </autotools>
 
-  <distutils id="pygobject3" >
+  <meson id="pygobject3" >
     <branch module="pygobject" checkoutdir="pygobject3"/>
     <dependencies>
       <dep package="pycairo"/>
@@ -133,7 +133,7 @@
      <dep package="python3"/>
       <dep package="python"/>
    </after>
-  </distutils>
+  </meson>
 
   <autotools id="pygtk" autogenargs="--disable-introspection">
     <branch />
