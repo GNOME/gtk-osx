@@ -94,10 +94,10 @@
     </after>
   </autotools>
 
-  <autotools id="python3" autogenargs="--enable-shared" autogen-sh="autoreconf">
-    <branch repo="python" module="3.6.8/Python-3.6.8.tar.xz" version="3.6.8">
-      <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/Python3.6-stack-size-flag.patch" strip="1"/>
-    </branch>
+  <autotools id="python3" autogenargs="--enable-shared" autogen-sh="configure">
+    <branch repo="python" module="3.8.2/Python-3.8.2.tar.xz" version="3.8.2"
+            hash="sha256:2646e7dc233362f59714c6193017bb2d6f7b38d6ab4a0cb5fbac5c36c4d845df"
+            />
     <dependencies>
       <dep package="gettext-runtime"/>
       <dep package='readline'/>
