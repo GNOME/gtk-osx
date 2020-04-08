@@ -153,8 +153,8 @@
   </meson>
   
  <meson id="atk">
-    <branch module="atk/2.32/atk-2.32.0.tar.xz" version="2.32.0"
-            hash="sha256:cb41feda7fe4ef0daa024471438ea0219592baf7c291347e5a858bb64e4091cc"/>
+    <branch module="atk/2.34/atk-2.34.1.tar.xz" version="2.34.1"
+            hash="sha256:d4f0e3b3d21265fcf2bc371e117da51c42ede1a71f6db1c834e6976bb20997cb"/>
     <dependencies>
     </dependencies>
     <after>
@@ -208,8 +208,9 @@
   </autotools>
 
   <meson id="libepoxy">
-    <branch repo="github-tarball" version="1.5.3"
-            module="anholt/libepoxy/releases/download/1.5.3/libepoxy-1.5.3.tar.xz"/>
+    <branch repo="github-tarball" version="1.5.4"
+            hash="sha256:0bd2cc681dfeffdef739cb29913f8c3caa47a88a451fd2bc6e606c02997289d2"
+            module="anholt/libepoxy/releases/download/1.5.4/libepoxy-1.5.4.tar.xz"/>
     <dependencies>
       <dep package="xorg-util-macros"/>
     </dependencies>
