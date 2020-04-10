@@ -23,8 +23,7 @@
   <repository type="tarball" name="harfbuzz"
               href="http://www.freedesktop.org/software/harfbuzz/release/"/>
   <repository type="tarball" name="itstool" href="http://files.itstool.org/"/>
-  <repository type="tarball" name="icu"
-              href="http://download.icu-project.org/files/"/>
+  <repository type="tarball" name="github-tarball" href="https://github.com/"/>
   <repository type="tarball" name="ragel"
               href="http://www.colm.net/files/ragel/"/>
 
@@ -133,8 +132,8 @@
 
   <autotools id="icu" autogen-sh="source/configure" autogenargs="--enable-rpath"
              makeargs='CFLAGS="$CFLAGS -DU_CHARSET_IS_UTF8=1 -DU_USING_ICU_NAMESPACE=0"'>
-    <branch repo="icu" version="58.2" checkoutdir="icu"
-            module="icu4c/58.2/icu4c-58_2-src.tgz"/>
+    <branch repo="github-tarball" version="58.3" checkoutdir="icu"
+            module="unicode-org/icu/releases/download/release-58-3/icu4c-58_3-src.tgz"/>
   </autotools>
 
 
