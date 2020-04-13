@@ -109,8 +109,7 @@
             module="rockdaboot/libpsl/releases/download/libpsl-0.21.0/libpsl-0.21.0.tar.gz"/>
   </autotools>
 
-  <autotools id="libsoup"
-             autogenargs="set_more_warnings=no --enable-introspection=no">
+  <meson id="libsoup" mesonargs="-Dintrospection=disabled">
     <branch revision="gnome-3-34"/>
     <dependencies>
       <dep package="libpsl"/>
@@ -120,7 +119,7 @@
       <dep package="glib-networking"/>
       <dep package="sqlite"/>
     </dependencies>
-  </autotools>
+  </meson>
 
   <autotools id="libwebp" autogen-sh="autoreconf">
     <branch repo="chromium" module="webm/libwebp" revision="0.6.0"/>

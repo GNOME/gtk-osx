@@ -104,8 +104,7 @@
             module="rockdaboot/libpsl/releases/download/libpsl-0.21.0/libpsl-0.21.0.tar.gz"/>
   </autotools>
 
-  <autotools id="libsoup" autogen-sh="configure"
-             autogenargs="set_more_warnings=no --enable-introspection=no">
+  <meson id="libsoup" mesonargs="-Dintrospection=disabled">
     <branch module="libsoup/2.68/libsoup-2.68.4.tar.xz" version="2.68.4"
             hash="sha256:2d50b12922cc516ab6a7c35844d42f9c8a331668bbdf139232743d82582b3294">
     </branch>
@@ -117,7 +116,7 @@
       <dep package="sqlite"/>
       <dep package="vala"/>
     </dependencies>
-  </autotools>
+  </meson>
 
   <autotools id="libwebp" autogen-sh="configure"  autogenargs="--enable-libwebpmux --enable-libwebpdecoder">
     <branch repo="webm" module="webp/libwebp-1.0.0.tar.gz" version="1.0.0"/>
