@@ -42,12 +42,11 @@
   </autotools>
 
   <!-- Rudely demands TeX to build documentation -->
-  <!-- Assembler files are missing md5-compress.asm for x86_64 -->
   <autotools id="libnettle" autogen-sh="configure"
-             autogenargs="--disable-documentation --disable-assembler">
-    <branch repo="ftp.gnu.org" version="3.3"
-            module="nettle/nettle-3.3.tar.gz">
-      <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/libnettle-cc-for-build-needs-cflags.patch" strip="1"/>
+             autogenargs="--disable-documentation">
+    <branch repo="ftp.gnu.org" version="3.5.1"
+            module="nettle/nettle-3.5.1.tar.gz"
+            hash="sha256:75cca1998761b02e16f2db56da52992aef622bf55a3b45ec538bc2eedadc9419">
     </branch>
     <dependencies>
       <dep package="gmp"/>
@@ -101,7 +100,7 @@
 
   <autotools id="libpsl" autogen-sh='configure'>
     <branch repo="github-tarball" version="0.21.0"
-            hash="sha256:41bd1c75a375b85c337b59783f5deb93dbb443fb0a52d257f403df7bd653ee12"
+            hash="sha256:055aa87ec166c7afb985d0816c07ff440e1eb899881a318c51c69a0aeea8e279"
             module="rockdaboot/libpsl/releases/download/libpsl-0.21.0/libpsl-0.21.0.tar.gz"/>
   </autotools>
 
