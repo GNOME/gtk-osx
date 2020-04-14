@@ -76,7 +76,7 @@
   <!-- Building from git does not work because they have checked in a bunch of
   files (build-aux/, po/Makefile.in.in) that they're not supposed to.-->
   <!-- Building with p11-kit support breaks g-ir-scanner, for some weird reason. -->
-  <autotools id="gnutls" autogen-sh="configure"
+  <autotools id="gnutls" autogen-sh="autoreconf"
              autogenargs="--disable-gtk-doc-html --without-p11-kit">
     <!--branch repo="gitlab" module="gnutls/gnutls"/-->
     <branch repo="gnutls" version="3.6.12"

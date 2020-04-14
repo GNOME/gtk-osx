@@ -68,7 +68,7 @@
   </autotools>
 
   <!-- Building with p11-kit support breaks g-ir-scanner, for some weird reason. -->
-  <autotools id="gnutls" autogen-sh="configure"
+  <autotools id="gnutls" autogen-sh="autoreconf"
              autogenargs="--disable-gtk-doc-html --without-p11-kit">
     <branch repo="gnutls" version="3.6.12"
             hash="sha256:bfacf16e342949ffd977a9232556092c47164bd26e166736cf3459a870506c4b"
