@@ -18,8 +18,7 @@
               href="https://chromium.googlesource.com/"/>
   <repository name="webkit.org" type="tarball"
               href="http://www.webkitgtk.org/releases/"/>
-  <repository type="tarball" name="icu"
-              href="http://download.icu-project.org/files/"/>
+  <repository type="tarball" name="github-tarball" href="https://github.com/"/>
   <repository type="git" name="github" href="https://github.com/"/>
 
   <!-- Builds last version of WebKitGTK that supported GTK 2.x -->
@@ -63,8 +62,8 @@
   <autotools id="libtasn1" supports-non-srcdir-builds="no" autogen-sh="configure">
     <!-- Git repository is missing files required to build libtasn1
     <branch repo="git.gnu.org" tag="libtasn1_4_4"  module="libtasn1"/> -->
-    <branch repo="ftp.gnu.org" version="4.15"
-            module="libtasn1/libtasn1-4.15.tar.gz"
+    <branch repo="ftp.gnu.org" version="4.15.0"
+            module="libtasn1/libtasn1-4.15.0.tar.gz"
             hash="sha256:dd77509fe8f5304deafbca654dc7f0ea57f5841f41ba530cff9a5bf71382739e" />
   </autotools>
 
@@ -105,11 +104,12 @@
   </autotools>
 
   <autotools id="libpsl" autogen-sh='configure'>
-    <branch repo="github" tag="libpsl-0.21.0" module="rockdaboot/libpsl"/>
+    <branch repo="github-tarball" version="0.21.0"
+            hash="sha256:41bd1c75a375b85c337b59783f5deb93dbb443fb0a52d257f403df7bd653ee12"
+            module="rockdaboot/libpsl/releases/download/libpsl-0.21.0/libpsl-0.21.0.tar.gz"/>
   </autotools>
 
-  <autotools id="libsoup"
-             autogenargs="set_more_warnings=no --enable-introspection=no">
+  <meson id="libsoup" mesonargs="-Dintrospection=disabled">
     <branch revision="gnome-3-34"/>
     <dependencies>
       <dep package="libpsl"/>
@@ -119,7 +119,7 @@
       <dep package="glib-networking"/>
       <dep package="sqlite"/>
     </dependencies>
-  </autotools>
+  </meson>
 
   <autotools id="libwebp" autogen-sh="autoreconf">
     <branch repo="chromium" module="webm/libwebp" revision="0.6.0"/>
@@ -128,8 +128,9 @@
   <autotools id="icu55" autogen-sh="source/configure"
              autogenargs="--enable-rpath"
              makeargs='CFLAGS="$CFLAGS -DU_CHARSET_IS_UTF8=1 -DU_USING_ICU_NAMESPACE=0"'>
-    <branch repo="icu" version="55.1" checkoutdir="icu"
-            module="icu4c/55.1/icu4c-55_1-src.tgz"/>
+    <branch repo="github-tarball" version="55.2" checkoutdir="icu"
+            module="unicode-org/icu/releases/download/release-55-2/icu4c-55_2-src.tgz"
+            hash="sha256:eda2aa9f9c787748a2e2d310590720ca8bcc6252adf6b4cfb03b65bef9d66759"/>
   </autotools>
 
   <!-- This is WebKitGTK 2.4.x, the last version that had the WebKit1 API.

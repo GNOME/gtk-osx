@@ -24,8 +24,7 @@
               href="https://gitlab.gnome.org/GNOME"/>
   <repository type="tarball" name="itstool" href="http://files.itstool.org/"/>
   <repository type="git" name="github" href="https://github.com/"/>
-  <repository type="tarball" name="icu"
-              href="http://download.icu-project.org/files/"/>
+  <repository type="tarball" name="github-tarball" href="https://github.com/"/>
   <repository type="tarball" name="pypi"
               href="https://pypi.python.org/packages/source/"/>
   <repository type="tarball" name="ragel"
@@ -109,8 +108,9 @@
 
   <autotools id="icu" autogen-sh="source/configure" autogenargs="--enable-rpath"
              makeargs='CFLAGS="$CFLAGS -DU_CHARSET_IS_UTF8=1 -DU_USING_ICU_NAMESPACE=0"'>
-    <branch repo="icu" version="58.2" checkoutdir="icu"
-            module="icu4c/58.2/icu4c-58_2-src.tgz"/>
+    <branch repo="github-tarball" version="66.1" checkoutdir="icu"
+            module="unicode-org/icu/releases/download/release-66-1/icu4c-66_1-src.tgz"
+            hash="sha256:52a3f2209ab95559c1cf0a14f24338001f389615bf00e2585ef3dbc43ecf0a2e"/>
   </autotools>
 
   <!-- Ragel, like Vala, isn't bootstrappable from git, so we might as well just use the tarball. -->

@@ -23,8 +23,7 @@
   <repository type="tarball" name="harfbuzz"
               href="http://www.freedesktop.org/software/harfbuzz/release/"/>
   <repository type="tarball" name="itstool" href="http://files.itstool.org/"/>
-  <repository type="tarball" name="icu"
-              href="http://download.icu-project.org/files/"/>
+  <repository type="tarball" name="github-tarball" href="https://github.com/"/>
   <repository type="tarball" name="ragel"
               href="http://www.colm.net/files/ragel/"/>
 
@@ -133,8 +132,9 @@
 
   <autotools id="icu" autogen-sh="source/configure" autogenargs="--enable-rpath"
              makeargs='CFLAGS="$CFLAGS -DU_CHARSET_IS_UTF8=1 -DU_USING_ICU_NAMESPACE=0"'>
-    <branch repo="icu" version="58.2" checkoutdir="icu"
-            module="icu4c/58.2/icu4c-58_2-src.tgz"/>
+    <branch repo="github-tarball" version="66.1" checkoutdir="icu"
+            module="unicode-org/icu/releases/download/release-66-1/icu4c-66_1-src.tgz"
+            hash="sha256:52a3f2209ab95559c1cf0a14f24338001f389615bf00e2585ef3dbc43ecf0a2e"/>
   </autotools>
 
 
@@ -146,7 +146,8 @@
 
   <autotools id="harfbuzz" autogen-sh="configure"
              autogenargs="--with-coretext --with-icu">
-    <branch repo="harfbuzz" module="harfbuzz-2.5.3.tar.xz" version="2.5.3">
+    <branch repo="harfbuzz" module="harfbuzz-2.6.4.tar.xz" version="2.6.4"
+            hash="sha256:9413b8d96132d699687ef914ebb8c50440efc87b3f775d25856d7ec347c03c12">
     </branch>
     <dependencies>
       <dep package="ragel"/>
