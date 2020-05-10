@@ -28,8 +28,8 @@
               href="http://www.colm.net/files/ragel/"/>
 
   <autotools id='readline' autogen-sh="configure">
-    <branch repo="ftp.gnu.org" module="readline/readline-7.0.tar.gz"
-      version="7.0">
+    <branch repo="ftp.gnu.org" module="readline/readline-8.0.tar.gz"
+      version="8.0">
     </branch>
   </autotools>
 
@@ -43,9 +43,9 @@
   </autotools>
 
   <autotools id="libjpeg" autogen-sh="configure">
-    <branch module="jpegsrc.v9c.tar.gz" version="9c"
+    <branch module="jpegsrc.v9d.tar.gz" version="9d"
             repo="jpeg"
-            checkoutdir="jpeg-9c">
+            checkoutdir="jpeg-9d">
     </branch>
   </autotools>
 
@@ -97,8 +97,8 @@
   </autotools>
 
   <autotools id="yelp-xsl">
-    <branch version="3.20.1" module="yelp-xsl/3.20/yelp-xsl-3.20.1.tar.xz"
-            hash="sha256:dc61849e5dca473573d32e28c6c4e3cf9c1b6afe241f8c26e29539c415f97ba0"/>
+    <branch version="3.36.0" module="yelp-xsl/3.36/yelp-xsl-3.36.0.tar.xz"
+            hash="sha256:4fe51c0233b79a4c204c68498d45f09b342c30ed02c4e418506c0e35f0904ec3"/>
     <dependencies>
       <dep package="libxml2"/>
       <dep package="libxslt"/>
@@ -107,8 +107,8 @@
   </autotools>
 
   <autotools id="yelp-tools">
-    <branch version="3.18.0" module="yelp-tools/3.18/yelp-tools-3.18.0.tar.xz"
-            hash="sha256:c6c1d65f802397267cdc47aafd5398c4b60766e0a7ad2190426af6c0d0716932"/>
+    <branch version="3.32.2" module="yelp-tools/3.32/yelp-tools-3.32.2.tar.xz"
+            hash="sha256:183856b5ed0b0bb2c05dd1204af023946ed436943e35e789afb0295e5e71e8f9"/>
     <dependencies>
       <dep package="libxml2"/>
       <dep package="libxslt"/>
@@ -118,8 +118,8 @@
   </autotools>
 
   <autotools id="gtk-doc" autogen-sh="configure">
-    <branch version="1.30" module="gtk-doc/1.30/gtk-doc-1.30.tar.xz"
-            hash="sha256:a4f6448eb838ccd30d76a33b1fd095f81aea361f03b12c7b23df181d21b7069e"/>
+    <branch version="1.32" module="gtk-doc/1.32/gtk-doc-1.32.tar.xz"
+            hash="sha256:de0ef034fb17cb21ab0c635ec730d19746bce52984a6706e7bbec6fb5e0b907c"/>
     <dependencies>
       <dep package="libxml2"/>
       <dep package="libxslt"/>
@@ -162,7 +162,7 @@
   <autotools id="freetype" autogen-sh="configure"
              skip-autogen="never"
              autogenargs="--without-bzip2 --without-harfbuzz">
-    <branch module="freetype/freetype-2.9.1.tar.gz" version="2.9.1"
+    <branch module="freetype/freetype-2.10.2.tar.gz" version="2.10.2"
             repo="sourceforge">
     </branch>
     <dependencies>
@@ -185,21 +185,11 @@
             version="0.15"/>
   </autotools>
 
-  <autotools id="gettext-runtime" autogen-sh="configure"
-	     autogenargs="--without-emacs --disable-java --disable-native-java --disable-libasprintf --disable-csharp">
-    <branch repo="ftp.gnu.org" source-subdir="gettext-runtime"
-            module="gettext/gettext-0.19.8.tar.xz" version="0.19.8">
-      <!-- upstream bug: https://savannah.gnu.org/bugs/index.php?49560 -->
-      <patch file="https://savannah.gnu.org/bugs/download.php?file_id=38908" strip="1"/>
-    </branch>
-  </autotools>
-
   <metamodule id="meta-gtk-osx-bootstrap">
     <dependencies>
       <dep package="libpng"/>
       <dep package="libjpeg"/>
       <dep package="libtiff"/>
-      <dep package="gettext-runtime"/>
       <dep package="hicolor-icon-theme"/>
       <dep package="gtk-doc"/>
     </dependencies>

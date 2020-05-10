@@ -183,19 +183,12 @@
             version="0.13"/>
   </autotools>
 
-  <autotools id="gettext-runtime" autogen-sh="configure"
-	     autogenargs="--without-emacs --disable-java --disable-native-java --disable-libasprintf --disable-csharp">
-    <branch repo="ftp.gnu.org" source-subdir="gettext-runtime"
-            module="gettext/gettext-0.19.8.tar.gz" version="0.19.8"/>
-  </autotools>
-
    <metamodule id="meta-gtk-osx-bootstrap">
     <dependencies>
       <dep package="readline"/>
       <dep package="libpng"/>
       <dep package="libjpeg"/>
       <dep package="libtiff"/>
-      <dep package="gettext-runtime"/>
       <dep package="hicolor-icon-theme"/>
       <dep package="gtk-doc"/>
     </dependencies>

@@ -164,12 +164,6 @@
             version="0.15"/>
   </autotools>
 
-  <autotools id="gettext-runtime" autogen-sh="configure"
-	     autogenargs="--without-emacs --disable-java --disable-native-java --disable-libasprintf --disable-csharp">
-    <branch repo="ftp.gnu.org" source-subdir="gettext-runtime"
-            module="gettext/gettext-0.19.8.tar.xz" version="0.19.8"/>
-  </autotools>
-
   <metamodule id="meta-gtk-osx-bootstrap">
     <dependencies>
       <dep package="readline"/>

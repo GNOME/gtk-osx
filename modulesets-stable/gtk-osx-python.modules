@@ -85,7 +85,6 @@
   <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/python-ldflags.patch" strip="1"/>
     </branch>
     <dependencies>
-      <dep package="gettext-runtime"/>
       <dep package='readline'/>
     </dependencies>
     <after>
@@ -99,7 +98,6 @@
             hash="sha256:2646e7dc233362f59714c6193017bb2d6f7b38d6ab4a0cb5fbac5c36c4d845df"
             />
     <dependencies>
-      <dep package="gettext-runtime"/>
       <dep package='readline'/>
       <dep package="openssl"/> <!-- For hashlib -->
     </dependencies>
