@@ -40,22 +40,6 @@ cgit    <after>
     </dependencies>
   </autotools>
 
-  <autotools id="adwaita-icon-theme">
-    <branch />
-    <dependencies>
-      <dep package="librsvg"/>
-      <dep package="hicolor-icon-theme"/>
-      <dep package="icon-naming-utils"/>
-    </dependencies>
-  </autotools>
-
-  <autotools id="gnome-themes-extra">
-    <branch />
-    <dependencies>
-      <dep package="librsvg"/>
-    </dependencies>
-  </autotools>
-
   <!-- Master on gtk-engines got adjusted in the Gtk+-2.90 cycle to
        require Gtk+-3. Shortly thereafter engine based theming was
        dropped from Gtk+-3 in favor of CSS theming, so it doesn't
@@ -71,24 +55,6 @@ cgit    <after>
 
   <autotools id="murrine-engine">
     <branch module="murrine"/>
-  </autotools>
-
-  <!-- librsvg is converting to the Rust language. This requires
-       substantial infrastructure that's resistant to installing with
-       jhbuild, so we'll freeze at the 2.40 branch. -->
-  <autotools id="librsvg" autogenargs="--disable-Bsymbolic">
-    <branch module="librsvg" tag="librsvg-2-40"/>
-    <dependencies>
-      <dep package="libcroco"/>
-    </dependencies>
-    <after>
-      <dep package="gtk+"/>
-      <dep package="gtk+-3.0"/>
-    </after>
-  </autotools>
-
-  <autotools id="libcroco" autogenargs="--disable-Bsymbolic">
-    <branch/>
   </autotools>
 
 </moduleset>

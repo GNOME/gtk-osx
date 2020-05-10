@@ -41,23 +41,6 @@
     </dependencies>
   </autotools>
 
-  <autotools id="adwaita-icon-theme">
-    <branch revision="gnome-3-30"/>
-    <dependencies>
-      <dep package="librsvg"/>
-      <dep package="hicolor-icon-theme"/>
-      <dep package="icon-naming-utils"/>
-    </dependencies>
-  </autotools>
-
-  <autotools id="gnome-themes-extra">
-    <branch revision="gnome-3-28"/> 
-    <dependencies>
-      <dep package="librsvg"/>
-      <dep package="adwaita-icon-theme"/>
-    </dependencies>
-  </autotools>
-
   <autotools id="gtk-engines">
     <branch revision="gtk-engines-2-22" repo="archive.gnome.org"/>
     <after>
@@ -67,26 +50,6 @@
 
   <autotools id="murrine-engine">
     <branch module="murrine"/>
-  </autotools>
-
-  <!-- librsvg is converting to the Rust language. This requires
-       substantial infrastructure that's resistant to installing with
-       jhbuild, so we'll freeze at the 2.40 branch. -->
-  <autotools id="librsvg" autogenargs="--disable-Bsymbolic">
-    <branch module="librsvg" tag="librsvg-2-40"/>
-    <dependencies>
-      <dep package="libcroco"/>
-      <dep package="meta-gtk-osx-freetype"/>
-    </dependencies>
-    <after>
-<!-- Circular dependency if we depend on meta-gtk-osx or meta-gtk-osx-gtk3 -->
-      <dep package="gtk+"/>
-      <dep package="gtk+-3.0"/>
-    </after>
-  </autotools>
-
-  <autotools id="libcroco" autogenargs="--disable-Bsymbolic">
-    <branch/>
   </autotools>
 
 </moduleset>

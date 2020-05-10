@@ -60,6 +60,7 @@
     <dependencies>
       <dep package="gtk+-3.0"/>
       <dep package="gtk-mac-integration"/>
+      <dep package="adwaita-icon-theme"/>
     </dependencies>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
@@ -241,6 +242,31 @@
       <dep package="gtk+"/>
       <dep package="gtk+-3.0"/>
     </after>
+  </autotools>
+
+  <autotools id="adwaita-icon-theme">
+    <branch />
+    <dependencies>
+      <dep package="librsvg"/>
+    </dependencies>
+  </autotools>
+
+  <!-- librsvg is converting to the Rust language. This requires
+       substantial infrastructure that's resistant to installing with
+       jhbuild, so we'll freeze at the 2.40 branch. -->
+  <autotools id="librsvg" autogenargs="--disable-Bsymbolic">
+    <branch module="librsvg" tag="librsvg-2-40"/>
+    <dependencies>
+      <dep package="libcroco"/>
+    </dependencies>
+    <after>
+      <dep package="gtk+"/>
+      <dep package="gtk+-3.0"/>
+    </after>
+  </autotools>
+
+  <autotools id="libcroco" autogenargs="--disable-Bsymbolic">
+    <branch/>
   </autotools>
 
 </moduleset>

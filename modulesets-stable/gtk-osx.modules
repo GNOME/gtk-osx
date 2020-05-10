@@ -67,6 +67,7 @@
     <dependencies>
       <dep package="gtk+-3.0"/>
       <dep package="gtk-mac-integration"/>
+      <dep package="adwaita-icon-theme"/>
     </dependencies>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
@@ -77,7 +78,7 @@
     <dependencies>
       <dep package="gtk+-3.14"/>
       <dep package="gtk-mac-integration"/>
-      <dep package="meta-gtk-osx-gtk3-core-themes"/>
+      <dep package="adwaita-icon-theme"/>
     </dependencies>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
@@ -302,4 +303,36 @@
     </after>
   </autotools>
 
+    <autotools id="adwaita-icon-theme" autogen-sh="configure">
+    <branch module="adwaita-icon-theme/3.36/adwaita-icon-theme-3.36.1.tar.xz"
+            version="3.36.1" hash="sha256:e498518627044dfd7db7d79a5b3d437848caf1991ef4ef036a2d3a2ac2c1f14d"/>
+    <dependencies>
+      <dep package="librsvg"/>
+    </dependencies>
+  </autotools>
+
+  <!-- librsvg is converting to the Rust language. This requires
+       substantial infrastructure that's resistant to installing with
+       jhbuild, so we'll freeze at the 2.40 branch. -->
+  <autotools id="librsvg" autogenargs="--disable-Bsymbolic">
+    <branch module="librsvg/2.40/librsvg-2.40.17.tar.xz" version="2.40.17"
+	    hash="sha256:e6f6c5cbecc405bb945c7cd15061276035ae3173bbb3bb25e8a916779c7f69cc"/>
+    <dependencies>
+      <dep package="libcroco"/>
+      <dep package="meta-gtk-osx-freetype"/>
+    </dependencies>
+    <after>
+<!-- Circular dependency if we depend on meta-gtk-osx or meta-gtk-osx-gtk3 -->
+      <dep package="gtk+"/>
+      <dep package="gtk+-3.0"/>
+      <dep package="gtk+-3.14"/>
+    </after>
+  </autotools>
+
+  <autotools id="libcroco" autogenargs="--disable-Bsymbolic"
+	     autogen-sh="configure">
+    <branch module="libcroco/0.6/libcroco-0.6.13.tar.xz" version="0.6.13"
+	    hash="sha256:767ec234ae7aa684695b3a735548224888132e063f92db585759b422570621d4"/>
+  </autotools>
+ 
 </moduleset>
