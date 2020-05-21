@@ -126,7 +126,6 @@
             version="0.51.0"
             hash="md5:12e517cac2b57a0121cda351570f1e63"/>
     <!--dependencies>
-      <dep package="gnome-common"/>
       <dep package="perl-xml-parser"/>
     </dependencies-->
   </autotools>
@@ -144,7 +143,6 @@
       <dep package="bison"/>
       <dep package="flex"/>
       <dep package="gtk-osx-docbook"/>
-      <dep package="gnome-common"/>
       <dep package="intltool"/>
       <dep package="gnumake"/>
     </dependencies>
