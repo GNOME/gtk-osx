@@ -115,11 +115,11 @@ PIPENV="$PYTHONUSERBASE/bin/pipenv"
 
 # Install jhbuild
 if test ! -d "$DEV_SRC_ROOT/jhbuild/.git" ; then
-    git clone $GITLAB/jhbuild.git "$DEV_SRC_ROOT/jhbuild"
+    git clone -b 3.36.0 $GITLAB/jhbuild.git "$DEV_SRC_ROOT/jhbuild"
     cd "$DEV_SRC_ROOT/jhbuild"
 else #Get the latest if it's already installed
     cd "$DEV_SRC_ROOT/jhbuild"
-    git pull origin master
+    git reset --hard 3.36.0
 fi
 
 # Install Ninja
