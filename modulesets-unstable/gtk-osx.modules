@@ -67,7 +67,7 @@
     </after>
   </metamodule>
 
-  <meson id="glib" mesonargs="-Dinternal_pcre=true -Dlibmount=false">
+  <meson id="glib" mesonargs="-Dinternal_pcre=true -Dlibmount=disabled">
     <branch/>
     <dependencies>
       <dep package="libffi"/>
