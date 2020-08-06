@@ -94,8 +94,8 @@
   </autotools>
 
   <autotools id="python3" autogenargs="--enable-shared" autogen-sh="configure">
-    <branch repo="python" module="3.8.2/Python-3.8.2.tar.xz" version="3.8.2"
-            hash="sha256:2646e7dc233362f59714c6193017bb2d6f7b38d6ab4a0cb5fbac5c36c4d845df"
+    <branch repo="python" module="3.8.5/Python-3.8.5.tar.xz" version="3.8.5"
+            hash="md5:35b5a3d0254c1c59be9736373d429db7"
             />
     <dependencies>
       <dep package='readline'/>
