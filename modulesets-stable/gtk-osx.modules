@@ -270,6 +270,7 @@
             repo="cairographics"
             hash="sha1:00e81842ae5e81bb0343108884eb5205be0eac14">
       <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/cairo-freetype-font-variations.patch" strip="1"/>
+      <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/cairo-image-refcount.patch" strip="1"/>
     </branch>
     <dependencies>
       <dep package="pixman"/>

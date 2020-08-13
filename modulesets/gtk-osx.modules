@@ -6,7 +6,7 @@
               href="https://gitlab.gnome.org/GNOME"/>
   <repository type="git" name="github" href="git://github.com/"/>
   <repository type="git" name="freedesktop"
-              href="git://anongit.freedesktop.org/git/"/>
+              href="git://gitlab.freedesktop.org/"/>
   <repository type="system" name="system"/>
 
   <!-- This module set works a bit differently than for example the

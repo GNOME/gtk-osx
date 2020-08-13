@@ -6,7 +6,9 @@
               href="https://gitlab.gnome.org/GNOME"/>
   <repository type="git" name="github" href="git://github.com/"/>
   <repository type="git" name="freedesktop"
-              href="git://anongit.freedesktop.org/git/"/>
+              href="git://gitlab.freedesktop.org/"/>
+  <repository type="git" name="freedesktop-jralls"
+              href="git://gitlab.freedesktop.org/jralls/"/>
   <repository type="system" name="system"/>
 
   <!-- This module set works a bit differently than for example the
@@ -219,7 +221,7 @@
        dependency. -->
   <autotools id="cairo"
              autogenargs="--enable-pdf --enable-quartz --disable-xlib --without-x">
-    <branch repo="freedesktop" module="cairo" />
+    <branch repo="freedesktop-jralls" module="cairo" />
     <dependencies>
       <dep package="pixman"/>
     </dependencies>
