@@ -240,11 +240,11 @@ osx_ver()
 
 def setup_sdk(target=_target, sdk_version=None, architectures=[_default_arch]):
 
+    global use_local_modulesets
     os.environ["MACOSX_DEPLOYMENT_TARGET"] = target
     sdkdir = None
     xcodepath = None
     xcodeversion = None
-
 
     sdkdir = _popen("xcrun --show-sdk-path")
 
