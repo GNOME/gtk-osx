@@ -120,7 +120,7 @@
     </branch>
   </autotools>
 
-  <autotools id="harfbuzz" autogenargs="--with-coretext --with-icu">
+  <autotools id="harfbuzz" autogenargs="--with-coretext --with-icu --with-gobject --enable-introspection=yes">
     <branch repo="freedesktop" module="harfbuzz"/>
     <dependencies>
       <dep package="freetype-no-harfbuzz"/>
