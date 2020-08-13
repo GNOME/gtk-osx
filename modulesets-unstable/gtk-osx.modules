@@ -176,8 +176,8 @@
   </autotools>
   
 
-  <autotools id="gtk+-3.0"
-             autogenargs="--enable-quartz-backend --enable-quartz-relocation --disable-colord">
+  <meson id="gtk+-3.0"
+        mesonargs="-Dquartz-backend=true -Dx11-backend=false -Dmedia=none">
     <branch module="gtk" checkoutdir="gtk+-3.0" revision="gtk-3-24"/>
     <dependencies>
       <dep package="glib"/>
@@ -190,7 +190,7 @@
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
     </after>
-  </autotools>
+  </meson>
 
   <meson id="gtk+-4.0"
              mesonargs="-Dquartz-backend=true -Dx11-backend=false -Dmedia=none">
