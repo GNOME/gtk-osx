@@ -6,9 +6,11 @@
               href="https://gitlab.gnome.org/GNOME"/>
   <repository type="git" name="github" href="git://github.com/"/>
   <repository type="git" name="freedesktop"
-              href="git://gitlab.freedesktop.org/"/>
+              href="https://gitlab.freedesktop.org/"/>
   <repository type="git" name="freedesktop-jralls"
-              href="git://gitlab.freedesktop.org/jralls/"/>
+              href="https://gitlab.freedesktop.org/jralls/"/>
+  <repository type="git" name="nongnu"
+	      href="git://git.sv.nongnu.org/"/>
   <repository type="system" name="system"/>
 
   <!-- This module set works a bit differently than for example the
@@ -48,6 +50,11 @@
   <include href="gtk-osx-random.modules"/>
   <include href="gtk-osx-unsupported.modules"/>
 
+  <!-- Dummy meson module to shut up a jhbuild warning. -->
+  <systemmodule id="meson">
+    <branch repo="system"/>
+  </systemmodule>
+  
   <metamodule id="meta-gtk-osx-core">
     <dependencies>
       <dep package="gtk+"/>
@@ -69,6 +76,11 @@
     </after>
   </metamodule>
 
+  <autotools id="libffi" autogenargs="--disable-builddir"
+             autogen-sh="autoreconf" supports-non-srcdir-builds="no">
+    <branch module="atgreen/libffi" repo="github"/>
+  </autotools>
+
   <meson id="glib" mesonargs="-Dinternal_pcre=true -Dlibmount=disabled">
     <branch/>
     <dependencies>
@@ -76,9 +88,31 @@
     </dependencies>
   </meson>
 
-  <autotools id="libffi" autogenargs="--disable-builddir"
-             autogen-sh="autoreconf" supports-non-srcdir-builds="no">
-    <branch module="atgreen/libffi" repo="github"/>
+   <cmake id="freetype-no-harfbuzz" cmakeargs="-DCMAKE_DISABLE_FIND_PACKAGE_HarfBuzz=TRUE -DCMAKE_DISABLE_FIND_PACKAGE_BZip2=TRUE -D BUILD_SHARED_LIBS=true -D CMAKE_BUILD_TYPE=Release">
+    <branch module="freetype/freetype2" repo="nongnu"/>
+    <dependencies>
+      <dep package="zlib"/>
+    </dependencies>
+  </cmake>
+
+  <autotools id="pixman" autogenargs="--disable-gtk --disable-mmx">
+    <branch repo="freedesktop" module="pixman/pixman" />
+    <after>
+      <dep package="meta-gtk-osx-bootstrap"/>
+    </after>
+  </autotools>
+
+  <autotools id="cairo"
+             autogenargs="--enable-pdf --enable-quartz --disable-xlib --without-x">
+    <branch repo="freedesktop-jralls" module="cairo" />
+    <dependencies>
+      <dep package="pixman"/>
+      <dep package="meta-gtk-osx-bootstrap"/>
+      <dep package="freetype-no-harfbuzz"/>
+    </dependencies>
+    <after>
+      <dep package="fontconfig"/>
+    </after>
   </autotools>
 
   <meson id="gobject-introspection">
@@ -88,6 +122,17 @@
       <dep package="cairo"/>
       <dep package='python3'/>
     </dependencies>
+  </meson>
+
+  <meson id="harfbuzz" mesonargs="-Ddocs=disabled">
+    <branch repo="github" module="harfbuzz/harfbuzz"/>
+    <dependencies>
+      <dep package="freetype-no-harfbuzz"/>
+      <dep package="cairo"/>
+    </dependencies>
+    <after>
+      <dep package="gobject-introspection"/>
+    </after>
   </meson>
 
   <meson id="fribidi" mesonargs="-Ddocs=false">
@@ -100,15 +145,15 @@
   <meson id="pango">
     <branch />
     <dependencies>
-      <dep package="cairo"/>
       <dep package="glib"/>
+      <dep package="cairo"/>
       <dep package="fribidi"/>
       <dep package="harfbuzz"/>
     </dependencies>
     <after>
       <dep package="gobject-introspection"/>
+      <dep package="freetype-no-harfbuzz"/>
       <dep package="meta-gtk-osx-bootstrap"/>
-      <dep package="meta-gtk-osx-freetype"/>
     </after>
   </meson>
 
@@ -129,16 +174,6 @@
       <dep package="pango"/>
       <dep package="gobject-introspection"/>
     </after>
-  </meson>
-
-  <meson id="gtk-doc">
-    <branch repo="git.gnome.org"/>
-    <dependencies>
-      <dep package="libxml2"/>
-      <dep package="itstool"/>
-      <dep package="yelp-tools"/>
-      <dep package="glib"/>
-    </dependencies>
   </meson>
 
   <autotools id="xorg-util-macros">
@@ -208,31 +243,27 @@
     </after>
   </meson>
 
-  <autotools id="pixman" autogenargs="--disable-gtk --disable-mmx">
-    <branch repo="freedesktop" module="pixman" />
-    <after>
-      <dep package="meta-gtk-osx-bootstrap"/>
-    </after>
-  </autotools>
-
-  <!-- Cairo will automatically enable freetype and fontconfig if
-       meta-gtk-osx-freetype is built, so packages which require
-       cairoft or cairofc should have meta-gtk-osx-freetype as a
-       dependency. -->
-  <autotools id="cairo"
-             autogenargs="--enable-pdf --enable-quartz --disable-xlib --without-x">
-    <branch repo="freedesktop-jralls" module="cairo" />
-    <dependencies>
-      <dep package="pixman"/>
-    </dependencies>
-    <after>
-      <dep package="meta-gtk-osx-bootstrap"/>
-      <dep package="meta-gtk-osx-freetype"/>
-    </after>
-  </autotools>
-
   <autotools id="gtk-mac-integration" autogenargs="--disable-python">
     <branch/>
+    <after>
+      <dep package="gtk+"/>
+      <dep package="gtk+-3.0"/>
+    </after>
+  </autotools>
+
+  <autotools id="libcroco" autogenargs="--disable-Bsymbolic">
+    <branch/>
+  </autotools>
+
+  <!-- librsvg is converting to the Rust language. This requires
+       substantial infrastructure that's resistant to installing with
+       jhbuild, so we'll freeze at the 2.40 branch. -->
+  <autotools id="librsvg" autogenargs="--disable-Bsymbolic">
+    <branch module="librsvg" tag="librsvg-2-40"/>
+    <dependencies>
+      <dep package="libcroco"/>
+      <dep package="freetype-no-harfbuzz"/>
+    </dependencies>
     <after>
       <dep package="gtk+"/>
       <dep package="gtk+-3.0"/>
@@ -244,24 +275,6 @@
     <dependencies>
       <dep package="librsvg"/>
     </dependencies>
-  </autotools>
-
-  <!-- librsvg is converting to the Rust language. This requires
-       substantial infrastructure that's resistant to installing with
-       jhbuild, so we'll freeze at the 2.40 branch. -->
-  <autotools id="librsvg" autogenargs="--disable-Bsymbolic">
-    <branch module="librsvg" tag="librsvg-2-40"/>
-    <dependencies>
-      <dep package="libcroco"/>
-    </dependencies>
-    <after>
-      <dep package="gtk+"/>
-      <dep package="gtk+-3.0"/>
-    </after>
-  </autotools>
-
-  <autotools id="libcroco" autogenargs="--disable-Bsymbolic">
-    <branch/>
   </autotools>
 
 </moduleset>

@@ -120,43 +120,20 @@
             hash="sha256:52a3f2209ab95559c1cf0a14f24338001f389615bf00e2585ef3dbc43ecf0a2e"/>
   </autotools>
 
-  <!-- Ragel, like Vala, isn't bootstrappable from git, so we might as well just use the tarball. -->
-  <autotools id="ragel" autogen-sh='autoreconf'>
-    <branch repo="ragel" module="ragel-6.10.tar.gz" version="6.10">
-      <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/ragel-6.9-setiosflags.patch" strip="1"/>
-    </branch>
-  </autotools>
-
-  <autotools id="harfbuzz"
-             autogenargs="--with-coretext --with-freetype --with-icu">
-    <branch repo="github" module="harfbuzz/harfbuzz" tag="2.5.3"/>
-    <dependencies>
-      <dep package="ragel"/>
-      <dep package="glib"/>
-    </dependencies>
-    <after>
-      <dep package="icu"/>
-      <dep package="icu55"/>
-    </after>
-  </autotools>
-
-  <autotools id="freetype" skip-autogen="never" autogenargs="--without-bzip2"
-	     autogen-template="if test -f Makefile; then make distclean; fi &amp;&amp; pushd %(srcdir)s &amp;&amp; ./autogen.sh &amp;&amp; popd &amp;&amp; %(srcdir)s/configure --prefix %(prefix)s  %(autogenargs)s">
-    <branch module="freetype/freetype2" tag="VER-2-9-1" repo="nongnu"/>
+  <cmake id="freetype" cmakeargs="-DCMAKE_DISABLE_FIND_PACKAGE_BZip2=TRUE -D BUILD_SHARED_LIBS=true -D CMAKE_BUILD_TYPE=Release">
+    <branch module="freetype/freetype2" repo="nongnu"/>
     <dependencies>
       <dep package="harfbuzz"/>
       <dep package="zlib"/>
     </dependencies>
- </autotools>
+  </cmake>
 
-  <autotools id="fontconfig" autogenargs="--disable-docs">
-    <branch repo="freedesktop" tag="2.13.1"/>
+  <meson id="fontconfig" mesonargs="-Ddocs=disabled">
+    <branch repo="freedesktop" module="fontconfig/fontconfig" tag="2.13.1"/>
     <dependencies>
       <dep package="freetype"/>
-      <dep package="pylxml"/>
-      <dep package="pysix"/>
     </dependencies>
-  </autotools>
+  </meson>
 
   <autotools id="hicolor-icon-theme" autogen-sh="configure"
 	     supports-non-srcdir-builds="no">
@@ -180,7 +157,6 @@
     <dependencies>
       <dep package="freetype"/>
       <dep package="fontconfig"/>
-      <dep package="harfbuzz"/>
     </dependencies>
   </metamodule>
 

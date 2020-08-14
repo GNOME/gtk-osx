@@ -20,8 +20,6 @@
 	      href="ftp://xmlsoft.org/libxml2/"/>
   <repository type="git" name="git.gnome.org"
               href="https://gitlab.gnome.org/GNOME"/>
-  <repository type="tarball" name="harfbuzz"
-              href="http://www.freedesktop.org/software/harfbuzz/release/"/>
   <repository type="tarball" name="itstool" href="http://files.itstool.org/"/>
   <repository type="tarball" name="github-tarball" href="https://github.com/"/>
   <repository type="tarball" name="ragel"
@@ -137,47 +135,21 @@
             hash="sha256:52a3f2209ab95559c1cf0a14f24338001f389615bf00e2585ef3dbc43ecf0a2e"/>
   </autotools>
 
-
-  <autotools id="ragel" autogen-sh='autoreconf'>
-    <branch repo="ragel" module="ragel-6.10.tar.gz" version="6.10">
-      <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/ragel-6.9-setiosflags.patch" strip="1"/>
-    </branch>
-  </autotools>
-
-  <autotools id="harfbuzz" autogen-sh="configure"
-             autogenargs="--with-coretext --with-icu">
-    <branch repo="harfbuzz" module="harfbuzz-2.6.4.tar.xz" version="2.6.4"
-            hash="sha256:9413b8d96132d699687ef914ebb8c50440efc87b3f775d25856d7ec347c03c12">
-    </branch>
-    <dependencies>
-      <dep package="ragel"/>
-      <dep package="glib"/>
-    </dependencies>
-    <after>
-      <dep package="icu"/>
-      <dep package="icu55"/>
-    </after>
-  </autotools>
-
-  <autotools id="freetype" autogen-sh="configure"
-             skip-autogen="never"
-             autogenargs="--without-bzip2 --without-harfbuzz">
+  <cmake id="freetype" cmakeargs="-DCMAKE_DISABLE_FIND_PACKAGE_BZip2=TRUE -D BUILD_SHARED_LIBS=true -D CMAKE_BUILD_TYPE=Release">
     <branch module="freetype/freetype-2.10.2.tar.gz" version="2.10.2"
-            repo="sourceforge">
-    </branch>
+            repo="sourceforge"/>
     <dependencies>
       <dep package="zlib"/>
     </dependencies>
-  </autotools>
+  </cmake>
 
-  <autotools id="fontconfig" autogen-sh="autoreconf"
-             autogenargs="--disable-docs '--with-add-fonts=/System/Library/Fonts,/Library/Fonts,~/Library/Fonts'">
-    <branch repo="fontconfig" version="2.13.1" module="fontconfig-2.13.1.tar.bz2">
-    </branch>
+  <meson id="fontconfig" mesonargs="-Ddocs=disabled">
+    <branch repo="fontconfig" version="2.13.1"
+            module="fontconfig-2.13.1.tar.bz2"/>
     <dependencies>
-      <dep package="freetype"/>
+      <dep package="freetype-no-harfbuzz"/>
     </dependencies>
-  </autotools>
+  </meson>
 
   <autotools id="hicolor-icon-theme" autogen-sh="configure"
 	     supports-non-srcdir-builds="no">
@@ -195,11 +167,11 @@
     </dependencies>
   </metamodule>
 
+  <!-- Use this only if you need fontconfig and for freetype to have harfbuzz shaping available. -->
   <metamodule id="meta-gtk-osx-freetype">
     <dependencies>
       <dep package="freetype"/>
       <dep package="fontconfig"/>
-      <dep package="harfbuzz"/>
     </dependencies>
   </metamodule>
 
