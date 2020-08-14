@@ -128,11 +128,11 @@ def osx_ver():
     _osx_version = float(vernum.group(1)) - 4.0
     _target = '10.%d' % int(_osx_version)
     
-    x64bit = _popen("sysctl hw.cpu64bit_capable").endswith("1")
-    if x64bit and _osx_version >= 6.0:
-        _default_arch = "x86_64"
+    is_arm = _popen("uname -v").endswith("RELEASE_ARM64_T8020")
+    if is_arm:
+        _default_arch = "arm64"
     else:
-        _default_arch = "i386"
+        _default_arch = "x86_64"
 
 # Determine the XCode Version:
 def xcode_ver():
@@ -222,7 +222,7 @@ def setup_release():
 # Set up the environment for building against particular SDK.
 #
 
-#We call osx_ver() here so that we can set up _default_arch for setup_sdk:
+#We call osx_ver() here so that we can set up _default_arch for setup_sdk
 osx_ver()
 
 #
@@ -283,9 +283,13 @@ def setup_sdk(target=_target, sdk_version=None, architectures=[_default_arch]):
         conditions.add('64-bit')
         append_autogenargs("glib", "ac_cv_c_bigendian=no")
         append_autogenargs("openssl", "darwin64-x86_64-cc #")
-    elif len(set(architectures) - set(["i386",  "x86_64"])) > 0:
-        raise EnvironmentError("Only architectures i386 and x86_64 are supported.")
-    else:
+    elif architectures == ["arm64"]:
+        conditions.add('64-bit')
+        append_autogenargs("glib", "ac_cv_c_bigendian=no")
+        append_autogenargs("openssl", "darwin64-arm64-cc #") # Not a legal value
+    elif len(set(architectures) - set(["i386",  "x86_64", 'arm64'])) > 0:
+        raise EnvironmentError("Only architectures i386, x86_64, and arm64 are supported.")
+    if len(set(architectures)) > 1:
         print "WARNING: Universal builds are neither prohibited nor supported. It might work, but if it doesn't you're on your own."
     # For unknown reasons, iconv is not picked up correctly without this
     #
@@ -318,6 +322,11 @@ def setup_sdk(target=_target, sdk_version=None, architectures=[_default_arch]):
         append_autogenargs("gmp", "--host=x86_64-apple-darwin ABI=64")
         append_autogenargs("liboil", "--host=x86_64-apple-darwin")
         append_autogenargs("gnutls", "--host=x86_64-apple-darwin")
+    elif architectures == ["arm64"]:
+        append_autogenargs("glib", "--build=aarch64-apple-darwin")
+        append_autogenargs("gmp", "--host=aarch64-apple-darwin ABI=64")
+        append_autogenargs("liboil", "--host=aarch64-apple-darwin")
+        append_autogenargs("libffi", "--host=aarch64-apple-darwin")
 
     # El Capitan needs bash to work around SIP. If you're using a
     # common bootstrap directory (e.g. $HOME/.local) then override
