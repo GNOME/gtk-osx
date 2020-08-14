@@ -143,11 +143,9 @@
 
   <metamodule id="meta-gtk-osx-bootstrap">
     <dependencies>
-      <dep package="readline"/>
       <dep package="libpng"/>
       <dep package="libjpeg"/>
       <dep package="libtiff"/>
-      <dep package="gettext-runtime"/>
       <dep package="hicolor-icon-theme"/>
       <dep package="gtk-doc"/>
     </dependencies>
