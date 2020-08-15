@@ -21,7 +21,7 @@ There are 3 modulesets. You can select the one which most suits you by
 adding the line
       moduleset="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/modulesets-stable/gtk-osx.modules"
 
-to your ~/.jhbuildrc-custom, replacing "modulesets-stable" (the default) with
+to your `~/.jhbuildrc-custom`, replacing "modulesets-stable" (the default) with
 
  * modulesets-stable: The default, all tarball-based released sources.
  * modulesets: Sources from VCS repositories when that's available,
@@ -31,13 +31,13 @@ to your ~/.jhbuildrc-custom, replacing "modulesets-stable" (the default) with
 
 ## Customization ##
 
-Jhbuild has a hook that opens a special file ~/.jhbuildrc (the
+Jhbuild has a hook that opens a special file `~/.jhbuildrc`  (the
 name and path can be overridden with the ```-f``` command-line
 parameter). Gtk-OSX provides a file intended to be installed as
-~/.jhbuildrc that configures the build parameters according to
+`~/.jhbuildrc` that configures the build parameters according to
 the version of MacOS that you're running or that you intend to target,
-i.e. MACOS_DEPLOYMENT_TARGET. That file, jhbuildrc-gtk-osx, includes
-it's own hook to load a file named ~/.jhbuildrc-custom (not
+i.e. `MACOS_DEPLOYMENT_TARGET`. That file, jhbuildrc-gtk-osx, includes
+it's own hook to load a file named `~/.jhbuildrc-custom` (not
 overrideable, sorry). This second rc file is for local customization,
 including the usual things contemplated by the jhbuild developers for
 the [configuration
@@ -92,38 +92,41 @@ library used by gtk-doc.
 
 ### Python Configuration ###
 
-gtk-osx-setup.sh uses several environment variables to control where it
+`gtk-osx-setup.sh` uses several environment variables to control where it
 puts things. Override the defaults by setting the corresponding
-variable in the environment before running gtk-osx-setup.sh.
+variable in the environment before running `gtk-osx-setup.sh`.
 
-* DEVROOT         default: $HOME                Base directory
-* DEVPREFIX       default: $DEVROOT/.new_local  Prefix for jhbuild tools
-* PYTHONUSERBASE  default: $DEVROOT/.new_local  Location where PIP installs packages when --user is given as an option; new-setup.sh uses --user when invoking pip.
-* DEV_SRC_ROOT    default: $DEVROOT/Source      Location of pyenv and jhbuild sources
-* PYENV_ROOT      default: $DEV_SRC_ROOT/pyenv  Prefix for pyenv's sources and virtual environments.
-* PIP_CONFIG_DIR  default: $HOME/.config/pip    Pip's configuration, see the PIP documentation.
+* `DEVROOT`         default: `$HOME`                Base directory
+* `DEVPREFIX`       default: `$DEVROOT/.new_local`  Prefix for jhbuild tools
+* `PYTHONUSERBASE`  default: `$DEVROOT/.new_local`  Location where PIP installs packages when --user is given as an option; new-setup.sh uses --user when invoking pip.
+* `DEV_SRC_ROOT`    default: `$DEVROOT/Source`      Location of pyenv and jhbuild sources
+* `PYENV_ROOT`      default: `$DEV_SRC_ROOT/pyenv`  Prefix for pyenv's sources and virtual environments.
+* `PIP_CONFIG_DIR`  default: `$HOME/.config/pip`    Pip's configuration, see the PIP documentation.
 
-PYTHONUSERBASE, PYENV_ROOT, and PIP_CONFIG_DIR are actually specified
+`PYTHONUSERBASE`, `PYENV_ROOT`, and `PIP_CONFIG_DIR` are actually specified
 by PIP and PYENV. Pipenv and pyenv have other control environment
 variables, consult their documentation for more information.
 
-gtk-osx-setup.sh will create several shell-script and configuration files,
+`gtk-osx-setup.sh` will create several shell-script and configuration files,
 but it will not overwrite any that already exist so it's safe to
 customize your setup after running it. The files are:
 
-* $DEVPREFIX/etc/Pipfile             Configures the python version and installed packages.
-* $DEVPREFIX/etc/pipenv-env          Environment variables for pipenv-controlled virtual environment.
-* $DEVPREFIX/bin/jhbuild             Shell script to run jhbuild inside a pipenv-controlled virtual environment using the above Pipfile and pipenv environment file.
-* $DEVPREFIX/libexec/run_jhbuild.py  Python file replacing the jhbuild executable provided by jhbuild itself. Called from the jhbuild shell script.
+* `$DEVPREFIX/etc/Pipfile`             Configures the python version and installed packages.
+* `$DEVPREFIX/etc/pipenv-env`          Environment variables for pipenv-controlled virtual environment.
+* `$DEVPREFIX/bin/jhbuild`             Shell script to run jhbuild inside a pipenv-controlled virtual environment using the above Pipfile and pipenv environment file.
+* `$DEVPREFIX/libexec/run_jhbuild.py`  Python file replacing the jhbuild executable provided by jhbuild itself. Called from the jhbuild shell script.
 
-gtk-osx-setup.sh will also copy /usr/bin/bash to $DEVPREFIX/bin and jhbuildrc-gtk-osx will set $SHELL to that path to work around SIP.
+`gtk-osx-setup.sh` will also copy `/usr/bin/bash` to `$DEVPREFIX/bin` and `jhbuildrc-gtk-osx` will set `$SHELL` to that path to work around SIP.
 
-The pipenv control file sets Python3.8 as its required version, and gtk-osx-setup.sh will create a pyenv virtual environment for that. If you don't already have Python3.8 in your $PATH it will offer to install the latest Python3.8 release for you.
+The pipenv control file sets Python3.8 as its required version, and
+`gtk-osx-setup.sh` will create a pyenv virtual environment for that. If
+you don't already have Python3.8 in your `$PATH` it will offer to
+install the latest Python3.8 release for you.
 
 
 ## Bootstrapping ##
 
-Unlike previous versions of gtk-osx-build-setup.sh, gtk-osx-setup.sh
+Unlike previous versions of `gtk-osx-build-setup.sh`, `gtk-osx-setup.sh`
 does *not* copy the Gtk-OSX boostrap moduleset over the jhbuild one.
 Instead, jhbuildrc provides a new command
 
