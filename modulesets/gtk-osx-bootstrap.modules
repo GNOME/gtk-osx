@@ -128,12 +128,13 @@
     </dependencies>
   </cmake>
 
-  <meson id="fontconfig" mesonargs="-Ddocs=disabled">
+  <autotools id="fontconfig" autogen-sh="configure"
+             autogenargs="--disable-docs">
     <branch repo="freedesktop" module="fontconfig/fontconfig" tag="2.13.1"/>
     <dependencies>
       <dep package="freetype"/>
     </dependencies>
-  </meson>
+  </autotools>
 
   <autotools id="hicolor-icon-theme" autogen-sh="configure"
 	     supports-non-srcdir-builds="no">
