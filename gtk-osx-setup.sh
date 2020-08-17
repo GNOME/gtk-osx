@@ -177,20 +177,20 @@ if test ! -d "$DEVPREFIX/libexec" ; then
 fi
 if test ! -f "$DEVPREFIX/libexec/run_jhbuild.py" ; then
     cat <<EOF > "$DEVPREFIX/libexec/run_jhbuild.py"
-#!/usr/bin/python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
 import sys
 import os
-import __builtin__
+import builtins
 sys.path.insert(0, '$DEV_SRC_ROOT/jhbuild')
 pkgdatadir = None
 datadir = None
 import jhbuild
 srcdir = os.path.abspath(os.path.join(os.path.dirname(jhbuild.__file__), '..'))
-__builtin__.__dict__['PKGDATADIR'] = pkgdatadir
-__builtin__.__dict__['DATADIR'] = datadir
-__builtin__.__dict__['SRCDIR'] = srcdir
+builtins.__dict__['PKGDATADIR'] = pkgdatadir
+builtins.__dict__['DATADIR'] = datadir
+builtins.__dict__['SRCDIR'] = srcdir
 
 import jhbuild.main
 jhbuild.main.main(sys.argv[1:])
