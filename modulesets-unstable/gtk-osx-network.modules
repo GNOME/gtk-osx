@@ -110,9 +110,8 @@
             module="rockdaboot/libpsl/releases/download/libpsl-0.21.0/libpsl-0.21.0.tar.gz"/>
   </autotools>
 
-  <autotools id="libsoup"
-             autogenargs="set_more_warnings=no --enable-introspection=no">
-    <branch revision="gnome-3-30"/> <!-- requires meson after this -->
+  <meson id="libsoup" mesonargs="-Dvapi=disabled">
+    <branch/>
     <dependencies>
       <dep package="libpsl"/>
       <dep package="python3"/>
@@ -121,7 +120,7 @@
       <dep package="glib"/>
       <dep package="glib-networking"/>
     </dependencies>
-  </autotools>
+  </meson>
 
   <autotools id="libwebp" autogen-sh="autoreconf">
     <branch repo="chromium" module="webm/libwebp"/>

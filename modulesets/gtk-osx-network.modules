@@ -111,7 +111,7 @@
             module="rockdaboot/libpsl/releases/download/libpsl-0.21.0/libpsl-0.21.0.tar.gz"/>
   </autotools>
 
-  <meson id="libsoup" mesonargs="-Dintrospection=disabled">
+  <meson id="libsoup" mesonargs="-Dvapi=disabled">
     <branch revision="gnome-3-34"/>
     <dependencies>
       <dep package="libpsl"/>
