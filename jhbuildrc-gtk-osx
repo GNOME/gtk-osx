@@ -605,7 +605,8 @@ if 'python3' in modules or 'meta-gtk-osx-python3' in modules:
     module_extra_env['pkg-config'] = {'PYTHON':sys.executable}
 else:
     _python_ver = sys.version_info.major * 10 + sys.version_info.minor
-    _python_install_path = os.path.join(prefix, 'lib', _python_ver, 'site-packages')
+    _python_install_path = os.path.join(prefix, 'lib', str(_python_ver),
+                                        'site-packages')
     append_autogenargs('libxml2',
                        '--with-python-install-dir=' + _python_install_path)
     environ_append('PYTHONPATH', _python_install_path, ':')
