@@ -71,10 +71,9 @@
   <!-- Building with p11-kit support breaks g-ir-scanner, for some weird reason. -->
   <autotools id="gnutls" autogen-sh="autoreconf"
              autogenargs="--disable-gtk-doc-html --without-p11-kit">
-    <branch repo="gnutls" version="3.6.12"
-            hash="sha256:bfacf16e342949ffd977a9232556092c47164bd26e166736cf3459a870506c4b"
-            module="gcrypt/gnutls/v3.6/gnutls-3.6.12.tar.xz">
-      <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/gnutls-yes-weak-imports.patch" strip="1"/>
+    <branch repo="gnutls" version="3.6.14"
+            hash="sha256:5630751adec7025b8ef955af4d141d00d252a985769f51b4059e5affa3d39d63"
+            module="gcrypt/gnutls/v3.6/gnutls-3.6.14.tar.xz">
     </branch>
     <dependencies>
       <dep package="libunistring"/>
@@ -85,21 +84,20 @@
   </autotools>
 
   <autotools id="libgcrypt" autogen-sh="configure">
-    <branch repo="gnutls" version="1.8.5"
-            hash="sha256:3b4a2a94cb637eff5bdebbcaf46f4d95c4f25206f459809339cdada0eb577ac3"
-            module="gcrypt/libgcrypt/libgcrypt-1.8.5.tar.bz2"/>
+    <branch repo="gnutls" version="1.8.6"
+            hash="sha256:626aafee84af9d2ce253d2c143dc1c0902dda045780cc241f39970fc60be05bc"
+            module="gcrypt/libgcrypt/libgcrypt-1.8.6.tar.bz2"/>
   </autotools>
 
-  <autotools id="glib-networking" autogen-sh="configure"
-             autogenargs="--without-ca-certificates set_more_warnings=no">
-    <branch module="glib-networking/2.50/glib-networking-2.50.0.tar.xz"
-            hash="sha256:3f1a442f3c2a734946983532ce59ed49120319fdb10c938447c373d5e5286bee"
-            version="2.50.0"/>
+  <meson id="glib-networking" mesonargs="-Dopenssl=enabled"
+         <branch module="glib-networking/2.65/glib-networking-2.65.1.tar.xz"
+            hash="sha256:45a4a22651f0268b45c26ab4a16282f06f2995fdaf5aa8d221e535099cdd7783"
+            version="2.65.1"/>
     <dependencies>
       <dep package="gnutls"/>
       <dep package="glib"/>
     </dependencies>
-  </autotools>
+  </meson>
 
   <autotools id="libpsl" autogen-sh='configure'>
     <branch repo="github-tarball" version="0.21.0"
