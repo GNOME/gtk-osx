@@ -96,7 +96,7 @@
             module="gcrypt/libgcrypt/libgcrypt-1.8.6.tar.bz2"/>
   </autotools>
 
-  <meson id="glib-networking" mesonargs="-Dopenssl=enabled"
+  <meson id="glib-networking" mesonargs="-Dopenssl=enabled">
     <branch/>
     <dependencies>
       <dep package="gnutls"/>

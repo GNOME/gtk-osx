@@ -89,7 +89,7 @@
             module="gcrypt/libgcrypt/libgcrypt-1.8.6.tar.bz2"/>
   </autotools>
 
-  <meson id="glib-networking" mesonargs="-Dopenssl=enabled"
+  <meson id="glib-networking" mesonargs="-Dopenssl=enabled">
          <branch module="glib-networking/2.65/glib-networking-2.65.1.tar.xz"
             hash="sha256:45a4a22651f0268b45c26ab4a16282f06f2995fdaf5aa8d221e535099cdd7783"
             version="2.65.1"/>
