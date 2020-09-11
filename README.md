@@ -53,10 +53,11 @@ customization.
 We tried for a long time to maintain compatibility with Mac OS X 10.4
 (Tiger), but the core Gnome projects decided at some point that this
 wasn't reasonable; Apple's changes to MacOS, particularly with the
-dropping of PPC support in Mac OS X 10.6 and the impending removal of
-32-bit support in 10.15 mean that it's not really feasible to both
-keep up with changes in Gnome and in MacOS and also to support older
-versions of MacOS.
+dropping of PPC support in Mac OS X 10.6, the removal of 32-bit
+support in 10.15, and the introduction of Apple Hardware (arm64) in
+macOS 11 mean that it's not really feasible to both keep up with
+changes in Gnome and in MacOS and also to support older versions of
+MacOS.
 
 The current policy is that we'll support whatever version of MacOS was
 released 5 years previously. In practice older systems will continue
@@ -66,7 +67,7 @@ notice* clean up ifdefs and such supporting older systems. If you
 insist on using an old system, check out the last version of Gtk-OSX
 that supports it and never pull again. Make sure that your
 configuration is set up to use local modulesets, the ones in the
-public repositories are frequently upgraded and are unlikely to work
+public repositories are freqquently upgraded and are unlikely to work
 on obsolete versions of MacOS.
 
 ## Python ##
@@ -76,10 +77,11 @@ everything else. In particular they have adopted a new build system,
 [meson](https://mesonbuild.com/), that requires Python3 and has
 dropped support for autotools builds in several of its core packages.
 
-Apple provided Python3 in Mac OS X 10.6 and dropped it in 10.7, so we
-need to arrange for Python 3 to be available for jhbuild to build
-meson files with as well as meson itself. Gtk-OSX takes care of that
-at installation. It relies on two Python standard packages,
+Apple provided Python3 in Mac OS X 10.6, it in 10.7, and brought it
+back in 10.15, so until 10.15 is the minumum supported version we need
+to arrange for it to be available for jhbuild to build meson
+files with as well as meson itself. Gtk-OSX takes care of that at
+installation. It relies on two Python standard packages,
 [Pipenv](https://docs.pipenv.org/) and
 [pyenv](https://github.com/pyenv/pyenv). In combination they create a
 Python3 [virtual
@@ -116,15 +118,8 @@ customize your setup after running it. The files are:
 
 gtk-osx-setup.sh will also copy /usr/bin/bash to $DEVPREFIX/bin and jhbuildrc-gtk-osx will set $SHELL to that path to work around SIP.
 
-The pipenv control file sets Python3.6 as its required version, and gtk-osx-setup.sh will create a pyenv virtual environment for that. If you don't already have Python3.6 in your $PATH it will offer to install the latest Python3.6 release for you.
+The pipenv control file sets Python3.8 as its required version, and gtk-osx-setup.sh will create a pyenv virtual environment for that. If you don't already have Python3.8 in your $PATH it will offer to install the latest Python3.8 release for you.
 
-Before you build there's one manual step needed: Python3 insists on
-setting `LINKFORSHARED: -Wl,stack_size,1000000 -framework
-CoreFoundation` even though stack_size is allowed only when compiling
-executables. It's in
-`$PYENV_ROOT/versions/3.6.x/lib/python3.6/_sysconfigdata_m-darwin.py`. Open
-that file with your programming editor and find and change it to
-`LINKFORSHARED: -framework CoreFoundation`.
 
 ## Bootstrapping ##
 
@@ -152,20 +147,3 @@ Note that in order to actually work the bootstrap.modules moduleset
 file must contain a meta-module named ```meta-bootstrap``` that
 depends on all of the modules that you want to build.
 
-
-## Build Problems ##
-
-I encountered two build problems while creating this:
-
-* gdk-pixbuf builds its modules as shared libraries instead of
-  loadable modules so gdk-pixbuf-query-loaders can't find them. Stop
-  the build, rename them (they're in
-  `$PREFIX/lib/gdk-pixbuf/2.10.0/loaders`) from
-  e.g. libpixbufloader-png.dylib to libpixbufloader-png.so and rerun
-  `gdk-pixbuf-query-loaders --update`.
-
-* Pango's meson passes a bogus `-framework CoreFoundation
-  ApplicationServices` arg at the end of the g-ir-scanner command, and
-  that fails. I couldn't figure out where it came from so I wound up
-  editing meson.build in the build directory and removing the argument
-  from the command.
