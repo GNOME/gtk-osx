@@ -105,15 +105,37 @@ configurations of WebKit.
     </dependencies>
   </meson>
 
-  <cmake id="freetype-no-harfbuzz" cmakeargs="-DCMAKE_DISABLE_FIND_PACKAGE_HarfBuzz=TRUE -DCMAKE_DISABLE_FIND_PACKAGE_BZip2=TRUE -D BUILD_SHARED_LIBS=true -D CMAKE_BUILD_TYPE=Release">
-    <branch module="freetype/freetype-2.10.2.tar.gz" version="2.10.2"
-            repo="sourceforge">
-      <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/freetype-install-name.patch" strip="1"/>
+  <meson id="harfbuzz-no-cairo" mesonargs="-Dcoretext=enabled -Ddocs=disabled">
+    <branch repo="github-tarball" version="2.7.1"
+            module="harfbuzz/harfbuzz/releases/download/2.7.1/harfbuzz-2.7.1.tar.xz" 
+            hash="sha256:e95ee43b6bd0d3d1307e2aacf0f9c0050e5baceb21988b367b833028114aa569">
     </branch>
     <dependencies>
+      <dep package="glib"/>
+    </dependencies>
+    <after>
+      <dep package="icu"/>
+      <dep package="icu55"/>
+    </after>
+  </meson>
+
+  <cmake id="freetype" cmakeargs="-DCMAKE_DISABLE_FIND_PACKAGE_BZip2=TRUE -D BUILD_SHARED_LIBS=true -D CMAKE_BUILD_TYPE=Release">
+    <branch module="freetype/freetype-2.10.2.tar.gz" version="2.10.2"
+            repo="sourceforge"/>
+    <dependencies>
+      <dep package="harfbuzz-no-cairo"/>
       <dep package="zlib"/>
     </dependencies>
   </cmake>
+
+  <autotools id="fontconfig" autogen-sh="configure"
+             autogenargs="--disable-docs">
+    <branch repo="fontconfig" version="2.13.1"
+            module="fontconfig-2.13.1.tar.bz2"/>
+    <dependencies>
+      <dep package="freetype"/>
+    </dependencies>
+  </autotools>
 
   <autotools id="pixman" autogenargs="--disable-gtk --disable-mmx"
              autogen-sh="configure">
@@ -137,11 +159,9 @@ configurations of WebKit.
     <dependencies>
       <dep package="pixman"/>
       <dep package="meta-gtk-osx-bootstrap"/>
-      <dep package="freetype-no-harfbuzz"/>
-    </dependencies>
-    <after>
+      <dep package="harfbuzz-no-cairo"/>
       <dep package="fontconfig"/>
-    </after>
+    </dependencies>
   </autotools>
 
   <meson id="gobject-introspection">
@@ -159,26 +179,24 @@ configurations of WebKit.
     </after>
   </meson>
 
-  <meson id="fribidi" mesonargs="-Ddocs=false">
-    <branch module="fribidi/fribidi/releases/download/v1.0.9/fribidi-1.0.9.tar.xz"
-            repo="github-tarball" version="1.0.9"/>
-    <dependencies>
-      <!--dep package="c2man"/ -->
-    </dependencies>
-  </meson>
-
   <meson id="harfbuzz" mesonargs="-Dcoretext=enabled -Ddocs=disabled">
     <branch repo="github-tarball" version="2.7.1"
             module="harfbuzz/harfbuzz/releases/download/2.7.1/harfbuzz-2.7.1.tar.xz" 
             hash="sha256:e95ee43b6bd0d3d1307e2aacf0f9c0050e5baceb21988b367b833028114aa569">
     </branch>
     <dependencies>
-      <dep package="freetype-no-harfbuzz"/>
-      <dep package="cairo"/>
-    </dependencies>
-    <after>
       <dep package="gobject-introspection"/>
-    </after>
+      <dep package="cairo"/>
+      <dep package="fontconfig"/>
+    </dependencies>
+  </meson>
+
+  <meson id="fribidi" mesonargs="-Ddocs=false">
+    <branch module="fribidi/fribidi/releases/download/v1.0.9/fribidi-1.0.9.tar.xz"
+            repo="github-tarball" version="1.0.9"/>
+    <dependencies>
+      <!--dep package="c2man"/ -->
+    </dependencies>
   </meson>
 
   <meson id="pango">
@@ -188,13 +206,12 @@ configurations of WebKit.
     <dependencies>
       <dep package="glib"/>
       <dep package="cairo"/>
-      <dep package="fribidi"/>
       <dep package="harfbuzz"/>
+      <dep package="fribidi"/>
     </dependencies>
     <after>
       <dep package="gobject-introspection"/>
       <dep package="meta-gtk-osx-bootstrap"/>
-      <dep package="freetype-no-harfbuzz"/>
     </after>
   </meson>
   
@@ -334,13 +351,14 @@ configurations of WebKit.
             hash="sha256:e6f6c5cbecc405bb945c7cd15061276035ae3173bbb3bb25e8a916779c7f69cc"/>
     <dependencies>
       <dep package="libcroco"/>
-      <dep package="freetype-no-harfbuzz"/>
     </dependencies>
     <after>
       <!-- Circular dependency if we depend on meta-gtk-osx or meta-gtk-osx-gtk3 -->
       <dep package="gtk+"/>
       <dep package="gtk+-3.0"/>
       <dep package="gtk+-3.14"/>
+      <dep package="freetype-no-harfbuzz"/>
+      <dep package="freetype"/>
     </after>
   </autotools>
 
@@ -351,5 +369,8 @@ configurations of WebKit.
       <dep package="librsvg"/>
     </dependencies>
   </autotools>
+
+  <!-- Null metamodule, provided so as not to break modules that use it. -->
+  <metamodule id="meta-gtk-osx-freetype" />
 
 </moduleset>

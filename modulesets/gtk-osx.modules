@@ -86,6 +86,33 @@
     </dependencies>
   </meson>
 
+  <meson id="harfbuzz-no-cairo" mesonargs="-Dcoretext=enabled -Ddocs=disabled">
+    <branch repo="github" module="harfbuzz/harfbuzz" tag="2.7.1"/>
+    <dependencies>
+      <dep package="glib"/>
+    </dependencies>
+    <after>
+      <dep package="icu"/>
+      <dep package="icu55"/>
+    </after>
+  </meson>
+
+  <cmake id="freetype" cmakeargs="-DCMAKE_DISABLE_FIND_PACKAGE_BZip2=TRUE -D BUILD_SHARED_LIBS=true -D CMAKE_BUILD_TYPE=Release">
+    <branch module="freetype/freetype2" repo="nongnu"/>
+    <dependencies>
+      <dep package="harfbuzz-no-cairo"/>
+      <dep package="zlib"/>
+    </dependencies>
+  </cmake>
+
+  <autotools id="fontconfig" autogen-sh="configure"
+             autogenargs="--disable-docs">
+    <branch repo="freedesktop" module="fontconfig/fontconfig" tag="2.13.1"/>
+    <dependencies>
+      <dep package="freetype"/>
+    </dependencies>
+  </autotools>
+
   <autotools id="pixman" autogenargs="--disable-gtk --disable-mmx">
     <branch repo="freedesktop" module="pixman" revision="0.38"/>
     <after>
@@ -93,23 +120,15 @@
     </after>
   </autotools>
 
-  <cmake id="freetype-no-harfbuzz" cmakeargs="-DCMAKE_DISABLE_FIND_PACKAGE_HarfBuzz=TRUE -DCMAKE_DISABLE_FIND_PACKAGE_BZip2=TRUE -D BUILD_SHARED_LIBS=true -D CMAKE_BUILD_TYPE=Release">
-    <branch module="freetype/freetype2" repo="nongnu" tag="VER-2-10-2"/>
-    <dependencies>
-      <dep package="zlib"/>
-    </dependencies>
-  </cmake>
-
   <autotools id="cairo"
              autogenargs="--enable-pdf --enable-quartz --disable-xlib --without-x">
     <branch repo="freedesktop" module="cairo" revision="1.16"/>
     <dependencies>
       <dep package="pixman"/>
       <dep package="meta-gtk-osx-bootstrap"/>
-      <dep package="freetype-no-harfbuzz"/>
+      <dep package="fontconfig"/>
     </dependencies>
     <after>
-      <dep package="fontconfig"/>
     </after>
   </autotools>
 
@@ -124,12 +143,12 @@
     </after>
   </meson>
 
-  <meson id="harfbuzz" mesonargs=""-Dcoretext=enabled -Ddocs=disabled">
+  <meson id="harfbuzz" mesonargs="-Dcoretext=enabled -Ddocs=disabled">
     <branch repo="github" module="harfbuzz/harfbuzz" tag="2.7.1"/>
     <dependencies>
-      <dep package="freetype-no-harfbuzz"/>
       <dep package="gobject-introspection"/>
       <dep package="cairo"/>
+      <dep package="fontconfig"/>
     </dependencies>
   </meson>
 
@@ -145,12 +164,11 @@
     <dependencies>
       <dep package="glib"/>
       <dep package="cairo"/>
-      <dep package="fribidi"/>
       <dep package="harfbuzz"/>
+      <dep package="fribidi"/>
     </dependencies>
     <after>
       <dep package="gobject-introspection"/>
-      <dep package="freetype-no-harfbuzz"/>
       <dep package="meta-gtk-osx-bootstrap"/>
     </after>
   </meson>
@@ -243,17 +261,21 @@
     <branch module="librsvg" tag="librsvg-2-40"/>
     <dependencies>
       <dep package="libcroco"/>
-      <dep package="freetype-no-harfbuzz"/>
     </dependencies>
     <after>
 <!-- Circular dependency if we depend on meta-gtk-osx or meta-gtk-osx-gtk3 -->
       <dep package="gtk+"/>
       <dep package="gtk+-3.0"/>
+      <dep package="freetype-no-harfbuzz"/>
+      <dep package="freetype"/>
     </after>
   </autotools>
 
   <autotools id="libcroco" autogenargs="--disable-Bsymbolic">
     <branch/>
   </autotools>
+
+  <!-- Null metamodule, provided so as not to break modules that use it. -->
+  <metamodule id="meta-gtk-osx-freetype" />
 
 </moduleset>

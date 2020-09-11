@@ -165,7 +165,6 @@
       <dep package="enchant"/>
       <dep package="icu"/>
       <dep package="libsoup"/>
-      <dep package="meta-gtk-osx-freetype"/>
     </dependencies>
     <after>
       <dep package="meta-gtk-osx-gtk"/>
@@ -188,7 +187,6 @@
       <dep package="enchant"/>
       <dep package="icu55"/>
       <dep package="libsoup"/>
-      <dep package="meta-gtk-osx-freetype"/>
     </dependencies>
     <after>
       <dep package="meta-gtk-osx-gtk3"/>
@@ -223,7 +221,6 @@
       <dep package="enchant"/>
       <dep package="icu"/>
       <dep package="libsoup"/>
-      <dep package="meta-gtk-osx-freetype"/>
     </dependencies>
     <after>
       <dep package="meta-gtk-osx-gtk3"/>

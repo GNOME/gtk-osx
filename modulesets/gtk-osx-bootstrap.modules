@@ -120,22 +120,6 @@
             hash="sha256:52a3f2209ab95559c1cf0a14f24338001f389615bf00e2585ef3dbc43ecf0a2e"/>
   </autotools>
 
-  <cmake id="freetype" cmakeargs="-DCMAKE_DISABLE_FIND_PACKAGE_BZip2=TRUE -D BUILD_SHARED_LIBS=true -D CMAKE_BUILD_TYPE=Release">
-    <branch module="freetype/freetype2" repo="nongnu"/>
-    <dependencies>
-      <dep package="harfbuzz"/>
-      <dep package="zlib"/>
-    </dependencies>
-  </cmake>
-
-  <autotools id="fontconfig" autogen-sh="configure"
-             autogenargs="--disable-docs">
-    <branch repo="freedesktop" module="fontconfig/fontconfig" tag="2.13.1"/>
-    <dependencies>
-      <dep package="freetype"/>
-    </dependencies>
-  </autotools>
-
   <autotools id="hicolor-icon-theme" autogen-sh="configure"
 	     supports-non-srcdir-builds="no">
     <branch module="hicolor-icon-theme-0.15.tar.xz" repo="icon-theme"
@@ -149,13 +133,6 @@
       <dep package="libtiff"/>
       <dep package="hicolor-icon-theme"/>
       <dep package="gtk-doc"/>
-    </dependencies>
-  </metamodule>
-
-  <metamodule id="meta-gtk-osx-freetype">
-    <dependencies>
-      <dep package="freetype"/>
-      <dep package="fontconfig"/>
     </dependencies>
   </metamodule>
 

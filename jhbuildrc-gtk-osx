@@ -482,6 +482,21 @@ disable_Werror = False
 # custom autogen-templates Gtk-OSX needs to use:"
 nice_build = False
 
+# Harfbuzz needs to be built twice, once before cairo and again after
+# gobject-introspection because cairo needs harfbuzz and
+# gobject-introspection needs cairo. The only way to get jhbuild to
+# run the configuration for harfbuzz the second time is to set
+# always_autogen to true.
+
+always_autogen = True
+
+# Freetype2 if left to itself will create an install name without the
+# path so none of the libraries that depend on it can link. Require
+# the install name to be an absolute path.
+
+module_cmakeargs["freetype"] = '-DCMAKE_INSTALL_NAME_DIR="' + os.path.join(prefix, 'lib') + '"'
+
+
 # Check and warn if jhbuild is started from within jhbuild, since that
 # will mess up environment variables, especially if different build
 # setups are used.
@@ -564,10 +579,6 @@ if 'XML_CATALOG_FILES' in os.environ:
     pass
 else:
     os.environ['XML_CATALOG_FILES'] = _pfx_cat_file
-
-#Freetype has -ansi added by its configure, but uses c99 code
-#
-append_autogenargs("freetype", 'CFLAGS="$CFLAGS -std=c99"')
 
 #GConf needs to be built static, overriding the generic autogenargs,
 #but including it in the module puts it in front of where autogenargs
