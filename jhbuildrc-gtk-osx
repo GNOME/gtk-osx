@@ -486,9 +486,9 @@ nice_build = False
 # gobject-introspection because cairo needs harfbuzz and
 # gobject-introspection needs cairo. The only way to get jhbuild to
 # run the configuration for harfbuzz the second time is to set
-# always_autogen to true.
+# alwaysautogen to true.
 
-always_autogen = True
+alwaysautogen = True
 
 # Freetype2 if left to itself will create an install name without the
 # path so none of the libraries that depend on it can link. Require

@@ -12,8 +12,6 @@
               href="http://www.ijg.org/files/"/>
   <repository type="tarball" name="libtiff"
 	      href="http://download.osgeo.org/"/>
-  <repository type="tarball" name="fontconfig"
-	      href="http://www.freedesktop.org/software/fontconfig/release/"/>
   <repository type="tarball" name="icon-theme"
 	      href="http://icon-theme.freedesktop.org/releases/"/>
   <repository type="tarball" name="xmlsoft.org"

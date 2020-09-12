@@ -12,6 +12,8 @@
               href="https://ftp.gnu.org/gnu/"/>
   <repository type="tarball" name="freedesktop"
               href="ftp://ftp.freedesktop.org/pub/"/>
+  <repository type="tarball" name="fontconfig"
+	      href="http://www.freedesktop.org/software/fontconfig/release/"/>
   <repository type="git" name="github" href="git://github.com/"/>
   <repository type="tarball" name="github-tarball" href="https://github.com/"/>
   <repository type="system" name="system"/>
