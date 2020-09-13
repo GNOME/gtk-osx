@@ -67,7 +67,7 @@ notice* clean up ifdefs and such supporting older systems. If you
 insist on using an old system, check out the last version of Gtk-OSX
 that supports it and never pull again. Make sure that your
 configuration is set up to use local modulesets, the ones in the
-public repositories are freqquently upgraded and are unlikely to work
+public repositories are frequently upgraded and are unlikely to work
 on obsolete versions of MacOS.
 
 ## Python ##
@@ -78,7 +78,7 @@ everything else. In particular they have adopted a new build system,
 dropped support for autotools builds in several of its core packages.
 
 Apple provided Python3 in Mac OS X 10.6, it in 10.7, and brought it
-back in 10.15, so until 10.15 is the minumum supported version we need
+back in 10.15, so until 10.15 is the minimum supported version we need
 to arrange for it to be available for jhbuild to build meson
 files with as well as meson itself. Gtk-OSX takes care of that at
 installation. It relies on two Python standard packages,
