@@ -88,8 +88,23 @@
     </dependencies>
   </meson>
 
+  <!-- To build Freetype *with* harfbuzz requires harfbuzz to be built
+       with freetype so we first have to build it *without* harfbuzz,
+       then build harfbuzz without cairo because cairo requires
+       harfbuzz. -->
+  <cmake id="freetype-no-harfbuzz" cmakeargs="-DCMAKE_DISABLE_FIND_PACKAGE_HarfBuzz=TRUE -DCMAKE_DISABLE_FIND_PACKAGE_BZip2=TRUE -D BUILD_SHARED_LIBS=true -D CMAKE_BUILD_TYPE=Release">
+    <branch module="freetype/freetype2" repo="nongnu"/>
+    <dependencies>
+      <dep package="zlib"/>
+    </dependencies>
+  </cmake>
+
   <meson id="harfbuzz-no-cairo" mesonargs="-Dcoretext=enabled -Ddocs=disabled">
     <branch repo="github" module="harfbuzz/harfbuzz"/>
+    <dependencies>
+      <dep package="glib"/>
+      <dep package="freetype-no-harfbuzz"/>
+    </dependencies>
     <after>
       <dep package="icu"/>
       <dep package="icu55"/>
@@ -118,6 +133,9 @@
     </after>
   </autotools>
 
+  <!-- cairo doesn't really need fontconfig, but if Pango finds
+       freetype it insists that it has to have fontconfig too and that
+       they are both built into cairo. -->
   <autotools id="cairo"
              autogenargs="--enable-pdf --enable-quartz --disable-xlib --without-x">
     <branch repo="freedesktop-jralls" module="cairo" />
@@ -141,6 +159,9 @@
     </after>
   </meson>
 
+  <!-- This harfbuzz doesn't really need cairo, but if Pango is going
+       to use introspection it requires harfbuzz to have
+       introspection, and gobject-introspection needs cairo. -->
   <meson id="harfbuzz" mesonargs="-Dcoretext=enabled -Ddocs=disabled">
     <branch repo="github" module="harfbuzz/harfbuzz"/>
     <dependencies>

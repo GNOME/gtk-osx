@@ -107,6 +107,18 @@ configurations of WebKit.
     </dependencies>
   </meson>
 
+  <!-- To build Freetype *with* harfbuzz requires harfbuzz to be built
+       with freetype so we first have to build it *without* harfbuzz,
+       then build harfbuzz without cairo because cairo requires
+       harfbuzz. -->
+  <cmake id="freetype-no-harfbuzz" cmakeargs="-DCMAKE_DISABLE_FIND_PACKAGE_HarfBuzz=TRUE -DCMAKE_DISABLE_FIND_PACKAGE_BZip2=TRUE -D BUILD_SHARED_LIBS=true -D CMAKE_BUILD_TYPE=Release">
+    <branch module="freetype/freetype-2.10.2.tar.gz" version="2.10.2"
+            repo="sourceforge"/>
+    <dependencies>
+      <dep package="zlib"/>
+    </dependencies>
+  </cmake>
+
   <meson id="harfbuzz-no-cairo" mesonargs="-Dcoretext=enabled -Ddocs=disabled">
     <branch repo="github-tarball" version="2.7.1"
             module="harfbuzz/harfbuzz/releases/download/2.7.1/harfbuzz-2.7.1.tar.xz" 
@@ -114,6 +126,7 @@ configurations of WebKit.
     </branch>
     <dependencies>
       <dep package="glib"/>
+      <dep package="freetype-no-harfbuzz"/>
     </dependencies>
     <after>
       <dep package="icu"/>
@@ -150,6 +163,9 @@ configurations of WebKit.
     </after>
   </autotools>
 
+  <!-- cairo doesn't really need fontconfig, but if Pango finds
+       freetype it insists that it has to have fontconfig too and that
+       they are both built into cairo. -->
   <autotools id="cairo"  autogen-sh="autoreconf"
              autogenargs="--enable-pdf --enable-quartz --disable-xlib --without-x">
     <branch module="cairo-1.16.0.tar.xz"  version="1.16.0"
@@ -353,14 +369,13 @@ configurations of WebKit.
             hash="sha256:e6f6c5cbecc405bb945c7cd15061276035ae3173bbb3bb25e8a916779c7f69cc"/>
     <dependencies>
       <dep package="libcroco"/>
+      <dep package="freetype"/>
     </dependencies>
     <after>
       <!-- Circular dependency if we depend on meta-gtk-osx or meta-gtk-osx-gtk3 -->
       <dep package="gtk+"/>
       <dep package="gtk+-3.0"/>
       <dep package="gtk+-3.14"/>
-      <dep package="freetype-no-harfbuzz"/>
-      <dep package="freetype"/>
     </after>
   </autotools>
 
