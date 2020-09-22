@@ -127,12 +127,8 @@ def osx_ver():
     vernum = exp.match(vstring)
     _osx_version = float(vernum.group(1)) - 4.0
     _target = '10.%d' % int(_osx_version)
-    
-    is_arm = _popen("uname -v").endswith("RELEASE_ARM64_T8020")
-    if is_arm:
-        _default_arch = "arm64"
-    else:
-        _default_arch = "x86_64"
+
+    _default_arch = _popen("uname -m")
 
 # Determine the XCode Version:
 def xcode_ver():
