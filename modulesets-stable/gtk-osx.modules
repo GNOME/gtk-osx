@@ -99,8 +99,8 @@ configurations of WebKit.
   </autotools>
 
   <meson id="glib" mesonargs="-Dinternal_pcre=true -Dlibmount=disabled">
-    <branch module="glib/2.64/glib-2.64.2.tar.xz"  version="2.64.2"
-            hash="sha256:9a2f21ed8f13b9303399de13a0252b7cbcede593d26971378ec6cb90e87f2277">
+    <branch module="glib/2.66/glib-2.66.0.tar.xz"  version="2.66.0"
+            hash="sha256:c5a66bf143065648c135da4c943d2ac23cce15690fc91c358013b2889111156c">
     </branch>
     <dependencies>
       <dep package="libffi"/>
@@ -218,8 +218,8 @@ configurations of WebKit.
   </meson>
 
   <meson id="pango">
-    <branch version="1.44.7" module="pango/1.44/pango-1.44.7.tar.xz"
-            hash="sha256:66a5b6cc13db73efed67b8e933584509f8ddb7b10a8a40c3850ca4a985ea1b1f">
+    <branch version="1.46.2" module="pango/1.46/pango-1.46.2.tar.xz"
+            hash="sha256:d89fab5f26767261b493279b65cfb9eb0955cd44c07c5628d36094609fc51841">
     </branch>
     <dependencies>
       <dep package="glib"/>
