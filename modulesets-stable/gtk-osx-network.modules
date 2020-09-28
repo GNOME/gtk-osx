@@ -48,6 +48,7 @@
     <branch repo="ftp.gnu.org" version="3.5.1"
             module="nettle/nettle-3.5.1.tar.gz"
             hash="sha256:75cca1998761b02e16f2db56da52992aef622bf55a3b45ec538bc2eedadc9419">
+      <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/libnettle-cc-for-build-return.patch" strip="1"/>
     </branch>
     <dependencies>
       <dep package="gmp"/>
