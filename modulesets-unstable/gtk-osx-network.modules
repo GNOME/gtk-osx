@@ -50,9 +50,8 @@
 
   <!-- Rudely demands TeX to build documentation -->
   <!-- Assembler files are missing md5-compress.asm for x86_64 -->
-  <autotools id="libnettle"
-             autogenargs="--disable-documentation --disable-assembler"
-             autogen-template="autoreconf -fis &amp;&amp; %(srcdir)s/configure --prefix %(prefix)s  %(autogenargs)s">
+  <autotools id="libnettle" autogen-sh="autoreconf"
+             autogenargs="--disable-documentation --disable-assembler">
     <branch repo="lysator" module="nettle/nettle.git" />
     <dependencies>
       <dep package="gmp"/>
