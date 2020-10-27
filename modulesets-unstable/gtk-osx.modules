@@ -119,12 +119,13 @@
     </dependencies>
   </cmake>
 
-  <meson id="fontconfig" mesonargs="-Ddocs=disabled">
+  <autotools id="fontconfig" autogen-sh="configure"
+             autogenargs="--disable-docs --with-default-fonts=/System/Library/Fonts --with-add-fonts=/Library/Fonts --with-cache-dir=home">
     <branch repo="freedesktop" module="fontconfig/fontconfig"/>
     <dependencies>
       <dep package="freetype"/>
     </dependencies>
-  </meson>
+  </autotools>
 
   <autotools id="pixman" autogenargs="--disable-gtk --disable-mmx">
     <branch repo="freedesktop" module="pixman/pixman" />
