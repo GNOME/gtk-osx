@@ -492,7 +492,7 @@ alwaysautogen = True
 
 module_cmakeargs["freetype"] = '-DCMAKE_INSTALL_NAME_DIR="' + os.path.join(prefix, 'lib') + '"'
 module_cmakeargs["freetype-no-harfbuzz"] = '-DCMAKE_INSTALL_NAME_DIR="' + os.path.join(prefix, 'lib') + '"'
-
+module_cmakeargs["webkit2gtk3"] = '-DCMAKE_INSTALL_NAME_DIR="' + os.path.join(prefix, 'lib') + '"'
 
 # Check and warn if jhbuild is started from within jhbuild, since that
 # will mess up environment variables, especially if different build

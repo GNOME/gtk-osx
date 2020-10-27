@@ -109,7 +109,7 @@
   </autotools>
 
   <meson id="libsoup" mesonargs="-Dvapi=disabled">
-    <branch/>
+    <branch />
     <dependencies>
       <dep package="libpsl"/>
       <dep package="python3"/>
@@ -200,26 +200,40 @@
       patches, this is untested.
     ENABLE_CREDENTIAL_STORAGE: Requires libsecret. No module for this yet.
     ENABLE_GEOLOCATION: Requires geoclue. No module for this yet.
-    ENABLE_OPENGL: Untested.
+    ENABLE_OPENGL: Known to not work with Quartz.
     USE_LIBNOTIFY: Requires libnotify. No module for this yet.
     USE_LIBHYPHEN: Requires libhyphen. No module for this yet.
   -->
-  <!--cmake id="webkit2gtk3"
-         cmakeargs="-DPORT=GTK -DENABLE_X11_TARGET=OFF -DENABLE_QUARTZ_TARGET=ON -DENABLE_TOOLS=ON -DENABLE_MINIBROWSER=ON -DENABLE_PLUGIN_PROCESS_GTK2=OFF -DENABLE_VIDEO=OFF -DENABLE_WEB_AUDIO=OFF -DENABLE_CREDENTIAL_STORAGE=OFF -DENABLE_GEOLOCATION=OFF -DENABLE_OPENGL=OFF -DUSE_LIBNOTIFY=OFF -DUSE_LIBHYPHEN=OFF -DCMAKE_CXX_FLAGS='-stdlib=libc++'"-->
-  <!--branch repo="webkit.org" module="webkitgtk-2.10.2.tar.xz" version="2.10.2">
-      <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/webkit-144561-quartz-backend.patch"
-             strip="1"/>
-      <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/webkit-144560-platform-fixes.patch"
-             strip="1"/>
-      <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/webkit-144785-link-injected-bundle.patch"
-             strip="1"/>
-      <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/webkit-148606-build-texture-mapper-gl-separately.patch"
-             strip="1"/>
-      <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/webkit-148607-include-stub-for-plugin-permission-request.patch"
-             strip="1"/>
-             </branch-->
   <cmake id="webkit2gtk3"
-         cmakeargs='-DPORT=GTK -DENABLE_X11_TARGET=OFF -DENABLE_QUARTZ_TARGET=ON -DENABLE_INTROSPECTION=OFF  -DENABLE_OPENGL=OFF -DENABLE_PLUGIN_PROCESS_GTK2=OFF -DENABLE_VIDEO=OFF -DENABLE_WEB_AUDIO=OFF -DENABLE_GEOLOCATION=OFF -DUSE_LIBNOTIFY=OFF -DUSE_LIBHYPHEN=OFF -DUSE_LIBSECRET=OFF -DENABLE_TOUCH_EVENTS=OFF -DCMAKE_CXX_FLAGS="$CXX_FLAGS -stdlib=libc++"'>
+         cmakeargs='-DPORT=GTK -DENABLE_X11_TARGET=OFF -DENABLE_QUARTZ_TARGET=ON -DENABLE_INTROSPECTION=OFF  -DENABLE_OPENGL=OFF -DENABLE_VIDEO=OFF -DENABLE_WEB_AUDIO=OFF -DENABLE_GEOLOCATION=OFF -DUSE_LIBNOTIFY=OFF -DUSE_LIBHYPHEN=OFF -DUSE_LIBSECRET=OFF -DENABLE_TOUCH_EVENTS=OFF  -DUSE_OPENJPEG=OFF -DUSE_WOFF2=OFF -DUSE_WPE_RENDERER=OFF -DENABLE_GRAPHICS_CONTEXT_GL=OFF -DCMAKE_CXX_FLAGS="-stdlib=libc++" -DCMAKE_MACOSX_RPATH=OFF'>
+    <branch repo="webkit.org" module="webkitgtk-2.28.2.tar.xz" version="2.28.2">
+      <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/patch-webkit2gtk-macports.diff" strip="0"/>
+      <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/patch-webkit2gtk-272-macports.diff" strip="0"/>
+      <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/patch-webkit2gtk-2282-unprotected-egl-changes.diff" strip="0"/>
+      <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/patch-webkit2gtk-2282-os-log-availability.diff" strip="0"/>
+      <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/patch-bundle-link-webcore.diff" strip="0"/>
+      <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/webkit-clang-fixes.patch" strip="0"/>
+    </branch>
+    <dependencies>
+      <dep package="libwebp"/>
+      <dep package="enchant"/>
+      <dep package="icu"/>
+      <dep package="libsoup"/>
+      <dep package="libgcrypt"/>
+    </dependencies>
+    <after>
+      <dep package="meta-gtk-osx-gtk3"/>
+      <dep package="meta-gtk-osx-gtk3.14"/>
+      <dep package="meta-gstreamer"/>
+    </after>
+  </cmake>
+
+  <!-- For updating to a new version start here. It won't build. Apply
+       the patches from the webkit2gtk3 module as a starting point and
+       then start playing whack-a-mole until it builds and works.
+  -->
+  <cmake id="webkit2gtk3-git"
+         cmakeargs='-DPORT=GTK -DENABLE_X11_TARGET=OFF -DENABLE_QUARTZ_TARGET=ON -DENABLE_INTROSPECTION=OFF  -DENABLE_OPENGL=OFF -DENABLE_VIDEO=OFF -DENABLE_WEB_AUDIO=OFF -DENABLE_GEOLOCATION=OFF -DUSE_LIBNOTIFY=OFF -DUSE_LIBHYPHEN=OFF -DUSE_LIBSECRET=OFF -DENABLE_TOUCH_EVENTS=OFF  -DUSE_OPENJPEG=OFF -DUSE_WOFF2=OFF -DUSE_WPE_RENDERER=OFF -DENABLE_GRAPHICS_CONTEXT_GL=OFF -DCMAKE_CXX_FLAGS="-stdlib=libc++" -DCMAKE_MACOSX_RPATH=OFF'>
     <branch repo="webkit-git" module= "WebKit.git" />
     <dependencies>
       <dep package="libwebp"/>
