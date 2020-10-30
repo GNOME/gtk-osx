@@ -216,6 +216,7 @@
       <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/patch-webkit2gtk-2282-os-log-availability.diff" strip="0"/>
       <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/patch-bundle-link-webcore.diff" strip="0"/>
       <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/webkit-clang-fixes.patch" strip="0"/>
+      <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/0001-Prevent-WebKitWebProcess-from-being-in-the-dock-or-p.patch" strip="1"/>
     </branch>
     <dependencies>
       <dep package="libwebp"/>
