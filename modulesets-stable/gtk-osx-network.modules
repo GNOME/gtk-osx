@@ -218,11 +218,10 @@
       <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/patch-webkit2gtk-2282-unprotected-egl-changes.diff" strip="0"/>
       <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/patch-webkit2gtk-2282-os-log-availability.diff" strip="0"/>
       <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/patch-bundle-link-webcore.diff" strip="0"/>
-      <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/webkit-clang-fixes.patch" strip="0"/>
-      <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/0001-Prevent-WebKitWebProcess-from-being-in-the-dock-or-p.patch" strip="1"/>
+      <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/WebKit2Gtk3-2.30.2-GUniquePtrGtk.patch" strip="1"/>
+      <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/WebKit2Gtk3-2.30.2-Prevent-WebKitWebProcess-from-being-in-.patch" strip="1"/>
       <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/WebKit2Gtk3-2.30.1-Disable-AUDIT_TOKEN-for-Gtk-builds.patch" strip="1"/>
       <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/WebKit2Gtk3-2.30.1-Disable-WebKitGenericCueAPIEnabled.patch" strip="1"/>
-      <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/WebKit2Gtk3-2.30.1-Enable-and-fix-build-of-JSCustomXPathNSResolver.patch" strip="1"/>
       <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/WebKit2Gtk3-2.30.1-Extend-UNIX_DOMAIN_SOCKETS-precedence-over-Mac-and-Win.patch" strip="1"/>
       <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/WebKit2Gtk3-2.30.1-Fix-Socket-signal-defines-for-Darwin-and-maybe-BSD.patch" strip="1"/>
       <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/WebKit2Gtk3-2.30.1-Force-FindICU-instead-of-inserting-heade.patch" strip="1"/>
