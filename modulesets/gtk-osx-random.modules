@@ -6,7 +6,7 @@
               href="https://gitlab.gnome.org/GNOME"/>
   <repository type="git" name="github" href="git://github.com/"/>
   <repository type="tarball" name="ftp.gnome.org"
-	      href="ftp://ftp.gnome.org/pub/gnome/sources/"/>
+	      href="http://download.gnome.org/sources/"/>
   <repository type="tarball" name="ftp.gnu.org"
 	      href="https://ftp.gnu.org/gnu/"/>
   <repository type="git" name="git.freedesktop.org"
