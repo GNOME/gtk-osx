@@ -67,21 +67,6 @@
     <branch repo="git.gnupg.org" module="libgpg-error"/>
   </autotools>
 
-  <autotools id="libgcrypt" autogen-sh="configure" autogenargs="--disable-asm">
-    <!-- Git version requires fig2dev, an X11 utility, until disable-doc option
-    is available, currently only on master.
-    <branch repo="git.gnupg.org" revision="LIBGCRYPT_1_6_BRANCH"
-            module="libgcrypt"/> -->
-    <branch repo="ftp.gnupg.org" version="1.7.6"
-            module="gcrypt/libgcrypt/libgcrypt-1.7.6.tar.bz2">
-            <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/libgcrypt-cflags-for-build.patch"
-       strip="1"/>
-    </branch>
-    <dependencies>
-      <dep package="libgpg-error" />
-    </dependencies>
-  </autotools>
-
   <autotools id="gnome-keyring" autogenargs="--disable-pam --without-root-certs">
     <branch revision="gnome-3-20"/>
     <dependencies>

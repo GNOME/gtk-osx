@@ -66,15 +66,6 @@
     <branch repo='git.gnupg.org' module="libgpg-error" />
   </autotools>
 
-  <autotools id="libgcrypt" autogenargs="--disable-asm --disable-doc"
-            autogen-template="./autogen.sh &amp;&amp; ./configure --prefix %(prefix)s  %(autogenargs)s">
-    <branch repo="git.gnupg.org" module="libgcrypt"/>
-    <dependencies>
-      <dep package="libgpg-error" />
-    </dependencies>
-  </autotools>
-
-
    <autotools id="gnome-keyring"
 	      autogenargs="--disable-pam --without-root-certs">
     <branch/>
