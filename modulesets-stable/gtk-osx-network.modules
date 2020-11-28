@@ -212,19 +212,11 @@
     USE_WPE_RENDERER: For embedded systems, not Macs.  -->
   <cmake id="webkit2gtk3"
          cmakeargs='-DPORT=GTK -DENABLE_X11_TARGET=OFF -DENABLE_QUARTZ_TARGET=ON -DENABLE_MINIBROWSER=ON -DENABLE_INTROSPECTION=OFF  -DUSE_SYSTEMD=OFF -DENABLE_VIDEO=OFF -DENABLE_WEB_AUDIO=OFF -DENABLE_GEOLOCATION=OFF -DUSE_LIBNOTIFY=OFF -DUSE_LIBHYPHEN=OFF -DUSE_LIBSECRET=OFF -DENABLE_TOUCH_EVENTS=OFF  -DUSE_OPENJPEG=OFF -DUSE_WOFF2=OFF -DUSE_WPE_RENDERER=OFF -DENABLE_GRAPHICS_CONTEXT_GL=OFF -DCMAKE_CXX_FLAGS="-stdlib=libc++" -DCMAKE_MACOSX_RPATH=OFF'>
-    <branch repo="webkit.org" module="webkitgtk-2.30.2.tar.xz" version="2.30.2">
-      <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/patch-webkit2gtk-macports.diff" strip="0"/>
-      <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/patch-webkit2gtk-272-macports.diff" strip="0"/>
-      <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/patch-webkit2gtk-2282-unprotected-egl-changes.diff" strip="0"/>
-      <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/patch-webkit2gtk-2282-os-log-availability.diff" strip="0"/>
-      <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/patch-bundle-link-webcore.diff" strip="0"/>
-      <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/WebKit2Gtk3-2.30.2-GUniquePtrGtk.patch" strip="1"/>
-      <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/WebKit2Gtk3-2.30.2-Prevent-WebKitWebProcess-from-being-in-.patch" strip="1"/>
-      <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/WebKit2Gtk3-2.30.1-Disable-AUDIT_TOKEN-for-Gtk-builds.patch" strip="1"/>
-      <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/WebKit2Gtk3-2.30.1-Disable-WebKitGenericCueAPIEnabled.patch" strip="1"/>
-      <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/WebKit2Gtk3-2.30.1-Extend-UNIX_DOMAIN_SOCKETS-precedence-over-Mac-and-Win.patch" strip="1"/>
-      <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/WebKit2Gtk3-2.30.1-Fix-Socket-signal-defines-for-Darwin-and-maybe-BSD.patch" strip="1"/>
+    <branch repo="webkit.org" module="webkitgtk-2.30.3.tar.xz" version="2.30.3">
+      <patch file="file:///Users/john/Development/GTK-OSX/gtk-osx-build/patches/WebKit2Gtk3-2.30.0-cumulative.patch" strip="1"/>
       <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/WebKit2Gtk3-2.30.1-Force-FindICU-instead-of-inserting-heade.patch" strip="1"/>
+      <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/WebKit2Gtk3-2.30.1-Extend-UNIX_DOMAIN_SOCKETS-precedence-over-Mac-and-Win.patch" strip="1"/>
+      <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/WebKit2Gtk3-2.30.1-Disable-AUDIT_TOKEN-for-Gtk-builds.patch" strip="1"/>
     </branch>
     <dependencies>
       <dep package="libwebp"/>
