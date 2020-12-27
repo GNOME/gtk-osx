@@ -119,7 +119,7 @@ configurations of WebKit.
     </dependencies>
   </cmake>
 
-  <meson id="harfbuzz-no-cairo" mesonargs="-Dcoretext=enabled -Ddocs=disabled">
+  <meson id="harfbuzz-no-cairo" mesonargs="-Dcoretext=enabled -Ddocs=disabled -Dbenchmark=disabled">
     <branch repo="github-tarball" version="2.7.1"
             module="harfbuzz/harfbuzz/releases/download/2.7.1/harfbuzz-2.7.1.tar.xz" 
             hash="sha256:e95ee43b6bd0d3d1307e2aacf0f9c0050e5baceb21988b367b833028114aa569">
@@ -197,7 +197,7 @@ configurations of WebKit.
     </after>
   </meson>
 
-  <meson id="harfbuzz" mesonargs="-Dcoretext=enabled -Ddocs=disabled">
+  <meson id="harfbuzz" mesonargs="-Dcoretext=enabled -Ddocs=disabled -Dbenchmark=disabled">
     <branch repo="github-tarball" version="2.7.1"
             module="harfbuzz/harfbuzz/releases/download/2.7.1/harfbuzz-2.7.1.tar.xz" 
             hash="sha256:e95ee43b6bd0d3d1307e2aacf0f9c0050e5baceb21988b367b833028114aa569">
