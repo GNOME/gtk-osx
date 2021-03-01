@@ -98,7 +98,7 @@ PIP=`which pip`
 if test ! -x "`eval echo $PIP`" ; then
     mv=`python --version 2>&1 | cut -b 12-13`
     if test $mv -lt 11 ; then
-        curl https://bootstrap.pypa.io/get-pip.py -o "$DEVPREFIX/get-pip.py"
+        curl https://bootstrap.pypa.io/2.7/get-pip.py -o "$DEVPREFIX/get-pip.py"
         python "$DEVPREFIX/get-pip.py" --user
         rm "$DEVPREFIX/get-pip.py"
     else
