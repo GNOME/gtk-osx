@@ -71,7 +71,7 @@
 
 
   <autotools id="automake" autogen-sh="configure" bootstrap="true">
-    <branch repo="ftp.gnu.org" version="1.16"
+    <branch repo="ftp.gnu.org" version="1.16.2"
             module="automake/automake-1.16.2.tar.xz"/>
     <dependencies>
       <dep package="autoconf"/>
