@@ -24,8 +24,8 @@
               href="http://www.colm.net/files/ragel/"/>
 
   <autotools id='readline' autogen-sh="configure">
-    <branch repo="ftp.gnu.org" module="readline/readline-8.0.tar.gz"
-      version="8.0">
+    <branch repo="ftp.gnu.org" module="readline/readline-8.1.tar.gz"
+      version="8.1">
     </branch>
   </autotools>
 
