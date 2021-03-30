@@ -213,7 +213,6 @@ Libglade itself is deprecated. This is the last release. -->
     <branch repo="git.gnome.org" module="goocanvas" checkoutdir="goocanvas2"/>
     <after>
       <dep package="gtk+-3.0"/>
-      <dep package="gtk+-3.14"/>
     </after>
   </autotools>
 
