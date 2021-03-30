@@ -218,4 +218,10 @@
     </branch>
   </autotools>
 
+  <autotools id='readline' autogen-sh="configure">
+    <branch repo="ftp.gnu.org" module="readline/readline-8.1.tar.gz"
+      version="8.1">
+    </branch>
+  </autotools>
+
 </moduleset>

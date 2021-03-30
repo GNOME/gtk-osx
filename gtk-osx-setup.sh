@@ -111,7 +111,7 @@ if test ! -x "`eval echo $PIP`" ; then
 fi
 
 # Install pipenv
-$PIP install --upgrade --user pipenv==2018.10.09
+$PIP install --upgrade --user pipenv==2020.11.15
 pip_remove typing
 PIPENV="$PYTHONUSERBASE/bin/pipenv"
 
@@ -121,7 +121,7 @@ if test ! -d "$DEV_SRC_ROOT/jhbuild/.git" ; then
     cd "$DEV_SRC_ROOT/jhbuild"
 else #Get the latest if it's already installed
     cd "$DEV_SRC_ROOT/jhbuild"
-    git reset --hard 3.36.0
+    git reset --hard 3.38.0
 fi
 
 # Install Ninja
