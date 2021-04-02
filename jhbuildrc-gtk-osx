@@ -620,6 +620,8 @@ else:
     environ_append('PYTHONPATH', _python_install_path, ':')
     os.environ['PYTHON'] = sys.executable
 
+module_extra_env["pygtk"] = {'PYTHON':os.path.join(prefix, 'bin', 'python2')}
+module_extra_env["pygobject2"] = {'PYTHON':os.path.join(prefix, 'bin', 'python2')}
 # Unset this so we don't mess with the check for not starting
 # recursively.
 os.unsetenv("JHB")
