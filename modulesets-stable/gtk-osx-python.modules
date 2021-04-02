@@ -16,19 +16,19 @@
   <repository type="tarball" name="github-tarball"
               href="https://github.com"/>
 
-  <metamodule id="meta-gtk-osx-python">
+  <metamodule id="meta-gtk-osx-python2-gtk2">
     <dependencies>
       <dep package="pycairo"/>
-      <dep package="pygobject"/>
+      <dep package="pygobject2"/>
       <dep package="pygtk"/>
       <dep package="gtk-mac-integration-python"/>
     </dependencies>
   </metamodule>
 
-  <metamodule id="meta-gtk-osx-python-gtk3">
+  <metamodule id="meta-gtk-osx-python2-gtk3">
     <dependencies>
       <dep package="pycairo"/>
-      <dep package="pygobject3"/>
+      <dep package="pygobject3-2"/>
       <dep package="gtk-mac-integration-python"/>
     </dependencies>
     <after>
@@ -125,7 +125,7 @@
     </dependencies>
     <after>
       <dep package="python3"/>
-      <dep package="python"/>
+      <dep package="python2"/>
       <dep package="meta-gtk-osx-gtk3"/>
       <dep package="meta-gtk-osx-gtk2"/>
     </after>
@@ -135,7 +135,7 @@
      with later versions it installs as pygobject2 and PyGObject 3
      installs as pygobject3. Introspection is disabled here, because
      gir-scanner isn't smart enough to co-install them. -->
-  <autotools id="pygobject" autogen-sh="configure"
+  <autotools id="pygobject2" autogen-sh="configure"
 	     autogenargs="--disable-introspection"
 	     supports-non-srcdir-builds="no">
     <branch version="2.28.7" module="pygobject/2.28/pygobject-2.28.7.tar.xz"
@@ -145,10 +145,10 @@
                      strip="1"/>
     </branch>
     <dependencies>
-      <dep package="meta-gtk-osx-core"/>
+      <dep package="meta-gtk-osx-gtk2"/>
     </dependencies>
     <after>
-      <dep package="python"/>
+      <dep package="python2"/>
     </after>
   </autotools>
 
@@ -159,7 +159,7 @@
       <dep package="pycairo"/>
     </dependencies>
     <after>
-      <dep package="python"/>
+      <dep package="python2"/>
       <dep package="python3"/>
     </after>
    </meson>
@@ -171,10 +171,11 @@
             hash="sha256:cd1c1ea265bd63ff669e92a2d3c2a88eb26bcd9e5363e0f82c896e649f206912">
       <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/pygtk-libtool.patch" strip="1"/>
       <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/pygtk-pango1.4x.patch" strip="1"/>
+      <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/pygtk-pango-decls.patch" strip="1"/>
     </branch>
     <dependencies>
       <dep package="pygobject"/>
-      <dep package="meta-gtk-osx-core"/>
+      <dep package="meta-gtk-osx-gtk2"/>
       <dep package="pycairo"/>
     </dependencies>
     <after>

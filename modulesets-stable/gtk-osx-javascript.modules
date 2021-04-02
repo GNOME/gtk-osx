@@ -38,7 +38,7 @@
       <dep package="nspr"/>
     </dependencies>
     <after>
-      <dep package="python"/>
+      <dep package="python2"/>
       <dep package="zlib"/>
     </after>
   </autotools>

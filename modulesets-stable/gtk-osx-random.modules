@@ -50,7 +50,7 @@ Libglade itself is deprecated. This is the last release. -->
     </branch>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
-      <dep package="meta-gtk-osx-core"/>
+      <dep package="meta-gtk-osx-gtk2"/>
     </after>
   </autotools>
 
@@ -60,7 +60,7 @@ Libglade itself is deprecated. This is the last release. -->
             hash="sha256:13f4a3f99d983bf76e8d9dd736021ecc95f53ec1f9582423aa4b4be87455aa07"/>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
-      <dep package="meta-gtk-osx-core"/>
+      <dep package="meta-gtk-osx-gtk2"/>
     </after>
   </autotools>
 
@@ -72,7 +72,7 @@ Libglade itself is deprecated. This is the last release. -->
       <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/libunique-663913-sockaddr-un.patch" strip="1"/>
     </branch>
     <dependencies>
-      <dep package="gtk+"/>
+      <dep package="gtk+-2.0"/>
     </dependencies>
   </autotools>
 
@@ -86,7 +86,7 @@ Libglade itself is deprecated. This is the last release. -->
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
       <dep package="meta-gtk-osx-themes"/>
-      <dep package="meta-gtk-osx-core"/>
+      <dep package="meta-gtk-osx-gtk2"/>
     </after>
     <dependencies>
       <dep package="WebKit"/>
@@ -120,7 +120,7 @@ Libglade itself is deprecated. This is the last release. -->
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
       <dep package="meta-gtk-osx-themes"/>
-      <dep package="meta-gtk-osx-core"/>
+      <dep package="meta-gtk-osx-gtk2"/>
     </after>
   </autotools>
 
@@ -150,7 +150,7 @@ Libglade itself is deprecated. This is the last release. -->
     </branch>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
-      <dep package="meta-gtk-osx-core"/>
+      <dep package="meta-gtk-osx-gtk2"/>
     </after>
   </autotools>
 
@@ -201,7 +201,7 @@ Libglade itself is deprecated. This is the last release. -->
     <branch module="goocanvas/1.0/goocanvas-1.0.0.tar.bz2" version="1.0.0"
 	    hash="sha256:1c072ef88567cad241fb4addee26e9bd96741b1503ff736d1c152fa6d865711e"/>
     <dependencies>
-      <dep package="gtk+"/>
+      <dep package="gtk+-2.0"/>
     </dependencies>
   </autotools>
 
@@ -222,7 +222,7 @@ Libglade itself is deprecated. This is the last release. -->
 	      version="2.3.21" hash="sha256:fdc11e74c10fc9ffe4188537e2b370c0abacca7d89021d4d303afdf7fd7476fa"/>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
-      <dep package="meta-gtk-osx-core"/>
+      <dep package="meta-gtk-osx-gtk2"/>
     </after>
   </autotools>
 

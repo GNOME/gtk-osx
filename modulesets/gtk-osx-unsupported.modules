@@ -70,7 +70,7 @@
   <autotools id="gnome-keyring" autogenargs="--disable-pam --without-root-certs">
     <branch revision="gnome-3-20"/>
     <dependencies>
-      <dep package="gtk+"/>
+      <dep package="gtk+-2.0"/>
       <dep package="libgcrypt"/>
       <dep package="libtasn1"/>
     </dependencies>

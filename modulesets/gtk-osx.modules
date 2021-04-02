@@ -53,9 +53,9 @@
     <branch repo="system"/>
   </systemmodule>
 
-  <metamodule id="meta-gtk-osx-core">
+  <metamodule id="meta-gtk-osx-gtk2">
     <dependencies>
-      <dep package="gtk+"/>
+      <dep package="gtk+-2.0"/>
       <dep package="gtk-mac-integration"/>
     </dependencies>
     <after>
@@ -223,7 +223,7 @@
     </dependencies>
   </autotools>
 
-  <autotools id="gtk+" autogenargs="--with-gdktarget=quartz --enable-introspection=no --enable-quartz-relocation --disable-visibility">
+  <autotools id="gtk+-2.0" autogenargs="--with-gdktarget=quartz --enable-introspection=no --enable-quartz-relocation --disable-visibility">
     <branch module="gtk" revision="gtk-2-24"/>
     <dependencies>
       <dep package="glib"/>
@@ -259,7 +259,7 @@
     <dependencies>
     </dependencies>
     <after>
-      <dep package="gtk+"/>
+      <dep package="gtk+-2.0"/>
       <dep package="gtk+-3.0"/>
       <dep package="meta-gtk-osx-bootstrap"/>
     </after>
@@ -283,7 +283,7 @@
     </dependencies>
     <after>
 <!-- Circular dependency if we depend on meta-gtk-osx or meta-gtk-osx-gtk3 -->
-      <dep package="gtk+"/>
+      <dep package="gtk+-2.0"/>
       <dep package="gtk+-3.0"/>
     </after>
   </autotools>

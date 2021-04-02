@@ -9,9 +9,9 @@
   <repository type="git" name="cairographics" 
               href="git://anongit.freedesktop.org/git/"/>
 
-  <metamodule id="meta-gtk-osx-gtkmm">
+  <metamodule id="meta-gtk-osx-gtkmm2">
     <dependencies>
-      <dep package="gtkmm"/>
+      <dep package="gtkmm2"/>
     </dependencies>
   </metamodule>
 
@@ -111,19 +111,19 @@
     </dependencies>
   </autotools>
 
-  <autotools id="gtkmm" >
+  <autotools id="gtkmm2" >
     <branch revision="gtkmm-2-24"/>
     <dependencies>
       <dep package="glibmm3"/>
       <dep package="cairomm3"/>
       <dep package="pangomm3"/>
       <dep package="atkmm"/>
-      <dep package="gtk+"/>
+      <dep package="gtk+-2.0"/>
     </dependencies>
   </autotools>
 
   <autotools id="gtkmm3">
-    <branch module="gtkmm" revision="gtkmm-3-22"/>
+    <branch module="gtkmm2" revision="gtkmm-3-22"/>
     <dependencies>
       <dep package="glibmm3"/>
       <dep package="cairomm3"/>
@@ -134,7 +134,7 @@
   </autotools>
 
   <autotools id="gtkmm4" >
-    <branch module="gtkmm"/>
+    <branch module="gtkmm2"/>
     <dependencies>
       <dep package="glibmm"/>
       <dep package="cairomm"/>

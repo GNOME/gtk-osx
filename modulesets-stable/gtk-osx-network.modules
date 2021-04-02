@@ -20,7 +20,7 @@
   <!-- Builds last version of WebKitGTK that supported GTK 2.x -->
   <metamodule id="meta-gtk-osx-webkit">
     <dependencies>
-      <dep package="meta-gtk-osx-core"/>
+      <dep package="meta-gtk-osx-gtk2"/>
       <dep package="webkit"/>
     </dependencies>
   </metamodule>

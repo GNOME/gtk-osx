@@ -60,9 +60,9 @@ configurations of WebKit.
     <branch repo="system"/>
   </systemmodule>
 
-  <metamodule id="meta-gtk-osx-core">
+  <metamodule id="meta-gtk-osx-gtk2">
     <dependencies>
-      <dep package="gtk+"/>
+      <dep package="gtk+-2.0"/>
       <dep package="gtk-mac-integration"/>
     </dependencies>
     <after>
@@ -245,7 +245,8 @@ configurations of WebKit.
     </after>
   </meson>
 
-  <autotools id="gtk+" autogen-sh="autoreconf"
+  <!-- gtk2 has reached its end-of-life as of December 2020 and 2.24.33 is the final release. -->
+  <autotools id="gtk+-2.0" autogen-sh="autoreconf"
              autogenargs="--with-gdktarget=quartz --enable-quartz-relocation --disable-introspection --disable-visibility">
     <branch module="gtk+/2.24/gtk+-2.24.32.tar.xz" version="2.24.32"
             hash="sha256:b6c8a93ddda5eabe3bfee1eb39636c9a03d2a56c7b62828b359bf197943c582e">
@@ -313,7 +314,7 @@ configurations of WebKit.
     <dependencies>
     </dependencies>
     <after>
-      <dep package="gtk+"/>
+      <dep package="gtk+-2.0"/>
       <dep package="gtk+-3.0"/>
       <dep package="gtk+-3.14"/>
       <dep package="meta-gtk-osx-bootstrap"/>
@@ -338,7 +339,7 @@ configurations of WebKit.
     </dependencies>
     <after>
       <!-- Circular dependency if we depend on meta-gtk-osx or meta-gtk-osx-gtk3 -->
-      <dep package="gtk+"/>
+      <dep package="gtk+-2.0"/>
       <dep package="gtk+-3.0"/>
       <dep package="gtk+-3.14"/>
     </after>

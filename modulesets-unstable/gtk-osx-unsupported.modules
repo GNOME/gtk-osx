@@ -70,7 +70,7 @@
 	      autogenargs="--disable-pam --without-root-certs">
     <branch/>
     <dependencies>
-      <dep package="gtk+"/>
+      <dep package="gtk+-2.0"/>
       <dep package="libgcrypt"/>
       <dep package="libtasn1"/>
     </dependencies>

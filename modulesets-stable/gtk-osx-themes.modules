@@ -48,7 +48,7 @@
     <branch module="gtk-engines/2.20/gtk-engines-2.20.2.tar.bz2"
             version="2.20.2" hash="sha256:15b680abca6c773ecb85253521fa100dd3b8549befeecc7595b10209d62d66b5"/>
     <after>
-      <dep package="meta-gtk-osx-core"/>
+      <dep package="meta-gtk-osx-gtk2"/>
     </after>
   </autotools>
 

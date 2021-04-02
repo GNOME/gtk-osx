@@ -44,7 +44,7 @@
   <autotools id="gtk-engines">
     <branch revision="gtk-engines-2-22" repo="archive.gnome.org"/>
     <after>
-      <dep package="meta-gtk-osx-core"/>
+      <dep package="meta-gtk-osx-gtk2"/>
     </after>
   </autotools>
 

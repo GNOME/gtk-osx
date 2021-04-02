@@ -46,7 +46,7 @@
     <branch />
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
-      <dep package="meta-gtk-osx-core"/>
+      <dep package="meta-gtk-osx-gtk2"/>
     </after>
   </autotools>
 
@@ -61,7 +61,7 @@
             hash="sha256:13f4a3f99d983bf76e8d9dd736021ecc95f53ec1f9582423aa4b4be87455aa07"/>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
-      <dep package="meta-gtk-osx-core"/>
+      <dep package="meta-gtk-osx-gtk2"/>
     </after>
   </autotools>
 
@@ -80,7 +80,7 @@
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
       <dep package="meta-gtk-osx-themes"/>
-      <dep package="meta-gtk-osx-core"/>
+      <dep package="meta-gtk-osx-gtk2"/>
     </after>
     <dependencies>
       <dep package="webkit2gtk3"/>
@@ -96,7 +96,7 @@
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
       <dep package="meta-gtk-osx-themes"/>
-      <dep package="meta-gtk-osx-core"/>
+      <dep package="meta-gtk-osx-gtk2"/>
     </after>
   </autotools>
 
@@ -116,7 +116,7 @@
     <branch />
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
-      <dep package="meta-gtk-osx-core"/>
+      <dep package="meta-gtk-osx-gtk2"/>
     </after>
   </autotools>
 
@@ -150,7 +150,7 @@
     <branch />
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
-      <dep package="meta-gtk-osx-core"/>
+      <dep package="meta-gtk-osx-gtk2"/>
     </after>
     <dependencies>
       <dep package="lcms"/>
@@ -181,7 +181,7 @@
     <branch repo="git.freedesktop.org" module="poppler/poppler" />
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
-      <dep package="meta-gtk-osx-core"/>
+      <dep package="meta-gtk-osx-gtk2"/>
     </after>
   </autotools>
 
@@ -196,7 +196,7 @@
   <autotools id="goocanvas">
     <branch/>
     <dependencies>
-      <dep package="gtk+"/>
+      <dep package="gtk+-2.0"/>
     </dependencies>
   </autotools>
 

@@ -40,7 +40,7 @@
     <branch tag="LIBGLADE_2_6_4"/>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
-      <dep package="meta-gtk-osx-core"/>
+      <dep package="meta-gtk-osx-gtk2"/>
     </after>
   </autotools>
 
@@ -65,7 +65,7 @@
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
       <dep package="meta-gtk-osx-themes"/>
-      <dep package="meta-gtk-osx-core"/>
+      <dep package="meta-gtk-osx-gtk2"/>
     </after>
     <dependencies>
       <dep package="WebKit"/>
@@ -94,7 +94,7 @@
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
       <dep package="meta-gtk-osx-themes"/>
-      <dep package="meta-gtk-osx-core"/>
+      <dep package="meta-gtk-osx-gtk2"/>
     </after>
   </autotools>
 
@@ -103,7 +103,7 @@
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
       <dep package="meta-gtk-osx-themes"/>
-      <dep package="meta-gtk-osx-core"/>
+      <dep package="meta-gtk-osx-gtk2"/>
     </after>
   </autotools>
 
@@ -111,7 +111,7 @@
     <branch revision="gnome-2-30"/>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
-      <dep package="meta-gtk-osx-core"/>
+      <dep package="meta-gtk-osx-gtk2"/>
     </after>
   </autotools>
 
@@ -153,7 +153,7 @@
     <branch revision="gimp-2-8"/>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
-      <dep package="meta-gtk-osx-core"/>
+      <dep package="meta-gtk-osx-gtk2"/>
     </after>
     <dependencies>
       <dep package="lcms"/>
@@ -184,7 +184,7 @@
     <branch repo="git.freedesktop.org" module="poppler/poppler" />
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
-      <dep package="meta-gtk-osx-core"/>
+      <dep package="meta-gtk-osx-gtk2"/>
     </after>
   </autotools>
 
@@ -200,7 +200,7 @@
   <autotools id="goocanvas">
     <branch revision="goocanvas-1.0"/>
     <dependencies>
-      <dep package="meta-gtk-osx-core"/>
+      <dep package="meta-gtk-osx-gtk2"/>
     </dependencies>
   </autotools>
 
@@ -218,7 +218,7 @@
     <branch/>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
-      <dep package="meta-gtk-osx-core"/>
+      <dep package="meta-gtk-osx-gtk2"/>
     </after>
   </autotools>
 

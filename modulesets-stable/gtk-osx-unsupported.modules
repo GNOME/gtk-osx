@@ -83,7 +83,7 @@
              version="3.20.0"
              hash="sha256:bc17cecd748a0e46e302171d11c3ae3d76bba5258c441fabec3786f418e7ec99"/>
     <dependencies>
-      <dep package="gtk+"/>
+      <dep package="gtk+-2.0"/>
       <dep package="libgcrypt"/>
       <dep package="libtasn1"/>
     </dependencies>

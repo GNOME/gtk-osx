@@ -14,9 +14,9 @@
   <repository type="tarball" name="pymodules"
 	      href="http://pypi.python.org/packages/"/>
 
-  <metamodule id="meta-gtk-osx-python">
+  <metamodule id="meta-gtk-osx-python2-gtk2">
     <dependencies>
-      <dep package="meta-gtk-osx-core"/>
+      <dep package="meta-gtk-osx-gtk2"/>
       <dep package="pycairo"/>
       <dep package="pygobject"/>
       <dep package="pygtk"/>
@@ -106,7 +106,7 @@
     <after>
       <dep package="python3"/>
       <dep package="python"/>
-      <dep package="meta-gtk-osx-core"/>
+      <dep package="meta-gtk-osx-gtk2"/>
       <dep package="meta-gtk-osx-gtk3"/>
     </after>
  </meson>
@@ -116,7 +116,7 @@
     <branch revision="pygobject-2-28"/>
     <dependencies>
       <dep package="python"/>
-      <dep package="meta-gtk-osx-core"/>
+      <dep package="meta-gtk-osx-gtk2"/>
    </dependencies>
   </autotools>
 
@@ -136,7 +136,7 @@
     <branch />
     <dependencies>
       <dep package="pygobject"/>
-      <dep package="meta-gtk-osx-core"/>
+      <dep package="meta-gtk-osx-gtk2"/>
       <dep package="pycairo"/>
     </dependencies>
     <after>
@@ -155,7 +155,7 @@
     <branch module="gtk-mac-integration"/>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
-      <dep package="gtk+"/>
+      <dep package="gtk+-2.0"/>
       <dep package="gtk+-3.0"/>
       <dep package="pygobject"/>
       <dep package="pygobject3"/>
