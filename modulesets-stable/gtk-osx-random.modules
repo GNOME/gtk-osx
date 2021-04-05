@@ -212,41 +212,10 @@
     </branch>
   </autotools>
 
-  <autotools id="libatomic-ops"
-             autogen-template="pushd %(srcdir)s &amp;&amp; ./%(autogen-sh)s &amp;&amp; popd &amp;&amp; %(srcdir)s/configure --prefix=%(prefix)s %(autogenargs)s">
-    <branch repo="github.com" module="ivmai/libatomic_ops"
-	    revision="libatomic_ops-7_4_4"/>
-  </autotools>
-
-  <autotools id="bdw-gc" autogen-template="pushd %(srcdir)s &amp;&amp; ./autogen.sh &amp;&amp; automake -ac &amp;&amp; popd &amp;&amp; %(srcdir)s/configure --prefix %(prefix)s  %(autogenargs)s">
-    <branch repo="github.com" module="ivmai/bdwgc"  revision="gc7_6_0" />
-    <dependencies>
-      <dep package="libatomic-ops"/>
-    </dependencies>
-  </autotools>
-
-  <autotools id="guile" autogen-sh="configure"
-	     autogenargs="--disable-error-on-warning">
-    <branch repo="ftp.gnu.org" module="guile/guile-1.8.8.tar.gz"
-	    version="1.8.8"/>
-    <dependencies>
-      <dep package="gmp"/>
-    </dependencies>
-  </autotools>
-
-  <!-- Guile 2.0.14 crashes during build. Stay at 2.0.12 while this is investigated. -->
-  <autotools id="guile2" autogen-sh="configure">
-    <branch repo="ftp.gnu.org" module="guile/guile-2.0.11.tar.gz"
-	    version="2.0.11">
-      <!--patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/guild-shell.patch" strip="1"/>
-      <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/guile-clocktime.patch" strip="1"/-->
+  <autotools id='readline' autogen-sh="configure">
+    <branch repo="ftp.gnu.org" module="readline/readline-8.1.tar.gz"
+      version="8.1">
     </branch>
-    <dependencies>
-      <dep package="libunistring"/>
-      <dep package="gmp"/>
-      <dep package="libffi"/>
-      <dep package="bdw-gc"/>
-    </dependencies>
   </autotools>
 
 </moduleset>
