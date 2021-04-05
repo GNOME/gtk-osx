@@ -9,8 +9,6 @@
               href="git://github.com"/>
   <repository type="tarball" name="python"
               href="https://www.python.org/ftp/python/"/>
-  <repository type="tarball" name="oracle"
-	      href="http://download.oracle.com/"/>
   <repository type="tarball" name="pymodules"
 	      href="http://pypi.python.org/packages/"/>
 
@@ -42,18 +40,6 @@
     </dependencies>
   </metamodule>
 
-  <!--Note the leading ; in autogen-template. It's there on purpose in case the user has set nice_build so that the nice prepended to the command doesn't eat the cd. -->
-   <autotools id="berkeleydb" autogen-sh="dist/configure"
-         autogen-template="cd .;cd build_unix; ../%(autogen-sh)s --prefix %(prefix)s  %(autogenargs)s" makeargs="-C build_unix"
-         makeinstallargs="-C build_unix install"
-	 supports-non-srcdir-builds="no">
-
-    <branch module="berkeley-db/db-4.8.30.NC.tar.gz" version="4.8.30"
-        repo="oracle">
-      <patch file="https://raw.githubusercontent.com/narkoleptik/os-x-berkeleydb-patch/master/atomic.patch" strip='1'/>
-    </branch>
-  </autotools>
-
   <autotools id="python" autogenargs="--enable-shared" supports-non-srcdir-builds="no"
              autogen-sh="autoreconf">
     <branch repo="python"
@@ -66,9 +52,6 @@
       <dep package='readline'/>
       <dep package="openssl" /> <!-- For hashlib -->
     </dependencies>
-    <after>
-      <dep package="berkeleydb"/>
-    </after>
   </autotools>
 
   <autotools id="python3" autogenargs="--enable-shared" autogen-sh="autoreconf">
@@ -79,24 +62,7 @@
       <dep package='readline'/>
       <dep package="openssl" /> <!-- For hashlib -->
     </dependencies>
-    <after>
-      <dep package="berkeleydb"/>
-    </after>
   </autotools>
-
-<!-- Pybsddb replaces Python2's built-in bsd module. Their repo uses
-     hg, so we stick with the tarball. -->
-  <distutils id="pybsddb">
-    <branch module="8d/9b/c3b01ff14e19254b2e031d8ae5ebe472e5523a47acc6f7d49300960d406d/bsddb3-6.2.4.tar.gz"
-	    hash="md5:eec77d104c5981366701c6b0de585504" repo="pymodules"
-	    version="6.2.4"/>
-    <dependencies>
-      <dep package="python3"/>
-    </dependencies>
-    <after>
-      <dep package="berkeleydb"/>
-    </after>
-  </distutils>
 
  <meson id="pycairo" >
     <branch module="pygobject/pycairo" repo="github" />
