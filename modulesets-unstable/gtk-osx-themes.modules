@@ -22,7 +22,7 @@
   <autotools id="icon-naming-utils" autogen-sh="configure" >
     <branch repo="freedesktop.org" module="gstreamer-sdk/icon-naming-utils" 
 	    revision="sdk-0.8.7"/>
-cgit    <after>
+   <after>
       <dep package="meta-gtk-osx-bootstrap"/>
     </after>
   </autotools>
