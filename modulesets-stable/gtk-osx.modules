@@ -42,7 +42,6 @@ library it depends on.
 configurations of WebKit.
 
 - gtk-osx-random.modules: "random stuff", has apps for testing GTK+.
-- gtk-osx-unsupported.modules: more testing stuff, competely unsupported.
   -->
 
   <include href="gtk-osx-bootstrap.modules"/>
@@ -53,7 +52,6 @@ configurations of WebKit.
   <include href="gtk-osx-python.modules"/>
   <include href="gtk-osx-random.modules"/>
   <include href="gtk-osx-themes.modules"/>
-  <include href="gtk-osx-unsupported.modules"/>
 
   <!-- Dummy meson module to shut up a jhbuild warning. -->
   <systemmodule id="meson">
