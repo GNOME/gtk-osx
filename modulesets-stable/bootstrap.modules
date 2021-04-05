@@ -5,8 +5,6 @@
               href="https://ftp.gnu.org/gnu/"/>
   <repository type="tarball" name="pkgconfig"
               href="http://pkgconfig.freedesktop.org/releases/"/>
-  <repository type="tarball" name="python"
-              href="http://www.python.org/ftp/python/"/>
   <repository type="tarball" name="sourceforge"
               href="http://downloads.sourceforge.net/sourceforge/"/>
   <repository type="tarball" name="tukaani.org"
