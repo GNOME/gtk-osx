@@ -131,26 +131,22 @@
     </after>
   </meson>
 
-<!-- PyGObject 2.28 is the last series for Gtk+-2; for co-installation
-     with later versions it installs as pygobject2 and PyGObject 3
-     installs as pygobject3. Introspection is disabled here, because
-     gir-scanner isn't smart enough to co-install them. -->
-  <autotools id="pygobject2" autogen-sh="configure"
-	     autogenargs="--disable-introspection"
-	     supports-non-srcdir-builds="no">
-    <branch version="2.28.7" module="pygobject/2.28/pygobject-2.28.7.tar.xz"
-            hash="sha256:bb9d25a3442ca7511385a7c01b057492095c263784ef31231ffe589d83a96a5a">
-      <!-- remove all references to the missing gdestktopappinfo -->
-      <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/pygobject-gdesktopappinfo-missing.patch"
-                     strip="1"/>
-    </branch>
+  <!-- PyGObject 3.36 is the last version of PyGObject that supports
+       Python2. It's provided here for those laggards who haven't yet
+       migrated their projects to Python3. Don't expect it to stay
+       forever, migrate now! -->
+
+   <meson id="pygobject3-2" >
+    <branch version="3.36.1" module="pygobject/3.36/pygobject-3.36.1.tar.xz"
+	    hash="sha256:d1bf42802d1cec113b5adaa0e7bf7f3745b44521dc2163588d276d5cd61d718f"/>
     <dependencies>
-      <dep package="meta-gtk-osx-gtk2"/>
+      <dep package="pycairo"/>
     </dependencies>
     <after>
       <dep package="python2"/>
+      <dep package="python3"/>
     </after>
-  </autotools>
+   </meson>
 
    <meson id="pygobject3" >
     <branch version="3.32.2" module="pygobject/3.32/pygobject-3.32.2.tar.xz"
@@ -163,25 +159,6 @@
       <dep package="python3"/>
     </after>
    </meson>
-
-<!-- Pygtk is discontinued, this is the last release -->
- <autotools id="pygtk" autogen-sh="configure"
-	     autogenargs="CFLAGS=&quot;$CFLAGS -xobjective-c&quot; lt_cv_sys_global_symbol_pipe=&quot;'sed -n -e '\''s/^.*[ ]\([BCDEGRST][BCDEGRST]*\)[ ][ ]*_\([_A-Za-z][_A-Za-z0-9]*\)$/\1 _\2 \2/p'\'' | sed '\''/ __gnu_lto/d'\'''&quot;">
-    <branch version="2.24.0" module="pygtk/2.24/pygtk-2.24.0.tar.bz2"
-            hash="sha256:cd1c1ea265bd63ff669e92a2d3c2a88eb26bcd9e5363e0f82c896e649f206912">
-      <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/pygtk-libtool.patch" strip="1"/>
-      <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/pygtk-pango1.4x.patch" strip="1"/>
-      <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/pygtk-pango-decls.patch" strip="1"/>
-    </branch>
-    <dependencies>
-      <dep package="pygobject"/>
-      <dep package="meta-gtk-osx-gtk2"/>
-      <dep package="pycairo"/>
-    </dependencies>
-    <after>
-      <dep package="libglade"/>
-    </after>
-  </autotools>
 
   <autotools id="gtk-mac-integration-python" autogen-sh="configure"
              autogenargs="--enable-python">
