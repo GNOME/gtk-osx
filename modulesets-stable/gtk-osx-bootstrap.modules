@@ -133,18 +133,11 @@
             hash="sha256:52a3f2209ab95559c1cf0a14f24338001f389615bf00e2585ef3dbc43ecf0a2e"/>
   </autotools>
 
-  <autotools id="hicolor-icon-theme" autogen-sh="configure"
-	     supports-non-srcdir-builds="no">
-    <branch module="hicolor-icon-theme-0.15.tar.xz" repo="icon-theme"
-            version="0.15"/>
-  </autotools>
-
   <metamodule id="meta-gtk-osx-bootstrap">
     <dependencies>
       <dep package="libpng"/>
       <dep package="libjpeg"/>
       <dep package="libtiff"/>
-      <dep package="hicolor-icon-theme"/>
       <dep package="gtk-doc"/>
     </dependencies>
   </metamodule>
