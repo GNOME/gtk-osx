@@ -57,6 +57,8 @@ envvar DEV_SRC_ROOT "$DEVROOT/Source"
 envvar PYENV_INSTALL_ROOT "$DEV_SRC_ROOT/pyenv"
 envvar PYENV_ROOT "$DEVPREFIX/share/pyenv"
 envvar PIP_CONFIG_DIR "$HOME/.config/pip"
+envvar CARGO_HOME "$DEVPREFIX"
+envvar RUSTUP_HOME "$DEVPREFIX"
 
 export PYTHONWARNINGS=ignore:DEPRECATION::pip._internal.cli.base_command
 export PYTHONPATH="$PYTHONUSERBASE/lib/python/site-packages":"$PYTHONPATH"
@@ -130,6 +132,12 @@ if test ! -x "$NINJA" -a ! -x "$DEVPREFIX/bin/ninja"; then
     rm "$DEVPREFIX/ninja-mac.zip"
 fi
 
+#Install Rust (required for librsvg, which gtk needs to render its icons.)
+RUSTUP=`which rustup`
+if test ! -x "$RUSTUP" -a ! -x "$DEVPREFIX/bin/rustup"; then
+    curl https://sh.rustup.rs -sSf | sh -s -- -y --profile minimal
+fi
+
 if test ! -d "$DEVPREFIX/etc" ; then
     mkdir -p "$DEVPREFIX/etc"
 fi
@@ -168,6 +176,7 @@ export PIPENV_DOTENV_LOCATION="$DEVPREFIX/etc/pipenv-env"
 export PIPENV_PIPFILE="$DEVPREFIX/etc/Pipfile"
 export PATH="$PYENV_ROOT/shims:$DEVPREFIX/bin:$PATH"
 export PYENV_ROOT="$PYENV_ROOT"
+export RUSTUP_HOME="$RUSTUP_HOME"
 
 exec pipenv run jhbuild \$@
 EOF
