@@ -128,7 +128,6 @@
       <dep package="pycairo"/>
     </dependencies>
     <after>
-      <dep package="python2"/>
       <dep package="python3"/>
     </after>
    </meson>

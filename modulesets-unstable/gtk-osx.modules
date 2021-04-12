@@ -7,8 +7,6 @@
   <repository type="git" name="github" href="git://github.com/"/>
   <repository type="git" name="freedesktop"
               href="https://gitlab.freedesktop.org/"/>
-  <repository type="git" name="freedesktop-jralls"
-              href="https://gitlab.freedesktop.org/jralls/"/>
   <repository type="git" name="nongnu"
 	      href="git://git.sv.nongnu.org/"/>
   <repository type="system" name="system"/>
@@ -24,28 +22,21 @@
          make it easy to rebuild the whole core stack without redoing
          the bootstrap parts. They have a soft, "after", depencency.
 
-       The remaining modules are mostly for testing and might not work
-       all the time:
-
-       - gtk-osx-python.modules: self explaining.
-       - gtk-osx-gtkmm.modules: self explaining.
-       - gtk-osx-javascript.modules: GJS, associated tools, and the Mozilla JS
-         library it depends on.
-       - gtk-osx-gstreamer.modules: self explaining.
-       - gtk-osx-themes.modules: self explaining.
-       - gtk-osx-network.modules: The network/crypto stack and various
-         configurations of WebKit.
-
+       - gtk-osx-python.modules: Python bindings for Gtk.
+       - gtk-osx-gtkmm.modules: C++ wrappers for Gtk.
+       - gtk-osx-javascript.modules: GJS and its Mozilla JS (aka
+         spidermonkey) dependency.
+       - gtk-osx-gstreamer.modules: GStreamer library and modules.
+       - gtk-osx-network.modules: The network/crypto stack and WebKit.
        - gtk-osx-random.modules: "random stuff", has apps for testing GTK+.
   -->
 
   <include href="gtk-osx-bootstrap.modules"/>
-  <include href="gtk-osx-javascript.modules"/>
-  <include href="gtk-osx-python.modules"/>
   <include href="gtk-osx-gstreamer.modules"/>
   <include href="gtk-osx-gtkmm.modules"/>
+  <include href="gtk-osx-javascript.modules"/>
   <include href="gtk-osx-network.modules"/>
-  <include href="gtk-osx-themes.modules"/>
+  <include href="gtk-osx-python.modules"/>
   <include href="gtk-osx-random.modules"/>
 
   <!-- Dummy meson module to shut up a jhbuild warning. -->
@@ -53,16 +44,6 @@
     <branch repo="system"/>
   </systemmodule>
   
-  <metamodule id="meta-gtk-osx-gtk2">
-    <dependencies>
-      <dep package="gtk+-2.0"/>
-      <dep package="gtk-mac-integration"/>
-    </dependencies>
-    <after>
-      <dep package="meta-gtk-osx-bootstrap"/>
-    </after>
-  </metamodule>
-
   <metamodule id="meta-gtk-osx-gtk3">
     <dependencies>
       <dep package="gtk+-3.0"/>
@@ -137,7 +118,7 @@
        they are both built into cairo. -->
   <autotools id="cairo"
              autogenargs="--enable-pdf --enable-quartz --disable-xlib --without-x">
-    <branch repo="freedesktop-jralls" module="cairo" />
+    <branch repo="freedesktop" module="cairo" />
     <dependencies>
       <dep package="pixman"/>
       <dep package="meta-gtk-osx-bootstrap"/>
@@ -229,22 +210,6 @@
     </dependencies>
   </meson>
  
-  <autotools id="gtk+-2.0"
-	     autogenargs="--with-gdktarget=quartz --enable-introspection=no --enable-quartz-relocation --disable-visibility">
-    <branch module="gtk" revision="gtk-2-24" checkoutdir="gtk+-2.0"/>
-    <dependencies>
-      <dep package="glib"/>
-      <dep package="pango"/>
-      <dep package="atk"/>
-      <dep package="gdk-pixbuf"/>
-      <dep package="gobject-introspection"/>
-    </dependencies>
-    <after>
-      <dep package="meta-gtk-osx-bootstrap"/>
-    </after>
-  </autotools>
-  
-
   <meson id="gtk+-3.0"
         mesonargs="-Dquartz-backend=true -Dx11-backend=false -Dmedia=none">
     <branch module="gtk" checkoutdir="gtk+-3.0" revision="gtk-3-24"/>
@@ -260,17 +225,30 @@
       <dep package="meta-gtk-osx-bootstrap"/>
     </after>
   </meson>
+  
+  <meson id="graphene" mesonargs="-Dtests=false -Dbenchmarks=false">
+    <branch repo="github" revision="1.10.4" module="ebassi/graphene"/>
+    <dependencies>
+      <dep package="glib"/>
+      <dep package="gobject-introspection"/>
+    </dependencies>
+  </meson>
+
+  <autotools id="libsass" autogen-sh="autoreconf"
+             autogenargs="--disable-tests --disable-static">
+    <branch repo="github" revision="3.6.4" module="sass/libsass"/>
+  </autotools>
 
   <meson id="gtk+-4.0"
              mesonargs="-Dquartz-backend=true -Dx11-backend=false -Dmedia=none">
-    <branch module="gtk" checkoutdir="gtk+-4.0"/>
+    <branch module="gtk" checkoutdir="gtk-4.0"/>
     <dependencies>
       <dep package="glib"/>
       <dep package="pango"/>
-      <dep package="gdk-pixbuf"/>
       <dep package="atk"/>
-      <dep package="gobject-introspection"/>
       <dep package="graphene"/>
+      <dep package="libsass"/>
+      <dep package="libepoxy"/>
     </dependencies>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
@@ -280,7 +258,6 @@
   <autotools id="gtk-mac-integration" autogenargs="--disable-python">
     <branch/>
     <after>
-      <dep package="gtk+-2.0"/>
       <dep package="gtk+-3.0"/>
     </after>
   </autotools>
@@ -289,18 +266,15 @@
     <branch/>
   </autotools>
 
-  <!-- librsvg is converting to the Rust language. This requires
-       substantial infrastructure that's resistant to installing with
-       jhbuild, so we'll freeze at the 2.40 branch. -->
   <autotools id="librsvg" autogenargs="--disable-Bsymbolic">
-    <branch module="librsvg" tag="librsvg-2-40"/>
+    <branch module="librsvg"/>
     <dependencies>
       <dep package="libcroco"/>
       <dep package="freetype"/>
     </dependencies>
     <after>
-      <dep package="gtk+-2.0"/>
       <dep package="gtk+-3.0"/>
+      <dep package="gtk-4"/>
     </after>
   </autotools>
 

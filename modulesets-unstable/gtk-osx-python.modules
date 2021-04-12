@@ -12,25 +12,6 @@
   <repository type="tarball" name="pymodules"
 	      href="http://pypi.python.org/packages/"/>
 
-  <metamodule id="meta-gtk-osx-python2-gtk2">
-    <dependencies>
-      <dep package="meta-gtk-osx-gtk2"/>
-      <dep package="pycairo"/>
-      <dep package="pygobject"/>
-      <dep package="pygtk"/>
-      <dep package="gtk-mac-integration-python"/>
-   </dependencies>
-  </metamodule>
-
-  <metamodule id="meta-gtk-osx-python-gtk3">
-    <dependencies>
-      <dep package="meta-gtk-osx-gtk3"/>
-      <dep package="pycairo"/>
-      <dep package="pygobject3"/>
-      <dep package="gtk-mac-integration-python"/>
-    </dependencies>
-  </metamodule>
-
   <metamodule id="meta-gtk-osx-python3-gtk3">
     <dependencies>
       <dep package="meta-gtk-osx-gtk3"/>
@@ -40,24 +21,9 @@
     </dependencies>
   </metamodule>
 
-  <autotools id="python" autogenargs="--enable-shared" supports-non-srcdir-builds="no"
-             autogen-sh="autoreconf">
-    <branch repo="python"
-            module="2.7.17/Python-2.7.17.tgz" version="2.7.17"
-            hash="sha256:f22059d09cdf9625e0a7284d24a13062044f5bf59d93a7f3382190dfa94cecde">
-        <!-- related to https://bugs.python.org/issue11445 -->
-        <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/python-ldflags.patch" strip="1"/>
-    </branch>
-    <dependencies>
-      <dep package='readline'/>
-      <dep package="openssl" /> <!-- For hashlib -->
-    </dependencies>
-  </autotools>
-
   <autotools id="python3" autogenargs="--enable-shared" autogen-sh="autoreconf">
-    <branch repo="python" module="3.8.5/Python-3.8.5.tar.xz" version="3.8.5"
-            hash="md5:35b5a3d0254c1c59be9736373d429db7"
-            />
+    <branch repo="python" module="3.9.2/Python-3.9.2.tar.xz" version="3.9.2"
+            hash="sha256:3c2034c54f811448f516668dce09d24008a0716c3a794dd8639b5388cbde247d"/>
     <dependencies>
       <dep package='readline'/>
       <dep package="openssl" /> <!-- For hashlib -->
@@ -77,15 +43,6 @@
     </after>
  </meson>
 
-  <autotools id="pygobject" autogenargs="--disable-introspection"
-	     supports-non-srcdir-builds="no">
-    <branch revision="pygobject-2-28"/>
-    <dependencies>
-      <dep package="python"/>
-      <dep package="meta-gtk-osx-gtk2"/>
-   </dependencies>
-  </autotools>
-
   <meson id="pygobject3" >
     <branch module="pygobject" checkoutdir="pygobject3"/>
     <dependencies>
@@ -94,38 +51,14 @@
    </dependencies>
    <after>
      <dep package="python3"/>
-      <dep package="python"/>
    </after>
   </meson>
 
-  <autotools id="pygtk" autogenargs="--disable-introspection">
-    <branch />
-    <dependencies>
-      <dep package="pygobject"/>
-      <dep package="meta-gtk-osx-gtk2"/>
-      <dep package="pycairo"/>
-    </dependencies>
-    <after>
-      <dep package="libglade"/>
-    </after>
-  </autotools>
-
-  <autotools id="pygoocanvas">
-    <branch/>
-    <dependencies>
-      <dep package="goocanvas"/>
-    </dependencies>
-  </autotools>
-
   <autotools id="gtk-mac-integration-python">
     <branch module="gtk-mac-integration"/>
-    <after>
-      <dep package="meta-gtk-osx-bootstrap"/>
-      <dep package="gtk+-2.0"/>
-      <dep package="gtk+-3.0"/>
-      <dep package="pygobject"/>
+    <dependencies>
       <dep package="pygobject3"/>
-    </after>
+    </dependencies>
   </autotools>
 
 </moduleset>
