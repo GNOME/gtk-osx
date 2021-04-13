@@ -141,8 +141,8 @@ fi
 if test ! -d "$DEVPREFIX/etc" ; then
     mkdir -p "$DEVPREFIX/etc"
 fi
-if test ! -f "$DEVPREFIX/etc/Pipfile" ; then
-    cat  <<EOF > "$DEVPREFIX/etc/Pipfile"
+
+cat  <<EOF > "$DEVPREFIX/etc/Pipfile"
 [[source]]
 url = "https://pypi.python.org/simple"
 verify_ssl = true
@@ -157,16 +157,15 @@ jhbuild = "$DEVPREFIX/libexec/run_jhbuild.py"
 [requires]
 python_version = "3.8"
 EOF
-    cat <<EOF > "$DEVPREFIX/etc/pipenv-env"
+cat <<EOF > "$DEVPREFIX/etc/pipenv-env"
 export PYTHONUSERBASE="$PYTHONUSERBASE"
 export DEV_SRC_ROOT="$DEV_SRC_ROOT"
 export PYENV_ROOT="$PYENV_ROOT"
 export PIP_CONFIG_DIR="$PIP_CONFIG_DIR"
 export LANG=C
 EOF
-fi
-if test ! -f "$DEVPREFIX/bin/jhbuild" ; then
-    cat <<EOF > "$DEVPREFIX/bin/jhbuild"
+
+cat <<EOF > "$DEVPREFIX/bin/jhbuild"
 #!$DEVPREFIX/bin/bash
 export DEVROOT="$DEVROOT"
 export DEVPREFIX="$DEVPREFIX"
@@ -180,12 +179,11 @@ export RUSTUP_HOME="$RUSTUP_HOME"
 
 exec pipenv run jhbuild \$@
 EOF
-fi
+
 if test ! -d "$DEVPREFIX/libexec" ; then
     mkdir -p "$DEVPREFIX/libexec"
 fi
-if test ! -f "$DEVPREFIX/libexec/run_jhbuild.py" ; then
-    cat <<EOF > "$DEVPREFIX/libexec/run_jhbuild.py"
+cat <<EOF > "$DEVPREFIX/libexec/run_jhbuild.py"
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
@@ -205,7 +203,7 @@ import jhbuild.main
 jhbuild.main.main(sys.argv[1:])
 
 EOF
-fi
+
 if test ! -x "$DEVPREFIX/bin/jhbuild" ; then
     chmod +x "$DEVPREFIX/bin/jhbuild"
 fi
