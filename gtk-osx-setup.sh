@@ -107,8 +107,8 @@ if test ! -x "`eval echo $PIP`" ; then
         python -m ensurepip --user
     fi
     PIP="$PYTHONUSERBASE/bin/pip"
-    $PIP install --upgrade --user pip
 fi
+$PIP install --upgrade --user pip
 
 # Install pipenv
 $PIP install --upgrade --user pipenv==2020.11.15
