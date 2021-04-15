@@ -118,7 +118,7 @@
        they are both built into cairo. -->
   <autotools id="cairo"
              autogenargs="--enable-pdf --enable-quartz --disable-xlib --without-x">
-    <branch repo="freedesktop" module="cairo" />
+    <branch repo="freedesktop" module="cairo/cairo" />
     <dependencies>
       <dep package="pixman"/>
       <dep package="meta-gtk-osx-bootstrap"/>

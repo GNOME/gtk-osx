@@ -109,7 +109,7 @@
   </autotools>
 
   <autotools id="pixman" autogenargs="--disable-gtk --disable-mmx">
-    <branch repo="freedesktop" module="pixman" revision="0.40.0"/>
+    <branch repo="freedesktop" module="pixman/pixman" revision="0.40.0"/>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
     </after>
@@ -120,7 +120,7 @@
        they are both built into cairo. -->
   <autotools id="cairo"
              autogenargs="--enable-pdf --enable-quartz --disable-xlib --without-x">
-    <branch repo="freedesktop-jralls" module="cairo" branch="1.16"/>
+    <branch repo="freedesktop-jralls" module="cairo/cairo" branch="1.16"/>
     <dependencies>
       <dep package="pixman"/>
       <dep package="meta-gtk-osx-bootstrap"/>
