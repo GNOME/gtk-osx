@@ -80,7 +80,11 @@ if test ! -x "$PYENV_INSTALL_ROOT/libexec/pyenv"; then
   if test -d "$PYENV_INSTALL_ROOT"; then
      rm -rf "$PYENV_INSTALL_ROOT";
   fi
-    git clone $GITHUB/pyenv/pyenv.git "$PYENV_INSTALL_ROOT"
+  git clone $GITHUB/pyenv/pyenv.git "$PYENV_INSTALL_ROOT"
+else
+    pushd "$PYENV_INSTALL_ROOT"
+    git pull
+    popd
 fi
 
 if test ! -x "$DEVPREFIX/bin/pyenv" ; then
@@ -163,6 +167,7 @@ export DEV_SRC_ROOT="$DEV_SRC_ROOT"
 export PYENV_ROOT="$PYENV_ROOT"
 export PIP_CONFIG_DIR="$PIP_CONFIG_DIR"
 export LANG=C
+eval "$(pyenv init -)"
 EOF
 
 cat <<EOF > "$DEVPREFIX/bin/jhbuild"
