@@ -165,7 +165,6 @@ cat <<EOF > "$DEVPREFIX/etc/pipenv-env"
 export PYTHONUSERBASE="$PYTHONUSERBASE"
 export DEV_SRC_ROOT="$DEV_SRC_ROOT"
 export PYENV_ROOT="$PYENV_ROOT"
-export WORKON_HOME="$DEVPREFIX/share/venv"
 export PIP_CONFIG_DIR="$PIP_CONFIG_DIR"
 export LANG=C
 eval "$(pyenv init -)"
@@ -233,7 +232,6 @@ if test -d "$SDKROOT"; then
     export CFLAGS="-isysroot $SDKROOT -I$SDKROOT/usr/include"
 fi
 export PYTHON_CONFIGURE_OPTS="--enable-shared"
-export WORKON_HOME="$DEVPREFIX/share/venv"
 
 $PIPENV install
 
