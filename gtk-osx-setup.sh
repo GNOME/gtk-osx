@@ -152,8 +152,8 @@ url = "https://pypi.python.org/simple"
 verify_ssl = true
 
 [packages]
-six = "*"
-meson = {version="==0.55"}
+pygments = "*"
+meson = {version=">=0.56.0"}
 
 [scripts]
 jhbuild = "$DEVPREFIX/libexec/run_jhbuild.py"
