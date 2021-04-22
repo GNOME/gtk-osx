@@ -98,7 +98,7 @@
     </dependencies>
   </cmake>
 
-  <autotools id="fontconfig" autogen-sh="configure"
+  <autotools id="fontconfig"
              autogenargs="--disable-docs --with-default-fonts=/System/Library/Fonts --with-add-fonts=/Library/Fonts --with-cache-dir=home">
     <branch repo="freedesktop" module="fontconfig/fontconfig"/>
     <dependencies>
