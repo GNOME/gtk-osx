@@ -22,9 +22,7 @@
   <repository type="tarball" name="paguire" href="https://releases.pagure.org/"/> 
   <repository type="tarball" name="pcre" href="https://ftp.pcre.org/pub/"/>
 
-   <autotools id="graphviz" supports-non-srcdir-builds="no"
-             autogen-template="pushd %(srcdir)s &amp;&amp; ./autogen.sh &amp;&amp; popd &amp;&amp; %(srcdir)s/configure --prefix %(prefix)s %(autogenargs)s"
-             autogenargs="--disable-sharp --disable-guile --disable-java --disable-lua --disable-ocaml --disable-perl --disable-php --disable-r --disable-ruby --disable-tcl --with-pangocairo">
+   <cmake id="graphviz">
     <branch module="2.47.0/graphviz-2.47.0.tar.bz2" version="2.47.0"
             repo="graphviz" 
             hash="sha256:dade5b374ce483bf28f2e535baef02280ba8ab86fbe6e93252ab0de48396b714"/>
@@ -32,7 +30,7 @@
       <dep package="pango"/>
       <dep package="librsvg"/>
     </dependencies>
-  </autotools>
+  </cmake>
 
   <autotools id="vala" autogen-sh="configure">
     <branch repo="ftp.gnome.org" version="0.52.0"
