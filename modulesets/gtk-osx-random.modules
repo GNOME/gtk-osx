@@ -56,7 +56,7 @@
   -->
   <meson id="amtk" >
     <branch revision="5.3.1">
-      <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/amtk-build-on-macOS.patch" strip="1"/>
+      <patch file="amtk-build-on-macOS.patch" strip="1"/>
     </branch>
     <dependencies>
       <dep package="gtk+-3.0"/>
@@ -160,8 +160,8 @@
     <branch module="gtkspell/gtkspell3-3.0.10.tar.xz" repo="sourceforge"
             version="3.0.10"
             hash="sha256:b040f63836b347eb344f5542443dc254621805072f7141d49c067ecb5a375732">
-      <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/0001-Enable-use-of-XDG_DATA_DIRS-for-locating-iso-code-fi.patch" strip="1"/>
-      <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/gtkspell-3-install.sh-wrong-sh-path.patch" strip="1"/>
+      <patch file="0001-Enable-use-of-XDG_DATA_DIRS-for-locating-iso-code-fi.patch" strip="1"/>
+      <patch file="gtkspell-3-install.sh-wrong-sh-path.patch" strip="1"/>
     </branch>
     <dependencies>
       <dep package="enchant"/>

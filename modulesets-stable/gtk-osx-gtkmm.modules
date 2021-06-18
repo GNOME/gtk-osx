@@ -124,7 +124,7 @@
   <meson id="gtkmm3" >
     <branch module="gtkmm/3.24/gtkmm-3.24.4.tar.xz" version="3.24.4"
             hash="sha256:9beb71c3e90cfcfb790396b51e3f5e7169966751efd4f3ef9697114be3be6743">
-      <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/gtkmm-3-bad-const-property-background.patch" strip="1"/>
+      <patch file="gtkmm-3-bad-const-property-background.patch" strip="1"/>
     </branch>
     <dependencies>
       <dep package="glibmm-2.4"/>

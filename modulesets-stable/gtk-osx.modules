@@ -156,8 +156,8 @@
     <branch module="cairo-1.16.0.tar.xz"  version="1.16.0"
             repo="cairographics"
             hash="sha256:5e7b29b3f113ef870d1e3ecf8adf21f923396401604bda16d44be45e66052331">
-      <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/cairo-freetype-font-variations.patch" strip="1"/>
-      <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/Cairo-quartz-surface-create-internal.patch" strip="1"/>
+      <patch file="cairo-freetype-font-variations.patch" strip="1"/>
+      <patch file="Cairo-quartz-surface-create-internal.patch" strip="1"/>
     </branch>
     <dependencies>
       <dep package="pixman"/>
@@ -171,7 +171,7 @@
     <branch module="gobject-introspection/1.68/gobject-introspection-1.68.0.tar.xz"
             version="1.68.0"
             hash="sha256:d229242481a201b84a0c66716de1752bca41db4133672cfcfb37c93eb6e54a27">
-      <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/girscanner-objc.patch" strip="1"/>
+      <patch file="girscanner-objc.patch" strip="1"/>
     </branch>
     <dependencies>
       <dep package="glib"/>
@@ -234,7 +234,7 @@
   <meson id="gdk-pixbuf" mesonargs="-Dx11=false -Dman=false">
     <branch module="gdk-pixbuf/2.42/gdk-pixbuf-2.42.4.tar.xz" version="2.42.4"
             hash="sha256:fe9c5dd88f486194ea2bc09b8814c1ed895bb6c530f37cbbf259757c4e482e4d">
-      <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/gdk-pixbuf-loader-name.patch" strip="1"/>
+      <patch file="gdk-pixbuf-loader-name.patch" strip="1"/>
     </branch>
     <after>
       <dep package="pango"/>
@@ -247,12 +247,12 @@
              autogenargs="--with-gdktarget=quartz --enable-quartz-relocation --disable-introspection --disable-visibility">
     <branch module="gtk+/2.24/gtk+-2.24.33.tar.xz" version="2.24.33"
             hash="sha256:ac2ac757f5942d318a311a54b0c80b5ef295f299c2a73c632f6bfb1ff49cc6da">
-      <!--patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/0004-Bug-571582-GtkSelection-implementation-for-quartz.patch" strip="1"/-->
-      <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/0008-Implement-GtkDragSourceOwner-pasteboardChangedOwner.patch" strip="1"/>
-      <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/0006-Bug-658722-Drag-and-Drop-sometimes-stops-working.patch" strip="1"/>
-      <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/gtk+-2-m4-creation.patch" strip="1"/>
+      <!--patch file="0004-Bug-571582-GtkSelection-implementation-for-quartz.patch" strip="1"/-->
+      <patch file="0008-Implement-GtkDragSourceOwner-pasteboardChangedOwner.patch" strip="1"/>
+      <patch file="0006-Bug-658722-Drag-and-Drop-sometimes-stops-working.patch" strip="1"/>
+      <patch file="gtk+-2-m4-creation.patch" strip="1"/>
       <!-- upstream bug https://bugzilla.gnome.org/show_bug.cgi?id=767091 -->
-      <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/gtk-gimp-dnd-bug767091.patch" strip="1"/>
+      <patch file="gtk-gimp-dnd-bug767091.patch" strip="1"/>
       <!-- upstream bug: https://gitlab.gnome.org/GNOME/gtk/issues/529 -->
       <patch file="https://gitlab.gnome.org/GNOME/gtk/uploads/f0c19446b9cd1df467c4cc9050516d4b/0001-Bug-743717-Crashes-on-clipboard-operation-influence-.patch" strip="1"/>
       <!-- upstream bug: https://gitlab.gnome.org/GNOME/gtk/issues/580 -->

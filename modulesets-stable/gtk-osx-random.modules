@@ -54,7 +54,7 @@
   <meson id="amtk" >
     <branch module="amtk/5.3/amtk-5.3.1.tar.xz" version="5.3.1"
             hash="sha256:d5aa236c5d71dc41aa4674f345560a67a27f21c0efc97c9b3da09cb582b4638b">
-      <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/amtk-build-on-macOS.patch" strip="1"/>
+      <patch file="amtk-build-on-macOS.patch" strip="1"/>
     </branch>
     <dependencies>
       <dep package="gtk+-3.0"/>
@@ -64,7 +64,7 @@
   <meson id="devhelp-gtk3">
     <branch module="devhelp/3.38/devhelp-3.38.1.tar.xz" version="3.38.1"
             hash="sha256:4da8f5951b3a5920df73d057beab3ebe1855a75eae41208a9d89305a6b114a8f">
-      <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/devhelp-3-build-on-macOS.patch" strip="1"/>
+      <patch file="devhelp-3-build-on-macOS.patch" strip="1"/>
     </branch>
   <dependencies>
       <dep package="webkit2gtk3"/>
@@ -118,14 +118,14 @@
              supports-non-srcdir-builds="no">
     <branch repo="frodo" version="1.1.6" module="getopt/getopt-1.1.6.tar.gz"
             hash="sha256:d0bf1dc642a993e7388a1cddfb9409bed375c21d5278056ccca3a0acd09dc5fe">
-       <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/frodo-getopt-autotools.patch" strip="1"/>
+       <patch file="frodo-getopt-autotools.patch" strip="1"/>
     </branch>
   </autotools>
   <autotools id="xmlto" autogen-sh="autoreconf">
     <branch module="xmlto/xmlto-0.0.28.tar.bz2"
             version="0.0.28" repo="paguire"
             hash="sha256:1130df3a7957eb9f6f0d29e4aa1c75732a7dfb6d639be013859b5c7ec5421276">
-      <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/xmlto-allow-net-access.patch" strip="1"/>
+      <patch file="xmlto-allow-net-access.patch" strip="1"/>
     </branch>
     <dependencies>
       <dep package="frodo-getopt"/>
@@ -205,8 +205,8 @@
     <branch module="gtkspell/gtkspell3-3.0.10.tar.xz" repo="sourceforge"
             version="3.0.10"
             hash="sha256:b040f63836b347eb344f5542443dc254621805072f7141d49c067ecb5a375732">
-      <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/0001-Enable-use-of-XDG_DATA_DIRS-for-locating-iso-code-fi.patch" strip="1"/>
-      <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/gtkspell-3-install.sh-wrong-sh-path.patch" strip="1"/>
+      <patch file="0001-Enable-use-of-XDG_DATA_DIRS-for-locating-iso-code-fi.patch" strip="1"/>
+      <patch file="gtkspell-3-install.sh-wrong-sh-path.patch" strip="1"/>
     </branch>
     <dependencies>
       <dep package="enchant"/>

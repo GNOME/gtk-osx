@@ -59,7 +59,7 @@
     <branch version="2.9.10" module="libxml2-2.9.10.tar.gz"
             repo="xmlsoft.org"
             hash="sha256:aafee193ffb8fe0c82d4afef6ef91972cbaf5feea100edc2f262750611b4be1f">
-      <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/libxml2.9.10-conditional-parentheses.patch" strip="1"/>            
+      <patch file="libxml2.9.10-conditional-parentheses.patch" strip="1"/>            
     </branch>
     <after>
       <dep package="python2"/>
@@ -80,7 +80,7 @@
     <branch module="itstool/itstool-2.0.6.tar.bz2" version="2.0.6n"
             repo="itstool"
             hash="sha256:6233cc22726a9a5a83664bf67d1af79549a298c23185d926c3677afa917b92a9">
-      <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/itstool-config-python.patch" strip="1"/>
+      <patch file="itstool-config-python.patch" strip="1"/>
     </branch>
     <dependencies>
       <dep package="libxml2"/>

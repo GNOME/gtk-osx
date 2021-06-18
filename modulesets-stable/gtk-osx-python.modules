@@ -56,7 +56,7 @@
                module="2.7.18/Python-2.7.18.tgz" version="2.7.18"
                hash="sha256:da3080e3b488f648a3d7a4560ddee895284c3380b11d6de75edb986526b9a814">
   <!-- related to https://bugs.python.org/issue11445 -->
-  <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/python-ldflags.patch" strip="1"/>
+  <patch file="python-ldflags.patch" strip="1"/>
     </branch>
     <dependencies>
       <dep package='readline'/>
