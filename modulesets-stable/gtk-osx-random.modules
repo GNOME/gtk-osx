@@ -125,7 +125,7 @@
     <branch module="xmlto/xmlto-0.0.28.tar.bz2"
             version="0.0.28" repo="paguire"
             hash="sha256:1130df3a7957eb9f6f0d29e4aa1c75732a7dfb6d639be013859b5c7ec5421276">
-      <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/xmlto-allow-net-access.patch"/>
+      <patch file="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master/patches/xmlto-allow-net-access.patch" strip="1"/>
     </branch>
     <dependencies>
       <dep package="frodo-getopt"/>
