@@ -9,6 +9,7 @@
               href="https://gitlab.freedesktop.org/"/>
   <repository type="git" name="nongnu"
 	      href="git://git.sv.nongnu.org/"/>
+  <repository type="tarball" name="pcre" href="https://ftp.pcre.org/pub/"/>
   <repository type="system" name="system"/>
 
   <!-- This module set works a bit differently than for example the
@@ -60,9 +61,16 @@
     <branch module="atgreen/libffi" repo="github"/>
   </autotools>
 
-  <meson id="glib" mesonargs="-Dinternal_pcre=true -Dlibmount=disabled">
+   <autotools id="libpcre" autogen-sh="configure">
+    <branch repo="pcre" version="8.45"
+            module="pcre/pcre-8.45.tar.bz2"
+            hash="sha256:4dae6fdcd2bb0bb6c37b5f97c33c2be954da743985369cddac3546e3218bffb8"/>
+  </autotools>
+  
+  <meson id="glib" mesonargs="-Dlibmount=disabled">
     <branch/>
     <dependencies>
+      <dep package="libpcre"/>
       <dep package="libffi"/>
     </dependencies>
   </meson>
