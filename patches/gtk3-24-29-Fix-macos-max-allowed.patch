@@ -1,0 +1,25 @@
+From 0e14822a22728cdc6ee3e77b63bfef4a11ae92bc Mon Sep 17 00:00:00 2001
+From: =?UTF-8?q?Mos=C3=A8=20Giordano?= <mose@gnu.org>
+Date: Fri, 7 May 2021 11:46:47 +0100
+Subject: [PATCH] Fix value of `MAC_OS_X_VERSION_MAX_ALLOWED`
+
+---
+ gdk/quartz/gdkwindow-quartz.c | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/gdk/quartz/gdkwindow-quartz.c b/gdk/quartz/gdkwindow-quartz.c
+index 5b454341df..14711e7d8e 100644
+--- a/gdk/quartz/gdkwindow-quartz.c
++++ b/gdk/quartz/gdkwindow-quartz.c
+@@ -2228,7 +2228,7 @@ _gdk_quartz_window_set_collection_behavior (NSWindow *nswindow,
+                                             GdkWindowTypeHint hint)
+ {
+ #if MAC_OS_X_VERSION_MAX_ALLOWED >= 1070
+-#if MAC_OS_X_VERSION_MAX_ALLOWED >= 10110
++#if MAC_OS_X_VERSION_MAX_ALLOWED >= 101100
+ #define GDK_QUARTZ_ALLOWS_TILING NSWindowCollectionBehaviorFullScreenAllowsTiling
+ #define GDK_QUARTZ_DISALLOWS_TILING NSWindowCollectionBehaviorFullScreenDisallowsTiling
+ #else
+-- 
+2.30.1 (Apple Git-130)
+
