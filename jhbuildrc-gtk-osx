@@ -396,7 +396,7 @@ modulesets_dir = ""
 # A list of the modules to build. You can override this in
 # .jhbuildrc-custom or on the command line.
 #
-modules = [ 'meta-gtk-osx-bootstrap', 'meta-gtk-osx-core' ]
+modules = [ 'meta-gtk-osx-bootstrap', 'meta-gtk-osx-gtk3' ]
 
 # A list of modules to skip.
 #

@@ -33,7 +33,7 @@ if _target is None:
 
 # As can the default modules to build.
 #
-# modules = [ "meta-gtk-osx-core", "meta-gstreamer" ]
+# modules = [ "meta-gtk-osx-gtk3", "meta-gstreamer" ]
 
 # You can skip modules.
 #
