@@ -167,7 +167,7 @@ export DEV_SRC_ROOT="$DEV_SRC_ROOT"
 export PYENV_ROOT="$PYENV_ROOT"
 export PIP_CONFIG_DIR="$PIP_CONFIG_DIR"
 export LANG=C
-eval "$(pyenv init -)"
+eval "$($DEVPREFIX/bin/pyenv init -)"
 EOF
 
 cat <<EOF > "$DEVPREFIX/bin/jhbuild"
@@ -181,7 +181,7 @@ export PATH="$PYENV_ROOT/shims:$DEVPREFIX/bin:$PATH"
 export PYENV_ROOT="$PYENV_ROOT"
 export RUSTUP_HOME="$RUSTUP_HOME"
 
-exec pipenv run jhbuild \$@
+exec $DEVPREFIX/bin/pipenv run jhbuild \$@
 EOF
 
 if test ! -d "$DEVPREFIX/libexec" ; then
@@ -227,7 +227,7 @@ SDKROOT=`xcrun --show-sdk-path`
 export PIPENV_DOTENV_LOCATION="$DEVPREFIX/etc/pipenv-env"
 export PIPENV_PIPFILE="$DEVPREFIX/etc/Pipfile"
 export PATH="$PYENV_ROOT/shims:$DEVPREFIX/bin:$PYENV_INSTALL_ROOT/plugins/python-build/bin:$PATH"
-export PYENV_ROOT
+
 if test -d "$SDKROOT"; then
     export CFLAGS="-isysroot $SDKROOT -I$SDKROOT/usr/include"
 fi
