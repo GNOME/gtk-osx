@@ -132,6 +132,7 @@ def osx_ver():
 
 # Determine the XCode Version:
 def xcode_ver():
+   global conditions
    devdir = _popen("xcode-select -p")
    if devdir != "/Library/Developer/CommandLineTools":
        ver = _popen("xcodebuild -version")
@@ -141,6 +142,8 @@ def xcode_ver():
            _xcode_ver = float(vernum.group(1))
            if _xcode_ver < 5.0:
                raise EnvironmentError("Xcode Version %f is not supported; if you want to build with Xcode versions earlier than 5.0 checkout tag Last-Lion." % _xcode_ver)
+           if _xcode_ver < 10.0:
+               conditions.add('pre-Mavericks')
            return _xcode_ver
        else:
            raise EnvironmentError("No suitable Xcode found. Xcode 5.0 or later is required.")
@@ -236,11 +239,11 @@ osx_ver()
 
 def setup_sdk(target=_target, sdk_version=None, architectures=[_default_arch]):
 
-    global use_local_modulesets
+    global use_local_modulesets, conditions
     os.environ["MACOSX_DEPLOYMENT_TARGET"] = target
     sdkdir = None
     xcodepath = None
-    xcodeversion = None
+    xcodeversion = xcode_ver()
 
     sdkdir = _popen("xcrun --show-sdk-path")
 

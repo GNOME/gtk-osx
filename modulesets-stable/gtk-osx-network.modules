@@ -72,19 +72,21 @@
     </dependencies>
   </autotools>
 
-  <autotools id="gnutls" autogen-sh="autoreconf"
-             autogenargs="--disable-gtk-doc-html --with-included-unistring">
-    <branch repo="gnupg.org" version="3.7.1"
-            module="gcrypt/gnutls/v3.7/gnutls-3.7.1.tar.xz"
-            hash="sha256:3777d7963eca5e06eb315686163b7b3f5045e2baac5e54e038ace9835e5cac6f">
-    </branch>
-    <dependencies>
-      <dep package="libnettle"/>
-      <dep package="libtasn1"/>
-      <dep package="zlib"/>
-      <dep package="p11-kit"/>
-    </dependencies>
-  </autotools>
+  <if condition-unset="pre-Mavericks">
+    <autotools id="gnutls" autogen-sh="autoreconf"
+               autogenargs="--disable-gtk-doc-html --with-included-unistring">
+      <branch repo="gnupg.org" version="3.7.1"
+              module="gcrypt/gnutls/v3.7/gnutls-3.7.1.tar.xz"
+              hash="sha256:3777d7963eca5e06eb315686163b7b3f5045e2baac5e54e038ace9835e5cac6f">
+      </branch>
+      <dependencies>
+        <dep package="libnettle"/>
+        <dep package="libtasn1"/>
+        <dep package="zlib"/>
+        <dep package="p11-kit"/>
+      </dependencies>
+    </autotools>
+  </if>
 
   <autotools id="libgpg-error" autogen-sh="autoreconf"
              autogenargs="--disable-doc">
@@ -147,11 +149,13 @@
   </autotools>
 
   <meson id="glib-networking" mesonargs="-Dopenssl=enabled">
-         <branch module="glib-networking/2.68/glib-networking-2.68.0.tar.xz"
-                 version="2.68.0"
-                 hash="sha256:0b235e85ad26b3c0d12255d0963c460e5a639c4722f78e2a03e969e224b29f6e"/>
+    <branch module="glib-networking/2.68/glib-networking-2.68.0.tar.xz"
+            version="2.68.0"
+            hash="sha256:0b235e85ad26b3c0d12255d0963c460e5a639c4722f78e2a03e969e224b29f6e"/>
     <dependencies>
-      <dep package="gnutls"/>
+      <if condition-unset="pre-Mavericks">
+        <dep package="gnutls"/>
+      </if>
       <dep package="glib"/>
     </dependencies>
   </meson>
