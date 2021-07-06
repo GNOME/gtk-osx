@@ -167,7 +167,6 @@ export DEV_SRC_ROOT="$DEV_SRC_ROOT"
 export PYENV_ROOT="$PYENV_ROOT"
 export PIP_CONFIG_DIR="$PIP_CONFIG_DIR"
 export LANG=C
-eval "$($DEVPREFIX/bin/pyenv init -)"
 EOF
 
 cat <<EOF > "$DEVPREFIX/bin/jhbuild"
@@ -177,7 +176,6 @@ export DEVPREFIX="$DEVPREFIX"
 export PYTHONPATH="$PYTHONPATH"
 export PIPENV_DOTENV_LOCATION="$DEVPREFIX/etc/pipenv-env"
 export PIPENV_PIPFILE="$DEVPREFIX/etc/Pipfile"
-export PATH="$PYENV_ROOT/shims:$DEVPREFIX/bin:$PATH"
 export PYENV_ROOT="$PYENV_ROOT"
 export RUSTUP_HOME="$RUSTUP_HOME"
 
