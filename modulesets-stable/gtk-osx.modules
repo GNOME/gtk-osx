@@ -288,11 +288,8 @@
   <!-- gtk3 is in maintenance mode with 3.24 the final release series. -->
   <meson id="gtk+-3.0"
              mesonargs="-Dquartz-backend=true -Dx11-backend=false -Dmedia=none">
-    <branch module="gtk+/3.24/gtk+-3.24.29.tar.xz" version="3.24.29"
-            hash="sha256:f57ec4ade8f15cab0c23a80dcaee85b876e70a8823d9105f067ce335a8268caa">
-      <patch file="gtk-3-24-29-ensure-drag-source-freed.patch" strip="1"/>
-      <patch file="gtk3-24-29-Fix-macos-max-allowed.patch" strip="1"/>
-      <patch file="gtk3-24-29-build-on-Yosemite.patch" strip="1"/>
+    <branch module="gtk+/3.24/gtk+-3.24.30.tar.xz" version="3.24.30"
+            hash="sha256:ba75bfff320ad1f4cfbee92ba813ec336322cc3c660d406aad014b07087a3ba9">
     </branch>
     <dependencies>
       <dep package="glib"/>
