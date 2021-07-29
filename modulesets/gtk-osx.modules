@@ -11,6 +11,8 @@
               href="https://gitlab.freedesktop.org/jralls/"/>
   <repository type="git" name="nongnu"
 	      href="git://git.sv.nongnu.org/"/>
+  <repository type="tarball" name="hicolor"
+              href="https://icon-theme.freedesktop.org/releases/"/>
   <repository type="system" name="system"/>
 
   <!-- This module set works a bit differently than for example the
@@ -206,6 +208,11 @@
     </dependencies>
   </autotools>
 
+  <autotools id="hicolor-icon-theme">
+    <branch module="hicolor-icon-theme-0.17.tar.xz" version="0.17"
+            repo="hicolor"/>
+  </autotools>
+
   <autotools id="gtk+-3.0"
          autogenargs="--enable-quartz-backend --enable-quartz-relocation --disable-colord">
     <branch module="gtk" checkoutdir="gtk+-3.0" revision="gtk-3-24"/>
@@ -216,6 +223,7 @@
       <dep package="gdk-pixbuf"/>
       <dep package="gobject-introspection"/>
       <dep package="libepoxy"/>
+      <dep package="hicolor-icon-theme"/>
     </dependencies>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>

@@ -10,6 +10,8 @@
   <repository type="git" name="nongnu"
 	      href="git://git.sv.nongnu.org/"/>
   <repository type="tarball" name="pcre" href="https://ftp.pcre.org/pub/"/>
+  <repository type="tarball" name="hicolor"
+              href="https://icon-theme.freedesktop.org/releases/"/>
   <repository type="system" name="system"/>
 
   <!-- This module set works a bit differently than for example the
@@ -218,6 +220,11 @@
     </dependencies>
   </meson>
  
+  <autotools id="hicolor-icon-theme">
+    <branch module="hicolor-icon-theme-0.17.tar.xz" version="0.17"
+            repo="hicolor"/>
+  </autotools>
+
   <meson id="gtk+-3.0"
         mesonargs="-Dquartz-backend=true -Dx11-backend=false -Dmedia=none">
     <branch module="gtk" checkoutdir="gtk+-3.0" revision="gtk-3-24"/>
@@ -228,6 +235,7 @@
       <dep package="atk"/>
       <dep package="gobject-introspection"/>
       <dep package="libepoxy"/>
+      <dep package="hicolor-icon-theme"/>
     </dependencies>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>

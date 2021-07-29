@@ -14,6 +14,8 @@
               href="ftp://ftp.freedesktop.org/pub/"/>
   <repository type="tarball" name="fontconfig"
 	      href="http://www.freedesktop.org/software/fontconfig/release/"/>
+  <repository type="tarball" name="hicolor"
+              href="https://icon-theme.freedesktop.org/releases/"/>
   <repository type="git" name="github" href="git://github.com/"/>
   <repository type="tarball" name="github-tarball" href="https://github.com/"/>
   <repository type="system" name="system"/>
@@ -242,6 +244,11 @@
     </after>
   </meson>
 
+  <autotools id="hicolor-icon-theme">
+    <branch module="hicolor-icon-theme-0.17.tar.xz" version="0.17"
+            repo="hicolor"/>
+  </autotools>
+
   <!-- gtk2 has reached its end-of-life as of December 2020 and 2.24.33 is the final release. -->
   <autotools id="gtk+-2.0" autogen-sh="autoreconf"
              autogenargs="--with-gdktarget=quartz --enable-quartz-relocation --disable-introspection --disable-visibility">
@@ -264,6 +271,7 @@
       <dep package="atk"/>
       <dep package="gdk-pixbuf"/>
       <dep package="gobject-introspection"/>
+      <dep package="hicolor-icon-theme"/>
     </dependencies>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
@@ -298,6 +306,7 @@
       <dep package="gdk-pixbuf"/>
       <dep package="gobject-introspection"/>
       <dep package="libepoxy"/>
+      <dep package="hicolor-icon-theme"/>
     </dependencies>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
