@@ -24,7 +24,9 @@
   <cmake id="graphviz">
     <branch module="2.47.0/graphviz-2.47.0.tar.bz2" version="2.47.0"
             repo="graphviz" 
-            hash="sha256:dade5b374ce483bf28f2e535baef02280ba8ab86fbe6e93252ab0de48396b714"/>
+            hash="sha256:dade5b374ce483bf28f2e535baef02280ba8ab86fbe6e93252ab0de48396b714">
+      <patch file="graphviz-remove-rpath.patch" strip="1"/>
+    </branch>
     <dependencies>
       <dep package="pango"/>
       <dep package="librsvg"/>
