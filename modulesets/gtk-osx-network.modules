@@ -51,12 +51,14 @@
     </dependencies>
   </autotools>
 
-  <autotools id="libtasn1" supports-non-srcdir-builds="no" autogen-sh="configure">
-    <!-- Git repository is missing files required to build libtasn1
+  <autotools id="libtasn1" autogen-sh="configure">
+    <!-- Git repository is missing GnuLib files required to build libtasn1
     <branch repo="git.gnu.org" tag="libtasn1_4_4"  module="libtasn1"/> -->
-    <branch repo="ftp.gnu.org" version="4.16.0"
-            module="libtasn1/libtasn1-4.16.0.tar.gz"
-             hash="sha256:0e0fb0903839117cb6e3b56e68222771bebf22ad7fc2295a0ed7d576e8d4329d"/>
+    <branch repo="ftp.gnu.org" version="4.17.0"
+            module="libtasn1/libtasn1-4.17.0.tar.gz"
+             hash="sha256:ece7551cea7922b8e10d7ebc70bc2248d1fdd73351646a2d6a8d68a9421c45a5">
+      <patch file="libtasn1-inline-fix.patch" strip="1"/>
+    </branch>
   </autotools>
 
   <autotools id="zlib" autogen-sh="configure" skip-autogen="never"
