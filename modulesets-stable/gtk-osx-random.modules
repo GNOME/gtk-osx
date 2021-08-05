@@ -89,7 +89,7 @@
 
   <!-- gtksourceview got a major version ahead: 4.x.x supports recent versions of gtk+-3 and 5.x.x is for gtk4.
   -->
-  <meson id="gtksourceview3">
+  <meson id="gtksourceview3" mesonargs="-Dvapi=false">
     <branch module="gtksourceview/4.8/gtksourceview-4.8.1.tar.xz"
             version="4.8.1"
             hash="sha256:d163d71b5fcafbc5b1eec6dd841edbdbcddd3a7511cd5fdcffd86b8bbfe69ac1">
