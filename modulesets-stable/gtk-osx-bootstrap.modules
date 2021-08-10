@@ -97,6 +97,7 @@
     </dependencies>
     <after>
       <dep package="python3"/>
+      <dep package="pygments"/>
     </after>
   </meson>
 
