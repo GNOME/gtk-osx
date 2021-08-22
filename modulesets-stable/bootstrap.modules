@@ -122,7 +122,7 @@
   -->
   <autotools id="gtk-osx-docbook" autogen-sh="configure"
              supports-non-srcdir-builds="no" >
-    <branch repo="github" module="jralls/gtk-osx-docbook/releases/download/gtk-osx-docbook/gtk-osx-docbook-1.3.tar.bz2"
+   <branch repo="github" module="jralls/gtk-osx-docbook/releases/download/gtk-osx-docbook-1.3/gtk-osx-docbook-1.3.tar.xz"
             version="1.3"
             hash="sha256:fcf497688a1d531b192301bd09c55adefda5a662729a58eb8a895166e38ef219"/>
   </autotools>
