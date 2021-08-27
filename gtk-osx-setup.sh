@@ -57,8 +57,6 @@ envvar DEV_SRC_ROOT "$DEVROOT/Source"
 envvar PYENV_INSTALL_ROOT "$DEV_SRC_ROOT/pyenv"
 envvar PYENV_ROOT "$DEVPREFIX/share/pyenv"
 envvar PIP_CONFIG_DIR "$HOME/.config/pip"
-envvar CARGO_HOME "$DEVPREFIX"
-envvar RUSTUP_HOME "$DEVPREFIX"
 
 export PYTHONWARNINGS=ignore:DEPRECATION::pip._internal.cli.base_command
 export PYTHONPATH="$PYTHONUSERBASE/lib/python/site-packages":"$PYTHONPATH"
@@ -138,7 +136,27 @@ fi
 
 #Install Rust (required for librsvg, which gtk needs to render its icons.)
 RUSTUP=`which rustup`
-if test ! -x "$RUSTUP" -a ! -x "$DEVPREFIX/bin/rustup"; then
+if test -x "$RUSTUP"; then
+    case `dirname "$RUSTUP"` in
+        "$DEVPREFIX"*)
+            DEFAULT_CARGO_HOME=$(dirname $(dirname "$RUSTUP"))
+            envvar CARGO_HOME "$DEFAULT_CARGO_HOME"
+            CARGO_HOME_DIR=$(basename "$CARGO_HOME")
+            if test "$CARGO_HOME_DIR" == "cargo"; then
+                CARGO_HOME_BASE=$(dirname "$CARGO_HOME")
+                envvar RUSTUP_HOME "$CARGO_HOME_BASE"/rustup
+            else
+                envvar RUSTUP_HOME "$CARGO_HOME"
+            fi
+            ;;
+        *)
+            envvar CARGO_HOME "$HOME/.cargo"
+            envvar RUSTUP_HOME "$HOME/.rustup"
+            ;;
+    esac
+else
+    envvar CARGO_HOME "$DEVPREFIX"
+    envvar RUSTUP_HOME "$DEVPREFIX"
     curl https://sh.rustup.rs -sSf | sh -s -- -y --profile minimal
 fi
 
@@ -177,6 +195,7 @@ export PYTHONPATH="$PYTHONPATH"
 export PIPENV_DOTENV_LOCATION="$DEVPREFIX/etc/pipenv-env"
 export PIPENV_PIPFILE="$DEVPREFIX/etc/Pipfile"
 export PYENV_ROOT="$PYENV_ROOT"
+export CARGO_HOME="$CARGO_HOME"
 export RUSTUP_HOME="$RUSTUP_HOME"
 
 exec $DEVPREFIX/bin/pipenv run jhbuild \$@
