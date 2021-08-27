@@ -83,7 +83,7 @@ if test ! -x "$PYENV_INSTALL_ROOT/libexec/pyenv"; then
   git clone $GITHUB/pyenv/pyenv.git "$PYENV_INSTALL_ROOT"
 else
     pushd "$PYENV_INSTALL_ROOT"
-    git pull
+    git pull --ff-only
     popd
 fi
 
