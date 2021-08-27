@@ -117,13 +117,14 @@ $PIP install --upgrade --user pipenv==2020.11.15
 pip_remove typing
 PIPENV="$PYTHONUSERBASE/bin/pipenv"
 
+JHUILD_RELEASE_VERSION=3.38.0
 # Install jhbuild
 if test ! -d "$DEV_SRC_ROOT/jhbuild/.git" ; then
-    git clone -b 3.36.0 $GITLAB/jhbuild.git "$DEV_SRC_ROOT/jhbuild"
+    git clone -b $JHBUILD_RELEASE_VERSION $GITLAB/jhbuild.git "$DEV_SRC_ROOT/jhbuild"
     cd "$DEV_SRC_ROOT/jhbuild"
 else #Get the latest if it's already installed
     cd "$DEV_SRC_ROOT/jhbuild"
-    git reset --hard 3.38.0
+    git reset --hard $JHBUILD_RELEASE_VERSION
 fi
 
 # Install Ninja
