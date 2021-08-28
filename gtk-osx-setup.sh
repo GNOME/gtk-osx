@@ -117,7 +117,7 @@ $PIP install --upgrade --user pipenv==2020.11.15
 pip_remove typing
 PIPENV="$PYTHONUSERBASE/bin/pipenv"
 
-JHUILD_RELEASE_VERSION=3.38.0
+JHBUILD_RELEASE_VERSION=3.38.0
 # Install jhbuild
 if test ! -d "$DEV_SRC_ROOT/jhbuild/.git" ; then
     git clone -b $JHBUILD_RELEASE_VERSION $GITLAB/jhbuild.git "$DEV_SRC_ROOT/jhbuild"
