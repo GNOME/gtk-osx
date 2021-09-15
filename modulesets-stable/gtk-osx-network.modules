@@ -213,7 +213,7 @@
       <patch file="WebKit2Gtk3-2.32.0-cumulative.patch" strip="1"/>
       <patch file="WebKit2Gtk3-2.30.1-Disable-AUDIT_TOKEN-for-Gtk-builds.patch" strip="1"/>
       <patch file="WebKit2Gtk3-2.30.1-Fix-Socket-signal-defines-for-Darwin-and-maybe-BSD.patch" strip="1"/>
-      <patch file="WebKit2Gtk3-2.32.0-color-components-correct-math-header.patch? strip="1"/>
+      <patch file="WebKit2Gtk3-2.32.0-color-components-correct-math-header.patch" strip="1"/>
     </branch>
     <dependencies>
       <dep package="libwebp"/>
