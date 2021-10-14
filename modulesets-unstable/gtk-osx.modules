@@ -256,7 +256,7 @@
   </autotools>
 
   <meson id="gtk+-4.0"
-             mesonargs="-Dquartz-backend=true -Dx11-backend=false -Dmedia=none">
+             mesonargs="-Dquartz-backend=true -Dx11-backend=false -Dmedia-gstreamer=disabled">
     <branch module="gtk" checkoutdir="gtk-4.0"/>
     <dependencies>
       <dep package="glib"/>

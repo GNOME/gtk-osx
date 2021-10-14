@@ -611,6 +611,7 @@ if not _ran_recursively and _gtk_osx_prompt_prefix:
 # Note that this will break if there's an undetected python3 build and
 # the built python is a different major + minor version from the
 # virtenv one.
+print('\n'.join(modules))
 if 'python3' in modules or 'meta-gtk-osx-python3' in modules:
     os.environ['PYTHON'] = os.path.join(prefix, 'bin', 'python3')
     module_extra_env['pkg-config'] = {'PYTHON':sys.executable}
