@@ -126,7 +126,10 @@ def osx_ver():
     exp = re.compile(r'(\d+\.\d+)\.\d+')
     vernum = exp.match(vstring)
     _osx_version = float(vernum.group(1)) - 4.0
-    _target = '10.%d' % int(_osx_version)
+    if _osx_version < 16:
+        _target = '10.%d' % int(_osx_version)
+    else:
+        _target = '%d' % (_osx_version - 5)
 
     _default_arch = _popen("uname -m")
 
