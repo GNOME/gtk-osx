@@ -98,17 +98,41 @@ if test ! -f "`eval echo $PIP_CONFIG_FILE`" ; then
     export PIP_CONFIG_FILE="$PIP_CONFIG_DIR/pip.conf"
     mkdir -p "$PIP_CONFIG_DIR"
 fi
-PIP=`which pip`
-if test ! -x "`eval echo $PIP`" ; then
-    mv=`python --version 2>&1 | cut -b 12-13`
-    if test $mv -lt 11 ; then
-        curl https://bootstrap.pypa.io/pip/2.7/get-pip.py -o "$DEVPREFIX/get-pip.py"
-        python "$DEVPREFIX/get-pip.py" --user
-        rm "$DEVPREFIX/get-pip.py"
+# What flavor of python is available?
+
+if test "x$PYTHON" = "x"; then
+    PYTHON3=`which python3`
+    if test "x$PYTHON3" != "x"; then
+        PYTHON=$PYTHON3
+        PYVER=3
     else
-        python -m ensurepip --user
+        PYTHON=`which python`
+        if test "x$PYTHON" != "x"; then
+            PYVER=`python --version 2>&1 | cut -d ' ' -f 2 | cut -d . -f 1`
+        else
+            echo "No Python interpreter found, quitting."
+            exit 1
+        fi
     fi
-    PIP="$PYTHONUSERBASE/bin/pip"
+else
+    PYVER=`$PYTHON --version 2>&1 | cut -d ' ' -f 2 | cut -d . -f 1`
+fi
+
+PIP="$PYTHON -m pip"
+pip_name=`$PIP --version | cut -d ' ' -f 1`
+if test "x$pip_name" != "xpip"; then
+    if test a $PYVER -eq 2; then
+        mv=`$PYTHON --version 2>&1 |  cut -d ' ' -f 2 | cut -d . -f 3`
+        if test $mv -lt 11 ; then
+            curl https://bootstrap.pypa.io/pip/2.7/get-pip.py -o "$DEVPREFIX/get-pip.py"
+            $PYTHON "$DEVPREFIX/get-pip.py" --user
+            rm "$DEVPREFIX/get-pip.py"
+        else
+            $PYTHON -m ensurepip --user
+        fi
+    else
+        $PYTHON -m ensurepip --user
+    fi
 fi
 $PIP install --upgrade --user pip
 
