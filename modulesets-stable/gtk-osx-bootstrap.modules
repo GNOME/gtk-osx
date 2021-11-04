@@ -41,7 +41,7 @@
     <branch version="4.2.0" module="libtiff/tiff-4.2.0.tar.gz"
             repo="libtiff"
             hash="sha256:eb0484e568ead8fa23b513e9b0041df7e327f4ee2d22db5a533929dfc19633cb">
-	<patch file="https://raw.githubusercontent.com/totaam/gtk-osx-build/master/patches/tiff-nohtml.patch" strip="1" />
+	<patch file="tiff-nohtml.patch" strip="1" />
     </branch>
     <dependencies>
       <dep package="libjpeg"/>
