@@ -193,7 +193,7 @@
     </after>
  </meson>
 
-  <meson id="gdk-pixbuf" mesonargs="-Dx11=false -Dman=false">
+  <meson id="gdk-pixbuf" mesonargs="-Drelocatable=true -Dman=false">
     <branch />
     <after>
       <dep package="pango"/>
@@ -225,8 +225,7 @@
             repo="hicolor"/>
   </autotools>
 
-  <meson id="gtk+-3.0"
-        mesonargs="-Dquartz-backend=true -Dx11-backend=false -Dmedia=none">
+  <meson id="gtk+-3.0">
     <branch module="gtk" checkoutdir="gtk+-3.0" revision="gtk-3-24"/>
     <dependencies>
       <dep package="glib"/>

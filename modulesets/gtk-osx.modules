@@ -187,7 +187,7 @@
     </after>
   </meson>
 
-  <meson id="gdk-pixbuf" mesonargs="-Dx11=false -Dman=false">
+  <meson id="gdk-pixbuf" mesonargs="-Drelocatable=true -Dman=false">
     <!--gdk-pixbuf is releasing from master-->
     <branch tag="2.42.4"/>
     <dependencies>
@@ -213,8 +213,7 @@
             repo="hicolor"/>
   </autotools>
 
-  <autotools id="gtk+-3.0"
-         autogenargs="--enable-quartz-backend --enable-quartz-relocation --disable-colord">
+  <autotools id="gtk+-3.0">
     <branch module="gtk" checkoutdir="gtk+-3.0" revision="gtk-3-24"/>
     <dependencies>
       <dep package="glib"/>
