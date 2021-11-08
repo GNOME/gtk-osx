@@ -85,55 +85,21 @@ else
     popd
 fi
 
-if test ! -x "$DEVPREFIX/bin/pyenv" ; then
+PYENV="$DEVPREFIX/bin/pyenv"
+
+if test ! -x "$PYENV" ; then
     ln -s "$PYENV_INSTALL_ROOT/bin/pyenv" "$DEVPREFIX/bin"
 fi
 
-# Setup PIP; note that we're assuming that python is the system python
-# at this point. Having set $PYTHONUSERBASE, pip will be installed in
-# $PYTHONUSERBASE/bin and the requisite modules will go in
-# $PYTHONUSERBASE/lib/python/site-packages.
+#Force installation and we hope use of Python with PyEnv. We must
+#avoid using the Apple-provided Python2 because jhbuild doesn't work
+#with python2 any more, and the Apple-provided python3 because it
+#doesn't include a usable libpython for libxml2 to link against.
 
-if test ! -f "`eval echo $PIP_CONFIG_FILE`" ; then
-    export PIP_CONFIG_FILE="$PIP_CONFIG_DIR/pip.conf"
-    mkdir -p "$PIP_CONFIG_DIR"
-fi
-# What flavor of python is available?
-
-if test "x$PYTHON" = "x"; then
-    PYTHON3=`which python3`
-    if test "x$PYTHON3" != "x"; then
-        PYTHON=$PYTHON3
-        PYVER=3
-    else
-        PYTHON=`which python`
-        if test "x$PYTHON" != "x"; then
-            PYVER=`python --version 2>&1 | cut -d ' ' -f 2 | cut -d . -f 1`
-        else
-            echo "No Python interpreter found, quitting."
-            exit 1
-        fi
-    fi
-else
-    PYVER=`$PYTHON --version 2>&1 | cut -d ' ' -f 2 | cut -d . -f 1`
-fi
-
-PIP="$PYTHON -m pip"
-pip_name=`$PIP --version | cut -d ' ' -f 1`
-if test "x$pip_name" != "xpip"; then
-    if test a $PYVER -eq 2; then
-        mv=`$PYTHON --version 2>&1 |  cut -d ' ' -f 2 | cut -d . -f 3`
-        if test $mv -lt 11 ; then
-            curl https://bootstrap.pypa.io/pip/2.7/get-pip.py -o "$DEVPREFIX/get-pip.py"
-            $PYTHON "$DEVPREFIX/get-pip.py" --user
-            rm "$DEVPREFIX/get-pip.py"
-        else
-            $PYTHON -m ensurepip --user
-        fi
-    else
-        $PYTHON -m ensurepip --user
-    fi
-fi
+export PYTHON_CONFIGURE_OPTS="--enable-shared"
+export PYENV_VERSION=3.10.0
+$PYENV install $PYENV_VERSION
+PIP="$PYENV_ROOT/shims/pip"
 $PIP install --upgrade --user pip
 
 # Install pipenv
@@ -182,13 +148,14 @@ if test -x "$RUSTUP"; then
 else
     envvar CARGO_HOME "$DEVPREFIX"
     envvar RUSTUP_HOME "$DEVPREFIX"
-    curl https://sh.rustup.rs -sSf | sh -s -- -y --profile minimal
+    curl https://sh.rustup.rs -sSf | sh -s -- -y --profile minimal --no-modify-path 
 fi
 
 if test ! -d "$DEVPREFIX/etc" ; then
     mkdir -p "$DEVPREFIX/etc"
 fi
 
+PYENV_MINOR_VERSION=$(echo $PYENV_VERSION | cut -d . -f 1,2)
 cat  <<EOF > "$DEVPREFIX/etc/Pipfile"
 [[source]]
 url = "https://pypi.python.org/simple"
@@ -202,7 +169,7 @@ meson = {version=">=0.56.0"}
 jhbuild = "$DEVPREFIX/libexec/run_jhbuild.py"
 
 [requires]
-python_version = "3.8"
+python_version = "$PYENV_MINOR_VERSION"
 EOF
 cat <<EOF > "$DEVPREFIX/etc/pipenv-env"
 export PYTHONUSERBASE="$PYTHONUSERBASE"
@@ -220,6 +187,8 @@ export PYTHONPATH="$PYTHONPATH"
 export PIPENV_DOTENV_LOCATION="$DEVPREFIX/etc/pipenv-env"
 export PIPENV_PIPFILE="$DEVPREFIX/etc/Pipfile"
 export PYENV_ROOT="$PYENV_ROOT"
+export PYENV_VERSION="$PYENV_VERSION"
+export PATH="$PYENV_ROOT/shims:$PATH"
 export CARGO_HOME="$CARGO_HOME"
 export RUSTUP_HOME="$RUSTUP_HOME"
 
@@ -262,7 +231,9 @@ if test "x`echo $PATH | grep "$DEVPREFIX/bin"`" == x ; then
 fi
 # pipenv wants enum34 because it's installed with Py2 but that conflicts
 # with Py3 so remove it.
-pip_remove enum34
+if test $PYVER -eq 3; then
+    pip_remove enum34
+fi
 
 SDKROOT=`xcrun --show-sdk-path`
 
@@ -273,7 +244,6 @@ export PATH="$PYENV_ROOT/shims:$DEVPREFIX/bin:$PYENV_INSTALL_ROOT/plugins/python
 if test -d "$SDKROOT"; then
     export CFLAGS="-isysroot $SDKROOT -I$SDKROOT/usr/include"
 fi
-export PYTHON_CONFIGURE_OPTS="--enable-shared"
 
 $PIPENV install
 
