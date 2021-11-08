@@ -64,7 +64,7 @@
   <autotools id="zlib" autogen-sh="configure" skip-autogen="never"
              supports-non-srcdir-builds="no">
     <branch repo="sourceforge" version="1.2.11"
-            module="libpng/zlib-1.2.11.tar.gz"
+            module="libpng/zlib-1.2.11.tar.xz"
             hash="sha256:4ff941449631ace0d4d203e3483be9dbc9da454084111f97ea0a2114e19bf066"/>
   </autotools>
 
