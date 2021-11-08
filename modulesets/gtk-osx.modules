@@ -6,9 +6,7 @@
               href="https://gitlab.gnome.org/GNOME"/>
   <repository type="git" name="github" href="git://github.com/"/>
   <repository type="git" name="freedesktop"
-              href="git://gitlab.freedesktop.org/"/>
-  <repository type="git" name="freedesktop-jralls"
-              href="https://gitlab.freedesktop.org/jralls/"/>
+              href="https://gitlab.freedesktop.org/"/>
   <repository type="git" name="nongnu"
 	      href="git://git.sv.nongnu.org/"/>
   <repository type="tarball" name="hicolor"
@@ -111,7 +109,7 @@
   </autotools>
 
   <autotools id="pixman" autogenargs="--disable-gtk --disable-mmx">
-    <branch repo="freedesktop" module="pixman/pixman" revision="0.40.0"/>
+    <branch repo="freedesktop" module="pixman/pixman" revision="pixman-0.40.0"/>
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
     </after>
@@ -122,7 +120,7 @@
        they are both built into cairo. -->
   <autotools id="cairo"
              autogenargs="--enable-pdf --enable-quartz --disable-xlib --without-x">
-    <branch repo="freedesktop-jralls" module="cairo/cairo" branch="1.16"/>
+    <branch repo="freedesktop" module="jralls/cairo" branch="1.16"/>
     <dependencies>
       <dep package="pixman"/>
       <dep package="meta-gtk-osx-bootstrap"/>
