@@ -225,7 +225,7 @@
             repo="hicolor"/>
   </autotools>
 
-  <meson id="gtk+-3.0">
+  <meson id="gtk+-3.0" mesonargs="-Dx11_backend=false">
     <branch module="gtk" checkoutdir="gtk+-3.0" revision="gtk-3-24"/>
     <dependencies>
       <dep package="glib"/>
