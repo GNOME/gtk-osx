@@ -366,7 +366,8 @@
             hash="sha256:767ec234ae7aa684695b3a735548224888132e063f92db585759b422570621d4"/>
   </autotools>
 
-  <autotools id="librsvg" autogenargs="--disable-Bsymbolic">
+  <autotools id="librsvg" autogen-sh="autoreconf"
+             autogenargs="--disable-Bsymbolic">
     <branch module="librsvg/2.51/librsvg-2.51.0.tar.xz" version="2.51.0"
             hash="sha256:89d32e38445025e1b1d9af3dd9d3aeb9f6fce527aeecbecf38b369b34c80c038"/>
     <dependencies>
