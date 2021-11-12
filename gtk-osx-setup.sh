@@ -59,7 +59,6 @@ envvar PYENV_ROOT "$DEVPREFIX/share/pyenv"
 envvar PIP_CONFIG_DIR "$HOME/.config/pip"
 
 export PYTHONWARNINGS=ignore:DEPRECATION::pip._internal.cli.base_command
-export PYTHONPATH="$PYTHONUSERBASE/lib/python/site-packages":"$PYTHONPATH"
 
 if test ! -d "$DEVPREFIX/bin" ; then
     mkdir -p "$DEVPREFIX/bin"
@@ -104,8 +103,8 @@ $PIP install --upgrade --user pip
 
 # Install pipenv
 $PIP install --upgrade --user pipenv==2020.11.15
-pip_remove typing
 PIPENV="$PYTHONUSERBASE/bin/pipenv"
+export WORKON_HOME=$DEVPREFIX/share/virtualenvs
 
 JHBUILD_RELEASE_VERSION=3.38.0
 # Install jhbuild
@@ -114,6 +113,7 @@ if test ! -d "$DEV_SRC_ROOT/jhbuild/.git" ; then
     cd "$DEV_SRC_ROOT/jhbuild"
 else #Get the latest if it's already installed
     cd "$DEV_SRC_ROOT/jhbuild"
+    git pull
     git reset --hard $JHBUILD_RELEASE_VERSION
 fi
 
@@ -183,7 +183,7 @@ cat <<EOF > "$DEVPREFIX/bin/jhbuild"
 #!$DEVPREFIX/bin/bash
 export DEVROOT="$DEVROOT"
 export DEVPREFIX="$DEVPREFIX"
-export PYTHONPATH="$PYTHONPATH"
+export PYTHONUSERBASE="$PYTHONUSERBASE"
 export PIPENV_DOTENV_LOCATION="$DEVPREFIX/etc/pipenv-env"
 export PIPENV_PIPFILE="$DEVPREFIX/etc/Pipfile"
 export PYENV_ROOT="$PYENV_ROOT"
@@ -191,6 +191,7 @@ export PYENV_VERSION="$PYENV_VERSION"
 export PATH="$PYENV_ROOT/shims:$PATH"
 export CARGO_HOME="$CARGO_HOME"
 export RUSTUP_HOME="$RUSTUP_HOME"
+export WORKON_HOME="$WORKON_HOME"
 
 exec $DEVPREFIX/bin/pipenv run jhbuild \$@
 EOF
