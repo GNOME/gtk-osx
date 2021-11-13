@@ -287,6 +287,7 @@ def setup_sdk(target=_target, sdk_version=None, architectures=[_default_arch]):
         append_autogenargs("openssl", "darwin64-x86_64-cc #")
     elif architectures == ["arm64"]:
         conditions.add('64-bit')
+        conditions.add('arm64')
         append_autogenargs("glib", "ac_cv_c_bigendian=no")
         append_autogenargs("openssl", "darwin64-arm64-cc #") # Not a legal value
     elif len(set(architectures) - {"i386",  "x86_64", 'arm64'}) > 0:
