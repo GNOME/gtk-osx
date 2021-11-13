@@ -42,7 +42,7 @@
   <!-- Assembler files are missing md5-compress.asm for x86_64 -->
   <autotools id="libnettle"
              autogenargs="--disable-documentation --disable-assembler"
-             autogen-template="autoreconf -fis &amp;&amp; %(srcdir)s/configure --prefix %(prefix)s  %(autogenargs)s">
+             autogen-sh="autoreconf">
     <branch repo="lysator" module="nettle/nettle.git"
             tag="nettle_3.7.2_release_20210321"/>
     <dependencies>
