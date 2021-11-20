@@ -227,7 +227,7 @@
     </after>
   </meson>
 
-  <meson id="graphene" mesonargs="-Dtests=false -Dbenchmarks=false">
+  <meson id="graphene" mesonargs="-Dtests=false">
     <branch repo="github" revision="1.10.4" module="ebassi/graphene"/>
     <dependencies>
       <dep package="glib"/>
