@@ -247,6 +247,7 @@
       <dep package="glib"/>
       <dep package="pango"/>
       <dep package="atk"/>
+      <dep package="gdk-pixbuf"/>
       <dep package="graphene"/>
       <dep package="libsass"/>
       <dep package="libepoxy"/>
