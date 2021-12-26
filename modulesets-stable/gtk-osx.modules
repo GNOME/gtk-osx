@@ -314,7 +314,7 @@
     </after>
   </meson>
 
-  <meson id="graphene" mesonargs="-Dtests=false -Dbenchmarks=false">
+  <meson id="graphene" mesonargs="-Dtests=false">
     <branch repo="github-tarball" version="1.10.4"
             module="ebassi/graphene/releases/download/1.10.4/graphene-1.10.4.tar.xz"
             hash="sha256:b2a45f230f332478553bd79666eca8df1d1c6dbf208c344ba9f5120592772414"/>
@@ -339,6 +339,7 @@
       <dependencies>
       <dep package="pango"/>
       <dep package="atk"/>
+      <dep package="gdk-pixbuf"/>
       <dep package="graphene"/>
       <dep package="libsass"/>
       <dep package="libepoxy"/>
@@ -366,7 +367,8 @@
             hash="sha256:767ec234ae7aa684695b3a735548224888132e063f92db585759b422570621d4"/>
   </autotools>
 
-  <autotools id="librsvg" autogenargs="--disable-Bsymbolic">
+  <autotools id="librsvg" autogen-sh="autoreconf"
+             autogenargs="--disable-Bsymbolic">
     <branch module="librsvg/2.51/librsvg-2.51.0.tar.xz" version="2.51.0"
             hash="sha256:89d32e38445025e1b1d9af3dd9d3aeb9f6fce527aeecbecf38b369b34c80c038"/>
     <dependencies>

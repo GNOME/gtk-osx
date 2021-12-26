@@ -287,6 +287,7 @@ def setup_sdk(target=_target, sdk_version=None, architectures=[_default_arch]):
         append_autogenargs("openssl", "darwin64-x86_64-cc #")
     elif architectures == ["arm64"]:
         conditions.add('64-bit')
+        conditions.add('arm64')
         append_autogenargs("glib", "ac_cv_c_bigendian=no")
         append_autogenargs("openssl", "darwin64-arm64-cc #") # Not a legal value
     elif len(set(architectures) - {"i386",  "x86_64", 'arm64'}) > 0:
@@ -626,9 +627,9 @@ else:
     append_autogenargs('libxml2',
                        '--with-python-install-dir=' + _python_install_path)
     environ_append('PYTHONPATH', _python_install_path, ':')
-    python_library_path = os.path.join(os.environ['PYENV_ROOT'], 'versions',
+    _python_library_path = os.path.join(os.environ['PYENV_ROOT'], 'versions',
                                        os.environ['PYENV_VERSION'], 'lib')
-    environ_append('LDFLAGS', '-L' + python_library_path)
+    environ_append('LDFLAGS', '-L' + _python_library_path)
     os.environ['PYTHON'] = sys.executable
 
 module_extra_env["pygtk"] = {'PYTHON':os.path.join(prefix, 'bin', 'python2')}
