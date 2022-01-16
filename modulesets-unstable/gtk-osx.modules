@@ -169,7 +169,7 @@
   </meson>
 
   <meson id="pango">
-    <branch />
+    <branch revision="main" />
     <dependencies>
       <dep package="glib"/>
       <dep package="cairo"/>
@@ -283,7 +283,7 @@
   </autotools>
 
   <autotools id="librsvg" autogenargs="--disable-Bsymbolic">
-    <branch module="librsvg"/>
+    <branch module="librsvg" revision="main"/>
     <dependencies>
       <dep package="libcroco"/>
       <dep package="freetype"/>
