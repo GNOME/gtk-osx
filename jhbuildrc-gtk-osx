@@ -628,7 +628,7 @@ else:
                        '--with-python-install-dir=' + _python_install_path)
     environ_append('PYTHONPATH', _python_install_path, ':')
     _python_library_path = os.path.join(os.environ['PYENV_ROOT'], 'versions',
-                                       os.environ['PYENV_VERSION'], 'lib')
+                                       os.environ['PYENV_PYTHON_VERSION'], 'lib')
     environ_append('LDFLAGS', '-L' + _python_library_path)
     os.environ['PYTHON'] = sys.executable
 
