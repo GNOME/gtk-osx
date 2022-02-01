@@ -173,7 +173,7 @@
     <branch module="gobject-introspection/1.70/gobject-introspection-1.70.0.tar.xz"
             version="1.70.0"
             hash="sha256:902b4906e3102d17aa2fcb6dad1c19971c70f2a82a159ddc4a94df73a3cafc4a">
-      <patch file="gobject-introspection-1.70.0-obsolet.patch" strip="1"/>XS
+      <patch file="gobject-introspection-1.70.0-obsolet.patch" strip="1"/>
       <patch file="girscanner-objc.patch" strip="1"/>
     </branch>
     <dependencies>

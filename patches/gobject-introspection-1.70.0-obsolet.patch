@@ -93,7 +93,7 @@ index eb2bc5c9..bb4873e0 100644
 +++ b/meson.build
 @@ -1,6 +1,6 @@
  project('gobject-introspection', 'c',
-   version: '1.71.0',
+   version: '1.70.0',
 -  meson_version: '>= 0.55.3',
 +  meson_version: '>= 0.58.2',
    default_options: [
