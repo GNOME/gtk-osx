@@ -616,6 +616,9 @@ if not _ran_recursively and _gtk_osx_prompt_prefix:
 # the built python is a different major + minor version from the
 # virtenv one.
 
+# Note that PYENV_VERSION sets the version of python that pyenv uses,
+# not pyenv's own version. It's defined by pyenv and can't be changed.
+
 if ('python3' in modules or 'meta-gtk-osx-python3' in modules or
     'pygments' in modules):
     os.environ['PYTHON'] = os.path.join(prefix, 'bin', 'python3')
@@ -628,7 +631,7 @@ else:
                        '--with-python-install-dir=' + _python_install_path)
     environ_append('PYTHONPATH', _python_install_path, ':')
     _python_library_path = os.path.join(os.environ['PYENV_ROOT'], 'versions',
-                                       os.environ['PYENV_PYTHON_VERSION'], 'lib')
+                                       os.environ['PYENV_VERSION'], 'lib')
     environ_append('LDFLAGS', '-L' + _python_library_path)
     os.environ['PYTHON'] = sys.executable
 

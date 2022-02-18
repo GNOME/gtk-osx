@@ -57,6 +57,7 @@ envvar DEV_SRC_ROOT "$DEVROOT/Source"
 envvar PYENV_INSTALL_ROOT "$DEV_SRC_ROOT/pyenv"
 envvar PYENV_ROOT "$DEVPREFIX/share/pyenv"
 envvar PIP_CONFIG_DIR "$HOME/.config/pip"
+envvar PYTHON_VERSION 3.10.0
 
 export PYTHONWARNINGS=ignore:DEPRECATION::pip._internal.cli.base_command
 
@@ -96,8 +97,10 @@ fi
 #doesn't include a usable libpython for libxml2 to link against.
 
 export PYTHON_CONFIGURE_OPTS="--enable-shared"
-export PYENV_PYTHON_VERSION=3.10.0
-$PYENV install -v $PYENV_PYTHON_VERSION
+#This really means pyenv's *python* version. It's poorly named but
+#it's defined by pyenv so it can't be changed.
+export PYENV_VERSION=$PYTHON_VERSION
+$PYENV install -v $PYENV_VERSION
 PIP="$PYENV_ROOT/shims/pip3"
 
 $PIP install --upgrade --user pip
@@ -156,7 +159,7 @@ if test ! -d "$DEVPREFIX/etc" ; then
     mkdir -p "$DEVPREFIX/etc"
 fi
 
-PYENV_MINOR_VERSION=$(echo $PYENV_PYTHON_VERSION | cut -d . -f 1,2)
+PYENV_MINOR_VERSION=$(echo $PYENV_VERSION | cut -d . -f 1,2)
 cat  <<EOF > "$DEVPREFIX/etc/Pipfile"
 [[source]]
 url = "https://pypi.python.org/simple"
@@ -188,7 +191,7 @@ export PYTHONUSERBASE="$PYTHONUSERBASE"
 export PIPENV_DOTENV_LOCATION="$DEVPREFIX/etc/pipenv-env"
 export PIPENV_PIPFILE="$DEVPREFIX/etc/Pipfile"
 export PYENV_ROOT="$PYENV_ROOT"
-export PYENV_PYTHON_VERSION="$PYENV_PYTHON_VERSION"
+export PYENV_VERSION="$PYENV_VERSION"
 export PATH="$PYENV_ROOT/shims:\$PATH"
 export CARGO_HOME="$CARGO_HOME"
 export RUSTUP_HOME="$RUSTUP_HOME"
