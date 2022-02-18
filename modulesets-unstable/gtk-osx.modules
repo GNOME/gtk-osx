@@ -93,11 +93,8 @@
     <dependencies>
       <dep package="glib"/>
       <dep package="freetype-no-harfbuzz"/>
-    </dependencies>
-    <after>
       <dep package="icu"/>
-      <dep package="icu55"/>
-    </after>
+    </dependencies>
   </meson>
   
   <cmake id="freetype" cmakeargs="-DCMAKE_DISABLE_FIND_PACKAGE_BZip2=TRUE -D BUILD_SHARED_LIBS=TRUE -D CMAKE_BUILD_TYPE=Release">
