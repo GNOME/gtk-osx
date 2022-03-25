@@ -123,8 +123,7 @@
   <!-- cairo doesn't really need fontconfig, but if Pango finds
        freetype it insists that it has to have fontconfig too and that
        they are both built into cairo. -->
-  <autotools id="cairo"
-             autogenargs="--enable-pdf --enable-quartz --disable-xlib --without-x">
+  <meson id="cairo">
     <branch repo="freedesktop" module="cairo/cairo" />
     <dependencies>
       <dep package="pixman"/>
@@ -133,7 +132,7 @@
     </dependencies>
     <after>
     </after>
-  </autotools>
+  </meson>
 
   <meson id="gobject-introspection">
     <branch/>

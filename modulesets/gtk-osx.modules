@@ -62,10 +62,17 @@
     <branch module="atgreen/libffi" repo="github" tag="v3.3"/>
   </autotools>
 
+  <autotools id="libpcre" autogen-sh="configure">
+    <branch repo="pcre" version="8.45"
+            module="pcre/pcre-8.45.tar.bz2"
+            hash="sha256:4dae6fdcd2bb0bb6c37b5f97c33c2be954da743985369cddac3546e3218bffb8"/>
+  </autotools>
+  
   <meson id="glib" mesonargs="-Dinternal_pcre=true -Dlibmount=disabled">
-    <branch tag="glib-2-68"/>
+    <branch tag="glib-2-72"/>
     <dependencies>
       <dep package="libffi"/>
+      <dep package="libpcre"/>
     </dependencies>
   </meson>
 
@@ -74,14 +81,14 @@
        then build harfbuzz without cairo because cairo requires
        harfbuzz. -->
   <cmake id="freetype-no-harfbuzz" cmakeargs="-DCMAKE_DISABLE_FIND_PACKAGE_HarfBuzz=TRUE -DCMAKE_DISABLE_FIND_PACKAGE_BZip2=TRUE -D BUILD_SHARED_LIBS=true -D CMAKE_BUILD_TYPE=Release">
-    <branch module="freetype/freetype2" repo="nongnu" revision="VER-2-10-4"/>
+    <branch module="freetype/freetype2" repo="nongnu" revision="VER-2-11-1"/>
     <dependencies>
       <dep package="zlib"/>
     </dependencies>
   </cmake>
 
   <meson id="harfbuzz-no-cairo" mesonargs="-Dcoretext=enabled -Ddocs=disabled -Dbenchmark=disabled">
-    <branch repo="github" module="harfbuzz/harfbuzz" tag="2.8.0"/>
+    <branch repo="github" module="harfbuzz/harfbuzz" tag="4.1.0"/>
     <dependencies>
       <dep package="glib"/>
       <dep package="freetype-no-harfbuzz"/>
@@ -93,7 +100,7 @@
   </meson>
 
   <cmake id="freetype" cmakeargs="-DCMAKE_DISABLE_FIND_PACKAGE_BZip2=TRUE -D BUILD_SHARED_LIBS=true -D CMAKE_BUILD_TYPE=Release">
-    <branch module="freetype/freetype2" repo="nongnu" revision="VER-2-10-4"/>
+    <branch module="freetype/freetype2" repo="nongnu" revision="VER-2-11-1"/>
     <dependencies>
       <dep package="harfbuzz-no-cairo"/>
       <dep package="zlib"/>
@@ -118,9 +125,8 @@
   <!-- cairo doesn't really need fontconfig, but if Pango finds
        freetype it insists that it has to have fontconfig too and that
        they are both built into cairo. -->
-  <autotools id="cairo"
-             autogenargs="--enable-pdf --enable-quartz --disable-xlib --without-x">
-    <branch repo="freedesktop" module="jralls/cairo" branch="1.16"/>
+  <meson id="cairo"
+    <branch repo="freedesktop" module="cairo/cairo" tag="1.17.6"/>
     <dependencies>
       <dep package="pixman"/>
       <dep package="meta-gtk-osx-bootstrap"/>
@@ -128,10 +134,10 @@
     </dependencies>
     <after>
     </after>
-  </autotools>
+  </meson>
 
   <meson id="gobject-introspection">
-    <branch tag="1.68.0" module="gobject-introspection"/>
+    <branch tag="1.72.0" module="gobject-introspection"/>
     <dependencies>
       <dep package="glib"/>
       <dep package="cairo"/>
@@ -145,7 +151,7 @@
        to use introspection it requires harfbuzz to have
        introspection, and gobject-introspection needs cairo. -->
   <meson id="harfbuzz" mesonargs="-Dcoretext=enabled -Ddocs=disabled -Dbenchmark=disabled">
-    <branch repo="github" module="harfbuzz/harfbuzz" tag="2.8.0"/>
+    <branch repo="github" module="harfbuzz/harfbuzz" tag="4.1.0"/>
     <dependencies>
       <dep package="gobject-introspection"/>
       <dep package="cairo"/>
@@ -154,14 +160,14 @@
   </meson>
 
   <meson id="fribidi" mesonargs="-Ddocs=false">
-    <branch module="fribidi/fribidi" repo="github" tag="v1.0.10"/>
+    <branch module="fribidi/fribidi" repo="github" tag="v1.0.11"/>
     <dependencies>
       <!--dep package="c2man"/ -->
     </dependencies>
   </meson>
 
   <meson id="pango">
-    <branch tag="1.48.4"/>
+    <branch tag="1.50.6"/>
     <dependencies>
       <dep package="glib"/>
       <dep package="cairo"/>
@@ -187,7 +193,7 @@
 
   <meson id="gdk-pixbuf" mesonargs="-Drelocatable=true -Dman=false">
     <!--gdk-pixbuf is releasing from master-->
-    <branch tag="2.42.4"/>
+    <branch tag="2.42.8"/>
     <dependencies>
       <dep package="pango"/>
       <dep package="gobject-introspection"/>
@@ -196,7 +202,7 @@
   </meson>
 
   <autotools id="xorg-util-macros">
-    <branch repo="freedesktop" module="xorg/util/macros"/>
+    <branch repo="freedesktop" module="xorg/util/macros" tag="util-macros-1.19.3"/>
   </autotools>
 
   <autotools id="libepoxy">
@@ -242,7 +248,7 @@
      
   <autotools id="gtk-4"
          autogenargs="--enable-quartz-backend --enable-quartz-relocation --disable-colord">
-    <branch module="gtk" checkoutdir="gtk-4.0" revision="gtk-4.0"/>
+    <branch module="gtk" checkoutdir="gtk-4.0" branch="gtk-4-6"/>
     <dependencies>
       <dep package="glib"/>
       <dep package="pango"/>
@@ -266,14 +272,14 @@
   </autotools>
 
   <autotools id="adwaita-icon-theme">
-    <branch revision="3.38.0"/>
+    <branch branch="gnome-42"/>
     <dependencies>
       <dep package="librsvg"/>
     </dependencies>
   </autotools>
 
   <autotools id="librsvg" autogenargs="--disable-Bsymbolic">
-    <branch module="librsvg" branch="librsvg-2.50"/>
+    <branch module="librsvg" branch="librsvg-2.54"/>
     <dependencies>
       <dep package="libcroco"/>
       <dep package="freetype"/>
@@ -285,9 +291,6 @@
     </after>
   </autotools>
 
-  <autotools id="libcroco" autogenargs="--disable-Bsymbolic">
-    <branch/>
-  </autotools>
 
   <!-- Null metamodule, provided so as not to break modules that use it. -->
   <metamodule id="meta-gtk-osx-freetype" />
