@@ -4,8 +4,6 @@
 <moduleset>
   <repository type="tarball" name="ftp.gnome.org" default="yes"
               href="http://ftp.gnome.org/pub/GNOME/sources/"/>
-  <repository type="tarball" name="sourceforge"
-              href="http://downloads.sourceforge.net/sourceforge/"/>
   <repository type="tarball" name="cairographics"
               href="https://www.cairographics.org/"/>
   <repository type="tarball" name="cairographics-temp"
@@ -20,7 +18,8 @@
               href="https://icon-theme.freedesktop.org/releases/"/>
   <repository type="git" name="github" href="https://github.com/"/>
   <repository type="tarball" name="github-tarball" href="https://github.com/"/>
-  <repository type="tarball" name="pcre" href="https://github.com/PhilipHazel/pcre2/releases/download/"/>
+  <repository type="tarball" name="sourceforge"
+              href="http://downloads.sourceforge.net/sourceforge/"/>
   <repository type="system" name="system"/>
 
   <!-- This module set works a bit differently than for example the
@@ -91,9 +90,9 @@
 
   <autotools id="libpcre" autogen-sh="configure"
              autogenargs="--enable-unicode-properties --enable-newline-is-any --enable-jit">
-    <branch repo="pcre" version="10.39"
-            module="pcre2-10.39/pcre2-10.39.tar.bz2"
-            hash="sha256:0f03caf57f81d9ff362ac28cd389c055ec2bf0678d277349a1a4bee00ad6d440"/>
+    <branch repo="sourceforge" version="8.45"
+            module="pcre/pcre-8.45.tar.bz2"
+            hash="sha256:4dae6fdcd2bb0bb6c37b5f97c33c2be954da743985369cddac3546e3218bffb8"/>
   </autotools>
   
   <meson id="glib" mesonargs="-Dlibmount=disabled">

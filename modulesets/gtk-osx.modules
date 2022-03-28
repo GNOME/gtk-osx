@@ -11,6 +11,8 @@
 	      href="https://git.sv.nongnu.org/"/>
   <repository type="tarball" name="hicolor"
               href="https://icon-theme.freedesktop.org/releases/"/>
+  <repository type="tarball" name="sourceforge"
+              href="http://downloads.sourceforge.net/sourceforge/"/>
   <repository type="system" name="system"/>
 
   <!-- This module set works a bit differently than for example the
@@ -64,7 +66,7 @@
 
   <autotools id="libpcre" autogen-sh="configure"
              autogenargs="--enable-unicode-properties --enable-newline-is-any --enable-jit">
-    <branch repo="pcre" version="8.45"
+    <branch repo="sourceforge" version="8.45"
             module="pcre/pcre-8.45.tar.bz2"
             hash="sha256:4dae6fdcd2bb0bb6c37b5f97c33c2be954da743985369cddac3546e3218bffb8"/>
   </autotools>
