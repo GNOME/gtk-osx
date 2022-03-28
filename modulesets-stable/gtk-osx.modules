@@ -8,6 +8,8 @@
               href="http://downloads.sourceforge.net/sourceforge/"/>
   <repository type="tarball" name="cairographics"
               href="https://www.cairographics.org/"/>
+  <repository type="tarball" name="cairographics-temp"
+              href="https://gitlab.freedesktop.org/cairo/cairo/-/archive/"/>
   <repository type="tarball" name="ftp.gnu.org"
               href="https://ftp.gnu.org/gnu/"/>
   <repository type="tarball" name="xorg"
@@ -163,8 +165,8 @@
        freetype it insists that it has to have fontconfig too and that
        they are both built into cairo. -->
   <meson id="cairo">
-    <branch module="snapshots/cairo-1.17.6.tar.bz2"  version="1.17.6"
-            repo="cairographics"
+    <branch module="1.17.6/cairo-1.17.6.tar.bz2"  version="1.17.6"
+            repo="cairographics-temp"
             hash="sha256:90496d135c9ef7612c98f8ee358390cdec0825534573778a896ea021155599d2">
     </branch>
     <dependencies>
