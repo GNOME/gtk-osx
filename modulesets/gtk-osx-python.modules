@@ -9,7 +9,7 @@
 	      href="https://www.python.org/ftp/python/"/>
   <repository type="tarball" name="pymodules"
 	      href="http://pypi.python.org/packages/"/>
-  <repository type="git" name="github" href="git://github.com/"/>
+  <repository type="git" name="github" href="https://github.com/"/>
 
   <metamodule id="meta-gtk-osx-python3-gtk3">
     <dependencies>

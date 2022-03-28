@@ -16,7 +16,7 @@
 	      href="http://www.freedesktop.org/software/fontconfig/release/"/>
   <repository type="tarball" name="hicolor"
               href="https://icon-theme.freedesktop.org/releases/"/>
-  <repository type="git" name="github" href="git://github.com/"/>
+  <repository type="git" name="github" href="https://github.com/"/>
   <repository type="tarball" name="github-tarball" href="https://github.com/"/>
   <repository type="tarball" name="pcre" href="https://ftp.pcre.org/pub/"/>
   <repository type="system" name="system"/>

@@ -4,11 +4,11 @@
 <moduleset>
   <repository type="git" name="git.gnome.org" default="yes"
               href="https://gitlab.gnome.org/GNOME"/>
-  <repository type="git" name="github" href="git://github.com/"/>
+  <repository type="git" name="github" href="https://github.com/"/>
   <repository type="git" name="freedesktop"
               href="https://gitlab.freedesktop.org/"/>
   <repository type="git" name="nongnu"
-	      href="git://git.sv.nongnu.org/"/>
+	      href="https://git.sv.nongnu.org/"/>
   <repository type="tarball" name="hicolor"
               href="https://icon-theme.freedesktop.org/releases/"/>
   <repository type="system" name="system"/>

@@ -3,7 +3,7 @@
 <?xml-stylesheet type="text/xsl" href="moduleset.xsl"?>
 <moduleset>
  <repository type="git" name="gstreamer" default="yes"
-              href="git://gitlab.freedesktop.org/gstreamer/"/>
+              href="https://gitlab.freedesktop.org/gstreamer/"/>
   <repository type="tarball" name="sourceforge"
               href="http://iweb.dl.sf.net/project/"/>
   <repository type="tarball" name="ffmpeg"
