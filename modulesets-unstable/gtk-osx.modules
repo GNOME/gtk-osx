@@ -8,7 +8,7 @@
   <repository type="git" name="freedesktop"
               href="https://gitlab.freedesktop.org/"/>
   <repository type="git" name="nongnu"
-	      href="https://git.sv.nongnu.org/"/>
+	      href="https://git.savannah.nongnu.org/git/"/>
   <repository type="tarball" name="hicolor"
               href="https://icon-theme.freedesktop.org/releases/"/>
   <repository type="tarball" name="sourceforge"
