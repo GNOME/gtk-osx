@@ -375,7 +375,7 @@
     <dependencies>
       <dep package="cairo"/>
       <dep package="pango"/>
-      <dep package="hafbuzz"/>
+      <dep package="harfbuzz"/>
       <dep package="freetype"/>
     </dependencies>
     <after>
