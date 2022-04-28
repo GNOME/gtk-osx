@@ -167,6 +167,7 @@
     <branch module="1.17.6/cairo-1.17.6.tar.bz2"  version="1.17.6"
             repo="cairographics-temp"
             hash="sha256:90496d135c9ef7612c98f8ee358390cdec0825534573778a896ea021155599d2">
+      <patch file="cairo-1.17.6-snapshot-memory-leak.patch" strip="1"/>
     </branch>
     <dependencies>
       <dep package="pixman"/>
