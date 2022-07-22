@@ -64,17 +64,16 @@
     <branch module="atgreen/libffi" repo="github"/>
   </autotools>
 
-  <autotools id="libpcre" autogen-sh="configure"
-             autogenargs="--enable-unicode-properties --enable-newline-is-any --enable-jit">
-    <branch repo="sourceforge" version="8.45"
-            module="pcre/pcre-8.45.tar.bz2"
-            hash="sha256:4dae6fdcd2bb0bb6c37b5f97c33c2be954da743985369cddac3546e3218bffb8"/>
+  <autotools id="libpcre2" autogen-sh="autoreconf"
+             autogenargs="--enable-pcre2-16 --enable-pcre2-32 --enable-jit">
+    <branch repo="github"
+            module="PCRE2Project/pcre2"/>
   </autotools>
   
   <meson id="glib" mesonargs="-Dlibmount=disabled">
     <branch revision='main'/>
     <dependencies>
-      <dep package="libpcre"/>
+      <dep package="libpcre2"/>
       <dep package="libffi"/>
     </dependencies>
   </meson>
