@@ -68,9 +68,9 @@
             hash="sha256:7db46b8d7726232a621befaab4a1c870f00a90805511c0e0090441dac57def18"/>
   </cmake>
 
-  <autotools id="p11-kit" autogen-sh="configure"
+  <autotools id="p11-kit" autogen-sh="autoreconf"
              autogenargs="--without-trust-paths">
-    <branch repo="github" module="pll-glue/pll-kit" revision="0.23.22"/>
+    <branch repo="github" module="p11-glue/p11-kit" revision="0.23.22"/>
     <dependencies>
       <dep package="libtasn1"/>
     </dependencies>
