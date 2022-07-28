@@ -251,7 +251,7 @@
     <branch repo="github" revision="3.6.4" module="sass/libsass"/>
   </autotools>
 
-  <meson id="gtk+-4.0"
+  <meson id="gtk-4"
              mesonargs="-Dquartz-backend=true -Dx11-backend=false -Dmedia-gstreamer=disabled">
     <branch module="gtk" checkoutdir="gtk-4.0"/>
     <dependencies>
