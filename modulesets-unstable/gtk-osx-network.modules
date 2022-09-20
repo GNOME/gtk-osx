@@ -69,7 +69,7 @@
             hash="sha256:7db46b8d7726232a621befaab4a1c870f00a90805511c0e0090441dac57def18"/>
   </cmake>
 
-  <autotools id="p11-kit" autogen-sh="configure"
+  <autotools id="p11-kit" autogen-sh="autoreconf"
              autogenargs="--without-trust-paths">
     <branch repo="github" module="p11-glue/p11-kit"/>
     <dependencies>
@@ -82,15 +82,15 @@
 
   <autotools id="gnutls" autogen-sh="autoreconf"
              autogenargs="--disable-gtk-doc-html --with-included-unistring">
-    <branch repo="gnupg.org" version="3.7.1"
-            module="gcrypt/gnutls/v3.7/gnutls-3.7.1.tar.xz"
-            hash="sha256:3777d7963eca5e06eb315686163b7b3f5045e2baac5e54e038ace9835e5cac6f">
+    <branch repo="gnupg.org" version="3.7.7"
+            module="gcrypt/gnutls/v3.7/gnutls-3.7.7.tar.xz">
     </branch>
     <dependencies>
       <dep package="libunistring"/>
       <dep package="libnettle"/>
       <dep package="libtasn1" />
       <dep package="zlib"/>
+      <dep package="p11-kit"/>
     </dependencies>
   </autotools>
 
