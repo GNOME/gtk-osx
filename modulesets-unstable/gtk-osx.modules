@@ -59,8 +59,8 @@
     </after>
   </metamodule>
 
-  <autotools id="libffi" autogenargs="--disable-builddir"
-             autogen-sh="autoreconf" supports-non-srcdir-builds="no">
+  <autotools id="libffi" autogenargs="--disable-multi-os-directory"
+             autogen-sh="autoreconf" >
     <branch module="atgreen/libffi" repo="github"/>
   </autotools>
 

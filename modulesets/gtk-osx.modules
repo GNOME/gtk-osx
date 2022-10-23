@@ -59,9 +59,9 @@
     </after>
   </metamodule>
 
-  <autotools id="libffi" autogenargs="--disable-builddir"
-             autogen-sh="autoreconf" supports-non-srcdir-builds="no">
-    <branch module="atgreen/libffi" repo="github" tag="v3.3"/>
+  <autotools id="libffi" autogenargs="--disable-multi-os-directory"
+             autogen-sh="autoreconf">
+    <branch module="atgreen/libffi" repo="github" tag="v3.4.3"/>
   </autotools>
 
   <autotools id="libpcre" autogen-sh="configure"
