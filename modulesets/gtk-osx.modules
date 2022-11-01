@@ -249,9 +249,8 @@
     <branch repo="github" revision="3.6.4" module="sass/libsass"/>
   </autotools>
      
-  <autotools id="gtk-4"
-         autogenargs="--enable-quartz-backend --enable-quartz-relocation --disable-colord">
-    <branch module="gtk" checkoutdir="gtk-4.0" branch="gtk-4-6"/>
+  <meson id="gtk-4" mesonargs="-Dx11-backend=false -Dmedia-gstreamer=disabled">
+    <branch module="gtk" checkoutdir="gtk-4.0" revision="gtk-4-6"/>
     <dependencies>
       <dep package="glib"/>
       <dep package="pango"/>
