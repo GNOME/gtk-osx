@@ -323,11 +323,8 @@
       <patch file="gtk-mac-integration-work-around-svg-locale-bug.patch" strip="1"/>
     </branch>
     <dependencies>
-    </dependencies>
-    <after>
-      <dep package="gtk+-2.0"/>
       <dep package="gtk+-3.0"/>
-    </after>
+    </dependencies>
   </autotools>
 
   <autotools id="librsvg" autogen-sh="autoreconf"
@@ -341,9 +338,9 @@
       <dep package="freetype"/>
     </dependencies>
     <after>
-      <!-- Circular dependency if we depend on meta-gtk-osx or meta-gtk-osx-gtk3 -->
-      <dep package="gtk+-2.0"/>
+<!-- Circular dependency if we depend on meta-gtk-osx-gtk3 -->
       <dep package="gtk+-3.0"/>
+      <dep package="gtk-4"/>
     </after>
   </autotools>
 
