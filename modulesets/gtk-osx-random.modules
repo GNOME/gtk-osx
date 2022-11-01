@@ -73,7 +73,7 @@
   </autotools>
 
   <meson id="glade" mesonargs="-Dmac_bundle=true -Dman=false">
-    <branch revision="glade-3-38"/>
+    <branch revision="glade-3-40"/>
     <dependencies>
       <dep package="itstool"/>
       <dep package="meta-gtk-osx-gtk3"/>
