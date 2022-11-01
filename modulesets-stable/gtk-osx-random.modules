@@ -155,9 +155,9 @@
 <!-- SQLite3 is also available from the macOS SDK -->
   <autotools id="sqlite" autogenargs="--disable-tcl --enable-threadsafe"
 	     autogen-sh="configure">
-    <branch module="2021/sqlite-autoconf-3350400.tar.gz" version='3.35.4'
+    <branch module="2022/sqlite-autoconf-3390400.tar.gz" version='3.39.4'
             repo="sqlite"
-            hash="sha256:7771525dff0185bfe9638ccce23faa0e1451757ddbda5a6c853bb80b923a512d"/>
+            hash="sha3:431328e30d12c551da9ba7ef2122b269076058512014afa799caaf62ca567090"/>
   </autotools>
 
 <!-- Goocanvas2 is for gtk+-3. -->
