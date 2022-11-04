@@ -90,7 +90,7 @@
     </dependencies>
   </cmake>
 
-  <meson id="harfbuzz-no-cairo" mesonargs="-Dcoretext=enabled -Ddocs=disabled -Dbenchmark=disabled">
+  <meson id="harfbuzz-no-cairo" mesonargs="-Dcoretext=enabled -Dfreetype=enabled -Ddocs=disabled -Dbenchmark=disabled">
     <branch repo="github" module="harfbuzz/harfbuzz" tag="4.1.0"/>
     <dependencies>
       <dep package="glib"/>
@@ -153,7 +153,7 @@
   <!-- This harfbuzz doesn't really need cairo, but if Pango is going
        to use introspection it requires harfbuzz to have
        introspection, and gobject-introspection needs cairo. -->
-  <meson id="harfbuzz" mesonargs="-Dcoretext=enabled -Ddocs=disabled -Dbenchmark=disabled">
+  <meson id="harfbuzz" mesonargs="-Dcoretext=enabled -Dfreetype=enabled -Ddocs=disabled -Dbenchmark=disabled">
     <branch repo="github" module="harfbuzz/harfbuzz" tag="4.1.0"/>
     <dependencies>
       <dep package="gobject-introspection"/>

@@ -108,7 +108,7 @@
     </dependencies>
   </cmake>
 
-  <meson id="harfbuzz-no-cairo" mesonargs="-Dcoretext=enabled -Ddocs=disabled -Dbenchmark=disabled -Dintrospection=disabled">
+  <meson id="harfbuzz-no-cairo" mesonargs="-Dcoretext=enabled -Dfreetype=enabled -Ddocs=disabled -Dbenchmark=disabled -Dintrospection=disabled">
     <branch repo="github-tarball" version="4.1.0"
             module="harfbuzz/harfbuzz/releases/download/4.1.0/harfbuzz-4.1.0.tar.xz" 
             hash="sha256:f7984ff4241d4d135f318a93aa902d910a170a8265b7eaf93b5d9a504eed40c8">
@@ -181,7 +181,7 @@
     </after>
   </meson>
 
-  <meson id="harfbuzz" mesonargs="-Dcoretext=enabled -Ddocs=disabled -Dbenchmark=disabled -Dintrospection=enabled">
+  <meson id="harfbuzz" mesonargs="-Dcoretext=enabled -Dfreetype=enabled -Ddocs=disabled -Dbenchmark=disabled -Dintrospection=enabled">
     <branch repo="github-tarball" version="4.1.0"
             module="harfbuzz/harfbuzz/releases/download/4.1.0/harfbuzz-4.1.0.tar.xz" 
 >
