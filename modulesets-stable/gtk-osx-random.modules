@@ -115,7 +115,7 @@
 
   <autotools id="getopt" autogen-sh="configure"
              supports-non-srcdir-builds="no">
-    <branch repo="fossies" version="1.1.6" module="getopt/getopt-1.1.6.tar.gz"
+    <branch repo="fossies" version="1.1.6" module="getopt-1.1.6.tar.gz"
             hash="sha256:d0bf1dc642a993e7388a1cddfb9409bed375c21d5278056ccca3a0acd09dc5fe">
        <patch file="getopt-autotools.patch" strip="1"/>
     </branch>
