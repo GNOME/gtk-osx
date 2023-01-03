@@ -2,8 +2,8 @@
 <!DOCTYPE moduleset SYSTEM "moduleset.dtd">
 <?xml-stylesheet type="text/xsl" href="moduleset.xsl"?>
 <moduleset>
-  <repository name="ftp.gnome.org" type="tarball" default="yes"
-              href="http://ftp.gnome.org/pub/GNOME/sources/"/>
+  <repository name="download.gnome.org" type="tarball" default="yes"
+              href="https:////download.gnome.org/sources/"/>
   <repository name="openssl" type="tarball"
               href="https://www.openssl.org/source/"/>
   <repository name="ftp.gnu.org" type="tarball"
@@ -31,8 +31,8 @@
   <autotools id="openssl" autogen-sh="Configure" autogenargs="shared "
              autogen-template="%(srcdir)s/%(autogen-sh)s --prefix=%(prefix)s --openssldir=%(prefix)s/etc/ssl %(autogenargs)s"
              makeinstallargs="install_sw" supports-non-srcdir-builds="no">
-    <branch module="openssl-1.1.1n.tar.gz" version="1.1.1n" repo="openssl"
-            hash="sha256:40dceb51a4f6a5275bde0e6bf20ef4b91bfc32ed57c0552e2e8e15463372b17a"/>
+    <branch module="openssl-1.1.1s.tar.gz" version="1.1.1s" repo="openssl"
+            hash="sha256:c5ac01e760ee6ff0dab61d6b2bbd30146724d063eb322180c6f18a6f74e4b6aa"/>
   </autotools>
 
   <!-- Rudely demands TeX to build documentation -->
@@ -40,9 +40,9 @@
   <if condition-set="arm64">
     <autotools id="libnettle" autogen-sh="configure"
                autogenargs="--disable-documentation --disable-assembler">
-      <branch repo="ftp.gnu.org" version="3.7.2"
-              module="nettle/nettle-3.7.2.tar.gz"
-              hash="sha256:8d2a604ef1cde4cd5fb77e422531ea25ad064679ff0adf956e78b3352e0ef162">
+      <branch repo="ftp.gnu.org" version="3.7.3"
+              module="nettle/nettle-3.7.3.tar.gz"
+              hash="sha256:661f5eb03f048a3b924c3a8ad2515d4068e40f67e774e8a26827658007e3bcf0">
       </branch>
       <dependencies>
         <dep package="gmp"/>
@@ -53,9 +53,9 @@
   <if condition-unset="arm64">
     <autotools id="libnettle" autogen-sh="configure"
                autogenargs="--disable-documentation">
-      <branch repo="ftp.gnu.org" version="3.7.2"
-              module="nettle/nettle-3.7.2.tar.gz"
-              hash="sha256:8d2a604ef1cde4cd5fb77e422531ea25ad064679ff0adf956e78b3352e0ef162">
+      <branch repo="ftp.gnu.org" version="3.7.3"
+              module="nettle/nettle-3.7.3.tar.gz"
+              hash="sha256:661f5eb03f048a3b924c3a8ad2515d4068e40f67e774e8a26827658007e3bcf0">
       </branch>
       <dependencies>
         <dep package="gmp"/>
@@ -94,7 +94,8 @@
     <autotools id="gnutls" autogen-sh="autoreconf"
                autogenargs="--disable-gtk-doc-html --with-included-unistring">
       <branch repo="gnupg.org" version="3.7.7"
-              module="gcrypt/gnutls/v3.7/gnutls-3.7.7.tar.xz">
+              module="gcrypt/gnutls/v3.7/gnutls-3.7.7.tar.xz"
+              hash="sha256:be9143d0d58eab64dba9b77114aaafac529b6c0d7e81de6bdf1c9b59027d2106">
       </branch>
       <dependencies>
         <dep package="libnettle"/>
@@ -108,31 +109,32 @@
 
   <autotools id="libgpg-error" autogen-sh="autoreconf"
              autogenargs="--disable-doc">
-    <branch repo="gnupg.org" version="1.42"
-            module="gcrypt/libgpg-error/libgpg-error-1.42.tar.bz2"
-            hash="sha256:fc07e70f6c615f8c4f590a8e37a9b8dd2e2ca1e9408f8e60459c67452b925e23">
+    <branch repo="gnupg.org" version="1.43"
+            module="gcrypt/libgpg-error/libgpg-error-1.43.tar.bz2"
+            hash="sha256:a9ab83ca7acc442a5bd846a75b920285ff79bdb4e3d34aa382be88ed2c3aebaf">
     </branch>
   </autotools>
 
  <autotools id="libgcrypt" autogen-sh="configure">
-    <branch repo="gnupg.org" version="1.9.2"
-            module="gcrypt/libgcrypt/libgcrypt-1.9.2.tar.bz2"
-            hash="sha256:b2c10d091513b271e47177274607b1ffba3d95b188bbfa8797f948aec9053c5a"/>
+    <branch repo="gnupg.org" version="1.9.4"
+            module="gcrypt/libgcrypt/libgcrypt-1.9.4.tar.bz2"
+            hash="sha256:ea849c83a72454e3ed4267697e8ca03390aee972ab421e7df69dfe42b65caaf7"/>
     <dependencies>
       <dep package="libgpg-error"/>
     </dependencies>
   </autotools>
 
   <autotools id="gpg" autogen-sh='configure'>
-    <branch repo="gnupg.org" version="2.2.27"
-            module="gcrypt/gnupg/gnupg-2.2.27.tar.bz2"
+    <branch repo="gnupg.org" version="2.3.3"
+            module="gcrypt/gnupg/gnupg-2.3.3.tar.bz2"
+            hash="sha256:5789b86da6a1a6752efb38598f16a77af51170a8494039c3842b085032e8e937"/>
             />
     <dependencies>
       <dep package="libgpg-error"/>
       <dep package="libgcrypt"/>
     </dependencies>
   </autotools>
-  
+
   <meson id="libsecret" mesonargs="-Dvapi=disabled -Dgtk_doc=disabled">
     <branch version="0.20.4"
             module="libsecret/0.20/libsecret-0.20.4.tar.xz"
@@ -154,7 +156,7 @@
       <dep package="glib"/>
     </dependencies>
   </meson>
-  
+
   <autotools id="gnome-keyring"
              autogenargs="--disable-pam --without-root-certs">
     <branch module="gnome-keyring/40/gnome-keyring-40.0.tar.xz"
@@ -179,9 +181,9 @@
   </meson>
 
   <autotools id="libpsl" autogen-sh='configure'>
-    <branch repo="github-tarball" version="0.21.0"
-            module="rockdaboot/libpsl/releases/download/0.21.1/libpsl-0.21.1.tar.gz"
-            hash="sha256:ac6ce1e1fbd4d0254c4ddb9d37f1fa99dec83619c1253328155206b896210d4c"/>
+    <branch repo="github-tarball" version="0.21.2"
+            module="rockdaboot/libpsl/releases/download/0.21.2/libpsl-0.21.2.tar.gz"
+            hash="sha256:e35991b6e17001afa2c0ca3b10c357650602b92596209b7492802f3768a6285f"/>
   </autotools>
 
   <meson id="libsoup" mesonargs="-Dvapi=disabled">
@@ -199,8 +201,8 @@
   </meson>
 
   <autotools id="libwebp" autogen-sh="configure"  autogenargs="--enable-libwebpmux --enable-libwebpdecoder">
-    <branch repo="webm" module="webp/libwebp-1.2.0.tar.gz" version="1.2.0"
-            hash="sha256:2fc8bbde9f97f2ab403c0224fb9ca62b2e6852cbc519e91ceaa7c153ffd88a0c"/>
+    <branch repo="webm" module="webp/libwebp-1.2.2.tar.gz" version="1.2.2"
+            hash="sha256:7656532f837af5f4cec3ff6bafe552c044dc39bf453587bd5b77450802f4aee6"/>
   </autotools>
 
 
