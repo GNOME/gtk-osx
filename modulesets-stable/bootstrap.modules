@@ -41,7 +41,7 @@
   <!-- cmakes ./configure is picky about invalid flags so we manually set it -->
   <autotools id="cmake" autogen-sh="bootstrap"  bootstrap="true"
              autogen-template="%(srcdir)s/%(autogen-sh)s --prefix=%(prefix)s">
-    <branch repo="cmake" module="v3.20/cmake-3.20.0.tar.gz" version="3.20.0">
+    <branch repo="cmake" module="v3.25/cmake-3.25.1.tar.gz" version="3.25.1">
     </branch>
   </autotools>
   <!-- The version of m4 provided with Xcode is now too old, see
