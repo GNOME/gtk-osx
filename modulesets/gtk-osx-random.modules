@@ -149,7 +149,7 @@
             hash="sha256:f31d445b48e67e284cf206717cc170ab63cbe4fd7f79a82793b772285e78fdbb"/>
   </autotools>
 
-!-- Goocanvas2 is for Gtk+-3 -->
+<!-- Goocanvas2 is for Gtk+-3 -->
   <autotools id="goocanvas2">
     <branch revision="goocanvas-2.0" module="goocanvas"/>
     <dependencies>
@@ -157,7 +157,7 @@
     </dependencies>
   </autotools>
 
-!-- Goocanvas3 is for Gtk-4 -->
+<!-- Goocanvas3 is for Gtk-4 -->
   <autotools id="goocanvas2">
     <branch revision="goocanvas-3.0" module="goocanvas"/>
     <dependencies>
