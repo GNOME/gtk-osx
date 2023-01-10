@@ -159,7 +159,7 @@
     are easier.-->
     <branch module="2022/sqlite-autoconf-3390400.tar.gz" version='3.39.4'
             repo="sqlite"
-            hash="sha3:431328e30d12c551da9ba7ef2122b269076058512014afa799caaf62ca567090"/>
+            hash="sha256:f31d445b48e67e284cf206717cc170ab63cbe4fd7f79a82793b772285e78fdbb"/>
   </autotools>
 
   <autotools id="goocanvas2">
