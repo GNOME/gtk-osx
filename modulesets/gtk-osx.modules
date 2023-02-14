@@ -263,7 +263,7 @@
     <after>
       <dep package="meta-gtk-osx-bootstrap"/>
     </after>
-  </autotools>
+  </meson>
 
   <autotools id="gtk-mac-integration" autogenargs="--disable-python">
 <!--gtk-mac-integration releases from master"-->

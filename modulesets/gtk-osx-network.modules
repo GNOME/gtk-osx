@@ -12,7 +12,8 @@
               href="https://ftp.gnu.org/gnu/"/>
   <repository name="sourceforge" type="tarball"
               href="http://downloads.sourceforge.net/sourceforge/"/>
-  <repository type='git' name='dev.gnupg.org/source/' href="https://git.gnupg.org/" />  
+  <repository name='git.gnupg.org' type='git'
+              href="https://git.gnupg.org/" />  
   <repository name='gnupg.org' type='tarball' href="https://gnupg.org/ftp/" />
   <repository name="chromium" type="git"
               href="https://chromium.googlesource.com/"/>
