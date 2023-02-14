@@ -12,7 +12,7 @@
               href="http://gstreamer.freedesktop.org/src/"
               type="tarball" />
   <repository name="sourceforge"
-              href="http://iweb.dl.sf.net/project/"
+              href="http://downloads.sourceforge.net/sourceforge/"
               type="tarball" />
   <repository name="ffmpeg"
               href="https://ffmpeg.org/releases/"
