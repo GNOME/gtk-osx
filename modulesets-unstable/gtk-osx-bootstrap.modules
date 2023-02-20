@@ -18,8 +18,8 @@
   <repository type="tarball" name="github-tarball" href="https://github.com/"/>
 
   <autotools id="libpng" autogenargs="--enable-shared" autogen-sh="configure">
-    <branch version="1.6.38" module="libpng/libpng-1.6.38.tar.xz"
-            hash="sha256:b3683e8b8111ebf6f1ac004ebb6b0c975cd310ec469d98364388e9cedbfa68be"
+    <branch version="1.6.39" module="libpng/libpng-1.6.39.tar.xz"
+            hash="sha256:1f4696ce70b4ee5f85f1e1623dc1229b210029fa4b7aee573df3e2ba7b036937"
             repo="sourceforge"/>
     <dependencies>
       <dep package="zlib"/>
