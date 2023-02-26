@@ -94,9 +94,9 @@
   <autotools id="libffi"
              autogen-sh="configure"
              autogenargs="--disable-multi-os-directory">
-    <branch module="libffi/libffi/releases/download/v3.4.3/libffi-3.4.3.tar.gz"
-            version="3.4.3"
-            hash="sha256:4416dd92b6ae8fcb5b10421e711c4d3cb31203d77521a77d85d0102311e6c3b8"
+    <branch module="libffi/libffi/releases/download/v3.4.4/libffi-3.4.4.tar.gz"
+            version="3.4.4"
+            hash="sha256:d66c56ad259a82cf2a9dfc408b32bf5da52371500b84745f7fb8b645712df676"
             repo="github-tarball" />
   </autotools>
   <!---->
@@ -212,9 +212,9 @@
   </meson>
   <!---->
   <meson id="gobject-introspection">
-    <branch module="gobject-introspection/1.72/gobject-introspection-1.72.0.tar.xz"
-            version="1.72.0"
-            hash="sha256:02fe8e590861d88f83060dd39cda5ccaa60b2da1d21d0f95499301b186beaabc">
+    <branch module="gobject-introspection/1.72/gobject-introspection-1.72.1.tar.xz"
+            version="1.72.1"
+            hash="sha256:012e313186e3186cf0fde6decb57d970adf90e6b1fac5612fe69cbb5ba99543a">
     </branch>
     <dependencies>
       <dep package="glib" />
@@ -241,9 +241,9 @@
   <!---->
   <meson id="fribidi"
          mesonargs="-Ddocs=false">
-    <branch module="fribidi/fribidi/releases/download/v1.0.11/fribidi-1.0.11.tar.xz"
-            version="1.0.11"
-            hash="sha256:30f93e9c63ee627d1a2cedcf59ac34d45bf30240982f99e44c6e015466b4e73d"
+    <branch module="fribidi/fribidi/releases/download/v1.0.12/fribidi-1.0.12.tar.xz"
+            version="1.0.12"
+            hash="sha256:0cd233f97fc8c67bb3ac27ce8440def5d3ffacf516765b91c2cc654498293495"
             repo="github-tarball" />
     <!--
     <dependencies>
