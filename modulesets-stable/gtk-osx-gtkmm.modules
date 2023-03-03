@@ -24,9 +24,9 @@
             hash="sha256:a2a99f3fa943cf662f189163ed39a2cfc19a428d906dd4f92b387d3659d1641d" />
   </meson>
   <!--
-    Libsigc++ was rewritten to use C++17 variadic templates for version 3, and adopting that
-    has created substantial API breaks for the whole "mm" stack. gtkmm2 and gtkmm3 use the
-    older versions, gtkmm4 the new ones.
+    Libsigc++ was rewritten to use C++17 variadic templates for version 3, and
+    adopting that has created substantial API breaks for the whole "mm" stack.
+    gtkmm2 and gtkmm3 use the older versions, gtkmm4 the new ones.
     Note that C++17 is supported only on macOS-10.13 and later.
   -->
   <meson id="cairomm-1.14">

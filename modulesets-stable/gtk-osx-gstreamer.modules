@@ -41,9 +41,10 @@
   <!---->
   <autotools id="nasm"
              autogen-sh="configure">
-    <branch repo="nasm" version="2.16.01"
-            module="2.16.01/nasm-2.16.01.tar.xz"
-            hash="sha256:c77745f4802375efeee2ec5c0ad6b7f037ea9c87c92b149a9637ff099f162558"/>
+    <branch module="2.16.01/nasm-2.16.01.tar.xz"
+            version="2.16.01"
+            hash="sha256:c77745f4802375efeee2ec5c0ad6b7f037ea9c87c92b149a9637ff099f162558"
+            repo="nasm" />
   </autotools>
   <!---->
   <autotools id="ffmpeg"
