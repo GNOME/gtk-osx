@@ -82,7 +82,9 @@
     <branch module="libxml2/2.10/libxml2-2.10.3.tar.xz"
             version="2.10.3"
             hash="sha256:5d2cc3d78bec3dbe212a9d7fa629ada25a7da928af432c93060ff5c17ee28a9c">
-    </branch>
+       <patch file="libxml2-python-config.patch"
+             strip="1" />
+   </branch>
     <after>
       <dep package="python3" />
     </after>
