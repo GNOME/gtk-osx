@@ -96,7 +96,10 @@
              autogen-sh="configure">
     <branch module="libxslt/1.1/libxslt-1.1.37.tar.xz"
             version="1.1.37"
-            hash="sha256:3a4b27dc8027ccd6146725950336f1ec520928f320f144eb5fa7990ae6123ab4" />
+            hash="sha256:3a4b27dc8027ccd6146725950336f1ec520928f320f144eb5fa7990ae6123ab4">
+       <patch file="libxslt-python-config.patch"
+             strip="1" />
+    </branch>
     <dependencies>
       <dep package="libxml2" />
     </dependencies>
