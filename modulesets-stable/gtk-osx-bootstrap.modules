@@ -39,9 +39,10 @@
   <autotools id="libpng"
              autogen-sh="configure"
              autogenargs="--enable-shared">
-    <branch version="1.6.39" module="libpng/libpng-1.6.39.tar.xz"
+    <branch module="libpng/libpng-1.6.39.tar.xz"
+            version="1.6.39"
             hash="sha256:1f4696ce70b4ee5f85f1e1623dc1229b210029fa4b7aee573df3e2ba7b036937"
-            repo="sourceforge"/>
+            repo="sourceforge" />
     <dependencies>
       <dep package="zlib" />
     </dependencies>
@@ -79,6 +80,7 @@
   <autotools id="libxml2"
              autogen-sh="autoreconf"
              autogenargs='--libdir="$JHBUILD_LIBDIR" --with-python'>
+             
     <branch module="libxml2/2.10/libxml2-2.10.3.tar.xz"
             version="2.10.3"
             hash="sha256:5d2cc3d78bec3dbe212a9d7fa629ada25a7da928af432c93060ff5c17ee28a9c">

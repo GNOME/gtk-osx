@@ -202,14 +202,14 @@
       <dep package="gobject-introspection" />
     </dependencies>
   </meson>
-
-<!-- SQLite3 is also available from the macOS SDK -->
-  <autotools id="sqlite" autogenargs="--disable-tcl --enable-threadsafe"
-	     autogen-sh="configure">
+  <!-- SQLite3 is also available from the macOS SDK -->
+  <autotools id="sqlite"
+             autogen-sh="configure"
+             autogenargs="--disable-tcl --enable-threadsafe">
     <branch module="2022/sqlite-autoconf-3390400.tar.gz"
             version='3.39.4'
             hash="sha256:f31d445b48e67e284cf206717cc170ab63cbe4fd7f79a82793b772285e78fdbb"
-            repo="sqlite"/>
+            repo="sqlite" />
   </autotools>
   <!--
     Goocanvas2 is for gtk+-3.
