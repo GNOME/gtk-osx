@@ -172,7 +172,7 @@
   <meson id="cairo">
     <branch module="cairo/cairo"
             repo="freedesktop"
-            tag="1.17.6" />
+            tag="1.17.8" />
     <dependencies>
       <dep package="pixman" />
       <dep package="meta-gtk-osx-bootstrap" />
