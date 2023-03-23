@@ -9,7 +9,7 @@
               href="http://download.gnome.org/sources/"/>
   <repository type="tarball" name="ftp.gnu.org" href="https://ftp.gnu.org/gnu/"/>
   <repository type="tarball" name="shared-mime-info"
-              href="https://gitlab.freedesktop.org/xdg/shared-mime-info/uploads/"/>
+              href="https://gitlab.freedesktop.org/xdg/shared-mime-info/-/archive/"/>
   <repository type="tarball" name="iso-codes"
               href="https://salsa.debian.org/iso-codes-team/iso-codes/uploads/"/>
   <repository type="tarball" name="sourceforge"
@@ -134,15 +134,15 @@
     </dependencies>
   </autotools>
 
-  <meson id="shared-mime-info" supports-non-srcdir-builds="no" >
-    <branch module="0ee50652091363ab0d17e335e5e74fbe/shared-mime-info-2.1.tar.xz"
-            repo="shared-mime-info" version="2.1"
-            hash="sha256:b2d40cfcdd84e835d0f2c9107b3f3e77e9cf912f858171fe779946da634e8563">
-      <patch file="shared-mime-info-2.1-freedesktop-generate.patch" strip="1"/>
+  <meson id="shared-mime-info">
+    <branch module="2.2/shared-mime-info-2.2.tar.bz2"
+            version="2.2"
+            hash="sha256:418c480019d9865f67f922dfb88de00e9f38bf971205d55cdffab50432919e61"
+            repo="shared-mime-info">
     </branch>
     <dependencies>
-      <dep package="glib"/>
-      <dep package="xmlto"/>
+      <dep package="glib" />
+      <dep package="xmlto" />
     </dependencies>
   </meson>
 
