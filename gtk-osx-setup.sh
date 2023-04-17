@@ -70,7 +70,7 @@ GITHUB="https://github.com"
 
 # We need to have a local copy of bash when compiling to prevent SIP problems.
 if test ! -x "$DEVPREFIX/bin/bash"; then
-    cp /bin/bash "$DEVPREFIX/bin"
+    ln -s /bin/bash "$DEVPREFIX/bin"
 fi
 
 # Setup pyenv
