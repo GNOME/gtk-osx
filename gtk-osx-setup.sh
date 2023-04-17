@@ -170,6 +170,8 @@ pygments = "*"
 meson = {version=">=0.56.0"}
 docutils = "*"
 gi-docgen = "*"
+setuptools = "*"
+packaging = "*"
 
 [scripts]
 jhbuild = "$DEVPREFIX/libexec/run_jhbuild.py"
