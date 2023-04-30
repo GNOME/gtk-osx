@@ -26,7 +26,7 @@
   <!--
     Libsigc++ was rewritten to use C++17 variadic templates for version 3, and
     adopting that has created substantial API breaks for the whole "mm" stack.
-    gtkmm2 and gtkmm3 use the older versions, gtkmm4 the new ones.
+    gtkmm3 uses the older versions, gtkmm4 the new ones.
     Note that C++17 is supported only on macOS-10.13 and later.
   -->
   <meson id="cairomm-1.14">
@@ -130,20 +130,6 @@
             version="3.0.6"
             hash="sha256:b70edcf4611651c54a426e109b17196e1fa17da090592a5000e2d134c03ac5ce" />
   </meson>
-  <!---->
-  <autotools id="gtkmm2"
-             autogen-sh="configure">
-    <branch module="gtkmm/2.24/gtkmm-2.24.5.tar.xz"
-            version="2.24.5"
-            hash="sha256:0680a53b7bf90b4e4bf444d1d89e6df41c777e0bacc96e9c09fc4dd2f5fe6b72" />
-    <dependencies>
-      <dep package="glibmm-2.4" />
-      <dep package="cairomm-1.14" />
-      <dep package="pangomm-1.4" />
-      <dep package="atkmm-1.6" />
-      <dep package="gtk+-2.0" />
-    </dependencies>
-  </autotools>
   <!---->
   <meson id="gtkmm3">
     <branch module="gtkmm/3.24/gtkmm-3.24.4.tar.xz"

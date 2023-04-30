@@ -14,8 +14,12 @@
     <branch module="mm-common"/>
   </meson>
 
-  <!-- Libsigc++ was rewritten to use C++17 variadic templates for version 3, and adopting that has created substantial API breaks for the whole "mm" stack. gtkmm2 and gtkmm3 use the older versions, gtkmm4 the new ones.
-       Note that C++17 is supported only on macOS-10.13 and later.
+  <!--
+      Libsigc++ was rewritten to use C++17 variadic templates for
+      version 3, and adopting that has created substantial API breaks
+      for the whole "mm" stack. gtkmm3 uses the older versions, gtkmm4
+      the new ones.  Note that C++17 is supported only on macOS-10.13
+      and later.
   -->
   <meson id="cairomm3" >
     <branch module="cairomm"  revision="cairomm-1-14"
