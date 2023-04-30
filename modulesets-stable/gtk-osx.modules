@@ -112,9 +112,9 @@
   <!---->
   <meson id="glib"
          mesonargs="-Dlibmount=disabled">
-    <branch module="glib/2.72/glib-2.72.0.tar.xz"
-            version="2.72.0"
-            hash="sha256:d7bef0d4c4e7a62e08efb8e5f252a01357007b9588a87ff2b463a3857011f79d">
+    <branch module="glib/2.76/glib-2.76.2.tar.xz"
+            version="2.76.2"
+            hash="sha256:24f3847857b1d8674cdb0389a36edec0f13c666cd3ce727ecd340eb9da8aca9e">
     </branch>
     <dependencies>
       <dep package="libffi" />
@@ -210,9 +210,9 @@
   </meson>
   <!---->
   <meson id="gobject-introspection">
-    <branch module="gobject-introspection/1.72/gobject-introspection-1.72.1.tar.xz"
-            version="1.72.1"
-            hash="sha256:012e313186e3186cf0fde6decb57d970adf90e6b1fac5612fe69cbb5ba99543a">
+    <branch module="gobject-introspection/1.76/gobject-introspection-1.76.1.tar.xz"
+            version="1.76.1"
+            hash="sha256:196178bf64345501dcdc4d8469b36aa6fe80489354efe71cb7cb8ab82a3738bf">
     </branch>
     <dependencies>
       <dep package="glib" />
@@ -252,12 +252,9 @@
   <!---->
   <meson id="pango"
          mesonargs="-Dfontconfig=enabled">
-    <branch module="pango/1.50/pango-1.50.6.tar.xz"
-            version="1.50.6"
-            hash="sha256:a998bcf36881c3ac20495d40bceb304f4eaa9175bd2967c85656434cbdafe86a">
-
-      <patch file="pango-coretext-fix-clang-build-failure.patch"
-             strip="1" />
+    <branch module="pango/1.50/pango-1.50.14.tar.xz"
+            version="1.50.14"
+            hash="sha256:1d67f205bfc318c27a29cfdfb6828568df566795df0cb51d2189cde7f2d581e8">
     </branch>
     <dependencies>
       <dep package="glib" />
@@ -272,9 +269,9 @@
   </meson>
   <!---->
   <meson id="atk">
-    <branch module="atk/2.36/atk-2.36.0.tar.xz"
-            version="2.36.0"
-            hash="sha256:fb76247e369402be23f1f5c65d38a9639c1164d934e40f6a9cf3c9e96b652788" />
+    <branch module="atk/2.38/atk-2.38.0.tar.xz"
+            version="2.38.0"
+            hash="sha256:ac4de2a4ef4bd5665052952fe169657e65e895c5057dffb3c2a810f6191a0c36" />
     <dependencies></dependencies>
     <after>
       <dep package="glib" />
@@ -285,9 +282,9 @@
   <!---->
   <meson id="gdk-pixbuf"
          mesonargs="-Drelocatable=true -Dman=false">
-    <branch module="gdk-pixbuf/2.42/gdk-pixbuf-2.42.8.tar.xz"
-            version="2.42.8"
-            hash="sha256:84acea3acb2411b29134b32015a5b1aaa62844b19c4b1ef8b8971c6b0759f4c6">
+    <branch module="gdk-pixbuf/2.42/gdk-pixbuf-2.42.10.tar.xz"
+            version="2.42.10"
+            hash="sha256:ee9b6c75d13ba096907a2e3c6b27b61bcd17f5c7ebeab5a5b439d2f2e39fe44b">
 
       <patch file="gdk-pixbuf-loader-name.patch"
              strip="1" />
@@ -325,18 +322,9 @@
   -->
   <meson id="gtk+-3.0"
          mesonargs="-Dx11_backend=false">
-    <branch module="gtk+/3.24/gtk+-3.24.36.tar.xz"
-            version="3.24.36"
-            hash="sha256:27a6ef157743350c807ffea59baa1d70226dbede82a5e953ffd58ea6059fe691">
-
-      <patch file="gtk-3-24-36-image-recolor-load-crash.patch"
-             strip="1" />
-      <patch file="gtk-3-24-36-call-gdk-quartz-osx-version.patch"
-             strip="1" />
-      <patch file="gtk-3-24-36-match-window-size.patch"
-             strip="1" />
-      <patch file="gtk-3-24-36-frame_callback_crash.patch"
-             strip="1" />
+    <branch module="gtk+/3.24/gtk+-3.24.37.tar.xz"
+            version="3.24.37"
+            hash="sha256:6745f0b4c053794151fd0f0e2474b077cccff5f83e9dd1bf3d39fe9fe5fb7f57">
     </branch>
     <dependencies>
       <dep package="glib" />
@@ -378,9 +366,9 @@
   <meson id="gtk-4"
          mesonargs="-Dx11-backend=false -Dmedia-gstreamer=disabled">
          
-    <branch module="gtk/4.6/gtk-4.6.2.tar.xz"
-            version="4.6.2"
-            hash="sha256:ff263af609a50eb76056653592d929459aef4819a444c436f6d52c6f63c1faec" />
+    <branch module="gtk/4.10/gtk-4.10.3.tar.xz"
+            version="4.10.3"
+            hash="sha256:4545441ad79e377eb6e0a705026dc7a46886e46a1b034db40912909da801cea9" />
     <dependencies>
       <dep package="pango" />
       <dep package="atk" />
@@ -409,9 +397,9 @@
   <autotools id="librsvg"
              autogen-sh="autoreconf"
              autogenargs="--disable-Bsymbolic">
-    <branch module="librsvg/2.54/librsvg-2.54.0.tar.xz"
-            version="2.54.0"
-            hash="sha256:baf8ebc147f146b4261bb3d0cd0fac944bf8dbb4b1f2347d23341f974dcc3085" />
+    <branch module="librsvg/2.56/librsvg-2.56.0.tar.xz"
+            version="2.56.0"
+            hash="sha256:194b5097d9cd107495f49c291cf0da65ec2b4bb55e5628369751a3f44ba222b3" />
     <dependencies>
       <dep package="cairo" />
       <dep package="pango" />
@@ -429,9 +417,9 @@
   <!---->
   <autotools id="adwaita-icon-theme"
              autogen-sh="configure">
-    <branch module="adwaita-icon-theme/42/adwaita-icon-theme-42.0.tar.xz"
-            version="42.0"
-            hash="sha256:5e85b5adc8dee666900fcaf271ba717f7dcb9d0a03d96dae08f9cbd27e18b1e0" />
+    <branch module="adwaita-icon-theme/44/adwaita-icon-theme-44.0.tar.xz"
+            version="44.0"
+            hash="sha256:4889c5601bbfecd25d80ba342209d0a936dcf691ee56bd6eca4cde361f1a664c" />
     <dependencies>
       <dep package="librsvg" />
     </dependencies>

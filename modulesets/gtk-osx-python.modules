@@ -62,7 +62,7 @@
   <meson id="pygobject3">
     <branch module="pygobject"
             checkoutdir="pygobject3"
-            tag="pygobject-3-40" />
+            tag="pygobject-3-44" />
     <dependencies>
       <dep package="pycairo" />
     </dependencies>

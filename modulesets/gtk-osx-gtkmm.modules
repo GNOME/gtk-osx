@@ -22,7 +22,7 @@
   -->
   <meson id="mm-common">
     <branch module="mm-common"
-            tag="1.0.2" />
+            tag="master" />
   </meson>
   <!--
     Libsigc++ was rewritten to use C++17 variadic templates for version 3, and
@@ -52,7 +52,7 @@
   <!---->
   <meson id="glibmm3">
     <branch module="glibmm"
-            revision="glibmm-2-60" />
+            revision="glibmm-2-66" />
     <dependencies>
       <dep package="glib" />
       <dep package="libsigc++2" />
@@ -60,7 +60,7 @@
   </meson>
   <!---->
   <meson id="glibmm">
-    <branch revision="glibmm-2-66" />
+    <branch revision="glibmm-2-76" />
     <dependencies>
       <dep package="libsigc++3" />
     </dependencies>
@@ -80,7 +80,7 @@
   </meson>
   <!---->
   <meson id="pangomm">
-    <branch revision="pangomm-2-48" />
+    <branch revision="pangomm-2-50" />
     <dependencies>
       <dep package="cairomm" />
     </dependencies>
@@ -104,7 +104,7 @@
   <!---->
   <meson id="atkmm">
     <branch module="atkmm"
-            revision="2.36.0" />
+            revision="master" />
     <dependencies>
       <dep package="glibmm" />
       <dep package="cairomm" />
@@ -117,7 +117,7 @@
          autogen-args="--disable-documentation">
     <branch module="libsigcplusplus/libsigcplusplus"
             repo="github"
-            revision="libsigc++-2-10" />
+            revision="libsigc++-2-12" />
     <dependencies>
       <dep package="mm-common" />
     </dependencies>
@@ -127,7 +127,7 @@
          autogen-args="--disable-documentation">
     <branch module="libsigcplusplus/libsigcplusplus"
             repo="github"
-            revision="3.0.6" />
+            revision="master" />
     <dependencies>
       <dep package="mm-common" />
       <!--
@@ -150,7 +150,7 @@
   <!---->
   <meson id="gtkmm4">
     <branch module="gtkmm"
-            revision="4.0.1" />
+            revision="4.10.0" />
     <dependencies>
       <dep package="glibmm" />
       <dep package="cairomm" />
