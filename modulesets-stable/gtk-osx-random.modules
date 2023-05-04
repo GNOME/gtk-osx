@@ -38,9 +38,6 @@
   <repository name="paguire"
               href="https://releases.pagure.org/"
               type="tarball" />
-  <repository name="pcre"
-              href="https://ftp.pcre.org/pub/"
-              type="tarball" />
   <!---->
   <cmake id="graphviz">
     <branch module="2.47.0/graphviz-2.47.0.tar.bz2"
@@ -133,14 +130,6 @@
       <dep package="gtk+-3.0" />
     </dependencies>
   </meson>
-  <!---->
-  <autotools id="libpcre2"
-             autogen-sh="configure">
-    <branch module="pcre/pcre2-10.36.tar.bz2"
-            version="20.36"
-            hash="sha256:a9ef39278113542968c7c73a31cfcb81aca1faa64690f400b907e8ab6b4a665c"
-            repo="pcre" />
-  </autotools>
   <!---->
   <meson id="gtksourceview4">
     <branch module="gtksourceview/5.0/gtksourceview-5.0.0.tar.xz"

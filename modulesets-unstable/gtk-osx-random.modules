@@ -21,8 +21,6 @@
   <repository type="tarball" name="fossies"
               href="https://fossies.org/linux/misc/"/>
   <repository type="tarball" name="paguire" href="https://releases.pagure.org/"/> 
-  <repository type="tarball" name="pcre" href="https://ftp.pcre.org/pub/"/>
-
   <cmake id="graphviz">
     <branch module="2.47.0/graphviz-2.47.0.tar.bz2" version="2.47.0"
             repo="graphviz"
@@ -100,12 +98,6 @@
       <dep package="gtk+-3.0"/>
     </dependencies>
   </meson>
-
-   <autotools id="libpcre2" autogen-sh="configure">
-    <branch repo="pcre" version="10.37"
-            module="pcre/pcre2-10.36.tar.bz2"
-            hash="sha256:4d95a96e8b80529893b4562be12648d798b957b1ba1aae39606bbc2ab956d270"/>
-  </autotools>
 
  <meson id="gtksourceview4">
     <branch />
