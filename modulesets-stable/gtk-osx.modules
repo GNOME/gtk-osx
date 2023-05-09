@@ -326,6 +326,7 @@
             version="3.24.37"
             hash="sha256:6745f0b4c053794151fd0f0e2474b077cccff5f83e9dd1bf3d39fe9fe5fb7f57">
       <patch file="gtk-3-24-36-frame_callback_crash.patch" strip="1"/>
+      <patch file="gtk-3-24-37-pad-win-and-content-rect.patch" strip="1"/>
     </branch>
     <dependencies>
       <dep package="glib" />
