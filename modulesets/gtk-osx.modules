@@ -116,6 +116,18 @@
     </dependencies>
   </cmake>
   <!---->
+  <autotools id="icu"
+             autogen-sh="source/configure"
+             autogenargs="--enable-rpath"
+             makeargs='CFLAGS="$CFLAGS -DU_CHARSET_IS_UTF8=1 -DU_USING_ICU_NAMESPACE=0"'>
+
+    <branch module="unicode-org/icu/releases/download/release-73-2/icu4c-73_2-src.tgz"
+            version="73.2"
+
+            checkoutdir="icu"
+            repo="github-tarball" />
+  </autotools>
+  <!---->
   <meson id="harfbuzz-no-cairo"
          mesonargs="-Dcoretext=enabled -Dfreetype=enabled -Ddocs=disabled -Dbenchmark=disabled">
 
