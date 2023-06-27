@@ -620,17 +620,16 @@ if not _ran_recursively and _gtk_osx_prompt_prefix:
 # Note that PYENV_VERSION sets the version of python that pyenv uses,
 # not pyenv's own version. It's defined by pyenv and can't be changed.
 
-if ('python3' in modules or 'meta-gtk-osx-python3' in modules or
-    'pygments' in modules):
-    os.environ['PYTHON'] = os.path.join(prefix, 'bin', 'python3')
+_python3_path = os.path.join(prefix, 'bin', 'python3')
+if ('python3' in modules or 'meta-gtk-osx-python3' in modules
+    or os.path.exists(_python3_path)):
+    os.environ['PYTHON'] = _python3_path
     module_extra_env['pkg-config'] = {'PYTHON':sys.executable}
     _found_modules = '';
     if ('python3' in modules):
         _found_modules += 'python3;'
     if ('meta-gtk-osx-python' in modules):
         _found_modules += 'meta;';
-    if ('pygments' in modules):
-        _found_modules += 'pygments'
     print("Setting $PYTHON to module-built python3 because %s." % _found_modules)
     print("Modules %s" % ';'.join(modules))
 else:
@@ -646,8 +645,7 @@ else:
     os.environ['PYTHON'] = sys.executable
     environ_append('PKG_CONFIG_PATH', os.path.join(_python_library_path, 'pkgconfig'))
 
-print("$PYTHON set to %s\n" % os.environ['PYTHON']);module_extra_env["pygtk"] = {'PYTHON':os.path.join(prefix, 'bin', 'python2')}
-module_extra_env["pygobject2"] = {'PYTHON':os.path.join(prefix, 'bin', 'python2')}
+module_extra_env["python3"] = {'LIBS':'-lintl'}
 module_extra_env["spidermonkey"] = {'AUTOCONF':'autoconf'}
 # Unset this so we don't mess with the check for not starting
 # recursively.

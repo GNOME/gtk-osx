@@ -41,9 +41,9 @@
   <autotools id="python3"
              autogen-sh="configure"
              autogenargs="--enable-shared">
-    <branch module="3.10.10/Python-3.10.10.tar.xz"
-            version="3.10.10"
-            hash="sha256:0419e9085bf51b7a672009b3f50dbf1859acdf18ba725d0ec19aa5c8503f0ea3"
+    <branch module="3.11.4/Python-3.11.4.tar.xz"
+            version="3.11.4"
+            hash="sha256:2f0e409df2ab57aa9fc4cbddfb976af44e4e55bf6f619eee6bc5c2297264a7f6"
             repo="python" />
     <dependencies>
       <dep package='readline' />
@@ -55,9 +55,9 @@
   </autotools>
   <!---->
   <meson id="pycairo">
-    <branch module="/pygobject/pycairo/releases/download/v1.20.0/pycairo-1.20.0.tar.gz"
-            version="1.20.0"
-            hash="sha256:5695a10cb7f9ae0d01f665b56602a845b0a8cb17e2123bfece10c2e58552468c"
+    <branch module="/pygobject/pycairo/releases/download/v1.24.0/pycairo-1.24.0.tar.gz"
+            version="1.24.0"
+            hash="sha256:1444d52f1bb4cc79a4a0c0fe2ccec4bd78ff885ab01ebe1c0f637d8392bcafb6"
             repo="github-tarball" />
     <dependencies>
       <dep package="cairo" />
