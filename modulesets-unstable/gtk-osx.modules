@@ -96,7 +96,7 @@
 
     <branch module="unicode-org/icu/releases/download/release-73-2/icu4c-73_2-src.tgz"
             version="73.2"
-
+            hash="sha256:818a80712ed3caacd9b652305e01afc7fa167e6f2e94996da44b90c2ab604ce1"
             checkoutdir="icu"
             repo="github-tarball" />
   </autotools>

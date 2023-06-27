@@ -110,7 +110,7 @@
 
     <branch module="freetype/freetype2"
             repo="nongnu"
-            revision="VER-2-11-1" />
+            revision="VER-2-13-1" />
     <dependencies>
       <dep package="zlib" />
     </dependencies>
@@ -123,7 +123,7 @@
 
     <branch module="unicode-org/icu/releases/download/release-73-2/icu4c-73_2-src.tgz"
             version="73.2"
-
+            hash="sha256:818a80712ed3caacd9b652305e01afc7fa167e6f2e94996da44b90c2ab604ce1"
             checkoutdir="icu"
             repo="github-tarball" />
   </autotools>
@@ -133,7 +133,7 @@
 
     <branch module="harfbuzz/harfbuzz"
             repo="github"
-            tag="4.1.0" />
+            tag="7.3.0" />
     <dependencies>
       <dep package="glib" />
       <dep package="freetype-no-harfbuzz" />
@@ -161,7 +161,7 @@
 
     <branch module="fontconfig/fontconfig"
             repo="freedesktop"
-            tag="2.13.1" />
+            tag="2.14.2" />
     <dependencies>
       <dep package="freetype" />
     </dependencies>
@@ -171,7 +171,7 @@
              autogenargs="--disable-gtk --disable-mmx">
     <branch module="pixman/pixman"
             repo="freedesktop"
-            revision="pixman-0.40.0" />
+            revision="pixman-0.42.2" />
     <after>
       <dep package="meta-gtk-osx-bootstrap" />
     </after>
@@ -217,7 +217,7 @@
 
     <branch module="harfbuzz/harfbuzz"
             repo="github"
-            tag="4.1.0" />
+            tag="7.3.0" />
     <dependencies>
       <dep package="gobject-introspection" />
       <dep package="cairo" />
@@ -229,7 +229,7 @@
          mesonargs="-Ddocs=false">
     <branch module="fribidi/fribidi"
             repo="github"
-            tag="v1.0.12" />
+            tag="v1.0.13" />
     <!--
     <dependencies>
       <dep package="c2man" />
@@ -282,7 +282,7 @@
   <autotools id="libepoxy">
     <branch module="anholt/libepoxy"
             repo="github"
-            revision="1.5.4" />
+            revision="1.5.10" />
     <dependencies>
       <dep package="xorg-util-macros" />
     </dependencies>
@@ -317,7 +317,7 @@
          mesonargs="-Dtests=false">
     <branch module="ebassi/graphene"
             repo="github"
-            revision="1.10.4" />
+            revision="1.10.8" />
     <dependencies>
       <dep package="glib" />
       <dep package="gobject-introspection" />
@@ -329,7 +329,7 @@
              autogenargs="--disable-tests --disable-static">
     <branch module="sass/libsass"
             repo="github"
-            revision="3.6.4" />
+            revision="3.6.5" />
   </autotools>
   <!---->
   <meson id="gtk-4"
