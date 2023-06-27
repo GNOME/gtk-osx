@@ -63,34 +63,56 @@
              autogenargs="shared"
              makeinstallargs="install_sw"
              supports-non-srcdir-builds="no">
-    <branch module="openssl-1.1.1s.tar.gz"
-            version="1.1.1s"
-            hash="sha256:c5ac01e760ee6ff0dab61d6b2bbd30146724d063eb322180c6f18a6f74e4b6aa"
+    <branch module="openssl-1.1.1u.tar.gz"
+            version="1.1.1u"
+            hash="sha256:e2f8d84b523eecd06c7be7626830370300fbcc15386bf5142d72758f6963ebc6"
             repo="openssl" />
   </autotools>
   <!--
     Rudely demands TeX to build documentation
     Assembler files are missing md5-compress.asm for x86_64
   -->
-  <autotools id="libnettle"
-             autogen-sh="autoreconf"
-             autogenargs="--disable-documentation --disable-assembler">
-             
-    <branch module="nettle/nettle.git"
-            repo="lysator"
-            tag="nettle_3.7.3_release_20210606" />
-    <dependencies>
-      <dep package="gmp" />
-      <dep package="openssl" />
-    </dependencies>
-  </autotools>
+    <if condition-set="arm64">
+    <autotools id="libnettle"
+               autogen-sh="configure"
+               autogenargs="--disable-documentation --disable-assembler">
+               
+      <branch module="nettle/nettle-3.9.1.tar.gz"
+              version="3.9.1"
+              hash="sha256:ccfeff981b0ca71bbd6fbcb054f407c60ffb644389a5be80d6716d5b550c6ce3"
+              repo="ftp.gnu.org" />
+      <dependencies>
+        <dep package="gmp" />
+        <dep package="openssl" />
+      </dependencies>
+    </autotools>
+  </if>
   <!---->
+  <if condition-unset="arm64">
+    <autotools id="libnettle"
+               autogen-sh="configure"
+               autogenargs="--disable-documentation">
+      <branch module="nettle/nettle-3.9.1.tar.gz"
+              version="3.9/1"
+              hash="sha256:ccfeff981b0ca71bbd6fbcb054f407c60ffb644389a5be80d6716d5b550c6ce3"
+              repo="ftp.gnu.org" />
+      <dependencies>
+        <dep package="gmp" />
+        <dep package="openssl" />
+      </dependencies>
+    </autotools>
+  </if>
+   <!---->
   <autotools id="libtasn1"
              autogen-sh="configure">
     <!--
       Git repository is missing GnuLib files required to build libtasn1
       <branch repo="git.gnu.org" tag="libtasn1_4_4"  module="libtasn1"/>
      -->
+    <branch module="libtasn1/libtasn1-4.19.0.tar.gz"
+            version="4.19.0"
+            hash="sha256:1613f0ac1cf484d6ec0ce3b8c06d56263cc7242f1c23b30d82d23de345a63f7a"
+            repo="ftp.gnu.org">
     <branch module="libtasn1/libtasn1-4.17.0.tar.gz"
             version="4.17.0"
             hash="sha256:ece7551cea7922b8e10d7ebc70bc2248d1fdd73351646a2d6a8d68a9421c45a5"
@@ -110,10 +132,12 @@
   <autotools id="p11-kit"
              autogen-sh="autoreconf"
              autogenargs="--without-trust-paths">
-    <branch module="p11-glue/p11-kit"
-            repo="github"
-            revision="0.23.22" />
+    <branch module="p11-glue/p11-kit/releases/download/0.24.1/p11-kit-0.24.1.tar.xz"
+            version="0.24.1"
+            hash="sha256:d8be783efd5cd4ae534cee4132338e3f40f182c3205d23b200094ec85faaaef8"
+            repo="github-tarball" />
     <dependencies>
+      <dep package="libffi"/>
       <dep package="libtasn1" />
     </dependencies>
   </autotools>
@@ -124,17 +148,21 @@
   <autotools id="gnutls"
              autogen-sh="autoreconf"
              autogenargs="--disable-gtk-doc-html --with-included-unistring">
-    <branch module="gcrypt/gnutls/v3.7/gnutls-3.7.7.tar.xz"
-            repo="gnupg.org"
-            version="3.7.7">
-      <patch file="gnutls-pkg-config-pc.patch" strip="1"/>
+    <branch module="gcrypt/gnutls/v3.8/gnutls-3.8.0.tar.xz"
+            version="3.8.0"
+            hash="sha256:0ea0d11a1660a1e63f960f157b197abe6d0c8cb3255be24e1fb3815930b9bdc5"
+            repo="gnupg.org" >
+      <patch file="gnutls-pkg-config-pc.patch"
+             strip="1"/>
+      <patch file="gnutls-gnulib.patch"
+             strip="1"/>
     </branch>
     <dependencies>
-      <dep package="libunistring" />
       <dep package="libnettle" />
       <dep package="libtasn1" />
       <dep package="zlib" />
       <dep package="p11-kit" />
+      <dep package="libgcrypt"/>
     </dependencies>
   </autotools>
   <!---->
@@ -143,7 +171,7 @@
              autogenargs="--disable-doc">
     <branch module="libgpg-error"
             repo="git.gnupg.org"
-            revision="libgpg-error-1.43" />
+            revision="libgpg-error-1.47" />
   </autotools>
   <!---->
   <autotools id="libgcrypt"
@@ -151,26 +179,16 @@
              autogenargs="--disable-asm --disable-doc">
     <branch module="libgcrypt"
             repo="git.gnupg.org"
-            revision="libgcrypt-1.9.4" />
+            revision="libgcrypt-1.10.2" />
     <dependencies>
       <dep package="libgpg-error" />
-    </dependencies>
-  </autotools>
-  <!---->
-  <autotools id="gpg">
-    <branch module="gnupg"
-            repo="git.gnupg.org"
-            revision="gnupg-2.3.3" />
-    <dependencies>
-      <dep package="libgpg-error" />
-      <dep package="libgcrypt" />
     </dependencies>
   </autotools>
   <!---->
   <meson id="libsecret"
          mesonargs="-Dvapi=disabled -Dgtk_doc=disabled">
     <branch module="libsecret"
-            revision="0.20.4" />
+            revision="0.20.5" />
     <dependencies>
       <dep package="glib" />
       <dep package="libgcrypt" />
@@ -179,7 +197,7 @@
   <!---->
   <meson id="gcr">
     <branch module="gcr"
-            branch="gnome-3-38" />
+            branch="gnome-3-44" />
     <dependencies>
       <dep package="p11-kit" />
       <dep package="gpg" />
@@ -191,17 +209,29 @@
   <autotools id="gnome-keyring"
              autogenargs="--disable-pam --without-root-certs">
     <branch module="gnome-keyring"
-            branch="gnome-40" />
+            branch="gnome-44" />
     <dependencies>
       <dep package="libgcrypt" />
       <dep package="gcr" />
     </dependencies>
   </autotools>
   <!---->
+  <meson id="gsettings-desktop-schema"
+         mesonargs="-Ddocs=false -Dtests=false -Dpacrunner-duktape=false -Dvapi=false -Dcurl=false -Dintrospection=false">
+    <branch revision="44.0" />
+  </meson>
+  <!---->
+  <meson id="libproxy"
+         mesonargs="-Ddocs=false -Dtests=false -Dpacrunner-duktape=false -Dvapi=false -Dcurl=false -Dintrospection=false">
+    <branch module="libproxy/libproxy"
+            revision="0.5.2"
+            repo="github"/>
+  </meson>
+  <!---->
   <meson id="glib-networking"
          mesonargs="-Dopenssl=enabled">
     <branch module="glib-networking"
-            revision="2.68.0" />
+            revision="2.76.0" />
     <dependencies>
       <dep package="gnutls" />
       <dep package="glib" />
@@ -217,7 +247,7 @@
   <!---->
   <meson id="libsoup"
          mesonargs="-Dvapi=disabled">
-    <branch revision="gnome-3-38" />
+    <branch revision="libsoup-2-74" />
     <dependencies>
       <dep package="libpsl" />
       <dep package="python3" />
@@ -234,7 +264,7 @@
              
     <branch module="webm/libwebp"
             repo="chromium"
-            revision="1.2.2" />
+            revision="1.3.0" />
   </autotools>
   <!--
     This is the stable release of WebKitGTK, for GTK 3.x. Use it if you need

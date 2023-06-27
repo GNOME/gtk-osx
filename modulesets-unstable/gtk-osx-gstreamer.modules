@@ -31,7 +31,10 @@
   <autotools id="nasm" autogen-sh="configure">
     <branch repo="nasm" version="2.16.01"
             module="2.16.01/nasm-2.16.01.tar.xz"
-            hash="sha256:c77745f4802375efeee2ec5c0ad6b7f037ea9c87c92b149a9637ff099f162558"/>
+            hash="sha256:c77745f4802375efeee2ec5c0ad6b7f037ea9c87c92b149a9637ff099f162558">
+      <patch file="nasm-2.16.01-warnings.c-needs-srcdir-patch"
+             strip="1"/>
+    </branch>
   </autotools>
 
   <autotools id="ffmpeg" autogen-sh="configure"
