@@ -29,6 +29,8 @@
   <!---->
   <metamodule id="meta-gtk-osx-python3-gtk3">
     <dependencies>
+      <dep package="meta-gtk-osx-gtk3" />
+      <dep package='pygments'/>
       <dep package="pycairo" />
       <dep package="pygobject3" />
       <dep package="gtk-mac-integration-python" />

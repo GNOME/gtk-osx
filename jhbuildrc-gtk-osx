@@ -621,8 +621,8 @@ if not _ran_recursively and _gtk_osx_prompt_prefix:
 # not pyenv's own version. It's defined by pyenv and can't be changed.
 
 _python3_path = os.path.join(prefix, 'bin', 'python3')
-if ('python3' in modules or 'meta-gtk-osx-python3' in modules
-    or os.path.exists(_python3_path)):
+if ('python3' in modules or 'pygments' in modules or
+    'meta-gtk-osx-python3' in modules or os.path.exists(_python3_path)):
     os.environ['PYTHON'] = _python3_path
     module_extra_env['pkg-config'] = {'PYTHON':sys.executable}
     _found_modules = '';
