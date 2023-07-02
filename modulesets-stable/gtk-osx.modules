@@ -416,6 +416,7 @@
             version="2.56.1"
             hash="sha256:1685aeacae9a441dcb12c0c3ec63706172a2f52705dafbefb8e7311d4d5e430b" />
     <dependencies>
+      <dep package="libxml2"/>
       <dep package="cairo" />
       <dep package="pango" />
       <dep package="harfbuzz" />

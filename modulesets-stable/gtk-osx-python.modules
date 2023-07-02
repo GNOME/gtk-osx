@@ -93,4 +93,13 @@
     </after>
   </autotools>
   <!---->
+  <distutils id="pygments">
+    <branch module="89/6b/2114e54b290824197006e41be3f9bbe1a26e9c39d1f5fa20a6d62945a0b3/Pygments-2.15.1.tar.gz"
+            version="2.15.1"
+            repo="pymodules" />
+    <dependencies>
+      <dep package="python3" />
+    </dependencies>
+  </distutils>
+  <!---->
 </moduleset>
