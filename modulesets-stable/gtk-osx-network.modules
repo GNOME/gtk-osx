@@ -308,7 +308,7 @@
              strip="1" />
       <patch file="WebKit2Gtk3-2.32.0-color-components-correct-math-header.patch"
              strip="1" />
-      <patch file="webkit-2.32.-bug-224093.patch"
+      <patch file="webkit-2.32-bug-224093.patch"
              strip="1"/>
     </branch>
     <dependencies>

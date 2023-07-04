@@ -210,7 +210,10 @@
     <branch repo="webkit.org" module="webkitgtk-2.32.0.tar.xz" version="2.32.0"
             hash="sha256:9d7df4dae9ada2394257565acc2a68ace9308c4c61c3fcc00111dc1f11076bf0">
       <patch file="WebKit2Gtk3-2.32.0-cumulative.patch" strip="1"/>
-     <patch file="WebKit2Gtk3-2.30.1-Disable-AUDIT_TOKEN-for-Gtk-builds.patch" strip="1"/>
+      <patch file="WebKit2Gtk3-2.30.1-Disable-AUDIT_TOKEN-for-Gtk-builds.patch" strip="1"/>
+      <patch file="WebKit2Gtk3-2.30.1-Fix-Socket-signal-defines-for-Darwin-and-maybe-BSD.patch" strip="1" />
+      <patch file="WebKit2Gtk3-2.32.0-color-components-correct-math-header.patch" strip="1" />
+      <patch file="webkit-2.32-bug-224093.patch" strip="1"/>
     </branch>
     <dependencies>
       <dep package="libwebp"/>
