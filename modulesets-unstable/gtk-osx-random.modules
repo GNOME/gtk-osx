@@ -28,7 +28,7 @@
   <cmake id="graphviz" cmakeargs="-Dwith_gvedit=NO">
     <branch module="8.0.5/graphviz-8.0.5.tar.bz2"
             version="8.0.5"
-            hash="sha256:c1901fe52483fad55fbf893ccd59a3dcaedd53f0d50b5aebbbf3deaba93b674d"
+            hash="sha256:c1901fe52483fad55fbf893ccd59a3dcaedd53f0d50b5aebbbf3deaba93b674d">
       <patch file="graphviz-remove-rpath.patch" strip="1"/>
     </branch>
     <dependencies>

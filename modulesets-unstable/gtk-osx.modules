@@ -13,6 +13,9 @@
               href="https://icon-theme.freedesktop.org/releases/"/>
   <repository type="tarball" name="sourceforge"
               href="http://downloads.sourceforge.net/sourceforge/"/>
+  <repository name="github-tarball"
+              href="https://github.com/"
+              type="tarball" />
   <repository type="system" name="system"/>
 
   <!-- This module set works a bit differently than for example the

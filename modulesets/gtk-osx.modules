@@ -26,6 +26,9 @@
   <repository name="sourceforge"
               href="http://downloads.sourceforge.net/sourceforge/"
               type="tarball" />
+  <repository name="github-tarball"
+              href="https://github.com/"
+              type="tarball" />
   <repository name="system"
               type="system" />
   <!--

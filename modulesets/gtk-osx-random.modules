@@ -62,10 +62,10 @@
   <autotools id="vala"
              autogen-sh="configure">
            repo="download.gnome.org" />
-    <dependencies>
     <branch module="vala/0.56/vala-0.56.8.tar.xz"
             version="0.56.8"
             hash="sha256:93f81dcfc6a93b77baa271d65e6be981ee3238ad451ef380af118e295d904bde" />
+    <dependencies>
       <dep package="graphviz" />
       <dep package="meta-gtk-osx-bootstrap" />
       <dep package="meta-gtk-osx-gtk3" />
