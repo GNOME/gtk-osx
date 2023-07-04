@@ -62,7 +62,7 @@
     </after>
   </metamodule>
 
-  <autotools id="libffi" autogenargs="--disable-multi-os-directory"
+  <autotools id="libffi" autogenargs="--disable-multi-os-directory --disable-docs"
              autogen-sh="autoreconf" >
     <branch module="atgreen/libffi" repo="github"/>
   </autotools>
@@ -181,7 +181,7 @@
     </dependencies>
   </meson>
 
-  <meson id="pango">
+  <meson id="pango" mesonargs="-Dfontconfig=enabled">
     <branch revision="main" />
     <dependencies>
       <dep package="glib"/>
@@ -297,6 +297,10 @@
   <autotools id="librsvg" autogenargs="--disable-Bsymbolic">
     <branch module="librsvg" revision="main"/>
     <dependencies>
+      <dep package="libxml2"/>
+      <dep package="cairo" />
+      <dep package="pango" />
+      <dep package="harfbuzz" />
       <dep package="libcroco"/>
       <dep package="freetype"/>
     </dependencies>
