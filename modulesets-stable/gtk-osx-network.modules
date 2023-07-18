@@ -209,7 +209,7 @@
   </autotools>
   <!---->
   <meson id="gsettings-desktop-schemas">
-    <branch module="gsettings-desktop-schemas/gsettings-desktop-schemas-44.0.tar.xz"
+    <branch module="gsettings-desktop-schemas/44/gsettings-desktop-schemas-44.0.tar.xz"
             version="44.0"
             hash="shas56:eb2de45cad905994849e642a623adeb75d41b21b0626d40d2a07b8ea281fec0e"
             />
