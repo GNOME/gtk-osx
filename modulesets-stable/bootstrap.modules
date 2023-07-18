@@ -84,8 +84,7 @@
     <branch module="m4/m4-1.4.19.tar.xz"
             version="1.4.19"
             hash="sha256:63aede5c6d33b6d9b13511cd0be2cac046f2e70fd0a07aa9573a04a82783af96"
-            repo="ftp.gnu.org">
-    </branch>
+            repo="ftp.gnu.org" />
   </autotools>
   <!---->
   <autotools id="autoconf"
@@ -151,7 +150,6 @@
              autogen-sh="configure">
     <branch module="bison/bison-3.8.2.tar.xz"
             version="3.8.2"
-
             repo="ftp.gnu.org" />
     <dependencies>
       <dep package='flex' />

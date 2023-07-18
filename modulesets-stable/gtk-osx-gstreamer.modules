@@ -44,9 +44,9 @@
     <branch module="2.16.01/nasm-2.16.01.tar.xz"
             version="2.16.01"
             hash="sha256:c77745f4802375efeee2ec5c0ad6b7f037ea9c87c92b149a9637ff099f162558"
-            repo="nasm" >
+            repo="nasm">
       <patch file="nasm-2.16.01-warnings.c-needs-srcdir-patch"
-             strip="1"/>
+             strip="1" />
     </branch>
   </autotools>
   <!---->
@@ -83,7 +83,6 @@
       <dep package="gstreamer" />
       <dep package="liborc" />
     </dependencies>
-    <after></after>
   </meson>
   <!---->
   <meson id="gst-plugins-good">

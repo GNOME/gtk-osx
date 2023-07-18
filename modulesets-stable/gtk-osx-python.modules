@@ -30,7 +30,7 @@
   <metamodule id="meta-gtk-osx-python3-gtk3">
     <dependencies>
       <dep package="meta-gtk-osx-gtk3" />
-      <dep package='pygments'/>
+      <dep package='pygments' />
       <dep package="pycairo" />
       <dep package="pygobject3" />
       <dep package="gtk-mac-integration-python" />
@@ -98,9 +98,9 @@
   <distutils id="pygments">
     <branch module="89/6b/2114e54b290824197006e41be3f9bbe1a26e9c39d1f5fa20a6d62945a0b3/Pygments-2.15.1.tar.gz"
             version="2.15.1"
-            repo="pymodules" >
+            repo="pymodules">
       <patch file="Pygments-setup-py.patch"
-             strip="1"/>
+             strip="1" />
     </branch>
     <dependencies>
       <dep package="python3" />

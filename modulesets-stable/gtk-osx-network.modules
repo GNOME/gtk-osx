@@ -100,8 +100,7 @@
     <branch module="libtasn1/libtasn1-4.19.0.tar.gz"
             version="4.19.0"
             hash="sha256:1613f0ac1cf484d6ec0ce3b8c06d56263cc7242f1c23b30d82d23de345a63f7a"
-            repo="ftp.gnu.org">
-    </branch>
+            repo="ftp.gnu.org" />
   </autotools>
   <!---->
   <cmake id="zlib">
@@ -119,7 +118,7 @@
             hash="sha256:d8be783efd5cd4ae534cee4132338e3f40f182c3205d23b200094ec85faaaef8"
             repo="github-tarball">
       <patch file="p11-kit-libintl.patch"
-             strip="1"/>
+             strip="1" />
     </branch>
     <dependencies>
       <dep package="libffi" />
@@ -130,14 +129,15 @@
   <autotools id="gnutls"
              autogen-sh="autoreconf"
              autogenargs="--disable-gtk-doc-html --with-included-unistring">
+             
     <branch module="gcrypt/gnutls/v3.8/gnutls-3.8.0.tar.xz"
             version="3.8.0"
             hash="sha256:0ea0d11a1660a1e63f960f157b197abe6d0c8cb3255be24e1fb3815930b9bdc5"
-            repo="gnupg.org" >
+            repo="gnupg.org">
       <patch file="gnutls-pkg-config-pc.patch"
-             strip="1"/>
+             strip="1" />
       <patch file="gnutls-gnulib.patch"
-             strip="1"/>
+             strip="1" />
     </branch>
     <dependencies>
       <dep package="libnettle" />
@@ -164,7 +164,7 @@
             hash="sha256:3b9c02a004b68c256add99701de00b383accccf37177e0d6c58289664cce0c03"
             repo="gnupg.org">
       <patch file="libgcrypt-1.10.2-no-getrandom.patch"
-             strip="1"/>
+             strip="1" />
     </branch>
     <dependencies>
       <dep package="libgpg-error" />
@@ -175,8 +175,7 @@
          mesonargs="-Dvapi=disabled -Dgtk_doc=disabled">
     <branch module="libsecret/0.20/libsecret-0.20.5.tar.xz"
             version="0.20.5"
-            hash="sha256:3fb3ce340fcd7db54d87c893e69bfc2b1f6e4d4b279065ffe66dac9f0fd12b4d"
-            />
+            hash="sha256:3fb3ce340fcd7db54d87c893e69bfc2b1f6e4d4b279065ffe66dac9f0fd12b4d" />
     <dependencies>
       <dep package="glib" />
       <dep package="libgcrypt" />
@@ -186,8 +185,7 @@
   <meson id="gcr">
     <branch module="gcr/4.1/gcr-4.1.0.tar.xz"
             version="4.1.0"
-            hash="sha256:9ceaad29284ba919b9216e2888c18ec67240c2c93b3a4856bc5488bbc1f3a383"
-            />
+            hash="sha256:9ceaad29284ba919b9216e2888c18ec67240c2c93b3a4856bc5488bbc1f3a383" />
     <dependencies>
       <dep package="p11-kit" />
       <dep package="gpg" />
@@ -200,8 +198,7 @@
              autogenargs="--disable-pam --without-root-certs">
     <branch module="gnome-keyring/42/gnome-keyring-42.1.tar.xz"
             version="42.1"
-            hash="sha256:c7f4d040cc76a6b7fe67e08ef9106911c3c80d40fc88cbfc8e2684a4c946e3e6"
-            />
+            hash="sha256:c7f4d040cc76a6b7fe67e08ef9106911c3c80d40fc88cbfc8e2684a4c946e3e6" />
     <dependencies>
       <dep package="libgcrypt" />
       <dep package="gcr" />
@@ -211,20 +208,19 @@
   <meson id="gsettings-desktop-schemas">
     <branch module="gsettings-desktop-schemas/44/gsettings-desktop-schemas-44.0.tar.xz"
             version="44.0"
-            hash="shas56:eb2de45cad905994849e642a623adeb75d41b21b0626d40d2a07b8ea281fec0e"
-            />
+            hash="shas56:eb2de45cad905994849e642a623adeb75d41b21b0626d40d2a07b8ea281fec0e" />
   </meson>
   <!---->
   <meson id="libproxy"
          mesonargs="-Ddocs=false -Dtests=false -Dpacrunner-duktape=false -Dvapi=false -Dcurl=false -Dintrospection=false">
+
     <branch module="libproxy/libproxy/archive/refs/tags/0.5.2.tar.gz"
             version="0.5.2"
-            checkoutdir="libproxy-0.5.2"
             hash="sha256:7d75a2cf1c977056eb86f460daab0247d30e6a34e26ec755aab4de40cfd0a06d"
-            repo="github-tarball"
-            />
+            checkoutdir="libproxy-0.5.2"
+            repo="github-tarball" />
     <dependencies>
-      <dep package="gsettings-desktop-schemas"/>
+      <dep package="gsettings-desktop-schemas" />
     </dependencies>
   </meson>
   <!---->
@@ -234,7 +230,7 @@
             version="2.76.0"
             hash="sha256:149a05a179e629a538be25662aa324b499d7c4549c5151db5373e780a1bf1b9a" />
     <dependencies>
-      <dep package="libproxy"/>
+      <dep package="libproxy" />
       <dep package="gnutls" />
       <dep package="glib" />
     </dependencies>
@@ -267,6 +263,7 @@
   <autotools id="libwebp"
              autogen-sh="configure"
              autogenargs="--enable-libwebpmux --enable-libwebpdecoder">
+             
     <branch module="webp/libwebp-1.3.0.tar.gz"
             version="1.3.0"
             hash="sha256:64ac4614db292ae8c5aa26de0295bf1623dbb3985054cb656c55e67431def17c"
@@ -309,7 +306,7 @@
       <patch file="WebKit2Gtk3-2.32.0-color-components-correct-math-header.patch"
              strip="1" />
       <patch file="webkit-2.32-bug-224093.patch"
-             strip="1"/>
+             strip="1" />
     </branch>
     <dependencies>
       <dep package="libwebp" />
