@@ -256,7 +256,19 @@
     </dependencies>
   </meson>
   <!---->
-  <autotools id="libwebp"
+  <meson id="libsoup3"
+         mesonargs="-Dvapi=disabled">
+    <branch revision="libsoup-3-4" />
+    <dependencies>
+      <dep package="libpsl" />
+      <dep package="python3" />
+      <dep package="glib" />
+      <dep package="glib-networking" />
+      <dep package="sqlite" />
+      <dep package="vala" />
+    </dependencies>
+  </meson>
+  <!---->  <autotools id="libwebp"
              autogen-sh="autoreconf"
              autogenargs="--enable-libwebpmux --enable-libwebpdecoder">
              
