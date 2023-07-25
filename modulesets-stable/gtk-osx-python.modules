@@ -30,7 +30,7 @@
   <metamodule id="meta-gtk-osx-python3-gtk3">
     <dependencies>
       <dep package="meta-gtk-osx-gtk3" />
-      <dep package='pygments'/>
+      <dep package='pygments' />
       <dep package="pycairo" />
       <dep package="pygobject3" />
       <dep package="gtk-mac-integration-python" />
@@ -57,7 +57,7 @@
   </autotools>
   <!---->
   <meson id="pycairo">
-    <branch module="/pygobject/pycairo/releases/download/v1.24.0/pycairo-1.24.0.tar.gz"
+    <branch module="pygobject/pycairo/releases/download/v1.24.0/pycairo-1.24.0.tar.gz"
             version="1.24.0"
             hash="sha256:1444d52f1bb4cc79a4a0c0fe2ccec4bd78ff885ab01ebe1c0f637d8392bcafb6"
             repo="github-tarball" />
@@ -98,9 +98,9 @@
   <distutils id="pygments">
     <branch module="89/6b/2114e54b290824197006e41be3f9bbe1a26e9c39d1f5fa20a6d62945a0b3/Pygments-2.15.1.tar.gz"
             version="2.15.1"
-            repo="pymodules" >
+            repo="pymodules">
       <patch file="Pygments-setup-py.patch"
-             strip="1"/>
+             strip="1" />
     </branch>
     <dependencies>
       <dep package="python3" />

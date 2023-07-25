@@ -39,10 +39,11 @@
               href="https://releases.pagure.org/"
               type="tarball" />
   <repository name="itstool"
-              type="tarball" 
-              href="http://files.itstool.org/"/>
+              href="http://files.itstool.org/"
+              type="tarball" />
   <!---->
-  <cmake id="graphviz" cmakeargs="-Dwith_gvedit=NO">
+  <cmake id="graphviz"
+         cmakeargs="-Dwith_gvedit=NO">
     <branch module="8.0.5/graphviz-8.0.5.tar.bz2"
             version="8.0.5"
             hash="sha256:c1901fe52483fad55fbf893ccd59a3dcaedd53f0d50b5aebbbf3deaba93b674d"
@@ -116,7 +117,7 @@
         Without shared-mime-info, HTML documents display as plain text
       -->
       <dep package="shared-mime-info" />
-      <dep package="itstool"/>
+      <dep package="itstool" />
     </dependencies>
   </meson>
   <!---->
@@ -188,8 +189,7 @@
     <branch module="2.2/shared-mime-info-2.2.tar.bz2"
             version="2.2"
             hash="sha256:418c480019d9865f67f922dfb88de00e9f38bf971205d55cdffab50432919e61"
-            repo="shared-mime-info">
-    </branch>
+            repo="shared-mime-info" />
     <dependencies>
       <dep package="glib" />
       <dep package="xmlto" />
@@ -210,7 +210,7 @@
              autogenargs="--disable-tcl --enable-threadsafe">
     <branch module="2023/sqlite-autoconf-3420000.tar.gz"
             version='3.42.0'
-
+            hash="sha256:7abcfd161c6e2742ca5c6c0895d1f853c940f203304a0b49da4e1eca5d088ca6"
             repo="sqlite" />
   </autotools>
   <!--
@@ -253,7 +253,6 @@
              autogenargs="--enable-relocatable">
     <branch module="AbiWord/enchant/releases/download/v2.5.0/enchant-2.5.0.tar.gz"
             version="2.5.0"
-
             repo="github-tarball" />
     <dependencies>
       <dep package="glib" />
@@ -314,9 +313,10 @@
     <branch module="libxml2/2.11/libxml2-2.11.4.tar.xz"
             version="2.11.4"
             hash="sha256:737e1d7f8ab3f139729ca13a2494fd17bf30ddb4b7a427cf336252cab57f57f7">
-       <patch file="libxml2-python-config.patch"
+
+      <patch file="libxml2-python-config.patch"
              strip="1" />
-   </branch>
+    </branch>
     <after>
       <dep package="python3" />
     </after>
@@ -327,8 +327,9 @@
     <branch module="libxslt/1.1/libxslt-1.1.38.tar.xz"
             version="1.1.38"
             hash="sha256:1f32450425819a09acaff2ab7a5a7f8a2ec7956e505d7beeb45e843d0e1ecab1">
-       <patch file="libxslt-python-config.patch"
-              strip="1" />
+
+      <patch file="libxslt-python-config.patch"
+             strip="1" />
     </branch>
     <dependencies>
       <dep package="libxml2" />

@@ -93,7 +93,7 @@
                autogen-sh="configure"
                autogenargs="--disable-documentation">
       <branch module="nettle/nettle-3.9.1.tar.gz"
-              version="3.9/1"
+              version="3.9.1"
               hash="sha256:ccfeff981b0ca71bbd6fbcb054f407c60ffb644389a5be80d6716d5b550c6ce3"
               repo="ftp.gnu.org" />
       <dependencies>
