@@ -37,10 +37,8 @@
   <autotools id="openssl" autogen-sh="Configure" autogenargs="shared "
              autogen-template="%(srcdir)s/%(autogen-sh)s --prefix=%(prefix)s --openssldir=%(prefix)s/etc/ssl %(autogenargs)s"
              makeinstallargs="install_sw" supports-non-srcdir-builds="no">
-    <branch module="openssl-1.1.1u.tar.gz"
-            version="1.1.1u"
-            hash="sha256:e2f8d84b523eecd06c7be7626830370300fbcc15386bf5142d72758f6963ebc6"
-            repo="openssl" />
+    <branch module="openssl-3.1.1.tar.gz" version="3.1.1" repo="openssl"
+            hash="sha256:b3aa61334233b852b63ddb048df181177c2c659eb9d4376008118f9c08d07674"/>
   </autotools>
 
   <autotools id="libnettle" autogen-sh="autoreconf"
