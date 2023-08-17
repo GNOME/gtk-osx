@@ -121,7 +121,7 @@
   <!---->
   <autotools id="gnutls"
              autogen-sh="autoreconf"
-             autogenargs="--disable-gtk-doc-html --with-included-unistring">
+             autogenargs="--disable-doc --with-included-unistring">
              
     <branch module="gcrypt/gnutls/v3.8/gnutls-3.8.0.tar.xz"
             version="3.8.0"

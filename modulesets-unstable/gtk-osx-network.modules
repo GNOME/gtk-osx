@@ -78,7 +78,7 @@
   files (build-aux/, po/Makefile.in.in) that they're not supposed to.-->
 
   <autotools id="gnutls" autogen-sh="autoreconf"
-             autogenargs="--disable-gtk-doc-html --with-included-unistring">
+             autogenargs="--disable-doc --with-included-unistring">
     <branch module="gcrypt/gnutls/v3.8/gnutls-3.8.0.tar.xz"
             version="3.8.0"
             hash="sha256:0ea0d11a1660a1e63f960f157b197abe6d0c8cb3255be24e1fb3815930b9bdc5"
