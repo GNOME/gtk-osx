@@ -73,6 +73,12 @@ if test ! -x "$DEVPREFIX/bin/bash"; then
     ln -s /bin/bash "$DEVPREFIX/bin"
 fi
 
+# Since macOS 13, groff isn't present on the system. By symlinking 'true', we get
+# a dummy groff that's succesfully executed in affected makefiles.
+if test ! -x /usr/bin/groff -a ! -x "$DEVPREFIX/bin/groff"; then
+    ln -s /usr/bin/true "$DEVPREFIX/bin/groff"
+fi
+
 # Setup pyenv
 if test ! -x "$PYENV_INSTALL_ROOT/libexec/pyenv"; then
   if test -d "$PYENV_INSTALL_ROOT"; then
