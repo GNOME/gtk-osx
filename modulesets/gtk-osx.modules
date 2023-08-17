@@ -170,15 +170,15 @@
     </dependencies>
   </autotools>
   <!---->
-  <autotools id="pixman"
-             autogenargs="--disable-gtk --disable-mmx">
+  <meson id="pixman"
+         mesonargs="-Dgtk=disabled -Dmmx=disabled -Da64-neon=disabled">
     <branch module="pixman/pixman"
             repo="freedesktop"
             revision="pixman-0.42.2" />
     <after>
       <dep package="meta-gtk-osx-bootstrap" />
     </after>
-  </autotools>
+  </meson>
   <!--
     cairo doesn't really need fontconfig, but if Pango finds
     freetype it insists that it has to have fontconfig too and that
