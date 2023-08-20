@@ -625,13 +625,6 @@ if ('python3' in modules or 'pygments' in modules or
     'meta-gtk-osx-python3' in modules or os.path.exists(_python3_path)):
     os.environ['PYTHON'] = _python3_path
     module_extra_env['pkg-config'] = {'PYTHON':sys.executable}
-    _found_modules = '';
-    if ('python3' in modules):
-        _found_modules += 'python3;'
-    if ('meta-gtk-osx-python' in modules):
-        _found_modules += 'meta;';
-    print("Setting $PYTHON to module-built python3 because %s." % _found_modules)
-    print("Modules %s" % ';'.join(modules))
 else:
     _python_ver = str(sys.version_info.major) + '.' + str(sys.version_info.minor)
     _python_install_path = os.path.join(prefix, 'lib', 'python' + _python_ver,
