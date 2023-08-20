@@ -358,7 +358,7 @@ def setup_sdk(target=_target, sdk_version=None, architectures=[_default_arch]):
     #Overcome Python's obnoxious misconfiguration of portable builds
     if len(architectures) == 1:
         os.environ["BUILDCFLAGS"] = os.environ["CFLAGS"]
-    append_autogenargs("gnutls", "--disable-guile")
+    append_autogenargs("gnutls", '--disable-guile CXXFLAGS="$CXXFLAGS -std=c++11"')
     append_autogenargs("guile", 'CFLAGS="$CFLAGS -O1"')
     #Some packages require special arguments or flags to compile with Clang:
     module_extra_env["pkg-config"] = {'CFLAGS': os.environ['CFLAGS'] + ' -std=gnu89'}
