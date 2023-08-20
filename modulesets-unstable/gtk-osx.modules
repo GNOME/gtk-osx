@@ -312,12 +312,12 @@
     </after>
   </autotools>
 
-  <autotools id="adwaita-icon-theme">
+  <meson id="adwaita-icon-theme">
     <branch />
     <dependencies>
       <dep package="librsvg"/>
     </dependencies>
-  </autotools>
+  </meson>
 
   <!-- Null metamodule, provided so as not to break modules that use it. -->
   <metamodule id="meta-gtk-osx-freetype" />
