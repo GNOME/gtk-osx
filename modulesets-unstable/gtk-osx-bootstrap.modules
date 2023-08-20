@@ -53,9 +53,7 @@
   <!---->
   <meson id="gtk-doc"
          mesonargs="-Dyelp_manual=false -Dtests=false">
-    <branch module="gtk-doc/1.33/gtk-doc-1.33.2.tar.xz"
-            version="1.33.2"
-            hash="sha256:cc1b709a20eb030a278a1f9842a362e00402b7f834ae1df4c1998a723152bf43" />
+    <branch module="gtk-doc"/>
     <dependencies>
     </dependencies>
     <after>
