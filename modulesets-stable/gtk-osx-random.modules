@@ -32,12 +32,6 @@
   <repository name="sqlite"
               href="http://www.sqlite.org/"
               type="tarball" />
-  <repository name="fossies"
-              href="https://fossies.org/linux/misc/"
-              type="tarball" />
-  <repository name="paguire"
-              href="https://releases.pagure.org/"
-              type="tarball" />
   <repository name="itstool"
               href="http://files.itstool.org/"
               type="tarball" />
@@ -159,32 +153,6 @@
     </dependencies>
   </meson>
   <!---->
-  <autotools id="getopt"
-             autogen-sh="configure"
-             supports-non-srcdir-builds="no">
-    <branch module="getopt-1.1.6.tar.gz"
-            version="1.1.6"
-            hash="sha256:d0bf1dc642a993e7388a1cddfb9409bed375c21d5278056ccca3a0acd09dc5fe"
-            repo="fossies">
-      <patch file="getopt-autotools.patch"
-             strip="1" />
-    </branch>
-  </autotools>
-  <!---->
-  <autotools id="xmlto"
-             autogen-sh="autoreconf">
-    <branch module="xmlto/xmlto-0.0.28.tar.bz2"
-            version="0.0.28"
-            hash="sha256:1130df3a7957eb9f6f0d29e4aa1c75732a7dfb6d639be013859b5c7ec5421276"
-            repo="paguire">
-      <patch file="xmlto-allow-net-access.patch"
-             strip="1" />
-    </branch>
-    <dependencies>
-      <dep package="getopt" />
-    </dependencies>
-  </autotools>
-  <!---->
   <meson id="shared-mime-info">
     <branch module="2.2/shared-mime-info-2.2.tar.bz2"
             version="2.2"
@@ -192,7 +160,6 @@
             repo="shared-mime-info" />
     <dependencies>
       <dep package="glib" />
-      <dep package="xmlto" />
     </dependencies>
   </meson>
   <!---->
