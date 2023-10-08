@@ -53,14 +53,26 @@
             repo="ftp.gnu.org" />
   </autotools>
   <!---->
+  <autotools id="libiconv"
+             autogen-sh="configure"
+             autogenargs="--disable-debug --disable-dependency-tracking --enable-extra-encodings">
+
+    <branch module="libiconv/libiconv-1.17.tar.gz"
+            version="1.17"
+            repo="ftp.gnu.org" />
+  </autotools>
+
   <autotools id="gettext"
              autogen-sh="configure"
              autogenargs="--without-emacs --disable-java --disable-native-java --disable-libasprintf --disable-csharp --with-included-glib --with-included-libcroco">
 
-    <branch module="gettext/gettext-0.22.tar.xz"
-            version="0.22"
-            hash="sha256:0e60393a47061567b46875b249b7d2788b092d6457d656145bb0e7e6a3e26d93"
+    <branch module="gettext/gettext-0.22.3.tar.xz"
+            version="0.22.3"
+            hash="sha256:b838228b3f8823a6c1eddf07297197c4db13f7e1b173b9ef93f3f945a63080b6"
             repo="ftp.gnu.org" />
+    <dependencies>
+      <dep package="libiconv" />
+    </dependencies>
   </autotools>
   <!--
     cmakes ./configure is picky about invalid flags so we manually set it
