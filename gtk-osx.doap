@@ -15,7 +15,7 @@
   Gtk-OSX is licensed under the GNU GPL. Nothing from Gtk-OSX is
   incorporated into the application, so there is no obstacle to its use
   by closed-source developers.</description>
-  <homepage rdf:resource="http://www.gtk+.org/" />
+  <homepage rdf:resource="https://www.gtk.org/" />
   <license rdf:resource="http://usefulinc.com/doap/licenses/gpl" />
   <bug-database rdf:resource="https://gitlab.gnome.org/GNOME/gtk-osx/issues/" />
   <download-page rdf:resource="https://sourceforge.net/projects/gtk-osx/files/" />
