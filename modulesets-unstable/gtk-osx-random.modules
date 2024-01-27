@@ -18,6 +18,9 @@
               href="https://gitlab.com/graphviz/graphviz/-/archive/"/>
 
   <repository type="tarball" name="sqlite" href="http://www.sqlite.org/"/>
+  <repository name="itstool"
+              href="http://files.itstool.org/"
+              type="tarball" />
   <!---->
  
   <cmake id="graphviz" cmakeargs="-Dwith_gvedit=NO">
