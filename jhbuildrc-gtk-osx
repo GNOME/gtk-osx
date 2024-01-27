@@ -75,7 +75,8 @@ class _cmd_bootstrap_gtk_osx(jhbuild.commands.base.cmd_build):
     def run(self, config, options, args, help=None):
         global use_local_modulesets
         moduleset="bootstrap"
-        modulesets_dir = os.path.dirname(config.moduleset)
+        modulesets_dir = os.path.join(os.path.dirname(os.path.dirname(config.moduleset)), 'modulesets-stable')
+        print(f"Modulests Dir: ${modulesets_dir}")
         if (use_local_modulesets and
             os.path.exists(os.path.join(modulesets_dir,
                                         moduleset + '.modules'))):
@@ -209,7 +210,7 @@ def setup_debug():
 #    autogenargs = autogenargs + " --enable-debug=yes"
 
 # Gtk+ crashes in gdk_window_quartz_raise() -- in a call to [NSWindow
-# orderFront:] if gcc is passed -O0 for 64-bit compilation. The old
+# orderFront:] if clang is passed -O0 for 64-bit compilation. The old
 # stabs+ debug format also doesn't work. See Snow Leopard in the Wiki
 # for more information about debugging.
     environ_prepend('CFLAGS', "-O0 -g")
@@ -296,12 +297,12 @@ def setup_sdk(target=_target, sdk_version=None, architectures=[_default_arch]):
         print("WARNING: Universal builds are neither prohibited nor supported. It might work, but if it doesn't you're on your own.")
     # For unknown reasons, iconv is not picked up correctly without this
     #
-    gcc = _popen("xcrun -f gcc")
-    gpp = _popen("xcrun -f g++")
+    cc = _popen("xcrun -f clang")
+    cxx = _popen("xcrun -f clang++")
     ld = _popen("xcrun -f ld")
-    os.environ["CC"] = gcc
-    os.environ["OBJC"] = gcc
-    os.environ["CXX"] = gpp
+    os.environ["CC"] = cc
+    os.environ["OBJC"] = cc
+    os.environ["CXX"] = cxx
     os.environ['LD'] = ld
 
     # Set the -arch flags for everything we're building.
@@ -348,7 +349,7 @@ def setup_sdk(target=_target, sdk_version=None, architectures=[_default_arch]):
     # gettext-fw rebuilds gettext with an in-tree libiconv to get
     # around the Apple-provided one not defining _libiconv_init for
     # x86_64
-    append_autogenargs("gettext-fw", "--with-libiconv-prefix=" + prefix)
+    append_autogenargs("gettext", "--with-libiconv-prefix=" + prefix)
 
     environ_append("CFLAGS", "-mmacosx-version-min=" + target)
     environ_append("CXXFLAGS", "-mmacosx-version-min=" + target)

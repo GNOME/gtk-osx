@@ -205,6 +205,7 @@
   <metamodule id="meta-bootstrap">
     <dependencies>
       <dep package="xz" />
+      <dep package="libiconv"/>
       <dep package="gettext" />
       <dep package="cmake" />
       <dep package="autoconf-archive" />
