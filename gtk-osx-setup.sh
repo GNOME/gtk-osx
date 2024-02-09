@@ -57,7 +57,7 @@ envvar DEV_SRC_ROOT "$DEVROOT/Source"
 envvar PYENV_INSTALL_ROOT "$DEV_SRC_ROOT/pyenv"
 envvar PYENV_ROOT "$DEVPREFIX/share/pyenv"
 envvar PIP_CONFIG_DIR "$HOME/.config/pip"
-envvar PYTHON_VERSION 3.11.4
+envvar PYTHON_VERSION 3.11.7
 
 export PYTHONWARNINGS=ignore:DEPRECATION::pip._internal.cli.base_command
 
@@ -112,7 +112,7 @@ PIP="$PYENV_ROOT/shims/pip3"
 $PIP install --upgrade --user pip
 
 # Install pipenv
-$PIP install --upgrade --user pipenv==2020.11.15
+$PIP install --upgrade --user pipenv==2023.12.1
 PIPENV="$PYTHONUSERBASE/bin/pipenv"
 export WORKON_HOME=$DEVPREFIX/share/virtualenvs
 
