@@ -45,6 +45,9 @@
       -->
       <dep package="openssl" />
     </dependencies>
+    <after>
+      <dep package="sqlite"/>
+    </after>
   </autotools>
   <!---->
   <meson id="pycairo">

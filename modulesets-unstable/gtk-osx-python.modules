@@ -31,6 +31,9 @@
       <dep package='readline'/>
       <dep package="openssl" /> <!-- For hashlib -->
     </dependencies>
+    <after>
+      <dep package='sqlite'/>
+    </after>
   </autotools>
 
  <meson id="pycairo" >
