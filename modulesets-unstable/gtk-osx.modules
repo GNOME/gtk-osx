@@ -105,7 +105,8 @@
   </autotools>
   <!---->
 
-  <meson id="harfbuzz-no-cairo" mesonargs="-Dcoretext=enabled -Dfreetype=enabled -Ddocs=disabled -Dbenchmark=disabled -Dtests=disabled">
+  <meson id="harfbuzz-no-cairo"
+         mesonargs="-Dcoretext=enabled -Dfreetype=enabled -Ddocs=disabled -Dbenchmark=disabled -Dintrospection=disabled -Dtests=disabled">
     <branch revision="main" repo="github" module="harfbuzz/harfbuzz"/>
     <dependencies>
       <dep package="glib"/>
