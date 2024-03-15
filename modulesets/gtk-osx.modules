@@ -336,6 +336,17 @@
             revision="3.6.5" />
   </autotools>
   <!---->
+  <autotools id="sassc"
+             autogen-sh="autoreconf">
+    <branch module="sass/sassc"
+            repo="github"
+            revision="3.6.2" />
+    <dependencies>
+      <dep package="libsass"/>
+    </dependencies>
+
+  </autotools>
+  <!---->
   <meson id="gtk-4"
          mesonargs="-Dx11-backend=false -Dmedia-gstreamer=disabled">
          
@@ -348,7 +359,7 @@
       <dep package="atk" />
       <dep package="gdk-pixbuf" />
       <dep package="graphene" />
-      <dep package="libsass" />
+      <dep package="sassc" />
       <dep package="libepoxy" />
     </dependencies>
     <after>

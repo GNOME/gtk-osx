@@ -278,7 +278,14 @@
 
   <autotools id="libsass" autogen-sh="autoreconf"
              autogenargs="--disable-tests --disable-static">
-    <branch repo="github" revision="3.6.4" module="sass/libsass"/>
+    <branch repo="github" revision="3.6.5" module="sass/libsass"/>
+  </autotools>
+
+  <autotools id="sassc" autogen-sh="autoreconf">
+    <branch repo="github" revision="3.6.2" module="sass/sassc"/>
+    <dependencies>
+      <dep package="libsass"/>
+    </dependencies>
   </autotools>
 
   <meson id="gtk-4" mesonargs="-Dx11-backend=false -Dmedia-gstreamer=disabled">
@@ -289,7 +296,7 @@
       <dep package="atk"/>
       <dep package="gdk-pixbuf"/>
       <dep package="graphene"/>
-      <dep package="libsass"/>
+      <dep package="sassc"/>
       <dep package="libepoxy"/>
     </dependencies>
     <after>
