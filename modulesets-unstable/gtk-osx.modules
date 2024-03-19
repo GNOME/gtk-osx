@@ -73,11 +73,18 @@
             module="PCRE2Project/pcre2"/>
   </autotools>
 
-  <meson id="glib" mesonargs="-Dlibmount=disabled">
-    <branch revision='main'/>
+  <meson id="glib-no-introspection" mesonargs="-Dlibmount=disabled -Dintrospection=disabled">
+    <branch revision='main' module="glib"/>
     <dependencies>
       <dep package="libpcre2"/>
       <dep package="libffi"/>
+    </dependencies>
+  </meson>
+
+  <meson id="glib" mesonargs="-Dlibmount=disabled -Dintrospection=enabled">
+    <branch revision='main'/>
+    <dependencies>
+      <dep package="gobject-introspection"/>
     </dependencies>
   </meson>
 
@@ -109,7 +116,7 @@
          mesonargs="-Dcoretext=enabled -Dfreetype=enabled -Ddocs=disabled -Dbenchmark=disabled -Dintrospection=disabled -Dtests=disabled">
     <branch revision="main" repo="github" module="harfbuzz/harfbuzz"/>
     <dependencies>
-      <dep package="glib"/>
+      <dep package="glib-no-introspection"/>
       <dep package="freetype-no-harfbuzz"/>
       <dep package="icu"/>
     </dependencies>
@@ -168,7 +175,7 @@
   <meson id="gobject-introspection">
     <branch/>
     <dependencies>
-      <dep package="glib"/>
+      <dep package="glib-no-introspection"/>
       <dep package="cairo"/>
     </dependencies>
     <after>
@@ -182,6 +189,7 @@
   <meson id="harfbuzz" mesonargs="-Dcoretext=enabled -Dfreetype=enabled -Ddocs=disabled -Dbenchmark=disabled -Dtests=disabled">
     <branch revision="main" repo="github" module="harfbuzz/harfbuzz"/>
     <dependencies>
+      <dep package="glib"/>
       <dep package="gobject-introspection"/>
       <dep package="cairo"/>
       <dep package="fontconfig"/>
@@ -198,7 +206,7 @@
   <meson id="pango" mesonargs="-Dfontconfig=enabled">
     <branch revision="main" />
     <dependencies>
-      <dep package="glib"/>
+      <dep package="glib-no-introspection"/>
       <dep package="cairo"/>
       <dep package="harfbuzz"/>
       <dep package="fribidi"/>
@@ -214,7 +222,6 @@
     <dependencies>
     </dependencies>
     <after>
-      <dep package="glib"/>
       <dep package="gobject-introspection"/>
       <dep package="meta-gtk-osx-bootstrap"/>
     </after>
@@ -239,14 +246,6 @@
     </dependencies>
   </meson>
 
-  <meson id="graphene">
-    <branch module="ebassi/graphene" repo="github" checkoutdir="graphene"/>
-    <dependencies>
-      <dep package="glib"/>
-      <dep package="gobject-introspection"/>
-    </dependencies>
-  </meson>
-
   <autotools id="hicolor-icon-theme">
     <branch module="hicolor-icon-theme-0.17.tar.xz" version="0.17"
             repo="hicolor"/>
@@ -268,8 +267,8 @@
     </after>
   </meson>
 
-  <meson id="graphene" mesonargs="-Dtests=false">
-    <branch repo="github" revision="1.10.4" module="ebassi/graphene"/>
+  <meson id="graphene">
+    <branch module="ebassi/graphene" repo="github" checkoutdir="graphene"/>
     <dependencies>
       <dep package="glib"/>
       <dep package="gobject-introspection"/>
