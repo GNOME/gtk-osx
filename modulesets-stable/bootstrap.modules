@@ -32,6 +32,7 @@
               href="https://github.com"
               type="tarball" />
   <!---->
+<!-- NOTE: DO NOT UPGRADE TO 5.6.x! See https://nvd.nist.gov/vuln/detail/CVE-2024-3094 -->
   <autotools id="xz"
              autogen-sh="configure"
              bootstrap="true">

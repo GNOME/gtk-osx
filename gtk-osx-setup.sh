@@ -34,6 +34,7 @@ envvar ()
         _var=$2
     fi
     if test ! -d "$_var"; then
+        echo "Creating $_var"
         mkdir -p "$_var"
     fi
 }
@@ -79,7 +80,6 @@ if test ! -x /usr/bin/groff -a ! -x "$DEVPREFIX/bin/groff"; then
     ln -s /usr/bin/true "$DEVPREFIX/bin/groff"
 fi
 
-# Setup pyenv
 if test ! -x "$PYENV_INSTALL_ROOT/libexec/pyenv"; then
   if test -d "$PYENV_INSTALL_ROOT"; then
      rm -rf "$PYENV_INSTALL_ROOT";
@@ -106,8 +106,10 @@ export PYTHON_CONFIGURE_OPTS="--enable-shared"
 #This really means pyenv's *python* version. It's poorly named but
 #it's defined by pyenv so it can't be changed.
 export PYENV_VERSION=$PYTHON_VERSION
-$PYENV install -v $PYENV_VERSION
+$PYENV install $PYENV_VERSION
 PIP="$PYENV_ROOT/shims/pip3"
+
+echo PyEnv installed to $PYENV_ROOT
 
 $PIP install --upgrade --user pip
 
@@ -255,7 +257,9 @@ if test -d "$SDKROOT"; then
     export CFLAGS="-isysroot $SDKROOT -I$SDKROOT/usr/include"
 fi
 
-$PIPENV install
+echo "Running $PIPENV install"
+$PIPENV install -v
+exit
 
 BASEURL="https://gitlab.gnome.org/GNOME/gtk-osx/raw/master"
 
