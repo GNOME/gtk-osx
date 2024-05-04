@@ -632,7 +632,7 @@ else:
                                        os.environ['PYENV_VERSION'], 'lib')
     environ_append('LDFLAGS', '-L' + _python_library_path)
     os.environ['PYTHON'] = sys.executable
-    environ_append('PKG_CONFIG_PATH', os.path.join(_python_library_path, 'pkgconfig'))
+    environ_append('PKG_CONFIG_PATH', os.path.join(_python_library_path, 'pkgconfig'), ":")
 
 module_extra_env["python3"] = {'LIBS':'-lintl'}
 module_extra_env["spidermonkey"] = {'AUTOCONF':'autoconf'}
