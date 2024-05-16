@@ -10,8 +10,8 @@
   <repository name="ftp.gnu.org"
               href="https://ftp.gnu.org/gnu/"
               type="tarball" />
-  <repository name="pkgconfig"
-              href="http://pkgconfig.freedesktop.org/releases/"
+  <repository name="pkgconf"
+              href="https://distfiles.ariadne.space/pkgconf/"
               type="tarball" />
   <repository name="sourceforge"
               href="http://downloads.sourceforge.net/sourceforge/"
@@ -146,15 +146,15 @@
     </dependencies>
   </autotools>
   <!---->
-  <autotools id="pkg-config"
-             autogen-sh="configure"
-             autogenargs="--with-internal-glib"
-             bootstrap="true">
-    <branch module="pkg-config-0.29.2.tar.gz"
-            version="0.29.2"
-            hash="sha256:6fc69c01688c9458a57eb9a1664c9aba372ccda420a02bf4429fe610e7e7d591"
-            repo="pkgconfig" />
-  </autotools>
+  <meson id="pkgconf"
+         mesonargs="-Dwith-system-libdir=/usr/lib -Dwith-system-includedir=/usr/include" >
+    <branch module="pkgconf-2.2.0.tar.xz"
+            version="2.2.0"
+            hash="sha256:b06ff63a83536aa8c2f6422fa80ad45e4833f590266feb14eaddfe1d4c853c69"
+            repo="pkgconf" >
+      <patch file="pkgconf-link-pkg-config.patch" strip="1" />
+    </branch>
+  </meson>
   <!--
     macOS provides 2.3 (presumably the last GPL2 version, gstreamer
     requires 2.4.
@@ -212,7 +212,7 @@
       <dep package="autoconf-archive" />
       <dep package="libtool" />
       <dep package="automake" />
-      <dep package="pkg-config" />
+      <dep package="pkgconf" />
       <dep package="bison" />
       <dep package="flex" />
       <dep package="gtk-osx-docbook" />
