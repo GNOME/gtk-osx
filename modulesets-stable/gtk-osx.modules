@@ -336,9 +336,9 @@
   -->
   <meson id="gtk+-3.0"
          mesonargs="-Dx11_backend=false">
-    <branch module="gtk+/3.24/gtk+-3.24.38.tar.xz"
-            version="3.24.38"
-            hash="sha256:ce11decf018b25bdd8505544a4f87242854ec88be054d9ade5f3a20444dd8ee7">
+    <branch module="gtk+/3.24/gtk+-3.24.42.tar.xz"
+            version="3.24.42"
+            hash="sha256:50f89f615092d4dd01bbd759719f8bd380e5f149f6fd78a94725e2de112377e2">
     </branch>
     <dependencies>
       <dep package="glib" />
