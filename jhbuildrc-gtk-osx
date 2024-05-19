@@ -357,7 +357,6 @@ def setup_sdk(target=_target, sdk_version=None, architectures=[_default_arch]):
     append_autogenargs("gnutls", '--disable-guile CXXFLAGS="$CXXFLAGS -std=c++11"')
     append_autogenargs("guile", 'CFLAGS="$CFLAGS -O1"')
     #Some packages require special arguments or flags to compile with Clang:
-    module_extra_env["pkg-config"] = {'CFLAGS': os.environ['CFLAGS'] + ' -std=gnu89'}
     append_autogenargs('libgcrypt', 'CFLAGS="$CFLAGS -fheinous-gnu-extensions"')
     module_makeargs['liboil'] = 'CFLAGS="$CFLAGS -DHAVE_SYMBOL_UNDERSCORE -fheinous-gnu-extensions"'
 
@@ -620,7 +619,6 @@ _python3_path = os.path.join(prefix, 'bin', 'python3')
 if ('python3' in modules or 'pygments' in modules or
     'meta-gtk-osx-python3' in modules or os.path.exists(_python3_path)):
     os.environ['PYTHON'] = _python3_path
-    module_extra_env['pkg-config'] = {'PYTHON':sys.executable}
 else:
     _python_ver = str(sys.version_info.major) + '.' + str(sys.version_info.minor)
     _python_install_path = os.path.join(prefix, 'lib', 'python' + _python_ver,
