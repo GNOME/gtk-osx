@@ -356,9 +356,10 @@
   <!---->
   <meson id="graphene"
          mesonargs="-Dtests=false">
-    <branch module="ebassi/graphene/releases/download/1.10.6/graphene-1.10.6.tar.xz"
+    <branch module="graphene/1.10/graphene-1.10.8.tar.xz"
             version="1.10.8"
-            repo="github-tarball" />
+            hash="a37bb0e78a419dcbeaa9c7027bcff52f5ec2367c25ec859da31dfde2928f279a"
+            repo="download.gnome.org" />
     <dependencies>
       <dep package="glib" />
       <dep package="gobject-introspection" />
