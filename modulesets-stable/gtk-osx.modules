@@ -210,11 +210,11 @@
     freetype it insists that it has to have fontconfig too and that
     they are both built into cairo.
   -->
-  <meson id="cairo">
-    <branch module="1.17.8/cairo-1.17.8.tar.bz2"
-            version="1.17.8"
-            hash="sha256:ead4724423eb969f98b456fe1e3ee1e1741fe1c8dfb1a41ca12afa81a6c1665f"
-            repo="cairographics-temp" />
+  <meson id="cairo" mesonargs="-Dfontconfig=enabled -Dfreetype=enabled">
+    <branch module="releases/cairo-1.18.0.tar.xz"
+            version="1.18.0"
+            hash="sha256:243a0736b978a33dee29f9cca7521733b78a65b5418206fef7bd1c3d4cf10b64"
+            repo="cairographics" />
     <dependencies>
       <dep package="pixman" />
       <dep package="meta-gtk-osx-bootstrap" />
