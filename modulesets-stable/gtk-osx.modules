@@ -224,9 +224,9 @@
   </meson>
   <!---->
   <meson id="gobject-introspection">
-    <branch module="gobject-introspection/1.76/gobject-introspection-1.76.1.tar.xz"
-            version="1.76.1"
-            hash="sha256:196178bf64345501dcdc4d8469b36aa6fe80489354efe71cb7cb8ab82a3738bf">
+    <branch module="gobject-introspection/1.78/gobject-introspection-1.78.1.tar.xz"
+            version="1.78.1"
+            hash="sha256:bd7babd99af7258e76819e45ba4a6bc399608fe762d83fde3cac033c50841bb4">
     </branch>
     <dependencies>
       <dep package="glib" />

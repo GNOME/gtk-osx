@@ -198,7 +198,7 @@
   <!---->
   <meson id="gobject-introspection">
     <branch module="gobject-introspection"
-            tag="1.76.1" />
+            tag="1.78.1" />
     <dependencies>
       <dep package="glib" />
       <dep package="cairo" />
