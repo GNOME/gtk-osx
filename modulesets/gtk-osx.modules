@@ -388,7 +388,7 @@
   <autotools id="librsvg"
              autogenargs="--disable-Bsymbolic">
     <branch module="librsvg"
-            branch="librsvg-2.56" />
+            branch="librsvg-2.57" />
     <dependencies>
       <dep package="libxml2"/>
       <dep package="cairo" />
