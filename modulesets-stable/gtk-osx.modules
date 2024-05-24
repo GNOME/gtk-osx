@@ -240,9 +240,9 @@
   <meson id="harfbuzz"
          mesonargs="-Dcoretext=enabled -Dfreetype=enabled -Ddocs=disabled -Dbenchmark=disabled -Dintrospection=enabled -Dtests=disabled">
 
-    <branch module="harfbuzz/harfbuzz/releases/download/7.3.0/harfbuzz-7.3.0.tar.xz"
-            version="7.3.0"
-            hash="sha256:20770789749ac9ba846df33983dbda22db836c70d9f5d050cb9aa5347094a8fb"
+    <branch module="harfbuzz/harfbuzz/releases/download/8.3.0/harfbuzz-8.3.0.tar.xz"
+            version="8.3.0"
+            hash="sha256:109501eaeb8bde3eadb25fab4164e993fbace29c3d775bcaa1c1e58e2f15f847"
             repo="github-tarball" />
     <dependencies>
       <dep package="gobject-introspection" />

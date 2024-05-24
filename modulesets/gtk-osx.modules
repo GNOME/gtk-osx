@@ -220,7 +220,7 @@
 
     <branch module="harfbuzz/harfbuzz"
             repo="github"
-            tag="7.3.0" />
+            tag="8.3.0" />
     <dependencies>
       <dep package="gobject-introspection" />
       <dep package="cairo" />
