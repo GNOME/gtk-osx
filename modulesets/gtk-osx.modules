@@ -113,7 +113,7 @@
 
     <branch module="freetype/freetype2"
             repo="nongnu"
-            revision="VER-2-13-1" />
+            revision="VER-2-13-2" />
     <dependencies>
       <dep package="zlib" />
     </dependencies>
@@ -152,7 +152,7 @@
 
     <branch module="freetype/freetype2"
             repo="nongnu"
-            revision="VER-2-11-1" />
+            revision="VER-2-13-2" />
     <dependencies>
       <dep package="harfbuzz-no-cairo" />
       <dep package="zlib" />

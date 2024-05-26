@@ -134,9 +134,9 @@
   <cmake id="freetype-no-harfbuzz"
          cmakeargs="-DCMAKE_DISABLE_FIND_PACKAGE_HarfBuzz=TRUE -DCMAKE_DISABLE_FIND_PACKAGE_BZip2=TRUE -D BUILD_SHARED_LIBS=true -D CMAKE_BUILD_TYPE=Release">
 
-    <branch module="freetype/freetype-2.13.1.tar.xz"
-            version="2.13.1"
-            hash="sha256:ea67e3b019b1104d1667aa274f5dc307d8cbd606b399bc32df308a77f1a564bf"
+    <branch module="freetype/freetype-2.13.2.tar.xz"
+            version="2.13.2"
+            hash="sha256:12991c4e55c506dd7f9b765933e62fd2be2e06d421505d7950a132e4f1bb484d"
             repo="sourceforge" />
     <dependencies>
       <dep package="zlib" />
@@ -172,9 +172,9 @@
   <cmake id="freetype"
          cmakeargs="-DCMAKE_DISABLE_FIND_PACKAGE_BZip2=TRUE -D BUILD_SHARED_LIBS=true -D CMAKE_BUILD_TYPE=Release">
 
-    <branch module="freetype/freetype-2.13.1.tar.gz"
-            version="2.13.1"
-            hash="sha256:ea67e3b019b1104d1667aa274f5dc307d8cbd606b399bc32df308a77f1a564bf"
+    <branch module="freetype/freetype-2.13.2.tar.xz"
+            version="2.13.2"
+            hash="sha256:12991c4e55c506dd7f9b765933e62fd2be2e06d421505d7950a132e4f1bb484d"
             repo="sourceforge" />
     <dependencies>
       <dep package="harfbuzz-no-cairo" />
