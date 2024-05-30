@@ -17,9 +17,6 @@
   <repository name="sourceforge"
               href="http://downloads.sourceforge.net/sourceforge/"
               type="tarball" />
-  <repository name="jpeg"
-              href="http://www.ijg.org/files/"
-              type="tarball" />
   <repository name="libtiff"
               href="http://download.osgeo.org/"
               type="tarball" />
@@ -45,13 +42,14 @@
     </dependencies>
   </autotools>
   <!---->
-  <autotools id="libjpeg"
-             autogen-sh="configure">
-    <branch module="jpegsrc.v9e.tar.gz"
-            version="9e"
-            checkoutdir="jpeg-9e"
-            repo="jpeg" />
-  </autotools>
+  <cmake id="libjpeg" cmakeargs="-DCMAKE_MACOSX_RPATH=true -DCMAKE_INSTALL_PREFIX:PATH=${JHBUILD_PREFIX} -DCMAKE_INSTALL_NAME_DIR=${JHBUILD_PREFIX}/lib -DCMAKE_INSTALL_LIBDIR:PATH=lib">
+    <branch module="libjpeg-turbo/libjpeg-turbo/releases/download/3.0.3/libjpeg-turbo-3.0.3.tar.gz" version="3.0.3"
+            hash="sha256:343e789069fc7afbcdfe44dbba7dbbf45afa98a15150e079a38e60e44578865d"
+            repo="github-tarball" checkoutdir="libjpeg-turbo-3.0.3" />
+    <dependencies>
+      <dep package="nasm" />
+    </dependencies>
+  </cmake>
   <!---->
   <autotools id="libtiff"
              autogen-sh="configure"
