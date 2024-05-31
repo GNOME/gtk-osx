@@ -29,6 +29,9 @@
   <repository name="github-tarball"
               href="https://github.com/"
               type="tarball" />
+  <repository name="nasm"
+              href="https://www.nasm.us/pub/nasm/releasebuilds/"
+              type="tarball" />
   <!---->
   <autotools id="libpng"
              autogen-sh="configure"
@@ -40,6 +43,15 @@
     <dependencies>
       <dep package="zlib" />
     </dependencies>
+  </autotools>
+  <!---->
+  <autotools id="nasm"
+             autogen-sh="configure">
+    <branch module="2.16.03/nasm-2.16.03.tar.xz"
+            version="2.16.03"
+            hash="sha256:1412a1c760bbd05db026b6c0d1657affd6631cd0a63cddb6f73cc6d4aa616148"
+            repo="nasm">
+    </branch>
   </autotools>
   <!---->
   <cmake id="libjpeg" cmakeargs="-DCMAKE_MACOSX_RPATH=true -DCMAKE_INSTALL_PREFIX:PATH=${JHBUILD_PREFIX} -DCMAKE_INSTALL_NAME_DIR=${JHBUILD_PREFIX}/lib -DCMAKE_INSTALL_LIBDIR:PATH=lib">
