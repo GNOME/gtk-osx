@@ -113,13 +113,9 @@
   <!---->
   <meson id="glib"
          mesonargs="-Dlibmount=disabled">
-    <branch module="glib/2.76/glib-2.76.3.tar.xz"
-            version="2.76.3"
-            hash="sha256:c0be444e403d7c3184d1f394f89f0b644710b5e9331b54fa4e8b5037813ad32a">
-
-      <patch file="glib-2.76.3-libintl.patch"
-             strip="1" />
-    </branch>
+    <branch module="glib/2.80/glib-2.80.2.tar.xz"
+            version="2.80.2"
+	    hash="sha256:b9cfb6f7a5bd5b31238fd5d56df226b2dda5ea37611475bf89f6a0f9400fe8bd" />
     <dependencies>
       <dep package="libffi" />
       <dep package="libpcre2" />
