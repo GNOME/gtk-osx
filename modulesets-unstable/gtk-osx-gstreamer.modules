@@ -8,8 +8,6 @@
               href="http://downloads.sourceforge.net/sourceforge/"/>
   <repository type="tarball" name="ffmpeg"
               href="https://ffmpeg.org/releases/"/>
-  <repository type="tarball" name="nasm"
-              href="https://www.nasm.us/pub/nasm/releasebuilds/"/>
 
   <!-- The GStreamer project maintains its own moduleset at
        git://anongit.freedesktop.org/gstreamer/jhbuild/. The modules
@@ -25,15 +23,6 @@
     <branch repo="sourceforge" version="2.8.6"
             module="faac/faad2-src/faad2-2.8.0/faad2-2.8.6.tar.gz"
             hash="sha256:654977adbf62eb81f4fca00152aca58ce3b6dd157181b9edd7bed687a7c73f21">
-    </branch>
-  </autotools>
-
-  <autotools id="nasm" autogen-sh="configure">
-    <branch repo="nasm" version="2.16.01"
-            module="2.16.01/nasm-2.16.01.tar.xz"
-            hash="sha256:c77745f4802375efeee2ec5c0ad6b7f037ea9c87c92b149a9637ff099f162558">
-      <patch file="nasm-2.16.01-warnings.c-needs-srcdir-patch"
-             strip="1"/>
     </branch>
   </autotools>
 
