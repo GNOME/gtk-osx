@@ -32,13 +32,12 @@
               href="https://github.com"
               type="tarball" />
   <!---->
-<!-- NOTE: DO NOT UPGRADE TO 5.6.x! See https://nvd.nist.gov/vuln/detail/CVE-2024-3094 -->
   <autotools id="xz"
              autogen-sh="configure"
              bootstrap="true">
-    <branch module="xz/xz-5.4.3.tar.bz2"
-            version="5.4.3"
-            hash="sha256:9243a04598d7a70c1f567a0143a255581ac5c64b140fd55fd5cbc1e00b0e6f90"
+    <branch module="xz/xz-5.6.2.tar.bz2"
+            version="5.6.2"
+            hash="sha256:e12aa03cbd200597bd4ce11d97be2d09a6e6d39a9311ce72c91ac7deacde3171"
             repo="tukaani.org" />
   </autotools>
   <!--
@@ -60,6 +59,7 @@
 
     <branch module="libiconv/libiconv-1.17.tar.gz"
             version="1.17"
+            hash="sha256:8f74213b56238c85a50a5329f77e06198771e70dd9a739779f4c02f65d971313"
             repo="ftp.gnu.org" />
   </autotools>
 
@@ -67,9 +67,9 @@
              autogen-sh="configure"
              autogenargs="--without-emacs --disable-java --disable-native-java --disable-libasprintf --disable-csharp --with-included-glib --with-included-libcroco">
 
-    <branch module="gettext/gettext-0.22.3.tar.xz"
-            version="0.22.3"
-            hash="sha256:b838228b3f8823a6c1eddf07297197c4db13f7e1b173b9ef93f3f945a63080b6"
+    <branch module="gettext/gettext-0.22.5.tar.xz"
+            version="0.22.5"
+            hash="sha256:fe10c37353213d78a5b83d48af231e005c4da84db5ce88037d88355938259640"
             repo="ftp.gnu.org" />
     <dependencies>
       <dep package="libiconv" />
@@ -82,9 +82,9 @@
              autogen-sh="bootstrap"
              autogen-template="%(srcdir)s/%(autogen-sh)s --prefix=%(prefix)s"
              bootstrap="true">
-    <branch module="v3.26/cmake-3.26.4.tar.gz"
-            version="3.26.4"
-            hash="sha256:313b6880c291bd4fe31c0aa51d6e62659282a521e695f30d5cc0d25abbd5c208"
+    <branch module="v3.29/cmake-3.29.3.tar.gz"
+            version="3.29.3"
+            hash="sha256:252aee1448d49caa04954fd5e27d189dd51570557313e7b281636716a238bccb"
             repo="cmake" />
   </autotools>
   <!--
@@ -103,9 +103,9 @@
   <autotools id="autoconf"
              autogen-sh="configure"
              bootstrap="true">
-    <branch module="autoconf/autoconf-2.71.tar.xz"
-            version="2.71"
-            hash="shas56:f14c83cfebcc9427f2c3cea7258bd90df972d92eb26752da4ddad81c87a0faa4"
+    <branch module="autoconf/autoconf-2.72.tar.xz"
+            version="2.72"
+            hash="sha256:ba885c1319578d6c94d46e9b0dceb4014caafe2490e437a0dbca3f270a223f5a"
             repo="ftp.gnu.org" />
     <dependencies>
       <dep package="m4" />
@@ -163,6 +163,7 @@
              autogen-sh="configure">
     <branch module="bison/bison-3.8.2.tar.xz"
             version="3.8.2"
+            hash="sha256:9bba0214ccf7f1079c5d59210045227bcf619519840ebfa80cd3849cff5a5bf2"
             repo="ftp.gnu.org" />
     <dependencies>
       <dep package='flex' />
