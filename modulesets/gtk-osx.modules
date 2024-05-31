@@ -89,17 +89,25 @@
              autogenargs="--enable-pcre2-16 --enable-pcre2-32 --enable-jit">
 
     <branch module="PCRE2Project/pcre2/releases/download/pcre2-10.42/pcre2-10.42.tar.bz2"
-            version="10.42"
-            hash="sha256:8d36cd8cb6ea2a4c2bb358ff6411b0c788633a2a45dabbf1aeb4b701d1b5e840"
+            version="10.43"
+            hash="sha256:"
             repo="github-tarball" />
   </autotools>
   <!---->
-  <meson id="glib"
+  <meson id="glib-no-introspection"
          mesonargs="-Dlibmount=disabled">
     <branch tag="glib-2-80" />
     <dependencies>
       <dep package="libffi" />
       <dep package="libpcre2" />
+    </dependencies>
+  </meson>
+  <!---->
+  <meson id="glib"
+         mesonargs="-Dlibmount=disabled">
+    <branch tag="glib-2-80" />
+    <dependencies>
+      <dep package="gobject-introspection" />
     </dependencies>
   </meson>
   <!--
@@ -136,9 +144,9 @@
 
     <branch module="harfbuzz/harfbuzz"
             repo="github"
-            tag="7.3.0" />
+            tag="8.5.0" />
     <dependencies>
-      <dep package="glib" />
+      <dep package="glib-no-introspection" />
       <dep package="freetype-no-harfbuzz" />
     </dependencies>
     <after>
@@ -159,16 +167,15 @@
     </dependencies>
   </cmake>
   <!---->
-  <autotools id="fontconfig"
-             autogenargs="--disable-docs --with-default-fonts=/System/Library/Fonts --with-add-fonts=/Library/Fonts --with-cache-dir=home">
-
+  <meson id="fontconfig"
+             mesonargs="-Ddoc=disabled -Ddefault-fonts-dirs=/System/Library/Fonts -Dadditional-fonts-dirs=/Library/Fonts">
     <branch module="fontconfig/fontconfig"
             repo="freedesktop"
-            tag="2.14.2" />
+            tag="2.15.0" />
     <dependencies>
       <dep package="freetype" />
     </dependencies>
-  </autotools>
+  </meson>
   <!---->
   <meson id="pixman"
          mesonargs="-Dgtk=disabled -Dmmx=disabled -Da64-neon=disabled">
@@ -193,14 +200,13 @@
       <dep package="meta-gtk-osx-bootstrap" />
       <dep package="fontconfig" />
     </dependencies>
-    <after></after>
   </meson>
   <!---->
   <meson id="gobject-introspection">
     <branch module="gobject-introspection"
             tag="1.78.1" />
     <dependencies>
-      <dep package="glib" />
+      <dep package="glib-no-introspection" />
       <dep package="cairo" />
     </dependencies>
     <after>
@@ -220,7 +226,7 @@
 
     <branch module="harfbuzz/harfbuzz"
             repo="github"
-            tag="8.3.0" />
+            tag="8.5.0" />
     <dependencies>
       <dep package="gobject-introspection" />
       <dep package="cairo" />
@@ -277,19 +283,10 @@
     </dependencies>
   </meson>
   <!---->
-  <autotools id="xorg-util-macros">
-    <branch module="xorg/util/macros"
-            repo="freedesktop"
-            tag="util-macros-1.19.3" />
-  </autotools>
-  <!---->
   <autotools id="libepoxy">
     <branch module="anholt/libepoxy"
             repo="github"
             revision="1.5.10" />
-    <dependencies>
-      <dep package="xorg-util-macros" />
-    </dependencies>
   </autotools>
   <!---->
   <autotools id="hicolor-icon-theme">
@@ -328,39 +325,19 @@
     </dependencies>
   </meson>
   <!---->
-  <autotools id="libsass"
-             autogen-sh="autoreconf"
-             autogenargs="--disable-tests --disable-static">
-    <branch module="sass/libsass"
-            repo="github"
-            revision="3.6.5" />
-  </autotools>
-  <!---->
-  <autotools id="sassc"
-             autogen-sh="autoreconf">
-    <branch module="sass/sassc"
-            repo="github"
-            revision="3.6.2" />
-    <dependencies>
-      <dep package="libsass"/>
-    </dependencies>
-
-  </autotools>
-  <!---->
   <meson id="gtk-4"
          mesonargs="-Dx11-backend=false -Dmedia-gstreamer=disabled">
-         
+
     <branch module="gtk"
             checkoutdir="gtk-4.0"
-            revision="gtk-4-10" />
+            revision="gtk-4-14" />
     <dependencies>
       <dep package="glib" />
       <dep package="pango" />
       <dep package="atk" />
       <dep package="gdk-pixbuf" />
       <dep package="graphene" />
-      <dep package="sassc" />
-      <dep package="libepoxy" />
+        <dep package="libepoxy" />
     </dependencies>
     <after>
       <dep package="meta-gtk-osx-bootstrap" />
@@ -378,17 +355,10 @@
     </dependencies>
   </autotools>
   <!---->
-  <autotools id="adwaita-icon-theme">
-    <branch branch="gnome-44" />
-    <dependencies>
-      <dep package="librsvg" />
-    </dependencies>
-  </autotools>
-  <!---->
   <autotools id="librsvg"
              autogenargs="--disable-Bsymbolic">
     <branch module="librsvg"
-            branch="librsvg-2.57" />
+            branch="librsvg-2.58" />
     <dependencies>
       <dep package="libxml2"/>
       <dep package="cairo" />
@@ -397,14 +367,14 @@
       <dep package="libcroco" />
       <dep package="freetype" />
     </dependencies>
-    <after>
-      <!--
-        Circular dependency if we depend on meta-gtk-osx-gtk3
-      -->
-      <dep package="gtk+-3.0" />
-      <dep package="gtk-4" />
-    </after>
   </autotools>
+  <!---->
+  <meson id="adwaita-icon-theme">
+    <branch branch="gnome-46" />
+    <dependencies>
+      <dep package="librsvg" />
+    </dependencies>
+  </meson>
   <!--
     Null metamodule, provided so as not to break modules that use it.
   -->

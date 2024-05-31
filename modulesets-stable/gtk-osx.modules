@@ -95,9 +95,9 @@
              autogen-sh="configure"
              autogenargs="--disable-multi-os-directory --disable-docs">
              
-    <branch module="libffi/libffi/releases/download/v3.4.4/libffi-3.4.4.tar.gz"
-            version="3.4.4"
-            hash="sha256:d66c56ad259a82cf2a9dfc408b32bf5da52371500b84745f7fb8b645712df676"
+    <branch module="libffi/libffi/releases/download/v3.4.6/libffi-3.4.6.tar.gz"
+            version="3.4.6"
+            hash="sha256:b0dea9df23c863a7a50e825440f3ebffabd65df1497108e5d437747843895a4e"
             repo="github-tarball" />
   </autotools>
   <!---->
@@ -105,13 +105,13 @@
              autogen-sh="configure"
              autogenargs="--enable-pcre2-16 --enable-pcre2-32 --enable-jit">
              
-    <branch module="PCRE2Project/pcre2/releases/download/pcre2-10.42/pcre2-10.42.tar.bz2"
-            version="10.42"
-            hash="sha256:8d36cd8cb6ea2a4c2bb358ff6411b0c788633a2a45dabbf1aeb4b701d1b5e840"
+    <branch module="PCRE2Project/pcre2/releases/download/pcre2-10.43/pcre2-10.43.tar.bz2"
+            version="10.43"
+            hash="sha256:e2a53984ff0b07dfdb5ae4486bbb9b21cca8e7df2434096cc9bf1b728c350bcb"
             repo="github-tarball" />
   </autotools>
   <!---->
-  <meson id="glib"
+  <meson id="glib-no-introspection"
          mesonargs="-Dlibmount=disabled">
     <branch module="glib/2.80/glib-2.80.2.tar.xz"
             version="2.80.2"
@@ -119,6 +119,16 @@
     <dependencies>
       <dep package="libffi" />
       <dep package="libpcre2" />
+    </dependencies>
+  </meson>
+  <!---->
+  <meson id="glib"
+         mesonargs="-Dlibmount=disabled">
+    <branch module="glib/2.80/glib-2.80.2.tar.xz"
+            version="2.80.2"
+	    hash="sha256:b9cfb6f7a5bd5b31238fd5d56df226b2dda5ea37611475bf89f6a0f9400fe8bd" />
+    <dependencies>
+      <dep package="gobject-introspection" />
     </dependencies>
   </meson>
   <!--
@@ -143,10 +153,9 @@
              autogen-sh="source/configure"
              autogenargs="--enable-rpath"
              makeargs='CFLAGS="$CFLAGS -DU_CHARSET_IS_UTF8=1 -DU_USING_ICU_NAMESPACE=0"'>
-
-    <branch module="unicode-org/icu/releases/download/release-73-2/icu4c-73_2-src.tgz"
-            version="73.2"
-            hash="sha256:818a80712ed3caacd9b652305e01afc7fa167e6f2e94996da44b90c2ab604ce1"
+    <branch module="unicode-org/icu/releases/download/release-75-1/icu4c-75_1-src.tgz"
+            version="75.1"
+            hash="sha256:cb968df3e4d2e87e8b11c49a5d01c787bd13b9545280fc6642f826527618caef"
             checkoutdir="icu"
             repo="github-tarball" />
   </autotools>
@@ -154,12 +163,12 @@
   <meson id="harfbuzz-no-cairo"
          mesonargs="-Dcoretext=enabled -Dfreetype=enabled -Ddocs=disabled -Dbenchmark=disabled -Dintrospection=disabled -Dtests=disabled">
 
-    <branch module="harfbuzz/harfbuzz/releases/download/7.3.0/harfbuzz-7.3.0.tar.xz"
-            version="7.3.0"
-            hash="sha256:20770789749ac9ba846df33983dbda22db836c70d9f5d050cb9aa5347094a8fb"
+    <branch module="harfbuzz/harfbuzz/releases/download/8.5.0/harfbuzz-8.5.0.tar.xz"
+            version="8.5.0"
+            hash="sha256:77e4f7f98f3d86bf8788b53e6832fb96279956e1c3961988ea3d4b7ca41ddc27"
             repo="github-tarball" />
     <dependencies>
-      <dep package="glib" />
+      <dep package="glib-no-introspection" />
       <dep package="freetype-no-harfbuzz" />
       <dep package="icu" />
     </dependencies>
@@ -178,24 +187,23 @@
     </dependencies>
   </cmake>
   <!---->
-  <autotools id="fontconfig"
-             autogen-sh="configure"
-             autogenargs="--disable-docs --with-default-fonts=/System/Library/Fonts --with-add-fonts=/Library/Fonts --with-cache-dir=home">
+  <meson id="fontconfig"
+             mesonargs="-Ddoc=disabled -Ddefault-fonts-dirs=/System/Library/Fonts -Dadditional-fonts-dirs=/Library/Fonts">
 
-    <branch module="fontconfig-2.14.2.tar.xz"
-            version="2.14.2"
-            hash="sha256:dba695b57bce15023d2ceedef82062c2b925e51f5d4cc4aef736cf13f60a468b"
+    <branch module="fontconfig-2.15.0.tar.xz"
+            version="2.15.0"
+            hash="sha256:63a0658d0e06e0fa886106452b58ef04f21f58202ea02a94c39de0d3335d7c0e"
             repo="fontconfig" />
     <dependencies>
       <dep package="freetype" />
     </dependencies>
-  </autotools>
+  </meson>
   <!---->
   <meson id="pixman"
          mesonargs="-Dgtk=disabled -Dmmx=disabled -Da64-neon=disabled">
-    <branch module="releases/pixman-0.42.2.tar.gz"
-            version="0.42.2"
-            hash="sha512:0a4e327aef89c25f8cb474fbd01de834fd2a1b13fdf7db11ab72072082e45881cd16060673b59d02054b1711ae69c6e2395f6ae9214225ee7153939efcd2fa5d"
+    <branch module="releases/pixman-0.43.4.tar.gz"
+            version="0.43.4"
+            hash="sha512:08802916648bab51fd804fc3fd823ac2c6e3d622578a534052b657491c38165696d5929d03639c52c4f29d8850d676a909f0299d1a4c76a07df18a34a896e43d"
             repo="cairographics" />
     <after>
       <dep package="meta-gtk-osx-bootstrap" />
@@ -220,12 +228,12 @@
   </meson>
   <!---->
   <meson id="gobject-introspection">
-    <branch module="gobject-introspection/1.78/gobject-introspection-1.78.1.tar.xz"
-            version="1.78.1"
-            hash="sha256:bd7babd99af7258e76819e45ba4a6bc399608fe762d83fde3cac033c50841bb4">
+    <branch module="gobject-introspection/1.80/gobject-introspection-1.80.1.tar.xz"
+            version="1.80.1"
+            hash="sha256:a1df7c424e15bda1ab639c00e9051b9adf5cea1a9e512f8a603b53cd199bc6d8">
     </branch>
     <dependencies>
-      <dep package="glib" />
+      <dep package="glib-no-introspection" />
       <dep package="cairo" />
     </dependencies>
     <after>
@@ -235,10 +243,9 @@
   <!---->
   <meson id="harfbuzz"
          mesonargs="-Dcoretext=enabled -Dfreetype=enabled -Ddocs=disabled -Dbenchmark=disabled -Dintrospection=enabled -Dtests=disabled">
-
-    <branch module="harfbuzz/harfbuzz/releases/download/8.3.0/harfbuzz-8.3.0.tar.xz"
-            version="8.3.0"
-            hash="sha256:109501eaeb8bde3eadb25fab4164e993fbace29c3d775bcaa1c1e58e2f15f847"
+    <branch module="harfbuzz/harfbuzz/releases/download/8.5.0/harfbuzz-8.5.0.tar.xz"
+            version="8.5.0"
+            hash="sha256:77e4f7f98f3d86bf8788b53e6832fb96279956e1c3961988ea3d4b7ca41ddc27"
             repo="github-tarball" />
     <dependencies>
       <dep package="gobject-introspection" />
@@ -249,9 +256,9 @@
   <!---->
   <meson id="fribidi"
          mesonargs="-Ddocs=false">
-    <branch module="fribidi/fribidi/releases/download/v1.0.13/fribidi-1.0.13.tar.xz"
-            version="1.0.13"
-            hash="sha256:7fa16c80c81bd622f7b198d31356da139cc318a63fc7761217af4130903f54a2"
+    <branch module="fribidi/fribidi/releases/download/v1.0.14/fribidi-1.0.14.tar.xz"
+            version="1.0.14"
+            hash="sha256:76ae204a7027652ac3981b9fa5817c083ba23114340284c58e756b259cd2259a"
             repo="github-tarball" />
     <!--
     <dependencies>
@@ -262,9 +269,9 @@
   <!---->
   <meson id="pango"
          mesonargs="-Dfontconfig=enabled">
-    <branch module="pango/1.50/pango-1.50.14.tar.xz"
-            version="1.50.14"
-            hash="sha256:1d67f205bfc318c27a29cfdfb6828568df566795df0cb51d2189cde7f2d581e8">
+    <branch module="pango/1.52/pango-1.52.2.tar.xz"
+            version="1.52.2"
+            hash="sha256:d0076afe01082814b853deec99f9349ece5f2ce83908b8e58ff736b41f78a96b">
     </branch>
     <dependencies>
       <dep package="glib" />
@@ -291,9 +298,9 @@
   <!---->
   <meson id="gdk-pixbuf"
          mesonargs="-Drelocatable=true -Dman=false">
-    <branch module="gdk-pixbuf/2.42/gdk-pixbuf-2.42.10.tar.xz"
-            version="2.42.10"
-            hash="sha256:ee9b6c75d13ba096907a2e3c6b27b61bcd17f5c7ebeab5a5b439d2f2e39fe44b">
+    <branch module="gdk-pixbuf/2.42/gdk-pixbuf-2.42.12.tar.xz"
+            version="2.42.12"
+            hash="sha256:b9505b3445b9a7e48ced34760c3bcb73e966df3ac94c95a148cb669ab748e3c7">
 
       <patch file="gdk-pixbuf-loader-name.patch"
              strip="1" />
@@ -310,22 +317,12 @@
             repo="hicolor" />
   </autotools>
   <!---->
-  <autotools id="xorg-util-macros">
-    <branch module="individual/util/util-macros-1.19.3.tar.bz2"
-            version="1.19.3"
-            hash="sha256:0f812e6e9d2786ba8f54b960ee563c0663ddbe2434bf24ff193f5feab1f31971"
-            repo="xorg" />
-  </autotools>
-  <!---->
   <meson id="libepoxy">
     <branch module="anholt/libepoxy/archive/refs/tags/1.5.10.tar.gz"
             version="1.5.10"
             hash="sha256:a7ced37f4102b745ac86d6a70a9da399cc139ff168ba6b8002b4d8d43c900c15"
             checkoutdir="libexpoxy-1.5.10"
             repo="github-tarball" />
-    <!--dependencies>
-      <dep package="xorg-util-macros" />
-    </dependencies-->
   </meson>
   <!--
     gtk3 is in maintenance mode with 3.24 the final release series.
@@ -361,30 +358,17 @@
       <dep package="gobject-introspection" />
     </dependencies>
   </meson>
-  <!---->
-  <autotools id="libsass"
-             autogen-sh="autoreconf"
-             autogenargs="--disable-tests --disable-static">
-    <branch module="sass/libsass/archive/refs/tags/3.6.5.tar.gz"
-            version="3.6.5"
-            hash="sha256:89d8f2c46ae2b1b826b58ce7dde966a176bac41975b82e84ad46b01a55080582"
-            checkoutdir="libsass-3.6.5"
-            rename-tarball="libsass-3.6.5.tar.gz"
-            repo="github-tarball" />
-  </autotools>
-  <!---->
   <meson id="gtk-4"
          mesonargs="-Dx11-backend=false -Dmedia-gstreamer=disabled">
          
-    <branch module="gtk/4.10/gtk-4.10.4.tar.xz"
-            version="4.10.4"
-            hash="sha256:7725400482e0685e28265e226c62847f4e73cfca9e9b416ac5838207f5377a24" />
+    <branch module="gtk/4.14/gtk-4.14.4.tar.xz"
+            version="4.14.4"
+            hash="sha256:443518b97e8348f9f6430ac435b1010f9a6c5207f4dc6a7cd5d24e3820cee633" />
     <dependencies>
       <dep package="pango" />
       <dep package="atk" />
       <dep package="gdk-pixbuf" />
       <dep package="graphene" />
-      <dep package="libsass" />
       <dep package="libepoxy" />
     </dependencies>
   </meson>
@@ -407,9 +391,9 @@
   <autotools id="librsvg"
              autogen-sh="autoreconf"
              autogenargs="--disable-Bsymbolic">
-    <branch module="librsvg/2.57/librsvg-2.57.0.tar.xz"
-            version="2.57.0"
-            hash="sha256:335fe2e0c2cbf1b7bf0668651224a23e135451f0b1793cd813649be2bffa74e8" />
+    <branch module="librsvg/2.58/librsvg-2.58.1.tar.xz"
+            version="2.58.1"
+            hash="sha256:3728596290a8576d305d06ec8afdf473516feee9dff22e03235eac433d56824e" />
     <dependencies>
       <dep package="libxml2" />
       <dep package="cairo" />
@@ -417,24 +401,16 @@
       <dep package="harfbuzz" />
       <dep package="freetype" />
     </dependencies>
-    <after>
-      <!--
-        Circular dependency if we depend on meta-gtk-osx-gtk3
-      -->
-      <dep package="gtk+-3.0" />
-      <dep package="gtk-4" />
-    </after>
   </autotools>
   <!---->
-  <autotools id="adwaita-icon-theme"
-             autogen-sh="configure">
-    <branch module="adwaita-icon-theme/44/adwaita-icon-theme-44.0.tar.xz"
-            version="44.0"
-            hash="sha256:4889c5601bbfecd25d80ba342209d0a936dcf691ee56bd6eca4cde361f1a664c" />
+  <meson id="adwaita-icon-theme">
+    <branch module="adwaita-icon-theme/46/adwaita-icon-theme-46.2.tar.xz"
+            version="46.2"
+            hash="sha256:beb126b9429339ba762e0818d5e73b2c46f444975bf80076366eae2d0f96b5cb" />
     <dependencies>
       <dep package="librsvg" />
     </dependencies>
-  </autotools>
+  </meson>
   <!--
     Null metamodule, provided so as not to break modules that use it.
   -->

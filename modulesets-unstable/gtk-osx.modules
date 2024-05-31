@@ -130,13 +130,13 @@
     </dependencies>
   </cmake>
 
-  <autotools id="fontconfig"
-             autogenargs="--disable-docs --with-default-fonts=/System/Library/Fonts --with-add-fonts=/Library/Fonts --with-cache-dir=home">
+  <meson id="fontconfig"
+             mesonargs="-Ddoc=disabled -Ddefault-fonts-dirs=/System/Library/Fonts -Dadditional-fonts-dirs=/Library/Fonts">
     <branch revision="main" repo="freedesktop" module="fontconfig/fontconfig"/>
     <dependencies>
       <dep package="freetype"/>
     </dependencies>
-  </autotools>
+  </meson>
 
   <if condition-set="arm64">
     <meson id="pixman"
@@ -235,15 +235,8 @@
     </after>
   </meson>
 
-  <autotools id="xorg-util-macros">
-    <branch repo="freedesktop" module="xorg/util/macros"/>
-  </autotools>
-
   <meson id="libepoxy">
     <branch repo="github" module="anholt/libepoxy"/>
-    <dependencies>
-      <dep package="xorg-util-macros"/>
-    </dependencies>
   </meson>
 
   <autotools id="hicolor-icon-theme">
@@ -275,18 +268,6 @@
     </dependencies>
   </meson>
 
-  <autotools id="libsass" autogen-sh="autoreconf"
-             autogenargs="--disable-tests --disable-static">
-    <branch repo="github" revision="3.6.5" module="sass/libsass"/>
-  </autotools>
-
-  <autotools id="sassc" autogen-sh="autoreconf">
-    <branch repo="github" revision="3.6.2" module="sass/sassc"/>
-    <dependencies>
-      <dep package="libsass"/>
-    </dependencies>
-  </autotools>
-
   <meson id="gtk-4" mesonargs="-Dx11-backend=false -Dmedia-gstreamer=disabled">
     <branch module="gtk" checkoutdir="gtk-4.0"/>
     <dependencies>
@@ -295,7 +276,6 @@
       <dep package="atk"/>
       <dep package="gdk-pixbuf"/>
       <dep package="graphene"/>
-      <dep package="sassc"/>
       <dep package="libepoxy"/>
     </dependencies>
     <after>
@@ -310,25 +290,16 @@
     </after>
   </autotools>
 
-  <autotools id="libcroco" autogenargs="--disable-Bsymbolic">
-    <branch/>
-  </autotools>
-
-  <autotools id="librsvg" autogenargs="--disable-Bsymbolic">
+  <meson id="librsvg" mesonargs="-Dintrospection=disabled -Ddocs=disabled">
     <branch module="librsvg" revision="main"/>
     <dependencies>
       <dep package="libxml2"/>
       <dep package="cairo" />
       <dep package="pango" />
       <dep package="harfbuzz" />
-      <dep package="libcroco"/>
       <dep package="freetype"/>
     </dependencies>
-    <after>
-      <dep package="gtk+-3.0"/>
-      <dep package="gtk-4"/>
-    </after>
-  </autotools>
+  </meson>
 
   <meson id="adwaita-icon-theme">
     <branch />
