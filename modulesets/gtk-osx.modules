@@ -113,7 +113,7 @@
 
     <branch module="freetype/freetype2"
             repo="nongnu"
-            revision="VER-2-13-1" />
+            revision="VER-2-13-2" />
     <dependencies>
       <dep package="zlib" />
     </dependencies>
@@ -152,7 +152,7 @@
 
     <branch module="freetype/freetype2"
             repo="nongnu"
-            revision="VER-2-11-1" />
+            revision="VER-2-13-2" />
     <dependencies>
       <dep package="harfbuzz-no-cairo" />
       <dep package="zlib" />
@@ -187,7 +187,7 @@
   <meson id="cairo">
     <branch module="cairo/cairo"
             repo="freedesktop"
-            tag="1.17.8" />
+            tag="1.18.0" />
     <dependencies>
       <dep package="pixman" />
       <dep package="meta-gtk-osx-bootstrap" />
@@ -198,7 +198,7 @@
   <!---->
   <meson id="gobject-introspection">
     <branch module="gobject-introspection"
-            tag="1.76.1" />
+            tag="1.78.1" />
     <dependencies>
       <dep package="glib" />
       <dep package="cairo" />
@@ -220,7 +220,7 @@
 
     <branch module="harfbuzz/harfbuzz"
             repo="github"
-            tag="7.3.0" />
+            tag="8.3.0" />
     <dependencies>
       <dep package="gobject-introspection" />
       <dep package="cairo" />
@@ -388,7 +388,7 @@
   <autotools id="librsvg"
              autogenargs="--disable-Bsymbolic">
     <branch module="librsvg"
-            branch="librsvg-2.56" />
+            branch="librsvg-2.57" />
     <dependencies>
       <dep package="libxml2"/>
       <dep package="cairo" />

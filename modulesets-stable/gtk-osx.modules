@@ -130,9 +130,9 @@
   <cmake id="freetype-no-harfbuzz"
          cmakeargs="-DCMAKE_DISABLE_FIND_PACKAGE_HarfBuzz=TRUE -DCMAKE_DISABLE_FIND_PACKAGE_BZip2=TRUE -D BUILD_SHARED_LIBS=true -D CMAKE_BUILD_TYPE=Release">
 
-    <branch module="freetype/freetype-2.13.1.tar.xz"
-            version="2.13.1"
-            hash="sha256:ea67e3b019b1104d1667aa274f5dc307d8cbd606b399bc32df308a77f1a564bf"
+    <branch module="freetype/freetype-2.13.2.tar.xz"
+            version="2.13.2"
+            hash="sha256:12991c4e55c506dd7f9b765933e62fd2be2e06d421505d7950a132e4f1bb484d"
             repo="sourceforge" />
     <dependencies>
       <dep package="zlib" />
@@ -168,9 +168,9 @@
   <cmake id="freetype"
          cmakeargs="-DCMAKE_DISABLE_FIND_PACKAGE_BZip2=TRUE -D BUILD_SHARED_LIBS=true -D CMAKE_BUILD_TYPE=Release">
 
-    <branch module="freetype/freetype-2.13.1.tar.gz"
-            version="2.13.1"
-            hash="sha256:ea67e3b019b1104d1667aa274f5dc307d8cbd606b399bc32df308a77f1a564bf"
+    <branch module="freetype/freetype-2.13.2.tar.xz"
+            version="2.13.2"
+            hash="sha256:12991c4e55c506dd7f9b765933e62fd2be2e06d421505d7950a132e4f1bb484d"
             repo="sourceforge" />
     <dependencies>
       <dep package="harfbuzz-no-cairo" />
@@ -206,11 +206,11 @@
     freetype it insists that it has to have fontconfig too and that
     they are both built into cairo.
   -->
-  <meson id="cairo">
-    <branch module="1.17.8/cairo-1.17.8.tar.bz2"
-            version="1.17.8"
-            hash="sha256:ead4724423eb969f98b456fe1e3ee1e1741fe1c8dfb1a41ca12afa81a6c1665f"
-            repo="cairographics-temp" />
+  <meson id="cairo" mesonargs="-Dfontconfig=enabled -Dfreetype=enabled">
+    <branch module="releases/cairo-1.18.0.tar.xz"
+            version="1.18.0"
+            hash="sha256:243a0736b978a33dee29f9cca7521733b78a65b5418206fef7bd1c3d4cf10b64"
+            repo="cairographics" />
     <dependencies>
       <dep package="pixman" />
       <dep package="meta-gtk-osx-bootstrap" />
@@ -220,9 +220,9 @@
   </meson>
   <!---->
   <meson id="gobject-introspection">
-    <branch module="gobject-introspection/1.76/gobject-introspection-1.76.1.tar.xz"
-            version="1.76.1"
-            hash="sha256:196178bf64345501dcdc4d8469b36aa6fe80489354efe71cb7cb8ab82a3738bf">
+    <branch module="gobject-introspection/1.78/gobject-introspection-1.78.1.tar.xz"
+            version="1.78.1"
+            hash="sha256:bd7babd99af7258e76819e45ba4a6bc399608fe762d83fde3cac033c50841bb4">
     </branch>
     <dependencies>
       <dep package="glib" />
@@ -236,9 +236,9 @@
   <meson id="harfbuzz"
          mesonargs="-Dcoretext=enabled -Dfreetype=enabled -Ddocs=disabled -Dbenchmark=disabled -Dintrospection=enabled -Dtests=disabled">
 
-    <branch module="harfbuzz/harfbuzz/releases/download/7.3.0/harfbuzz-7.3.0.tar.xz"
-            version="7.3.0"
-            hash="sha256:20770789749ac9ba846df33983dbda22db836c70d9f5d050cb9aa5347094a8fb"
+    <branch module="harfbuzz/harfbuzz/releases/download/8.3.0/harfbuzz-8.3.0.tar.xz"
+            version="8.3.0"
+            hash="sha256:109501eaeb8bde3eadb25fab4164e993fbace29c3d775bcaa1c1e58e2f15f847"
             repo="github-tarball" />
     <dependencies>
       <dep package="gobject-introspection" />
@@ -352,9 +352,10 @@
   <!---->
   <meson id="graphene"
          mesonargs="-Dtests=false">
-    <branch module="ebassi/graphene/releases/download/1.10.6/graphene-1.10.6.tar.xz"
+    <branch module="graphene/1.10/graphene-1.10.8.tar.xz"
             version="1.10.8"
-            repo="github-tarball" />
+            hash="a37bb0e78a419dcbeaa9c7027bcff52f5ec2367c25ec859da31dfde2928f279a"
+            repo="download.gnome.org" />
     <dependencies>
       <dep package="glib" />
       <dep package="gobject-introspection" />
@@ -406,9 +407,9 @@
   <autotools id="librsvg"
              autogen-sh="autoreconf"
              autogenargs="--disable-Bsymbolic">
-    <branch module="librsvg/2.56/librsvg-2.56.1.tar.xz"
-            version="2.56.1"
-            hash="sha256:1685aeacae9a441dcb12c0c3ec63706172a2f52705dafbefb8e7311d4d5e430b" />
+    <branch module="librsvg/2.57/librsvg-2.57.0.tar.xz"
+            version="2.57.0"
+            hash="sha256:335fe2e0c2cbf1b7bf0668651224a23e135451f0b1793cd813649be2bffa74e8" />
     <dependencies>
       <dep package="libxml2" />
       <dep package="cairo" />
