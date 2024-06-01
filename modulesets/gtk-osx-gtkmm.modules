@@ -43,7 +43,7 @@
   <meson id="cairomm">
     <branch module="cairomm"
             repo="cairographics"
-            revision="1.16.0" />
+            revision="1.18.0" />
     <dependencies>
       <dep package="cairo" />
       <dep package="libsigc++3" />
@@ -60,7 +60,7 @@
   </meson>
   <!---->
   <meson id="glibmm">
-    <branch revision="glibmm-2-76" />
+    <branch revision="glibmm-2-80" />
     <dependencies>
       <dep package="libsigc++3" />
     </dependencies>
@@ -80,7 +80,7 @@
   </meson>
   <!---->
   <meson id="pangomm">
-    <branch revision="pangomm-2-50" />
+    <branch revision="pangomm-2-52" />
     <dependencies>
       <dep package="cairomm" />
     </dependencies>
@@ -150,7 +150,7 @@
   <!---->
   <meson id="gtkmm4">
     <branch module="gtkmm"
-            revision="4.10.0" />
+            revision="4.14.0" />
     <dependencies>
       <dep package="glibmm" />
       <dep package="cairomm" />
