@@ -9,7 +9,7 @@
   -->
   <repository name="download.gnome.org"
               default="yes"
-              href="https:////download.gnome.org/sources/"
+              href="https://download.gnome.org/sources/"
               type="tarball" />
   <repository name="openssl"
               href="https://www.openssl.org/source/"
@@ -54,8 +54,8 @@
              autogenargs="shared"
              makeinstallargs="install_sw"
              supports-non-srcdir-builds="no">
-    <branch module="openssl-3.1.1.tar.gz" version="3.1.1" repo="openssl"
-            hash="sha256:b3aa61334233b852b63ddb048df181177c2c659eb9d4376008118f9c08d07674"/>
+    <branch module="openssl-3.2.1.tar.gz" version="3.2.1" repo="openssl"
+            hash="sha256:83c7329fe52c850677d75e5d0b0ca245309b97e8ecbcfdc1dfdc4ab9fac35b39"/>
   </autotools>
   <!---->
   <if condition-set="arm64">
@@ -107,8 +107,8 @@
              autogen-sh="configure"
              autogenargs="--without-trust-paths">
     <branch module="p11-glue/p11-kit/releases/download/0.24.1/p11-kit-0.24.1.tar.xz"
-            version="0.24.1"
-            hash="sha256:d8be783efd5cd4ae534cee4132338e3f40f182c3205d23b200094ec85faaaef8"
+            version="0.25.3"
+
             repo="github-tarball">
       <patch file="p11-kit-libintl.patch"
              strip="1" />
@@ -144,20 +144,18 @@
   <autotools id="libgpg-error"
              autogen-sh="autoreconf"
              autogenargs="--disable-doc">
-    <branch module="gcrypt/libgpg-error/libgpg-error-1.47.tar.bz2"
-            version="1.47"
-            hash="sha256:9e3c670966b96ecc746c28c2c419541e3bcb787d1a73930f5e5f5e1bcbbb9bdb"
+    <branch module="gcrypt/libgpg-error/libgpg-error-1.49.tar.bz2"
+            version="1.49"
+            hash="sha256:8b79d54639dbf4abc08b5406fb2f37e669a2dec091dd024fb87dd367131c63a9"
             repo="gnupg.org" />
   </autotools>
   <!---->
   <autotools id="libgcrypt"
              autogen-sh="configure">
-    <branch module="gcrypt/libgcrypt/libgcrypt-1.10.2.tar.bz2"
-            version="1.10.2"
-            hash="sha256:3b9c02a004b68c256add99701de00b383accccf37177e0d6c58289664cce0c03"
+    <branch module="gcrypt/libgcrypt/libgcrypt-1.10.3.tar.bz2"
+            version="1.10.3"
+
             repo="gnupg.org">
-      <patch file="libgcrypt-1.10.2-no-getrandom.patch"
-             strip="1" />
     </branch>
     <dependencies>
       <dep package="libgpg-error" />
@@ -167,8 +165,8 @@
   <meson id="libsecret"
          mesonargs="-Dvapi=disabled -Dgtk_doc=disabled">
     <branch module="libsecret/0.20/libsecret-0.20.5.tar.xz"
-            version="0.20.5"
-            hash="sha256:3fb3ce340fcd7db54d87c893e69bfc2b1f6e4d4b279065ffe66dac9f0fd12b4d" />
+            version="0.21.4"
+            hash="sha256:163d08d783be6d4ab9a979ceb5a4fecbc1d9660d3c34168c581301cd53912b20" />
     <dependencies>
       <dep package="glib" />
       <dep package="libgcrypt" />
@@ -176,9 +174,9 @@
   </meson>
   <!---->
   <meson id="gcr">
-    <branch module="gcr/4.1/gcr-4.1.0.tar.xz"
-            version="4.1.0"
-            hash="sha256:9ceaad29284ba919b9216e2888c18ec67240c2c93b3a4856bc5488bbc1f3a383" />
+    <branch module="gcr/4.3/gcr-4.3.0.tar.xz"
+            version="4.3.0"
+            hash="sha256:c3ee8728e4364b0397f435fa20f92f901ab139d2b264f4e059d67b3c0f43cd36" />
     <dependencies>
       <dep package="p11-kit" />
       <dep package="gpg" />
@@ -189,9 +187,9 @@
   <!---->
   <autotools id="gnome-keyring"
              autogenargs="--disable-pam --without-root-certs">
-    <branch module="gnome-keyring/42/gnome-keyring-42.1.tar.xz"
-            version="42.1"
-            hash="sha256:c7f4d040cc76a6b7fe67e08ef9106911c3c80d40fc88cbfc8e2684a4c946e3e6" />
+    <branch module="gnome-keyring/46/gnome-keyring-46.1.tar.xz"
+            version="46.1"
+            hash="sha256:b1d3ae9132ff2f8b3f25a190790892968e3d0acf952a487e40f644a8550ce3f6" />
     <dependencies>
       <dep package="libgcrypt" />
       <dep package="gcr" />
@@ -199,18 +197,18 @@
   </autotools>
   <!---->
   <meson id="gsettings-desktop-schemas">
-    <branch module="gsettings-desktop-schemas/44/gsettings-desktop-schemas-44.0.tar.xz"
-            version="44.0"
-            hash="shas56:eb2de45cad905994849e642a623adeb75d41b21b0626d40d2a07b8ea281fec0e" />
+    <branch module="gsettings-desktop-schemas/46/gsettings-desktop-schemas-46.0.tar.xz"
+            version="46.0"
+            hash="shas56:493a46a1161b6388d57aa72f632a79ce96c42d5ffbd1d0b00f496ec5876f8575" />
   </meson>
   <!---->
   <meson id="libproxy"
          mesonargs="-Ddocs=false -Dtests=false -Dpacrunner-duktape=false -Dvapi=false -Dcurl=false -Dintrospection=false">
 
-    <branch module="libproxy/libproxy/archive/refs/tags/0.5.2.tar.gz"
-            version="0.5.2"
-            hash="sha256:7d75a2cf1c977056eb86f460daab0247d30e6a34e26ec755aab4de40cfd0a06d"
-            checkoutdir="libproxy-0.5.2"
+    <branch module="libproxy/libproxy/archive/refs/tags/0.5.6.tar.gz"
+            version="0.5.6"
+
+            checkoutdir="libproxy-0.5.6"
             repo="github-tarball" />
     <dependencies>
       <dep package="gsettings-desktop-schemas" />
@@ -219,9 +217,9 @@
   <!---->
   <meson id="glib-networking"
          mesonargs="-Dopenssl=enabled">
-    <branch module="glib-networking/2.76/glib-networking-2.76.0.tar.xz"
-            version="2.76.0"
-            hash="sha256:149a05a179e629a538be25662aa324b499d7c4549c5151db5373e780a1bf1b9a" />
+    <branch module="glib-networking/2.80/glib-networking-2.80.0.tar.xz"
+            version="2.80.0"
+            hash="sha256:d8f4f1aab213179ae3351617b59dab5de6bcc9e785021eee178998ebd4bb3acf" />
     <dependencies>
       <dep package="libproxy" />
       <dep package="gnutls" />
@@ -231,9 +229,9 @@
   <!---->
   <autotools id="libpsl"
              autogen-sh='configure'>
-    <branch module="rockdaboot/libpsl/releases/download/0.21.2/libpsl-0.21.2.tar.gz"
-            version="0.21.2"
-            hash="sha256:e35991b6e17001afa2c0ca3b10c357650602b92596209b7492802f3768a6285f"
+    <branch module="rockdaboot/libpsl/releases/download/0.21.5/libpsl-0.21.5.tar.gz"
+            version="0.21.5"
+
             repo="github-tarball" />
   </autotools>
   <!---->
@@ -253,16 +251,28 @@
     </dependencies>
   </meson>
   <!---->
+  <cmake id="libnghttp2"
+         cmakeargs="-DENABLE_LIB_ONLY=ON -DENABLE_DOC=OFF -DWITH_LIBXML2=OFF -DWITH_JEMALLOC=OFF -DWITH_MRUBY=OFF -DWITH_NEVERBLEED=OFF -DWITH_LIBBPF=OFF">
+    <branch module="nghttp2/nghttp2/releases/download/v1.62.1/nghttp2-1.62.1.tar.xz"
+            version="1.62.1"
+            repo="github-tarball" />
+    <dependencies>
+      <dep package="openssl" />
+      <dep package="zlib" />
+    </dependencies>
+  </cmake>
+  <!---->
   <meson id="libsoup3"
          mesonargs="-Dvapi=disabled">
-    <branch module="libsoup/3.4/libsoup-3.4.2.tar.xz"
-            version="3.4.2"
-            hash="sha256:78c8fa37cb152d40ec8c4a148d6155e2f6947f3f1602a7cda3a31ad40f5ee2f3" />
+    <branch module="libsoup/3.5/libsoup-3.5.1.tar.xz"
+            version="3.5.1"
+            hash="sha256:c1d7cfb89832d35c271f37d544f2cfe21fa60ae9faad4a7ac58996ae4031f7ba" />
     <dependencies>
       <dep package="libpsl" />
       <dep package="python3" />
       <dep package="glib" />
       <dep package="glib-networking" />
+      <dep package="libnghttp2" />
       <dep package="sqlite" />
       <dep package="vala" />
     </dependencies>
@@ -271,9 +281,9 @@
   <autotools id="libwebp"
              autogen-sh="configure"
              autogenargs="--enable-libwebpmux --enable-libwebpdecoder">
-    <branch module="webp/libwebp-1.3.0.tar.gz"
-            version="1.3.0"
-            hash="sha256:64ac4614db292ae8c5aa26de0295bf1623dbb3985054cb656c55e67431def17c"
+    <branch module="webp/libwebp-1.4.0.tar.gz"
+            version="1.4.0"
+
             repo="webm" />
   </autotools>
   <!--
@@ -314,12 +324,13 @@
              strip="1" />
       <patch file="webkit-2.32-bug-224093.patch"
              strip="1" />
+      -->
     </branch>
     <dependencies>
       <dep package="libwebp" />
       <dep package="enchant" />
       <dep package="icu" />
-      <dep package="libsoup" />
+      <dep package="libsoup3" />
       <dep package="libgcrypt" />
       <dep package="meta-gtk-osx-gtk3" />
     </dependencies>

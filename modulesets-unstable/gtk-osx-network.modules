@@ -37,8 +37,8 @@
   <autotools id="openssl" autogen-sh="Configure" autogenargs="shared "
              autogen-template="%(srcdir)s/%(autogen-sh)s --prefix=%(prefix)s --openssldir=%(prefix)s/etc/ssl %(autogenargs)s"
              makeinstallargs="install_sw" supports-non-srcdir-builds="no">
-    <branch module="openssl-3.1.1.tar.gz" version="3.1.1" repo="openssl"
-            hash="sha256:b3aa61334233b852b63ddb048df181177c2c659eb9d4376008118f9c08d07674"/>
+    <branch module="openssl-3.2.1.tar.gz" version="3.2.1" repo="openssl"
+            hash="sha256:83c7329fe52c850677d75e5d0b0ca245309b97e8ecbcfdc1dfdc4ab9fac35b39"/>
   </autotools>
 
   <autotools id="libnettle" autogen-sh="autoreconf"
@@ -205,8 +205,8 @@
     USE_WPE_RENDERER: For embedded systems, not Macs.  -->
   <cmake id="webkit2gtk3"
          cmakeargs='-DPORT=GTK -DENABLE_X11_TARGET=OFF -DENABLE_QUARTZ_TARGET=ON -DENABLE_MINIBROWSER=ON -DENABLE_INTROSPECTION=OFF  -DUSE_SYSTEMD=OFF -DENABLE_VIDEO=OFF -DENABLE_WEB_AUDIO=OFF -DENABLE_GEOLOCATION=OFF -DUSE_LIBNOTIFY=OFF -DUSE_LIBHYPHEN=OFF -DUSE_LIBSECRET=OFF -DENABLE_TOUCH_EVENTS=OFF  -DUSE_OPENJPEG=OFF -DUSE_WOFF2=OFF -DUSE_WPE_RENDERER=OFF -DENABLE_GRAPHICS_CONTEXT_GL=OFF -DENABLE_GAMEPAD=OFF -DUSE_APPLE_ICU=NO -DCMAKE_CXX_FLAGS="-stdlib=libc++" -DCMAKE_MACOSX_RPATH=OFF'>
-    <branch repo="webkit.org" module="webkitgtk-2.32.0.tar.xz" version="2.32.0"
-            hash="sha256:9d7df4dae9ada2394257565acc2a68ace9308c4c61c3fcc00111dc1f11076bf0">
+    <branch repo="webkit.org" module="webkitgtk-2.45.3.tar.xz" version="2.45.3"
+            hash="sha256:9b5fbfa6c9ddc92508ca9f32cc8aa2e68cf50fcfada8f2f45775d559570713b3">
       <patch file="WebKit2Gtk3-2.32.0-cumulative.patch" strip="1"/>
       <patch file="WebKit2Gtk3-2.30.1-Disable-AUDIT_TOKEN-for-Gtk-builds.patch" strip="1"/>
       <patch file="WebKit2Gtk3-2.30.1-Fix-Socket-signal-defines-for-Darwin-and-maybe-BSD.patch" strip="1" />
