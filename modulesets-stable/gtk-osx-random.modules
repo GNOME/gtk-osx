@@ -83,9 +83,9 @@
   <!---->
   <autotools id="itstool"
              autogen-sh="configure">
-    <branch module="itstool/itstool-2.0.6.tar.bz2"
-            version="2.0.6n"
-            hash="sha256:6233cc22726a9a5a83664bf67d1af79549a298c23185d926c3677afa917b92a9"
+    <branch module="itstool/itstool-2.0.7.tar.bz2"
+            version="2.0.7"
+            hash="sha256:6b9a7cd29a12bb95598f5750e8763cee78836a1a207f85b74d8b3275b27e87ca"
             repo="itstool">
       <patch file="itstool-config-python.patch"
              strip="1" />
@@ -277,11 +277,10 @@
              autogen-sh="autoreconf"
              autogenargs='--libdir="$JHBUILD_LIBDIR" --with-python'>
              
-    <branch module="libxml2/2.11/libxml2-2.11.4.tar.xz"
-            version="2.11.4"
-            hash="sha256:737e1d7f8ab3f139729ca13a2494fd17bf30ddb4b7a427cf336252cab57f57f7">
-
-      <patch file="libxml2-python-config.patch"
+    <branch module="libxml2/2.11/libxml2-2.11.5.tar.xz"
+            version="2.11.5"
+            hash="sha256:3727b078c360ec69fa869de14bd6f75d7ee8d36987b071e6928d4720a28df3a6">
+       <patch file="libxml2-python-config.patch"
              strip="1" />
     </branch>
     <after>
