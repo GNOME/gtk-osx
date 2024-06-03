@@ -24,8 +24,8 @@
               href="https://gitlab.freedesktop.org/xdg/shared-mime-info/-/archive/"
               type="tarball" />
   <repository name="iso-codes"
-              href="https://salsa.debian.org/iso-codes-team/iso-codes/uploads/"
-              type="tarball" />
+              href="https://salsa.debian.org/iso-codes-team/"
+              type="git" />
   <repository name="sourceforge"
               href="http://downloads.sourceforge.net/sourceforge/"
               type="tarball" />
@@ -39,26 +39,28 @@
               type="tarball" 
               href="http://files.itstool.org/"/>
   <!---->
-  <cmake id="graphviz" cmakeargs="-Dwith_gvedit=NO">
-    <branch module="8.0.5/graphviz-8.0.5.tar.bz2"
-            version="8.0.5"
-            hash="sha256:c1901fe52483fad55fbf893ccd59a3dcaedd53f0d50b5aebbbf3deaba93b674d"
+  <autotools id="graphviz"
+             autogen-sh="configure"
+             supports-non-srcdir-builds="no"
+             autogenargs="--disable-sharp --disable-guile --disable-java --disable-lua --disable-ocaml --disable-perl --disable-php --disable-r --disable-ruby --disable-tcl --with-pangocairo">
+
+    <branch module="11.0.0/graphviz-11.0.0.tar.xz"
+            version="11.0.0"
+            hash="sha256:ae9a344748876f5c16577061e9c2a652151c90eb7572ee17c92b148c65577222"
             repo="graphviz">
-      <patch file="graphviz-remove-rpath.patch"
-             strip="1" />
     </branch>
     <dependencies>
       <dep package="pango" />
       <dep package="librsvg" />
     </dependencies>
-  </cmake>
+  </autotools>
   <!---->
   <autotools id="vala"
              autogen-sh="configure">
            repo="download.gnome.org" />
-    <branch module="vala/0.56/vala-0.56.8.tar.xz"
-            version="0.56.8"
-            hash="sha256:93f81dcfc6a93b77baa271d65e6be981ee3238ad451ef380af118e295d904bde" />
+    <branch module="vala/0.56/vala-0.56.17.tar.xz"
+            version="0.56.17"
+            hash="sha256:26100c4e4ef0049c619275f140d97cf565883d00c7543c82bcce5a426934ed6a" />
     <dependencies>
       <dep package="graphviz" />
       <dep package="meta-gtk-osx-bootstrap" />
@@ -68,9 +70,9 @@
   <!---->
   <autotools id="expat"
              autogen-sh="configure">
-    <branch module="expat/expat-2.5.0.tar.xz"
-            version="2.5.0"
-            hash="sha256:ef2420f0232c087801abf705e89ae65f6257df6b7931d37846a193ef2e8cdcbe"
+    <branch module="expat/expat-2.6.2.tar.xz"
+            version="2.6.2"
+            hash="sha256:ee14b4c5d8908b1bec37ad937607eab183d4d9806a08adee472c3c3121d27364"
             repo="sourceforge" />
   </autotools>
   <!--
@@ -91,17 +93,15 @@
             version="2.0.7"
             hash="sha256:6b9a7cd29a12bb95598f5750e8763cee78836a1a207f85b74d8b3275b27e87ca"
             repo="itstool">
-      <patch file="itstool-config-python.patch"
-             strip="1" />
     </branch>
     <dependencies>
       <dep package="libxml2" />
     </dependencies>
   </autotools>
   <!---->
-  <autotools id="devhelp-gtk3">
+  <meson id="devhelp-gtk3">
     <branch module="devhelp"
-            revision="gnome-41" />
+            revision="43.0" />
     <dependencies>
       <dep package="webkit2gtk3" />
       <dep package="gsettings-desktop-schemas" />
@@ -111,7 +111,7 @@
       <dep package="shared-mime-info" />
       <dep package="itstool"/>
     </dependencies>
-  </autotools>
+  </meson>
   <!---->
   <meson id="glade"
          mesonargs="-Dmac_bundle=true -Dman=false">
@@ -131,7 +131,7 @@
   </meson>
   <!---->
   <meson id="gtksourceview4">
-    <branch revision="5.0.0" />
+    <branch revision="5.12.1" />
     <dependencies>
       <dep package="gtk-4" />
       <dep package="libpcre2" />
@@ -150,7 +150,7 @@
   </meson>
   <!---->
   <meson id="gsettings-desktop-schemas">
-    <branch revision="gnome-44" />
+    <branch revision="gnome-46" />
     <dependencies>
       <dep package="gobject-introspection" />
     </dependencies>
@@ -164,9 +164,9 @@
       Another package with a non-standard repository structure. Tarballs
       are easier.
     -->
-    <branch module="2022/sqlite-autoconf-3390400.tar.gz"
-            version='3.39.4'
-            hash="sha256:f31d445b48e67e284cf206717cc170ab63cbe4fd7f79a82793b772285e78fdbb"
+    <branch module="2024/sqlite-autoconf-3460000.tar.gz"
+            version='3.46.0'
+            hash="sha256:6f8e6a7b335273748816f9b3b62bbdc372a889de8782d7f048c653a447417a7d"
             repo="sqlite" />
   </autotools>
   <!--
@@ -201,7 +201,7 @@
              autogenargs="--enable-relocatable">
     <branch module="AbiWord/enchant"
             repo="github"
-            tag="v2.5.0" />
+            tag="v2.8.0" />
     <dependencies>
       <dep package="glib" />
     </dependencies>
@@ -240,15 +240,19 @@
     having to install yet another vcs tool.
   -->
   <autotools id="gmp">
-    <branch module="gmp/gmp-6.2.1.tar.bz2"
-            version="6.2.1"
-            hash="sha256:eae9326beb4158c386e39a356818031bd28f3124cf915f8c5b1dc4c7a36b4d7c"
+    <branch module="gmp/gmp-6.3.0.tar.bz2"
+            version="6.3.0"
+            hash="sha256:ac28211a7cfb609bae2e2c8d6058d66c8fe96434f740cf6fe2e47b000d1c20cb"
             repo="ftp.gnu.org" >
-      <patch file="gmp-6.2.1-avoid-x18-register-apple-silicon.patch"
-             strip="1" />
     </branch>
   </autotools>
   <!---->
+  <autotools id="iso-codes"
+             autogen-sh="configure">
+    <branch module="iso-codes"
+            revision="v4.16.0"
+            repo="iso-codes" />
+  </autotools>
   <!---->
   <autotools id="libxml2"
              autogen-sh="autoreconf"
@@ -267,9 +271,9 @@
   <!---->
   <autotools id="libxslt"
              autogen-sh="autoreconf">
-    <branch module="libxslt/1.1/libxslt-1.1.38.tar.xz"
-            version="1.1.38"
-            hash="sha256:1f32450425819a09acaff2ab7a5a7f8a2ec7956e505d7beeb45e843d0e1ecab1">
+    <branch module="libxslt/1.1/libxslt-1.1.39.tar.xz"
+            version="1.1.39"
+            hash="sha256:2a20ad621148339b0759c4d4e96719362dee64c9a096dbba625ba053846349f0">
        <patch file="libxslt-python-config.patch"
               strip="1" />
     </branch>
