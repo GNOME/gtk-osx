@@ -41,9 +41,9 @@
              autogen-template="%(srcdir)s/%(autogen-sh)s --prefix=%(prefix)s %(autogenargs)s"
              autogenargs="--enable-gpl --enable-version3 --enable-shared --disable-static --disable-runtime-cpudetect --disable-programs --disable-ffplay --disable-ffprobe --disable-doc">
 
-    <branch module="ffmpeg-4.3.2.tar.xz"
-            version="4.3.2"
-            hash="sha256:46e4e64f1dd0233cbc0934b9f1c0da676008cad34725113fb7f802cfa84ccddb"
+    <branch module="ffmpeg-7.0.tar.xz"
+            version="7.0"
+            hash="sha256:4426a94dd2c814945456600c8adfc402bee65ec14a70e8c531ec9a2cd651da7b"
             repo="ffmpeg" />
     <dependencies>
       <dep package="nasm" />
