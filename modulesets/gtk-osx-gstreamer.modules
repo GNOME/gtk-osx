@@ -11,8 +11,8 @@
               default="yes"
               href="https://gitlab.freedesktop.org/gstreamer/"
               type="git" />
-  <repository name="sourceforge"
-              href="http://downloads.sourceforge.net/sourceforge/"
+  <repository name="github.com"
+              href="https://github.com/"
               type="tarball" />
   <repository name="ffmpeg"
               href="https://ffmpeg.org/releases/"
@@ -23,17 +23,17 @@
 
     <branch module="orc"
             repo="gstreamer"
-            tag="orc-0.4.32" />
+            tag="orc-0.4.38" />
   </meson>
   <!---->
   <autotools id="faad2"
              autogen-sh="autoreconf"
              autogenargs="-without-bmp --without-xmms --without-drm --without-mpeg4ip">
 
-    <branch module="faac/faad2-src/faad2-2.8.0/faad2-2.8.6.tar.gz"
-            version="2.8.6"
-            hash="sha256:654977adbf62eb81f4fca00152aca58ce3b6dd157181b9edd7bed687a7c73f21"
-            repo="sourceforge" />
+    <branch module="knik0/faad2/archive/refs/tags/2.11.0.tar.gz"
+            version="2.11.0"
+            hash="sha256:720c1dc404439e0a9117aa144dc7ead56f1658adf4badbb39f959d6ad8eed489"
+            repo="github.com" />
   </autotools>
   <!---->
   <autotools id="ffmpeg"
@@ -41,9 +41,9 @@
              autogen-template="%(srcdir)s/%(autogen-sh)s --prefix=%(prefix)s %(autogenargs)s"
              autogenargs="--enable-gpl --enable-version3 --enable-shared --disable-static --disable-runtime-cpudetect --disable-programs --disable-ffplay --disable-ffprobe --disable-doc">
 
-    <branch module="ffmpeg-4.3.2.tar.xz"
-            version="4.3.2"
-            hash="sha256:46e4e64f1dd0233cbc0934b9f1c0da676008cad34725113fb7f802cfa84ccddb"
+    <branch module="ffmpeg-7.0.tar.xz"
+            version="7.0"
+            hash="sha256:4426a94dd2c814945456600c8adfc402bee65ec14a70e8c531ec9a2cd651da7b"
             repo="ffmpeg" />
     <dependencies>
       <dep package="nasm" />
@@ -51,7 +51,7 @@
   </autotools>
   <!---->
   <meson id="gstreamer">
-    <branch revision="1.22.5" />
+    <branch revision="1.24.4" />
     <after>
       <dep package="glib" />
       <dep package="libxml2" />
@@ -60,7 +60,7 @@
   <!---->
   <meson id="gst-plugins-base"
          mesonargs="-Dexamples=disabled -Ddoc=disabled">
-    <branch revision="1.22.5" />
+    <branch revision="1.24.4" />
     <dependencies>
       <dep package="gstreamer" />
       <dep package="liboil" />
@@ -69,7 +69,7 @@
   </meson>
   <!---->
   <meson id="gst-plugins-good">
-    <branch revision="1.22.5" />
+    <branch revision="1.24.4" />
     <dependencies>
       <dep package="gstreamer" />
       <dep package="gst-plugins-base" />
@@ -77,7 +77,7 @@
   </meson>
   <!---->
   <meson id="gst-plugins-ugly">
-    <branch revision="1.22.5" />
+    <branch revision="1.24.4" />
     <dependencies>
       <dep package="gstreamer" />
       <dep package="gst-plugins-base" />
@@ -85,7 +85,7 @@
   </meson>
   <!---->
   <meson id="gst-plugins-bad">
-    <branch revision="1.22.5" />
+    <branch revision="1.24.4" />
     <dependencies>
       <dep package="gstreamer" />
       <dep package="gst-plugins-base" />
@@ -95,7 +95,16 @@
   <!---->
   <meson id="gst-libav">
     <branch module="gst-libav"
-            revision="1.22.5" />
+            revision="1.24.4" />
+    <dependencies>
+      <dep package="gstreamer" />
+      <dep package="gst-plugins-base" />
+    </dependencies>
+  </meson>
+  <!---->
+  <meson id="gst-python">
+    <branch module="gst-python"
+            revision="1.24.4" />
     <dependencies>
       <dep package="gstreamer" />
       <dep package="gst-plugins-base" />
@@ -112,6 +121,7 @@
       -->
       <dep package="gst-plugins-bad" />
       <dep package="gst-ffmpeg" />
+      <dep package="gst-python" />
     </dependencies>
   </metamodule>
   <!---->
