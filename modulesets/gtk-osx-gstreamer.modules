@@ -23,7 +23,7 @@
 
     <branch module="orc"
             repo="gstreamer"
-            tag="orc-0.4.32" />
+            tag="orc-0.4.38" />
   </meson>
   <!---->
   <autotools id="faad2"
