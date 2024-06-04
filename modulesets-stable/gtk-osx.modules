@@ -112,7 +112,7 @@
   </autotools>
   <!---->
   <meson id="glib-no-introspection"
-         mesonargs="-Dlibmount=disabled">
+         mesonargs="-Dlibmount=disabled -Dintrospection=disabled">
     <branch module="glib/2.80/glib-2.80.2.tar.xz"
             version="2.80.2"
 	    hash="sha256:b9cfb6f7a5bd5b31238fd5d56df226b2dda5ea37611475bf89f6a0f9400fe8bd" />
