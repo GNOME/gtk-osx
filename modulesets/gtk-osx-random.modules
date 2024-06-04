@@ -21,8 +21,8 @@
               href="https://ftp.gnu.org/gnu/"
               type="tarball" />
   <repository name="shared-mime-info"
-              href="https://gitlab.freedesktop.org/xdg/shared-mime-info/-/archive/"
-              type="tarball" />
+              href="https://gitlab.freedesktop.org/xdg/"
+              type="git" />
   <repository name="iso-codes"
               href="https://salsa.debian.org/iso-codes-team/"
               type="git" />
@@ -139,9 +139,8 @@
   </meson>
   <!---->
   <meson id="shared-mime-info">
-    <branch module="2.2/shared-mime-info-2.2.tar.bz2"
-            version="2.2"
-            hash="sha256:418c480019d9865f67f922dfb88de00e9f38bf971205d55cdffab50432919e61"
+    <branch module="shared-mime-info"
+            revision="2.4"
             repo="shared-mime-info">
     </branch>
     <dependencies>
