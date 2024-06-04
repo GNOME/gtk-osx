@@ -102,6 +102,15 @@
     </dependencies>
   </meson>
   <!---->
+  <meson id="gst-python">
+    <branch module="gst-python"
+            revision="1.24.4" />
+    <dependencies>
+      <dep package="gstreamer" />
+      <dep package="gst-plugins-base" />
+    </dependencies>
+  </meson>
+  <!---->
   <metamodule id="meta-gstreamer">
     <dependencies>
       <dep package="gstreamer" />
@@ -112,6 +121,7 @@
       -->
       <dep package="gst-plugins-bad" />
       <dep package="gst-ffmpeg" />
+      <dep package="gst-python" />
     </dependencies>
   </metamodule>
   <!---->

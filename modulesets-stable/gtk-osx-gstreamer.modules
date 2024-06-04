@@ -116,6 +116,17 @@
     </dependencies>
   </meson>
   <!---->
+  <meson id="gst-python">
+    <branch module="gst-python/gst-python-1.24.4.tar.xz"
+            version="1.24.4"
+            hash="sha256:5510358316eb5c965829a393714b4d88306033cd64db3eae8cc62b41ae80a392">
+    </branch>
+    <dependencies>
+      <dep package="gstreamer" />
+      <dep package="gst-plugins-base" />
+    </dependencies>
+  </meson>
+  <!---->
   <metamodule id="meta-gtk-osx-gstreamer">
     <dependencies>
       <dep package="gstreamer" />
@@ -124,6 +135,7 @@
       <dep package="gst-plugins-ugly" />
       <dep package="gst-plugins-bad" />
       <dep package="gst-libav" />
+      <dep package="gst-python" />
     </dependencies>
   </metamodule>
   <!---->
