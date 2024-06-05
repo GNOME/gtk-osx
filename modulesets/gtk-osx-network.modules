@@ -11,9 +11,6 @@
               default="yes"
               href="https://gitlab.gnome.org/GNOME"
               type="git" />
-  <repository name="openssl"
-              href="https://www.openssl.org/source/"
-              type="tarball" />
   <repository name="lysator"
               href="https://git.lysator.liu.se/"
               type="git" />
@@ -61,8 +58,10 @@
              autogen-sh="Configure"
              autogen-template="%(srcdir)s/%(autogen-sh)s --prefix=%(prefix)s --openssldir=%(prefix)s/etc/ssl %(autogenargs)s"
              makeinstallargs="install_sw" supports-non-srcdir-builds="no">
-    <branch module="openssl-3.2.1.tar.gz" version="3.2.1" repo="openssl"
-            hash="sha256:83c7329fe52c850677d75e5d0b0ca245309b97e8ecbcfdc1dfdc4ab9fac35b39"/>
+    <branch module="openssl/openssl/releases/download/openssl-3.3.1/openssl-3.3.1.tar.gz"
+            version="3.3.1"
+            hash="sha256:777cd596284c883375a2a7a11bf5d2786fc5413255efab20c50d6ffe6d020b7e"
+            repo="github-tarball"/>
   </autotools>
   <!--
     Rudely demands TeX to build documentation
