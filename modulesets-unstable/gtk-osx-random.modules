@@ -9,7 +9,7 @@
               href="http://download.gnome.org/sources/"/>
   <repository type="tarball" name="ftp.gnu.org" href="https://ftp.gnu.org/gnu/"/>
   <repository type="git" name="shared-mime-info"
-              href="https://gitlab.freedesktop.org/xdg/"
+              href="https://gitlab.freedesktop.org/xdg/"/>
   <repository type="git" name="iso-codes"
               href="https://salsa.debian.org/iso-codes-team/"/>
   <repository type="tarball" name="sourceforge"
