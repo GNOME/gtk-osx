@@ -61,8 +61,14 @@
             version="1.17"
             hash="sha256:8f74213b56238c85a50a5329f77e06198771e70dd9a739779f4c02f65d971313"
             repo="ftp.gnu.org" />
+  <!---->
   </autotools>
-
+  <autotools id="libunistring" autogen-sh="configure">
+    <branch repo="ftp.gnu.org" module="libunistring/libunistring-1.2.tar.gz"
+           version="1.2">
+     </branch>
+   </autotools>
+  <!---->
   <autotools id="gettext"
              autogen-sh="configure"
              autogenargs="--without-emacs --disable-java --disable-native-java --disable-libasprintf --disable-csharp --with-included-glib --with-included-libcroco">
@@ -73,6 +79,7 @@
             repo="ftp.gnu.org" />
     <dependencies>
       <dep package="libiconv" />
+      <dep package="libunistring" />
     </dependencies>
   </autotools>
   <!--
