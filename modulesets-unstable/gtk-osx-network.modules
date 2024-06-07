@@ -171,7 +171,6 @@
     <dependencies>
       <dep package="libpsl"/>
       <dep package="python3"/>
-      <dep package="vala"/>
       <dep package="sqlite"/>
       <dep package="glib"/>
       <dep package="glib-networking"/>

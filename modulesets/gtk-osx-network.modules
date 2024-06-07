@@ -244,7 +244,6 @@
     <dependencies>
       <dep package="libpsl" />
       <dep package="python3" />
-      <dep package="vala" />
       <dep package="glib" />
       <dep package="glib-networking" />
       <dep package="sqlite" />
@@ -272,7 +271,6 @@
       <dep package="glib-networking" />
       <dep package="libnghttp2" />
       <dep package="sqlite" />
-      <dep package="vala" />
     </dependencies>
   </meson>
   <!---->

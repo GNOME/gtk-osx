@@ -247,7 +247,6 @@
       <dep package="glib" />
       <dep package="glib-networking" />
       <dep package="sqlite" />
-      <dep package="vala" />
     </dependencies>
   </meson>
   <!---->
@@ -274,7 +273,6 @@
       <dep package="glib-networking" />
       <dep package="libnghttp2" />
       <dep package="sqlite" />
-      <dep package="vala" />
     </dependencies>
   </meson>
   <!---->
