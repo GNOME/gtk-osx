@@ -15,7 +15,7 @@
   <repository type="tarball" name="sourceforge"
               href="http://downloads.sourceforge.net/sourceforge/"/>
   <repository type="tarball" name="graphviz"
-              href="https://gitlab.com/graphviz/graphviz/-/archive/"/>
+              href="https://gitlab.com/api/v4/projects/4207231/packages/generic/graphviz-releases/" />
 
   <repository type="tarball" name="sqlite" href="http://www.sqlite.org/"/>
   <repository name="itstool"
@@ -23,14 +23,14 @@
               type="tarball" />
   <!---->
   <autotools id="graphviz"
-             autogen-sh="configure"
-             supports-non-srcdir-builds="no"
+             autogen-sh="autoreconf"
              autogenargs="--disable-sharp --disable-guile --disable-java --disable-lua --disable-ocaml --disable-perl --disable-php --disable-r --disable-ruby --disable-tcl --with-pangocairo">
  
-    <branch module="11.0.0/graphviz-11.0.0.tar.bz2"
+    <branch module="11.0.0/graphviz-11.0.0.tar.xz"
             version="11.0.0"
             hash="sha256:ae9a344748876f5c16577061e9c2a652151c90eb7572ee17c92b148c65577222"
             repo="graphviz">
+      <patch file="graphviz-11-fix-python-config.patch" strip="1" />
     </branch>
     <dependencies>
       <dep package="pango"/>
