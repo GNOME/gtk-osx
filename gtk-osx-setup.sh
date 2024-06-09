@@ -112,7 +112,7 @@ PIP="$PYENV_ROOT/shims/pip3"
 $PIP install --upgrade --user pip
 
 # Install pipenv
-$PIP install --upgrade --user pipenv==2023.12.1
+$PIP install --upgrade --user pipenv==2024.0.0
 PIPENV="$PYTHONUSERBASE/bin/pipenv"
 export WORKON_HOME=$DEVPREFIX/share/virtualenvs
 
