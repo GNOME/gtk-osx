@@ -327,7 +327,7 @@
       <dep package="libwebp" />
       <dep package="enchant" />
       <dep package="icu" />
-      <dep package="libsoup3" />
+      <dep package="libsoup" />
       <dep package="libgcrypt" />
       <dep package="meta-gtk-osx-gtk3" />
     </dependencies>
