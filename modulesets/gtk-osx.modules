@@ -45,8 +45,6 @@
 
       - gtk-osx-python.modules: Python bindings for Gtk.
       - gtk-osx-gtkmm.modules: C++ wrappers for Gtk.
-      - gtk-osx-javascript.modules: GJS and its Mozilla JS (aka
-        spidermonkey) dependency.
       - gtk-osx-gstreamer.modules: Gstreamer Library and modules.
       - gtk-osx-network.modules: The network/crypto stack and WebKit.
       - gtk-osx-random.modules: "random stuff", has apps for testing GTK+.
@@ -54,7 +52,6 @@
   <include href="gtk-osx-bootstrap.modules" />
   <include href="gtk-osx-gstreamer.modules" />
   <include href="gtk-osx-gtkmm.modules" />
-  <include href="gtk-osx-javascript.modules" />
   <include href="gtk-osx-network.modules" />
   <include href="gtk-osx-python.modules" />
   <include href="gtk-osx-random.modules" />
