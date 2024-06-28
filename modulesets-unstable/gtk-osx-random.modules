@@ -5,7 +5,7 @@
   <repository type="git" name="git.gnome.org" default="yes"
               href="https://gitlab.gnome.org/GNOME"/>
   <repository type="git" name="github" href="https://github.com/"/>
-  <repository type="tarball" name="ftp.gnome.org"
+  <repository type="tarball" name="download.gnome.org"
               href="http://download.gnome.org/sources/"/>
   <repository type="tarball" name="ftp.gnu.org" href="https://ftp.gnu.org/gnu/"/>
   <repository type="git" name="shared-mime-info"
@@ -238,7 +238,7 @@
              autogen-sh="autoreconf">
     <branch module="libxslt/1.1/libxslt-1.1.39.tar.xz"
             version="1.1.39"
-            repo="ftp.gnome.org"
+            repo="download.gnome.org"
             hash="sha256:2a20ad621148339b0759c4d4e96719362dee64c9a096dbba625ba053846349f0">
        <patch file="libxslt-python-config.patch"
               strip="1" />
