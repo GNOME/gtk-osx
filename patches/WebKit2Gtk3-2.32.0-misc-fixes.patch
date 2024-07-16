@@ -1,0 +1,47 @@
+--- a/Source/WTF/wtf/URLHelpers.cpp	2021-02-26 01:57:08
++++ b/Source/WTF/wtf/URLHelpers.cpp	2024-07-13 13:14:05
+@@ -52,7 +52,7 @@
+ //    WebKit was compiled.
+ // This is only really important for platforms that load an external IDN allowed script list.
+ // Not important for the compiled-in one.
+-constexpr auto scriptCodeLimit = static_cast<UScriptCode>(256);
++constexpr auto scriptCodeLimit = static_cast<UScriptCode>(255);
+ 
+ static uint32_t allowedIDNScriptBits[(scriptCodeLimit + 31) / 32];
+ 
+
+--- a/Source/WTF/wtf/PlatformUse.h	2021-02-26 01:57:08
++++ b/Source/WTF/wtf/PlatformUse.h	2024-07-14 09:27:02
+@@ -313,7 +313,7 @@
+ #define USE_LEGACY_CFNETWORK_DOWNLOADS 1
+ #endif
+ 
+-#if (PLATFORM(MAC) && __MAC_OS_X_VERSION_MIN_REQUIRED >= 110000) \
++#if (OS(MAC_OS_X) && __MAC_OS_X_VERSION_MIN_REQUIRED >= 110000)              \
+     || (PLATFORM(MACCATALYST) && __IPHONE_OS_VERSION_MIN_REQUIRED >= 140000)
+ #if USE(APPLE_INTERNAL_SDK)
+ /* Always use the macro on internal builds */
+
+--- b/Source/WTF/wtf/glib/GLibUtilities.cpp	2024-07-13 12:02:10
++++ b/Source/WTF/wtf/glib/GLibUtilities.cpp	2024-07-15 17:19:10
+@@ -58,6 +58,19 @@
+     CFStringGetCString(string, bundle_path, len, kCFStringEncodingUTF8);
+     CFRelease(abs_url);
+     CFRelease(string);
++
++    auto basename{g_path_get_basename(bundle_path)};
++    if (g_strcmp0("bin", basename) == 0)
++    {
++        auto parent_path{g_path_get_dirname(bundle_path)};
++        if (parent_path && *parent_path)
++        {
++            strncpy(bundle_path, parent_path, len);
++            len = strlen(parent_path);
++            g_free(parent_path);
++        }
++    }
++    g_free(basename);
+     return CString(bundle_path, len);
+ }
+ #endif
+
