@@ -11,14 +11,8 @@
               default="yes"
               href="https://download.gnome.org/sources/"
               type="tarball" />
-  <repository name="cairographics.org"
-              href="http://cairographics.org/releases/"
-              type="tarball" />
   <repository name="python"
               href="https://www.python.org/ftp/python/"
-              type="tarball" />
-  <repository name="oracle"
-              href="http://download.oracle.com/"
               type="tarball" />
   <repository name="pymodules"
               href="https://pypi.python.org/packages/"

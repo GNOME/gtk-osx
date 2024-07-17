@@ -11,8 +11,6 @@
 	      href="https://git.savannah.nongnu.org/git/"/>
   <repository type="tarball" name="hicolor"
               href="https://icon-theme.freedesktop.org/releases/"/>
-  <repository type="tarball" name="sourceforge"
-              href="http://downloads.sourceforge.net/sourceforge/"/>
   <repository name="github-tarball"
               href="https://github.com/"
               type="tarball" />

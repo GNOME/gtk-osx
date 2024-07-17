@@ -11,17 +11,11 @@
               default="yes"
               href="https://gitlab.gnome.org/GNOME"
               type="git" />
-  <repository name="ftp.gnu.org"
-              href="https://ftp.gnu.org/gnu/"
-              type="tarball" />
   <repository name="sourceforge"
               href="http://downloads.sourceforge.net/sourceforge/"
               type="tarball" />
   <repository name="libtiff"
               href="http://download.osgeo.org/"
-              type="tarball" />
-  <repository name="icon-theme"
-              href="http://icon-theme.freedesktop.org/releases/"
               type="tarball" />
   <repository name="github-tarball"
               href="https://github.com/"

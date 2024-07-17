@@ -23,9 +23,6 @@
   <repository name="hicolor"
               href="https://icon-theme.freedesktop.org/releases/"
               type="tarball" />
-  <repository name="sourceforge"
-              href="http://downloads.sourceforge.net/sourceforge/"
-              type="tarball" />
   <repository name="github-tarball"
               href="https://github.com/"
               type="tarball" />

@@ -13,17 +13,11 @@
   <repository name="pkgconf"
               href="https://distfiles.ariadne.space/pkgconf/"
               type="tarball" />
-  <repository name="sourceforge"
-              href="http://downloads.sourceforge.net/sourceforge/"
-              type="tarball" />
   <repository name="tukaani.org"
               href="http://tukaani.org/"
               type="tarball" />
   <repository name="cmake"
               href="https://cmake.org/files/"
-              type="tarball" />
-  <repository name="cpan"
-              href="http://search.cpan.org/CPAN/"
               type="tarball" />
   <repository name="intltool"
               href="http://launchpad.net/intltool/trunk/"

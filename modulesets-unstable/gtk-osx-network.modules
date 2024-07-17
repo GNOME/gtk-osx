@@ -8,16 +8,12 @@
               href="https://git.lysator.liu.se/"/>
   <repository name="ftp.gnu.org" type="tarball"
               href="https://ftp.gnu.org/gnu/"/>
-  <repository name="sourceforge" type="tarball"
-              href="http://downloads.sourceforge.net/sourceforge/"/>
   <repository type='git' name='git.gnupg.org' href="https://dev.gnupg.org/source/" />  
   <repository name='gnupg.org' type='tarball' href="https://gnupg.org/ftp/" />
   <repository name="chromium" type="git"
               href="https://chromium.googlesource.com/"/>
   <repository name="webkit.org" type="tarball"
               href="http://www.webkitgtk.org/releases/"/>
-  <repository name="webkit-git" type="git"
-              href="https://git.webkit.org"/>
   <repository type="tarball" name="github-tarball" href="https://github.com/"/>
   <repository type="git" name="github" href="https://github.com/"/>
   <repository type="tarball" name="zlib" href="https://www.zlib.net/"/>

@@ -11,9 +11,6 @@
               default="yes"
               href="https://download.gnome.org/sources/"
               type="tarball" />
-  <repository name="doxygen"
-              href="http://ftp.stack.nl/pub/users/dimitri/"
-              type="tarball" />
   <repository name="cairographics"
               href="http://cairographics.org/releases/"
               type="tarball" />

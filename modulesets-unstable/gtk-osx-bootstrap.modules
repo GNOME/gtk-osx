@@ -5,13 +5,10 @@
 
   <repository type="git" name="git.gnome.org"  default="yes"
               href="https://gitlab.gnome.org/GNOME"/>
-  <repository type="tarball" name="ftp.gnu.org" href="https://ftp.gnu.org/gnu/"/>
   <repository type="tarball" name="sourceforge"
               href="http://downloads.sourceforge.net/sourceforge/"/>
   <repository type="tarball" name="libtiff"
 	      href="http://download.osgeo.org/"/>
-  <repository type="tarball" name="icon-theme"
-	      href="http://icon-theme.freedesktop.org/releases/"/>
   <repository type="tarball" name="github-tarball" href="https://github.com/"/>
   <repository type="tarball" name="nasm"
               href="https://www.nasm.us/pub/nasm/releasebuilds/" />

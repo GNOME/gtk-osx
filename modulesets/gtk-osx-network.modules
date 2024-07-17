@@ -11,14 +11,8 @@
               default="yes"
               href="https://gitlab.gnome.org/GNOME"
               type="git" />
-  <repository name="lysator"
-              href="https://git.lysator.liu.se/"
-              type="git" />
   <repository name="ftp.gnu.org"
               href="https://ftp.gnu.org/gnu/"
-              type="tarball" />
-  <repository name="sourceforge"
-              href="http://downloads.sourceforge.net/sourceforge/"
               type="tarball" />
   <repository name='git.gnupg.org'
               href="https://git.gnupg.org/"
