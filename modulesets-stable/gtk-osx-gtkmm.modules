@@ -20,7 +20,7 @@
   <!---->
   <meson id="mm-common">
     <branch module="mm-common/1.0/mm-common-1.0.6.tar.xz"
-            version="1.0.5"
+            version="1.0.6"
             hash="sha256:b55c46037dbcdabc5cee3b389ea11cc3910adb68ebe883e9477847aa660862e7" />
   </meson>
   <!--
