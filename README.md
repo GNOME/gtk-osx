@@ -15,6 +15,10 @@ created by Gtk-OSX is suitable for development of Gnome libraries and
 Gtk+-based applications on MacOS; indeed the author has been using it
 for just that purpose for almost 10 years.
 
+## Installation ##
+
+See [Quickstart](https://gitlab.gnome.org/GNOME/gtk-osx/-/wikis/home#quick-start).
+
 ## Modulesets ##
 
 There are 3 modulesets. You can select the one which most suits you by
