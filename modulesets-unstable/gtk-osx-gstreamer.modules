@@ -2,101 +2,101 @@
 <!DOCTYPE moduleset SYSTEM "moduleset.dtd">
 <?xml-stylesheet type="text/xsl" href="moduleset.xsl"?>
 <moduleset>
- <repository type="git" name="gstreamer" default="yes"
-              href="https://gitlab.freedesktop.org/gstreamer/"/>
-  <repository type="tarball" name="sourceforge"
-              href="http://downloads.sourceforge.net/sourceforge/"/>
-  <repository type="tarball" name="ffmpeg"
-              href="https://ffmpeg.org/releases/"/>
-
+  <!-- Please format this file using the following command:
+       tidy -config ../tidy.conf -m gtk-osx-gstreamer.modules; sed -i "" '/^ *$/d' gtk-osx-gstreamer.modules
+       You can get 'tidy' here: https://github.com/htacg/tidy-html5 -->
+  <repository name="gstreamer"
+              default="yes"
+              href="https://gitlab.freedesktop.org/gstreamer/"
+              type="git" />
+  <repository name="sourceforge"
+              href="http://downloads.sourceforge.net/sourceforge/"
+              type="tarball" />
+  <repository name="ffmpeg"
+              href="https://ffmpeg.org/releases/"
+              type="tarball" />
   <!-- The GStreamer project maintains its own moduleset at
        git://anongit.freedesktop.org/gstreamer/jhbuild/. The modules
        are unversioned and haven't been tested for gtk-osx
        compatibility, but there are more of them. -->
-
-  <meson id="liborc" mesonargs="-Dgtk_doc=disabled -Dbenchmarks=disabled -Dexamples=disabled -Dtests=disabled">
-    <branch repo="gstreamer" module="orc"/>
+  <meson id="liborc"
+         mesonargs="-Dgtk_doc=disabled -Dbenchmarks=disabled -Dexamples=disabled -Dtests=disabled">
+    <branch module="orc"
+            repo="gstreamer" />
   </meson>
-
-  <autotools id="faad2" autogen-sh="autoreconf"
+  <autotools id="faad2"
+             autogen-sh="autoreconf"
              autogenargs="-without-bmp --without-xmms --without-drm --without-mpeg4ip">
-    <branch repo="sourceforge" version="2.8.6"
-            module="faac/faad2-src/faad2-2.8.0/faad2-2.8.6.tar.gz"
-            hash="sha256:654977adbf62eb81f4fca00152aca58ce3b6dd157181b9edd7bed687a7c73f21">
-    </branch>
+    <branch module="faac/faad2-src/faad2-2.8.0/faad2-2.8.6.tar.gz"
+            version="2.8.6"
+            hash="sha256:654977adbf62eb81f4fca00152aca58ce3b6dd157181b9edd7bed687a7c73f21"
+            repo="sourceforge" />
   </autotools>
-
-  <autotools id="ffmpeg" autogen-sh="configure"
-             autogenargs="--enable-gpl --enable-version3 --enable-shared --disable-static --disable-runtime-cpudetect --disable-programs --disable-ffplay --disable-ffprobe --disable-doc"
+  <autotools id="ffmpeg"
+             autogen-sh="configure"
              autogen-template="%(srcdir)s/%(autogen-sh)s --prefix=%(prefix)s %(autogenargs)s"
->
-    <branch repo="ffmpeg" version="4.3.2"
-            module="ffmpeg-4.3.2.tar.xz"
-            hash="sha256:46e4e64f1dd0233cbc0934b9f1c0da676008cad34725113fb7f802cfa84ccddb"/>
+             autogenargs="--enable-gpl --enable-version3 --enable-shared --disable-static --disable-runtime-cpudetect --disable-programs --disable-ffplay --disable-ffprobe --disable-doc">
+    <branch module="ffmpeg-4.3.2.tar.xz"
+            version="4.3.2"
+            hash="sha256:46e4e64f1dd0233cbc0934b9f1c0da676008cad34725113fb7f802cfa84ccddb"
+            repo="ffmpeg" />
     <dependencies>
-      <dep package="nasm"/>
+      <dep package="nasm" />
     </dependencies>
   </autotools>
-
-  <meson id="gstreamer" >
-    <branch/>
+  <meson id="gstreamer">
+    <branch />
     <after>
-      <dep package="glib"/>
-      <dep package="libxml2"/>
+      <dep package="glib" />
+      <dep package="libxml2" />
     </after>
   </meson>
-
-  <meson id="gst-plugins-base" mesonargs="-Dexamples=disabled -Ddoc=disabled">
+  <meson id="gst-plugins-base"
+         mesonargs="-Dexamples=disabled -Ddoc=disabled">
     <branch />
     <dependencies>
-      <dep package="gstreamer"/>
-      <dep package="liborc"/>
+      <dep package="gstreamer" />
+      <dep package="liborc" />
     </dependencies>
   </meson>
-
   <meson id="gst-plugins-good">
     <branch />
     <dependencies>
-      <dep package="gstreamer"/>
-      <dep package="gst-plugins-base"/>
+      <dep package="gstreamer" />
+      <dep package="gst-plugins-base" />
     </dependencies>
   </meson>
-
   <meson id="gst-plugins-ugly">
-    <branch/>
+    <branch />
     <dependencies>
-      <dep package="gstreamer"/>
-      <dep package="gst-plugins-base"/>
+      <dep package="gstreamer" />
+      <dep package="gst-plugins-base" />
     </dependencies>
   </meson>
-
   <meson id="gst-plugins-bad">
-    <branch/>
+    <branch />
     <dependencies>
-      <dep package="gstreamer"/>
-      <dep package="gst-plugins-base"/>
-      <dep package="faad2"/>
-      <dep package='openssl'/>
+      <dep package="gstreamer" />
+      <dep package="gst-plugins-base" />
+      <dep package="faad2" />
+      <dep package="openssl" />
     </dependencies>
   </meson>
-
   <meson id="gst-libav">
-    <branch module="gst-libav"/>
+    <branch module="gst-libav" />
     <dependencies>
-      <dep package="gstreamer-1.0"/>
-      <dep package="gst-plugins-base-1.0"/>
+      <dep package="gstreamer-1.0" />
+      <dep package="gst-plugins-base-1.0" />
     </dependencies>
   </meson>
-
   <metamodule id="meta-gstreamer">
     <dependencies>
-      <dep package="gstreamer"/>
-      <dep package="gst-plugins-base"/>
-      <dep package="gst-plugins-good"/>
+      <dep package="gstreamer" />
+      <dep package="gst-plugins-base" />
+      <dep package="gst-plugins-good" />
       <!--dep package="gst-plugins-ugly"/-->
-      <dep package="gst-plugins-bad"/>
-      <dep package="gst-ffmpeg"/>
+      <dep package="gst-plugins-bad" />
+      <dep package="gst-ffmpeg" />
     </dependencies>
   </metamodule>
-
 </moduleset>

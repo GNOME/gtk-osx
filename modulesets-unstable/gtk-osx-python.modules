@@ -2,78 +2,83 @@
 <!DOCTYPE moduleset SYSTEM "moduleset.dtd">
 <?xml-stylesheet type="text/xsl" href="moduleset.xsl"?>
 <moduleset>
-
-  <repository type="git" name="git.gnome.org" default="yes"
-              href="https://gitlab.gnome.org/GNOME"/>
-  <repository type="git" name="github"
-              href="https://github.com"/>
-  <repository type="tarball" name="python"
-              href="https://www.python.org/ftp/python/"/>
-  <repository type="tarball" name="pymodules"
-	      href="https://pypi.python.org/packages/"/>
-
+  <!-- Please format this file using the following command:
+       tidy -config ../tidy.conf -m gtk-osx-python.modules; sed -i "" '/^ *$/d' gtk-osx-python.modules
+       You can get 'tidy' here: https://github.com/htacg/tidy-html5 -->
+  <repository name="git.gnome.org"
+              default="yes"
+              href="https://gitlab.gnome.org/GNOME"
+              type="git" />
+  <repository name="github"
+              href="https://github.com"
+              type="git" />
+  <repository name="python"
+              href="https://www.python.org/ftp/python/"
+              type="tarball" />
+  <repository name="pymodules"
+              href="https://pypi.python.org/packages/"
+              type="tarball" />
   <metamodule id="meta-gtk-osx-python3-gtk3">
     <dependencies>
-      <dep package="meta-gtk-osx-gtk3"/>
-      <dep package='pygments'/>
-      <dep package="pycairo"/>
-      <dep package="pygobject3"/>
-      <dep package="gtk-mac-integration-python"/>
+      <dep package="meta-gtk-osx-gtk3" />
+      <dep package="pygments" />
+      <dep package="pycairo" />
+      <dep package="pygobject3" />
+      <dep package="gtk-mac-integration-python" />
     </dependencies>
   </metamodule>
-
-  <autotools id="python3" autogenargs="--enable-shared" autogen-sh="autoreconf">
+  <autotools id="python3"
+             autogen-sh="autoreconf"
+             autogenargs="--enable-shared">
     <branch module="3.11.9/Python-3.11.9.tar.xz"
             version="3.11.9"
             hash="sha256:9b1e896523fc510691126c864406d9360a3d1e986acbda59cda57b5abda45b87"
             repo="python" />
     <dependencies>
-      <dep package='readline'/>
-      <dep package="openssl" /> <!-- For hashlib -->
+      <dep package="readline" />
+      <!-- For hashlib -->
+      <dep package="openssl" />
     </dependencies>
     <after>
-      <dep package='sqlite'/>
+      <dep package="sqlite" />
     </after>
   </autotools>
-
- <meson id="pycairo" >
-    <branch module="pygobject/pycairo" repo="github" />
+  <meson id="pycairo">
+    <branch module="pygobject/pycairo"
+            repo="github" />
     <dependencies>
-      <dep package="cairo"/>
-      <dep package="python3"/>
-      <dep package="meta-gtk-osx-gtk3"/>
+      <dep package="cairo" />
+      <dep package="python3" />
+      <dep package="meta-gtk-osx-gtk3" />
     </dependencies>
- </meson>
-
-  <meson id="pygobject3" >
-    <branch module="pygobject" checkoutdir="pygobject3"/>
-    <dependencies>
-      <dep package="pycairo"/>
-      <dep package="meta-gtk-osx-gtk3"/>
-   </dependencies>
-   <after>
-     <dep package="python3"/>
-   </after>
   </meson>
-
-  <autotools id="gtk-mac-integration-python">
-    <branch module="gtk-mac-integration"/>
+  <meson id="pygobject3">
+    <branch module="pygobject"
+            checkoutdir="pygobject3" />
     <dependencies>
-      <dep package="pygobject3"/>
+      <dep package="pycairo" />
+      <dep package="meta-gtk-osx-gtk3" />
+    </dependencies>
+    <after>
+      <dep package="python3" />
+    </after>
+  </meson>
+  <autotools id="gtk-mac-integration-python">
+    <branch module="gtk-mac-integration" />
+    <dependencies>
+      <dep package="pygobject3" />
     </dependencies>
   </autotools>
-  <!---->
   <distutils id="pygments">
     <branch module="d6/f7/4d461ddf9c2bcd6a4d7b2b139267ca32a69439387cc1f02a924ff8883825/Pygments-2.16.1.tar.gz"
             version="2.16.1"
             hash="1daff0494820c69bc8941e407aa20f577374ee88364ee10a98fdbe0aece96e29"
-            repo="pymodules" >
+            repo="pymodules">
       <patch file="Pygments-setup-py.patch"
-             strip="1"/>
+             strip="1" />
     </branch>
     <dependencies>
       <dep package="python3" />
     </dependencies>
   </distutils>
-  <!---->
 </moduleset>
