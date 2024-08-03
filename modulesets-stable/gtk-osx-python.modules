@@ -2,11 +2,9 @@
 <!DOCTYPE moduleset SYSTEM "moduleset.dtd">
 <?xml-stylesheet type="text/xsl" href="moduleset.xsl"?>
 <moduleset>
-  <!--
-    Please format this file using https://github.com/htacg/tidy-html5
-
-        tidy -config ../tidy.conf -m gtk-osx-python.modules
-  -->
+  <!-- Please format this file using the following command:
+       tidy -config ../tidy.conf -m gtk-osx-python.modules; sed -i "" '/^ *$/d' gtk-osx-python.modules
+       You can get 'tidy' here: https://github.com/htacg/tidy-html5 -->
   <repository name="download.gnome.org"
               default="yes"
               href="https://download.gnome.org/sources/"
@@ -20,11 +18,10 @@
   <repository name="github-tarball"
               href="https://github.com"
               type="tarball" />
-  <!---->
   <metamodule id="meta-gtk-osx-python3-gtk3">
     <dependencies>
       <dep package="meta-gtk-osx-gtk3" />
-      <dep package='pygments' />
+      <dep package="pygments" />
       <dep package="pycairo" />
       <dep package="pygobject3" />
       <dep package="gtk-mac-integration-python" />
@@ -33,7 +30,6 @@
       <dep package="meta-gtk-osx-gtk3" />
     </after>
   </metamodule>
-  <!---->
   <autotools id="python3"
              autogen-sh="configure"
              autogenargs="--enable-shared">
@@ -42,17 +38,14 @@
             hash="sha256:9b1e896523fc510691126c864406d9360a3d1e986acbda59cda57b5abda45b87"
             repo="python" />
     <dependencies>
-      <dep package='readline' />
-      <!--
-        for hashlib
-      -->
+      <dep package="readline" />
+      <!-- for hashlib -->
       <dep package="openssl" />
     </dependencies>
     <after>
-      <dep package="sqlite"/>
+      <dep package="sqlite" />
     </after>
   </autotools>
-  <!---->
   <meson id="pycairo">
     <branch module="pygobject/pycairo/releases/download/v1.26.0/pycairo-1.26.0.tar.gz"
             version="1.26.0"
@@ -64,7 +57,6 @@
       <dep package="meta-gtk-osx-gtk3" />
     </dependencies>
   </meson>
-  <!---->
   <meson id="pygobject3">
     <branch module="pygobject/3.48/pygobject-3.48.2.tar.xz"
             version="3.48.2"
@@ -76,14 +68,12 @@
       <dep package="python3" />
     </after>
   </meson>
-  <!---->
   <autotools id="gtk-mac-integration-python"
              autogen-sh="configure"
              autogenargs="--enable-python">
     <branch module="gtk-mac-integration/3.0/gtk-mac-integration-3.0.1.tar.xz"
             version="3.0.1"
             hash="sha256:f19e35bc4534963127bbe629b9b3ccb9677ef012fc7f8e97fd5e890873ceb22d">
-
       <patch file="gtk-mac-integration-work-around-svg-locale-bug.patch"
              strip="1" />
     </branch>
@@ -91,12 +81,11 @@
       <dep package="pygobject3" />
     </after>
   </autotools>
-  <!---->
   <distutils id="pygments">
     <branch module="d6/f7/4d461ddf9c2bcd6a4d7b2b139267ca32a69439387cc1f02a924ff8883825/Pygments-2.16.1.tar.gz"
             version="2.16.1"
             hash="1daff0494820c69bc8941e407aa20f577374ee88364ee10a98fdbe0aece96e29"
-            repo="pymodules" >
+            repo="pymodules">
       <patch file="Pygments-setup-py.patch"
              strip="1" />
     </branch>
@@ -104,5 +93,4 @@
       <dep package="python3" />
     </dependencies>
   </distutils>
-  <!---->
 </moduleset>

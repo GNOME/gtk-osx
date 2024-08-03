@@ -2,11 +2,9 @@
 <!--*- mode: nxml -*-->
 <?xml-stylesheet type="text/xsl" href="moduleset.xsl"?>
 <moduleset>
-  <!--
-    Please format this file using https://github.com/htacg/tidy-html5
-
-        tidy -config ../tidy.conf -m bootstrap.modules
-  -->
+  <!-- Please format this file using the following command:
+       tidy -config ../tidy.conf -m bootstrap.modules; sed -i "" '/^ *$/d' bootstrap.modules
+       You can get 'tidy' here: https://github.com/htacg/tidy-html5 -->
   <repository name="ftp.gnu.org"
               href="https://ftp.gnu.org/gnu/"
               type="tarball" />
@@ -25,7 +23,6 @@
   <repository name="github"
               href="https://github.com"
               type="tarball" />
-  <!---->
   <autotools id="xz"
              autogen-sh="configure"
              bootstrap="true">
@@ -34,9 +31,7 @@
             hash="sha256:e12aa03cbd200597bd4ce11d97be2d09a6e6d39a9311ce72c91ac7deacde3171"
             repo="tukaani.org" />
   </autotools>
-  <!--
-    gnu make 4.xx, needed to unbreak parallel builds for the webkit
-  -->
+  <!-- gnu make 4.xx, needed to unbreak parallel builds for the webkit -->
   <autotools id="gnumake"
              autogen-sh="configure"
              autogenargs="--disable-dependency-tracking"
@@ -46,27 +41,23 @@
             hash="sha256:581f4d4e872da74b3941c874215898a7d35802f03732bdccee1d4a7979105d18"
             repo="ftp.gnu.org" />
   </autotools>
-  <!---->
   <autotools id="libiconv"
              autogen-sh="configure"
              autogenargs="--disable-debug --disable-dependency-tracking --enable-extra-encodings">
-
     <branch module="libiconv/libiconv-1.17.tar.gz"
             version="1.17"
             hash="sha256:8f74213b56238c85a50a5329f77e06198771e70dd9a739779f4c02f65d971313"
             repo="ftp.gnu.org" />
-  <!---->
   </autotools>
-  <autotools id="libunistring" autogen-sh="configure">
-    <branch repo="ftp.gnu.org" module="libunistring/libunistring-1.2.tar.gz"
-           version="1.2">
-     </branch>
-   </autotools>
-  <!---->
+  <autotools id="libunistring"
+             autogen-sh="configure">
+    <branch module="libunistring/libunistring-1.2.tar.gz"
+            version="1.2"
+            repo="ftp.gnu.org" />
+  </autotools>
   <autotools id="gettext"
              autogen-sh="configure"
              autogenargs="--without-emacs --disable-java --disable-native-java --disable-libasprintf --disable-csharp --with-included-glib --with-included-libcroco">
-
     <branch module="gettext/gettext-0.22.5.tar.xz"
             version="0.22.5"
             hash="sha256:fe10c37353213d78a5b83d48af231e005c4da84db5ce88037d88355938259640"
@@ -76,9 +67,7 @@
       <dep package="libunistring" />
     </dependencies>
   </autotools>
-  <!--
-    cmakes ./configure is picky about invalid flags so we manually set it
-  -->
+  <!-- cmakes ./configure is picky about invalid flags so we manually set it -->
   <autotools id="cmake"
              autogen-sh="bootstrap"
              autogen-template="%(srcdir)s/%(autogen-sh)s --prefix=%(prefix)s"
@@ -88,10 +77,8 @@
             hash="sha256:252aee1448d49caa04954fd5e27d189dd51570557313e7b281636716a238bccb"
             repo="cmake" />
   </autotools>
-  <!--
-    The version of m4 provided with Xcode is now too old, see
-    https://savannah.gnu.org/support/index.php?110397
-  -->
+  <!-- The version of m4 provided with Xcode is now too old, see
+       https://savannah.gnu.org/support/index.php?110397 -->
   <autotools id="m4"
              autogen-sh="configure"
              bootstrap="true">
@@ -100,7 +87,6 @@
             hash="sha256:63aede5c6d33b6d9b13511cd0be2cac046f2e70fd0a07aa9573a04a82783af96"
             repo="ftp.gnu.org" />
   </autotools>
-  <!---->
   <autotools id="autoconf"
              autogen-sh="configure"
              bootstrap="true">
@@ -113,7 +99,6 @@
       <dep package="xz" />
     </dependencies>
   </autotools>
-  <!---->
   <autotools id="autoconf-archive"
              autogen-sh="configure"
              bootstrap="true">
@@ -122,7 +107,6 @@
             hash="sha256:71d4048479ae28f1f5794619c3d72df9c01df49b1c628ef85fde37596dc31a33"
             repo="ftp.gnu.org" />
   </autotools>
-  <!---->
   <autotools id="libtool"
              autogen-sh="configure"
              bootstrap="true">
@@ -134,7 +118,6 @@
              strip="1" />
     </branch>
   </autotools>
-  <!---->
   <autotools id="automake"
              autogen-sh="configure"
              bootstrap="true">
@@ -146,20 +129,17 @@
       <dep package="autoconf" />
     </dependencies>
   </autotools>
-  <!---->
   <meson id="pkgconf"
-         mesonargs="-Dwith-system-libdir=/usr/lib -Dwith-system-includedir=/usr/include" >
+         mesonargs="-Dwith-system-libdir=/usr/lib -Dwith-system-includedir=/usr/include">
     <branch module="pkgconf-2.2.0.tar.xz"
             version="2.2.0"
             hash="sha256:b06ff63a83536aa8c2f6422fa80ad45e4833f590266feb14eaddfe1d4c853c69"
-            repo="pkgconf" >
-      <patch file="pkgconf-link-pkg-config.patch" strip="1" />
+            repo="pkgconf">
+      <patch file="pkgconf-link-pkg-config.patch"
+             strip="1" />
     </branch>
   </meson>
-  <!--
-    macOS provides 2.3 (presumably the last GPL2 version, gstreamer
-    requires 2.4.
-  -->
+  <!-- macOS provides 2.3 (presumably the last GPL2 version, gstreamer requires 2.4. -->
   <autotools id="bison"
              autogen-sh="configure">
     <branch module="bison/bison-3.8.2.tar.xz"
@@ -167,12 +147,10 @@
             hash="sha256:9bba0214ccf7f1079c5d59210045227bcf619519840ebfa80cd3849cff5a5bf2"
             repo="ftp.gnu.org" />
     <dependencies>
-      <dep package='flex' />
+      <dep package="flex" />
     </dependencies>
   </autotools>
-  <!--
-    As of 29 March 2021 Flex hasn't had an update since May 2017.
-  -->
+  <!-- As of 29 March 2021 Flex hasn't had an update since May 2017. -->
   <autotools id="flex"
              autogen-sh="configure"
              autogenargs="--disable-libfl">
@@ -181,13 +159,11 @@
             hash="sha256:e87aae032bf07c26f85ac0ed3250998c37621d95f8bd748b31f15b33c45ee995"
             repo="github" />
   </autotools>
-  <!--
-    This is generated by tarring up the needed docbook stylesheets
-    for gtk-doc to work. If someone wants to work on a setup that
-    uses the real docbook source from upstream, feel free to do so,
-    it used to be a huge amount of work, but might be easier these
-    days.
-  -->
+  <!-- This is generated by tarring up the needed docbook stylesheets
+       for gtk-doc to work. If someone wants to work on a setup that
+       uses the real docbook source from upstream, feel free to do so,
+       it used to be a huge amount of work, but might be easier these
+       days. -->
   <autotools id="gtk-osx-docbook"
              autogen-sh="configure"
              supports-non-srcdir-builds="no">
@@ -196,7 +172,6 @@
             hash="sha256:fcf497688a1d531b192301bd09c55adefda5a662729a58eb8a895166e38ef219"
             repo="github" />
   </autotools>
-  <!---->
   <autotools id="intltool"
              autogen-sh="configure">
     <branch module="0.51.0/+download/intltool-0.51.0.tar.gz"
@@ -204,11 +179,10 @@
             hash="sha256:67c74d94196b153b774ab9f89b2fa6c6ba79352407037c8c14d5aeb334e959cd"
             repo="intltool" />
   </autotools>
-  <!---->
   <metamodule id="meta-bootstrap">
     <dependencies>
       <dep package="xz" />
-      <dep package="libiconv"/>
+      <dep package="libiconv" />
       <dep package="gettext" />
       <dep package="cmake" />
       <dep package="autoconf-archive" />
@@ -222,5 +196,4 @@
       <dep package="gnumake" />
     </dependencies>
   </metamodule>
-  <!---->
 </moduleset>
