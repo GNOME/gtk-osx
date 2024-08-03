@@ -104,7 +104,7 @@
              autogenargs="--without-trust-paths">
     <branch module="p11-glue/p11-kit/releases/download/0.24.1/p11-kit-0.24.1.tar.xz"
             version="0.25.3"
-
+            hash="sha256:d8be783efd5cd4ae534cee4132338e3f40f182c3205d23b200094ec85faaaef8"
             repo="github-tarball">
       <patch file="p11-kit-libintl.patch"
              strip="1" />
@@ -150,7 +150,7 @@
              autogen-sh="configure">
     <branch module="gcrypt/libgcrypt/libgcrypt-1.10.3.tar.bz2"
             version="1.10.3"
-
+            hash="sha256:8b0870897ac5ac67ded568dcfadf45969cfa8a6beb0fd60af2a9eadc2a3272aa"
             repo="gnupg.org">
     </branch>
     <dependencies>
@@ -203,7 +203,7 @@
 
     <branch module="libproxy/libproxy/archive/refs/tags/0.5.6.tar.gz"
             version="0.5.6"
-
+            hash="sha256:68cb4548143e843826a35e024dba8ced92117c0982c2cc9a4c8247e32d259603"
             checkoutdir="libproxy-0.5.6"
             repo="github-tarball" />
     <dependencies>
@@ -227,7 +227,7 @@
              autogen-sh='configure'>
     <branch module="rockdaboot/libpsl/releases/download/0.21.5/libpsl-0.21.5.tar.gz"
             version="0.21.5"
-
+            hash="sha256:1dcc9ceae8b128f3c0b3f654decd0e1e891afc6ff81098f227ef260449dae208"
             repo="github-tarball" />
   </autotools>
   <!---->
@@ -250,6 +250,7 @@
          cmakeargs="-DENABLE_LIB_ONLY=ON -DENABLE_DOC=OFF -DWITH_LIBXML2=OFF -DWITH_JEMALLOC=OFF -DWITH_MRUBY=OFF -DWITH_NEVERBLEED=OFF -DWITH_LIBBPF=OFF">
     <branch module="nghttp2/nghttp2/releases/download/v1.62.1/nghttp2-1.62.1.tar.xz"
             version="1.62.1"
+            hash="sha256:2345d4dc136fda28ce243e0bb21f2e7e8ef6293d62c799abbf6f633a6887af72"
             repo="github-tarball" />
     <dependencies>
       <dep package="openssl" />
@@ -277,7 +278,7 @@
              autogenargs="--enable-libwebpmux --enable-libwebpdecoder">
     <branch module="webp/libwebp-1.4.0.tar.gz"
             version="1.4.0"
-
+            hash="sha256:61f873ec69e3be1b99535634340d5bde750b2e4447caa1db9f61be3fd49ab1e5"
             repo="webm" />
   </autotools>
   <!--
