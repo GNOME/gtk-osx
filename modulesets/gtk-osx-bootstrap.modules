@@ -2,11 +2,9 @@
 <!DOCTYPE moduleset SYSTEM "moduleset.dtd">
 <?xml-stylesheet type="text/xsl" href="moduleset.xsl"?>
 <moduleset>
-  <!--
-    Please format this file using https://github.com/htacg/tidy-html5
-
-        tidy -config ../tidy.conf -m gtk-osx-bootstrap.modules
-  -->
+  <!-- Please format this file using the following command:
+       tidy -config ../tidy.conf -m gtk-osx-bootstrap.modules; sed -i "" '/^ *$/d' gtk-osx-bootstrap.modules
+       You can get 'tidy' here: https://github.com/htacg/tidy-html5 -->
   <repository name="git.gnome.org"
               default="yes"
               href="https://gitlab.gnome.org/GNOME"
@@ -23,7 +21,6 @@
   <repository name="nasm"
               href="https://www.nasm.us/pub/nasm/releasebuilds/"
               type="tarball" />
-  <!---->
   <autotools id="libpng"
              autogen-sh="configure"
              autogenargs="--enable-shared">
@@ -35,25 +32,24 @@
       <dep package="zlib" />
     </dependencies>
   </autotools>
-  <!---->
   <autotools id="nasm"
              autogen-sh="configure">
     <branch module="2.16.03/nasm-2.16.03.tar.xz"
             version="2.16.03"
             hash="sha256:1412a1c760bbd05db026b6c0d1657affd6631cd0a63cddb6f73cc6d4aa616148"
-            repo="nasm">
-    </branch>
+            repo="nasm" />
   </autotools>
-  <!---->
-  <cmake id="libjpeg" cmakeargs="-DCMAKE_MACOSX_RPATH=true -DCMAKE_INSTALL_PREFIX:PATH=${JHBUILD_PREFIX} -DCMAKE_INSTALL_NAME_DIR=${JHBUILD_PREFIX}/lib -DCMAKE_INSTALL_LIBDIR:PATH=lib">
-    <branch module="libjpeg-turbo/libjpeg-turbo/releases/download/3.0.3/libjpeg-turbo-3.0.3.tar.gz" version="3.0.3"
+  <cmake id="libjpeg"
+         cmakeargs="-DCMAKE_MACOSX_RPATH=true -DCMAKE_INSTALL_PREFIX:PATH=${JHBUILD_PREFIX} -DCMAKE_INSTALL_NAME_DIR=${JHBUILD_PREFIX}/lib -DCMAKE_INSTALL_LIBDIR:PATH=lib">
+    <branch module="libjpeg-turbo/libjpeg-turbo/releases/download/3.0.3/libjpeg-turbo-3.0.3.tar.gz"
+            version="3.0.3"
             hash="sha256:343e789069fc7afbcdfe44dbba7dbbf45afa98a15150e079a38e60e44578865d"
-            repo="github-tarball" checkoutdir="libjpeg-turbo-3.0.3" />
+            checkoutdir="libjpeg-turbo-3.0.3"
+            repo="github-tarball" />
     <dependencies>
       <dep package="nasm" />
     </dependencies>
   </cmake>
-
   <autotools id="libtiff"
              autogen-sh="configure"
              autogenargs="--without-x">
@@ -68,20 +64,16 @@
       <dep package="libjpeg" />
     </dependencies>
   </autotools>
-  <!---->
   <meson id="gtk-doc"
          mesonargs="-Dyelp_manual=false -Dtests=false">
     <branch module="gtk-doc/1.33/gtk-doc-1.33.2.tar.xz"
             version="1.33.2"
             hash="sha256:cc1b709a20eb030a278a1f9842a362e00402b7f834ae1df4c1998a723152bf43" />
-    <dependencies>
-    </dependencies>
     <after>
       <dep package="python3" />
       <dep package="pygments" />
     </after>
   </meson>
-  <!---->
   <metamodule id="meta-gtk-osx-bootstrap">
     <dependencies>
       <dep package="libpng" />
@@ -90,5 +82,4 @@
       <dep package="gtk-doc" />
     </dependencies>
   </metamodule>
-  <!---->
 </moduleset>
