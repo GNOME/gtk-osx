@@ -127,6 +127,9 @@ def osx_ver():
     exp = re.compile(r'(\d+\.\d+)\.\d+')
     vernum = exp.match(vstring)
     _osx_version = float(vernum.group(1)) - 4.0
+    if _osx_version < 14.0:
+        print("Error: Mac OS X 10.14 or newer is required, exiting.")
+        raise SystemExit
     if _osx_version < 16:
         _target = '10.%d' % int(_osx_version)
     else:
@@ -327,20 +330,8 @@ def setup_sdk(target=_target, sdk_version=None, architectures=[_default_arch]):
         append_autogenargs("liboil", "--host=aarch64-apple-darwin")
         append_autogenargs("libffi", "--host=aarch64-apple-darwin")
 
-    # El Capitan needs bash to work around SIP. If you're using a
-    # common bootstrap directory (e.g. $HOME/.local) then override
-    # CONFIG_SHELL in .jhbuildrc-custom after calling setup_sdk().
-    config_shell = os.path.join(prefix, 'bin', 'bash')
-    if _osx_version < 11.0:
-        skip.append('bash')
-    elif os.path.exists(config_shell):
-        os.environ['CONFIG_SHELL'] = config_shell
-
     if not sdkdir:
         sdkdir = '/'
-    if os.path.exists(os.path.join(sdkdir, "usr", "include", "openssl")):
-        skip.append('openssl')  # openssl removed in El Capitan
-
     # gettext-fw rebuilds gettext with an in-tree libiconv to get
     # around the Apple-provided one not defining _libiconv_init for
     # x86_64
@@ -432,10 +423,6 @@ _gtk_osx_prompt_prefix = "JH"
 _gtk_osx_default_build = ""
 
 #print "Default Architecture %s\n" % _default_arch
-
-if _osx_version < 11.0:
-    print("Error: Mac OS X 10.11 or newer is required, exiting.")
-    raise SystemExit
 
 ###### Import Customizations ######
 
