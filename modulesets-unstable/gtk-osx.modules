@@ -93,7 +93,7 @@
        then build harfbuzz without cairo because cairo requires
        harfbuzz. -->
   <cmake id="freetype-no-harfbuzz"
-         cmakeargs="-DCMAKE_DISABLE_FIND_PACKAGE_HarfBuzz=TRUE -DCMAKE_DISABLE_FIND_PACKAGE_BZip2=TRUE -D BUILD_SHARED_LIBS=true -D CMAKE_BUILD_TYPE=Release">
+         cmakeargs="-DFT_DISABLE_HARFBUZZ=ON -DBUILD_SHARED_LIBS=true -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_NAME_DIR=${JHBUILD_PREFIX}/lib">
     <branch module="freetype/freetype2"
             repo="nongnu" />
     <dependencies>
@@ -122,7 +122,7 @@
     </dependencies>
   </meson>
   <cmake id="freetype"
-         cmakeargs="-DCMAKE_DISABLE_FIND_PACKAGE_BZip2=TRUE -D BUILD_SHARED_LIBS=TRUE -D CMAKE_BUILD_TYPE=Release">
+         cmakeargs="-DFT_REQUIRE_HARFBUZZ=ON -DBUILD_SHARED_LIBS=true -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_NAME_DIR=${JHBUILD_PREFIX}/lib">
     <branch module="freetype/freetype2"
             repo="nongnu" />
     <dependencies>

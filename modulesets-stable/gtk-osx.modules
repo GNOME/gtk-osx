@@ -102,9 +102,14 @@
   <!-- To build Freetype *with* harfbuzz requires harfbuzz to be built
        with freetype so we first have to build it *without* harfbuzz,
        then build harfbuzz without cairo because cairo requires
-       harfbuzz. -->
+       harfbuzz.
+
+       Freetype2 if left to itself will create an install name without the
+       path so none of the libraries that depend on it can link. Require
+       the install name to be an absolute path.
+  -->
   <cmake id="freetype-no-harfbuzz"
-         cmakeargs="-DCMAKE_DISABLE_FIND_PACKAGE_HarfBuzz=TRUE -DCMAKE_DISABLE_FIND_PACKAGE_BZip2=TRUE -D BUILD_SHARED_LIBS=true -D CMAKE_BUILD_TYPE=Release">
+         cmakeargs="-DFT_DISABLE_HARFBUZZ=ON -DBUILD_SHARED_LIBS=true -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_NAME_DIR=${JHBUILD_PREFIX}/lib">
     <branch module="freetype/freetype-2.13.2.tar.xz"
             version="2.13.2"
             hash="sha256:12991c4e55c506dd7f9b765933e62fd2be2e06d421505d7950a132e4f1bb484d"
@@ -136,7 +141,7 @@
     </dependencies>
   </meson>
   <cmake id="freetype"
-         cmakeargs="-DCMAKE_DISABLE_FIND_PACKAGE_BZip2=TRUE -D BUILD_SHARED_LIBS=true -D CMAKE_BUILD_TYPE=Release">
+         cmakeargs="-DFT_REQUIRE_HARFBUZZ=ON -DBUILD_SHARED_LIBS=true -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_NAME_DIR=${JHBUILD_PREFIX}/lib">
     <branch module="freetype/freetype-2.13.2.tar.xz"
             version="2.13.2"
             hash="sha256:12991c4e55c506dd7f9b765933e62fd2be2e06d421505d7950a132e4f1bb484d"
@@ -304,6 +309,7 @@
   </meson>
   <meson id="gtk-4"
          mesonargs="-Dx11-backend=false -Dmedia-gstreamer=disabled">
+
     <branch module="gtk/4.14/gtk-4.14.4.tar.xz"
             version="4.14.4"
             hash="sha256:443518b97e8348f9f6430ac435b1010f9a6c5207f4dc6a7cd5d24e3820cee633" />

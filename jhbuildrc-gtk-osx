@@ -410,17 +410,6 @@ autogenargs=''
 #
 cmakeargs = '-DCMAKE_SYSTEM_IGNORE_PREFIX_PATH="/usr/local;/opt/homebrew;/opt/local"'
 
-# Freetype2 if left to itself will create an install name without the
-# path so none of the libraries that depend on it can link. Require
-# the install name to be an absolute path.
-# XXX(2024-08-03 monson): Should we make -DCMAKE_INSTALL_NAME_DIR={prefix}/lib
-# into default cmakeargs? libjpeg needs it too.
-
-module_cmakeargs["freetype"] = cmakeargs + f' -DCMAKE_INSTALL_NAME_DIR={prefix}/lib'
-module_cmakeargs["freetype-no-harfbuzz"] = cmakeargs + f' -DCMAKE_INSTALL_NAME_DIR={prefix}/lib'
-module_cmakeargs["zlib"] = cmakeargs + f' -DCMAKE_INSTALL_NAME_DIR={prefix}/lib'
-module_cmakeargs["webkit2gtk3"] = cmakeargs + f' -DCMAKE_INSTALL_NAME_DIR={prefix}/lib'
-
 # Extra meson args. --wrapmode=nofallback prevents meson projects from
 # building dependencies on their own. We generally want failed
 # dependencies to error out so that we know to add them to the
