@@ -2,11 +2,9 @@
 <!DOCTYPE moduleset SYSTEM "moduleset.dtd">
 <?xml-stylesheet type="text/xsl" href="moduleset.xsl"?>
 <moduleset>
-  <!--
-    Please format this file using https://github.com/htacg/tidy-html5
-
-        tidy -config ../tidy.conf -m gtk-osx.modules
-  -->
+  <!-- Please format this file using the following command:
+       tidy -config ../tidy.conf -m gtk-osx.modules; sed -i "" '/^ *$/d' gtk-osx.modules
+       You can get 'tidy' here: https://github.com/htacg/tidy-html5 -->
   <repository name="git.gnome.org"
               default="yes"
               href="https://gitlab.gnome.org/GNOME"
@@ -23,45 +21,34 @@
   <repository name="hicolor"
               href="https://icon-theme.freedesktop.org/releases/"
               type="tarball" />
-  <repository name="sourceforge"
-              href="http://downloads.sourceforge.net/sourceforge/"
-              type="tarball" />
   <repository name="github-tarball"
               href="https://github.com/"
               type="tarball" />
   <repository name="system"
               type="system" />
-  <!--
-    This module set works a bit differently than for example the
-    GNOME ones do. It's split up in seperate pieces:
-
-      - gtk-osx-bootstrap: contains bootstrap-like modules that you
-        don't want to rebuild all the time.
-
-      - gtk-osx.modules: contains the core GTK+ stack. This does not
-        have a hard dependency on the bootstrap modules, in order to
-        make it easy to rebuild the whole core stack without redoing
-        the bootstrap parts. They have a soft, "after", depencency.
-
-      - gtk-osx-python.modules: Python bindings for Gtk.
-      - gtk-osx-gtkmm.modules: C++ wrappers for Gtk.
-      - gtk-osx-gstreamer.modules: Gstreamer Library and modules.
-      - gtk-osx-network.modules: The network/crypto stack and WebKit.
-      - gtk-osx-random.modules: "random stuff", has apps for testing GTK+.
-  -->
+  <!-- This module set works a bit differently than for example the
+       GNOME ones do. It's split up in seperate pieces:
+         - gtk-osx-bootstrap: contains bootstrap-like modules that you
+           don't want to rebuild all the time.
+         - gtk-osx.modules: contains the core GTK+ stack. This does not
+           have a hard dependency on the bootstrap modules, in order to
+           make it easy to rebuild the whole core stack without redoing
+           the bootstrap parts. They have a soft, "after", depencency.
+         - gtk-osx-python.modules: Python bindings for Gtk.
+         - gtk-osx-gtkmm.modules: C++ wrappers for Gtk.
+         - gtk-osx-gstreamer.modules: Gstreamer Library and modules.
+         - gtk-osx-network.modules: The network/crypto stack and WebKit.
+         - gtk-osx-random.modules: "random stuff", has apps for testing GTK+. -->
   <include href="gtk-osx-bootstrap.modules" />
   <include href="gtk-osx-gstreamer.modules" />
   <include href="gtk-osx-gtkmm.modules" />
   <include href="gtk-osx-network.modules" />
   <include href="gtk-osx-python.modules" />
   <include href="gtk-osx-random.modules" />
-  <!--
-    Dummy meson module to shut up a jhbuild warning.
-  -->
+  <!-- Dummy meson module to shut up a jhbuild warning. -->
   <systemmodule id="meson">
     <branch repo="system" />
   </systemmodule>
-  <!---->
   <metamodule id="meta-gtk-osx-gtk3">
     <dependencies>
       <dep package="gtk+-3.0" />
@@ -72,7 +59,6 @@
       <dep package="meta-gtk-osx-bootstrap" />
     </after>
   </metamodule>
-  <!---->
   <autotools id="libffi"
              autogen-sh="autoreconf"
              autogenargs="--disable-multi-os-directory --disable-docs">
@@ -80,17 +66,14 @@
             repo="github"
             tag="v3.4.4" />
   </autotools>
-  <!---->
   <autotools id="libpcre2"
              autogen-sh="configure"
              autogenargs="--enable-pcre2-16 --enable-pcre2-32 --enable-jit">
-
     <branch module="PCRE2Project/pcre2/releases/download/pcre2-10.42/pcre2-10.42.tar.bz2"
             version="10.43"
             hash="sha256:"
             repo="github-tarball" />
   </autotools>
-  <!---->
   <meson id="glib-no-introspection"
          mesonargs="-Dlibmount=disabled">
     <branch tag="glib-2-80" />
@@ -99,7 +82,6 @@
       <dep package="libpcre2" />
     </dependencies>
   </meson>
-  <!---->
   <meson id="glib"
          mesonargs="-Dlibmount=disabled">
     <branch tag="glib-2-80" />
@@ -107,15 +89,12 @@
       <dep package="gobject-introspection" />
     </dependencies>
   </meson>
-  <!--
-    To build Freetype *with* harfbuzz requires harfbuzz to be built
-    with freetype so we first have to build it *without* harfbuzz,
-    then build harfbuzz without cairo because cairo requires
-    harfbuzz.
-  -->
+  <!-- To build Freetype *with* harfbuzz requires harfbuzz to be built
+       with freetype so we first have to build it *without* harfbuzz,
+       then build harfbuzz without cairo because cairo requires
+       harfbuzz. -->
   <cmake id="freetype-no-harfbuzz"
          cmakeargs="-DCMAKE_DISABLE_FIND_PACKAGE_HarfBuzz=TRUE -DCMAKE_DISABLE_FIND_PACKAGE_BZip2=TRUE -D BUILD_SHARED_LIBS=true -D CMAKE_BUILD_TYPE=Release">
-
     <branch module="freetype/freetype2"
             repo="nongnu"
             revision="VER-2-13-2" />
@@ -123,22 +102,18 @@
       <dep package="zlib" />
     </dependencies>
   </cmake>
-  <!---->
   <autotools id="icu"
              autogen-sh="source/configure"
              autogenargs="--enable-rpath"
              makeargs='CFLAGS="$CFLAGS -DU_CHARSET_IS_UTF8=1 -DU_USING_ICU_NAMESPACE=0"'>
-
     <branch module="unicode-org/icu/releases/download/release-73-2/icu4c-73_2-src.tgz"
             version="73.2"
             hash="sha256:818a80712ed3caacd9b652305e01afc7fa167e6f2e94996da44b90c2ab604ce1"
             checkoutdir="icu"
             repo="github-tarball" />
   </autotools>
-  <!---->
   <meson id="harfbuzz-no-cairo"
          mesonargs="-Dcoretext=enabled -Dfreetype=enabled -Ddocs=disabled -Dbenchmark=disabled -Dintrospection=disabled -Dtests=disabled">
-
     <branch module="harfbuzz/harfbuzz"
             repo="github"
             tag="8.5.0" />
@@ -151,10 +126,8 @@
       <dep package="icu55" />
     </after>
   </meson>
-  <!---->
   <cmake id="freetype"
          cmakeargs="-DCMAKE_DISABLE_FIND_PACKAGE_BZip2=TRUE -D BUILD_SHARED_LIBS=true -D CMAKE_BUILD_TYPE=Release">
-
     <branch module="freetype/freetype2"
             repo="nongnu"
             revision="VER-2-13-2" />
@@ -163,9 +136,8 @@
       <dep package="zlib" />
     </dependencies>
   </cmake>
-  <!---->
   <meson id="fontconfig"
-             mesonargs="-Ddoc=disabled -Ddefault-fonts-dirs=/System/Library/Fonts -Dadditional-fonts-dirs=/Library/Fonts">
+         mesonargs="-Ddoc=disabled -Ddefault-fonts-dirs=/System/Library/Fonts -Dadditional-fonts-dirs=/Library/Fonts">
     <branch module="fontconfig/fontconfig"
             repo="freedesktop"
             tag="2.15.0" />
@@ -173,7 +145,6 @@
       <dep package="freetype" />
     </dependencies>
   </meson>
-  <!---->
   <meson id="pixman"
          mesonargs="-Dgtk=disabled -Dmmx=disabled -Da64-neon=disabled">
     <branch module="pixman/pixman"
@@ -183,11 +154,9 @@
       <dep package="meta-gtk-osx-bootstrap" />
     </after>
   </meson>
-  <!--
-    cairo doesn't really need fontconfig, but if Pango finds
-    freetype it insists that it has to have fontconfig too and that
-    they are both built into cairo.
-  -->
+  <!-- cairo doesn't really need fontconfig, but if Pango finds
+       freetype it insists that it has to have fontconfig too and that
+       they are both built into cairo. -->
   <meson id="cairo">
     <branch module="cairo/cairo"
             repo="freedesktop"
@@ -198,7 +167,6 @@
       <dep package="fontconfig" />
     </dependencies>
   </meson>
-  <!---->
   <meson id="gobject-introspection">
     <branch module="gobject-introspection"
             tag="1.78.1" />
@@ -207,20 +175,15 @@
       <dep package="cairo" />
     </dependencies>
     <after>
-      <!--
-        Mandatory if MAC_OS_X_MIN_REQURED != macOS Version.
-      -->
+      <!-- Mandatory if MAC_OS_X_MIN_REQURED != macOS Version. -->
       <dep package='python3' />
     </after>
   </meson>
-  <!--
-    This harfbuzz doesn't really need cairo, but if Pango is going
-    to use introspection it requires harfbuzz to have
-    introspection, and gobject-introspection needs cairo.
-  -->
+  <!-- This harfbuzz doesn't really need cairo, but if Pango is going
+       to use introspection it requires harfbuzz to have
+       introspection, and gobject-introspection needs cairo. -->
   <meson id="harfbuzz"
          mesonargs="-Dcoretext=enabled -Dfreetype=enabled -Ddocs=disabled -Dbenchmark=disabled">
-
     <branch module="harfbuzz/harfbuzz"
             repo="github"
             tag="8.5.0" />
@@ -230,19 +193,15 @@
       <dep package="fontconfig" />
     </dependencies>
   </meson>
-  <!---->
   <meson id="fribidi"
          mesonargs="-Ddocs=false">
     <branch module="fribidi/fribidi"
             repo="github"
             tag="v1.0.13" />
-    <!--
     <dependencies>
-      <dep package="c2man" />
+      <!--dep package="c2man" /-->
     </dependencies>
-    -->
   </meson>
-  <!---->
   <meson id="pango"
          mesonargs="-Dfontconfig=enabled">
     <branch tag="1.50.14" />
@@ -257,7 +216,6 @@
       <dep package="meta-gtk-osx-bootstrap" />
     </after>
   </meson>
-  <!---->
   <meson id="atk">
     <branch tag="gnome-3-38" />
     <after>
@@ -266,12 +224,9 @@
       <dep package="gobject-introspection" />
     </after>
   </meson>
-  <!---->
   <meson id="gdk-pixbuf"
          mesonargs="-Drelocatable=true -Dman=false">
-    <!--
-      gdk-pixbuf is releasing from master
-    -->
+    <!-- gdk-pixbuf is releasing from master -->
     <branch tag="2.42.10" />
     <dependencies>
       <dep package="pango" />
@@ -279,19 +234,16 @@
       <dep package="shared-mime-info" />
     </dependencies>
   </meson>
-  <!---->
   <autotools id="libepoxy">
     <branch module="anholt/libepoxy"
             repo="github"
             revision="1.5.10" />
   </autotools>
-  <!---->
   <autotools id="hicolor-icon-theme">
     <branch module="hicolor-icon-theme-0.17.tar.xz"
             version="0.17"
             repo="hicolor" />
   </autotools>
-  <!---->
   <meson id="gtk+-3.0"
          mesonargs="-Dx11_backend=false">
     <branch module="gtk"
@@ -310,7 +262,6 @@
       <dep package="meta-gtk-osx-bootstrap" />
     </after>
   </meson>
-  <!---->
   <meson id="graphene"
          mesonargs="-Dtests=false">
     <branch module="ebassi/graphene"
@@ -321,10 +272,8 @@
       <dep package="gobject-introspection" />
     </dependencies>
   </meson>
-  <!---->
   <meson id="gtk-4"
          mesonargs="-Dx11-backend=false -Dmedia-gstreamer=disabled">
-
     <branch module="gtk"
             checkoutdir="gtk-4.0"
             revision="gtk-4-14" />
@@ -334,30 +283,26 @@
       <dep package="atk" />
       <dep package="gdk-pixbuf" />
       <dep package="graphene" />
-        <dep package="libepoxy" />
+      <dep package="libepoxy" />
     </dependencies>
     <after>
       <dep package="meta-gtk-osx-bootstrap" />
     </after>
   </meson>
-  <!---->
   <autotools id="gtk-mac-integration"
              autogenargs="--disable-python">
-    <!--
-      gtk-mac-integration releases from master"
-    -->
+    <!-- gtk-mac-integration releases from master" -->
     <branch />
     <dependencies>
       <dep package="gtk+-3.0" />
     </dependencies>
   </autotools>
-  <!---->
   <autotools id="librsvg"
              autogenargs="--disable-Bsymbolic">
     <branch module="librsvg"
             branch="librsvg-2.58" />
     <dependencies>
-      <dep package="libxml2"/>
+      <dep package="libxml2" />
       <dep package="cairo" />
       <dep package="pango" />
       <dep package="harfbuzz" />
@@ -365,15 +310,12 @@
       <dep package="freetype" />
     </dependencies>
   </autotools>
-  <!---->
   <meson id="adwaita-icon-theme">
     <branch branch="gnome-46" />
     <dependencies>
       <dep package="librsvg" />
     </dependencies>
   </meson>
-  <!--
-    Null metamodule, provided so as not to break modules that use it.
-  -->
+  <!-- Null metamodule, provided so as not to break modules that use it. -->
   <metamodule id="meta-gtk-osx-freetype" />
 </moduleset>

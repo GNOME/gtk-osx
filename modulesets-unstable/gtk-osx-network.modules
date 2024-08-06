@@ -2,247 +2,269 @@
 <!DOCTYPE moduleset SYSTEM "moduleset.dtd">
 <?xml-stylesheet type="text/xsl" href="moduleset.xsl"?>
 <moduleset>
-  <repository name="git.gnome.org" type="git" default="yes"
-              href="https://gitlab.gnome.org/GNOME"/>
-  <repository name="lysator" type="git"
-              href="https://git.lysator.liu.se/"/>
-  <repository name="ftp.gnu.org" type="tarball"
-              href="https://ftp.gnu.org/gnu/"/>
-  <repository name="sourceforge" type="tarball"
-              href="http://downloads.sourceforge.net/sourceforge/"/>
-  <repository type='git' name='git.gnupg.org' href="https://dev.gnupg.org/source/" />  
-  <repository name='gnupg.org' type='tarball' href="https://gnupg.org/ftp/" />
-  <repository name="chromium" type="git"
-              href="https://chromium.googlesource.com/"/>
-  <repository name="webkit.org" type="tarball"
-              href="http://www.webkitgtk.org/releases/"/>
-  <repository name="webkit-git" type="git"
-              href="https://git.webkit.org"/>
-  <repository type="tarball" name="github-tarball" href="https://github.com/"/>
-  <repository type="git" name="github" href="https://github.com/"/>
-  <repository type="tarball" name="zlib" href="https://www.zlib.net/"/>
-
+  <!-- Please format this file using the following command:
+       tidy -config ../tidy.conf -m gtk-osx-network.modules; sed -i "" '/^ *$/d' gtk-osx-network.modules
+       You can get 'tidy' here: https://github.com/htacg/tidy-html5 -->
+  <repository name="git.gnome.org"
+              default="yes"
+              href="https://gitlab.gnome.org/GNOME"
+              type="git" />
+  <repository name="lysator"
+              href="https://git.lysator.liu.se/"
+              type="git" />
+  <repository name="ftp.gnu.org"
+              href="https://ftp.gnu.org/gnu/"
+              type="tarball" />
+  <repository name="git.gnupg.org"
+              href="https://dev.gnupg.org/source/"
+              type="git" />
+  <repository name="gnupg.org"
+              href="https://gnupg.org/ftp/"
+              type="tarball" />
+  <repository name="chromium"
+              href="https://chromium.googlesource.com/"
+              type="git" />
+  <repository name="webkit.org"
+              href="http://www.webkitgtk.org/releases/"
+              type="tarball" />
+  <repository name="github-tarball"
+              href="https://github.com/"
+              type="tarball" />
+  <repository name="github"
+              href="https://github.com/"
+              type="git" />
+  <repository name="zlib"
+              href="https://www.zlib.net/"
+              type="tarball" />
   <!-- Builds latest stable version of WebKitGTK for GTK 3.x -->
   <metamodule id="meta-gtk-osx-webkit-gtk3">
     <dependencies>
-      <dep package="meta-gtk-osx-gtk3"/>
-      <dep package="webkit2gtk3"/>
+      <dep package="meta-gtk-osx-gtk3" />
+      <dep package="webkit2gtk3" />
     </dependencies>
   </metamodule>
-
   <!-- of the many arguments such as prefix and libdir that jhbuild might pass
-  to configure, openssl only understands prefix, and only with =. -->
-  <autotools id="openssl" autogen-sh="Configure" autogenargs="shared "
+       to configure, openssl only understands prefix, and only with =. -->
+  <autotools id="openssl"
+             autogen-sh="Configure"
              autogen-template="%(srcdir)s/%(autogen-sh)s --prefix=%(prefix)s --openssldir=%(prefix)s/etc/ssl %(autogenargs)s"
-             makeinstallargs="install_sw" supports-non-srcdir-builds="no">
+             autogenargs="shared"
+             makeinstallargs="install_sw"
+             supports-non-srcdir-builds="no">
     <branch module="openssl/openssl/releases/download/openssl-3.3.1/openssl-3.3.1.tar.gz"
             version="3.3.1"
             hash="sha256:777cd596284c883375a2a7a11bf5d2786fc5413255efab20c50d6ffe6d020b7e"
-            repo="github-tarball"/>
+            repo="github-tarball" />
   </autotools>
-
-  <autotools id="libnettle" autogen-sh="autoreconf"
+  <autotools id="libnettle"
+             autogen-sh="autoreconf"
              autogenargs="--disable-documentation --disable-assembler">
-    <branch repo="lysator" module="nettle/nettle.git" />
+    <branch module="nettle/nettle.git"
+            repo="lysator" />
     <dependencies>
-      <dep package="gmp"/>
-      <dep package="openssl"/>
+      <dep package="gmp" />
+      <dep package="openssl" />
     </dependencies>
   </autotools>
-
-  <autotools id="libtasn1" autogen-sh="configure">
+  <autotools id="libtasn1"
+             autogen-sh="configure">
     <!-- Git repository is missing GnuLib files required to build libtasn1 -->
     <branch module="libtasn1/libtasn1-4.19.0.tar.gz"
             version="4.19.0"
             hash="sha256:1613f0ac1cf484d6ec0ce3b8c06d56263cc7242f1c23b30d82d23de345a63f7a"
-            repo="ftp.gnu.org">
-    </branch>
+            repo="ftp.gnu.org" />
   </autotools>
-
   <cmake id="zlib">
-    <branch repo="zlib" version="1.3.1"
-            module="zlib-1.3.1.tar.xz"
-            hash="sha256:38ef96b8dfe510d42707d9c781877914792541133e1870841463bfa73f883e32"/>
+    <branch module="zlib-1.3.1.tar.xz"
+            version="1.3.1"
+            hash="sha256:38ef96b8dfe510d42707d9c781877914792541133e1870841463bfa73f883e32"
+            repo="zlib" />
   </cmake>
-
-  <autotools id="p11-kit" autogen-sh="autoreconf"
+  <autotools id="p11-kit"
+             autogen-sh="autoreconf"
              autogenargs="--without-trust-paths">
-    <branch repo="github" module="p11-glue/p11-kit"/>
+    <branch module="p11-glue/p11-kit"
+            repo="github" />
     <dependencies>
-      <dep package="libffi"/>
-      <dep package="libtasn1"/>
+      <dep package="libffi" />
+      <dep package="libtasn1" />
     </dependencies>
   </autotools>
-
   <!-- Building from git does not work because they have checked in a bunch of
-  files (build-aux/, po/Makefile.in.in) that they're not supposed to.-->
-
-  <autotools id="gnutls" autogen-sh="autoreconf"
+       files (build-aux/, po/Makefile.in.in) that they're not supposed to.-->
+  <autotools id="gnutls"
+             autogen-sh="autoreconf"
              autogenargs="--disable-doc --with-included-unistring">
     <branch module="gcrypt/gnutls/v3.8/gnutls-3.8.5.tar.xz"
             version="3.8.5"
             hash="sha256:66269a2cfe0e1c2dabec87bdbbd8ab656f396edd9a40dd006978e003cfa52bfc"
-            repo="gnupg.org" >
+            repo="gnupg.org">
       <patch file="gnutls-pkg-config-pc.patch"
-             strip="1"/>
+             strip="1" />
       <patch file="gnutls-gnulib.patch"
-             strip="1"/>
+             strip="1" />
     </branch>
     <dependencies>
-      <dep package="libnettle"/>
+      <dep package="libnettle" />
       <dep package="libtasn1" />
-      <dep package="zlib"/>
-      <dep package="p11-kit"/>
-      <dep package="libgcrypt"/>
+      <dep package="zlib" />
+      <dep package="p11-kit" />
+      <dep package="libgcrypt" />
     </dependencies>
   </autotools>
-
-  <autotools id="libgpg-error" autogen-sh="autoreconf"
+  <autotools id="libgpg-error"
+             autogen-sh="autoreconf"
              autogenargs="--disable-doc">
-    <branch repo="git.gnupg.org" module="libgpg-error.git"/>
+    <branch module="libgpg-error.git"
+            repo="git.gnupg.org" />
   </autotools>
-
-  <autotools id="libgcrypt" autogen-sh="autoreconf"
+  <autotools id="libgcrypt"
+             autogen-sh="autoreconf"
              autogenargs="--disable-asm --disable-doc">
-    <branch repo="git.gnupg.org" module="libgcrypt.git"/>
+    <branch module="libgcrypt.git"
+            repo="git.gnupg.org" />
     <dependencies>
       <dep package="libgpg-error" />
     </dependencies>
   </autotools>
-
-  <meson id="libsecret" mesonargs="-Dvapi=disabled -Dgtk_doc=disabled">
+  <meson id="libsecret"
+         mesonargs="-Dvapi=disabled -Dgtk_doc=disabled">
     <branch module="libsecret" />
     <dependencies>
-      <dep package="glib"/>
-      <dep package="libgcrypt"/>
+      <dep package="glib" />
+      <dep package="libgcrypt" />
     </dependencies>
   </meson>
-
   <meson id="gcr">
     <branch module="gcr" />
     <dependencies>
-      <dep package="p11-kit"/>
-      <dep package="gpg"/>
-      <dep package="libsecret"/>
-      <dep package="glib"/>
+      <dep package="p11-kit" />
+      <dep package="gpg" />
+      <dep package="libsecret" />
+      <dep package="glib" />
     </dependencies>
   </meson>
-
   <autotools id="gnome-keyring"
              autogenargs="--disable-pam --without-root-certs">
-    <branch module="gnome-keyring"/>
+    <branch module="gnome-keyring" />
     <dependencies>
-      <dep package="libgcrypt"/>
-      <dep package="gcr"/>
+      <dep package="libgcrypt" />
+      <dep package="gcr" />
     </dependencies>
   </autotools>
-
   <meson id="gsettings-desktop-schema"
          mesonargs="-Ddocs=false -Dtests=false -Dpacrunner-duktape=false -Dvapi=false -Dcurl=false -Dintrospection=false">
     <branch />
   </meson>
-
   <meson id="libproxy"
          mesonargs="-Ddocs=false -Dtests=false -Dpacrunner-duktape=false -Dvapi=false -Dcurl=false -Dintrospection=false">
     <branch module="libproxy/libproxy"
-            repo="github"/>
+            repo="github" />
   </meson>
-
-  <meson id="glib-networking" mesonargs="-Dopenssl=enabled -Dlibproxy=disabled -Dgnome_proxy=disabled">
-    <branch/>
-    <dependencies>
-      <dep package="libproxy"/>
-      <dep package="gnutls"/>
-      <dep package="libproxy"/>
-    </dependencies>
-  </meson>
-
-  <autotools id="nghttp2" autogen-sh="autoreconf"
-             autogenargs="--enable-lib-only">
-    <branch repo="github" module="nghttp2/nghttp2"/>
-  </autotools>
-
-  <autotools id="libpsl" autogen-sh='autoreconf'>
-    <branch repo="github" module="rockdaboot/libpsl"/>
-  </autotools>
-
-  <meson id="libsoup" mesonargs="-Dvapi=disabled">
+  <meson id="glib-networking"
+         mesonargs="-Dopenssl=enabled -Dlibproxy=disabled -Dgnome_proxy=disabled">
     <branch />
     <dependencies>
-      <dep package="libpsl"/>
-      <dep package="python3"/>
-      <dep package="sqlite"/>
-      <dep package="glib"/>
-      <dep package="glib-networking"/>
-      <dep package="nghttp2"/>
+      <dep package="libproxy" />
+      <dep package="gnutls" />
+      <dep package="libproxy" />
     </dependencies>
   </meson>
-
-  <autotools id="libwebp" autogen-sh="autoreconf"
-             autogenargs="--enable-libwebpmux --enable-libwebpdecoder">
-    <branch repo="chromium" module="webm/libwebp"/>
+  <autotools id="nghttp2"
+             autogen-sh="autoreconf"
+             autogenargs="--enable-lib-only">
+    <branch module="nghttp2/nghttp2"
+            repo="github" />
   </autotools>
-
-
+  <autotools id="libpsl"
+             autogen-sh="autoreconf">
+    <branch module="rockdaboot/libpsl"
+            repo="github" />
+  </autotools>
+  <meson id="libsoup"
+         mesonargs="-Dvapi=disabled">
+    <branch />
+    <dependencies>
+      <dep package="libpsl" />
+      <dep package="python3" />
+      <dep package="sqlite" />
+      <dep package="glib" />
+      <dep package="glib-networking" />
+      <dep package="nghttp2" />
+    </dependencies>
+  </meson>
+  <autotools id="libwebp"
+             autogen-sh="autoreconf"
+             autogenargs="--enable-libwebpmux --enable-libwebpdecoder">
+    <branch module="webm/libwebp"
+            repo="chromium" />
+  </autotools>
   <!-- This is the stable release of WebKitGTK, for GTK 3.x. Use it if you need
-      the WebKit2 API.
-    ENABLE_MINIBROWSER: This is enabled because it's an easy test of whether the
-      library is working correctly: run "jhbuild run MiniBrowser".
-    USE_SYSTEMD: macOS doesn't have systemd.
-    ENABLE_VIDEO, ENABLE_WEB_AUDIO: Requires gstreamer. If you want video and
-      audio, fix this in your .jhbuildrc-custom. You may need some extra
-      patches, this is untested.
-    ENABLE_CREDENTIAL_STORAGE: Requires libsecret. No module for this.
-    ENABLE_GEOLOCATION: Requires geoclue. No module for this.
-    ENABLE_GRAPHICS_CONTEXT_GL: Known to not work with quartz.
-    USE_LIBNOTIFY: Requires libnotify. No module for this.
-    USE_LIBHYPHEN: Requires libhyphen. No module for this.
-    USE_LIBSECRET: Requires libsecret. No module for this.
-    ENABLE_TOUCH_EVENTS: Seems not to be needed.
-    USE_OPENJPEG: Requires openjpeg. No module for this.
-    USE_WOFF2: Requires Woff2. No module for this
-    USE_WPE_RENDERER: For embedded systems, not Macs.  -->
+       the WebKit2 API.
+       ENABLE_MINIBROWSER: This is enabled because it's an easy test of whether the
+         library is working correctly: run "jhbuild run MiniBrowser".
+       USE_SYSTEMD: macOS doesn't have systemd.
+       ENABLE_VIDEO, ENABLE_WEB_AUDIO: Requires gstreamer. If you want video and
+         audio, fix this in your .jhbuildrc-custom. You may need some extra
+         patches, this is untested.
+       ENABLE_CREDENTIAL_STORAGE: Requires libsecret. No module for this.
+       ENABLE_GEOLOCATION: Requires geoclue. No module for this.
+       ENABLE_GRAPHICS_CONTEXT_GL: Known to not work with quartz.
+       USE_LIBNOTIFY: Requires libnotify. No module for this.
+       USE_LIBHYPHEN: Requires libhyphen. No module for this.
+       USE_LIBSECRET: Requires libsecret. No module for this.
+       ENABLE_TOUCH_EVENTS: Seems not to be needed.
+       USE_OPENJPEG: Requires openjpeg. No module for this.
+       USE_WOFF2: Requires Woff2. No module for this
+       USE_WPE_RENDERER: For embedded systems, not Macs. -->
   <cmake id="webkit2gtk3"
-         cmakeargs='-DPORT=GTK -DENABLE_X11_TARGET=OFF -DENABLE_QUARTZ_TARGET=ON -DENABLE_MINIBROWSER=ON -DENABLE_INTROSPECTION=OFF  -DUSE_SYSTEMD=OFF -DENABLE_VIDEO=OFF -DENABLE_WEB_AUDIO=OFF -DENABLE_GEOLOCATION=OFF -DUSE_LIBNOTIFY=OFF -DUSE_LIBHYPHEN=OFF -DUSE_LIBSECRET=OFF -DENABLE_TOUCH_EVENTS=OFF  -DUSE_OPENJPEG=OFF -DUSE_WOFF2=OFF -DUSE_WPE_RENDERER=OFF -DENABLE_GRAPHICS_CONTEXT_GL=OFF -DENABLE_GAMEPAD=OFF -DUSE_APPLE_ICU=NO -DCMAKE_CXX_FLAGS="-stdlib=libc++" -DCMAKE_MACOSX_RPATH=OFF'>
-    <branch repo="webkit.org" module="webkitgtk-2.45.3.tar.xz" version="2.45.3"
-            hash="sha256:9b5fbfa6c9ddc92508ca9f32cc8aa2e68cf50fcfada8f2f45775d559570713b3">
-      <patch file="WebKit2Gtk3-2.32.0-cumulative.patch" strip="1"/>
-      <patch file="WebKit2Gtk3-2.30.1-Disable-AUDIT_TOKEN-for-Gtk-builds.patch" strip="1"/>
-      <patch file="WebKit2Gtk3-2.30.1-Fix-Socket-signal-defines-for-Darwin-and-maybe-BSD.patch" strip="1" />
-      <patch file="WebKit2Gtk3-2.32.0-color-components-correct-math-header.patch" strip="1" />
-      <patch file="webkit-2.32-bug-224093.patch" strip="1"/>
-      <patch file="WebKit2Gtk3-2.32.0-misc-fixes.patch" strip="1" />
+         cmakeargs='-DPORT=GTK -DENABLE_X11_TARGET=OFF -DENABLE_QUARTZ_TARGET=ON -DENABLE_MINIBROWSER=ON -DENABLE_INTROSPECTION=OFF -DUSE_SYSTEMD=OFF -DENABLE_VIDEO=OFF -DENABLE_WEB_AUDIO=OFF -DENABLE_GEOLOCATION=OFF -DUSE_LIBNOTIFY=OFF -DUSE_LIBHYPHEN=OFF -DUSE_LIBSECRET=OFF -DENABLE_TOUCH_EVENTS=OFF -DUSE_OPENJPEG=OFF -DUSE_WOFF2=OFF -DUSE_WPE_RENDERER=OFF -DENABLE_GRAPHICS_CONTEXT_GL=OFF -DENABLE_GAMEPAD=OFF -DUSE_APPLE_ICU=NO -DCMAKE_CXX_FLAGS="-stdlib=libc++" -DCMAKE_MACOSX_RPATH=OFF'>
+    <branch module="webkitgtk-2.45.3.tar.xz"
+            version="2.45.3"
+            hash="sha256:9b5fbfa6c9ddc92508ca9f32cc8aa2e68cf50fcfada8f2f45775d559570713b3"
+            repo="webkit.org">
+      <patch file="WebKit2Gtk3-2.32.0-cumulative.patch"
+             strip="1" />
+      <patch file="WebKit2Gtk3-2.30.1-Disable-AUDIT_TOKEN-for-Gtk-builds.patch"
+             strip="1" />
+      <patch file="WebKit2Gtk3-2.30.1-Fix-Socket-signal-defines-for-Darwin-and-maybe-BSD.patch"
+             strip="1" />
+      <patch file="WebKit2Gtk3-2.32.0-color-components-correct-math-header.patch"
+             strip="1" />
+      <patch file="webkit-2.32-bug-224093.patch"
+             strip="1" />
+      <patch file="WebKit2Gtk3-2.32.0-misc-fixes.patch"
+             strip="1" />
     </branch>
     <dependencies>
-      <dep package="libwebp"/>
-      <dep package="enchant"/>
-      <dep package="icu"/>
-      <dep package="libsoup"/>
-      <dep package="libgcrypt"/>
+      <dep package="libwebp" />
+      <dep package="enchant" />
+      <dep package="icu" />
+      <dep package="libsoup" />
+      <dep package="libgcrypt" />
     </dependencies>
     <after>
-      <dep package="meta-gtk-osx-gtk3"/>
-      <dep package="meta-gstreamer"/>
+      <dep package="meta-gtk-osx-gtk3" />
+      <dep package="meta-gstreamer" />
     </after>
   </cmake>
-
   <!-- For updating to a new version start here. It won't build. Apply
        the patches from the webkit2gtk3 module as a starting point and
-       then start playing whack-a-mole until it builds and works.
-  -->
+       then start playing whack-a-mole until it builds and works. -->
   <cmake id="webkit2gtk3-git"
-         cmakeargs='-DPORT=GTK -DENABLE_X11_TARGET=OFF -DENABLE_QUARTZ_TARGET=ON -DENABLE_MINIBROWSER=ON -DENABLE_INTROSPECTION=ON  -DUSE_SYSTEMD=OFF -DENABLE_VIDEO=OFF -DENABLE_WEB_AUDIO=OFF -DENABLE_GEOLOCATION=OFF -DUSE_LIBNOTIFY=OFF -DUSE_LIBHYPHEN=OFF -DUSE_LIBSECRET=OFF -DENABLE_TOUCH_EVENTS=OFF  -DUSE_OPENJPEG=OFF -DUSE_WOFF2=OFF -DUSE_WPE_RENDERER=OFF -DENABLE_GRAPHICS_CONTEXT_GL=OFF -DENABLE_GAMEPAD=OFF -DUSE_APPLE_ICU=NO -DCMAKE_CXX_FLAGS="-stdlib=libc++" -DCMAKE_MACOSX_RPATH=OFF  -DUSE_OPENGL_OR_ES=OFF -DUSE_GBM=OFF -DUSE_AVIF=OFF -DENABLE_JOURNALD_LOG=OFF -DENABLE_DOCUMENTATION=OFF -DUSE_LCMS=OFF -DENABLE_WEBGL=OFF -DENABLE_WEBGL2=OFF'>
-    <branch repo="github" module= "WebKit/WebKit.git" />
+         cmakeargs='-DPORT=GTK -DENABLE_X11_TARGET=OFF -DENABLE_QUARTZ_TARGET=ON -DENABLE_MINIBROWSER=ON -DENABLE_INTROSPECTION=ON -DUSE_SYSTEMD=OFF -DENABLE_VIDEO=OFF -DENABLE_WEB_AUDIO=OFF -DENABLE_GEOLOCATION=OFF -DUSE_LIBNOTIFY=OFF -DUSE_LIBHYPHEN=OFF -DUSE_LIBSECRET=OFF -DENABLE_TOUCH_EVENTS=OFF -DUSE_OPENJPEG=OFF -DUSE_WOFF2=OFF -DUSE_WPE_RENDERER=OFF -DENABLE_GRAPHICS_CONTEXT_GL=OFF -DENABLE_GAMEPAD=OFF -DUSE_APPLE_ICU=NO -DCMAKE_CXX_FLAGS="-stdlib=libc++" -DCMAKE_MACOSX_RPATH=OFF -DUSE_OPENGL_OR_ES=OFF -DUSE_GBM=OFF -DUSE_AVIF=OFF -DENABLE_JOURNALD_LOG=OFF -DENABLE_DOCUMENTATION=OFF -DUSE_LCMS=OFF -DENABLE_WEBGL=OFF -DENABLE_WEBGL2=OFF'>
+    <branch module="WebKit/WebKit.git"
+            repo="github" />
     <dependencies>
-      <dep package="libwebp"/>
-      <dep package="enchant"/>
-      <dep package="icu"/>
-      <dep package="libsoup"/>
-      <dep package="libgcrypt"/>
+      <dep package="libwebp" />
+      <dep package="enchant" />
+      <dep package="icu" />
+      <dep package="libsoup" />
+      <dep package="libgcrypt" />
     </dependencies>
     <after>
-      <dep package="meta-gtk-osx-gtk3"/>
-      <dep package="meta-gstreamer-1.0"/>
+      <dep package="meta-gtk-osx-gtk3" />
+      <dep package="meta-gstreamer-1.0" />
     </after>
   </cmake>
 </moduleset>

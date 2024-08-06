@@ -2,11 +2,9 @@
 <!DOCTYPE moduleset SYSTEM "moduleset.dtd">
 <?xml-stylesheet type="text/xsl" href="moduleset.xsl"?>
 <moduleset>
-  <!--
-    Please format this file using https://github.com/htacg/tidy-html5
-
-        tidy -config ../tidy.conf -m gtk-osx-gtkmm.modules
-  -->
+  <!-- Please format this file using the following command:
+       tidy -config ../tidy.conf -m gtk-osx-gtkmm.modules; sed -i "" '/^ *$/d' gtk-osx-gtkmm.modules
+       You can get 'tidy' here: https://github.com/htacg/tidy-html5 -->
   <repository name="git.gnome.org"
               default="yes"
               href="https://gitlab.gnome.org/GNOME"
@@ -17,19 +15,15 @@
   <repository name="github"
               href="https://github.com"
               type="git" />
-  <!--
-    mm-common is C++ glue code needed only to build from git.
-  -->
+  <!-- mm-common is C++ glue code needed only to build from git. -->
   <meson id="mm-common">
     <branch module="mm-common"
             tag="master" />
   </meson>
-  <!--
-    Libsigc++ was rewritten to use C++17 variadic templates for version 3, and
-    adopting that has created substantial API breaks for the whole "mm" stack.
-    gtkmm3 uses the older versions, gtkmm4 the new ones.
-    Note that C++17 is supported only on macOS-10.13 and later.
-  -->
+  <!-- Libsigc++ was rewritten to use C++17 variadic templates for version 3, and
+       adopting that has created substantial API breaks for the whole "mm" stack.
+       gtkmm3 uses the older versions, gtkmm4 the new ones.
+       Note that C++17 is supported only on macOS-10.13 and later. -->
   <meson id="cairomm3">
     <branch module="cairomm"
             repo="cairographics"
@@ -39,7 +33,6 @@
       <dep package="libsigc++2" />
     </dependencies>
   </meson>
-  <!---->
   <meson id="cairomm">
     <branch module="cairomm"
             repo="cairographics"
@@ -49,7 +42,6 @@
       <dep package="libsigc++3" />
     </dependencies>
   </meson>
-  <!---->
   <meson id="glibmm3">
     <branch module="glibmm"
             revision="glibmm-2-66" />
@@ -58,7 +50,6 @@
       <dep package="libsigc++2" />
     </dependencies>
   </meson>
-  <!---->
   <meson id="glibmm">
     <branch revision="glibmm-2-80" />
     <dependencies>
@@ -68,7 +59,6 @@
       <dep package="glib" />
     </after>
   </meson>
-  <!---->
   <meson id="pangomm3">
     <branch module="pangomm"
             revision="pangomm-2-42" />
@@ -78,7 +68,6 @@
       <dep package="pango" />
     </dependencies>
   </meson>
-  <!---->
   <meson id="pangomm">
     <branch revision="pangomm-2-52" />
     <dependencies>
@@ -90,7 +79,6 @@
       <dep package="pango" />
     </after>
   </meson>
-  <!---->
   <meson id="atkmm3">
     <branch module="atkmm"
             revision="atkmm-2-28" />
@@ -101,7 +89,6 @@
       <dep package="atk" />
     </dependencies>
   </meson>
-  <!---->
   <meson id="atkmm">
     <branch module="atkmm"
             revision="master" />
@@ -112,7 +99,6 @@
       <dep package="atk" />
     </dependencies>
   </meson>
-  <!---->
   <meson id="libsigc++2"
          autogen-args="--disable-documentation">
     <branch module="libsigcplusplus/libsigcplusplus"
@@ -122,7 +108,6 @@
       <dep package="mm-common" />
     </dependencies>
   </meson>
-  <!---->
   <meson id="libsigc++3"
          autogen-args="--disable-documentation">
     <branch module="libsigcplusplus/libsigcplusplus"
@@ -130,12 +115,9 @@
             revision="master" />
     <dependencies>
       <dep package="mm-common" />
-      <!--
-      <dep package="doxygen" />
-      -->
+      <!--dep package="doxygen" /-->
     </dependencies>
   </meson>
-  <!---->
   <meson id="gtkmm3">
     <branch module="gtkmm"
             revision="gtkmm-3-24" />
@@ -147,7 +129,6 @@
       <dep package="gtk+-3.0" />
     </dependencies>
   </meson>
-  <!---->
   <meson id="gtkmm4">
     <branch module="gtkmm"
             revision="4.14.0" />
@@ -159,5 +140,4 @@
       <dep package="gtk-4" />
     </dependencies>
   </meson>
-  <!---->
 </moduleset>

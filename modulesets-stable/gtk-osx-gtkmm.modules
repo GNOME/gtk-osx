@@ -2,33 +2,25 @@
 <!DOCTYPE moduleset SYSTEM "moduleset.dtd">
 <?xml-stylesheet type="text/xsl" href="moduleset.xsl"?>
 <moduleset>
-  <!--
-    Please format this file using https://github.com/htacg/tidy-html5
-
-        tidy -config ../tidy.conf -m gtk-osx-gtkmm.modules
-  -->
+  <!-- Please format this file using the following command:
+       tidy -config ../tidy.conf -m gtk-osx-gtkmm.modules; sed -i "" '/^ *$/d' gtk-osx-gtkmm.modules
+       You can get 'tidy' here: https://github.com/htacg/tidy-html5 -->
   <repository name="download.gnome.org"
               default="yes"
               href="https://download.gnome.org/sources/"
               type="tarball" />
-  <repository name="doxygen"
-              href="http://ftp.stack.nl/pub/users/dimitri/"
-              type="tarball" />
   <repository name="cairographics"
               href="http://cairographics.org/releases/"
               type="tarball" />
-  <!---->
   <meson id="mm-common">
     <branch module="mm-common/1.0/mm-common-1.0.6.tar.xz"
-            version="1.0.5"
+            version="1.0.6"
             hash="sha256:b55c46037dbcdabc5cee3b389ea11cc3910adb68ebe883e9477847aa660862e7" />
   </meson>
-  <!--
-    Libsigc++ was rewritten to use C++17 variadic templates for version 3, and
-    adopting that has created substantial API breaks for the whole "mm" stack.
-    gtkmm3 uses the older versions, gtkmm4 the new ones.
-    Note that C++17 is supported only on macOS-10.13 and later.
-  -->
+  <!-- Libsigc++ was rewritten to use C++17 variadic templates for version 3, and
+       adopting that has created substantial API breaks for the whole "mm" stack.
+       gtkmm3 uses the older versions, gtkmm4 the new ones.
+       Note that C++17 is supported only on macOS-10.13 and later. -->
   <meson id="cairomm3">
     <branch module="cairomm-1.14.5.tar.xz"
             version="1.14.5"
@@ -38,7 +30,6 @@
       <dep package="cairo" />
     </dependencies>
   </meson>
-  <!---->
   <meson id="cairomm">
     <branch module="cairomm-1.18.0.tar.xz"
             version="1.18.0"
@@ -48,7 +39,6 @@
       <dep package="cairo" />
     </dependencies>
   </meson>
-  <!---->
   <meson id="glibmm3">
     <branch module="glibmm/2.66/glibmm-2.66.7.tar.xz"
             version="2.66.7"
@@ -59,7 +49,6 @@
       <dep package="mm-common" />
     </dependencies>
   </meson>
-  <!---->
   <meson id="glibmm">
     <branch module="glibmm/2.80/glibmm-2.80.0.tar.xz"
             version="2.80.0"
@@ -71,12 +60,12 @@
       <dep package="mm-common" />
     </dependencies>
   </meson>
-  <!---->
   <meson id="pangomm3">
     <branch module="pangomm/2.42/pangomm-2.42.2.tar.xz"
             version="2.42.2"
-            hash="sha256:1b24c92624ae1275ccb57758175d35f7c39ad3342d8c0b4ba60f0d9849d2d08a" >
-      <patch file="pangomm3-missing-include.patch" strip="1"/>
+            hash="sha256:1b24c92624ae1275ccb57758175d35f7c39ad3342d8c0b4ba60f0d9849d2d08a">
+      <patch file="pangomm3-missing-include.patch"
+             strip="1" />
     </branch>
     <dependencies>
       <dep package="glibmm3" />
@@ -84,7 +73,6 @@
       <dep package="pango" />
     </dependencies>
   </meson>
-  <!---->
   <meson id="pangomm">
     <branch module="pangomm/2.52/pangomm-2.52.0.tar.xz"
             version="2.52.0"
@@ -95,7 +83,6 @@
       <dep package="pango" />
     </dependencies>
   </meson>
-  <!---->
   <meson id="atkmm3">
     <branch module="atkmm/2.28/atkmm-2.28.4.tar.xz"
             version="2.28.4"
@@ -107,7 +94,6 @@
       <dep package="atk" />
     </dependencies>
   </meson>
-  <!---->
   <meson id="atkmm">
     <branch module="atkmm/2.36/atkmm-2.36.3.tar.xz"
             version="2.36.3"
@@ -119,24 +105,20 @@
       <dep package="atk" />
     </dependencies>
   </meson>
-  <!---->
   <meson id="libsigc++2">
     <branch module="libsigc++/2.12/libsigc++-2.12.1.tar.xz"
             version="2.12.1"
             hash="sha256:a9dbee323351d109b7aee074a9cb89ca3e7bcf8ad8edef1851f4cf359bd50843" />
   </meson>
-  <!---->
   <meson id="libsigc++3">
     <branch module="libsigc++/3.6/libsigc++-3.6.0.tar.xz"
             version="3.6.0"
             hash="sha256:c3d23b37dfd6e39f2e09f091b77b1541fbfa17c4f0b6bf5c89baef7229080e17" />
   </meson>
-  <!---->
   <meson id="gtkmm3">
     <branch module="gtkmm/3.24/gtkmm-3.24.9.tar.xz"
             version="3.24.9"
             hash="sha256:30d5bfe404571ce566a8e938c8bac17576420eb508f1e257837da63f14ad44ce">
-
       <patch file="gtkmm-3-bad-const-property-background.patch"
              strip="1" />
     </branch>
@@ -148,7 +130,6 @@
       <dep package="gtk+-3.0" />
     </dependencies>
   </meson>
-  <!---->
   <meson id="gtkmm4">
     <branch module="gtkmm/4.14/gtkmm-4.14.0.tar.xz"
             version="4.14.0"
@@ -161,5 +142,4 @@
       <dep package="gtk-4" />
     </dependencies>
   </meson>
-  <!---->
 </moduleset>

@@ -2,137 +2,136 @@
 <!DOCTYPE moduleset SYSTEM "moduleset.dtd">
 <?xml-stylesheet type="text/xsl" href="moduleset.xsl"?>
 <moduleset>
-  <repository type="git" name="git.gnome.org" default="yes" 
-              href="https://gitlab.gnome.org/GNOME"/>
-  <repository type="git" name="cairographics" 
-              href="https://gitlab.freedesktop.org/cairo/"/>
-  <repository type="git" name="github"
-              href="https://github.com"/>
-
-<!-- mm-common is C++ glue code needed only to build from git. -->
+  <!-- Please format this file using the following command:
+       tidy -config ../tidy.conf -m gtk-osx-gtkmm.modules; sed -i "" '/^ *$/d' gtk-osx-gtkmm.modules
+       You can get 'tidy' here: https://github.com/htacg/tidy-html5 -->
+  <repository name="git.gnome.org"
+              default="yes"
+              href="https://gitlab.gnome.org/GNOME"
+              type="git" />
+  <repository name="cairographics"
+              href="https://gitlab.freedesktop.org/cairo/"
+              type="git" />
+  <repository name="github"
+              href="https://github.com"
+              type="git" />
+  <!-- mm-common is C++ glue code needed only to build from git. -->
   <meson id="mm-common">
-    <branch module="mm-common"/>
+    <branch module="mm-common" />
   </meson>
-
-  <!--
-      Libsigc++ was rewritten to use C++17 variadic templates for
-      version 3, and adopting that has created substantial API breaks
-      for the whole "mm" stack. gtkmm3 uses the older versions, gtkmm4
-      the new ones.  Note that C++17 is supported only on macOS-10.13
-      and later.
-  -->
-  <meson id="cairomm3" >
-    <branch module="cairomm"  revision="cairomm-1-14"
+  <!-- Libsigc++ was rewritten to use C++17 variadic templates for
+       version 3, and adopting that has created substantial API breaks
+       for the whole "mm" stack. gtkmm3 uses the older versions, gtkmm4
+       the new ones.  Note that C++17 is supported only on macOS-10.13
+       and later. -->
+  <meson id="cairomm3">
+    <branch module="cairomm"
+            repo="cairographics"
+            revision="cairomm-1-14" />
+    <dependencies>
+      <dep package="cairo" />
+    </dependencies>
+  </meson>
+  <meson id="cairomm">
+    <branch module="cairomm"
             repo="cairographics" />
     <dependencies>
-      <dep package="cairo"/>
+      <dep package="cairo" />
     </dependencies>
   </meson>
-
-  <meson id="cairomm" >
-    <branch module="cairomm"  
-            repo="cairographics" />
+  <meson id="glibmm3">
+    <branch module="glibmm"
+            revision="glibmm-2-60" />
     <dependencies>
-      <dep package="cairo"/>
+      <dep package="glib" />
+      <dep package="libsigc++2" />
     </dependencies>
   </meson>
-
-  <meson id="glibmm3" >
-    <branch module="glibmm" revision="glibmm-2-60"/>
-    <dependencies>
-      <dep package="glib"/>
-      <dep package="libsigc++2"/>
-    </dependencies>
-  </meson>
-
-  <meson id="glibmm" >
+  <meson id="glibmm">
     <branch />
     <dependencies>
-      <dep package="glib"/>
-      <dep package="libsigc++3"/>
+      <dep package="glib" />
+      <dep package="libsigc++3" />
     </dependencies>
   </meson>
-
-  <meson id="pangomm3" >
-     <branch module="pangomm" revision="pangomm-2-42"/>
+  <meson id="pangomm3">
+    <branch module="pangomm"
+            revision="pangomm-2-42" />
     <dependencies>
-      <dep package="glibmm3"/>
-      <dep package="cairomm3"/>
-      <dep package="pango"/>
+      <dep package="glibmm3" />
+      <dep package="cairomm3" />
+      <dep package="pango" />
     </dependencies>
   </meson>
-
-  <meson id="pangomm" >
-     <branch />
+  <meson id="pangomm">
+    <branch />
     <dependencies>
-      <dep package="glibmm"/>
-      <dep package="cairomm"/>
-      <dep package="pango"/>
+      <dep package="glibmm" />
+      <dep package="cairomm" />
+      <dep package="pango" />
     </dependencies>
   </meson>
-
   <meson id="atkmm3">
-    <branch module="atkmm" revision="atkmm-2-24"/>
+    <branch module="atkmm"
+            revision="atkmm-2-24" />
     <dependencies>
-      <dep package="glibmm3"/>
-      <dep package="cairomm3"/>
-      <dep package="pangomm3"/>
-      <dep package="atk"/>
+      <dep package="glibmm3" />
+      <dep package="cairomm3" />
+      <dep package="pangomm3" />
+      <dep package="atk" />
     </dependencies>
   </meson>
-
   <meson id="atkmm">
-    <branch/>
+    <branch />
     <dependencies>
-      <dep package="glibmm"/>
-      <dep package="cairomm"/>
-      <dep package="pangomm"/>
-      <dep package="atk"/>
+      <dep package="glibmm" />
+      <dep package="cairomm" />
+      <dep package="pangomm" />
+      <dep package="atk" />
     </dependencies>
   </meson>
-
-<!-- libsigc++ depends on doxygen for documentation, but doxygen
-     doesn't build correctly under gtk-osx. It builds fine on its own,
-     of course, and there are OSX binaries available on their
-     website. If you want the docs, install it separately and renable
-     documentation in your jhbuildrc-custom. -->
-  <meson id="libsigc++2" autogen-args="--disable-documentation">
-    <branch repo="github" module="libsigcplusplus/libsigcplusplus"
-            revision="libsigc++-2-10"/>
+  <!-- libsigc++ depends on doxygen for documentation, but doxygen
+       doesn't build correctly under gtk-osx. It builds fine on its own,
+       of course, and there are OSX binaries available on their
+       website. If you want the docs, install it separately and renable
+       documentation in your jhbuildrc-custom. -->
+  <meson id="libsigc++2"
+         autogen-args="--disable-documentation">
+    <branch module="libsigcplusplus/libsigcplusplus"
+            repo="github"
+            revision="libsigc++-2-10" />
     <dependencies>
-      <dep package="mm-common"/>
+      <dep package="mm-common" />
       <!-- dep package="doxygen"/ -->
     </dependencies>
   </meson>
-
   <meson id="libsigc++3">
-     <branch repo="github" module="libsigcplusplus/libsigcplusplus"/>
+    <branch module="libsigcplusplus/libsigcplusplus"
+            repo="github" />
     <dependencies>
-      <dep package="mm-common"/>
+      <dep package="mm-common" />
       <!-- dep package="doxygen"/ -->
     </dependencies>
   </meson>
-
   <meson id="gtkmm3">
-    <branch module="gtkmm" revision="gtkmm-3-24"/>
+    <branch module="gtkmm"
+            revision="gtkmm-3-24" />
     <dependencies>
-      <dep package="glibmm3"/>
-      <dep package="cairomm3"/>
-      <dep package="pangomm3"/>
-      <dep package="atkmm3"/>
-      <dep package="gtk+-3.0"/>
+      <dep package="glibmm3" />
+      <dep package="cairomm3" />
+      <dep package="pangomm3" />
+      <dep package="atkmm3" />
+      <dep package="gtk+-3.0" />
     </dependencies>
   </meson>
-
-  <meson id="gtkmm4" >
-    <branch module="gtkmm"/>
+  <meson id="gtkmm4">
+    <branch module="gtkmm" />
     <dependencies>
-      <dep package="glibmm"/>
-      <dep package="cairomm"/>
-      <dep package="pangomm"/>
-      <dep package="atkmm"/>
-      <dep package="gtk+-4.0"/>
+      <dep package="glibmm" />
+      <dep package="cairomm" />
+      <dep package="pangomm" />
+      <dep package="atkmm" />
+      <dep package="gtk+-4.0" />
     </dependencies>
   </meson>
-
 </moduleset>
