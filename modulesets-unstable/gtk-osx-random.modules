@@ -39,6 +39,7 @@
   <autotools id="graphviz"
              autogen-sh="autoreconf"
              autogenargs="--disable-sharp --disable-guile --disable-java --disable-lua --disable-ocaml --disable-perl --disable-php --disable-r --disable-ruby --disable-tcl --with-pangocairo">
+
     <branch module="11.0.0/graphviz-11.0.0.tar.xz"
             version="11.0.0"
             hash="sha256:ae9a344748876f5c16577061e9c2a652151c90eb7572ee17c92b148c65577222"
@@ -229,6 +230,7 @@
   <autotools id="libxml2"
              autogen-sh="autoreconf"
              autogenargs='--libdir="$JHBUILD_LIBDIR" --with-python'>
+             
     <branch module="libxml2/2.11/libxml2-2.11.5.tar.xz"
             version="2.11.5"
             hash="sha256:3727b078c360ec69fa869de14bd6f75d7ee8d36987b071e6928d4720a28df3a6"

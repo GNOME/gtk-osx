@@ -67,6 +67,7 @@
   <autotools id="libffi"
              autogen-sh="configure"
              autogenargs="--disable-multi-os-directory --disable-docs">
+             
     <branch module="libffi/libffi/releases/download/v3.4.6/libffi-3.4.6.tar.gz"
             version="3.4.6"
             hash="sha256:b0dea9df23c863a7a50e825440f3ebffabd65df1497108e5d437747843895a4e"
@@ -75,6 +76,7 @@
   <autotools id="libpcre2"
              autogen-sh="configure"
              autogenargs="--enable-pcre2-16 --enable-pcre2-32 --enable-jit">
+             
     <branch module="PCRE2Project/pcre2/releases/download/pcre2-10.43/pcre2-10.43.tar.bz2"
             version="10.43"
             hash="sha256:e2a53984ff0b07dfdb5ae4486bbb9b21cca8e7df2434096cc9bf1b728c350bcb"
@@ -110,6 +112,7 @@
   -->
   <cmake id="freetype-no-harfbuzz"
          cmakeargs="-DFT_DISABLE_HARFBUZZ=ON -DBUILD_SHARED_LIBS=true -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_NAME_DIR=${JHBUILD_PREFIX}/lib">
+
     <branch module="freetype/freetype-2.13.2.tar.xz"
             version="2.13.2"
             hash="sha256:12991c4e55c506dd7f9b765933e62fd2be2e06d421505d7950a132e4f1bb484d"
@@ -122,6 +125,7 @@
              autogen-sh="source/configure"
              autogenargs="--enable-rpath"
              makeargs='CFLAGS="$CFLAGS -DU_CHARSET_IS_UTF8=1 -DU_USING_ICU_NAMESPACE=0"'>
+
     <branch module="unicode-org/icu/releases/download/release-75-1/icu4c-75_1-src.tgz"
             version="75.1"
             hash="sha256:cb968df3e4d2e87e8b11c49a5d01c787bd13b9545280fc6642f826527618caef"
@@ -130,6 +134,7 @@
   </autotools>
   <meson id="harfbuzz-no-cairo"
          mesonargs="-Dcoretext=enabled -Dfreetype=enabled -Ddocs=disabled -Dbenchmark=disabled -Dintrospection=disabled -Dtests=disabled">
+
     <branch module="harfbuzz/harfbuzz/releases/download/8.5.0/harfbuzz-8.5.0.tar.xz"
             version="8.5.0"
             hash="sha256:77e4f7f98f3d86bf8788b53e6832fb96279956e1c3961988ea3d4b7ca41ddc27"
@@ -142,6 +147,7 @@
   </meson>
   <cmake id="freetype"
          cmakeargs="-DFT_REQUIRE_HARFBUZZ=ON -DBUILD_SHARED_LIBS=true -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_NAME_DIR=${JHBUILD_PREFIX}/lib">
+
     <branch module="freetype/freetype-2.13.2.tar.xz"
             version="2.13.2"
             hash="sha256:12991c4e55c506dd7f9b765933e62fd2be2e06d421505d7950a132e4f1bb484d"
@@ -153,6 +159,7 @@
   </cmake>
   <meson id="fontconfig"
          mesonargs="-Ddoc=disabled -Ddefault-fonts-dirs=/System/Library/Fonts -Dadditional-fonts-dirs=/Library/Fonts">
+
     <branch module="fontconfig-2.15.0.tar.xz"
             version="2.15.0"
             hash="sha256:63a0658d0e06e0fa886106452b58ef04f21f58202ea02a94c39de0d3335d7c0e"
@@ -163,6 +170,7 @@
   </meson>
   <meson id="pixman"
          mesonargs="-Dgtk=disabled -Dmmx=disabled -Da64-neon=disabled">
+         
     <branch module="releases/pixman-0.43.4.tar.gz"
             version="0.43.4"
             hash="sha512:08802916648bab51fd804fc3fd823ac2c6e3d622578a534052b657491c38165696d5929d03639c52c4f29d8850d676a909f0299d1a4c76a07df18a34a896e43d"
@@ -202,6 +210,7 @@
   </meson>
   <meson id="harfbuzz"
          mesonargs="-Dcoretext=enabled -Dfreetype=enabled -Ddocs=disabled -Dbenchmark=disabled -Dintrospection=enabled -Dtests=disabled">
+
     <branch module="harfbuzz/harfbuzz/releases/download/8.5.0/harfbuzz-8.5.0.tar.xz"
             version="8.5.0"
             hash="sha256:77e4f7f98f3d86bf8788b53e6832fb96279956e1c3961988ea3d4b7ca41ddc27"
@@ -227,6 +236,7 @@
     <branch module="pango/1.52/pango-1.52.2.tar.xz"
             version="1.52.2"
             hash="sha256:d0076afe01082814b853deec99f9349ece5f2ce83908b8e58ff736b41f78a96b">
+
       <patch file="pango-ct-font-fallback.patch"
              strip="1" />
     </branch>
@@ -256,6 +266,7 @@
     <branch module="gdk-pixbuf/2.42/gdk-pixbuf-2.42.12.tar.xz"
             version="2.42.12"
             hash="sha256:b9505b3445b9a7e48ced34760c3bcb73e966df3ac94c95a148cb669ab748e3c7">
+
       <patch file="gdk-pixbuf-loader-name.patch"
              strip="1" />
     </branch>
@@ -309,7 +320,7 @@
   </meson>
   <meson id="gtk-4"
          mesonargs="-Dx11-backend=false -Dmedia-gstreamer=disabled">
-
+         
     <branch module="gtk/4.14/gtk-4.14.4.tar.xz"
             version="4.14.4"
             hash="sha256:443518b97e8348f9f6430ac435b1010f9a6c5207f4dc6a7cd5d24e3820cee633" />
@@ -327,6 +338,7 @@
     <branch module="gtk-mac-integration/3.0/gtk-mac-integration-3.0.1.tar.xz"
             version="3.0.1"
             hash="sha256:f19e35bc4534963127bbe629b9b3ccb9677ef012fc7f8e97fd5e890873ceb22d">
+
       <patch file="gtk-mac-integration-work-around-svg-locale-bug.patch"
              strip="1" />
     </branch>

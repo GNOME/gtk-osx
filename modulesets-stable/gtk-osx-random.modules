@@ -36,6 +36,7 @@
   <autotools id="graphviz"
              autogen-sh="autoreconf"
              autogenargs="--disable-sharp --disable-guile --disable-java --disable-lua --disable-ocaml --disable-perl --disable-php --disable-r --disable-ruby --disable-tcl --with-pangocairo">
+
     <branch module="11.0.0/graphviz-11.0.0.tar.xz"
             version="11.0.0"
             hash="sha256:ae9a344748876f5c16577061e9c2a652151c90eb7572ee17c92b148c65577222"
@@ -89,6 +90,7 @@
     <branch module="devhelp/43/devhelp-43.0.tar.xz"
             version="43.0"
             hash="sha256:63ceeefd05392e02044881ef1ecd724293553da5735b7efc082b2d13fe85dd04">
+
       <patch file="devhelp-3-build-on-macOS.patch"
              strip="1" />
     </branch>
@@ -244,9 +246,11 @@
   <autotools id="libxml2"
              autogen-sh="autoreconf"
              autogenargs='--libdir="$JHBUILD_LIBDIR" --with-python'>
+             
     <branch module="libxml2/2.11/libxml2-2.11.5.tar.xz"
             version="2.11.5"
             hash="sha256:3727b078c360ec69fa869de14bd6f75d7ee8d36987b071e6928d4720a28df3a6">
+
       <patch file="libxml2-python-config.patch"
              strip="1" />
     </branch>
@@ -259,6 +263,7 @@
     <branch module="libxslt/1.1/libxslt-1.1.39.tar.xz"
             version="1.1.39"
             hash="sha256:2a20ad621148339b0759c4d4e96719362dee64c9a096dbba625ba053846349f0">
+
       <patch file="libxslt-python-config.patch"
              strip="1" />
     </branch>
