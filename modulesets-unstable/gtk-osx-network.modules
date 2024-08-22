@@ -59,7 +59,6 @@
   <autotools id="libnettle"
              autogen-sh="autoreconf"
              autogenargs="--disable-documentation --disable-assembler">
-             
     <branch module="nettle/nettle.git"
             repo="lysator" />
     <dependencies>
@@ -76,8 +75,7 @@
             repo="ftp.gnu.org" />
   </autotools>
   <cmake id="zlib"
-         cmakeargs="-DCMAKE_INSTALL_NAME_DIR=${JHBUILD_PREFIX}/lib">
-         
+         cmakeargs='-DCMAKE_INSTALL_NAME_DIR="${JHBUILD_PREFIX}/lib"'>
     <branch module="zlib-1.3.1.tar.xz"
             version="1.3.1"
             hash="sha256:38ef96b8dfe510d42707d9c781877914792541133e1870841463bfa73f883e32"
@@ -157,18 +155,15 @@
   </autotools>
   <meson id="gsettings-desktop-schema"
          mesonargs="-Ddocs=false -Dtests=false -Dpacrunner-duktape=false -Dvapi=false -Dcurl=false -Dintrospection=false">
-
     <branch />
   </meson>
   <meson id="libproxy"
          mesonargs="-Ddocs=false -Dtests=false -Dpacrunner-duktape=false -Dvapi=false -Dcurl=false -Dintrospection=false">
-
     <branch module="libproxy/libproxy"
             repo="github" />
   </meson>
   <meson id="glib-networking"
          mesonargs="-Dopenssl=enabled -Dlibproxy=disabled -Dgnome_proxy=disabled">
-
     <branch />
     <dependencies>
       <dep package="libproxy" />
@@ -202,7 +197,6 @@
   <autotools id="libwebp"
              autogen-sh="autoreconf"
              autogenargs="--enable-libwebpmux --enable-libwebpdecoder">
-             
     <branch module="webm/libwebp"
             repo="chromium" />
   </autotools>
@@ -225,8 +219,7 @@
        USE_WOFF2: Requires Woff2. No module for this
        USE_WPE_RENDERER: For embedded systems, not Macs. -->
   <cmake id="webkit2gtk3"
-         cmakeargs='-DPORT=GTK -DENABLE_X11_TARGET=OFF -DENABLE_QUARTZ_TARGET=ON -DENABLE_MINIBROWSER=ON -DENABLE_INTROSPECTION=OFF -DUSE_SYSTEMD=OFF -DENABLE_VIDEO=OFF -DENABLE_WEB_AUDIO=OFF -DENABLE_GEOLOCATION=OFF -DUSE_LIBNOTIFY=OFF -DUSE_LIBHYPHEN=OFF -DUSE_LIBSECRET=OFF -DENABLE_TOUCH_EVENTS=OFF -DUSE_OPENJPEG=OFF -DUSE_WOFF2=OFF -DUSE_WPE_RENDERER=OFF -DENABLE_GRAPHICS_CONTEXT_GL=OFF -DENABLE_GAMEPAD=OFF -DUSE_APPLE_ICU=NO -DCMAKE_CXX_FLAGS="-stdlib=libc++" -DCMAKE_MACOSX_RPATH=OFF -DCMAKE_INSTALL_NAME_DIR=${JHBUILD_PREFIX}/lib'>
-
+         cmakeargs='-DPORT=GTK -DENABLE_X11_TARGET=OFF -DENABLE_QUARTZ_TARGET=ON -DENABLE_MINIBROWSER=ON -DENABLE_INTROSPECTION=OFF -DUSE_SYSTEMD=OFF -DENABLE_VIDEO=OFF -DENABLE_WEB_AUDIO=OFF -DENABLE_GEOLOCATION=OFF -DUSE_LIBNOTIFY=OFF -DUSE_LIBHYPHEN=OFF -DUSE_LIBSECRET=OFF -DENABLE_TOUCH_EVENTS=OFF -DUSE_OPENJPEG=OFF -DUSE_WOFF2=OFF -DUSE_WPE_RENDERER=OFF -DENABLE_GRAPHICS_CONTEXT_GL=OFF -DENABLE_GAMEPAD=OFF -DUSE_APPLE_ICU=NO -DCMAKE_CXX_FLAGS="-stdlib=libc++" -DCMAKE_MACOSX_RPATH=OFF -DCMAKE_INSTALL_NAME_DIR="${JHBUILD_PREFIX}/lib"'>
     <branch module="webkitgtk-2.45.3.tar.xz"
             version="2.45.3"
             hash="sha256:9b5fbfa6c9ddc92508ca9f32cc8aa2e68cf50fcfada8f2f45775d559570713b3"
@@ -261,7 +254,6 @@
        then start playing whack-a-mole until it builds and works. -->
   <cmake id="webkit2gtk3-git"
          cmakeargs='-DPORT=GTK -DENABLE_X11_TARGET=OFF -DENABLE_QUARTZ_TARGET=ON -DENABLE_MINIBROWSER=ON -DENABLE_INTROSPECTION=ON -DUSE_SYSTEMD=OFF -DENABLE_VIDEO=OFF -DENABLE_WEB_AUDIO=OFF -DENABLE_GEOLOCATION=OFF -DUSE_LIBNOTIFY=OFF -DUSE_LIBHYPHEN=OFF -DUSE_LIBSECRET=OFF -DENABLE_TOUCH_EVENTS=OFF -DUSE_OPENJPEG=OFF -DUSE_WOFF2=OFF -DUSE_WPE_RENDERER=OFF -DENABLE_GRAPHICS_CONTEXT_GL=OFF -DENABLE_GAMEPAD=OFF -DUSE_APPLE_ICU=NO -DCMAKE_CXX_FLAGS="-stdlib=libc++" -DCMAKE_MACOSX_RPATH=OFF -DUSE_OPENGL_OR_ES=OFF -DUSE_GBM=OFF -DUSE_AVIF=OFF -DENABLE_JOURNALD_LOG=OFF -DENABLE_DOCUMENTATION=OFF -DUSE_LCMS=OFF -DENABLE_WEBGL=OFF -DENABLE_WEBGL2=OFF'>
-
     <branch module="WebKit/WebKit.git"
             repo="github" />
     <dependencies>

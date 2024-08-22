@@ -44,7 +44,6 @@
   <autotools id="libiconv"
              autogen-sh="configure"
              autogenargs="--disable-debug --disable-dependency-tracking --enable-extra-encodings">
-
     <branch module="libiconv/libiconv-1.17.tar.gz"
             version="1.17"
             hash="sha256:8f74213b56238c85a50a5329f77e06198771e70dd9a739779f4c02f65d971313"
@@ -59,7 +58,6 @@
   <autotools id="gettext"
              autogen-sh="configure"
              autogenargs="--without-emacs --disable-java --disable-native-java --disable-libasprintf --disable-csharp --with-included-glib --with-included-libcroco">
-
     <branch module="gettext/gettext-0.22.5.tar.xz"
             version="0.22.5"
             hash="sha256:fe10c37353213d78a5b83d48af231e005c4da84db5ce88037d88355938259640"
@@ -133,7 +131,6 @@
   </autotools>
   <meson id="pkgconf"
          mesonargs="-Dwith-system-libdir=/usr/lib -Dwith-system-includedir=/usr/include">
-
     <branch module="pkgconf-2.2.0.tar.xz"
             version="2.2.0"
             hash="sha256:b06ff63a83536aa8c2f6422fa80ad45e4833f590266feb14eaddfe1d4c853c69"

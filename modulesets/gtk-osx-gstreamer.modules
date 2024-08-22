@@ -17,7 +17,6 @@
               type="tarball" />
   <meson id="liborc"
          mesonargs="-Dgtk_doc=disabled -Dbenchmarks=disabled -Dexamples=disabled -Dtests=disabled">
-
     <branch module="orc"
             repo="gstreamer"
             tag="orc-0.4.38" />
@@ -25,7 +24,6 @@
   <autotools id="faad2"
              autogen-sh="autoreconf"
              autogenargs="-without-bmp --without-xmms --without-drm --without-mpeg4ip">
-
     <branch module="knik0/faad2/archive/refs/tags/2.11.0.tar.gz"
             version="2.11.0"
             hash="sha256:720c1dc404439e0a9117aa144dc7ead56f1658adf4badbb39f959d6ad8eed489"
@@ -35,7 +33,6 @@
              autogen-sh="configure"
              autogen-template="%(srcdir)s/%(autogen-sh)s --prefix=%(prefix)s %(autogenargs)s"
              autogenargs="--enable-gpl --enable-version3 --enable-shared --disable-static --disable-runtime-cpudetect --disable-programs --disable-ffplay --disable-ffprobe --disable-doc">
-
     <branch module="ffmpeg-7.0.tar.xz"
             version="7.0"
             hash="sha256:4426a94dd2c814945456600c8adfc402bee65ec14a70e8c531ec9a2cd651da7b"

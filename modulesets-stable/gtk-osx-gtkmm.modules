@@ -64,7 +64,6 @@
     <branch module="pangomm/2.42/pangomm-2.42.2.tar.xz"
             version="2.42.2"
             hash="sha256:1b24c92624ae1275ccb57758175d35f7c39ad3342d8c0b4ba60f0d9849d2d08a">
-
       <patch file="pangomm3-missing-include.patch"
              strip="1" />
     </branch>
@@ -120,7 +119,6 @@
     <branch module="gtkmm/3.24/gtkmm-3.24.9.tar.xz"
             version="3.24.9"
             hash="sha256:30d5bfe404571ce566a8e938c8bac17576420eb508f1e257837da63f14ad44ce">
-
       <patch file="gtkmm-3-bad-const-property-background.patch"
              strip="1" />
     </branch>

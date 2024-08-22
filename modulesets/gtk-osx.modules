@@ -62,7 +62,6 @@
   <autotools id="libffi"
              autogen-sh="autoreconf"
              autogenargs="--disable-multi-os-directory --disable-docs">
-             
     <branch module="atgreen/libffi"
             repo="github"
             tag="v3.4.4" />
@@ -70,7 +69,6 @@
   <autotools id="libpcre2"
              autogen-sh="configure"
              autogenargs="--enable-pcre2-16 --enable-pcre2-32 --enable-jit">
-             
     <branch module="PCRE2Project/pcre2/releases/download/pcre2-10.42/pcre2-10.42.tar.bz2"
             version="10.43"
             hash="sha256:"
@@ -96,8 +94,7 @@
        then build harfbuzz without cairo because cairo requires
        harfbuzz. -->
   <cmake id="freetype-no-harfbuzz"
-         cmakeargs="-DFT_DISABLE_HARFBUZZ=ON -DBUILD_SHARED_LIBS=true -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_NAME_DIR=${JHBUILD_PREFIX}/lib">
-
+         cmakeargs='-DFT_DISABLE_HARFBUZZ=ON -DBUILD_SHARED_LIBS=true -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_NAME_DIR="${JHBUILD_PREFIX}/lib"'>
     <branch module="freetype/freetype2"
             repo="nongnu"
             revision="VER-2-13-2" />
@@ -109,7 +106,6 @@
              autogen-sh="source/configure"
              autogenargs="--enable-rpath"
              makeargs='CFLAGS="$CFLAGS -DU_CHARSET_IS_UTF8=1 -DU_USING_ICU_NAMESPACE=0"'>
-
     <branch module="unicode-org/icu/releases/download/release-73-2/icu4c-73_2-src.tgz"
             version="73.2"
             hash="sha256:818a80712ed3caacd9b652305e01afc7fa167e6f2e94996da44b90c2ab604ce1"
@@ -118,7 +114,6 @@
   </autotools>
   <meson id="harfbuzz-no-cairo"
          mesonargs="-Dcoretext=enabled -Dfreetype=enabled -Ddocs=disabled -Dbenchmark=disabled -Dintrospection=disabled -Dtests=disabled">
-
     <branch module="harfbuzz/harfbuzz"
             repo="github"
             tag="8.5.0" />
@@ -132,8 +127,7 @@
     </after>
   </meson>
   <cmake id="freetype"
-         cmakeargs="-DFT_REQUIRE_HARFBUZZ=ON -DBUILD_SHARED_LIBS=true -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_NAME_DIR=${JHBUILD_PREFIX}/lib">
-
+         cmakeargs='-DFT_REQUIRE_HARFBUZZ=ON -DBUILD_SHARED_LIBS=true -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_NAME_DIR="${JHBUILD_PREFIX}/lib"'>
     <branch module="freetype/freetype2"
             repo="nongnu"
             revision="VER-2-13-2" />
@@ -144,7 +138,6 @@
   </cmake>
   <meson id="fontconfig"
          mesonargs="-Ddoc=disabled -Ddefault-fonts-dirs=/System/Library/Fonts -Dadditional-fonts-dirs=/Library/Fonts">
-
     <branch module="fontconfig/fontconfig"
             repo="freedesktop"
             tag="2.15.0" />
@@ -154,7 +147,6 @@
   </meson>
   <meson id="pixman"
          mesonargs="-Dgtk=disabled -Dmmx=disabled -Da64-neon=disabled">
-         
     <branch module="pixman/pixman"
             repo="freedesktop"
             revision="pixman-0.42.2" />
@@ -192,7 +184,6 @@
        introspection, and gobject-introspection needs cairo. -->
   <meson id="harfbuzz"
          mesonargs="-Dcoretext=enabled -Dfreetype=enabled -Ddocs=disabled -Dbenchmark=disabled">
-
     <branch module="harfbuzz/harfbuzz"
             repo="github"
             tag="8.5.0" />
@@ -283,7 +274,6 @@
   </meson>
   <meson id="gtk-4"
          mesonargs="-Dx11-backend=false -Dmedia-gstreamer=disabled">
-         
     <branch module="gtk"
             checkoutdir="gtk-4.0"
             revision="gtk-4-14" />
