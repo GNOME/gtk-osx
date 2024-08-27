@@ -149,8 +149,6 @@ def xcode_ver():
            _xcode_ver = float(vernum.group(1))
            if _xcode_ver < 5.0:
                raise EnvironmentError("Xcode Version %f is not supported; if you want to build with Xcode versions earlier than 5.0 checkout tag Last-Lion." % _xcode_ver)
-           if _xcode_ver < 10.0:
-               conditions.add('pre-Mavericks')
            return _xcode_ver
        else:
            raise EnvironmentError("No suitable Xcode found. Xcode 5.0 or later is required.")
@@ -212,10 +210,6 @@ def setup_debug():
 
 #    autogenargs = autogenargs + " --enable-debug=yes"
 
-# Gtk+ crashes in gdk_window_quartz_raise() -- in a call to [NSWindow
-# orderFront:] if clang is passed -O0 for 64-bit compilation. The old
-# stabs+ debug format also doesn't work. See Snow Leopard in the Wiki
-# for more information about debugging.
     environ_prepend('CFLAGS', "-O0 -g")
     environ_prepend('CXXFLAGS', "-O0 -g")
     environ_prepend('OBJCFLAGS', "-O0 -g")
@@ -276,21 +270,15 @@ def setup_sdk(target=_target, sdk_version=None, architectures=[_default_arch]):
         # To pick up cups-config from the right place.
         os.environ["CUPS_CONFIG"] = os.path.join(sdkdir, "usr/bin/cups-config")
 
-    if architectures == ["i386"]:
-        # The '#' on openssl is to stop jhbuild from appending any more autogen
-        # arguments such as --disable-Werror; they cause openssl to error out
-        append_autogenargs("openssl", "darwin-i386-cc #")
-    elif architectures == ["x86_64"]:
-        conditions.add('64-bit')
+    if architectures == ["x86_64"]:
         append_autogenargs("glib", "ac_cv_c_bigendian=no")
         append_autogenargs("openssl", "darwin64-x86_64-cc #")
     elif architectures == ["arm64"]:
-        conditions.add('64-bit')
         conditions.add('arm64')
         append_autogenargs("glib", "ac_cv_c_bigendian=no")
         append_autogenargs("openssl", "darwin64-arm64-cc #") # Not a legal value
-    elif len(set(architectures) - {"i386",  "x86_64", 'arm64'}) > 0:
-        raise EnvironmentError("Only architectures i386, x86_64, and arm64 are supported.")
+    elif len(set(architectures) - {"x86_64", 'arm64'}) > 0:
+        raise EnvironmentError("Only architectures x86_64 and arm64 are supported.")
     if len(set(architectures)) > 1:
         print("WARNING: Universal builds are neither prohibited nor supported. It might work, but if it doesn't you're on your own.")
     # For unknown reasons, iconv is not picked up correctly without this
@@ -314,12 +302,7 @@ def setup_sdk(target=_target, sdk_version=None, architectures=[_default_arch]):
     # For intel, set glib's build parameter so that it builds the
     # correct atomic asm functions
     #
-    if architectures == ["i386"]:
-        append_autogenargs("glib", "--build=i486-apple-darwin")
-        append_autogenargs("gmp", "ABI=32")
-        append_autogenargs("liboil", "--host=i486-apple-darwin")
-        append_autogenargs("gnutls", "--host=i486-apple-darwin")
-    elif architectures == ["x86_64"]:
+    if architectures == ["x86_64"]:
         append_autogenargs("glib", "--build=x86_64-apple-darwin")
         append_autogenargs("gmp", "--host=x86_64-apple-darwin ABI=64")
         append_autogenargs("liboil", "--host=x86_64-apple-darwin")
