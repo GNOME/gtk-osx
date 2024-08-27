@@ -305,12 +305,10 @@ def setup_sdk(target=_target, sdk_version=None, architectures=[_default_arch]):
     if architectures == ["x86_64"]:
         append_autogenargs("glib", "--build=x86_64-apple-darwin")
         append_autogenargs("gmp", "--host=x86_64-apple-darwin ABI=64")
-        append_autogenargs("liboil", "--host=x86_64-apple-darwin")
         append_autogenargs("gnutls", "--host=x86_64-apple-darwin")
     elif architectures == ["arm64"]:
         append_autogenargs("glib", "--build=aarch64-apple-darwin")
         append_autogenargs("gmp", "--host=aarch64-apple-darwin ABI=64")
-        append_autogenargs("liboil", "--host=aarch64-apple-darwin")
         append_autogenargs("libffi", "--host=aarch64-apple-darwin")
 
     if not sdkdir:
@@ -329,10 +327,8 @@ def setup_sdk(target=_target, sdk_version=None, architectures=[_default_arch]):
     if len(architectures) == 1:
         os.environ["BUILDCFLAGS"] = os.environ["CFLAGS"]
     append_autogenargs("gnutls", '--disable-guile CXXFLAGS="$CXXFLAGS -std=c++11"')
-    append_autogenargs("guile", 'CFLAGS="$CFLAGS -O1"')
     #Some packages require special arguments or flags to compile with Clang:
     append_autogenargs('libgcrypt', 'CFLAGS="$CFLAGS -fheinous-gnu-extensions"')
-    module_makeargs['liboil'] = 'CFLAGS="$CFLAGS -DHAVE_SYMBOL_UNDERSCORE -fheinous-gnu-extensions"'
 
     # openssl doesn't understand DESTDIR, but luckily it has its own mechanism.
     module_extra_env['openssl'] = {'INSTALL_PREFIX': os.path.join(prefix, '_jhbuild', 'root-openssl')}
@@ -547,12 +543,6 @@ if 'XML_CATALOG_FILES' in os.environ:
     pass
 else:
     os.environ['XML_CATALOG_FILES'] = _pfx_cat_file
-
-#GConf needs to be built static, overriding the generic autogenargs,
-#but including it in the module puts it in front of where autogenargs
-#puts --disable-static, so we need the override here.
-#
-append_autogenargs("gconf", "--enable-static")
 
 if _build:
     if "shell" in sys.argv:
