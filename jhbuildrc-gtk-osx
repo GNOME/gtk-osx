@@ -271,11 +271,9 @@ def setup_sdk(target=_target, sdk_version=None, architectures=[_default_arch]):
         os.environ["CUPS_CONFIG"] = os.path.join(sdkdir, "usr/bin/cups-config")
 
     if architectures == ["x86_64"]:
-        append_autogenargs("glib", "ac_cv_c_bigendian=no")
         append_autogenargs("openssl", "darwin64-x86_64-cc #")
     elif architectures == ["arm64"]:
         conditions.add('arm64')
-        append_autogenargs("glib", "ac_cv_c_bigendian=no")
         append_autogenargs("openssl", "darwin64-arm64-cc #") # Not a legal value
     elif len(set(architectures) - {"x86_64", 'arm64'}) > 0:
         raise EnvironmentError("Only architectures x86_64 and arm64 are supported.")
@@ -303,11 +301,9 @@ def setup_sdk(target=_target, sdk_version=None, architectures=[_default_arch]):
     # correct atomic asm functions
     #
     if architectures == ["x86_64"]:
-        append_autogenargs("glib", "--build=x86_64-apple-darwin")
         append_autogenargs("gmp", "--host=x86_64-apple-darwin ABI=64")
         append_autogenargs("gnutls", "--host=x86_64-apple-darwin")
     elif architectures == ["arm64"]:
-        append_autogenargs("glib", "--build=aarch64-apple-darwin")
         append_autogenargs("gmp", "--host=aarch64-apple-darwin ABI=64")
         append_autogenargs("libffi", "--host=aarch64-apple-darwin")
 
