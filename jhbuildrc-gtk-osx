@@ -404,6 +404,12 @@ tarballdir = None
 #
 autogenargs=''
 
+# Extra cmake args.
+# CMAKE_IGNORE_PREFIX_PATH prevents cmake finding libraries from popular
+# package-management system like Homebrew and MacPorts by default.
+#
+cmakeargs = '-DCMAKE_IGNORE_PREFIX_PATH="/usr/local;/opt/homebrew;/opt/local"'
+
 # Extra meson args. --wrapmode=nofallback prevents meson projects from
 # building dependencies on their own. We generally want failed
 # dependencies to error out so that we know to add them to the
@@ -475,14 +481,6 @@ nice_build = False
 
 alwaysautogen = True
 
-# Freetype2 if left to itself will create an install name without the
-# path so none of the libraries that depend on it can link. Require
-# the install name to be an absolute path.
-
-module_cmakeargs["freetype"] = '-DCMAKE_INSTALL_NAME_DIR="' + os.path.join(prefix, 'lib') + '"'
-module_cmakeargs["freetype-no-harfbuzz"] = '-DCMAKE_INSTALL_NAME_DIR="' + os.path.join(prefix, 'lib') + '"'
-module_cmakeargs["webkit2gtk3"] = '-DCMAKE_INSTALL_NAME_DIR="' + os.path.join(prefix, 'lib') + '"'
-module_cmakeargs["zlib"] = '-DCMAKE_INSTALL_NAME_DIR="' + os.path.join(prefix, 'lib') + '"'
 
 # Check and warn if jhbuild is started from within jhbuild, since that
 # will mess up environment variables, especially if different build
