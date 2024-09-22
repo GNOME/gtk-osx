@@ -131,7 +131,7 @@
       <dep package="cairomm" />
       <dep package="pangomm" />
       <dep package="atkmm" />
-      <dep package="gtk+-4.0" />
+      <dep package="gtk-4" />
     </dependencies>
   </meson>
 </moduleset>
