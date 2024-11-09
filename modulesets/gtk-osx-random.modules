@@ -168,7 +168,7 @@
   <autotools id="enchant"
              autogen-template="pushd %(srcdir)s &amp;&amp; ./%(autogen-sh)s &amp;&amp; popd &amp;&amp; %(srcdir)s/configure --prefix=%(prefix)s %(autogenargs)s"
              autogenargs="--enable-relocatable">
-    <branch module="AbiWord/enchant"
+    <branch module="rrthomas/enchant"
             repo="github"
             tag="v2.8.0" />
     <dependencies>

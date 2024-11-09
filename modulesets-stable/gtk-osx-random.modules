@@ -193,7 +193,7 @@
   <autotools id="enchant"
              autogen-sh="configure"
              autogenargs="--enable-relocatable">
-    <branch module="AbiWord/enchant/releases/download/v2.8.0/enchant-2.8.0.tar.gz"
+    <branch module="rrthomas/enchant/releases/download/v2.8.0/enchant-2.8.0.tar.gz"
             version="2.8.0"
             hash="sha256:c57add422237b8a7eed116a9a88d8be4f7b9281778fa36f03e1f2c051ecb0372"
             repo="github-tarball" />
