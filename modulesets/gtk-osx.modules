@@ -204,7 +204,7 @@
   </meson>
   <meson id="pango"
          mesonargs="-Dfontconfig=enabled">
-    <branch tag="1.50.14" />
+    <branch tag="1.55.0" />
     <dependencies>
       <dep package="glib" />
       <dep package="cairo" />

@@ -223,10 +223,10 @@
   </meson>
   <meson id="pango"
          mesonargs="-Dfontconfig=enabled">
-    <branch module="pango/1.52/pango-1.52.2.tar.xz"
-            version="1.52.2"
-            hash="sha256:d0076afe01082814b853deec99f9349ece5f2ce83908b8e58ff736b41f78a96b">
-      <patch file="pango-ct-font-fallback.patch"
+    <branch module="pango/1.55/pango-1.55.0.tar.xz"
+            version="1.55.0"
+            hash="sha256:a2c17a8dc459a7267b8b167bb149d23ff473b6ff9d5972bee047807ee2220ccf">
+      <patch file="pango-coretext-null.patch"
              strip="1" />
     </branch>
     <dependencies>
