@@ -21,14 +21,13 @@
             version="0.4.39"
             hash="sha256:33ed2387f49b825fa1b9c3b0072e05f259141b895474ad085ae51143d3040cc0" />
   </meson>
-  <autotools id="faad2"
-             autogen-sh="autoreconf"
-             autogenargs="-without-bmp --without-xmms --without-drm --without-mpeg4ip">
+  <cmake id="faad2">
     <branch module="knik0/faad2/archive/refs/tags/2.11.0.tar.gz"
             version="2.11.0"
+            checkoutdir="faad-2.11.0"
             hash="sha256:720c1dc404439e0a9117aa144dc7ead56f1658adf4badbb39f959d6ad8eed489"
             repo="github.com" />
-  </autotools>
+  </cmake>
   <autotools id="ffmpeg"
              autogen-sh="configure"
              autogen-template="%(srcdir)s/%(autogen-sh)s --prefix=%(prefix)s %(autogenargs)s"
