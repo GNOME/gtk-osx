@@ -82,7 +82,10 @@
   <meson id="gst-plugins-bad">
     <branch module="gst-plugins-bad/gst-plugins-bad-1.24.7.tar.xz"
             version="1.24.7"
-            hash="sha256:75d513fc0ba635fb1f39786d890b73fbac5f4bc88ff39f2a9ff62f4b8f428f22" />
+            hash="sha256:75d513fc0ba635fb1f39786d890b73fbac5f4bc88ff39f2a9ff62f4b8f428f22">
+      <patch file="gst-plugins-bad-missing-enum.patch"
+             strip="1" />
+    </branch>
     <dependencies>
       <dep package="gstreamer" />
       <dep package="gst-plugins-base" />
