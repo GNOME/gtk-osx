@@ -92,6 +92,7 @@
     <dependencies>
       <dep package="gstreamer" />
       <dep package="gst-plugins-base" />
+      <dep package="pygobject3" />
     </dependencies>
   </meson>
   <metamodule id="meta-gstreamer">
