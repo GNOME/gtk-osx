@@ -1,4 +1,4 @@
-<?xml version="1.0"?>
+
 <!DOCTYPE moduleset SYSTEM "moduleset.dtd">
 <?xml-stylesheet type="text/xsl" href="moduleset.xsl"?>
 <moduleset>
@@ -58,7 +58,7 @@
   <meson id="pygobject3">
     <branch module="pygobject"
             checkoutdir="pygobject3"
-            tag="pygobject-3-48" />
+            tag="pygobject-3-50" />
     <dependencies>
       <dep package="pycairo" />
     </dependencies>
