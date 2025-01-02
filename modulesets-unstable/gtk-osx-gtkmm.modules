@@ -9,6 +9,8 @@
               default="yes"
               href="https://gitlab.gnome.org/GNOME"
               type="git" />
+  <repository type='tarball' name='sourceforge'
+	      href="http://downloads.sourceforge.net/"/>
   <repository name="cairographics"
               href="https://gitlab.freedesktop.org/cairo/"
               type="git" />
@@ -16,8 +18,26 @@
               href="https://github.com"
               type="git" />
   <!-- mm-common is C++ glue code needed only to build from git. -->
+    <cmake id="boost" cmakeargs="-DLIBRARIES='date_time;regex;locale;filesystem;program_options;system'">
+    <branch module="boost/boost_1_85_0.tar.bz2" version="1.85.0" 
+
+            repo="sourceforge">
+      <patch file="boost-cmake.patch" strip="1"/>
+    </branch>
+    <after>
+      <dep package="icu"/>
+    </after>
+    </cmake>
+    <cmake id="doxygen">
+      <branch module="doxygen/doxygen"
+              repo="github" />
+    </cmake>
   <meson id="mm-common">
     <branch module="mm-common" />
+    <dependencies>
+      <dep package="boost"/>
+      <dep package="doxygen"/>
+    </dependencies>
   </meson>
   <!-- Libsigc++ was rewritten to use C++17 variadic templates for
        version 3, and adopting that has created substantial API breaks
