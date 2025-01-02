@@ -206,7 +206,7 @@
              autogenargs="--without-python">
     <branch />
   </autotools>
-  <autotools id="eadline"
+  <autotools id="readline"
              autogen-sh="configure">
     <branch module="readline/readline-8.2.tar.gz"
             version="8.2"
