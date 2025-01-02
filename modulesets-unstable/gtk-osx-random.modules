@@ -120,7 +120,7 @@
   </meson>
   <meson id="gtksourceview3"
          mesonargs="-Dvapi=false">
-    <branch revision="gtksourceview-4-8" />
+    <branch module="gtksourceview" revision="gtksourceview-4-8" />
     <dependencies>
       <dep package="gtk+-3.0" />
     </dependencies>
