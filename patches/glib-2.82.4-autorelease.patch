@@ -1,0 +1,42 @@
+From d3705ecdcfa747ff0d39b8f9334c9f701abbad48 Mon Sep 17 00:00:00 2001
+From: John Ralls <jralls@ceridwen.us>
+Date: Sat, 21 Dec 2024 09:55:13 -0800
+Subject: [PATCH] g_osx_appinfo_launch: Use autorelease pool to manage cocoa
+ memory.
+
+Fixes https://gitlab.gnome.org/GNOME/glib/-/issues/3568
+---
+ gio/gosxappinfo.m | 3 ++-
+ 1 file changed, 2 insertions(+), 1 deletion(-)
+
+diff --git a/gio/gosxappinfo.m b/gio/gosxappinfo.m
+index 28b97e9fa..8cb00829a 100644
+--- a/gio/gosxappinfo.m
++++ b/gio/gosxappinfo.m
+@@ -291,7 +291,6 @@
+       CFArrayRemoveAllValues ((CFMutableArrayRef) urlspec->itemURLs);
+       CFRelease (urlspec->itemURLs);
+     }
+-  CFRelease (urlspec->appURL);
+ }
+ 
+ static NSBundle *
+@@ -450,6 +449,7 @@
+   GOsxAppInfo *info = G_OSX_APP_INFO (appinfo);
+   LSLaunchURLSpec urlspec = { 0 };
+   gint ret, success = TRUE;
++  NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+ 
+   g_return_val_if_fail (G_IS_OSX_APP_INFO (appinfo), FALSE);
+ 
+@@ -464,6 +464,7 @@
+     }
+ 
+   clear_urlspec (&urlspec);
++  [pool drain];
+   return success;
+ }
+ 
+-- 
+2.39.5 (Apple Git-154)
+
