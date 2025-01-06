@@ -201,6 +201,16 @@
             hash="sha256:3feb7171f16a84ee82ca18a36d7b9be109a52c04f492a053331d7d1095007c35"
             repo="ftp.gnu.org" />
   </autotools>
+  <meson id="gspell"
+        mesonargs="-Dvapi=false -Dgtk_doc=false -Dtests=false -Dinstall_tests=false" >
+    <branch module="gspell"
+            tag="1.14.0" />>
+    <dependencies>
+      <dep package="enchant" />
+      <dep package="gtk+-3.0" />
+      <dep package='icu' />
+    </dependencies>
+  </meson>
   <!-- gmp uses Mercurial, so we stick with the tarball to avoid
        having to install yet another vcs tool. -->
   <autotools id="gmp">

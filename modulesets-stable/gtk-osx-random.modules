@@ -221,6 +221,18 @@
       <dep package="iso-codes" />
     </dependencies>
   </autotools>
+  <meson id="gspell"
+        mesonargs="-Dvapi=false -Dgtk_doc=false -Dtests=false -Dinstall_tests=false" >
+    <branch module="gspell/1.14/gspell-1.14.0.tar.xz"
+            version="1.14.0"
+            hash="sha256:64ea1d8e9edc1c25b45a920e80daf67559d1866ffcd7f8432fecfea6d0fe8897" >
+    </branch>
+    <dependencies>
+      <dep package="enchant" />
+      <dep package="gtk+-3.0" />
+      <dep package='icu' />
+    </dependencies>
+  </meson>
   <autotools id="gmp">
     <branch module="gmp/gmp-6.3.0.tar.bz2"
             version="6.3.0"
