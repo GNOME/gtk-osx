@@ -85,7 +85,7 @@
     <branch module="glib/2.82/glib-2.82.4.tar.xz"
             version="2.82.4"
             hash="sha256:37dd0877fe964cd15e9a2710b044a1830fb1bd93652a6d0cb6b8b2dff187c709" >
-      <patch file="glib-2.82.4-autorelease.patch"/>
+      <patch file="glib-2.82.4-autorelease.patch" strip="1"/>
     </branch>
     <dependencies>
       <dep package="libffi" />
@@ -97,7 +97,7 @@
     <branch module="glib/2.82/glib-2.82.4.tar.xz"
             version="2.82.4"
             hash="sha256:37dd0877fe964cd15e9a2710b044a1830fb1bd93652a6d0cb6b8b2dff187c709" >
-      <patch file="glib-2.82.4-autorelease.patch"/>
+      <patch file="glib-2.82.4-autorelease.patch" strip="1"/>
     </branch>
     <dependencies>
       <dep package="gobject-introspection" />
