@@ -226,6 +226,7 @@
     <branch module="gspell/1.14/gspell-1.14.0.tar.xz"
             version="1.14.0"
             hash="sha256:64ea1d8e9edc1c25b45a920e80daf67559d1866ffcd7f8432fecfea6d0fe8897" >
+      <patch file="gspell-1.14-enchant-resource-path.patch" strip="1" />
     </branch>
     <dependencies>
       <dep package="enchant" />
