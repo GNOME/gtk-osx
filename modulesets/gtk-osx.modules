@@ -157,7 +157,8 @@
   <!-- cairo doesn't really need fontconfig, but if Pango finds
        freetype it insists that it has to have fontconfig too and that
        they are both built into cairo. -->
-  <meson id="cairo">
+  <meson id="cairo"
+          mesonargs="-Dfontconfig=enabled -Dfreetype=enabled">
     <branch module="cairo/cairo"
             repo="freedesktop"
             tag="1.18.0" />
