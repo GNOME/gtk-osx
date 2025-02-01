@@ -298,19 +298,18 @@
       <dep package="gtk+-3.0" />
     </dependencies>
   </autotools>
-  <autotools id="librsvg"
-             autogenargs="--disable-Bsymbolic">
-    <branch module="librsvg"
-            branch="librsvg-2.58" />
+    <meson id="librsvg"
+         mesonargs="-Dintrospection=disabled -Ddocs=disabled">
+      <branch module="librsvg"
+              branch="librsvg-2.58" />
     <dependencies>
       <dep package="libxml2" />
       <dep package="cairo" />
       <dep package="pango" />
       <dep package="harfbuzz" />
-      <dep package="libcroco" />
       <dep package="freetype" />
     </dependencies>
-  </autotools>
+  </meson>
   <meson id="adwaita-icon-theme">
     <branch branch="gnome-46" />
     <dependencies>
