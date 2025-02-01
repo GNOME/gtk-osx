@@ -217,8 +217,9 @@
       <dep package="meta-gtk-osx-bootstrap" />
     </after>
   </meson>
+<!-- ATK is retired and archived. There are only housekeeping commits since tagging 3.38.0 so we might as well use master. -->
   <meson id="atk">
-    <branch tag="gnome-3-38" />
+    <branch />
     <after>
       <dep package="glib" />
       <dep package="meta-gtk-osx-bootstrap" />
