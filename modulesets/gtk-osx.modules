@@ -233,7 +233,6 @@
     <dependencies>
       <dep package="pango" />
       <dep package="gobject-introspection" />
-      <dep package="shared-mime-info" />
     </dependencies>
   </meson>
   <meson id="libepoxy">
