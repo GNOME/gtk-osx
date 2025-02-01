@@ -63,7 +63,7 @@
   <autotools id="libffi"
              autogen-sh="autoreconf"
              autogenargs="--disable-multi-os-directory --disable-docs">
-    <branch module="atgreen/libffi"
+    <branch module="libffi/libffi"
             repo="github" />
   </autotools>
   <autotools id="libpcre2"
