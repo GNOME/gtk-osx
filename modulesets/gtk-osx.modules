@@ -234,11 +234,11 @@
       <dep package="shared-mime-info" />
     </dependencies>
   </meson>
-  <autotools id="libepoxy">
+  <meson id="libepoxy">
     <branch module="anholt/libepoxy"
             repo="github"
             revision="1.5.10" />
-  </autotools>
+  </meson>
   <autotools id="hicolor-icon-theme">
     <branch module="hicolor-icon-theme-0.17.tar.xz"
             version="0.17"
