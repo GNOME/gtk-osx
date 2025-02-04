@@ -281,7 +281,7 @@
          mesonargs="-Dx11_backend=false">
     <branch module="gtk/3.24/gtk-3.24.48.tar.xz"
             version="3.24.48"
-            hash="sha256:c34b603db9dd0dfcb0ec49187b098ccd74ef233c2c93c27bc20f7dce1ef1b695">
+            hash="sha256:d10ce9ea9df44c1016d8d1721f39e55d3d607fcfb85334aec0d236cdc9a70556">
     </branch>
     <dependencies>
       <dep package="glib" />
