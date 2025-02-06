@@ -116,7 +116,7 @@ $PIP install --upgrade --user pipenv==2024.0.0
 PIPENV="$PYTHONUSERBASE/bin/pipenv"
 export WORKON_HOME=$DEVPREFIX/share/virtualenvs
 
-JHBUILD_RELEASE_VERSION=3.38.0
+JHBUILD_RELEASE_VERSION="master"
 # Install jhbuild
 if test ! -d "$DEV_SRC_ROOT/jhbuild/.git" ; then
     git clone -b $JHBUILD_RELEASE_VERSION $GITLAB/jhbuild.git "$DEV_SRC_ROOT/jhbuild"
