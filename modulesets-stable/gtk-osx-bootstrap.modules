@@ -33,9 +33,9 @@
   <autotools id="libpng"
              autogen-sh="configure"
              autogenargs="--enable-shared">
-    <branch module="libpng/libpng-1.6.43.tar.xz"
-            version="1.6.43"
-            hash="sha256:6a5ca0652392a2d7c9db2ae5b40210843c0bbc081cbd410825ab00cc59f14a6c"
+    <branch module="libpng/libpng-1.6.46.tar.xz"
+            version="1.6.46"
+            hash="sha256:f3aa8b7003998ab92a4e9906c18d19853e999f9d3bca9bd1668f54fa81707cb1"
             repo="sourceforge" />
     <dependencies>
       <dep package="zlib" />
@@ -50,19 +50,19 @@
   </autotools>
   <cmake id="libjpeg"
          cmakeargs="-DCMAKE_MACOSX_RPATH=true -DCMAKE_INSTALL_NAME_DIR=&quot;${JHBUILD_PREFIX}/lib&quot; -DCMAKE_INSTALL_LIBDIR:PATH=lib">
-    <branch module="libjpeg-turbo/libjpeg-turbo/releases/download/3.0.3/libjpeg-turbo-3.0.3.tar.gz"
-            version="3.0.3"
-            hash="sha256:343e789069fc7afbcdfe44dbba7dbbf45afa98a15150e079a38e60e44578865d"
-            checkoutdir="libjpeg-turbo-3.0.3"
+    <branch module="libjpeg-turbo/libjpeg-turbo/releases/download/3.1.0/libjpeg-turbo-3.1.0.tar.gz"
+            version="3.1.0"
+            hash="sha256:9564c72b1dfd1d6fe6274c5f95a8d989b59854575d4bbee44ade7bc17aa9bc93"
+            checkoutdir="libjpeg-turbo-3.1.0"
             repo="github-tarball" />
     <dependencies>
       <dep package="nasm" />
     </dependencies>
   </cmake>
   <cmake id="libtiff" cmakeargs="-Dtiff-tests=off -Dtiff-docs=off">
-    <branch module="libtiff/tiff-4.6.0.tar.xz"
-            version="4.6.0"
-            hash="sha256:e178649607d1e22b51cf361dd20a3753f244f022eefab1f2f218fc62ebaf87d2"
+    <branch module="libtiff/tiff-4.7.0.tar.xz"
+            version="4.7.0"
+            hash="sha256:273a0a73b1f0bed640afee4a5df0337357ced5b53d3d5d1c405b936501f71017"
             repo="libtiff">
       <patch file="tiff-nohtml.patch"
              strip="1" />
@@ -73,9 +73,9 @@
   </cmake>
   <meson id="gtk-doc"
          mesonargs="-Dyelp_manual=false -Dtests=false">
-    <branch module="gtk-doc/1.33/gtk-doc-1.33.2.tar.xz"
-            version="1.33.2"
-            hash="sha256:cc1b709a20eb030a278a1f9842a362e00402b7f834ae1df4c1998a723152bf43" />
+    <branch module="gtk-doc/1.34/gtk-doc-1.34.0.tar.xz"
+            version="1.34.0"
+            hash="sha256:b20b72b32a80bc18c7f975c9d4c16460c2276566a0b50f87d6852dff3aa7861c" />
     <after>
       <dep package="python3" />
       <dep package="pygments" />
