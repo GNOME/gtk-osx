@@ -11,9 +11,6 @@
   <repository name="pkgconf"
               href="https://distfiles.ariadne.space/pkgconf/"
               type="tarball" />
-  <repository name="tukaani.org"
-              href="http://tukaani.org/"
-              type="tarball" />
   <repository name="cmake"
               href="https://cmake.org/files/"
               type="tarball" />
@@ -26,10 +23,10 @@
   <autotools id="xz"
              autogen-sh="configure"
              bootstrap="true">
-    <branch module="xz/xz-5.6.2.tar.bz2"
-            version="5.6.2"
-            hash="sha256:e12aa03cbd200597bd4ce11d97be2d09a6e6d39a9311ce72c91ac7deacde3171"
-            repo="tukaani.org" />
+    <branch module="tukaani-project/xz/releases/download/v5.6.4/xz-5.6.4.tar.bz2"
+            version="5.6.4"
+            hash="sha256:176d510c30d80a23b8050bbc048f2ecaacb823ae48b6821727ed6591f0df9200"
+            repo="github" />
   </autotools>
   <!-- gnu make 4.xx, needed to unbreak parallel builds for the webkit -->
   <autotools id="gnumake"
@@ -44,23 +41,24 @@
   <autotools id="libiconv"
              autogen-sh="configure"
              autogenargs="--disable-debug --disable-dependency-tracking --enable-extra-encodings">
-    <branch module="libiconv/libiconv-1.17.tar.gz"
-            version="1.17"
-            hash="sha256:8f74213b56238c85a50a5329f77e06198771e70dd9a739779f4c02f65d971313"
+    <branch module="libiconv/libiconv-1.18.tar.gz"
+            version="1.18"
+            hash="sha256:3b08f5f4f9b4eb82f151a7040bfd6fe6c6fb922efe4b1659c66ea933276965e8"
             repo="ftp.gnu.org" />
   </autotools>
   <autotools id="libunistring"
              autogen-sh="configure">
-    <branch module="libunistring/libunistring-1.2.tar.gz"
-            version="1.2"
+    <branch module="libunistring/libunistring-1.3.tar.gz"
+            version="1.3"
+            hash="sha256:8ea8ccf86c09dd801c8cac19878e804e54f707cf69884371130d20bde68386b7"
             repo="ftp.gnu.org" />
   </autotools>
   <autotools id="gettext"
              autogen-sh="configure"
              autogenargs="--without-emacs --disable-java --disable-native-java --disable-libasprintf --disable-csharp --with-included-glib --with-included-libcroco">
-    <branch module="gettext/gettext-0.22.5.tar.xz"
-            version="0.22.5"
-            hash="sha256:fe10c37353213d78a5b83d48af231e005c4da84db5ce88037d88355938259640"
+    <branch module="gettext/gettext-0.23.1.tar.xz"
+            version="0.23.1"
+            hash="sha256:c1f97a72a7385b7e71dd07b5fea6cdaf12c9b88b564976b23bd8c11857af2970"
             repo="ftp.gnu.org" />
     <dependencies>
       <dep package="libiconv" />
@@ -72,9 +70,9 @@
              autogen-sh="bootstrap"
              autogen-template="%(srcdir)s/%(autogen-sh)s --prefix=%(prefix)s"
              bootstrap="true">
-    <branch module="v3.29/cmake-3.29.3.tar.gz"
-            version="3.29.3"
-            hash="sha256:252aee1448d49caa04954fd5e27d189dd51570557313e7b281636716a238bccb"
+    <branch module="v3.31/cmake-3.31.5.tar.gz"
+            version="3.31.5"
+            hash="sha256:66fb53a145648be56b46fa9e8ccade3a4d0dfc92e401e52ce76bdad1fea43d27"
             repo="cmake" />
   </autotools>
   <!-- The version of m4 provided with Xcode is now too old, see
@@ -102,17 +100,17 @@
   <autotools id="autoconf-archive"
              autogen-sh="configure"
              bootstrap="true">
-    <branch module="autoconf-archive/autoconf-archive-2023.02.20.tar.xz"
-            version="2023-02-20"
-            hash="sha256:71d4048479ae28f1f5794619c3d72df9c01df49b1c628ef85fde37596dc31a33"
+    <branch module="autoconf-archive/autoconf-archive-2024.10.16.tar.xz"
+            version="202410-162-20"
+            hash="sha256:7bcd5d001916f3a50ed7436f4f700e3d2b1bade3ed803219c592d62502a57363"
             repo="ftp.gnu.org" />
   </autotools>
   <autotools id="libtool"
              autogen-sh="configure"
              bootstrap="true">
-    <branch module="libtool/libtool-2.4.7.tar.gz"
-            version="2.4.7"
-            hash="sha256:04e96c2404ea70c590c546eba4202a4e12722c640016c12b9b2f1ce3d481e9a8"
+    <branch module="libtool/libtool-2.5.4.tar.gz"
+            version="2.5.4"
+            hash="sha256:da8ebb2ce4dcf46b90098daf962cffa68f4b4f62ea60f798d0ef12929ede6adf"
             repo="ftp.gnu.org">
       <patch file="libtool-apple-sort.patch"
              strip="1" />
@@ -121,9 +119,9 @@
   <autotools id="automake"
              autogen-sh="configure"
              bootstrap="true">
-    <branch module="automake/automake-1.16.5.tar.xz"
-            version="1.16.5"
-            hash="sha256:f01d58cd6d9d77fbdca9eb4bbd5ead1988228fdb73d6f7a201f5f8d6b118b469"
+    <branch module="automake/automake-1.17.tar.xz"
+            version="1.17"
+            hash="sha256:8920c1fc411e13b90bf704ef9db6f29d540e76d232cb3b2c9f4dc4cc599bd990"
             repo="ftp.gnu.org" />
     <dependencies>
       <dep package="autoconf" />
@@ -131,9 +129,9 @@
   </autotools>
   <meson id="pkgconf"
          mesonargs="-Dwith-system-libdir=/usr/lib -Dwith-system-includedir=/usr/include">
-    <branch module="pkgconf-2.2.0.tar.xz"
-            version="2.2.0"
-            hash="sha256:b06ff63a83536aa8c2f6422fa80ad45e4833f590266feb14eaddfe1d4c853c69"
+    <branch module="pkgconf-2.3.0.tar.xz"
+            version="2.3.0"
+            hash="sha256:3a9080ac51d03615e7c1910a0a2a8df08424892b5f13b0628a204d3fcce0ea8b"
             repo="pkgconf">
       <patch file="pkgconf-link-pkg-config.patch"
              strip="1" />
