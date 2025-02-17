@@ -104,9 +104,9 @@
              autogen-sh="source/configure"
              autogenargs="--enable-rpath"
              makeargs='CFLAGS="$CFLAGS -DU_CHARSET_IS_UTF8=1 -DU_USING_ICU_NAMESPACE=0"'>
-    <branch module="unicode-org/icu/releases/download/release-73-2/icu4c-73_2-src.tgz"
-            version="73.2"
-            hash="sha256:818a80712ed3caacd9b652305e01afc7fa167e6f2e94996da44b90c2ab604ce1"
+    <branch module="unicode-org/icu/releases/download/release-76-1/icu4c-76_1-src.tgz"
+            version="76.1"
+
             checkoutdir="icu"
             repo="github-tarball" />
   </autotools>
@@ -201,12 +201,11 @@
       <dep package="cairo" />
       <dep package="harfbuzz" />
       <dep package="fribidi" />
-    </dependencies>
-    <after>
       <dep package="gobject-introspection" />
       <dep package="meta-gtk-osx-bootstrap" />
-    </after>
+    </dependencies>
   </meson>
+<!-- atk is archived and no longer developed. -->
   <meson id="atk">
     <branch />
     <after>
@@ -258,17 +257,38 @@
       <dep package="gobject-introspection" />
     </dependencies>
   </meson>
+  <!-- SASS is required to build Gtk4 from git, not needed for
+       tarballs.  sassc versions are tied to specific libsass versions
+       and 3.6.2 is the last release so we're stuck with libsass 3.6.5
+       unless Gtk4 migrates to Dart-Sass.-->
+  <autotools id="libsass"
+             autogen-sh="autoreconf"
+             autogenargs="--disable-tests --disable-static">
+    <branch module="sass/libsass"
+            repo="github"
+            revision="3.6.5"/>
+  </autotools>
+  <autotools id="sassc"
+             autogen-sh="autoreconf">
+    <branch module="sass/sassc"
+            repo="github"
+            revision="3.6.2"/>
+    <dependencies>
+      <dep package="libsass"/>
+    </dependencies>
+  </autotools>
   <meson id="gtk-4"
          mesonargs="-Dx11-backend=false -Dmedia-gstreamer=disabled">
     <branch module="gtk"
             checkoutdir="gtk-4.0" />
     <dependencies>
-      <dep package="glib" />
-      <dep package="pango" />
-      <dep package="atk" />
-      <dep package="gdk-pixbuf" />
-      <dep package="graphene" />
-      <dep package="libepoxy" />
+      <dep package="glib"/>
+      <dep package="pango"/>
+      <dep package="atk"/>
+      <dep package="gdk-pixbuf"/>
+      <dep package="graphene"/>
+      <dep package="libepoxy"/>
+      <dep package="sassc"/>
     </dependencies>
     <after>
       <dep package="meta-gtk-osx-bootstrap" />
@@ -280,6 +300,9 @@
     <after>
       <dep package="gtk+-3.0" />
     </after>
+  </autotools>
+  <autotools id="libxml2">
+    <branch module="libxml2"/>
   </autotools>
   <meson id="librsvg"
          mesonargs="-Dintrospection=disabled -Ddocs=disabled">

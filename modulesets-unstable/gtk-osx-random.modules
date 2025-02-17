@@ -55,7 +55,8 @@
              autogen-sh="configure">
     <branch module="vala/0.56/vala-0.56.17.tar.xz"
             version="0.56.17"
-            hash="sha256:26100c4e4ef0049c619275f140d97cf565883d00c7543c82bcce5a426934ed6a" />
+            hash="sha256:26100c4e4ef0049c619275f140d97cf565883d00c7543c82bcce5a426934ed6a"
+            repo="download.gnome.org"/>
     <dependencies>
       <dep package="graphviz" />
       <dep package="meta-gtk-osx-bootstrap" />
@@ -216,7 +217,7 @@
   </autotools>
   <meson id="gspell"
         mesonargs="-Dvapi=false -Dgtk_doc=false -Dtests=false -Dinstall_tests=false" >
-    <branch module="gspell" />>
+    <branch module="gspell" />
     <dependencies>
       <dep package="enchant" />
       <dep package="gtk+-3.0" />
@@ -235,20 +236,6 @@
              autogen-sh="configure">
     <branch module="iso-codes"
             repo="iso-codes" />
-  </autotools>
-  <autotools id="libxml2"
-             autogen-sh="autoreconf"
-             autogenargs='--libdir="$JHBUILD_LIBDIR" --with-python'>
-    <branch module="libxml2/2.11/libxml2-2.11.5.tar.xz"
-            version="2.11.5"
-            hash="sha256:3727b078c360ec69fa869de14bd6f75d7ee8d36987b071e6928d4720a28df3a6"
-            repo="download.gnome.org">
-      <patch file="libxml2-python-config.patch"
-             strip="1" />
-    </branch>
-    <after>
-      <dep package="python3" />
-    </after>
   </autotools>
   <autotools id="libxslt"
              autogen-sh="autoreconf">

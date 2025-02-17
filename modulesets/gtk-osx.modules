@@ -64,20 +64,19 @@
              autogenargs="--disable-multi-os-directory --disable-docs">
     <branch module="libffi/libffi"
             repo="github"
-            tag="v3.4.4" />
+            tag="v3.4.7" />
   </autotools>
   <autotools id="libpcre2"
              autogen-sh="configure"
              autogenargs="--enable-pcre2-16 --enable-pcre2-32 --enable-jit">
-    <branch module="PCRE2Project/pcre2/releases/download/pcre2-10.42/pcre2-10.42.tar.bz2"
-            version="10.43"
-            hash="sha256:8d36cd8cb6ea2a4c2bb358ff6411b0c788633a2a45dabbf1aeb4b701d1b5e840"
-            repo="github-tarball" />
+    <branch module="PCRE2Project/pcre2/"
+            revision="release/pcre2-10.45"
+            repo="github" />
   </autotools>
   <meson id="glib-no-introspection"
          mesonargs="-Dlibmount=disabled">
     <branch module="glib"
-            tag="glib-2-82" />
+            tag="glib-2-83" />
     <dependencies>
       <dep package="libffi" />
       <dep package="libpcre2" />
@@ -85,7 +84,7 @@
   </meson>
   <meson id="glib"
          mesonargs="-Dlibmount=disabled">
-    <branch tag="glib-2-82" />
+    <branch tag="glib-2-83" />
     <dependencies>
       <dep package="gobject-introspection" />
     </dependencies>
@@ -98,7 +97,7 @@
          cmakeargs='-DFT_DISABLE_HARFBUZZ=ON -DBUILD_SHARED_LIBS=true -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_NAME_DIR="${JHBUILD_PREFIX}/lib"'>
     <branch module="freetype/freetype2"
             repo="nongnu"
-            revision="VER-2-13-2" />
+            revision="VER-2-13-3" />
     <dependencies>
       <dep package="zlib" />
     </dependencies>
@@ -107,9 +106,9 @@
              autogen-sh="source/configure"
              autogenargs="--enable-rpath"
              makeargs='CFLAGS="$CFLAGS -DU_CHARSET_IS_UTF8=1 -DU_USING_ICU_NAMESPACE=0"'>
-    <branch module="unicode-org/icu/releases/download/release-73-2/icu4c-73_2-src.tgz"
-            version="73.2"
-            hash="sha256:818a80712ed3caacd9b652305e01afc7fa167e6f2e94996da44b90c2ab604ce1"
+    <branch module="unicode-org/icu/releases/download/release-76-1/icu4c-76_1-src.tgz"
+            version="76.1"
+
             checkoutdir="icu"
             repo="github-tarball" />
   </autotools>
@@ -117,7 +116,7 @@
          mesonargs="-Dcoretext=enabled -Dfreetype=enabled -Ddocs=disabled -Dbenchmark=disabled -Dintrospection=disabled -Dtests=disabled">
     <branch module="harfbuzz/harfbuzz"
             repo="github"
-            tag="8.5.0" />
+            tag="10.2.0" />
     <dependencies>
       <dep package="glib-no-introspection" />
       <dep package="freetype-no-harfbuzz" />
@@ -131,7 +130,7 @@
          cmakeargs='-DFT_REQUIRE_HARFBUZZ=ON -DBUILD_SHARED_LIBS=true -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_NAME_DIR="${JHBUILD_PREFIX}/lib"'>
     <branch module="freetype/freetype2"
             repo="nongnu"
-            revision="VER-2-13-2" />
+            revision="VER-2-13-3" />
     <dependencies>
       <dep package="harfbuzz-no-cairo" />
       <dep package="zlib" />
@@ -141,7 +140,7 @@
          mesonargs="-Ddoc=disabled -Ddefault-fonts-dirs=/System/Library/Fonts -Dadditional-fonts-dirs=/Library/Fonts">
     <branch module="fontconfig/fontconfig"
             repo="freedesktop"
-            tag="2.15.0" />
+            tag="2.16.0" />
     <dependencies>
       <dep package="freetype" />
     </dependencies>
@@ -150,7 +149,7 @@
          mesonargs="-Dgtk=disabled -Dmmx=disabled -Da64-neon=disabled">
     <branch module="pixman/pixman"
             repo="freedesktop"
-            revision="pixman-0.42.2" />
+            revision="pixman-0.44.2" />
     <after>
       <dep package="meta-gtk-osx-bootstrap" />
     </after>
@@ -162,7 +161,7 @@
           mesonargs="-Dfontconfig=enabled -Dfreetype=enabled">
     <branch module="cairo/cairo"
             repo="freedesktop"
-            tag="1.18.0" />
+            tag="1.18.2" />
     <dependencies>
       <dep package="pixman" />
       <dep package="meta-gtk-osx-bootstrap" />
@@ -188,7 +187,7 @@
          mesonargs="-Dcoretext=enabled -Dfreetype=enabled -Ddocs=disabled -Dbenchmark=disabled">
     <branch module="harfbuzz/harfbuzz"
             repo="github"
-            tag="8.5.0" />
+            tag="10.2.0" />
     <dependencies>
       <dep package="gobject-introspection" />
       <dep package="cairo" />
@@ -206,17 +205,15 @@
   </meson>
   <meson id="pango"
          mesonargs="-Dfontconfig=enabled">
-    <branch tag="1.55.5" />
+    <branch tag="1.56.1" />
     <dependencies>
       <dep package="glib" />
       <dep package="cairo" />
       <dep package="harfbuzz" />
       <dep package="fribidi" />
-    </dependencies>
-    <after>
       <dep package="gobject-introspection" />
       <dep package="meta-gtk-osx-bootstrap" />
-    </after>
+    </dependencies>
   </meson>
 <!-- ATK is retired and archived. There are only housekeeping commits since tagging 3.38.0 so we might as well use master. -->
   <meson id="atk">
@@ -274,18 +271,39 @@
       <dep package="gobject-introspection" />
     </dependencies>
   </meson>
+  <!-- SASS is required to build Gtk4 from git, not needed for
+       tarballs.  sassc versions are tied to specific libsass versions
+       and 3.6.2 is the last release so we're stuck with libsass 3.6.5
+       unless Gtk4 migrates to Dart-Sass.-->
+ <autotools id="libsass"
+             autogen-sh="autoreconf"
+             autogenargs="--disable-tests --disable-static">
+    <branch module="sass/libsass"
+            repo="github"
+            revision="3.6.6"/>
+  </autotools>
+  <autotools id="sassc"
+             autogen-sh="autoreconf">
+    <branch module="sass/sassc"
+            repo="github"
+            revision="3.6.2"/>
+    <dependencies>
+      <dep package="libsass"/>
+    </dependencies>
+  </autotools>
   <meson id="gtk-4"
          mesonargs="-Dx11-backend=false -Dmedia-gstreamer=disabled">
     <branch module="gtk"
             checkoutdir="gtk-4.0"
-            revision="gtk-4-14" />
+            revision="gtk-4-16" />
     <dependencies>
-      <dep package="glib" />
-      <dep package="pango" />
-      <dep package="atk" />
-      <dep package="gdk-pixbuf" />
-      <dep package="graphene" />
-      <dep package="libepoxy" />
+      <dep package="glib"/>
+      <dep package="pango"/>
+      <dep package="atk"/>
+      <dep package="gdk-pixbuf"/>
+      <dep package="graphene"/>
+      <dep package="libepoxy"/>
+      <dep package="sassc"/>
     </dependencies>
     <after>
       <dep package="meta-gtk-osx-bootstrap" />
@@ -299,10 +317,14 @@
       <dep package="gtk+-3.0" />
     </dependencies>
   </autotools>
-    <meson id="librsvg"
+  <autotools id="libxml2">
+   <branch module="libxml2"
+            revision="2.13"/>
+  </autotools>
+  <meson id="librsvg"
          mesonargs="-Dintrospection=disabled -Ddocs=disabled">
       <branch module="librsvg"
-              branch="librsvg-2.58" />
+              branch="librsvg-2.59" />
     <dependencies>
       <dep package="libxml2" />
       <dep package="cairo" />
@@ -312,7 +334,7 @@
     </dependencies>
   </meson>
   <meson id="adwaita-icon-theme">
-    <branch branch="gnome-46" />
+    <branch branch="gnome-47" />
     <dependencies>
       <dep package="librsvg" />
     </dependencies>

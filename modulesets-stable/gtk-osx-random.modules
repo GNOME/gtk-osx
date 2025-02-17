@@ -254,19 +254,6 @@
             repo="iso-codes"
             revision="v4.16.0" />
   </autotools>
-  <autotools id="libxml2"
-             autogen-sh="autoreconf"
-             autogenargs='--libdir="$JHBUILD_LIBDIR" --with-python'>
-    <branch module="libxml2/2.11/libxml2-2.11.5.tar.xz"
-            version="2.11.5"
-            hash="sha256:3727b078c360ec69fa869de14bd6f75d7ee8d36987b071e6928d4720a28df3a6">
-      <patch file="libxml2-python-config.patch"
-             strip="1" />
-    </branch>
-    <after>
-      <dep package="python3" />
-    </after>
-  </autotools>
   <autotools id="libxslt"
              autogen-sh="autoreconf">
     <branch module="libxslt/1.1/libxslt-1.1.39.tar.xz"
