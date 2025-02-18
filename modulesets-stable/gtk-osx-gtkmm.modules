@@ -19,8 +19,7 @@
   </meson>
   <!-- Libsigc++ was rewritten to use C++17 variadic templates for version 3, and
        adopting that has created substantial API breaks for the whole "mm" stack.
-       gtkmm3 uses the older versions, gtkmm4 the new ones.
-       Note that C++17 is supported only on macOS-10.13 and later. -->
+       gtkmm3 uses the older versions, gtkmm4 the new ones. -->
   <meson id="cairomm3">
     <branch module="cairomm-1.14.5.tar.xz"
             version="1.14.5"
@@ -50,9 +49,9 @@
     </dependencies>
   </meson>
   <meson id="glibmm">
-    <branch module="glibmm/2.80/glibmm-2.80.0.tar.xz"
-            version="2.80.0"
-            hash="sha256:539b0a29e15a96676c4f0594541250566c5ca44da5d4d87a3732fa2d07909e4a">
+    <branch module="glibmm/2.83/glibmm-2.83.1.tar.xz"
+            version="2.83.1"
+            hash="sha256:68350a823c33da8acfb1263715bb002a36c68346bd44c19ac4c3f0bd190fd2b1">
     </branch>
     <dependencies>
       <dep package="glib" />
@@ -74,9 +73,9 @@
     </dependencies>
   </meson>
   <meson id="pangomm">
-    <branch module="pangomm/2.52/pangomm-2.52.0.tar.xz"
-            version="2.52.0"
-            hash="sha256:34a134126a6484ff12f774358c36ecc44d0e9df094e1b83796d9774bb7d24947" />
+    <branch module="pangomm/2.56/pangomm-2.56.1.tar.xz"
+            version="2.56.1"
+            hash="sha256:539f5aa60e9bdc6b955bb448e2a62cc14562744df690258040fbb74bf885755d" />
     <dependencies>
       <dep package="glibmm" />
       <dep package="cairomm" />
@@ -94,6 +93,7 @@
       <dep package="atk" />
     </dependencies>
   </meson>
+  <!-- atkmm is no longer developed and is archived. 2.36.3 was the last release. -->
   <meson id="atkmm">
     <branch module="atkmm/2.36/atkmm-2.36.3.tar.xz"
             version="2.36.3"
@@ -131,9 +131,9 @@
     </dependencies>
   </meson>
   <meson id="gtkmm4">
-    <branch module="gtkmm/4.14/gtkmm-4.14.0.tar.xz"
-            version="4.14.0"
-            hash="sha256:9350a0444b744ca3dc69586ebd1b6707520922b6d9f4f232103ce603a271ecda" />
+    <branch module="gtkmm/4.16/gtkmm-4.16.0.tar.xz"
+            version="4.16.0"
+            hash="sha256:3b23fd3abf8fb223b00e9983b6010af2db80e38c89ab6994b8b6230aa85d60f9" />
     <dependencies>
       <dep package="glibmm" />
       <dep package="cairomm" />

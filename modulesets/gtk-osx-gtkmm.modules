@@ -16,14 +16,31 @@
               href="https://github.com"
               type="git" />
   <!-- mm-common is C++ glue code needed only to build from git. -->
+   <cmake id="boost" cmakeargs="-DLIBRARIES='date_time;regex;locale;filesystem;program_options;system'">
+    <branch module="boost/boost_1_87_0.tar.bz2" version="1.87.0" 
+
+            repo="sourceforge">
+      <patch file="boost-cmake.patch" strip="1"/>
+    </branch>
+    <after>
+      <dep package="icu"/>
+    </after>
+    </cmake>
+    <cmake id="doxygen">
+      <branch module="doxygen/doxygen"
+              repo="github" />
+    </cmake>
   <meson id="mm-common">
-    <branch module="mm-common"
-            tag="master" />
+    <branch module="mm-common" />
+    <dependencies>
+      <dep package="boost"/>
+      <dep package="doxygen"/>
+    </dependencies>
   </meson>
   <!-- Libsigc++ was rewritten to use C++17 variadic templates for version 3, and
        adopting that has created substantial API breaks for the whole "mm" stack.
-       gtkmm3 uses the older versions, gtkmm4 the new ones.
-       Note that C++17 is supported only on macOS-10.13 and later. -->
+       gtkmm3 uses the older versions, gtkmm4 the new ones. -->
+
   <meson id="cairomm3">
     <branch module="cairomm"
             repo="cairographics"
@@ -51,7 +68,7 @@
     </dependencies>
   </meson>
   <meson id="glibmm">
-    <branch revision="glibmm-2-80" />
+    <branch revision="glibmm-2-83" />
     <dependencies>
       <dep package="libsigc++3" />
     </dependencies>
@@ -131,7 +148,7 @@
   </meson>
   <meson id="gtkmm4">
     <branch module="gtkmm"
-            revision="4.14.0" />
+            revision="4.16.0" />
     <dependencies>
       <dep package="glibmm" />
       <dep package="cairomm" />
