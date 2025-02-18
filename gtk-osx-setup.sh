@@ -135,7 +135,10 @@ if test ! -x "$NINJA" -a ! -x "$DEVPREFIX/bin/ninja"; then
     rm "$DEVPREFIX/ninja-mac.zip"
 fi
 
-#Install Rust (required for librsvg, which gtk needs to render its icons.)
+# Install Rust (required for librsvg, which gtk needs to render its icons.)
+# Cross compilation note: To enable x86_64 rust builds on an Apple Silicon mac, run
+# rustup toolchain install stable-x86_64-apple-darwin
+# and edit the default toolchain in $DEVPREFIX/settings.toml to match.
 RUSTUP=`which rustup`
 if test -x "$RUSTUP"; then
     case `dirname "$RUSTUP"` in
