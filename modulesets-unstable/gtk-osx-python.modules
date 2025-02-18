@@ -69,16 +69,14 @@
       <dep package="pygobject3" />
     </dependencies>
   </autotools>
-  <distutils id="pygments">
-    <branch module="d6/f7/4d461ddf9c2bcd6a4d7b2b139267ca32a69439387cc1f02a924ff8883825/Pygments-2.16.1.tar.gz"
-            version="2.16.1"
-            hash="1daff0494820c69bc8941e407aa20f577374ee88364ee10a98fdbe0aece96e29"
+   <pip id="pygments">
+    <branch module="7c/2d/c3338d48ea6cc0feb8446d8e6937e1408088a72a39937982cc6111d17f84/pygments-2.19.1.tar.gz"
+            version="2.19.1"
+            hash="61c16d2a8576dc0649d9f39e089b5f02bcd27fba10d8fb4dcc28173f7a45151f"
             repo="pymodules">
-      <patch file="Pygments-setup-py.patch"
-             strip="1" />
     </branch>
     <dependencies>
       <dep package="python3" />
     </dependencies>
-  </distutils>
+  </pip>
 </moduleset>
