@@ -45,3 +45,51 @@
  }
  #endif
 
+--- a/Source/WebCore/platform/LayoutUnit.h
++++ b/Source/WebCore/platform/LayoutUnit.h
+@@ -83,7 +83,7 @@
+     {
+         m_value = clampToInteger(value * kFixedPointDenominator);
+     }
+-
++    LayoutUnit(const LayoutUnit& other) = default;
+     LayoutUnit& operator=(const LayoutUnit& other) = default;
+     LayoutUnit& operator=(const float& other) { return *this = LayoutUnit(other); }
+ 
+
+--- a/Source/WebCore/xml/XSLStyleSheetLibxslt.cpp
++++ b/Source/WebCore/xml/XSLStyleSheetLibxslt.cpp
+@@ -139,7 +139,8 @@
+     if (frame && frame->page())
+         console = &frame->page()->console();
+ 
+-    XMLDocumentParserScope scope(cachedResourceLoader(), XSLTProcessor::genericErrorFunc, XSLTProcessor::parseErrorFunc, console);
++    XMLDocumentParserScope scope(cachedResourceLoader(), XSLTProcessor::genericErrorFunc,
++                                 (xmlStructuredErrorFunc)XSLTProcessor::parseErrorFunc, console);
+ 
+     auto upconvertedCharacters = StringView(string).upconvertedCharacters();
+     const char* buffer = reinterpret_cast<const char*>(upconvertedCharacters.get());
+
+--- a/Source/WebCore/xml/XSLTProcessorLibxslt.cpp
++++ b/Source/WebCore/xml/XSLTProcessorLibxslt.cpp
+@@ -130,7 +130,7 @@
+         Frame* frame = globalProcessor->xslStylesheet()->ownerDocument()->frame();
+         if (frame && frame->page())
+             console = &frame->page()->console();
+-        xmlSetStructuredErrorFunc(console, XSLTProcessor::parseErrorFunc);
++        xmlSetStructuredErrorFunc(console, (xmlStructuredErrorFunc)XSLTProcessor::parseErrorFunc);
+         xmlSetGenericErrorFunc(console, XSLTProcessor::genericErrorFunc);
+ 
+         // We don't specify an encoding here. Neither Gecko nor WinIE respects
+
+--- a/Source/WTF/wtf/Platform.h
++++ b/Source/WTF/wtf/Platform.h
+@@ -115,6 +115,7 @@
+ /* ICU configuration. Some of these match ICU defaults on some platforms, but we would like them consistently set everywhere we build WebKit. */
+ #define U_HIDE_DEPRECATED_API 1
+ #define U_SHOW_CPLUSPLUS_API 0
++#define U_SHOW_CPLUSPLUS_HEADER_API 0
+ #ifdef __cplusplus
+ #define UCHAR_TYPE char16_t
+ #endif
+

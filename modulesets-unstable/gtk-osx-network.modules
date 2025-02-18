@@ -51,9 +51,9 @@
              autogenargs="shared"
              makeinstallargs="install_sw"
              supports-non-srcdir-builds="no">
-    <branch module="openssl/openssl/releases/download/openssl-3.3.1/openssl-3.3.1.tar.gz"
-            version="3.3.1"
-            hash="sha256:777cd596284c883375a2a7a11bf5d2786fc5413255efab20c50d6ffe6d020b7e"
+    <branch module="openssl/openssl/releases/download/openssl-3.4.1/openssl-3.4.1.tar.gz"
+            version="3.4.1"
+            hash="sha256:002a2d6b30b58bf4bea46c43bdd96365aaf8daa6c428782aa4feee06da197df3"
             repo="github-tarball" />
   </autotools>
   <autotools id="libnettle"
@@ -69,9 +69,9 @@
   <autotools id="libtasn1"
              autogen-sh="configure">
     <!-- Git repository is missing GnuLib files required to build libtasn1 -->
-    <branch module="libtasn1/libtasn1-4.19.0.tar.gz"
-            version="4.19.0"
-            hash="sha256:1613f0ac1cf484d6ec0ce3b8c06d56263cc7242f1c23b30d82d23de345a63f7a"
+    <branch module="libtasn1/libtasn1-4.20.0.tar.gz"
+            version="4.20.0"
+            hash="sha256:92e0e3bd4c02d4aeee76036b2ddd83f0c732ba4cda5cb71d583272b23587a76c"
             repo="ftp.gnu.org" />
   </autotools>
   <cmake id="zlib"
@@ -96,9 +96,9 @@
   <autotools id="gnutls"
              autogen-sh="autoreconf"
              autogenargs="--disable-doc --with-included-unistring">
-    <branch module="gcrypt/gnutls/v3.8/gnutls-3.8.5.tar.xz"
-            version="3.8.5"
-            hash="sha256:66269a2cfe0e1c2dabec87bdbbd8ab656f396edd9a40dd006978e003cfa52bfc"
+    <branch module="gcrypt/gnutls/v3.8/gnutls-3.8.9.tar.xz"
+            version="3.8.9"
+            hash="sha256:09120c9867ce7f2081d6aaa1775386b98c2f2f246135761aae47d81f58685b9c"
             repo="gnupg.org">
       <patch file="gnutls-pkg-config-pc.patch"
              strip="1" />
@@ -171,15 +171,15 @@
       <dep package="libproxy" />
     </dependencies>
   </meson>
+  <autotools id="libpsl"
+             autogen-sh="autoreconf">
+    <branch module="rockdaboot/libpsl"
+            repo="github" />
+  </autotools>
   <autotools id="nghttp2"
              autogen-sh="autoreconf"
              autogenargs="--enable-lib-only">
     <branch module="nghttp2/nghttp2"
-            repo="github" />
-  </autotools>
-  <autotools id="libpsl"
-             autogen-sh="autoreconf">
-    <branch module="rockdaboot/libpsl"
             repo="github" />
   </autotools>
   <meson id="libsoup"

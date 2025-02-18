@@ -47,9 +47,9 @@
              autogen-template="%(srcdir)s/%(autogen-sh)s --prefix=%(prefix)s --openssldir=%(prefix)s/etc/ssl %(autogenargs)s"
              makeinstallargs="install_sw"
              supports-non-srcdir-builds="no">
-    <branch module="openssl/openssl/releases/download/openssl-3.3.1/openssl-3.3.1.tar.gz"
-            version="3.3.1"
-            hash="sha256:777cd596284c883375a2a7a11bf5d2786fc5413255efab20c50d6ffe6d020b7e"
+    <branch module="openssl/openssl/releases/download/openssl-3.4.1/openssl-3.4.1.tar.gz"
+            version="3.4.1"
+            hash="sha256:002a2d6b30b58bf4bea46c43bdd96365aaf8daa6c428782aa4feee06da197df3"
             repo="github-tarball" />
   </autotools>
   <!-- Rudely demands TeX to build documentation
@@ -58,9 +58,9 @@
     <autotools id="libnettle"
                autogen-sh="configure"
                autogenargs="--disable-documentation --disable-assembler">
-      <branch module="nettle/nettle-3.9.1.tar.gz"
-              version="3.9.1"
-              hash="sha256:ccfeff981b0ca71bbd6fbcb054f407c60ffb644389a5be80d6716d5b550c6ce3"
+      <branch module="nettle/nettle-3.10.1.tar.gz"
+              version="3.10.1"
+              hash="sha256:b0fcdd7fc0cdea6e80dcf1dd85ba794af0d5b4a57e26397eee3bc193272d9132"
               repo="ftp.gnu.org" />
       <dependencies>
         <dep package="gmp" />
@@ -72,9 +72,9 @@
     <autotools id="libnettle"
                autogen-sh="configure"
                autogenargs="--disable-documentation">
-      <branch module="nettle/nettle-3.9.1.tar.gz"
-              version="3.9.1"
-              hash="sha256:ccfeff981b0ca71bbd6fbcb054f407c60ffb644389a5be80d6716d5b550c6ce3"
+      <branch module="nettle/nettle-3.10.1.tar.gz"
+              version="3.10.1"
+              hash="sha256:b0fcdd7fc0cdea6e80dcf1dd85ba794af0d5b4a57e26397eee3bc193272d9132"
               repo="ftp.gnu.org" />
       <dependencies>
         <dep package="gmp" />
@@ -87,9 +87,9 @@
     <!-- Git repository is missing GnuLib files required to build libtasn1
     <branch repo="git.gnu.org" tag="libtasn1_4_4"  module="libtasn1"/>
     -->
-    <branch module="libtasn1/libtasn1-4.19.0.tar.gz"
-            version="4.19.0"
-            hash="sha256:1613f0ac1cf484d6ec0ce3b8c06d56263cc7242f1c23b30d82d23de345a63f7a"
+    <branch module="libtasn1/libtasn1-4.20.0.tar.gz"
+            version="4.20.0"
+            hash="sha256:92e0e3bd4c02d4aeee76036b2ddd83f0c732ba4cda5cb71d583272b23587a76c"
             repo="ftp.gnu.org" />
   </autotools>
   <cmake id="zlib"
@@ -102,8 +102,9 @@
   <autotools id="p11-kit"
              autogen-sh="autoreconf"
              autogenargs="--without-trust-paths">
-    <branch module="p11-glue/p11-kit/releases/download/0.25.3/p11-kit-0.25.3.tar.xz"
-            version="0.25.3"
+    <branch module="p11-glue/p11-kit/releases/download/0.25.5/p11-kit-0.25.5.tar.xz"
+            version="0.25.5"
+            hash="sha256:04d0a86450cdb1be018f26af6699857171a188ac6d5b8c90786a60854e1198e5"
             repo="github-tarball">
       <patch file="p11-kit-libintl.patch"
              strip="1" />
@@ -118,9 +119,9 @@
   <autotools id="gnutls"
              autogen-sh="autoreconf"
              autogenargs="--disable-doc --with-included-unistring">
-    <branch module="gcrypt/gnutls/v3.8/gnutls-3.8.5.tar.xz"
-            version="3.8.5"
-            hash="sha256:66269a2cfe0e1c2dabec87bdbbd8ab656f396edd9a40dd006978e003cfa52bfc"
+    <branch module="gcrypt/gnutls/v3.8/gnutls-3.8.9.tar.xz"
+            version="3.8.9"
+            hash="sha256:09120c9867ce7f2081d6aaa1775386b98c2f2f246135761aae47d81f58685b9c"
             repo="gnupg.org">
       <patch file="gnutls-pkg-config-pc.patch"
              strip="1" />
@@ -140,14 +141,14 @@
              autogenargs="--disable-doc">
     <branch module="libgpg-error"
             repo="git.gnupg.org"
-            revision="libgpg-error-1.49" />
+            revision="libgpg-error-1.51" />
   </autotools>
   <autotools id="libgcrypt"
              autogen-sh="autoreconf"
              autogenargs="--disable-asm --disable-doc">
     <branch module="libgcrypt"
             repo="git.gnupg.org"
-            revision="libgcrypt-1.10.3" />
+            revision="libgcrypt-1.11.0" />
     <dependencies>
       <dep package="libgpg-error" />
     </dependencies>
@@ -155,7 +156,7 @@
   <meson id="libsecret"
          mesonargs="-Dvapi=disabled -Dgtk_doc=disabled">
     <branch module="libsecret"
-            revision="0.21.4" />
+            revision="0.21.6" />
     <dependencies>
       <dep package="glib" />
       <dep package="libgcrypt" />
@@ -163,7 +164,7 @@
   </meson>
   <meson id="gcr">
     <branch module="gcr"
-            revision="4.3.0" />
+            revision="4.3.1" />
     <dependencies>
       <dep package="p11-kit" />
       <dep package="gpg" />
@@ -174,7 +175,7 @@
   <autotools id="gnome-keyring"
              autogenargs="--disable-pam --without-root-certs">
     <branch module="gnome-keyring"
-            revision="46.1" />
+            revision="46.2" />
     <dependencies>
       <dep package="libgcrypt" />
       <dep package="gcr" />
@@ -182,18 +183,18 @@
   </autotools>
   <meson id="gsettings-desktop-schema"
          mesonargs="-Ddocs=false -Dtests=false -Dpacrunner-duktape=false -Dvapi=false -Dcurl=false -Dintrospection=false">
-    <branch revision="46.0" />
+    <branch revision="47.1" />
   </meson>
   <meson id="libproxy"
          mesonargs="-Ddocs=false -Dtests=false -Dpacrunner-duktape=false -Dvapi=false -Dcurl=false -Dintrospection=false">
     <branch module="libproxy/libproxy"
             repo="github"
-            revision="0.5.6" />
+            revision="0.5.9" />
   </meson>
   <meson id="glib-networking"
          mesonargs="-Dopenssl=enabled">
     <branch module="glib-networking"
-            revision="2.80.0" />
+            revision="2.80.1" />
     <dependencies>
       <dep package="gnutls" />
       <dep package="glib" />
@@ -219,7 +220,7 @@
   <cmake id="libnghttp2"
          cmakeargs="-DENABLE_LIB_ONLY=ON -DENABLE_DOC=OFF -DWITH_LIBXML2=OFF -DWITH_JEMALLOC=OFF -DWITH_MRUBY=OFF -DWITH_NEVERBLEED=OFF -DWITH_LIBBPF=OFF">
     <branch module="nghttp2/nghttp2"
-            branch="v1.62.x"
+            tag="v1.64.0"
             repo="github" />
     <dependencies>
       <dep package="openssl" />
@@ -228,7 +229,8 @@
   </cmake>
   <meson id="libsoup3"
          mesonargs="-Dvapi=disabled">
-    <branch revision="libsoup-3-5" />
+    <branch module="libsoup"
+            tag="3.6.4" />
     <dependencies>
       <dep package="libpsl" />
       <dep package="python3" />
@@ -243,7 +245,7 @@
              autogenargs="--enable-libwebpmux --enable-libwebpdecoder">
     <branch module="webm/libwebp"
             repo="chromium"
-            revision="1.4.0" />
+            revision="1.5.0" />
   </autotools>
   <!-- This is the stable release of WebKitGTK, for GTK 3.x. Use it if you need
        the WebKit2 API.
@@ -264,7 +266,7 @@
        USE_WOFF2: Requires Woff2. No module for this
        USE_WPE_RENDERER: For embedded systems, not Macs. -->
   <cmake id="webkit2gtk3"
-         cmakeargs='-DPORT=GTK -DENABLE_X11_TARGET=OFF -DENABLE_QUARTZ_TARGET=ON -DENABLE_MINIBROWSER=ON -DENABLE_INTROSPECTION=OFF -DUSE_SYSTEMD=OFF -DENABLE_VIDEO=OFF -DENABLE_WEB_AUDIO=OFF -DENABLE_GEOLOCATION=OFF -DUSE_LIBNOTIFY=OFF -DUSE_LIBHYPHEN=OFF -DUSE_LIBSECRET=OFF -DENABLE_TOUCH_EVENTS=OFF -DUSE_OPENJPEG=OFF -DUSE_WOFF2=OFF -DUSE_WPE_RENDERER=OFF -DENABLE_GRAPHICS_CONTEXT_GL=OFF -DENABLE_GAMEPAD=OFF -DUSE_APPLE_ICU=NO -DCMAKE_CXX_FLAGS="-stdlib=libc++" -DCMAKE_MACOSX_RPATH=OFF -DCMAKE_INSTALL_NAME_DIR="${JHBUILD_PREFIX}/lib"'>
+         cmakeargs='-DPORT=GTK -DENABLE_X11_TARGET=OFF -DENABLE_QUARTZ_TARGET=ON -DENABLE_MINIBROWSER=ON -DENABLE_INTROSPECTION=OFF -DUSE_SYSTEMD=OFF -DENABLE_VIDEO=OFF -DENABLE_WEB_AUDIO=OFF -DENABLE_GEOLOCATION=OFF -DUSE_LIBNOTIFY=OFF -DUSE_LIBHYPHEN=OFF -DUSE_LIBSECRET=OFF -DENABLE_TOUCH_EVENTS=OFF -DUSE_OPENJPEG=OFF -DUSE_WOFF2=OFF -DUSE_WPE_RENDERER=OFF -DENABLE_GRAPHICS_CONTEXT_GL=OFF -DENABLE_GAMEPAD=OFF -DUSE_APPLE_ICU=NO -DCMAKE_CXX_FLAGS="-stdlib=libc++ -Wno-deprecated-declarations" -DCMAKE_MACOSX_RPATH=OFF -DCMAKE_INSTALL_NAME_DIR="${JHBUILD_PREFIX}/lib"'>
     <branch module="webkitgtk-2.32.0.tar.xz"
             version="2.32.0"
             hash="sha256:9d7df4dae9ada2394257565acc2a68ace9308c4c61c3fcc00111dc1f11076bf0"
