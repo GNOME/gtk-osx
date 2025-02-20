@@ -82,9 +82,9 @@
   </autotools>
   <meson id="glib-no-introspection"
          mesonargs="-Dlibmount=disabled -Dintrospection=disabled">
-    <branch module="glib/2.83/glib-2.83.3.tar.xz"
-            version="2.83.3"
-            hash="sha256:d0c65318bb2e3fa594277cf98a71cffaf5f666c078db39dcec121757b2ba328d" >
+    <branch module="glib/2.83/glib-2.83.4.tar.xz"
+            version="2.83.4"
+            hash="sha256:4edc4dc184f46d1220694b7775c5d7c62265c83b0e9632d844da127c181fc391" >
     </branch>
     <dependencies>
       <dep package="libffi" />
