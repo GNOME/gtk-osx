@@ -161,7 +161,7 @@ if test -x "$RUSTUP"; then
 else
     envvar CARGO_HOME "$DEVPREFIX"
     envvar RUSTUP_HOME "$DEVPREFIX"
-    curl https://sh.rustup.rs -sSf | sh -s -- -y --profile minimal --no-modify-path
+    curl https://sh.rustup.rs -sSf | sh -s -- -y --profile minimal --no-modify-path > /dev/null
 fi
 
 if test ! -d "$DEVPREFIX/etc" ; then
@@ -245,7 +245,9 @@ if test ! -x "$DEVPREFIX/libexec/run_jhbuild.py" ; then
     chmod +x "$DEVPREFIX/libexec/run_jhbuild.py"
 fi
 if test "x`echo $PATH | grep "$DEVPREFIX/bin"`" == x ; then
-    echo "PATH does not contain $DEVPREFIX/bin. You probably want to fix that."
+    echo "***********"
+    echo "PATH does not contain $DEVPREFIX/bin. You probably want to fix that.\n*"
+    echo "***********"
     export PATH="$DEVPREFIX/bin:$PATH"
 fi
 
