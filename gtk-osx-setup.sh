@@ -65,6 +65,14 @@ if test ! -d "$DEVPREFIX/bin" ; then
     mkdir -p "$DEVPREFIX/bin"
 fi
 
+ARCH=arm64
+if test "$(arch)x" = "i386x"; then
+    ARCH=x86_64
+elif test "$(arch)x" != "arm64x"; then
+    echo "Unknown architecture $(arch), aborting!"
+    exit 1
+fi
+
 GITLAB="https://gitlab.gnome.org/GNOME"
 GITHUB="https://github.com"
 
@@ -198,7 +206,7 @@ export LANG=C
 EOF
 
 cat <<EOF > "$DEVPREFIX/bin/jhbuild"
-#!$DEVPREFIX/bin/bash
+#!/usr/bin/arch -$ARCH $DEVPREFIX/bin/bash
 export DEVROOT="$DEVROOT"
 export DEVPREFIX="$DEVPREFIX"
 export PYTHONUSERBASE="$PYTHONUSERBASE"
@@ -218,7 +226,7 @@ if test ! -d "$DEVPREFIX/libexec" ; then
     mkdir -p "$DEVPREFIX/libexec"
 fi
 cat <<EOF > "$DEVPREFIX/libexec/run_jhbuild.py"
-#!/usr/bin/env python3
+#!/usr/bin/env /usr/bin/arch -$ARCH python3
 # -*- coding: utf-8 -*-
 
 import sys

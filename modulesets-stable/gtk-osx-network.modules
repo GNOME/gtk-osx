@@ -115,11 +115,13 @@
              strip="1" />
     </branch>
     <dependencies>
+      
       <dep package="libnettle" />
       <dep package="libtasn1" />
-      <dep package="zlib" />
-      <dep package="p11-kit" />
       <dep package="libgcrypt" />
+      <dep package="meta-gtk-osx-bootstrap"/>
+      <dep package="p11-kit" />
+      <dep package="zlib" />
     </dependencies>
   </autotools>
   <autotools id="libgpg-error"
