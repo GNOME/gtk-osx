@@ -149,7 +149,7 @@
             version="3.49.1"
             hash="sha256:106642d8ccb36c5f7323b64e4152e9b719f7c0215acf5bfeac3d5e7f97b59254"
             repo="sqlite"  >
-      <patch file="sqliet3-install-name.patch" />
+      <patch file="sqlite3-install-name.patch" />
     </branch>
     <dependencies>
       <dep package="readline" />
