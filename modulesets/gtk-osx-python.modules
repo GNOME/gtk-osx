@@ -38,6 +38,7 @@
       <dep package="readline" />
       <!-- for hashlib -->
       <dep package="openssl" />
+      <dep package="zlib"/>
     </dependencies>
     <after>
       <dep package="sqlite" />
