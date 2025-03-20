@@ -222,7 +222,7 @@
     </dependencies>
   </meson>
   <cmake id="libnghttp2"
-         cmakeargs="-DENABLE_LIB_ONLY=ON -DENABLE_DOC=OFF -DWITH_LIBXML2=OFF -DWITH_JEMALLOC=OFF -DWITH_MRUBY=OFF -DWITH_NEVERBLEED=OFF -DWITH_LIBBPF=OFF">
+         cmakeargs='-DENABLE_LIB_ONLY=ON -DENABLE_DOC=OFF -DWITH_LIBXML2=OFF -DWITH_JEMALLOC=OFF -DWITH_MRUBY=OFF -DWITH_NEVERBLEED=OFF -DWITH_LIBBPF=OFF -DCMAKE_INSTALL_NAME_DIR="${JHBUILD_PREFIX}/lib"'>
     <branch module="nghttp2/nghttp2/releases/download/v1.64.0/nghttp2-1.64.0.tar.xz"
             version="1.64.0"
             hash="sha256:88bb94c9e4fd1c499967f83dece36a78122af7d5fb40da2019c56b9ccc6eb9dd"

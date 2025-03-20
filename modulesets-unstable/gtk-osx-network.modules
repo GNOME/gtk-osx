@@ -176,12 +176,11 @@
     <branch module="rockdaboot/libpsl"
             repo="github" />
   </autotools>
-  <autotools id="nghttp2"
-             autogen-sh="autoreconf"
-             autogenargs="--enable-lib-only">
+  <cmake id="libnghttp2"
+         cmakeargs='-DENABLE_LIB_ONLY=ON -DENABLE_DOC=OFF -DWITH_LIBXML2=OFF -DWITH_JEMALLOC=OFF -DWITH_MRUBY=OFF -DWITH_NEVERBLEED=OFF -DWITH_LIBBPF=OFF -DCMAKE_INSTALL_NAME_DIR="${JHBUILD_PREFIX}/lib"'>
     <branch module="nghttp2/nghttp2"
             repo="github" />
-  </autotools>
+  </cmake>
   <meson id="libsoup"
          mesonargs="-Dvapi=disabled">
     <branch />
@@ -191,7 +190,7 @@
       <dep package="sqlite" />
       <dep package="glib" />
       <dep package="glib-networking" />
-      <dep package="nghttp2" />
+      <dep package="libnghttp2" />
     </dependencies>
   </meson>
   <autotools id="libwebp"
