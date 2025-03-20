@@ -39,12 +39,12 @@
   <autotools id="graphviz"
              autogen-sh="autoreconf"
              autogenargs="--disable-sharp --disable-guile --disable-java --disable-lua --disable-ocaml --disable-perl --disable-php --disable-r --disable-ruby --disable-tcl --with-pangocairo">
-      <patch file="graphviz-11-fix-python-config.patch"
-             strip="1" />
     <branch module="12.2.1/graphviz-12.2.1.tar.xz"
             version="12.2.1"
             hash="sha256:85e34b5c982777c30f01dfab9ea7c713b4335a2f584e62c0abb9868413eb915b"
             repo="graphviz">
+      <patch file="graphviz-11-fix-python-config.patch"
+             strip="1" />
     </branch>
     <dependencies>
       <dep package="pango" />
@@ -244,7 +244,8 @@
              autogen-sh="autoreconf">
     <branch module="libxslt/1.1/libxslt-1.1.42.tar.xz"
             version="1.1.42"
-            hash="sha256:85ca62cac0d41fc77d3f6033da9df6fd73d20ea2fc18b0a3609ffb4110e1baeb">
+            hash="sha256:85ca62cac0d41fc77d3f6033da9df6fd73d20ea2fc18b0a3609ffb4110e1baeb"
+            repo="download.gnome.org">
       <patch file="libxslt-python-config.patch"
              strip="1" />
     </branch>
