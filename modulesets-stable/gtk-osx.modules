@@ -305,7 +305,7 @@
     </dependencies>
   </meson>
   <meson id="gtk-4"
-         mesonargs="-Dx11-backend=false -Dmedia-gstreamer=disabled">
+         mesonargs="-Dx11-backend=false -Dmedia-gstreamer=disabled -Dintrospection=enabled">
     <branch module="gtk/4.16/gtk-4.16.7.tar.xz"
             version="4.16.7"
             hash="sha256:5303c7624e15a48880591b9ddd43389afba3de4fb92a219719519bb1642ce3dc" />

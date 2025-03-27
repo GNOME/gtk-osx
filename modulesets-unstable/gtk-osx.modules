@@ -194,7 +194,7 @@
     </dependencies>
   </meson>
   <meson id="pango"
-         mesonargs="-Dfontconfig=enabled">
+         mesonargs="-Dfontconfig=enabled -Dintrospection=enabled">
     <branch revision="main" />
     <dependencies>
       <dep package="glib-no-introspection" />
@@ -278,7 +278,7 @@
     </dependencies>
   </autotools>
   <meson id="gtk-4"
-         mesonargs="-Dx11-backend=false -Dmedia-gstreamer=disabled">
+         mesonargs="-Dx11-backend=false -Dmedia-gstreamer=disabled -Dintrospection=enabled">
     <branch module="gtk"
             checkoutdir="gtk-4.0" />
     <dependencies>
