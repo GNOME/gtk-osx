@@ -115,6 +115,7 @@ export PYTHON_CONFIGURE_OPTS="--enable-shared"
 #it's defined by pyenv so it can't be changed.
 export PYENV_VERSION=$PYTHON_VERSION
 $PYENV install -v $PYENV_VERSION
+$PYENV global $PYENV_VERSION
 PIP="$PYENV_ROOT/shims/pip3"
 
 $PIP install --upgrade --user pip
@@ -171,6 +172,8 @@ else
     envvar RUSTUP_HOME "$DEVPREFIX"
     curl https://sh.rustup.rs -sSf | sh -s -- -y --profile minimal --no-modify-path > /dev/null
 fi
+# Install the Build C package, C integration required to build librsvg
+cargo install cargo-c
 
 if test ! -d "$DEVPREFIX/etc" ; then
     mkdir -p "$DEVPREFIX/etc"
