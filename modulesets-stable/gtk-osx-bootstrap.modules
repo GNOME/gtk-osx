@@ -59,7 +59,8 @@
       <dep package="nasm" />
     </dependencies>
   </cmake>
-  <cmake id="libtiff" cmakeargs="-Dtiff-tests=off -Dtiff-docs=off">
+  <cmake id="libtiff"
+         cmakeargs='-Dtiff-tests=off -Dtiff-docs=off -DCMAKE_MACOSX_RPATH=OFF -DCMAKE_INSTALL_NAME_DIR="${JHBUILD_PREFIX}/lib"'>
     <branch module="libtiff/tiff-4.7.0.tar.xz"
             version="4.7.0"
             hash="sha256:273a0a73b1f0bed640afee4a5df0337357ced5b53d3d5d1c405b936501f71017"
