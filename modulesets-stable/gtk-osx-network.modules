@@ -183,7 +183,7 @@
     <branch module="libproxy/libproxy/archive/refs/tags/0.5.9.tar.gz"
             version="0.5.9"
             hash="sha256:a1976c3ac4affedc17e6d40cf78c9d8eca6751520ea3cbbec1a8850f7ded1565"
-            checkoutdir="libproxy-0.5.6"
+            checkoutdir="libproxy-0.5.9"
             repo="github-tarball" />
     <dependencies>
       <dep package="gsettings-desktop-schemas" />
@@ -235,7 +235,7 @@
   <meson id="libsoup3"
          mesonargs="-Dvapi=disabled">
     <branch module="libsoup/3.6/libsoup-3.6.4.tar.xz"
-            version="3.64"
+            version="3.6.4"
             hash="sha256:9b54c76f5276b05bebcaf2b6c2a141a188fc7bb1d0624eda259dac13a6665c8a" />
     <dependencies>
       <dep package="libpsl" />
