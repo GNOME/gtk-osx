@@ -15,9 +15,6 @@
   <repository name="freedesktop"
               href="https://gitlab.freedesktop.org/"
               type="git" />
-  <repository name="nongnu"
-              href="https://git.savannah.nongnu.org/git/"
-              type="git" />
   <repository name="hicolor"
               href="https://icon-theme.freedesktop.org/releases/"
               type="tarball" />
@@ -95,8 +92,8 @@
        harfbuzz. -->
   <cmake id="freetype-no-harfbuzz"
          cmakeargs='-DFT_DISABLE_HARFBUZZ=ON -DBUILD_SHARED_LIBS=true -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_NAME_DIR="${JHBUILD_PREFIX}/lib"'>
-    <branch module="freetype/freetype2"
-            repo="nongnu"
+    <branch module="freetype/freetype.git"
+            repo="freedesktop"
             revision="VER-2-13-3" />
     <dependencies>
       <dep package="zlib" />
@@ -128,8 +125,8 @@
   </meson>
   <cmake id="freetype"
          cmakeargs='-DFT_REQUIRE_HARFBUZZ=ON -DBUILD_SHARED_LIBS=true -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_NAME_DIR="${JHBUILD_PREFIX}/lib"'>
-    <branch module="freetype/freetype2"
-            repo="nongnu"
+    <branch module="freetype/freetype.git"
+            repo="freedesktop"
             revision="VER-2-13-3" />
     <dependencies>
       <dep package="harfbuzz-no-cairo" />
