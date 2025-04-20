@@ -65,7 +65,7 @@
   </cmake>
   <meson id="gtk-doc"
          mesonargs="-Dyelp_manual=false -Dtests=false">
-    <branch revision="1.34.0" />
+    <branch module="gtk-doc" />
     <after>
       <dep package="python3" />
       <dep package="pygments" />
