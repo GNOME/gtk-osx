@@ -173,7 +173,7 @@ else
     curl https://sh.rustup.rs -sSf | sh -s -- -y --profile minimal --no-modify-path > /dev/null
 fi
 # Install the Build C package, C integration required to build librsvg
-cargo install cargo-c --features=vendored-openssl
+$DEVPREFIX/bin/cargo install cargo-c --features=vendored-openssl
 
 if test ! -d "$DEVPREFIX/etc" ; then
     mkdir -p "$DEVPREFIX/etc"
