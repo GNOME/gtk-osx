@@ -592,6 +592,7 @@ module_extra_env["python3"] = {'LIBS':'-lintl'}
 module_extra_env["spidermonkey"] = {'AUTOCONF':'autoconf'}
 module_extra_env["harfbuzz-no-cairo"] = {"CXXFLAGS":"-std=c++17"}
 module_extra_env["harfbuzz"] = {"CXXFLAGS":"-std=c++17"}
+module_extra_env['librsvg'] = {'RUSTFLAGS':'-C link-args=-Wl,-headerpad_max_install_names'}
 # Unset this so we don't mess with the check for not starting
 # recursively.
 os.unsetenv("JHB")
