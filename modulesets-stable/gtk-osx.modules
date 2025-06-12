@@ -280,8 +280,7 @@
             version="3.24.48"
             hash="sha256:d10ce9ea9df44c1016d8d1721f39e55d3d607fcfb85334aec0d236cdc9a70556">
       <patch file="gtk-3.24.48-check-all-dnd-windows.patch" strip="1" />
-      <!-- This patch causes issues with resizing windows. Maybe they're not so redundant.
-          patch file="gtk-3.24.48-remove-redundant-NSView-calls.patch" strip="1" / -->
+      <patch file="gtk-3.24.48-fix-context-menus-non-Retina.patch" strip="1" />
       <patch file="gtk-3.24.48-fix-leaking-cairo-surface.patch" strip="1" />
       <patch file="gtk-3.24.48-GtkNotebook-drag-operation-failed.patch" strip="1" />
     </branch>
