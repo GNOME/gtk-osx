@@ -319,7 +319,7 @@
             revision="2.13"/>
   </autotools>
   <meson id="librsvg"
-         mesonargs="-Dintrospection=disabled -Ddocs=disabled">
+         mesonargs="--buildtype=release -Dintrospection=disabled -Ddocs=disabled">
       <branch module="librsvg"
               branch="librsvg-2.60" />
     <dependencies>
