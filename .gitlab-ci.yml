@@ -17,20 +17,23 @@ stages:
 
 build:
   stage: build
+  parallel:
+    matrix:
+      - GTK_VERSION: [ "gtk3", "gtk4" ]
   tags:
     - macos
     - arm64
   cache:
-    - key: packages
+    - key: packages-$GTK_VERSION
       paths:
         - pkgs
       when: always
-    - key: ccache
+    - key: ccache-$GTK_VERSION
       paths:
         - ccache
       when: always
   variables:
-    CCACHE_VER: "4.11.2"
+    CCACHE_VER: "4.11.3"
     CCACHE_URL: https://github.com/ccache/ccache/releases/download/v$CCACHE_VER/ccache-$CCACHE_VER-darwin.tar.gz
     CCACHE_DIR: $CI_PROJECT_DIR/ccache
     CCACHE_MAXSIZE: "500Mi"
@@ -52,7 +55,7 @@ build:
         echo "modulesets_dir = \"$CI_PROJECT_DIR/modulesets-stable\""
         echo "use_local_modulesets = True"
       } >>$HOME/.config/jhbuildrc-custom
-    # config: move tarballdir below workspace (requird for caching)
+    # config: move tarballdir below workspace (required for caching)
     - |
       {
         echo "tarballdir = \"$CI_PROJECT_DIR/pkgs\""
@@ -71,4 +74,15 @@ build:
     # run: bootstrap
     - jhbuild bootstrap-gtk-osx
     # run: build modules
-    - jhbuild build meta-gtk-osx-bootstrap meta-gtk-osx-gtk3
+    - |
+      case "$GTK_VERSION" in
+        gtk3)
+          jhbuild build meta-gtk-osx-bootstrap meta-gtk-osx-gtk3
+          ;;
+        gtk4)
+          jhbuild build meta-gtk-osx-bootstrap gtk-4
+          ;;
+        *)
+          echo "invalid GTK version: $GTK_VERSION"
+          ;;
+      esac
