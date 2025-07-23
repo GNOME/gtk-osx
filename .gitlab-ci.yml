@@ -30,7 +30,7 @@ build:
         - ccache
       when: always
   variables:
-    CCACHE_VER: "4.11.2"
+    CCACHE_VER: "4.11.3"
     CCACHE_URL: https://github.com/ccache/ccache/releases/download/v$CCACHE_VER/ccache-$CCACHE_VER-darwin.tar.gz
     CCACHE_DIR: $CI_PROJECT_DIR/ccache
     CCACHE_MAXSIZE: "500Mi"
