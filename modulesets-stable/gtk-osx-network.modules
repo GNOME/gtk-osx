@@ -107,9 +107,9 @@
   <autotools id="gnutls"
              autogen-sh="autoreconf"
              autogenargs="--disable-doc --with-included-unistring">
-    <branch module="gcrypt/gnutls/v3.8/gnutls-3.8.9.tar.xz"
-            version="3.8.9"
-            has="sha256:69e113d802d1670c4d5ac1b99040b1f2d5c7c05daec5003813c049b5184820ed"
+    <branch module="gcrypt/gnutls/v3.8/gnutls-3.8.10.tar.xz"
+            version="3.8.10"
+            hash="sha256:db7fab7cce791e7727ebbef2334301c821d79a550ec55c9ef096b610b03eb6b7"
             repo="gnupg.org">
       <patch file="gnutls-gnulib.patch"
              strip="1" />
@@ -127,16 +127,16 @@
   <autotools id="libgpg-error"
              autogen-sh="autoreconf"
              autogenargs="--disable-doc">
-    <branch module="gcrypt/libgpg-error/libgpg-error-1.51.tar.bz2"
-            version="1.51"
-            hash="sha256:be0f1b2db6b93eed55369cdf79f19f72750c8c7c39fc20b577e724545427e6b2"
+    <branch module="gcrypt/libgpg-error/libgpg-error-1.55.tar.bz2"
+            version="1.55"
+            hash="sha256:95b178148863f07d45df0cea67e880a79b9ef71f5d230baddc0071128516ef78"
             repo="gnupg.org" />
   </autotools>
   <autotools id="libgcrypt"
              autogen-sh="configure">
-    <branch module="gcrypt/libgcrypt/libgcrypt-1.11.0.tar.bz2"
-            version="1.11.0"
-            hash="sha256:09120c9867ce7f2081d6aaa1775386b98c2f2f246135761aae47d81f58685b9c"
+    <branch module="gcrypt/libgcrypt/libgcrypt-1.11.1.tar.bz2"
+            version="1.11.1"
+            hash="sha256:24e91c9123a46c54e8371f3a3a2502f1198f2893fbfbf59af95bc1c21499b00e"
             repo="gnupg.org" />
     <dependencies>
       <dep package="libgpg-error" />
@@ -144,9 +144,9 @@
   </autotools>
   <meson id="libsecret"
          mesonargs="-Dvapi=disabled -Dgtk_doc=disabled">
-    <branch module="libsecret/0.21/libsecret-0.21.6.tar.xz"
-            version="0.21.6"
-            hash="sha256:747b8c175be108c880d3adfb9c3537ea66e520e4ad2dccf5dce58003aeeca090" />
+    <branch module="libsecret/0.21/libsecret-0.21.7.tar.xz"
+            version="0.21.7"
+            hash="sha256:6b452e4750590a2b5617adc40026f28d2f4903de15f1250e1d1c40bfd68ed55e" />
     <dependencies>
       <dep package="glib" />
       <dep package="libgcrypt" />

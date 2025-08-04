@@ -119,9 +119,9 @@
   <autotools id="gnutls"
              autogen-sh="autoreconf"
              autogenargs="--disable-doc --with-included-unistring">
-    <branch module="gcrypt/gnutls/v3.8/gnutls-3.8.9.tar.xz"
-            version="3.8.9"
-            hash="sha256:09120c9867ce7f2081d6aaa1775386b98c2f2f246135761aae47d81f58685b9c"
+    <branch module="gcrypt/gnutls/v3.8/gnutls-3.8.10.tar.xz"
+            version="3.8.10"
+            hash="sha256:db7fab7cce791e7727ebbef2334301c821d79a550ec55c9ef096b610b03eb6b7"
             repo="gnupg.org">
       <patch file="gnutls-pkg-config-pc.patch"
              strip="1" />
@@ -141,14 +141,14 @@
              autogenargs="--disable-doc">
     <branch module="libgpg-error"
             repo="git.gnupg.org"
-            revision="libgpg-error-1.51" />
+            revision="libgpg-error-1.55" />
   </autotools>
   <autotools id="libgcrypt"
              autogen-sh="autoreconf"
              autogenargs="--disable-asm --disable-doc">
     <branch module="libgcrypt"
             repo="git.gnupg.org"
-            revision="libgcrypt-1.11.0" />
+            revision="libgcrypt-1.11.1" />
     <dependencies>
       <dep package="libgpg-error" />
     </dependencies>
