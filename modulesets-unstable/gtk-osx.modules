@@ -276,8 +276,12 @@
       <dep package="libsass"/>
     </dependencies>
   </autotools>
+  <meson id="accesskit-c">
+    <branch module="AccessKit/accesskit-c"
+            repo="github" />
+  </meson>
   <meson id="gtk-4"
-         mesonargs="-Dx11-backend=false -Dmedia-gstreamer=disabled -Dintrospection=enabled">
+         mesonargs="-Dvulkan=disabled -Dx11-backend=false -Dmedia-gstreamer=disabled -Dintrospection=enabled">
     <branch module="gtk"
             checkoutdir="gtk-4.0" />
     <dependencies>
@@ -288,6 +292,8 @@
       <dep package="graphene"/>
       <dep package="libepoxy"/>
       <dep package="sassc"/>
+      <dep package="librsvg"/>
+      <dep package="accesskit-c"/>
     </dependencies>
     <after>
       <dep package="meta-gtk-osx-bootstrap" />
