@@ -88,14 +88,16 @@ if test ! -x /usr/bin/groff -a ! -x "$DEVPREFIX/bin/groff"; then
 fi
 
 # Setup pyenv
+PYENV_RELEASE_VERSION=v2.6.6
 if test ! -x "$PYENV_INSTALL_ROOT/libexec/pyenv"; then
   if test -d "$PYENV_INSTALL_ROOT"; then
      rm -rf "$PYENV_INSTALL_ROOT";
   fi
-  git clone $GITHUB/pyenv/pyenv.git "$PYENV_INSTALL_ROOT"
+  git clone -b $PYENV_RELEASE_VERSION $GITHUB/pyenv/pyenv.git "$PYENV_INSTALL_ROOT"
 else
     pushd "$PYENV_INSTALL_ROOT"
     git pull --ff-only
+    git reset --hard $PYENV_RELEASE_VERSION
     popd
 fi
 
