@@ -53,6 +53,7 @@ build:
     # config: use the local 'modulesets-stable' moduleset
     - |
       {
+        echo "moduleset = \"gtk-osx\""
         echo "modulesets_dir = \"$CI_PROJECT_DIR/modulesets-stable\""
         echo "use_local_modulesets = True"
       } >>$HOME/.config/jhbuildrc-custom
