@@ -25,7 +25,7 @@
 # Function envvardir. Tests environment variable, sets default value if unset,
 # and creates the specified directory if it doesn't already exist. This
 # will barf if the name indicates a file that isn't a directory.
-envvar ()
+envvardir ()
 {
     local _varname=$1
     eval local _var=\$$_varname
@@ -50,14 +50,16 @@ pip_remove()
 
 # Environment variable defaults:
 #
-envvar DEVROOT "$HOME"
-envvar DEVPREFIX "$DEVROOT/.new_local"
-envvar PYTHONUSERBASE "$DEVROOT/.new_local"
-envvar DEV_SRC_ROOT "$DEVROOT/Source"
-envvar PYENV_INSTALL_ROOT "$DEV_SRC_ROOT/pyenv"
-envvar PYENV_ROOT "$DEVPREFIX/share/pyenv"
-envvar PIP_CONFIG_DIR "$HOME/.config/pip"
-envvar PYTHON_VERSION 3.13.2
+envvardir DEVROOT "$HOME"
+envvardir DEVPREFIX "$DEVROOT/.new_local"
+envvardir PYTHONUSERBASE "$DEVROOT/.new_local"
+envvardir DEV_SRC_ROOT "$DEVROOT/Source"
+envvardir PYENV_INSTALL_ROOT "$DEV_SRC_ROOT/pyenv"
+envvardir PYENV_ROOT "$DEVPREFIX/share/pyenv"
+envvardir PIP_CONFIG_DIR "$HOME/.config/pip"
+if test -z $PYTHON_VERSION; then
+    export PYTHON_VERSION=3.13.2
+fi
 
 export PYTHONWARNINGS=ignore:DEPRECATION::pip._internal.cli.base_command
 
@@ -153,23 +155,23 @@ if test -x "$RUSTUP"; then
     case `dirname "$RUSTUP"` in
         "$DEVPREFIX"*)
             DEFAULT_CARGO_HOME=$(dirname $(dirname "$RUSTUP"))
-            envvar CARGO_HOME "$DEFAULT_CARGO_HOME"
+            envvardir CARGO_HOME "$DEFAULT_CARGO_HOME"
             CARGO_HOME_DIR=$(basename "$CARGO_HOME")
             if test "$CARGO_HOME_DIR" == "cargo"; then
                 CARGO_HOME_BASE=$(dirname "$CARGO_HOME")
-                envvar RUSTUP_HOME "$CARGO_HOME_BASE"/rustup
+                envvardir RUSTUP_HOME "$CARGO_HOME_BASE"/rustup
             else
-                envvar RUSTUP_HOME "$CARGO_HOME"
+                envvardir RUSTUP_HOME "$CARGO_HOME"
             fi
             ;;
         *)
-            envvar CARGO_HOME "$HOME/.cargo"
-            envvar RUSTUP_HOME "$HOME/.rustup"
+            envvardir CARGO_HOME "$HOME/.cargo"
+            envvardir RUSTUP_HOME "$HOME/.rustup"
             ;;
     esac
 else
-    envvar CARGO_HOME "$DEVPREFIX"
-    envvar RUSTUP_HOME "$DEVPREFIX"
+    envvardir CARGO_HOME "$DEVPREFIX"
+    envvardir RUSTUP_HOME "$DEVPREFIX"
     curl https://sh.rustup.rs -sSf | sh -s -- -y --profile minimal --no-modify-path > /dev/null
 fi
 # Install the Build C package, C integration required to build librsvg
