@@ -39,6 +39,7 @@ build:
     CCACHE_MAXSIZE: "500Mi"
     ORKA_RUNNER: sonoma
     SDKROOT: /opt/sdks/MacOSX11.3.sdk
+    MODULESET: stable
   script:
     # init: set us up
     - export PATH=$HOME/.new_local/bin:$PATH
@@ -50,10 +51,11 @@ build:
             -c "Print :DefaultProperties:MACOSX_DEPLOYMENT_TARGET" \
             "$SDKROOT"/SDKSettings.plist)\")"
       } >$HOME/.config/jhbuildrc-custom
-    # config: use the local 'modulesets-stable' moduleset
+    # config: use the local moduleset
     - |
       {
-        echo "modulesets_dir = \"$CI_PROJECT_DIR/modulesets-stable\""
+        echo "moduleset = \"gtk-osx\""
+        echo "modulesets_dir = \"$CI_PROJECT_DIR/modulesets-${MODULESET}\""
         echo "use_local_modulesets = True"
       } >>$HOME/.config/jhbuildrc-custom
     # config: move tarballdir below workspace (required for caching)
