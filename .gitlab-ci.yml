@@ -37,6 +37,7 @@ build:
     CCACHE_URL: https://github.com/ccache/ccache/releases/download/v$CCACHE_VER/ccache-$CCACHE_VER-darwin.tar.gz
     CCACHE_DIR: $CI_PROJECT_DIR/ccache
     CCACHE_MAXSIZE: "500Mi"
+    ORKA_RUNNER: sonoma
     SDKROOT: /opt/sdks/MacOSX11.3.sdk
   script:
     # init: set us up
