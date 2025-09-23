@@ -222,7 +222,7 @@
     </after>
   </meson>
   <meson id="gdk-pixbuf"
-         mesonargs="-Drelocatable=true -Dman=false">
+         mesonargs="-Drelocatable=true -Dman=false -Dbuiltin_loaders='all' -Dothers=enabled">
     <!-- gdk-pixbuf is releasing from master -->
     <branch tag="2.42.10" />
     <dependencies>
