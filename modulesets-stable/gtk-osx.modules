@@ -276,14 +276,9 @@
   <!-- gtk3 is in maintenance mode with 3.24 the final release series. -->
   <meson id="gtk+-3.0"
          mesonargs="-Dx11_backend=false">
-    <branch module="gtk/3.24/gtk-3.24.48.tar.xz"
-            version="3.24.48"
-            hash="sha256:d10ce9ea9df44c1016d8d1721f39e55d3d607fcfb85334aec0d236cdc9a70556">
-      <patch file="gtk-3.24.48-check-all-dnd-windows.patch" strip="1" />
-      <patch file="gtk-3.24.48-fix-context-menus-non-Retina.patch" strip="1" />
-      <patch file="gtk-3.24.48-fix-leaking-cairo-surface.patch" strip="1" />
-      <patch file="gtk-3.24.48-GtkNotebook-drag-operation-failed.patch" strip="1" />
-    </branch>
+    <branch module="gtk/3.24/gtk-3.24.51.tar.xz"
+            version="3.24.51"
+            hash="sha256:0013877c6bd23c2dbe42ad7c70a053d0e449be66736574e37867c49c5f905a4f" />
     <dependencies>
       <dep package="glib" />
       <dep package="pango" />
