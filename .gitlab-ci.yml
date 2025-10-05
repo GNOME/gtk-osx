@@ -33,11 +33,9 @@ build:
         - ccache
       when: always
   variables:
-    CCACHE_VER: "4.11.3"
-    CCACHE_URL: https://github.com/ccache/ccache/releases/download/v$CCACHE_VER/ccache-$CCACHE_VER-darwin.tar.gz
     CCACHE_DIR: $CI_PROJECT_DIR/ccache
     CCACHE_MAXSIZE: "500Mi"
-    ORKA_RUNNER: sonoma
+    ORKA_RUNNER: sequoia-3
     SDKROOT: /opt/sdks/MacOSX11.3.sdk
     MODULESET: stable
   script:
@@ -65,9 +63,8 @@ build:
       } >>$HOME/.config/jhbuildrc-custom
     # config: use ccache to speed up the builds
     - |
-      curl -L $CCACHE_URL | tar -C $HOME/.new_local/bin -xz --strip-components=1 ccache-$CCACHE_VER-darwin/ccache
       for compiler in clang clang++ gcc g++; do
-        ln -s $HOME/.new_local/bin/ccache $HOME/.new_local/bin/$compiler
+        ln -s /opt/ccache/ccache $HOME/.new_local/bin/$compiler
       done
       {
         echo "os.environ[\"CC\"] = \"$HOME/.new_local/bin/gcc\""
