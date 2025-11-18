@@ -123,17 +123,16 @@
              autogen-sh="source/configure"
              autogenargs="--enable-rpath"
              makeargs='CFLAGS="$CFLAGS -DU_CHARSET_IS_UTF8=1 -DU_USING_ICU_NAMESPACE=0"'>
-    <branch module="unicode-org/icu/releases/download/release-76-1/icu4c-76_1-src.tgz"
-            version="76.1"
-
+    <branch module="unicode-org/icu/releases/download/release-78-1/icu4c-78.1-sources.tgz"
+            version="78.1"
+            hash="sha256:6217f58ca39b23127605cfc6c7e0d3475fe4b0d63157011383d716cb41617886"
             checkoutdir="icu"
             repo="github-tarball" />
   </autotools>
   <meson id="harfbuzz-no-cairo"
          mesonargs="-Dcoretext=enabled -Dfreetype=enabled -Ddocs=disabled -Dbenchmark=disabled -Dintrospection=disabled -Dtests=disabled">
-    <branch module="harfbuzz/harfbuzz/releases/download/10.2.0/harfbuzz-10.2.0.tar.xz"
-            version="10.2.0"
-
+    <branch module="harfbuzz/harfbuzz/releases/download/12.2.0/harfbuzz-12.2.0.tar.xz"
+            version="12.2.0"
             repo="github-tarball" />
     <dependencies>
       <dep package="glib-no-introspection" />
@@ -177,9 +176,9 @@
        they are both built into cairo. -->
   <meson id="cairo"
          mesonargs="-Dfontconfig=enabled -Dfreetype=enabled">
-    <branch module="releases/cairo-1.18.2.tar.xz"
-            version="1.18.2"
-            hash="sha256:a62b9bb42425e844cc3d6ddde043ff39dbabedd1542eba57a2eb79f85889d45a"
+    <branch module="releases/cairo-1.18.4.tar.xz"
+            version="1.18.4"
+            hash="sha256:445ed8208a6e4823de1226a74ca319d3600e83f6369f99b14265006599c32ccb"
             repo="cairographics" />
     <dependencies>
       <dep package="pixman" />
@@ -203,9 +202,9 @@
   </meson>
   <meson id="harfbuzz"
          mesonargs="-Dcoretext=enabled -Dfreetype=enabled -Ddocs=disabled -Dbenchmark=disabled -Dintrospection=enabled -Dtests=disabled">
-    <branch module="harfbuzz/harfbuzz/releases/download/10.2.0/harfbuzz-10.2.0.tar.xz"
-            version="10.2.0"
-
+    <branch module="harfbuzz/harfbuzz/releases/download/12.2.0/harfbuzz-12.2.0.tar.xz"
+            version="12.2.0"
+            hash="sha256:ecb603aa426a8b24665718667bda64a84c1504db7454ee4cadbd362eea64e545"
             repo="github-tarball" />
     <dependencies>
       <dep package="gobject-introspection" />
@@ -335,9 +334,9 @@
   </autotools>
   <meson id="librsvg"
          mesonargs="--buildtype=release -Dintrospection=disabled -Ddocs=disabled">
-    <branch module="librsvg/2.60/librsvg-2.60.0.tar.xz"
-            version="2.60.0"
-            hash="sha256:0b6ffccdf6e70afc9876882f5d2ce9ffcf2c713cbaaf1ad90170daa752e1eec3" >
+    <branch module="librsvg/2.61/librsvg-2.61.3.tar.xz"
+            version="2.61.3"
+            hash="sha256:a56d2c80d744ad2f2718f85df466fe71d24ff1f9bc3e5ef588bde4d7e87815f2" >
       <patch file="librsvg-libpixbufloader-install-names.patch" strip="1" />
       <patch file="librsvg-fix-symbol-link-argument.patch" strip="1" />
     </branch>

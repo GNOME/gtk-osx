@@ -103,9 +103,9 @@
              autogen-sh="source/configure"
              autogenargs="--enable-rpath"
              makeargs='CFLAGS="$CFLAGS -DU_CHARSET_IS_UTF8=1 -DU_USING_ICU_NAMESPACE=0"'>
-    <branch module="unicode-org/icu/releases/download/release-76-1/icu4c-76_1-src.tgz"
-            version="76.1"
-
+    <branch module="unicode-org/icu/releases/download/release-78-1/icu4c-78.1-sources.tgz"
+            version="78.1"
+            hash="sha256:6217f58ca39b23127605cfc6c7e0d3475fe4b0d63157011383d716cb41617886"
             checkoutdir="icu"
             repo="github-tarball" />
   </autotools>
@@ -113,7 +113,7 @@
          mesonargs="-Dcoretext=enabled -Dfreetype=enabled -Ddocs=disabled -Dbenchmark=disabled -Dintrospection=disabled -Dtests=disabled">
     <branch module="harfbuzz/harfbuzz"
             repo="github"
-            tag="10.2.0" />
+            tag="12.2.0" />
     <dependencies>
       <dep package="glib-no-introspection" />
       <dep package="freetype-no-harfbuzz" />
@@ -158,7 +158,7 @@
           mesonargs="-Dfontconfig=enabled -Dfreetype=enabled">
     <branch module="cairo/cairo"
             repo="freedesktop"
-            tag="1.18.2" />
+            tag="1.18.4" />
     <dependencies>
       <dep package="pixman" />
       <dep package="meta-gtk-osx-bootstrap" />
@@ -184,7 +184,7 @@
          mesonargs="-Dcoretext=enabled -Dfreetype=enabled -Ddocs=disabled -Dbenchmark=disabled">
     <branch module="harfbuzz/harfbuzz"
             repo="github"
-            tag="10.2.0" />
+            tag="12.2.0" />
     <dependencies>
       <dep package="gobject-introspection" />
       <dep package="cairo" />
@@ -321,7 +321,7 @@
   <meson id="librsvg"
          mesonargs="--buildtype=release -Dintrospection=disabled -Ddocs=disabled">
       <branch module="librsvg"
-              branch="librsvg-2.60" />
+              branch="librsvg-2.61" />
     <dependencies>
       <dep package="libxml2" />
       <dep package="cairo" />
