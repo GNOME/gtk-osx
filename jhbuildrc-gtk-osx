@@ -588,7 +588,7 @@ else:
     os.environ['PYTHON'] = sys.executable
     environ_append('PKG_CONFIG_PATH', os.path.join(_python_library_path, 'pkgconfig'), ":")
 
-module_extra_env["python3"] = {'LIBS':'-lintl'}
+module_extra_env["python3"] = {'LIBS':'-lintl', 'LIBFFI_LIBS':'-L$PREFIX/lib/ -lffi', 'LIBFFI_CFLAGS':'-I$PREFIX/include'}
 module_extra_env["spidermonkey"] = {'AUTOCONF':'autoconf'}
 module_extra_env["harfbuzz-no-cairo"] = {"CXXFLAGS":"-std=c++17"}
 module_extra_env["harfbuzz"] = {"CXXFLAGS":"-std=c++17"}
