@@ -30,12 +30,12 @@ envvardir ()
     local _varname=$1
     eval local _var=\$$_varname
     if test -z "$_var"; then
-        eval export $_varname="$2"
         _var=$2
     fi
     if test ! -d "$_var"; then
         mkdir -p "$_var"
     fi
+    eval export $_varname=$(realpath "$_var")
 }
 
 pip_remove()
@@ -259,7 +259,11 @@ fi
 if test ! -x "$DEVPREFIX/libexec/run_jhbuild.py" ; then
     chmod +x "$DEVPREFIX/libexec/run_jhbuild.py"
 fi
-if test "x`echo $PATH | grep "$DEVPREFIX/bin"`" == x ; then
+path_match=no
+while read -d: pathdir; do
+    [[ x$(realpath "$pathdir") == x$DEVPREFIX/bin ]] && path_match=true
+done
+if test "x$path_match" == "xno"; then
     echo "***********"
     echo "PATH does not contain $DEVPREFIX/bin. You probably want to fix that.\n*"
     echo "***********"
