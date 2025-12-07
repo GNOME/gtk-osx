@@ -222,7 +222,9 @@
   </meson>
   <meson id="libepoxy">
     <branch module="anholt/libepoxy"
-            repo="github" />
+            repo="github" >
+      <patch file="libepoxy-fix-meson-configuration.patch" strip="1" />
+    </branch>
   </meson>
   <autotools id="hicolor-icon-theme">
     <branch module="hicolor-icon-theme-0.17.tar.xz"
