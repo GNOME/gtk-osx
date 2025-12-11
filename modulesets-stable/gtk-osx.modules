@@ -288,6 +288,7 @@
       <dep package="gobject-introspection" />
       <dep package="libepoxy" />
       <dep package="hicolor-icon-theme" />
+      <dep package="librsvg"/>
     </dependencies>
     <after>
       <dep package="meta-gtk-osx-bootstrap" />
@@ -335,7 +336,7 @@
             repo="download.gnome.org"/>
   </autotools>
   <meson id="librsvg"
-         mesonargs="--buildtype=release -Dintrospection=disabled -Ddocs=disabled">
+         mesonargs="--buildtype=release -Dintrospection=disabled -Ddocs=disabled -Dpixbuf-loader=enabled">
     <branch module="librsvg/2.61/librsvg-2.61.3.tar.xz"
             version="2.61.3"
             hash="sha256:a56d2c80d744ad2f2718f85df466fe71d24ff1f9bc3e5ef588bde4d7e87815f2" >

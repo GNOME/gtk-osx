@@ -244,6 +244,7 @@
       <dep package="gobject-introspection" />
       <dep package="libepoxy" />
       <dep package="hicolor-icon-theme" />
+      <dep package="librsvg"/>
     </dependencies>
     <after>
       <dep package="meta-gtk-osx-bootstrap" />
@@ -312,7 +313,7 @@
     <branch module="libxml2"/>
   </autotools>
   <meson id="librsvg"
-         mesonargs="--buildtype=release -Dintrospection=disabled -Ddocs=disabled">
+         mesonargs="--buildtype=release -Dintrospection=disabled -Ddocs=disabled -Dpixbuf-loader=enabled">
     <branch module="librsvg"
             revision="main" />
     <dependencies>
