@@ -262,7 +262,7 @@ fi
 path_match=no
 while read -d: pathdir; do
     [[ x$(realpath "$pathdir") == x$DEVPREFIX/bin ]] && path_match=true
-done
+done  < <( echo $PATH )
 if test "x$path_match" == "xno"; then
     echo "***********"
     echo "PATH does not contain $DEVPREFIX/bin. You probably want to fix that.\n*"
