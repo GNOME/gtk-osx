@@ -126,12 +126,13 @@ jhbuild.commands.register_command(_getenv)
 # serial 25, but even though it was serial 25 and released in
 # September 2025 they named it macOS 26.
 def osx_ver():
+    from decimal import Decimal
     global _default_arch, _osx_version, _target
     vstring = _popen("uname -r")
     mstring = _popen("machine")
     exp = re.compile(r'(\d+\.\d+)\.\d+')
     vernum = exp.match(vstring)
-    _osx_version = float(vernum.group(1)) - 4.0
+    _osx_version = Decimal(vernum.group(1)) - 4
     if _osx_version < 14.0:
         print("Error: Mac OS X 10.14 or newer is required, exiting.")
         raise SystemExit
