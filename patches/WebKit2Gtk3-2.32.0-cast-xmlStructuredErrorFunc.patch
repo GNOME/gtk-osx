@@ -1,0 +1,22 @@
+--- a/Source/WebCore/xml/XSLTProcessorLibxslt.cpp	2021-02-26 01:57:15
++++ b/Source/WebCore/xml/XSLTProcessorLibxslt.cpp	2026-01-10 20:58:15
+@@ -130,7 +130,7 @@
+         Frame* frame = globalProcessor->xslStylesheet()->ownerDocument()->frame();
+         if (frame && frame->page())
+             console = &frame->page()->console();
+-        xmlSetStructuredErrorFunc(console, XSLTProcessor::parseErrorFunc);
++        xmlSetStructuredErrorFunc(console, (xmlStructuredErrorFunc)XSLTProcessor::parseErrorFunc);
+         xmlSetGenericErrorFunc(console, XSLTProcessor::genericErrorFunc);
+ 
+         // We don't specify an encoding here. Neither Gecko nor WinIE respects
+--- a/Source/WebCore/xml/XSLStyleSheetLibxslt.cpp	2021-02-26 01:57:15
++++ b/Source/WebCore/xml/XSLStyleSheetLibxslt.cpp	2026-01-10 20:57:23
+@@ -139,7 +139,7 @@
+     if (frame && frame->page())
+         console = &frame->page()->console();
+ 
+-    XMLDocumentParserScope scope(cachedResourceLoader(), XSLTProcessor::genericErrorFunc, XSLTProcessor::parseErrorFunc, console);
++    XMLDocumentParserScope scope(cachedResourceLoader(), XSLTProcessor::genericErrorFunc, (xmlStructuredErrorFunc)(XSLTProcessor::parseErrorFunc), console);
+ 
+     auto upconvertedCharacters = StringView(string).upconvertedCharacters();
+     const char* buffer = reinterpret_cast<const char*>(upconvertedCharacters.get());
