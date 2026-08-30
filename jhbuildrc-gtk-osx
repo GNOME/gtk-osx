@@ -161,12 +161,12 @@ def xcode_ver():
        else:
            raise EnvironmentError("No suitable Xcode found. Xcode 5.0 or later is required.")
    else: #Command-Line Tools instead of Xcode
-       ver_str = _popen("pkgutil --pkg-info=com.apple.pkg.CLTools_Executables | grep version*")
+       ver_str = _popen("clang -dumpversion")
        print("Found Command Line Tools '%s'" % ver_str)
-       exp = re.compile(r'version: (\d+\.\d+)')
+       exp = re.compile(r'(\d+\.\d+)')
        vernum = exp.match(ver_str)
        if vernum:
-           print("Command Line Tools version %f" % float(vernum.group(1)))
+           print("Command Line Tools clang version %f" % float(vernum.group(1)))
            return float(vernum.group(1))
        else:
            return 8.0
